@@ -75,7 +75,7 @@
   <nav class="nav-site" aria-label="Navigation principale">
     <a href="../../../#chapitres">Chapitres</a>
     <a href="../../../#apropos">À&nbsp;propos</a>
-    <button type="button" class="btn-pill js-toggle-theme">☀ clair</button>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
   </nav>
 </header>
 
@@ -345,32 +345,36 @@
           <span>TABLEAU DE VARIATIONS</span>
           <span class="bande-note">f(x) = x³ − 3x</span>
         </figcaption>
-        <div class="grille-variations">
-          <div class="cel cel-entete bord-x">x</div>
-          <div class="cel cel-gauche bord-x">−∞</div>
-          <div class="cel-centre bord-x">−1</div>
-          <div class="bord-x"></div>
-          <div class="cel-centre bord-x">1</div>
-          <div class="cel cel-droite bord-x">+∞</div>
+        <div class="defile">
+          <div class="tab-grille" role="img" aria-label="Tableau de variations de f. f croît de moins l'infini jusqu'à 2 sur l'intervalle de moins l'infini à moins 1, décroît de 2 à moins 2 entre moins 1 et 1, puis croît de moins 2 vers plus l'infini au-delà de 1.">
+            <div class="cel cel-entete bord-x">x</div>
+            <div class="cel cel-gauche bord-x">−∞</div>
+            <div class="cel-centre bord-x">−1</div>
+            <div class="bord-x"></div>
+            <div class="cel-centre bord-x">1</div>
+            <div class="cel cel-droite bord-x">+∞</div>
 
-          <div class="cel cel-entete bord-signe">f′(x)</div>
-          <div class="cel-centre bord-signe">+</div>
-          <div class="cel-centre bord-signe">0</div>
-          <div class="cel-centre bord-signe">−</div>
-          <div class="cel-centre bord-signe">0</div>
-          <div class="cel-centre bord-signe">+</div>
+            <div class="cel cel-entete bord-signe">f′(x)</div>
+            <div class="cel-centre bord-signe">+</div>
+            <div class="cel-centre bord-signe">0</div>
+            <div class="cel-centre bord-signe">−</div>
+            <div class="cel-centre bord-signe">0</div>
+            <div class="cel-centre bord-signe">+</div>
 
-          <div class="cel cel-entete cel-fleche">f</div>
-          <div class="cel-fleche">
-            <span class="fleche" aria-hidden="true">↗</span>
-            <span class="borne borne--bas-gauche">−∞</span>
-          </div>
-          <div class="val-haut">2</div>
-          <div class="cel-fleche"><span class="fleche" aria-hidden="true">↘</span></div>
-          <div class="val-bas">−2</div>
-          <div class="cel-fleche">
-            <span class="fleche" aria-hidden="true">↗</span>
-            <span class="borne borne--haut-droite">+∞</span>
+            <div class="cel cel-entete cel-fleche">f</div>
+            <div class="cel-fleche">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 50L73.8 10.8"></path><path class="fleche-pointe" d="M82 6L74.1 16.3L69.1 7.7Z"></path></svg>
+              <span class="borne borne--bas-gauche">−∞</span>
+            </div>
+            <div class="val-haut">2</div>
+            <div class="cel-fleche">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 6L73.8 45.2"></path><path class="fleche-pointe" d="M82 50L74.1 39.7L69.1 48.3Z"></path></svg>
+            </div>
+            <div class="val-bas">−2</div>
+            <div class="cel-fleche">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 50L73.8 10.8"></path><path class="fleche-pointe" d="M82 6L74.1 16.3L69.1 7.7Z"></path></svg>
+              <span class="borne borne--haut-droite">+∞</span>
+            </div>
           </div>
         </div>
       </figure>

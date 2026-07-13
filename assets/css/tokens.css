@@ -67,6 +67,14 @@
   --accTint2: color-mix(in oklab, var(--accent) 20%, var(--surface));
   --accEdge: color-mix(in oklab, var(--accent) 45%, var(--bg));
 
+  /* Sémantique pente/feedback : le vert et le rouge alternatifs du design
+     (versions relevées pour le sombre). Utilisés par le widget variations
+     (tangente qui monte/descend) et le feedback des quiz. */
+  --good: #63BD9B;
+  --goodTint: color-mix(in oklab, var(--good) 13%, var(--surface));
+  --bad: #E68F86;
+  --badTint: color-mix(in oklab, var(--bad) 13%, var(--surface));
+
   /* Bandeaux inversés (en-têtes de tableaux, VERS LE BAC, tag glisse-moi) */
   --band-bg: #F2EFE6;
   --band-fg: #16140F;
@@ -112,6 +120,11 @@
   --accTint: color-mix(in oklab, var(--accent) 6%, var(--surface));
   --accTint2: color-mix(in oklab, var(--accent) 10%, var(--surface));
   --accEdge: color-mix(in oklab, var(--accent) 40%, var(--surface));
+
+  --good: #0E6B4E;
+  --goodTint: color-mix(in oklab, var(--good) 7%, var(--surface));
+  --bad: #A8322D;
+  --badTint: color-mix(in oklab, var(--bad) 7%, var(--surface));
 
   --band-bg: #1D1B16;
   --band-fg: #FBFAF7;

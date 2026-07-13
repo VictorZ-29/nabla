@@ -205,6 +205,10 @@
 .g-courbe-derivee { stroke: var(--accent); stroke-width: var(--sw-curve); fill: none; stroke-linecap: round; }
 .g-tangente { stroke: var(--accent); stroke-width: var(--sw-tan); fill: none; stroke-linecap: round; }
 .g-tangente-mini { stroke: var(--accent); stroke-width: var(--sw-tan-mini); fill: none; stroke-linecap: round; }
+/* Tangente colorée par le signe de la pente (widget variations) */
+.g-tangente.pente-pos, .g-tangente-mini.pente-pos { stroke: var(--good); }
+.g-tangente.pente-neg, .g-tangente-mini.pente-neg { stroke: var(--bad); }
+.g-tangente.pente-nulle, .g-tangente-mini.pente-nulle { stroke: var(--accent); }
 .g-guide { stroke: var(--guide); stroke-width: var(--sw-grid); fill: none; }
 .g-guide-accent { stroke: var(--accent); stroke-opacity: 0.4; stroke-width: var(--sw-grid); fill: none; }
 .pt-halo { fill: none; stroke: var(--accent); stroke-opacity: 0.4; stroke-width: 1.5; }
@@ -324,6 +328,48 @@
 .piege p { margin: 0; font-size: 16px; line-height: 1.65; }
 .piege strong { font-weight: 600; }
 
+/* Exemple résolu : la méthode exécutée sous les yeux de l'élève. Même famille
+   visuelle que le corrigé (étiquette intérieure, étapes), mais sur fond
+   surface pour marquer « cours » et non « exercice ». */
+.bloc-exemple {
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-block);
+  background: var(--surface);
+  padding: 18px 20px;
+  margin: 30px 0;
+}
+.bloc-exemple .exemple-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.bloc-exemple p { margin: 0 0 12px; font-size: 16px; line-height: 1.7; }
+.bloc-exemple p:last-child { margin-bottom: 0; }
+.bloc-exemple .exemple-enonce { font-weight: 500; }
+.exemple-item { padding: 14px 0; border-bottom: 1px solid var(--hairIn); }
+.exemple-item:first-of-type { padding-top: 2px; }
+.exemple-item:last-child { border-bottom: none; padding-bottom: 2px; }
+.exemple-item p { margin: 0 0 8px; }
+.exemple-item p:last-child { margin-bottom: 0; }
+
+/* Aparté « POURQUOI ? » : l'intuition derrière la formule, en voix basse */
+.bloc-pourquoi {
+  margin: 28px 0;
+  padding: 2px 0 2px 20px;
+  border-left: 2px solid var(--accEdge);
+}
+.bloc-pourquoi .bloc-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.bloc-pourquoi p { margin: 0 0 12px; font-size: 16px; line-height: 1.7; }
+.bloc-pourquoi p:last-child { margin-bottom: 0; }
+
 /* --- Tableaux (dérivées usuelles, opérations) -------------------------------------------------- */
 
 .tableau {
@@ -373,35 +419,79 @@
 }
 .tableau .cellule-vide { color: var(--faint); }
 
-/* --- Tableau de variations --------------------------------------------------------------------- */
+/* --- Tableaux de signes & de variations ---------------------------------------------------------
+   Grille partagée .tab-grille : rangée x, rangée(s) de signes, et pour les
+   variations une rangée de flèches. Les flèches sont des SVG en ligne
+   (.var-fleche) — jamais les caractères ↗ / ↘, rendus en emoji sur mobile. */
 
-.tab-variations .grille-variations {
+.tab-grille {
   display: grid;
   grid-template-columns: minmax(58px, auto) 1fr 44px 1fr 44px 1fr;
   font-family: var(--font-math);
   font-size: 17px;
 }
-.tab-variations .cel { padding: 10px 14px; }
-.tab-variations .cel-entete { text-align: center; font-style: italic; border-right: 1.5px solid var(--edge); }
-.tab-variations .bord-x { border-bottom: 1px solid var(--edge); }
-.tab-variations .bord-signe { border-bottom: 1px solid var(--hair); }
-.tab-variations .cel-centre { padding: 10px 0; text-align: center; }
-.tab-variations .cel-gauche { text-align: left; }
-.tab-variations .cel-droite { text-align: right; }
-.tab-variations .cel-fleche {
+.tab-variations .tab-grille,
+.tab-signes .tab-grille { min-width: 320px; }
+.tab-grille .cel { padding: 10px 14px; }
+.tab-grille .cel-entete { text-align: center; font-style: italic; border-right: 1.5px solid var(--edge); }
+.tab-grille .bord-x { border-bottom: 1px solid var(--edge); }
+.tab-grille .bord-signe { border-bottom: 1px solid var(--hair); }
+.tab-grille .cel-centre { padding: 10px 0; text-align: center; }
+.tab-grille .cel-gauche { text-align: left; }
+.tab-grille .cel-droite { text-align: right; }
+.tab-grille .cel-fleche {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 104px;
   position: relative;
+  padding: 12px 10px;
 }
+.tab-grille .val-haut { display: flex; align-items: flex-start; justify-content: center; padding-top: 10px; font-weight: 600; }
+.tab-grille .val-bas { display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; font-weight: 600; }
+.tab-grille .borne { position: absolute; font-size: 14px; color: var(--faint); }
+.tab-grille .borne--bas-gauche { bottom: 8px; left: 12px; }
+.tab-grille .borne--haut-droite { top: 8px; right: 12px; }
+
+/* Flèche oblique de variation (SVG, s'adapte à la cellule sans déformation) */
+.var-fleche { display: block; width: 100%; height: 100%; max-width: 170px; max-height: 76px; }
+.var-fleche .fleche-trait { stroke: var(--text); stroke-width: var(--sw-tan-mini); fill: none; stroke-linecap: round; }
+.var-fleche .fleche-pointe { fill: var(--text); stroke: none; }
+
+/* Rangée produit d'un tableau de signes (légère emphase) */
+.tab-grille .cel-produit { font-weight: 500; }
+
+/* Variante compacte embarquée dans un widget (tableau vivant) */
+.tab-grille--mini {
+  font-size: 15px;
+  grid-template-columns: minmax(44px, auto) 1fr 34px 1fr 34px 1fr;
+  border: 1px solid var(--hairIn);
+  border-radius: var(--radius-block);
+  overflow: hidden;
+}
+.tab-grille--mini .cel { padding: 7px 10px; }
+.tab-grille--mini .cel-centre { padding: 7px 0; }
+.tab-grille--mini .cel-fleche { min-height: 60px; padding: 8px 8px; }
+.tab-grille--mini .val-haut { padding-top: 7px; }
+.tab-grille--mini .val-bas { padding-bottom: 7px; }
+.tab-grille--mini .var-fleche { max-height: 44px; }
+
+/* Colonne « tu es ici » du tableau vivant */
+.tab-grille .zone-active { background: var(--accTint2); }
+.tab-grille .zone-active .var-fleche .fleche-trait { stroke: var(--accent); }
+.tab-grille .zone-active .var-fleche .fleche-pointe { fill: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .tab-grille [data-zone] { transition: background-color 0.15s ease; }
+}
+
+@media (max-width: 480px) {
+  .tab-grille { font-size: 15px; grid-template-columns: minmax(44px, auto) 1fr 34px 1fr 34px 1fr; }
+  .tab-grille .cel { padding: 8px 10px; }
+  .tab-grille .cel-fleche { min-height: 84px; }
+  .tab-grille .borne { font-size: 12px; }
+}
+
 .site-footer--chapitre { margin-top: 40px; }
-.tab-variations .fleche { font-size: 26px; }
-.tab-variations .val-haut { display: flex; align-items: flex-start; justify-content: center; padding-top: 10px; font-weight: 600; }
-.tab-variations .val-bas { display: flex; align-items: flex-end; justify-content: center; padding-bottom: 10px; font-weight: 600; }
-.tab-variations .borne { position: absolute; font-size: 14px; color: var(--faint); }
-.tab-variations .borne--bas-gauche { bottom: 8px; left: 12px; }
-.tab-variations .borne--haut-droite { top: 8px; right: 12px; }
 
 /* --- Exercices & corrigés ------------------------------------------------------------------------ */
 
@@ -469,8 +559,8 @@
 }
 .corrige p { margin: 0 0 12px; font-size: 16px; line-height: 1.7; }
 .corrige p:last-child { margin-bottom: 0; }
-.corrige .etape-label { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
-.corrige .conclusion { font-weight: 600; }
+.corrige .etape-label, .bloc-exemple .etape-label { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+.corrige .conclusion, .bloc-exemple .conclusion { font-weight: 600; }
 
 .ex-reste {
   padding: 20px 0;
@@ -657,6 +747,12 @@
   padding: 5px 10px;
 }
 .chip--accent { background: var(--accTint2); color: var(--accent); }
+.chip--good { background: var(--goodTint); color: var(--good); }
+.chip--bad { background: var(--badTint); color: var(--bad); }
+
+/* Équation en direct (widget tangente) */
+.lecture-eq { font-family: var(--font-mono); font-size: 14px; color: var(--text); }
+.lecture-eq .eq-t { color: var(--accent); margin-right: 4px; }
 
 /* Légende révélée (état tangente du widget sécante) */
 .widget-legende {
@@ -725,3 +821,59 @@
   color: var(--muted);
   line-height: 1.6;
 }
+
+/* --- Quiz « Teste-toi » --------------------------------------------------------------------------------
+   Réutilise le cadre de widget (.widget + .widget-tete). Une question =
+   énoncé, boutons-réponses, retour. Mauvaise réponse : marquée et
+   désactivée, on peut réessayer ; bonne réponse : question verrouillée,
+   explication révélée. */
+
+.quiz-corps { padding: 4px 18px 16px; }
+.quiz-question { padding: 14px 0 4px; }
+.quiz-question + .quiz-question { border-top: 1px solid var(--hairIn); }
+.quiz-enonce { margin: 0 0 12px; font-size: 16.5px; line-height: 1.6; }
+.quiz-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+  margin-right: 8px;
+}
+.quiz-reponses { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 12px; }
+.quiz-reponse {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-block);
+  padding: 8px 16px;
+  min-height: 44px;
+  cursor: pointer;
+  text-align: left;
+}
+@media (hover: hover) {
+  .quiz-reponse:not(:disabled):hover { border-color: var(--accent); }
+}
+.quiz-reponse:disabled { cursor: default; }
+.quiz-reponse[data-etat="bonne"] { border-color: var(--good); background: var(--goodTint); }
+.quiz-reponse[data-etat="fausse"] { border-color: var(--bad); background: var(--badTint); color: var(--muted); }
+.quiz-reponse:disabled:not([data-etat]) { opacity: 0.45; }
+@media (prefers-reduced-motion: no-preference) {
+  .quiz-reponse[data-etat="fausse"] { animation: quiz-secousse 0.25s ease; }
+  @keyframes quiz-secousse {
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+  }
+}
+.quiz-retour { margin: 2px 0 12px; font-size: 15.5px; line-height: 1.6; color: var(--muted); }
+.quiz-retour[hidden] { display: none; }
+.quiz-retour .verdict {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-right: 6px;
+}
+.quiz-retour .verdict--bonne { color: var(--good); }
+.quiz-retour .verdict--fausse { color: var(--bad); }
+.quiz-score { font-family: var(--font-mono); font-size: 12px; color: var(--faint); }

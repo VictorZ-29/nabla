@@ -5,7 +5,7 @@
 
 import { track } from './analytics.js';
 
-const LIBELLES = { dark: '☀ clair', light: '☾ sombre' }; // ce vers quoi on bascule
+const LIBELLES = { dark: '☀︎ clair', light: '☾ sombre' }; // ce vers quoi on bascule
 
 function themeCourant() {
   return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
