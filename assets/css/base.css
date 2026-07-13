@@ -277,6 +277,8 @@ button { font: inherit; }
 .carte-motif .g-courbe { stroke: var(--chalk); stroke-width: var(--sw-motif); fill: none; stroke-linecap: round; }
 .carte-motif .g-tangente { stroke: var(--accent); stroke-width: 1.4; fill: none; stroke-linecap: round; }
 .carte-motif .pt-point { fill: var(--accent); stroke: var(--surface); stroke-width: 1; }
+.carte-motif .pt-craie { fill: var(--chalk); }
+.carte-chapitre + .carte-chapitre { margin-top: 14px; }
 
 /* Cartes « bientôt » */
 .grille-bientot {
