@@ -186,7 +186,6 @@ button { font: inherit; }
 /* Héro : SVG animé */
 .hero-svg .g-grid { stroke: var(--grid); stroke-width: var(--sw-grid); fill: none; }
 .hero-svg .g-axis { stroke: var(--axis); stroke-width: var(--sw-grid); fill: none; }
-.hero-svg .g-guide { stroke: var(--guide); stroke-width: var(--sw-grid); fill: none; }
 .hero-svg .g-courbe {
   stroke: var(--chalk);
   stroke-width: var(--sw-curve-hero);
@@ -196,21 +195,18 @@ button { font: inherit; }
   stroke-dashoffset: 1;
   animation: nablaDraw 1.9s cubic-bezier(0.55, 0.06, 0.28, 0.99) 0.3s forwards;
 }
-.hero-svg .g-tangente {
+.hero-svg .g-onde {
   stroke: var(--accent);
   stroke-width: var(--sw-tan);
   fill: none;
   stroke-linecap: round;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: nablaDraw 0.9s ease-out 2s forwards;
+  animation: nablaDraw 1.3s cubic-bezier(0.55, 0.06, 0.28, 0.99) 1.4s forwards;
 }
-.hero-svg .g-apparition { opacity: 0; animation: nablaFade 0.6s ease 2.7s forwards; }
+.hero-svg .g-apparition { opacity: 0; animation: nablaFade 0.6s ease 2.8s forwards; }
 .hero-svg .pt-halo { fill: none; stroke: var(--accent); stroke-opacity: 0.4; stroke-width: 1.5; }
 .hero-svg .pt-point { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
-.hero-svg .etiquette-fn { font-family: var(--font-math); font-style: italic; font-size: 21px; fill: var(--text); }
-.hero-svg .etiquette-pt { font-family: var(--font-math); font-style: italic; font-size: 19px; fill: var(--text); }
-.hero-svg .etiquette-eq { font-family: var(--font-math); font-style: italic; font-size: 17px; fill: var(--accent); }
 
 /* --- Accueil : rangées de chapitres ------------------------------------------- */
 
