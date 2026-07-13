@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Résolution du thème avant le premier rendu (pas de flash) :
+   localStorage 'nabla-theme' → prefers-color-scheme → dark. */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('nabla-theme'); } catch (e) {}
+  if (t !== 'light' && t !== 'dark') {
+    try { t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; } catch (e) { t = 'dark'; }
+  }
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+
+<title>Nabla — fiches de révision interactives pour la spé, Première &amp; Terminale</title>
+<meta name="description" content="Des fiches interactives de spé maths et spé physique-chimie pour Première et Terminale : tu manipules les courbes toi-même, avec des exercices corrigés pas à pas. Gratuit, sans compte, sans pub.">
+<link rel="canonical" href="https://NABLA_DOMAIN/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nabla — La spé, expliquée pour de vrai.">
+<meta property="og:description" content="Fiches interactives et exercices corrigés pour la spé maths et la spé physique-chimie. Gratuit, sans compte, sans pub.">
+<meta property="og:url" content="https://NABLA_DOMAIN/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nabla — La spé, expliquée pour de vrai.">
+<meta name="twitter:description" content="Fiches interactives et exercices corrigés pour la spé maths et la spé physique-chimie. Gratuit, sans compte, sans pub.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+
+<script type="module" src="assets/js/theme.js" defer></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="marque" href="./">
+    <span class="nabla-symbole" aria-hidden="true">∇</span>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="#chapitres">Chapitres</a>
+    <a href="#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀ clair</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-texte">
+    <div class="kicker">PREMIÈRE &amp; TERMINALE — SPÉ MATHS · PHYSIQUE-CHIMIE</div>
+    <h1>La spé, expliquée pour de vrai.</h1>
+    <p class="hero-accroche">Des fiches interactives où tu manipules les courbes toi-même, et des exercices corrigés pas à pas. Gratuit, sans compte, sans pub.</p>
+    <div class="hero-cta">
+      <a href="premiere/maths/derivation/">Commencer par la dérivation <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  <div class="hero-figure">
+    <svg class="hero-svg" viewBox="0 0 720 480" role="img" aria-label="Courbe de f(x) = x³ − 3x et sa tangente au point A">
+      <path class="g-grid" d="M60 480L60 0M210 480L210 0M510 480L510 0M660 480L660 0M0 462.2L720 462.2M0 417.8L720 417.8M0 373.3L720 373.3M0 328.9L720 328.9M0 284.4L720 284.4M0 195.6L720 195.6M0 151.1L720 151.1M0 106.7L720 106.7M0 62.2L720 62.2M0 17.8L720 17.8"></path>
+      <path class="g-axis" d="M0 240L720 240M360 480L360 0"></path>
+      <path class="g-guide" d="M585 240L585 290" stroke-dasharray="3 5"></path>
+      <text class="etiquette-fn" x="92" y="128">f(x) = x³ − 3x</text>
+      <path class="g-courbe" pathLength="1" d="M15 474.1L21.3 450.7L27.5 428.4L33.8 407.1L40.1 386.8L46.4 367.5L52.6 349.2L58.9 331.8L65.2 315.4L71.5 299.9L77.7 285.3L84 271.5L90.3 258.7L96.5 246.6L102.8 235.4L109.1 225L115.4 215.3L121.6 206.5L127.9 198.3L134.2 190.9L140.5 184.2L146.7 178.2L153 172.8L159.3 168.1L165.5 164L171.8 160.5L178.1 157.6L184.4 155.2L190.6 153.4L196.9 152.2L203.2 151.4L209.5 151.1L215.7 151.3L222 151.9L228.3 153L234.5 154.5L240.8 156.4L247.1 158.6L253.4 161.2L259.6 164.1L265.9 167.3L272.2 170.9L278.5 174.7L284.7 178.7L291 183L297.3 187.5L303.5 192.2L309.8 197.1L316.1 202.1L322.4 207.2L328.6 212.5L334.9 217.9L341.2 223.4L347.5 228.9L353.7 234.4L360 240L366.3 245.6L372.5 251.1L378.8 256.6L385.1 262.1L391.4 267.5L397.6 272.8L403.9 277.9L410.2 282.9L416.5 287.8L422.7 292.5L429 297L435.3 301.3L441.5 305.3L447.8 309.1L454.1 312.7L460.4 315.9L466.6 318.8L472.9 321.4L479.2 323.6L485.5 325.5L491.7 327L498 328.1L504.3 328.7L510.5 328.9L516.8 328.6L523.1 327.8L529.4 326.6L535.6 324.8L541.9 322.4L548.2 319.5L554.5 316L560.7 311.9L567 307.2L573.3 301.8L579.5 295.8L585.8 289.1L592.1 281.7L598.4 273.5L604.6 264.7L610.9 255L617.2 244.6L623.5 233.4L629.7 221.3L636 208.5L642.3 194.7L648.5 180.1L654.8 164.6L661.1 148.2L667.4 130.8L673.6 112.5L679.9 93.2L686.2 72.9L692.5 51.6L698.7 29.3L705 5.9"></path>
+      <path class="g-tangente" pathLength="1" d="M414 480L720 140"></path>
+      <g class="g-apparition">
+        <circle class="pt-halo" cx="585" cy="290" r="12"></circle>
+        <circle class="pt-point" cx="585" cy="290" r="5.5"></circle>
+        <text class="etiquette-pt" x="602" y="272">A</text>
+        <text class="etiquette-eq" x="470" y="416" text-anchor="end">y = f′(a)(x − a) + f(a)</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section id="chapitres" class="rangee-chapitres">
+  <div class="rangee-tete">
+    <h2>Première · Spé Maths</h2>
+    <span class="rangee-compte">1 chapitre en ligne · 4 en préparation</span>
+  </div>
+
+  <a class="carte-chapitre" href="premiere/maths/derivation/">
+    <div class="carte-info">
+      <div class="carte-statut">CHAPITRE 01 — EN LIGNE</div>
+      <div class="carte-titre">La dérivation</div>
+      <div class="carte-desc">Taux de variation · Nombre dérivé · Tangente · Fonctions dérivées · Variations · 15 exercices corrigés</div>
+      <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
+    </div>
+    <div class="carte-motif">
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-courbe" d="M2.7 45.3L4.2 40L5.7 35.4L7.2 31.2L8.7 27.6L10.2 24.4L11.7 21.8L13.2 19.5L14.7 17.7L16.1 16.3L17.6 15.2L19.1 14.5L20.6 14.1L22.1 14L23.6 14.2L25.1 14.6L26.6 15.3L28.1 16.2L29.6 17.3L31.1 18.5L32.5 19.9L34 21.4L35.5 22.9L37 24.6L38.5 26.3L40 28L41.5 29.7L43 31.4L44.5 33.1L46 34.6L47.5 36.1L48.9 37.5L50.4 38.7L51.9 39.8L53.4 40.7L54.9 41.4L56.4 41.8L57.9 42L59.4 41.9L60.9 41.5L62.4 40.8L63.9 39.7L65.3 38.3L66.8 36.5L68.3 34.2L69.8 31.6L71.3 28.4L72.8 24.8L74.3 20.6L75.8 16L77.3 10.7"></path>
+        <path class="g-tangente" d="M56.4 51.6L78.2 20.1"></path>
+        <circle class="pt-point" cx="67.3" cy="35.9" r="2.4"></circle>
+      </svg>
+    </div>
+  </a>
+
+  <div class="grille-bientot">
+    <div class="carte-bientot">
+      <span class="bientot-tag">BIENTÔT</span>
+      <div class="bientot-titre">Les suites numériques</div>
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <circle class="pt-motif" cx="5.7" cy="5.6" r="2.2"></circle><circle class="pt-motif" cx="17.1" cy="19.7" r="2.2"></circle><circle class="pt-motif" cx="28.6" cy="29.9" r="2.2"></circle><circle class="pt-motif" cx="40" cy="37.2" r="2.2"></circle><circle class="pt-motif" cx="51.4" cy="42.5" r="2.2"></circle><circle class="pt-motif" cx="62.9" cy="46.2" r="2.2"></circle><circle class="pt-motif" cx="74.3" cy="49" r="2.2"></circle>
+      </svg>
+    </div>
+    <div class="carte-bientot">
+      <span class="bientot-tag">BIENTÔT</span>
+      <div class="bientot-titre">Le produit scalaire</div>
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-motif" d="M8 49L68 32.2M8 49L38 7"></path>
+        <circle class="pt-motif" cx="68" cy="32.2" r="2.2"></circle><circle class="pt-motif" cx="38" cy="7" r="2.2"></circle>
+      </svg>
+    </div>
+    <div class="carte-bientot">
+      <span class="bientot-tag">BIENTÔT</span>
+      <div class="bientot-titre">Probabilités conditionnelles</div>
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-motif" d="M6.7 28L40 14M6.7 28L40 42M40 14L73.3 7M40 14L73.3 21M40 42L73.3 35M40 42L73.3 49"></path>
+        <circle class="pt-motif" cx="6.7" cy="28" r="2"></circle><circle class="pt-motif" cx="40" cy="14" r="2"></circle><circle class="pt-motif" cx="40" cy="42" r="2"></circle><circle class="pt-motif" cx="73.3" cy="7" r="2"></circle><circle class="pt-motif" cx="73.3" cy="21" r="2"></circle><circle class="pt-motif" cx="73.3" cy="35" r="2"></circle><circle class="pt-motif" cx="73.3" cy="49" r="2"></circle>
+      </svg>
+    </div>
+    <div class="carte-bientot">
+      <span class="bientot-tag">BIENTÔT</span>
+      <div class="bientot-titre">La fonction exponentielle</div>
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-motif" d="M1.7 55.1L3.2 55L4.7 55L6.2 54.9L7.7 54.8L9.2 54.7L10.7 54.6L12.2 54.4L13.7 54.3L15.2 54.2L16.7 54L18.2 53.8L19.7 53.7L21.2 53.5L22.7 53.3L24.2 53L25.7 52.8L27.2 52.5L28.7 52.2L30.2 51.9L31.7 51.5L33.2 51.2L34.7 50.8L36.2 50.3L37.7 49.8L39.2 49.3L40.7 48.7L42.2 48.1L43.7 47.5L45.2 46.7L46.7 46L48.2 45.1L49.7 44.2L51.2 43.2L52.7 42.1L54.2 41L55.7 39.7L57.2 38.3L58.7 36.8L60.2 35.2L61.7 33.4L63.2 31.5L64.7 29.5L66.2 27.2L67.7 24.8L69.2 22.2L70.7 19.3L72.2 16.2L73.7 12.9L75.2 9.2L76.7 5.3"></path>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="rangee-chapitres">
+  <div class="rangee-tete">
+    <h2>Première · Spé Physique-Chimie</h2>
+    <span class="rangee-compte">4 chapitres en préparation</span>
+  </div>
+  <div class="grille-bientot">
+    <div class="carte-bientot">
+      <span class="bientot-tag">BIENTÔT</span>
+      <div class="bientot-titre">Transformation chimique et avancement</div>
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-motif" d="M3.6 56L5.1 51.7L6.5 47.8L8 44.2L9.5 40.9L10.9 37.9L12.4 35.1L13.8 32.6L15.3 30.3L16.7 28.1L18.2 26.2L19.6 24.4L21.1 22.8L22.5 21.3L24 19.9L25.5 18.7L26.9 17.5L28.4 16.5L29.8 15.5L31.3 14.7L32.7 13.8L34.2 13.1L35.6 12.4L37.1 11.8L38.5 11.3L40 10.7L41.5 10.3L42.9 9.8L44.4 9.4L45.8 9.1L47.3 8.7L48.7 8.4L50.2 8.1L51.6 7.9L53.1 7.6L54.5 7.4L56 7.2L57.5 7.1L58.9 6.9L60.4 6.7L61.8 6.6L63.3 6.5L64.7 6.4L66.2 6.2L67.6 6.2L69.1 6.1L70.5 6L72 5.9L73.5 5.8L74.9 5.8L76.4 5.7"></path>
+      </svg>
+    </div>
+    <div class="carte-bientot">
+      <span class="bientot-tag">BIENTÔT</span>
+      <div class="bientot-titre">Mouvement et deuxième loi de Newton</div>
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-motif" d="M4.1 42L5.5 38.9L7 36L8.4 33.2L9.8 30.6L11.3 28.1L12.7 25.7L14.1 23.5L15.6 21.3L17 19.4L18.4 17.6L19.9 15.9L21.3 14.3L22.7 12.9L24.1 11.6L25.6 10.4L27 9.4L28.4 8.6L29.9 7.8L31.3 7.2L32.7 6.7L34.2 6.4L35.6 6.2L37 6.2L38.5 6.2L39.9 6.5L41.3 6.8L42.8 7.3L44.2 7.9L45.6 8.7L47.1 9.6L48.5 10.6L49.9 11.8L51.4 13.1L52.8 14.5L54.2 16.1L55.6 17.8L57.1 19.7L58.5 21.7L59.9 23.8L61.4 26.1L62.8 28.4L64.2 31L65.7 33.7L67.1 36.5L68.5 39.4L70 42.5L71.4 45.7L72.8 49.1L74.3 52.5L75.7 56.2"></path>
+      </svg>
+    </div>
+    <div class="carte-bientot">
+      <span class="bientot-tag">BIENTÔT</span>
+      <div class="bientot-titre">Aspects énergétiques des phénomènes mécaniques</div>
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-motif" d="M0 51.8L2 51.8L4 51.7L6 51.5L8 51.3L10 51.1L12 50.7L14 50.3L16 49.9L18 49.4L20 48.8L22 48.2L24 47.5L26 46.8L28 46L30 45.1L32 44.2L34 43.2L36 42.2L38 41.1L40 39.9L42 38.7L44 37.4L46 36.1L48 34.7L50 33.2L52 31.7L54 30.1L56 28.5L58 26.8L60 25L62 23.2L64 21.3L66 19.4L68 17.4L70 15.4L72 13.2L74 11.1L76 8.8L78 6.6L80 4.2"></path>
+        <path class="g-motif" stroke-dasharray="3 3" d="M0 4.2L2 4.2L4 4.3L6 4.5L8 4.7L10 4.9L12 5.3L14 5.7L16 6.1L18 6.6L20 7.2L22 7.8L24 8.5L26 9.2L28 10L30 10.9L32 11.8L34 12.8L36 13.8L38 14.9L40 16.1L42 17.3L44 18.6L46 19.9L48 21.3L50 22.8L52 24.3L54 25.9L56 27.5L58 29.2L60 31L62 32.8L64 34.7L66 36.6L68 38.6L70 40.6L72 42.8L74 44.9L76 47.2L78 49.4L80 51.8"></path>
+      </svg>
+    </div>
+    <div class="carte-bientot">
+      <span class="bientot-tag">BIENTÔT</span>
+      <div class="bientot-titre">Ondes mécaniques</div>
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-motif" d="M0 28L1.3 24.4L2.7 21L4 17.7L5.3 14.6L6.7 11.9L8 9.7L9.3 7.8L10.7 6.5L12 5.8L13.3 5.6L14.7 6L16 7L17.3 8.4L18.7 10.4L20 12.9L21.3 15.7L22.7 18.8L24 22.2L25.3 25.7L26.7 29.3L28 32.9L29.3 36.3L30.7 39.5L32 42.4L33.3 45L34.7 47.1L36 48.7L37.3 49.8L38.7 50.3L40 50.3L41.3 49.7L42.7 48.6L44 46.9L45.3 44.7L46.7 42.1L48 39.2L49.3 36L50.7 32.5L52 29L53.3 25.4L54.7 21.9L56 18.5L57.3 15.4L58.7 12.6L60 10.2L61.3 8.3L62.7 6.8L64 5.9L65.3 5.6L66.7 5.8L68 6.6L69.3 8L70.7 9.8L72 12.2L73.3 14.9L74.7 18L76 21.3L77.3 24.8L78.7 28.3L80 31.9"></path>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="bande-comment">
+  <div class="bande-inner">
+    <div class="etape-comment">
+      <span class="etape-num">01</span>
+      <span class="etape-texte"><strong>Lis la fiche</strong><span class="etape-detail"> — l'essentiel du cours, sans remplissage.</span></span>
+    </div>
+    <div class="etape-comment">
+      <span class="etape-num">02</span>
+      <span class="etape-texte"><strong>Manipule les graphiques</strong><span class="etape-detail"> — déplace un point, la tangente suit.</span></span>
+    </div>
+    <div class="etape-comment">
+      <span class="etape-num">03</span>
+      <span class="etape-texte"><strong>Entraîne-toi</strong><span class="etape-detail"> — des exercices corrigés étape par étape.</span></span>
+    </div>
+  </div>
+</section>
+
+<section id="apropos" class="apropos">
+  <div class="apropos-inner">
+    <div class="portrait" aria-hidden="true">photo</div>
+    <div class="apropos-texte">
+      <div class="kicker">QUI EST DERRIÈRE CE SITE&nbsp;?</div>
+      <p>Nabla est écrit par une seule personne&nbsp;: tuteur indépendant depuis neuf ans, diplômé d'Imperial College London, spécialiste du Bac français et des lycées français à l'étranger. Chaque fiche est construite comme un cours particulier — relue et retravaillée jusqu'à ce que ce soit vraiment clair.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span><span class="nabla-symbole" aria-hidden="true">∇</span> Nabla — fiches de révision interactives</span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

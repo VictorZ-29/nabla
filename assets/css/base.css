@@ -1,0 +1,376 @@
+/* ==========================================================================
+   Nabla — base.css
+   Reset, typographie, en-tête/pied de page, composants partagés, accueil.
+   Toutes les couleurs viennent de tokens.css.
+   ========================================================================== */
+
+/* --- Reset & fondations --------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg { max-width: 100%; height: auto; }
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--text); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+button { font: inherit; }
+
+@keyframes nablaDraw { to { stroke-dashoffset: 0; } }
+@keyframes nablaFade { to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition: none !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* --- Composants partagés --------------------------------------------------- */
+
+/* Bouton pilule (toggle de thème, réinitialiser) */
+.btn-pill {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-pill:hover { border-color: var(--text); color: var(--text); }
+
+/* Étiquette mono (kickers, labels de section) */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+
+/* --- En-tête de site -------------------------------------------------------- */
+
+.site-header {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 22px var(--pad-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.marque {
+  text-decoration: none;
+  color: var(--text);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.marque:hover { color: var(--text); }
+.marque .nabla-symbole {
+  font-family: var(--font-math);
+  font-size: 22px;
+  color: var(--accent);
+}
+.marque .marque-nom {
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.01em;
+}
+
+.nav-site {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 28px);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.nav-site a {
+  text-decoration: none;
+  color: var(--text);
+}
+.nav-site a:hover { color: var(--accent); }
+
+/* --- Pied de page ------------------------------------------------------------ */
+
+.site-footer { border-top: 1px solid var(--hair); }
+.site-footer .footer-inner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 24px var(--pad-x);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--faint);
+}
+.site-footer .nabla-symbole { color: var(--accent); }
+.site-footer .footer-liens { display: flex; gap: 20px; flex-wrap: wrap; }
+.site-footer a { color: var(--faint); }
+.site-footer a:hover { color: var(--text); }
+
+/* --- Accueil : héro ------------------------------------------------------------ */
+
+.hero {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: clamp(36px, 6vw, 76px) var(--pad-x) clamp(44px, 6vw, 72px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(32px, 5vw, 64px);
+}
+.hero-texte { flex: 1.15; min-width: 300px; }
+.hero-texte h1 {
+  margin: 16px 0 0;
+  font-size: clamp(34px, 5.5vw, 54px);
+  line-height: 1.07;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.hero-texte .hero-accroche {
+  margin: 20px 0 0;
+  font-size: clamp(16px, 2vw, 18.5px);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 46ch;
+}
+.hero-cta { margin-top: 28px; }
+.hero-cta a { font-size: 17px; font-weight: 500; }
+.hero-figure { flex: 1; min-width: 280px; }
+.hero-figure svg { width: 100%; height: auto; display: block; }
+
+/* Héro : SVG animé */
+.hero-svg .g-grid { stroke: var(--grid); stroke-width: var(--sw-grid); fill: none; }
+.hero-svg .g-axis { stroke: var(--axis); stroke-width: var(--sw-grid); fill: none; }
+.hero-svg .g-guide { stroke: var(--guide); stroke-width: var(--sw-grid); fill: none; }
+.hero-svg .g-courbe {
+  stroke: var(--chalk);
+  stroke-width: var(--sw-curve-hero);
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: nablaDraw 1.9s cubic-bezier(0.55, 0.06, 0.28, 0.99) 0.3s forwards;
+}
+.hero-svg .g-tangente {
+  stroke: var(--accent);
+  stroke-width: var(--sw-tan);
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: nablaDraw 0.9s ease-out 2s forwards;
+}
+.hero-svg .g-apparition { opacity: 0; animation: nablaFade 0.6s ease 2.7s forwards; }
+.hero-svg .pt-halo { fill: none; stroke: var(--accent); stroke-opacity: 0.4; stroke-width: 1.5; }
+.hero-svg .pt-point { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
+.hero-svg .etiquette-fn { font-family: var(--font-math); font-style: italic; font-size: 21px; fill: var(--text); }
+.hero-svg .etiquette-pt { font-family: var(--font-math); font-style: italic; font-size: 19px; fill: var(--text); }
+.hero-svg .etiquette-eq { font-family: var(--font-math); font-style: italic; font-size: 17px; fill: var(--accent); }
+
+/* --- Accueil : rangées de chapitres ------------------------------------------- */
+
+.rangee-chapitres {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--pad-x) clamp(24px, 4vw, 40px);
+}
+.rangee-chapitres:last-of-type { padding-bottom: clamp(48px, 7vw, 80px); }
+
+.rangee-tete {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--edge);
+  padding-top: 18px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.rangee-tete h2 {
+  margin: 0;
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 600;
+}
+.rangee-compte {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--faint);
+}
+
+/* Carte de chapitre en ligne */
+.carte-chapitre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(20px, 4vw, 56px);
+  text-decoration: none;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-card);
+  padding: clamp(22px, 4vw, 34px);
+}
+.carte-chapitre:hover { border-color: var(--accent); color: var(--text); }
+.carte-info { flex: 1.4; min-width: 260px; }
+.carte-statut {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.carte-titre {
+  font-size: clamp(24px, 4vw, 30px);
+  font-weight: 600;
+  margin-top: 8px;
+}
+.carte-desc {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+.carte-ouvrir {
+  margin-top: 16px;
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 16px;
+}
+.carte-motif { flex: 1; min-width: 190px; max-width: 270px; }
+.carte-motif svg { width: 100%; height: auto; display: block; overflow: visible; }
+.carte-motif .g-courbe { stroke: var(--chalk); stroke-width: var(--sw-motif); fill: none; stroke-linecap: round; }
+.carte-motif .g-tangente { stroke: var(--accent); stroke-width: 1.4; fill: none; stroke-linecap: round; }
+.carte-motif .pt-point { fill: var(--accent); stroke: var(--surface); stroke-width: 1; }
+
+/* Cartes « bientôt » */
+.grille-bientot {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 14px;
+}
+.carte-chapitre + .grille-bientot { margin-top: 14px; }
+.carte-bientot {
+  border: 1px dashed var(--dash2);
+  border-radius: var(--radius-card);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.carte-bientot .bientot-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--faint);
+}
+.carte-bientot .bientot-titre {
+  font-size: 17.5px;
+  font-weight: 500;
+  color: var(--faint);
+  flex: 1;
+}
+.carte-bientot svg { width: 68px; height: auto; display: block; }
+.carte-bientot .g-motif { stroke: var(--ghost); stroke-width: var(--sw-motif); fill: none; stroke-linecap: round; }
+.carte-bientot .pt-motif { fill: var(--ghost); }
+
+/* --- Accueil : « comment ça marche » ------------------------------------------- */
+
+.bande-comment {
+  border-top: 1px solid var(--hair);
+  border-bottom: 1px solid var(--hair);
+}
+.bande-comment .bande-inner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 40px) var(--pad-x);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px clamp(28px, 4vw, 56px);
+}
+.etape-comment {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex: 1;
+  min-width: 230px;
+}
+.etape-comment .etape-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent);
+}
+.etape-comment .etape-texte { font-size: 16px; line-height: 1.5; }
+.etape-comment strong { font-weight: 600; }
+.etape-comment .etape-detail { color: var(--muted); }
+
+/* --- Accueil : à propos ----------------------------------------------------------- */
+
+.apropos {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 76px) var(--pad-x);
+}
+.apropos-inner {
+  max-width: 680px;
+  display: flex;
+  gap: 26px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.portrait {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px dashed var(--dash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--faint);
+}
+.apropos-texte { flex: 1; min-width: 260px; }
+.apropos-texte .kicker { letter-spacing: 0.14em; font-size: 11px; }
+.apropos-texte p {
+  margin: 12px 0 0;
+  font-size: 17px;
+  line-height: 1.65;
+}

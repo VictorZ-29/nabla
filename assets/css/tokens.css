@@ -1,0 +1,126 @@
+/* ==========================================================================
+   Nabla — design tokens
+   Extraits du handoff Claude Design (design-reference/, bloc DCLogic des
+   pages courantes). SOURCE DE VÉRITÉ UNIQUE du design system : aucune
+   couleur, police ou épaisseur de trait SVG codée en dur ailleurs.
+   Si Victor envoie un handoff mis à jour : re-dériver ce fichier, ne pas
+   patcher à la main.
+
+   Le thème est posé par data-theme="dark|light" sur <html> (dark = défaut
+   de marque). Les teintes d'accent sont dérivées de --accent par
+   color-mix(in oklab, …), exactement comme dans le design.
+   ========================================================================== */
+
+:root {
+  /* --- Typographie (Google Fonts, cf. designs) ------------------------- */
+  --font-serif: 'Spectral', Georgia, serif;              /* corps de texte */
+  --font-mono: 'IBM Plex Mono', monospace;               /* labels, chips, UI */
+  --font-math: 'STIX Two Text', serif;                   /* maths SVG (le texte
+                                                            maths HTML est rendu
+                                                            par KaTeX) */
+
+  /* --- Mise en page ------------------------------------------------------ */
+  --page-max: 1100px;                                    /* largeur contenu */
+  --pad-x: clamp(20px, 5vw, 48px);                       /* gouttières page */
+  --content-max: 720px;                                  /* colonne chapitre */
+  --sommaire-w: 230px;
+  --bp-sommaire: 920px;                                  /* bascule sommaire
+                                                            desktop/mobile (JS
+                                                            et CSS) */
+  --radius-card: 12px;
+  --radius-block: 10px;
+  --radius-chip: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Thème sombre (défaut de marque)
+   -------------------------------------------------------------------------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #16140F;
+  --surface: #1F1C15;
+  --chip: #2A261B;
+
+  --text: #F2EFE6;
+  --muted: #B3AC9A;
+  --faint: #8D8776;
+
+  --hair: #332F24;      /* filets externes */
+  --hairIn: #2B2720;    /* filets internes (rangées, séparateurs) */
+  --edge: #D6D0BF;      /* bord contrasté des blocs cadres */
+  --dash: #5A5443;      /* pointillés (blocs MÉTHODE) */
+  --dash2: #453F30;     /* pointillés (cartes « bientôt ») */
+  --ghost: #57513F;     /* motifs SVG des cartes « bientôt » */
+
+  /* Graphiques SVG */
+  --grid: #242018;
+  --axis: #4C4635;
+  --chalk: #EDE9DB;     /* courbe de f (la « craie ») */
+  --guide: #6B6450;     /* guides pointillés */
+  --tick: #3B362A;      /* barres de niveau éteintes (exercices) */
+
+  /* Accent : #2743C6 relevé pour le sombre (liftMap du design).
+     Alternatives du design : vert #0E6B4E→#63BD9B, rouge #A8322D→#E68F86. */
+  --accent: #93A6F2;
+  --accTint: color-mix(in oklab, var(--accent) 13%, var(--surface));
+  --accTint2: color-mix(in oklab, var(--accent) 20%, var(--surface));
+  --accEdge: color-mix(in oklab, var(--accent) 45%, var(--bg));
+
+  /* Bandeaux inversés (en-têtes de tableaux, VERS LE BAC, tag glisse-moi) */
+  --band-bg: #F2EFE6;
+  --band-fg: #16140F;
+  --band-muted: #6B6759;
+
+  /* Épaisseurs de traits SVG — plus épais sur fond sombre, cf. designs */
+  --sw-grid: 1.5;
+  --sw-curve: 2.4;        /* courbes des widgets chapitre */
+  --sw-curve-hero: 2.5;   /* courbe du héro d'accueil */
+  --sw-tan: 2.1;          /* sécantes / tangentes */
+  --sw-tan-mini: 1.8;     /* mini-tangente du widget « Construis f′ » */
+  --sw-motif: 1.8;        /* motifs des cartes chapitre */
+}
+
+/* --------------------------------------------------------------------------
+   Thème clair
+   -------------------------------------------------------------------------- */
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #FBFAF7;
+  --surface: #FFFFFF;
+  --chip: #F4F1E8;
+
+  --text: #1D1B16;
+  --muted: #57534A;
+  --faint: #8A8677;
+
+  --hair: #E4E1D7;
+  --hairIn: #EEECE3;
+  --edge: #1D1B16;
+  --dash: #B9B4A3;
+  --dash2: #CFCABA;
+  --ghost: #C9C4B4;
+
+  --grid: #F0EDE3;
+  --axis: #CFCBBE;
+  --chalk: #1D1B16;
+  --guide: #B9B4A3;
+  --tick: #DDD9CC;
+
+  --accent: #2743C6;
+  --accTint: color-mix(in oklab, var(--accent) 6%, var(--surface));
+  --accTint2: color-mix(in oklab, var(--accent) 10%, var(--surface));
+  --accEdge: color-mix(in oklab, var(--accent) 40%, var(--surface));
+
+  --band-bg: #1D1B16;
+  --band-fg: #FBFAF7;
+  --band-muted: #A39E8E;
+
+  --sw-grid: 1;
+  --sw-curve: 2.1;
+  --sw-curve-hero: 2.25;
+  --sw-tan: 1.8;
+  --sw-tan-mini: 1.6;
+  --sw-motif: 1.5;
+}
