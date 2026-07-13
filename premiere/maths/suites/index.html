@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Les suites numériques — Première Spé Maths | Nabla</title>
+<meta name="description" content="Comprends vraiment les suites : termes et récurrence, suites arithmétiques et géométriques, sommes et sens de variation, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/suites/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Les suites numériques — Première Spé Maths | Nabla">
+<meta property="og:description" content="Récurrence, suites arithmétiques et géométriques, sommes, sens de variation : un cours interactif où tu manipules les suites toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/suites/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Les suites numériques — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Récurrence, suites arithmétiques et géométriques, sommes, sens de variation : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Les suites numériques — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur les suites numériques : modes de génération, suites arithmétiques et géométriques, sommes de termes, sens de variation. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/suites/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Suites numériques, formule explicite et récurrence, suites arithmétiques, suites géométriques, sommes de termes consécutifs, sens de variation d'une suite",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false});"></script>
+
+<link rel="stylesheet" href="../../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../../assets/css/base.css">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/termes.js"></script>
+<script type="module" src="../../../assets/js/widgets/arithmetique.js"></script>
+<script type="module" src="../../../assets/js/widgets/somme.js"></script>
+<script type="module" src="../../../assets/js/widgets/geometrique.js"></script>
+<script type="module" src="../../../assets/js/widgets/sens.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="suites">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <span class="nabla-symbole" aria-hidden="true">∇</span>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>Les suites numériques</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer les termes d'une suite définie par formule ou par récurrence, reconnaître les suites arithmétiques et géométriques, utiliser leurs formules explicites et leurs sommes — et étudier le sens de variation d'une suite.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. Une liste de nombres numérotés</a>
+      <a href="#s2">2. Deux façons de fabriquer une suite</a>
+      <a href="#s3">3. Les suites arithmétiques</a>
+      <a href="#s4">4. Les suites géométriques</a>
+      <a href="#s5">5. Le sens de variation</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. Une liste de nombres numérotés</a>
+        <a href="#s2">2. Deux façons de fabriquer une suite</a>
+        <a href="#s3">3. Les suites arithmétiques</a>
+        <a href="#s4">4. Les suites géométriques</a>
+        <a href="#s5">5. Le sens de variation</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. Une liste de nombres numérotés</h2>
+      <p class="prose">Regarde&nbsp;: 100, 120, 140, 160… Tu as déjà deviné le nombre d'après, 180, sans qu'on te donne la moindre formule. Une <strong>suite numérique</strong>, ce n'est rien de plus que ça&nbsp;: une liste infinie de nombres, rangés dans un ordre précis. Toute la nouveauté du chapitre tient dans la façon d'en parler proprement, et dans ce qu'on arrive à en faire.</p>
+      <p class="prose">Ces nombres racontent quelque chose de très concret&nbsp;: tu ouvres un livret avec 100&nbsp;€, et tu y déposes 20&nbsp;€ chaque mois. 100&nbsp;€ au départ, 120&nbsp;€ après un mois, 140&nbsp;€ après deux… Chaque nombre de la liste a donc un numéro d'ordre&nbsp;: le mois 0, le mois 1, le mois 2. Ce numéro s'appelle le <strong>rang</strong>, et c'est lui qui organise toute la notation.</p>
+      <p class="prose">On note \(u\) la suite, et \(u_n\) (lis «&nbsp;u indice n&nbsp;») le nombre qui occupe le rang \(n\). Ici, \(u_0 = 100\), \(u_1 = 120\), \(u_3 = 160\). Prends une seconde sur cette écriture, elle porte tout le chapitre&nbsp;: dans \(u_3 = 160\), le 3 dit <em>où</em> on est dans la liste, le 160 dit <em>combien</em> vaut le terme. Et remarque que le tout premier terme s'appelle \(u_0\), pas \(u_1\)&nbsp;: on démarre presque toujours au rang 0.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="Neuf points isolés représentant une épargne mois par mois : 100 euros au rang 0, puis 20 euros de plus à chaque rang ; le point de rang 3, à 160 euros, est mis en évidence par des pointillés">
+          <path class="g-grid" d="M106.7 400L106.7 0M173.3 400L173.3 0M240 400L240 0M306.7 400L306.7 0M373.3 400L373.3 0M440 400L440 0M506.7 400L506.7 0M573.3 400L573.3 0M0 317.5L640 317.5M0 254L640 254M0 190.5L640 190.5M0 127L640 127M0 63.5L640 63.5"></path>
+          <path class="g-axis" d="M0 381L640 381M40 400L40 0"></path>
+          <path class="g-guide" stroke-dasharray="4 4" d="M240 381L240 177.8M240 177.8L40 177.8"></path>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="32" y="258" text-anchor="end">100</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="32" y="131" text-anchor="end">200</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="40" y="399" text-anchor="middle">0</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="106.7" y="399" text-anchor="middle">1</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="173.3" y="399" text-anchor="middle">2</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="240" y="399" text-anchor="middle">3</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="306.7" y="399" text-anchor="middle">4</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="373.3" y="399" text-anchor="middle">5</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="440" y="399" text-anchor="middle">6</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="506.7" y="399" text-anchor="middle">7</text>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="573.3" y="399" text-anchor="middle">8</text>
+          <text class="etiquette-math etiquette-math--muted" font-size="15" x="632" y="366" text-anchor="end">rang n</text>
+          <text class="etiquette-math etiquette-math--muted" font-size="15" x="50" y="18">u<tspan dy="4" font-size="11">n</tspan><tspan dy="-4">&#8202;(€)</tspan></text>
+          <circle class="pt-suite" cx="40" cy="254" r="5"></circle>
+          <circle class="pt-suite" cx="106.7" cy="228.6" r="5"></circle>
+          <circle class="pt-suite" cx="173.3" cy="203.2" r="5"></circle>
+          <circle class="pt-suite" cx="306.7" cy="152.4" r="5"></circle>
+          <circle class="pt-suite" cx="373.3" cy="127" r="5"></circle>
+          <circle class="pt-suite" cx="440" cy="101.6" r="5"></circle>
+          <circle class="pt-suite" cx="506.7" cy="76.2" r="5"></circle>
+          <circle class="pt-suite" cx="573.3" cy="50.8" r="5"></circle>
+          <circle class="pt-point" cx="240" cy="177.8" r="5.5"></circle>
+          <text class="etiquette-math etiquette-math--accent" font-size="16" x="252" y="168">u<tspan dy="4" font-size="11">3</tspan><tspan dy="-4">&#8201;= 160 €</tspan></text>
+        </svg>
+        <figcaption>L'épargne, mois par mois. Chaque point a un numéro (son rang \(n\), en abscisse) et une valeur (le terme \(u_n\), en ordonnée). On ne relie pas les points&nbsp;: entre deux rangs, il n'y a rien.</figcaption>
+      </figure>
+
+      <p class="prose">Ce graphique dit déjà l'essentiel&nbsp;: une suite, c'est une fonction — mais une fonction qui n'accepte que des entiers. Demander \(u_{2{,}5}\) n'a aucun sens&nbsp;: il n'y a pas de «&nbsp;mois deux et demi&nbsp;» dans la liste. Voilà pourquoi on ne relie jamais les points entre eux.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une <strong>suite numérique</strong> \(u\) associe à chaque entier naturel \(n\) (0, 1, 2, 3…) un nombre réel noté \(u_n\), appelé <strong>terme de rang \(n\)</strong>. La suite entière se note \((u_n)\), avec des parenthèses&nbsp;: \((u_n)\) désigne toute la liste, \(u_n\) un seul nombre.</p>
+      </div>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Deux façons de fabriquer une suite</h2>
+      <p class="prose">Une liste infinie, personne ne peut l'écrire en entier. Pour définir une suite, il faut donner une <em>règle</em> qui permette de calculer n'importe quel terme. Et il existe deux grandes manières de donner cette règle — si différentes qu'on dirait deux machines.</p>
+      <p class="prose">La première&nbsp;: une <strong>formule explicite</strong>, du type \(u_n = n^2 - 2n\). Tu veux le terme de rang 37&nbsp;? Tu remplaces \(n\) par 37, et c'est terminé. Accès direct, un seul calcul.</p>
+      <p class="prose">La seconde&nbsp;: une <strong>relation de récurrence</strong>. On te donne le premier terme, puis une règle pour passer d'un terme au suivant, du type \(v_{n+1} = 2v_n - 1\). Lis-la comme une phrase&nbsp;: «&nbsp;le terme suivant s'obtient en doublant le terme actuel, puis en retirant 1&nbsp;». Tu veux \(v_{10}\)&nbsp;? Il faut d'abord calculer \(v_1\), puis \(v_2\), puis \(v_3\)… Dix marches, une par une. Compare les deux machines toi-même&nbsp;:</p>
+
+      <figure class="widget" id="widget-termes" data-widget="termes" data-exp="n2-2n" data-rec="2v-1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Explicite ou récurrence&nbsp;: deux machines</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <div class="machine-corps">
+          <div class="machine-panneau">
+            <div class="machine-mode">MACHINE 1 — FORMULE EXPLICITE</div>
+            <div class="machine-regle">\(u_n = n^2 - 2n\)</div>
+            <div class="curseur-ligne">
+              <span class="curseur-label" aria-hidden="true">n</span>
+              <input type="range" class="js-n" min="0" max="50" step="1" value="4" aria-label="Rang n du terme à calculer directement">
+            </div>
+            <p class="machine-calcul">u<sub class="js-cn1">4</sub> = <span class="js-cn2">4</span>² − 2 × <span class="js-cn3">4</span> = <strong class="js-cres">8</strong></p>
+            <p class="machine-note">Un seul calcul, même pour n = 50&nbsp;: tu remplaces n, et c'est réglé.</p>
+          </div>
+          <div class="machine-panneau">
+            <div class="machine-mode">MACHINE 2 — RÉCURRENCE</div>
+            <div class="machine-regle">\(v_0 = 2 \;;\quad v_{n+1} = 2v_n - 1\)</div>
+            <button type="button" class="btn-pill btn-pill--accent js-suivant">Calcule le terme suivant ▸</button>
+            <ol class="machine-chaine js-chaine"></ol>
+            <p class="machine-note js-note">Pour l'instant, tu ne connais que le premier terme. Les suivants se méritent.</p>
+          </div>
+        </div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Si la formule explicite est si commode, pourquoi s'encombrer de la récurrence&nbsp;? Parce que dans la vraie vie, c'est presque toujours la récurrence qu'on connaît. La population d'une ville l'an prochain se déduit de celle de cette année&nbsp;; ton épargne du mois prochain, de celle de ce mois-ci&nbsp;; le nombre de malades demain, de celui d'aujourd'hui. Le monde évolue de proche en proche&nbsp;: la récurrence est la langue naturelle de tout ce qui avance étape par étape.</p>
+        <p>Du coup, l'un des grands jeux du chapitre sera de <em>traduire</em>&nbsp;: partir d'une règle de récurrence et en tirer une formule explicite, pour retrouver l'accès direct. Tu vas le faire deux fois — pour les suites arithmétiques, puis pour les géométriques.</p>
+      </div>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une suite est définie <strong>de façon explicite</strong> quand on dispose d'une formule \(u_n = f(n)\) qui donne chaque terme directement à partir de son rang.</p>
+        <p>Elle est définie <strong>par récurrence</strong> quand on dispose de son premier terme et d'une relation qui exprime chaque terme à partir du précédent, comme \(u_{n+1} = f(u_n)\).</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER LES TERMES D'UNE SUITE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Repère le mode de définition&nbsp;: une formule en \(n\) (explicite), ou une règle de passage d'un terme au suivant (récurrence).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Explicite&nbsp;: remplace \(n\) par le rang visé, <em>partout</em> dans la formule.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Récurrence&nbsp;: pars du premier terme et applique la règle autant de fois que nécessaire, en notant chaque terme au passage.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LES DEUX MACHINES, PLUS UN RÉFLEXE</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Soit \(u_n = n^2 + 1\). Calcule \(u_0\), \(u_1\), \(u_3\) et \(u_{10}\).</p>
+          <p><span class="etape-label">Calcul — </span>on remplace \(n\)&nbsp;: \(u_0 = 0 + 1 = 1\), \(u_1 = 1 + 1 = 2\), \(u_3 = 9 + 1 = 10\), et directement \(u_{10} = 100 + 1 = 101\).</p>
+          <p class="conclusion">Aucun terme intermédiaire à calculer&nbsp;: c'est tout l'intérêt de l'explicite.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Soit \(v_0 = 5\) et \(v_{n+1} = 3v_n - 4\). Calcule \(v_1\), \(v_2\) et \(v_3\).</p>
+          <p><span class="etape-label">Calcul — </span>de proche en proche&nbsp;: \(v_1 = 3 \times 5 - 4 = 11\), puis \(v_2 = 3 \times 11 - 4 = 29\), puis \(v_3 = 3 \times 29 - 4 = 83\).</p>
+          <p class="conclusion">Pour \(v_{10}\), il faudrait continuer ainsi jusqu'au bout&nbsp;: la récurrence ne saute jamais de marche.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">c. Soit \(u_n = n^2 + 1\). Exprime \(u_{n+1}\) en fonction de \(n\).</p>
+          <p><span class="etape-label">Calcul — </span>\(u_{n+1}\) est le terme de rang \(n+1\)&nbsp;: on remplace \(n\) par \(n+1\) <em>partout</em>. \(u_{n+1} = (n+1)^2 + 1 = n^2 + 2n + 2\).</p>
+          <p class="conclusion">Surtout pas \(n^2 + 1 + 1\)&nbsp;: \(u_{n+1}\) est le terme <em>suivant</em>, pas «&nbsp;le terme plus 1&nbsp;». Ce réflexe servira pour tout le chapitre.</p>
+        </div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Dans une suite \((u_n)\), le terme \(u_{n+1}\) désigne…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(u_n\) augmenté de 1</button>
+              <button type="button" class="quiz-reponse">le terme qui suit \(u_n\) dans la liste</button>
+              <button type="button" class="quiz-reponse">le terme de rang \(n - 1\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n + 1\) est un <em>rang</em>&nbsp;: \(u_{n+1}\) est le terme d'après. Sa valeur n'a aucune raison d'être \(u_n + 1\)&nbsp;: avec \(v_{n+1} = 2v_n - 1\), on passe de 5 à 9, pas de 5 à 6.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(u_n = 2n^2\) pour tout \(n\). Alors \(u_3 =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">18</button>
+              <button type="button" class="quiz-reponse">12</button>
+              <button type="button" class="quiz-reponse">36</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> remplace \(n\) par 3&nbsp;: \(2 \times 3^2 = 2 \times 9 = 18\). (36, c'est \((2 \times 3)^2\)&nbsp;: le carré ne porte que sur \(n\).)</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Une suite est définie par récurrence. Pour connaître \(u_{50}\), il faut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">remplacer \(n\) par 50 dans la règle</button>
+              <button type="button" class="quiz-reponse">calculer \(50 \times u_1\)</button>
+              <button type="button" class="quiz-reponse">calculer d'abord tous les termes jusqu'à \(u_{49}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la récurrence ne donne un terme qu'à partir du précédent&nbsp;: il faut remonter toute la chaîne. C'est exactement ce que la machine 2 t'a fait faire — sauf si on trouve une formule explicite, et c'est tout l'enjeu de la suite du chapitre.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Les suites arithmétiques&nbsp;: la même marche à chaque pas</h2>
+      <p class="prose">Reviens au livret du début&nbsp;: 100&nbsp;€, puis +20&nbsp;€ chaque mois. La règle de passage est la plus simple qui existe&nbsp;: <strong>on ajoute toujours le même nombre</strong>. Les suites qui avancent comme ça s'appellent <strong>arithmétiques</strong>, et le nombre ajouté à chaque pas s'appelle la <strong>raison</strong>, notée \(r\). Ici, \(r = 20\).</p>
+      <p class="prose">Joue avec les deux réglages ci-dessous&nbsp;: le point de départ \(u_0\) et la marche \(r\). Regarde ce que \(r\) change dans le dessin — et ce qui, quoi que tu fasses, ne change jamais.</p>
+
+      <figure class="widget" id="widget-arithmetique"
+        data-widget="arithmetique" data-n="8"
+        data-u0-init="-2" data-r-init="0.75"
+        data-xmin="-0.7" data-xmax="9.3" data-ymin="-7" data-ymax="7">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Construis ta suite arithmétique</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Points d'une suite arithmétique, avec l'escalier des marches +r entre les points et la droite en pointillé qui les porte"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">u<sub>0</sub></span>
+            <input type="range" class="js-curseur-u0" min="-3" max="3" step="0.5" value="-2" aria-label="Premier terme u indice 0">
+          </div>
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">r</span>
+            <input type="range" class="js-curseur-r" min="-1" max="1" step="0.05" value="0.75" aria-label="Raison r, la marche ajoutée à chaque rang">
+          </div>
+          <div class="lecture-formule">u<sub>8</sub> = u<sub>0</sub> + 8 × r = <span class="js-f-u0">−2</span> + 8 × <span class="js-f-r">0,75</span> = <span class="js-f-un val-accent">4</span></div>
+          <div class="chips">
+            <span class="chip">u<sub>0</sub> = <span class="js-u0">−2</span></span>
+            <span class="chip">r = <span class="js-r">0,75</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">r &gt; 0 — la suite monte</span>
+          </div>
+        </div>
+        <div class="widget-note">Quoi que tu règles, les points restent alignés. La pente de la droite qui les porte, c'est r&nbsp;: la marche que la suite ajoute à chaque rang.</div>
+      </figure>
+
+      <p class="prose">Des points alignés, une pente&nbsp;: si tu as déjà travaillé <a href="../derivation/">le chapitre sur la dérivation</a>, ce vocabulaire te dit quelque chose. Une suite arithmétique, c'est l'équivalent version «&nbsp;liste de nombres&nbsp;» d'une droite&nbsp;: partir d'une hauteur \(u_0\) et avancer d'une pente constante \(r\).</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une suite \((u_n)\) est <strong>arithmétique</strong> s'il existe un réel \(r\), appelé <strong>raison</strong>, tel que pour tout entier \(n\)&nbsp;: \(u_{n+1} = u_n + r\).</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — MONTRER QU'UNE SUITE EST ARITHMÉTIQUE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule \(u_{n+1} - u_n\) pour un \(n\) quelconque, en littéral.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Simplifie&nbsp;: si le résultat est une constante (plus aucun \(n\) ne survit), la suite est arithmétique, et cette constante est la raison.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Si le résultat dépend de \(n\), elle ne l'est pas. Pour le montrer, deux écarts numériques différents suffisent.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — PROUVER, OU RÉFUTER</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Montre que la suite définie par \(u_n = 7 - 2n\) est arithmétique.</p>
+          <p><span class="etape-label">Étape 1 — </span>\(u_{n+1} - u_n = \big(7 - 2(n+1)\big) - (7 - 2n) = 7 - 2n - 2 - 7 + 2n\).</p>
+          <p><span class="etape-label">Étape 2 — </span>tout se simplifie&nbsp;: \(u_{n+1} - u_n = -2\), une constante, quelle que soit la valeur de \(n\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \((u_n)\) est arithmétique, de raison \(r = -2\) et de premier terme \(u_0 = 7\).</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. La suite définie par \(v_n = n^2\) est-elle arithmétique&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>\(v_1 - v_0 = 1\), mais \(v_2 - v_1 = 3\)&nbsp;: deux écarts différents.</p>
+          <p class="conclusion">Conclusion&nbsp;: non. La marche change à chaque pas, ce n'est pas une suite arithmétique. (Deux écarts différents suffisent pour dire non — mais des écarts égaux au début ne suffiraient pas pour dire oui&nbsp;: voir les pièges classiques.)</p>
+        </div>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>La formule explicite se lit sur le graphique du dessus. Pour aller du rang 0 au rang \(n\), la suite monte \(n\) marches, toutes de hauteur \(r\)&nbsp;: en tout, elle ajoute \(n \times r\) à son point de départ. C'est toute la démonstration&nbsp;: \(u_n = u_0 + nr\). Compte les <em>marches</em> entre les deux rangs, pas les termes&nbsp;: du rang 0 au rang \(n\), il y a exactement \(n\) marches.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — FORMULE EXPLICITE</div>
+        <p>Si \((u_n)\) est arithmétique de raison \(r\), alors pour tout \(n\)&nbsp;:</p>
+        <div class="math-vitrine">$$u_n = u_0 + n\,r$$</div>
+        <p>Et plus généralement, entre deux rangs quelconques \(n\) et \(p\)&nbsp;: \(u_n = u_p + (n - p)\,r\). En particulier, si la suite commence à \(u_1\)&nbsp;: \(u_n = u_1 + (n-1)\,r\).</p>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — L'ACCÈS DIRECT RETROUVÉ</div>
+        <p class="exemple-enonce">Une suite arithmétique vérifie \(u_2 = 11\) et \(u_5 = 26\). Trouve \(r\), \(u_0\), puis \(u_{40}\).</p>
+        <p><span class="etape-label">Étape 1 — </span>du rang 2 au rang 5, il y a 3 marches&nbsp;: \(u_5 = u_2 + 3r\), donc \(3r = 26 - 11 = 15\) et \(r = 5\).</p>
+        <p><span class="etape-label">Étape 2 — </span>en redescendant de 2 marches&nbsp;: \(u_0 = u_2 - 2r = 11 - 10 = 1\).</p>
+        <p><span class="etape-label">Étape 3 — </span>accès direct&nbsp;: \(u_{40} = u_0 + 40r = 1 + 200 = 201\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(r = 5\), \(u_0 = 1\), \(u_{40} = 201\). La récurrence disait «&nbsp;+5 à chaque pas&nbsp;»&nbsp;; la formule explicite fait les 40 pas d'un coup.</p>
+      </div>
+
+      <p class="prose">Il reste une arme à récupérer&nbsp;: <strong>additionner</strong> les termes. La légende raconte qu'un instituteur, pour avoir la paix, demanda à sa classe de calculer \(1 + 2 + 3 + \cdots + 100\). Un élève de huit ans, un certain Carl Friedrich Gauss, donna la réponse en quelques secondes. Son idée&nbsp;: ne pas additionner dans l'ordre. La voici en images, à manipuler toi-même.</p>
+
+      <figure class="widget" id="widget-somme" data-widget="somme" data-n-init="8">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">L'astuce de Gauss, en images</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 360" aria-label="Un escalier de colonnes de 1 à n cases représente la somme 1 plus 2 plus etc. jusqu'à n ; une copie retournée vient compléter un rectangle de n lignes sur n plus 1 colonnes"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">n</span>
+            <input type="range" class="js-curseur" min="3" max="12" step="1" value="8" aria-label="Nombre n de colonnes de l'escalier">
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-copie" aria-pressed="false">▸ pose la copie retournée</button>
+          </div>
+          <div class="lecture-formule js-lecture" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">n = <span class="js-n-chip">8</span></span>
+            <span class="chip chip--accent">1 + … + n = <span class="js-somme">?</span></span>
+          </div>
+        </div>
+        <div class="widget-note">Deux escaliers identiques, tête-bêche, remplissent exactement un rectangle de n lignes sur (n + 1) colonnes. Un escalier vaut donc la moitié de n(n + 1).</div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — SOMME DES PREMIERS ENTIERS</div>
+        <div class="math-vitrine">$$1 + 2 + 3 + \cdots + n = \frac{n(n+1)}{2}$$</div>
+        <p>Plus généralement, une somme de termes consécutifs d'une suite arithmétique se calcule par&nbsp;: \(S = \text{(nombre de termes)} \times \dfrac{\text{premier} + \text{dernier}}{2}\). C'est la même idée que le rectangle&nbsp;: apparier le premier terme avec le dernier.</p>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — DEUX SOMMES</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Calcule \(1 + 2 + \cdots + 60\).</p>
+          <p><span class="etape-label">Calcul — </span>\(\dfrac{60 \times 61}{2} = 30 \times 61 = 1\,830\).</p>
+          <p class="conclusion">1&thinsp;830, sans additionner soixante nombres.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Calcule \(S = 7 + 10 + 13 + \cdots + 37\).</p>
+          <p><span class="etape-label">Étape 1 — </span>ce sont les termes d'une suite arithmétique de raison 3. Combien y en a-t-il&nbsp;? De 7 à 37, on monte \( (37-7)/3 = 10\) marches, donc il y a \(10 + 1 = 11\) termes.</p>
+          <p><span class="etape-label">Étape 2 — </span>\(S = 11 \times \dfrac{7 + 37}{2} = 11 \times 22 = 242\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(S = 242\). L'erreur guette au comptage des termes&nbsp;: marches + 1, toujours.</p>
+        </div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions sur l'arithmétique</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\((u_n)\) est arithmétique de raison \(r = -2\). Pour passer d'un terme au suivant…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">on ajoute −2, c'est-à-dire on retire 2</button>
+              <button type="button" class="quiz-reponse">on multiplie par −2</button>
+              <button type="button" class="quiz-reponse">on retire \(2n\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> arithmétique = on ajoute toujours \(r\), et \(r\) ne dépend pas de \(n\). Une raison négative, c'est simplement une marche qui descend.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(u_0 = 5\) et \(r = 3\). Alors \(u_{20} =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">60</button>
+              <button type="button" class="quiz-reponse">65</button>
+              <button type="button" class="quiz-reponse">62</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(u_{20} = u_0 + 20r = 5 + 60 = 65\). 62, c'est \(u_{19}\)&nbsp;: l'erreur d'indice classique. Compte les marches entre les rangs&nbsp;: de 0 à 20, il y en a 20.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Sur un graphique, les points d'une suite arithmétique…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">dessinent une parabole</button>
+              <button type="button" class="quiz-reponse">doivent être reliés entre eux</button>
+              <button type="button" class="quiz-reponse">sont alignés sur une droite de pente \(r\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> chaque rang ajoute la même hauteur \(r\)&nbsp;: les points s'alignent, et la pente de la droite est \(r\). Mais on ne les relie pas&nbsp;: entre deux rangs, il n'y a rien.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Les suites géométriques&nbsp;: multiplier au lieu d'ajouter</h2>
+      <p class="prose">Change une seule chose dans l'histoire&nbsp;: au lieu d'<em>ajouter</em>, on <em>multiplie</em>. Une vidéo fait 1&thinsp;000 vues le premier jour, et chaque jour le compteur est multiplié par 1,5&nbsp;: 1&thinsp;500, puis 2&thinsp;250, puis 3&thinsp;375… Les suites qui avancent en multipliant toujours par le même nombre sont dites <strong>géométriques</strong>. Le multiplicateur s'appelle encore la <strong>raison</strong>, mais on le note \(q\).</p>
+      <p class="prose">«&nbsp;Multiplier par 1,5&nbsp;», dit comme ça, a l'air raisonnable. Regarde ce que ça donne vraiment&nbsp;: règle \(q\) ci-dessous, et compare \(q = 0{,}7\), \(q = 1\) et \(q = 2\). Trois mondes complètement différents, séparés par presque rien.</p>
+
+      <figure class="widget" id="widget-geometrique"
+        data-widget="geometrique" data-n="8"
+        data-u0="1" data-q-init="1.3"
+        data-xmin="-0.7" data-xmax="9.3" data-ymin="-1" data-ymax="10">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La raison <span class="titre-math">q</span> change tout</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages de la raison q">
+            <button type="button" data-q="2" aria-pressed="false">q = 2</button>
+            <button type="button" data-q="1" aria-pressed="false">q = 1</button>
+            <button type="button" data-q="0.7" aria-pressed="false">q = 0,7</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Points d'une suite géométrique de premier terme 1 ; la raison q se règle au curseur et change complètement l'allure : explosion, constance ou extinction vers zéro"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">q</span>
+            <input type="range" class="js-curseur" min="0.1" max="2" step="0.05" value="1.3" aria-label="Raison q, le multiplicateur appliqué à chaque rang">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="lecture-formule">u<sub>8</sub> = u<sub>0</sub> × q⁸ = 1 × <span class="js-f-q">1,3</span>⁸ = <span class="js-f-un val-accent">8,16</span></div>
+          <div class="chips">
+            <span class="chip">u<sub>0</sub> = 1</span>
+            <span class="chip">q = <span class="js-q">1,3</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">q &gt; 1 — ça s'emballe</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite"></p>
+        </div>
+        <div class="widget-note">Le premier terme reste fixé à u<sub>0</sub> = 1, pour ne regarder que l'effet de q. Trois mondes&nbsp;: q &gt; 1 explose, q = 1 fige, q &lt; 1 éteint.</div>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une suite \((u_n)\) est <strong>géométrique</strong> s'il existe un réel \(q\), appelé <strong>raison</strong>, tel que pour tout entier \(n\)&nbsp;: \(u_{n+1} = q \times u_n\).</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — MONTRER QU'UNE SUITE EST GÉOMÉTRIQUE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris \(u_{n+1}\), puis transforme-le pour le mettre sous la forme \(q \times u_n\), avec \(q\) constant.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Si tu y arrives, la suite est géométrique de raison \(q\). (Variante quand aucun terme n'est nul&nbsp;: vérifie que le quotient \(u_{n+1}/u_n\) est constant.)</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Pour montrer qu'elle ne l'est pas&nbsp;: deux quotients numériques différents suffisent.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — PROUVER, OU RÉFUTER</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Montre que la suite définie par \(u_n = 5 \times 3^n\) est géométrique.</p>
+          <p><span class="etape-label">Étape 1 — </span>\(u_{n+1} = 5 \times 3^{n+1} = 5 \times 3^n \times 3 = 3 \times u_n\).</p>
+          <p class="conclusion">Conclusion&nbsp;: pour tout \(n\), \(u_{n+1} = 3\,u_n\)&nbsp;: géométrique, de raison \(q = 3\) et de premier terme \(u_0 = 5\).</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. La suite définie par \(v_n = 2n + 1\) est-elle géométrique&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>\(\dfrac{v_1}{v_0} = \dfrac{3}{1} = 3\), mais \(\dfrac{v_2}{v_1} = \dfrac{5}{3}\)&nbsp;: deux quotients différents.</p>
+          <p class="conclusion">Conclusion&nbsp;: non. On ne multiplie pas par le même nombre à chaque pas.</p>
+        </div>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>La formule explicite s'obtient exactement comme pour l'arithmétique, en remplaçant les additions par des multiplications. Du rang 0 au rang \(n\)&nbsp;: \(n\) multiplications par \(q\), c'est-à-dire une seule multiplication par \(q \times q \times \cdots \times q = q^n\). D'où \(u_n = u_0 \times q^n\). Les puissances ne sont pas là pour décorer&nbsp;: \(q^n\), c'est «&nbsp;\(n\) pas de multiplication d'un coup&nbsp;».</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — FORMULE EXPLICITE</div>
+        <p>Si \((u_n)\) est géométrique de raison \(q\), alors pour tout \(n\)&nbsp;:</p>
+        <div class="math-vitrine">$$u_n = u_0 \times q^n$$</div>
+        <p>Et entre deux rangs quelconques&nbsp;: \(u_n = u_p \times q^{\,n-p}\).</p>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA VIDÉO QUI DÉCOLLE</div>
+        <p class="exemple-enonce">La vidéo du début fait \(u_0 = 1\,000\) vues le jour 0, et les vues quotidiennes sont multipliées par 1,5 chaque jour. Combien de vues le jour 10&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>\((u_n)\) est géométrique de raison \(q = 1{,}5\)&nbsp;: \(u_{10} = 1\,000 \times 1{,}5^{10}\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(1{,}5^{10} \approx 57{,}7\), donc \(u_{10} \approx 57\,700\) vues.</p>
+        <p class="conclusion">Conclusion&nbsp;: en dix jours, on passe de 1&thinsp;000 à plus de 57&thinsp;000 vues quotidiennes. «&nbsp;×1,5 par jour&nbsp;» n'avait l'air de rien&nbsp;: c'est ça, l'exponentielle.</p>
+      </div>
+
+      <p class="prose">Dernière formule du chapitre, et pas la moins utile&nbsp;: additionner les termes d'une suite géométrique, c'est-à-dire calculer \(1 + q + q^2 + \cdots + q^n\). Ici, pas de rectangle&nbsp;: l'astuce est algébrique, et elle est belle.</p>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Appelle \(S = 1 + q + q^2 + \cdots + q^n\), et calcule \(q \times S\)&nbsp;: chaque terme se décale d'un cran, \(qS = q + q^2 + \cdots + q^{n+1}\). Soustrais les deux&nbsp;: dans \(qS - S\), tout le milieu s'annule deux à deux, il ne reste que les extrémités&nbsp;: \(qS - S = q^{n+1} - 1\). Donc \(S(q - 1) = q^{n+1} - 1\), et il n'y a plus qu'à diviser (possible dès que \(q \neq 1\)).</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — SOMME DES PUISSANCES DE q</div>
+        <p>Pour tout réel \(q \neq 1\) et tout entier \(n\)&nbsp;:</p>
+        <div class="math-vitrine">$$1 + q + q^2 + \cdots + q^n = \frac{1 - q^{\,n+1}}{1 - q}$$</div>
+        <p>L'exposant du haut est \(n + 1\)&nbsp;: c'est le <em>nombre de termes</em> de la somme (de \(q^0\) à \(q^n\), il y en a \(n+1\)). Pour une suite géométrique, on factorise par le premier terme&nbsp;: \(u_0 + u_1 + \cdots + u_n = u_0 \times \dfrac{1 - q^{\,n+1}}{1 - q}\).</p>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LES DOUBLEMENTS S'ADDITIONNENT</div>
+        <p class="exemple-enonce">Calcule \(S = 1 + 2 + 4 + 8 + \cdots + 2^9\).</p>
+        <p><span class="etape-label">Étape 1 — </span>c'est la somme des puissances de \(q = 2\), de \(2^0\) à \(2^9\)&nbsp;: \(S = \dfrac{1 - 2^{10}}{1 - 2} = \dfrac{1 - 1\,024}{-1} = 1\,023\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(S = 1\,023\). Regarde bien&nbsp;: le dernier terme vaut 512, et la somme entière à peine le double. C'est typique du géométrique — le dernier terme pèse presque autant que tous les autres réunis.</p>
+      </div>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>ARITHMÉTIQUE OU GÉOMÉTRIQUE&nbsp;?</span>
+          <span class="bande-note">LE FACE-À-FACE</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th></th><th>arithmétique</th><th>géométrique</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="note-cellule">d'un terme au suivant</td><td>\(u_{n+1} = u_n + r\)</td><td>\(u_{n+1} = q \times u_n\)</td></tr>
+              <tr><td class="note-cellule">formule explicite</td><td>\(u_n = u_0 + n\,r\)</td><td>\(u_n = u_0 \times q^n\)</td></tr>
+              <tr><td class="note-cellule">allure des points</td><td>alignés (pente \(r\))</td><td>courbe exponentielle</td></tr>
+              <tr><td class="note-cellule">comment la reconnaître</td><td>\(u_{n+1} - u_n\) constant</td><td>\(u_{n+1}/u_n\) constant</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Ajouter le même nombre à chaque pas&nbsp;: suite <strong>arithmétique</strong>, raison \(r\). Multiplier par le même nombre à chaque pas&nbsp;: suite <strong>géométrique</strong>, raison \(q\). Tout le chapitre tient dans ces deux phrases.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions sur le géométrique</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\((u_n)\) est géométrique de raison \(q = 3\). Alors pour tout \(n\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(u_{n+1} = u_n + 3\)</button>
+              <button type="button" class="quiz-reponse">\(u_{n+1} = 3\,u_n\)</button>
+              <button type="button" class="quiz-reponse">\(u_{n+1} = u_n^3\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> géométrique = on <em>multiplie</em> par \(q\) à chaque pas. Ajouter 3, c'était l'arithmétique.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(u_0 = 5\) et \(q = 2\). Alors \(u_4 =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">80</button>
+              <button type="button" class="quiz-reponse">40</button>
+              <button type="button" class="quiz-reponse">625</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(u_4 = 5 \times 2^4 = 5 \times 16 = 80\). 40, c'est \(5 \times 2^3\)&nbsp;: compte les multiplications — du rang 0 au rang 4, il y en a quatre.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pour \(q \neq 1\), la somme \(1 + q + q^2 + \cdots + q^n\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{1 - q^{\,n}}{1 - q}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{n(n+1)}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{1 - q^{\,n+1}}{1 - q}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'exposant du haut est \(n + 1\), le nombre de termes de la somme. Quant à \(n(n+1)/2\), c'est la somme <em>arithmétique</em> \(1 + 2 + \cdots + n\)&nbsp;: ne mélange pas les deux mondes.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>\(u_0 = 100\) et \(q = 0{,}9\). À long terme, les termes…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">se rapprochent de 0</button>
+              <button type="button" class="quiz-reponse">finissent par exploser</button>
+              <button type="button" class="quiz-reponse">deviennent négatifs</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> multiplier par 0,9 encore et encore fait fondre le terme&nbsp;: 90, puis 81, puis 72,9… Chaque terme reste positif, mais s'écrase vers 0. C'est ce que montrait le graphique avec \(q &lt; 1\).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Le sens de variation d'une suite</h2>
+      <p class="prose">Une fonction monte ou descend&nbsp;; une suite aussi. Mais ici, pas de courbe à suivre des yeux&nbsp;: seulement des termes, un par rang. La question devient donc toute simple — entre \(u_n\) et le terme d'après, \(u_{n+1}\), lequel est le plus grand&nbsp;? Si c'est toujours \(u_{n+1}\), la suite est croissante&nbsp;; si c'est toujours \(u_n\), décroissante.</p>
+      <p class="prose">Entraîne ton œil d'abord. Pour chacune des quatre suites ci-dessous, lis les points de gauche à droite et décide. Deux d'entre elles sont des pièges.</p>
+
+      <figure class="widget" id="widget-sens" data-widget="sens">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Croissante, décroissante… ou ni l'une ni l'autre&nbsp;?</span>
+          </div>
+          <span class="quiz-score js-progression">SUITE 1/4</span>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 360" aria-label="Nuage de points d'une suite ; à toi de dire si elle est croissante, décroissante, ou ni l'une ni l'autre"></svg>
+        <div class="widget-pied">
+          <p class="quiz-enonce">Observe les termes de gauche à droite&nbsp;: cette suite est…</p>
+          <div class="quiz-reponses">
+            <button type="button" class="quiz-reponse js-choix">croissante</button>
+            <button type="button" class="quiz-reponse js-choix">décroissante</button>
+            <button type="button" class="quiz-reponse js-choix">ni l'une ni l'autre</button>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> compare chaque terme au suivant, du début à la fin&nbsp;: le sens doit être le même à chaque pas.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> d'un rang au suivant, on ajoute toujours 0,5&nbsp;: chaque terme dépasse le précédent. Croissante — et même arithmétique, de raison 0,5.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> chaque terme vaut les trois quarts du précédent&nbsp;: ça descend à chaque pas. La suite se rapproche de 0 sans jamais l'atteindre, mais elle descend toujours&nbsp;: décroissante.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> elle monte, puis descend, puis remonte, sans arrêt. Une suite croissante doit monter à <em>chaque</em> pas, sans exception&nbsp;: ici, aucune des deux définitions ne tient. Ni l'une ni l'autre.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> elle descend jusqu'au rang 5, puis remonte. Un seul pas dans le mauvais sens suffit à casser la monotonie&nbsp;: sur l'ensemble des rangs, elle n'est ni croissante ni décroissante. (On peut dire, en revanche, qu'elle est croissante <em>à partir du rang 5</em>.)</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Suite suivante ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <script type="application/json">
+        [
+          {"suite":"lin","ymin":-1,"ymax":6,"bonne":1},
+          {"suite":"geo","ymin":-1,"ymax":6,"bonne":2},
+          {"suite":"osc","ymin":-3.5,"ymax":3.5,"bonne":3},
+          {"suite":"par","ymin":-2,"ymax":6,"bonne":3}
+        ]
+        </script>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>La suite \((u_n)\) est <strong>croissante</strong> si pour tout entier \(n\), \(u_{n+1} \geq u_n\)&nbsp;; <strong>décroissante</strong> si pour tout \(n\), \(u_{n+1} \leq u_n\) (et <em>strictement</em> croissante ou décroissante avec des inégalités strictes). Le «&nbsp;pour tout \(n\)&nbsp;» est le cœur de la définition&nbsp;: un seul pas dans le mauvais sens, et la suite n'est ni croissante ni décroissante.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi ne pas simplement regarder les premiers termes&nbsp;? Parce qu'ils peuvent mentir&nbsp;: la quatrième suite du jeu descend pendant cinq rangs avant de remonter. Les premiers termes donnent une intuition, jamais une preuve. Il faut donc un argument valable pour <em>tout</em> \(n\) d'un coup — et comparer deux nombres, c'est étudier le signe de leur différence&nbsp;: \(u_{n+1} - u_n &gt; 0\) veut exactement dire \(u_{n+1} &gt; u_n\). D'où la méthode.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — ÉTUDIER LE SENS DE VARIATION D'UNE SUITE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule \(u_{n+1} - u_n\) en littéral, et étudie son signe pour tout \(n\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Si tous les termes sont strictement positifs, tu peux préférer comparer le quotient \(\dfrac{u_{n+1}}{u_n}\) à 1 — très pratique quand il y a des puissances.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Conclus&nbsp;: différence toujours positive (ou quotient &gt; 1) → croissante&nbsp;; toujours négative (ou quotient &lt; 1) → décroissante.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LES DEUX ROUTES</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Sens de variation de la suite définie par \(u_n = n^2 + 4n\)&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>\(u_{n+1} - u_n = (n+1)^2 + 4(n+1) - n^2 - 4n = 2n + 5\).</p>
+          <p><span class="etape-label">Étape 2 — </span>pour tout entier \(n \geq 0\), \(2n + 5 &gt; 0\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \((u_n)\) est strictement croissante.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Sens de variation de la suite définie par \(u_n = 5 \times 0{,}8^n\)&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>tous les termes sont strictement positifs, on prend la route du quotient&nbsp;: \(\dfrac{u_{n+1}}{u_n} = \dfrac{5 \times 0{,}8^{n+1}}{5 \times 0{,}8^n} = 0{,}8\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(0{,}8 &lt; 1\)&nbsp;: chaque terme vaut 80&nbsp;% du précédent.</p>
+          <p class="conclusion">Conclusion&nbsp;: \((u_n)\) est strictement décroissante.</p>
+        </div>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LES CAS QUE TU CONNAIS DÉJÀ</div>
+        <p>Suite <strong>arithmétique</strong> de raison \(r\)&nbsp;: croissante si \(r &gt; 0\), décroissante si \(r &lt; 0\), constante si \(r = 0\). (C'est le chip de couleur du graphique de la section 3.)</p>
+        <p>Suite <strong>géométrique</strong> de raison \(q &gt; 0\), avec \(u_0 &gt; 0\)&nbsp;: croissante si \(q &gt; 1\), décroissante si \(0 &lt; q &lt; 1\), constante si \(q = 1\). (Si \(u_0 &lt; 0\), tout s'inverse&nbsp;; et si \(q &lt; 0\), les termes changent de signe à chaque rang&nbsp;: la suite oscille, ni croissante ni décroissante.)</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Dire que \((u_n)\) est croissante signifie…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(u_n &gt; 0\) pour tout \(n\)</button>
+              <button type="button" class="quiz-reponse">\(u_{n+1} \geq u_n\) pour tout \(n\)</button>
+              <button type="button" class="quiz-reponse">la suite finit par augmenter</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> croissante, c'est terme à terme et dès le début. Et ça n'a rien à voir avec le signe&nbsp;: −10, −7, −4… est une suite négative et croissante.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Pour tout \(n\), \(u_{n+1} - u_n = -3\). La suite est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">décroissante — et arithmétique de raison −3</button>
+              <button type="button" class="quiz-reponse">croissante</button>
+              <button type="button" class="quiz-reponse">impossible à classer</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> différence constamment négative&nbsp;: chaque terme perd 3 par rapport au précédent, la suite descend. Et une différence <em>constante</em>, c'est la carte d'identité d'une suite arithmétique.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>La suite \(u_n = (-1)^n\), c'est-à-dire 1, −1, 1, −1… est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">croissante</button>
+              <button type="button" class="quiz-reponse">décroissante</button>
+              <button type="button" class="quiz-reponse">ni l'une ni l'autre</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> elle monte puis descend à chaque pas&nbsp;: aucune des deux définitions ne tient. Une suite qui oscille n'a pas de sens de variation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Confondre le rang et le terme.</strong> Dans \(u_3 = 160\), le 3 dit <em>où</em> (le rang), le 160 dit <em>combien</em> (le terme). «&nbsp;Calcule \(u_3\)&nbsp;» ne veut pas dire «&nbsp;calcule \(3 \times u\)&nbsp;».</p>
+        </div>
+        <div class="piege">
+          <p><strong>Croire que \(u_{n+1} = u_n + 1\).</strong> \(u_{n+1}\) est le terme <em>suivant</em>, pas «&nbsp;le terme plus 1&nbsp;». Pour l'exprimer depuis une formule explicite, remplace \(n\) par \(n+1\) partout&nbsp;: si \(u_n = n^2\), alors \(u_{n+1} = (n+1)^2 = n^2 + 2n + 1\), pas \(n^2 + 1\).</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;Vérifié sur trois termes, donc c'est prouvé.&nbsp;»</strong> Trois écarts égaux ne prouvent rien&nbsp;: la définition exige la même raison pour <em>tout</em> \(n\). La preuve se fait en littéral, avec \(u_{n+1} - u_n\) (ou \(u_{n+1}/u_n\)). Les premiers termes ne suffisent que pour répondre <em>non</em>.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Se tromper d'indice dans la formule explicite.</strong> \(u_n = u_0 + nr\) quand le premier terme est \(u_0\)&nbsp;; mais si la suite commence à \(u_1\), c'est \(u_n = u_1 + (n-1)r\). Compte les <em>marches</em> entre les deux rangs, jamais les termes.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Mal compter les termes d'une somme.</strong> De \(u_3\) à \(u_{10}\), il y a \(10 - 3 + 1 = 8\) termes, pas 7. Et de \(q^0\) à \(q^n\)&nbsp;: \(n + 1\) termes — c'est l'exposant \(n+1\) de la formule.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">SUITE</span>
+          <p>\(u_n\)&nbsp;: le terme de rang \(n\). Explicite \(u_n = f(n)\)&nbsp;: accès direct&nbsp;; récurrence \(u_{n+1}\) en fonction de \(u_n\)&nbsp;: de proche en proche.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ARITHMÉTIQUE</span>
+          <p>\(u_{n+1} = u_n + r\)&nbsp;; \(u_n = u_0 + nr\)&nbsp;; points alignés, de pente \(r\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">GÉOMÉTRIQUE</span>
+          <p>\(u_{n+1} = q\,u_n\)&nbsp;; \(u_n = u_0 \times q^n\)&nbsp;; explose si \(q &gt; 1\), s'éteint vers 0 si \(0 &lt; q &lt; 1\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">SOMMES</span>
+          <p>\(1 + 2 + \cdots + n = \dfrac{n(n+1)}{2}\)&nbsp;; \(1 + q + \cdots + q^n = \dfrac{1 - q^{\,n+1}}{1 - q}\) (pour \(q \neq 1\)).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">VARIATIONS</span>
+          <p>Étudie le signe de \(u_{n+1} - u_n\)&nbsp;; si les termes sont strictement positifs, compare \(u_{n+1}/u_n\) à 1. Valable pour tout \(n\), sinon rien.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: termes et notations, suites arithmétiques, suites géométriques, sommes, sens de variation, et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· formule explicite</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \((u_n)\) la suite définie par \(u_n = n^2 - 3n\). Calcule \(u_0\), \(u_1\), \(u_2\), \(u_3\), puis \(u_{10}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>on remplace \(n\), partout&nbsp;: \(u_0 = 0 - 0 = 0\)&nbsp;; \(u_1 = 1 - 3 = -2\)&nbsp;; \(u_2 = 4 - 6 = -2\)&nbsp;; \(u_3 = 9 - 9 = 0\).</p>
+          <p><span class="etape-label">Étape 2 — </span>accès direct au rang 10&nbsp;: \(u_{10} = 100 - 30 = 70\), sans calculer les rangs 4 à 9.</p>
+          <p class="conclusion">Conclusion&nbsp;: 0, −2, −2, 0, puis 70. Remarque au passage&nbsp;: \(u_1 = u_2\) — une suite a le droit de répéter des valeurs.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· récurrence</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \((u_n)\) la suite définie par \(u_0 = 5\) et \(u_{n+1} = 2u_n - 3\). Calcule \(u_1\), \(u_2\) et \(u_3\). Peux-tu calculer \(u_{10}\) directement&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>de proche en proche&nbsp;: \(u_1 = 2 \times 5 - 3 = 7\)&nbsp;; \(u_2 = 2 \times 7 - 3 = 11\)&nbsp;; \(u_3 = 2 \times 11 - 3 = 19\).</p>
+          <p><span class="etape-label">Étape 2 — </span>pour \(u_{10}\), la règle exige de connaître \(u_9\), qui exige \(u_8\), etc.&nbsp;: pas d'accès direct avec une définition par récurrence.</p>
+          <p class="conclusion">Conclusion&nbsp;: 7, 11, 19&nbsp;; et non — il faudrait remonter toute la chaîne (ou trouver une formule explicite, ce que cette suite-là ne rend pas facile).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· notation u<sub>n+1</sub></span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(u_n = n^2 + n\). a. Exprime \(u_{n+1}\) en fonction de \(n\). b. Exprime \(u_n + 1\). c. Compare-les pour \(n = 1\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>on remplace \(n\) par \(n+1\) partout&nbsp;: \(u_{n+1} = (n+1)^2 + (n+1) = n^2 + 3n + 2\).</p>
+          <p><span class="etape-label">b. — </span>\(u_n + 1 = n^2 + n + 1\)&nbsp;: là, on ajoute 1 <em>au terme</em>, la formule ne bouge pas.</p>
+          <p><span class="etape-label">c. — </span>pour \(n = 1\)&nbsp;: \(u_2 = 6\), alors que \(u_1 + 1 = 3\). Rien à voir.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(u_{n+1}\) est le terme <em>suivant</em>, \(u_n + 1\) est le terme <em>plus un</em>. Ce distinguo est le piège n°&thinsp;1 du chapitre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· arithmétique</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\((u_n)\) est arithmétique, de premier terme \(u_0 = 3\) et de raison \(r = 5\). Calcule \(u_1\), \(u_2\), puis \(u_{100}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>de proche en proche pour les premiers&nbsp;: \(u_1 = 3 + 5 = 8\), \(u_2 = 8 + 5 = 13\).</p>
+          <p><span class="etape-label">Étape 2 — </span>pour le rang 100, surtout pas 100 additions&nbsp;: formule explicite. \(u_{100} = u_0 + 100r = 3 + 500 = 503\).</p>
+          <p class="conclusion">Conclusion&nbsp;: 8, 13, et \(u_{100} = 503\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· arithmétique · preuve</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Les suites définies par \(u_n = 4n - 1\) et \(v_n = n^2 + 1\) sont-elles arithmétiques&nbsp;? Justifie dans les deux cas.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>pour \((u_n)\), en littéral&nbsp;: \(u_{n+1} - u_n = \big(4(n+1) - 1\big) - (4n - 1) = 4\), constante quelle que soit la valeur de \(n\).</p>
+          <p><span class="etape-label">Étape 2 — </span>pour \((v_n)\), deux écarts suffisent pour réfuter&nbsp;: \(v_1 - v_0 = 1\) mais \(v_2 - v_1 = 3\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \((u_n)\) est arithmétique de raison 4 (et \(u_0 = -1\))&nbsp;; \((v_n)\) ne l'est pas. Sens de la preuve&nbsp;: le littéral pour dire oui, un contre-exemple pour dire non.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· arithmétique</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\((u_n)\) est arithmétique avec \(u_4 = 17\) et \(u_{10} = 35\). Détermine la raison \(r\) et \(u_0\), puis calcule \(u_{50}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>du rang 4 au rang 10, il y a 6 marches&nbsp;: \(u_{10} = u_4 + 6r\), donc \(6r = 35 - 17 = 18\) et \(r = 3\).</p>
+          <p><span class="etape-label">Étape 2 — </span>en redescendant&nbsp;: \(u_0 = u_4 - 4r = 17 - 12 = 5\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(u_{50} = u_0 + 50r = 5 + 150 = 155\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(r = 3\), \(u_0 = 5\), \(u_{50} = 155\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· géométrique</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\((u_n)\) est géométrique, de premier terme \(u_0 = 3\) et de raison \(q = 2\). Calcule \(u_1\), \(u_2\), puis \(u_5\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(u_1 = 3 \times 2 = 6\), \(u_2 = 6 \times 2 = 12\).</p>
+          <p><span class="etape-label">Étape 2 — </span>accès direct&nbsp;: \(u_5 = u_0 \times q^5 = 3 \times 32 = 96\).</p>
+          <p class="conclusion">Conclusion&nbsp;: 6, 12, et \(u_5 = 96\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· géométrique · preuve</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Les suites définies par \(u_n = 7 \times 5^n\) et \(v_n = 3n + 2\) sont-elles géométriques&nbsp;? Justifie dans les deux cas.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>pour \((u_n)\)&nbsp;: \(u_{n+1} = 7 \times 5^{n+1} = 5 \times (7 \times 5^n) = 5\,u_n\) pour tout \(n\).</p>
+          <p><span class="etape-label">Étape 2 — </span>pour \((v_n)\)&nbsp;: \(\dfrac{v_1}{v_0} = \dfrac{5}{2}\) mais \(\dfrac{v_2}{v_1} = \dfrac{8}{5}\)&nbsp;: quotients différents.</p>
+          <p class="conclusion">Conclusion&nbsp;: \((u_n)\) est géométrique de raison 5 (et \(u_0 = 7\))&nbsp;; \((v_n)\) ne l'est pas — elle est arithmétique, d'ailleurs&nbsp;: +3 à chaque pas.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· géométrique</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\((u_n)\) est géométrique, à termes strictement positifs, avec \(u_1 = 6\) et \(u_3 = 54\). Détermine \(q\) et \(u_0\), puis calcule \(u_6\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>du rang 1 au rang 3&nbsp;: deux multiplications par \(q\), donc \(u_3 = u_1 \times q^2\), soit \(q^2 = \dfrac{54}{6} = 9\).</p>
+          <p><span class="etape-label">Étape 2 — </span>deux candidats, \(q = 3\) ou \(q = -3\). Les termes sont strictement positifs, donc \(q = -3\) est écarté (il ferait alterner les signes)&nbsp;: \(q = 3\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(u_0 = \dfrac{u_1}{q} = 2\), puis \(u_6 = u_0 \times 3^6 = 2 \times 729 = 1\,458\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(q = 3\), \(u_0 = 2\), \(u_6 = 1\,458\). Le réflexe à retenir&nbsp;: \(q^2 = 9\) a <em>deux</em> solutions — c'est l'énoncé qui permet de trancher.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· sommes arithmétiques</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Calcule&nbsp;: a. \(1 + 2 + 3 + \cdots + 200\)&nbsp;; b. \(S = 5 + 8 + 11 + \cdots + 62\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>formule de Gauss&nbsp;: \(\dfrac{200 \times 201}{2} = 100 \times 201 = 20\,100\).</p>
+          <p><span class="etape-label">b. — </span>termes d'une suite arithmétique de raison 3. Nombre de termes&nbsp;: de 5 à 62, on monte \((62 - 5)/3 = 19\) marches, donc \(19 + 1 = 20\) termes. Puis \(S = 20 \times \dfrac{5 + 62}{2} = 10 \times 67 = 670\).</p>
+          <p class="conclusion">Conclusion&nbsp;: a. 20&thinsp;100&nbsp;; b. 670. Le seul vrai danger, c'est le comptage des termes&nbsp;: marches + 1.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· sommes géométriques</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Calcule&nbsp;: a. \(1 + 2 + 4 + \cdots + 2^{10}\)&nbsp;; b. \(S = 3 + 6 + 12 + \cdots + 384\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>somme des puissances de 2, de \(2^0\) à \(2^{10}\)&nbsp;: \(\dfrac{1 - 2^{11}}{1 - 2} = 2^{11} - 1 = 2\,047\).</p>
+          <p><span class="etape-label">b. — </span>chaque terme vaut \(3 \times\) une puissance de 2, et \(384 = 3 \times 128 = 3 \times 2^7\)&nbsp;: \(S = 3 \times (1 + 2 + \cdots + 2^7) = 3 \times (2^8 - 1) = 3 \times 255 = 765\).</p>
+          <p class="conclusion">Conclusion&nbsp;: a. 2&thinsp;047&nbsp;; b. 765. Factoriser par le premier terme ramène toujours à \(1 + q + \cdots + q^n\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· variations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Étudie le sens de variation des suites définies par&nbsp;: a. \(u_n = n^2 + 3n\)&nbsp;; b. \(v_n = 10 - 4n\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(u_{n+1} - u_n = (n+1)^2 + 3(n+1) - n^2 - 3n = 2n + 4 &gt; 0\) pour tout \(n\)&nbsp;: \((u_n)\) est strictement croissante.</p>
+          <p><span class="etape-label">b. — </span>\(v_{n+1} - v_n = -4\) pour tout \(n\)&nbsp;: différence constante négative, \((v_n)\) est strictement décroissante — et c'est une suite arithmétique de raison −4.</p>
+          <p class="conclusion">Conclusion&nbsp;: a. croissante&nbsp;; b. décroissante. La différence \(u_{n+1} - u_n\) répond à tout.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· variations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Étudie le sens de variation des suites définies par&nbsp;: a. \(u_n = 4 \times 1{,}2^n\)&nbsp;; b. \(v_n = \dfrac{n}{n+1}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>tous les termes sont strictement positifs&nbsp;: route du quotient. \(\dfrac{u_{n+1}}{u_n} = 1{,}2 &gt; 1\)&nbsp;: \((u_n)\) est strictement croissante.</p>
+          <p><span class="etape-label">b. — </span>route de la différence, au dénominateur commun&nbsp;: \(v_{n+1} - v_n = \dfrac{n+1}{n+2} - \dfrac{n}{n+1} = \dfrac{(n+1)^2 - n(n+2)}{(n+1)(n+2)} = \dfrac{1}{(n+1)(n+2)}\).</p>
+          <p><span class="etape-label">Signe — </span>numérateur 1 et dénominateur strictement positifs&nbsp;: la différence est strictement positive pour tout \(n\).</p>
+          <p class="conclusion">Conclusion&nbsp;: les deux suites sont strictement croissantes. Note le choix d'outil&nbsp;: le quotient dès qu'il y a des puissances, la différence sinon.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Deux offres d'embauche, salaire mensuel de départ 1&thinsp;800&nbsp;€. Offre A&nbsp;: +60&nbsp;€ chaque année. Offre B&nbsp;: +3&nbsp;% chaque année. a. Quel est le salaire mensuel la 10ᵉ année dans chaque cas&nbsp;? b. En cumulant les salaires mensuels des années 1 à 10, quelle offre rapporte le plus&nbsp;? (Arrondis à l'euro.)</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>modélise. Offre A&nbsp;: suite arithmétique \(a_n\), salaire de l'année \(n\), avec \(a_1 = 1\,800\) et \(r = 60\). Offre B&nbsp;: suite géométrique \(b_n\) avec \(b_1 = 1\,800\) et \(q = 1{,}03\) (+3&nbsp;% = ×1,03).</p>
+          <p><span class="etape-label">Étape 2 — </span>10ᵉ année, attention à l'indice (9 marches depuis l'année 1)&nbsp;: \(a_{10} = 1\,800 + 9 \times 60 = 2\,340\)&nbsp;€&nbsp;; \(b_{10} = 1\,800 \times 1{,}03^9 \approx 2\,349\)&nbsp;€. Avantage B, de justesse.</p>
+          <p><span class="etape-label">Étape 3 — </span>cumuls. A (somme arithmétique)&nbsp;: \(10 \times \dfrac{1\,800 + 2\,340}{2} = 20\,700\)&nbsp;€. B (somme géométrique)&nbsp;: \(1\,800 \times \dfrac{1 - 1{,}03^{10}}{1 - 1{,}03} \approx 20\,635\)&nbsp;€.</p>
+          <p class="conclusion">Conclusion&nbsp;: sur dix ans, l'offre A rapporte encore un peu plus (20&thinsp;700&nbsp;€ contre ≈&thinsp;20&thinsp;635&nbsp;€), alors même que B paie mieux la 10ᵉ année. Moralité&nbsp;: l'exponentielle finit toujours par gagner, mais pas tout de suite — dès l'année 11, B passe devant, et l'écart ne fera plus que grandir.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Une plateforme de vidéos compte 12&thinsp;000 abonnés au 1ᵉʳ janvier 2026. Chaque année, elle conserve 80&nbsp;% de ses abonnés et en gagne 5&thinsp;000 nouveaux. On note \(u_n\) le nombre d'abonnés au 1ᵉʳ janvier de l'année \(2026 + n\)&nbsp;; ainsi \(u_0 = 12\,000\).</p>
+          <div class="bac-partie">PARTIE A</div>
+          <ol>
+            <li>Calcule \(u_1\) et \(u_2\).</li>
+            <li>Justifie que pour tout \(n\), \(u_{n+1} = 0{,}8\,u_n + 5\,000\).</li>
+            <li>La suite \((u_n)\) est-elle arithmétique&nbsp;? géométrique&nbsp;? Justifie.</li>
+          </ol>
+          <div class="bac-partie">PARTIE B</div>
+          <p class="prose">On pose, pour tout \(n\)&nbsp;: \(v_n = u_n - 25\,000\).</p>
+          <ol>
+            <li>Montre que \((v_n)\) est géométrique&nbsp;; précise sa raison et son premier terme.</li>
+            <li>Exprime \(v_n\), puis \(u_n\), en fonction de \(n\).</li>
+            <li>Montre que \((u_n)\) est croissante.</li>
+            <li>Que devient le nombre d'abonnés à long terme&nbsp;?</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>\(u_1 = 0{,}8 \times 12\,000 + 5\,000 = 14\,600\)&nbsp;; \(u_2 = 0{,}8 \times 14\,600 + 5\,000 = 16\,680\).</p>
+            <p><span class="etape-label">A.2 — </span>conserver 80&nbsp;% des abonnés, c'est multiplier par 0,8&nbsp;; puis on ajoute les 5&thinsp;000 nouveaux&nbsp;: \(u_{n+1} = 0{,}8\,u_n + 5\,000\).</p>
+            <p><span class="etape-label">A.3 — </span>ni l'une ni l'autre. \(u_1 - u_0 = 2\,600\) mais \(u_2 - u_1 = 2\,080\)&nbsp;: pas arithmétique. \(u_1/u_0 \approx 1{,}22\) mais \(u_2/u_1 \approx 1{,}14\)&nbsp;: pas géométrique. (Deux écarts ou deux quotients différents suffisent pour réfuter.)</p>
+            <p><span class="etape-label">B.1 — </span>\(v_{n+1} = u_{n+1} - 25\,000 = 0{,}8\,u_n + 5\,000 - 25\,000 = 0{,}8\,u_n - 20\,000 = 0{,}8\,(u_n - 25\,000) = 0{,}8\,v_n\)&nbsp;: géométrique, de raison \(q = 0{,}8\) et de premier terme \(v_0 = 12\,000 - 25\,000 = -13\,000\).</p>
+            <p><span class="etape-label">B.2 — </span>\(v_n = -13\,000 \times 0{,}8^n\), donc \(u_n = v_n + 25\,000 = 25\,000 - 13\,000 \times 0{,}8^n\).</p>
+            <p><span class="etape-label">B.3 — </span>\(u_{n+1} - u_n = v_{n+1} - v_n = -13\,000 \times 0{,}8^n \times (0{,}8 - 1) = 2\,600 \times 0{,}8^n &gt; 0\) pour tout \(n\)&nbsp;: \((u_n)\) est strictement croissante.</p>
+            <p><span class="etape-label">B.4 — </span>quand \(n\) grandit, \(0{,}8^n\) s'écrase vers 0 (c'est le monde «&nbsp;q &lt; 1&nbsp;» du graphique de la section 4)&nbsp;: \(u_n\) se rapproche de 25&thinsp;000. Le nombre d'abonnés grimpe donc vers un plafond de 25&thinsp;000, sans jamais l'atteindre.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">Le produit scalaire <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span><span class="nabla-symbole" aria-hidden="true">∇</span> Nabla — fiches de révision interactives</span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
