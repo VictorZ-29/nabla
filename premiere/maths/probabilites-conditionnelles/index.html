@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Les probabilités conditionnelles — Première Spé Maths | Nabla</title>
+<meta name="description" content="Comprends vraiment les probabilités conditionnelles : le « sachant », les arbres pondérés, les probabilités totales et l'indépendance, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/probabilites-conditionnelles/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Les probabilités conditionnelles — Première Spé Maths | Nabla">
+<meta property="og:description" content="Probabilité sachant, arbres pondérés, probabilités totales, indépendance : un cours interactif où tu manipules les univers toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/probabilites-conditionnelles/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Les probabilités conditionnelles — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Probabilité sachant, arbres pondérés, probabilités totales, indépendance : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Les probabilités conditionnelles — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur les probabilités conditionnelles : probabilité de B sachant A, tableaux croisés, arbres pondérés, formule des probabilités totales, indépendance de deux événements. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/probabilites-conditionnelles/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Probabilités conditionnelles, tableaux croisés, arbres pondérés, formule des probabilités totales, indépendance de deux événements",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=6">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=6">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=6">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/univers.js"></script>
+<script type="module" src="../../../assets/js/widgets/arbre.js"></script>
+<script type="module" src="../../../assets/js/widgets/depistage.js"></script>
+<script type="module" src="../../../assets/js/widgets/independance.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="probabilites">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>Les probabilités conditionnelles</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer une probabilité conditionnelle, construire et exploiter un arbre pondéré, utiliser la formule des probabilités totales — et reconnaître quand deux événements sont indépendants.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. L'information change les chances</a>
+      <a href="#s2">2. «&nbsp;Sachant que&nbsp;»&nbsp;: l'univers rétrécit</a>
+      <a href="#s3">3. L'arbre pondéré</a>
+      <a href="#s4">4. Les probabilités totales</a>
+      <a href="#s5">5. L'indépendance</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. L'information change les chances</a>
+        <a href="#s2">2. «&nbsp;Sachant que&nbsp;»&nbsp;: l'univers rétrécit</a>
+        <a href="#s3">3. L'arbre pondéré</a>
+        <a href="#s4">4. Les probabilités totales</a>
+        <a href="#s5">5. L'indépendance</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. Une information change les chances</h2>
+      <p class="prose">Une place de concert à faire gagner, 40 élèves dans le groupe de Première&nbsp;: on tire au sort. Toi, tu te demandes si le gagnant sera musicien — 12 élèves du groupe jouent d'un instrument. Douze chances sur quarante&nbsp;: probabilité \(12/40 = 0{,}30\). Là, quelqu'un qui a vu le tirage te souffle&nbsp;: «&nbsp;c'est un élève de l'atelier théâtre.&nbsp;» Tu ne sais toujours pas qui a gagné. Mais tes chances, elles, viennent de bouger&nbsp;: l'atelier théâtre compte 10 élèves, dont 6 musiciens. Six sur dix&nbsp;: la probabilité a doublé, \(0{,}60\).</p>
+      <p class="prose">Relis la scène, parce que tout le chapitre est dedans. Le monde n'a pas changé — personne ne s'est mis à la guitare entre les deux phrases. Ce qui a changé, c'est l'ensemble des possibles&nbsp;: avant l'indice, le gagnant pouvait être n'importe lequel des 40&nbsp;; après, ce ne peut être qu'un des 10 du théâtre. Une information ne modifie pas la réalité&nbsp;: elle <strong>rétrécit l'univers</strong> dans lequel tu comptes.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 356" role="img" aria-label="Les 40 élèves représentés par des points : 12 points pleins pour les musiciens, et un cadre en pointillé autour des 10 élèves du théâtre, dont 6 sont des points pleins">
+          <rect class="cadre-univers" x="70" y="34" width="108" height="276" rx="12"></rect>
+          <circle class="pt-pop pt-pop--b" cx="96" cy="60" r="10"></circle>
+          <circle class="pt-pop" cx="152" cy="60" r="10"></circle>
+          <circle class="pt-pop" cx="96" cy="116" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="152" cy="116" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="96" cy="172" r="10"></circle>
+          <circle class="pt-pop" cx="152" cy="172" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="96" cy="228" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="152" cy="228" r="10"></circle>
+          <circle class="pt-pop" cx="96" cy="284" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="152" cy="284" r="10"></circle>
+          <circle class="pt-pop" cx="260" cy="60" r="10"></circle>
+          <circle class="pt-pop" cx="316" cy="60" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="372" cy="60" r="10"></circle>
+          <circle class="pt-pop" cx="428" cy="60" r="10"></circle>
+          <circle class="pt-pop" cx="484" cy="60" r="10"></circle>
+          <circle class="pt-pop" cx="540" cy="60" r="10"></circle>
+          <circle class="pt-pop" cx="260" cy="116" r="10"></circle>
+          <circle class="pt-pop" cx="316" cy="116" r="10"></circle>
+          <circle class="pt-pop" cx="372" cy="116" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="428" cy="116" r="10"></circle>
+          <circle class="pt-pop" cx="484" cy="116" r="10"></circle>
+          <circle class="pt-pop" cx="540" cy="116" r="10"></circle>
+          <circle class="pt-pop" cx="260" cy="172" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="316" cy="172" r="10"></circle>
+          <circle class="pt-pop" cx="372" cy="172" r="10"></circle>
+          <circle class="pt-pop" cx="428" cy="172" r="10"></circle>
+          <circle class="pt-pop" cx="484" cy="172" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="540" cy="172" r="10"></circle>
+          <circle class="pt-pop" cx="260" cy="228" r="10"></circle>
+          <circle class="pt-pop" cx="316" cy="228" r="10"></circle>
+          <circle class="pt-pop" cx="372" cy="228" r="10"></circle>
+          <circle class="pt-pop" cx="428" cy="228" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="484" cy="228" r="10"></circle>
+          <circle class="pt-pop" cx="540" cy="228" r="10"></circle>
+          <circle class="pt-pop" cx="260" cy="284" r="10"></circle>
+          <circle class="pt-pop" cx="316" cy="284" r="10"></circle>
+          <circle class="pt-pop" cx="372" cy="284" r="10"></circle>
+          <circle class="pt-pop" cx="428" cy="284" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="484" cy="284" r="10"></circle>
+          <circle class="pt-pop" cx="540" cy="284" r="10"></circle>
+          <circle class="pt-pop pt-pop--b" cx="268" cy="14" r="7"></circle>
+          <text class="pop-dim" x="282" y="19">joue d’un instrument (M)</text>
+          <circle class="pt-pop" cx="500" cy="14" r="7"></circle>
+          <text class="pop-dim" x="514" y="19">ne joue pas</text>
+          <text class="pop-dim pop-dim--accent" x="124" y="342" text-anchor="middle">théâtre (T) — 10 élèves</text>
+          <text class="pop-dim" x="400" y="342" text-anchor="middle">les autres — 30 élèves</text>
+        </svg>
+        <figcaption>Le groupe, élève par élève. «&nbsp;Quelle est la probabilité que le gagnant soit musicien&nbsp;?&nbsp;» se lit en comptant les points pleins partout&nbsp;: 12 sur 40. «&nbsp;…&nbsp;sachant qu'il fait du théâtre&nbsp;?&nbsp;» se lit en ne comptant que dans le cadre&nbsp;: 6 sur 10.</figcaption>
+      </figure>
+
+      <p class="prose">Le mot «&nbsp;<strong>sachant</strong>&nbsp;» — ou «&nbsp;parmi&nbsp;», c'est le même geste — dit simplement <em>dans quel univers on compte</em>. Rien que tu ne saches déjà faire&nbsp;: en Seconde, tu appelais ça une fréquence conditionnelle, et tu la lisais dans un tableau croisé. Le voici pour notre groupe, avec une notation à connaître&nbsp;: \(T \cap M\) (lis «&nbsp;T inter M&nbsp;») désigne les élèves qui font <em>les deux</em> — théâtre <em>et</em> musique.</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>LE GROUPE EN TABLEAU CROISÉ</span>
+          <span class="bande-note">EFFECTIFS</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th></th><th>musicien (M)</th><th>non musicien</th><th class="total sep-total">total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="note-cellule">théâtre (T)</td><td>6 <span class="note-cellule">(c'est T ∩ M)</span></td><td>4</td><td class="total sep-total">10</td></tr>
+              <tr><td class="note-cellule">pas théâtre</td><td>6</td><td>24</td><td class="total sep-total">30</td></tr>
+              <tr class="ligne-total"><td class="note-cellule total">total</td><td class="total">12</td><td class="total">28</td><td class="total sep-total">40</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <p class="prose">La question du tirage se calcule alors en une ligne&nbsp;: parmi les élèves du théâtre, quelle proportion joue d'un instrument&nbsp;? On lit la ligne «&nbsp;théâtre&nbsp;», et on divise la case commune par le total de la ligne.</p>
+
+      <div class="math-vitrine">$$\text{proportion de M parmi T} \;=\; \frac{\text{effectif de } T \cap M}{\text{effectif de } T} \;=\; \frac{6}{10} \;=\; 0{,}60$$</div>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. «&nbsp;Sachant que&nbsp;»&nbsp;: l'univers rétrécit</h2>
+      <p class="prose">Refais le geste toi-même. Le graphique ci-dessous reprend la classe&nbsp;; les trois boutons changent l'information dont tu disposes. Regarde ce qui bouge à chaque fois&nbsp;: jamais les élèves — seulement l'univers dans lequel on compte, et donc le dénominateur.</p>
+
+      <figure class="widget" id="widget-univers" data-widget="univers">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Rétrécis l'univers toi-même</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Information connue sur l'élève tiré">
+            <button type="button" data-mode="tout" aria-pressed="true">tout le monde</button>
+            <button type="button" data-mode="theatre" aria-pressed="false">sachant T</button>
+            <button type="button" data-mode="musique" aria-pressed="false">sachant M</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 356" aria-label="Les 40 élèves en points ; selon l'information choisie, les élèves hors du nouvel univers s'estompent"></svg>
+        <div class="widget-pied" aria-live="polite">
+          <p class="widget-question js-mode-tout">Tu tires un élève au hasard parmi les 40. Probabilité qu'il soit musicien&nbsp;?</p>
+          <p class="widget-question js-mode-theatre" hidden>Sachant que l'élève tiré fait du théâtre&nbsp;: probabilité qu'il soit musicien&nbsp;?</p>
+          <p class="widget-question js-mode-musique" hidden>Dans l'autre sens&nbsp;: sachant que l'élève tiré est musicien, probabilité qu'il fasse du théâtre&nbsp;?</p>
+          <div class="lecture-formule js-mode-tout">P(M) = 12 / 40 = <span class="val-accent">0,30</span></div>
+          <div class="lecture-formule js-mode-theatre" hidden>P<sub>T</sub>(M) = 6 / 10 = <span class="val-accent">0,60</span></div>
+          <div class="lecture-formule js-mode-musique" hidden>P<sub>M</sub>(T) = 6 / 12 = <span class="val-accent">0,50</span></div>
+          <div class="chips js-mode-tout">
+            <span class="chip">univers&nbsp;: les 40 élèves</span>
+            <span class="chip">favorables&nbsp;: les 12 musiciens</span>
+          </div>
+          <div class="chips js-mode-theatre" hidden>
+            <span class="chip chip--accent">univers&nbsp;: les 10 du cadre</span>
+            <span class="chip">favorables&nbsp;: les 6 musiciens du cadre</span>
+          </div>
+          <div class="chips js-mode-musique" hidden>
+            <span class="chip chip--accent">univers&nbsp;: les 12 musiciens</span>
+            <span class="chip">favorables&nbsp;: les 6 qui font aussi du théâtre</span>
+          </div>
+          <p class="widget-legende js-mode-tout">Aucune information&nbsp;: l'univers, c'est toute la classe. On divise par 40.</p>
+          <p class="widget-legende js-mode-theatre" hidden>Les 30 autres n'ont plus le droit de gagner&nbsp;: ils s'effacent. On compte les musiciens parmi 10, plus parmi 40 — et la probabilité double.</p>
+          <p class="widget-legende js-mode-musique" hidden>Même intersection — les 6 élèves qui font les deux — mais autre univers&nbsp;: on divise par 12, pas par 10. <strong>Le sens du «&nbsp;sachant&nbsp;» compte&nbsp;:</strong> 0,50 ici, 0,60 tout à l'heure.</p>
+        </div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Le calcul «&nbsp;6 sur 10&nbsp;», tu peux l'écrire autrement. Divise le haut et le bas par 40, la taille de la classe&nbsp;: \(\dfrac{6}{10} = \dfrac{6/40}{10/40} = \dfrac{P(T \cap M)}{P(T)}\). La proportion «&nbsp;parmi T&nbsp;» est donc un quotient de deux probabilités de départ — celles qu'on connaissait avant l'indice. C'est exactement la définition qui arrive&nbsp;: rien de neuf, juste le comptage de la section 1 réécrit avec des \(P\).</p>
+        <p>Au passage, tu vois pourquoi on exige \(P(A) \neq 0\)&nbsp;: on divise par \(P(A)\). Et c'est de toute façon du bon sens — se placer dans un univers qui n'a aucune chance de se produire, ça ne veut rien dire.</p>
+      </div>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Soit A et B deux événements, avec \(P(A) \neq 0\). La <strong>probabilité de B sachant A</strong>, notée \(P_A(B)\), est la probabilité que B se réalise <em>dans l'univers restreint aux issues où A se réalise</em>&nbsp;:</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$P_A(B) = \frac{P(A \cap B)}{P(A)}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER UNE PROBABILITÉ CONDITIONNELLE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Repère l'univers restreint&nbsp;: c'est l'événement qui suit «&nbsp;sachant que&nbsp;» ou «&nbsp;parmi&nbsp;» dans l'énoncé.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Repère l'intersection&nbsp;: les issues qui réalisent les deux événements à la fois.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Divise — en effectifs (favorables dans le nouvel univers, sur la taille du nouvel univers) ou en probabilités \(P(A \cap B)/P(A)\)&nbsp;: c'est le même calcul.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MÉTHODE EN ACTION</div>
+        <p class="exemple-enonce">On lance un dé équilibré. Soit A&nbsp;: «&nbsp;le résultat est au moins 4&nbsp;» et B&nbsp;: «&nbsp;le résultat est pair&nbsp;». Calcule \(P_A(B)\) et compare-le à \(P(B)\).</p>
+        <p><span class="etape-label">Étape 1 — </span>l'univers restreint&nbsp;: \(A = \{4\;;\, 5\;;\, 6\}\), trois issues au lieu de six.</p>
+        <p><span class="etape-label">Étape 2 — </span>l'intersection&nbsp;: \(A \cap B = \{4\;;\, 6\}\), deux issues.</p>
+        <p><span class="etape-label">Étape 3 — </span>\(P_A(B) = \dfrac{2}{3}\). Par la formule, même résultat&nbsp;: \(\dfrac{P(A \cap B)}{P(A)} = \dfrac{2/6}{3/6} = \dfrac{2}{3}\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(P(B) = \dfrac{3}{6} = \dfrac{1}{2}\), mais sachant A, la probabilité monte à \(\dfrac{2}{3}\). L'information «&nbsp;au moins 4&nbsp;» favorise les pairs&nbsp;: dans \(\{4, 5, 6\}\), deux nombres sur trois le sont.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>\(P_A(B)\), c'est la part de B <em>à l'intérieur</em> de A. Le «&nbsp;sachant&nbsp;» ne change pas le monde&nbsp;: il change l'univers dans lequel tu comptes.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(P_A(B)\), c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la probabilité que A et B se produisent tous les deux</button>
+              <button type="button" class="quiz-reponse">la part de B dans l'univers restreint à A</button>
+              <button type="button" class="quiz-reponse">la probabilité de A sachant B</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le «&nbsp;sachant A&nbsp;» commence par rétrécir l'univers à A&nbsp;; on y mesure ensuite la part de B. La première réponse, c'est \(P(A \cap B)\)&nbsp;: elle se compte dans l'univers entier.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(P(A) = 0{,}5\) et \(P(A \cap B) = 0{,}2\). Alors \(P_A(B) =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,4</button>
+              <button type="button" class="quiz-reponse">0,1</button>
+              <button type="button" class="quiz-reponse">0,7</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(P_A(B) = \dfrac{P(A \cap B)}{P(A)} = \dfrac{0{,}2}{0{,}5} = 0{,}4\). (0,1, c'est leur produit&nbsp;; 0,7 leur somme&nbsp;: ni l'un ni l'autre.)</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>\(P_A(B)\) et \(P_B(A)\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">c'est toujours le même nombre</button>
+              <button type="button" class="quiz-reponse">sont toujours différents</button>
+              <button type="button" class="quiz-reponse">sont en général différents</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> même numérateur \(P(A \cap B)\), mais on divise par \(P(A)\) dans un cas et par \(P(B)\) dans l'autre. Dans la classe&nbsp;: 6/10 d'un côté, 6/12 de l'autre. (Ils peuvent coïncider — quand \(P(A) = P(B)\) — d'où le «&nbsp;en général&nbsp;».)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. L'arbre pondéré&nbsp;: l'expérience racontée pas à pas</h2>
+      <p class="prose">Le tableau croisé photographie une situation figée. Mais beaucoup d'expériences se déroulent <em>en étapes</em>&nbsp;: d'abord il pleut, ou pas&nbsp;; ensuite tu arrives en retard, ou pas. Pour raconter ça, l'outil roi du chapitre est l'<strong>arbre pondéré</strong>&nbsp;: chaque embranchement est une étape de l'histoire, chaque branche porte la probabilité d'emprunter ce chemin-là.</p>
+      <p class="prose">Voici l'histoire qu'on va suivre. Dans ta ville, il pleut 30&nbsp;% des matins — c'est l'événement A. Les matins de pluie, tu arrives en retard 40&nbsp;% du temps (bus bondés, vélo au garage)&nbsp;; les matins secs, 10&nbsp;% seulement — R est l'événement «&nbsp;tu es en retard&nbsp;». Regarde bien ces deux derniers nombres&nbsp;: «&nbsp;40&nbsp;% du temps <em>quand il pleut</em>&nbsp;», c'est une probabilité <em>sachant</em>. En notation&nbsp;: \(P_A(R) = 0{,}4\). Les probabilités conditionnelles ne sont pas un chapitre à part&nbsp;: elles vivent sur les branches du deuxième niveau de tous les arbres.</p>
+
+      <figure class="widget" id="widget-arbre"
+        data-widget="arbre" data-p-init="0.3" data-pa-init="0.4" data-pn-init="0.1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">L'arbre pondéré, en vrai</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 432" aria-label="Arbre pondéré à deux niveaux : pluie ou non, puis retard ou non ; sous l'arbre, une barre découpée montre chaque probabilité comme une aire"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">\(P(A)\) — il pleut&nbsp;: <span class="js-lect-p">0,30</span></span>
+            <input type="range" class="js-p" min="0.05" max="0.95" step="0.05" value="0.3" aria-label="Probabilité qu'il pleuve">
+          </div>
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">\(P_A(R)\) — retard sachant pluie&nbsp;: <span class="js-lect-pa">0,40</span></span>
+            <input type="range" class="js-pa" min="0" max="1" step="0.05" value="0.4" aria-label="Probabilité d'être en retard sachant qu'il pleut">
+          </div>
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">\(P_{\overline{A}}(R)\) — retard sachant pas de pluie&nbsp;: <span class="js-lect-pn">0,10</span></span>
+            <input type="range" class="js-pn" min="0" max="1" step="0.05" value="0.1" aria-label="Probabilité d'être en retard sachant qu'il ne pleut pas">
+          </div>
+          <div class="arbre-feuilles" role="group" aria-label="Choisis un chemin de l'arbre pour dérouler son calcul">
+            <button type="button" class="feuille-btn" data-feuille="ar" aria-pressed="true">\(A \cap R\) = <span class="js-val">0,12</span></button>
+            <button type="button" class="feuille-btn" data-feuille="an" aria-pressed="false">\(A \cap \overline{R}\) = <span class="js-val">0,18</span></button>
+            <button type="button" class="feuille-btn" data-feuille="nr" aria-pressed="false">\(\overline{A} \cap R\) = <span class="js-val">0,07</span></button>
+            <button type="button" class="feuille-btn" data-feuille="nn" aria-pressed="false">\(\overline{A} \cap \overline{R}\) = <span class="js-val">0,63</span></button>
+          </div>
+          <div class="lecture-formule js-calcul" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">somme des 4 feuilles&nbsp;: <span class="js-somme">1,00</span></span>
+          </div>
+        </div>
+        <div class="widget-note">A&nbsp;: il pleut · R&nbsp;: tu es en retard. Touche une feuille pour allumer son chemin&nbsp;: sa probabilité se lit en multipliant le long des branches. Et quoi que tu règles, les quatre feuilles se partagent toujours un total de 1.</div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LES TROIS RÈGLES DE L'ARBRE</div>
+        <p><strong>1.</strong> Les probabilités des branches issues d'un même nœud somment à 1.</p>
+        <p><strong>2.</strong> La probabilité d'un chemin est le <strong>produit</strong> des probabilités de ses branches&nbsp;:</p>
+        <div class="math-vitrine">$$P(A \cap B) = P(A) \times P_A(B)$$</div>
+        <p><strong>3.</strong> La somme des probabilités de toutes les feuilles vaut 1.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi <em>multiplier</em>&nbsp;? Regarde la barre sous l'arbre. Les matins de pluie occupent 30&nbsp;% de la barre. Parmi ce morceau, les matins de retard en occupent 40&nbsp;%. «&nbsp;40&nbsp;% de 30&nbsp;%&nbsp;», c'est \(0{,}4 \times 0{,}3 = 0{,}12\)&nbsp;: douze matins sur cent sont «&nbsp;pluie et retard&nbsp;». Multiplier le long d'un chemin, c'est prendre <em>une part d'une part</em>.</p>
+        <p>Et si tu préfères l'algèbre, tout est déjà dans la section 2. La définition dit \(P_A(B) = P(A \cap B)/P(A)\)&nbsp;; multiplie les deux côtés par \(P(A)\)&nbsp;: \(P(A \cap B) = P(A) \times P_A(B)\). La règle de l'arbre, c'est la définition lue à l'envers. Une seule idée, deux costumes.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CONSTRUIRE ET UTILISER UN ARBRE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Premier niveau&nbsp;: la première étape de l'expérience (A et \(\overline{A}\)), avec leurs probabilités.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Deuxième niveau&nbsp;: la deuxième étape, avec des probabilités <em>conditionnelles</em> — sachant la branche d'où l'on vient.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: à chaque nœud, vérifie que les branches somment à 1.</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">La probabilité d'une feuille&nbsp;: multiplie le long de son chemin.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE «&nbsp;SANS REMISE&nbsp;», ROYAUME DU CONDITIONNEL</div>
+        <p class="exemple-enonce">Un sac contient 5 billes rouges et 3 vertes. On en tire une au hasard, on ne la remet pas, puis on en tire une seconde. Quelle est la probabilité de tirer deux rouges&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>premier niveau&nbsp;: \(R_1\), «&nbsp;rouge au premier tirage&nbsp;», \(P(R_1) = \dfrac{5}{8}\).</p>
+        <p><span class="etape-label">Étape 2 — </span>deuxième niveau&nbsp;: <em>sachant</em> \(R_1\), il reste 7 billes dont 4 rouges&nbsp;: \(P_{R_1}(R_2) = \dfrac{4}{7}\). Le «&nbsp;sans remise&nbsp;» se loge exactement là — la deuxième probabilité dépend de ce qui vient de se passer.</p>
+        <p><span class="etape-label">Étape 3 — </span>multiplie le long du chemin&nbsp;: \(P(R_1 \cap R_2) = \dfrac{5}{8} \times \dfrac{4}{7} = \dfrac{20}{56} = \dfrac{5}{14}\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(P(\text{deux rouges}) = \dfrac{5}{14} \approx 0{,}36\). Un peu plus d'une chance sur trois.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions sur l'arbre</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Sur les branches du <em>deuxième</em> niveau d'un arbre, on écrit…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(P(B)\), la probabilité de l'événement tout court</button>
+              <button type="button" class="quiz-reponse">des probabilités conditionnelles, sachant la branche d'où l'on vient</button>
+              <button type="button" class="quiz-reponse">\(P(A \cap B)\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> au deuxième niveau, la première étape est déjà jouée&nbsp;: chaque branche se lit «&nbsp;sachant ce qui précède&nbsp;». \(P(A \cap B)\) n'est pas sur une branche — c'est la feuille au bout du chemin.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(P(A) = 0{,}2\) et \(P_A(B) = 0{,}5\). Alors \(P(A \cap B) =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,1</button>
+              <button type="button" class="quiz-reponse">0,7</button>
+              <button type="button" class="quiz-reponse">0,4</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> multiplie le long du chemin&nbsp;: \(0{,}2 \times 0{,}5 = 0{,}1\). La moitié de 20&nbsp;%, ça fait 10&nbsp;%.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Les probabilités des branches issues d'un même nœud…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">sont toutes égales</button>
+              <button type="button" class="quiz-reponse">se multiplient entre elles</button>
+              <button type="button" class="quiz-reponse">somment à 1</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> au départ d'un nœud, il se passe forcément l'une des possibilités, et une seule&nbsp;: leurs probabilités se partagent 1. C'est le contrôle-réflexe à faire sur chaque arbre avant tout calcul.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Recoller les morceaux&nbsp;: les probabilités totales</h2>
+      <p class="prose">L'arbre de la section 3 sait répondre à «&nbsp;pluie <em>et</em> retard&nbsp;». Mais la question que tu te poses vraiment le matin, c'est&nbsp;: quelle est la probabilité que je sois en retard, <em>tout court</em>&nbsp;? Regarde les feuilles de l'arbre&nbsp;: être en retard, ça arrive de deux façons — avec pluie (\(A \cap R\), probabilité 0,12) ou sans (\(\overline{A} \cap R\), probabilité 0,07). Deux chemins qui ne peuvent pas se produire en même temps&nbsp;; le retard, c'est l'un ou l'autre. Donc on additionne&nbsp;: \(P(R) = 0{,}12 + 0{,}07 = 0{,}19\).</p>
+      <p class="prose">Remonte au graphique de la section 3 et regarde la barre&nbsp;: \(P(R)\), ce sont les deux segments pleins, mis bout à bout. C'est toute la formule qui suit — elle a un grand nom, mais tu viens de la faire à la main.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — FORMULE DES PROBABILITÉS TOTALES</div>
+        <p>A et \(\overline{A}\) découpent l'univers en deux&nbsp;: chaque issue est dans exactement l'un des deux. Alors, pour tout événement B&nbsp;:</p>
+        <div class="math-vitrine">$$P(B) = P(A \cap B) + P(\overline{A} \cap B) = P(A)\,P_A(B) + P(\overline{A})\,P_{\overline{A}}(B)$$</div>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>B se coupe en deux morceaux&nbsp;: les cas de B où A se produit aussi (\(A \cap B\)), et ceux où A ne se produit pas (\(\overline{A} \cap B\)). Ces deux morceaux ne se recouvrent jamais, et à eux deux ils reconstituent B en entier — donc leurs probabilités s'ajoutent. «&nbsp;Totales&nbsp;», parce qu'on retrouve la probabilité <em>totale</em> de B en recollant ses morceaux. Chaque morceau se calcule ensuite en multipliant le long de son chemin&nbsp;: c'est la règle de la section 3.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER P(B) AVEC UN ARBRE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Repère toutes les feuilles où B apparaît (il y en a une par branche de départ).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule la probabilité de chacune&nbsp;: produit le long du chemin.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Additionne-les.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — PROBABILITÉS TOTALES, PUIS SACHANT RENVERSÉ</div>
+        <p class="exemple-enonce">Jade va au lycée à vélo 70&nbsp;% des jours, en bus les autres jours. À vélo, elle est en retard 5&nbsp;% du temps&nbsp;; en bus, 15&nbsp;%. a. Quelle est la probabilité qu'elle soit en retard un jour donné&nbsp;? b. Jade est en retard ce matin&nbsp;: quelle est la probabilité qu'elle soit venue en bus&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>note V «&nbsp;à vélo&nbsp;» et R «&nbsp;en retard&nbsp;», et traduis&nbsp;: \(P(V) = 0{,}7\), \(P_V(R) = 0{,}05\), \(P_{\overline{V}}(R) = 0{,}15\).</p>
+        <p><span class="etape-label">Étape 2 — </span>les deux chemins vers R&nbsp;: \(P(V \cap R) = 0{,}7 \times 0{,}05 = 0{,}035\) et \(P(\overline{V} \cap R) = 0{,}3 \times 0{,}15 = 0{,}045\).</p>
+        <p><span class="etape-label">Étape 3 — </span>probabilités totales&nbsp;: \(P(R) = 0{,}035 + 0{,}045 = 0{,}08\). Jade est en retard 8&nbsp;% des jours.</p>
+        <p><span class="etape-label">Étape 4 — </span>la question b demande \(P_R(\overline{V})\) — le «&nbsp;sachant&nbsp;» est <em>renversé</em> par rapport à l'arbre. Pas de panique&nbsp;: la définition marche dans les deux sens. \(P_R(\overline{V}) = \dfrac{P(\overline{V} \cap R)}{P(R)} = \dfrac{0{,}045}{0{,}08} \approx 0{,}56\).</p>
+        <p class="conclusion">Conclusion&nbsp;: 8&nbsp;% de retards, et sachant retard, plus d'une chance sur deux que ce soit un jour de bus. Relis ce résultat&nbsp;: le bus ne fait que 30&nbsp;% des trajets, mais fournit plus de la moitié des retards. Renverser le «&nbsp;sachant&nbsp;» change vraiment la réponse.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — RENVERSER LE «&nbsp;SACHANT&nbsp;» (LE CLASSIQUE DU BAC)</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">L'arbre te donne \(P_A(B)\), on te demande \(P_B(A)\)&nbsp;: reviens à la définition, \(P_B(A) = \dfrac{P(A \cap B)}{P(B)}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Le numérateur est une feuille de l'arbre&nbsp;: produit le long du chemin.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Le dénominateur, c'est \(P(B)\)&nbsp;: probabilités totales. Puis divise.</span></div>
+      </div>
+
+      <p class="prose">Ce renversement n'est pas qu'un exercice d'examen. C'est lui qui explique un paradoxe célèbre — sur lequel se trompent, littéralement, des médecins. Un test de dépistage fiable à 90&nbsp;% vient de te déclarer positif. Quelle est la probabilité que tu sois vraiment malade&nbsp;? Presque tout le monde répond «&nbsp;90&nbsp;%&nbsp;». Manipule, et regarde.</p>
+
+      <figure class="widget" id="widget-depistage" data-widget="depistage" data-n-init="1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le test qui se trompe</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages de la prévalence">
+            <button type="button" data-prev="1" aria-pressed="true">1 %</button>
+            <button type="button" data-prev="10" aria-pressed="false">10 %</button>
+            <button type="button" data-prev="30" aria-pressed="false">30 %</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 395" aria-label="1 000 personnes en points ; les malades détectés, malades non détectés, faux positifs et vrais négatifs se distinguent par leur couleur"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">prévalence de la maladie&nbsp;: <span class="js-n">1</span>&nbsp;%</span>
+            <input type="range" class="js-curseur" min="1" max="30" step="1" value="1" aria-label="Prévalence de la maladie, en pourcentage">
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-positifs" aria-pressed="false">▸ ne garde que les positifs</button>
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="lecture-formule js-formule" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">malades&nbsp;: <span class="js-malades">10</span> / 1&thinsp;000</span>
+            <span class="chip">tests positifs&nbsp;: <span class="js-positifs-chip">108</span></span>
+            <span class="chip chip--accent">P(malade sachant positif) ≈ <span class="js-reponse">8,3 %</span></span>
+          </div>
+          <div class="puces-legende" aria-hidden="true">
+            <span><span class="puce puce--vp"></span>malade, test positif</span>
+            <span><span class="puce puce--fn"></span>malade, test négatif</span>
+            <span><span class="puce puce--fp"></span>sain, test positif</span>
+            <span><span class="puce puce--vn"></span>sain, test négatif</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite"></p>
+        </div>
+        <div class="widget-note">Le test, lui, ne change jamais&nbsp;: il détecte 90&nbsp;% des malades et innocente 90&nbsp;% des sains. Seule la rareté de la maladie bouge — et c'est elle qui décide de tout. Le bouton «&nbsp;ne garde que les positifs&nbsp;» refait le geste du chapitre&nbsp;: restreindre l'univers, puis compter dedans.</div>
+      </figure>
+
+      <p class="prose">La morale tient en une ligne&nbsp;: la fiabilité du test, c'est \(P_{\text{malade}}(\text{positif}) = 0{,}9\)&nbsp;; la question qui t'intéresse, c'est \(P_{\text{positif}}(\text{malade})\) — le «&nbsp;sachant&nbsp;» renversé. Quand la maladie est rare, les deux nombres n'ont rien à voir&nbsp;: les personnes saines sont si nombreuses que leurs 10&nbsp;% d'erreurs noient les vrais malades. C'est le piège n°&thinsp;2 du chapitre, avec de vraies conséquences.</p>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions sur les totales</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(P(A) = 0{,}3\), \(P_A(B) = 0{,}6\), \(P_{\overline{A}}(B) = 0{,}2\). Alors \(P(B) =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,8</button>
+              <button type="button" class="quiz-reponse">0,32</button>
+              <button type="button" class="quiz-reponse">0,26</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(0{,}3 \times 0{,}6 + 0{,}7 \times 0{,}2 = 0{,}18 + 0{,}14 = 0{,}32\). (0,8, c'est la somme des deux conditionnelles sans les pondérer&nbsp;: interdit — chacune ne parle que de son morceau d'univers.)</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>L'arbre commence par A / \(\overline{A}\). Pour obtenir \(P_B(A)\), on…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">lit directement la branche qui porte B</button>
+              <button type="button" class="quiz-reponse">ne peut rien faire&nbsp;: l'arbre est dans le mauvais sens</button>
+              <button type="button" class="quiz-reponse">revient à la définition&nbsp;: \(P(A \cap B)/P(B)\), avec \(P(B)\) par probabilités totales</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'arbre ne se lit que dans son sens de construction, mais il fournit tout&nbsp;: le numérateur (une feuille) et le dénominateur (la somme des feuilles où B apparaît). La définition fait le reste.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Une maladie est très rare. Un test fiable à 90&nbsp;% te déclare positif. La probabilité que tu sois vraiment malade est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">environ 90 %</button>
+              <button type="button" class="quiz-reponse">exactement 10 %</button>
+              <button type="button" class="quiz-reponse">souvent bien plus faible que 90 %</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> revois les 1&thinsp;000 points&nbsp;: à 1&nbsp;% de prévalence, 9 vrais positifs pour 99 faux — à peine 8&nbsp;% des positifs sont malades. 90&nbsp;%, c'est \(P_{\text{malade}}(\text{positif})\)&nbsp;; la question pose le «&nbsp;sachant&nbsp;» inverse.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. L'indépendance&nbsp;: quand l'information ne change rien</h2>
+      <p class="prose">Retour à la classe du début. Savoir «&nbsp;il fait du théâtre&nbsp;» faisait passer la probabilité d'être musicien de 0,30 à 0,60&nbsp;: l'information déplaçait les chances. Question naturelle&nbsp;: aurait-elle pu ne <em>rien</em> déplacer&nbsp;? Bien sûr — il aurait suffi que les musiciens soient répartis au prorata&nbsp;: 30&nbsp;% de musiciens chez les théâtreux, comme partout ailleurs. Essaie de fabriquer cette situation toi-même.</p>
+
+      <figure class="widget" id="widget-independance" data-widget="independance" data-k-init="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Déplace les musiciens</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 444" aria-label="Les 40 élèves en points, et deux jauges comparant la part de musiciens chez les 10 du théâtre et chez les 30 autres, avec un repère à 0,30 pour toute la classe"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">musiciens parmi les 10 du théâtre&nbsp;: <span class="js-k">6</span></span>
+            <input type="range" class="js-curseur" min="0" max="10" step="1" value="6" aria-label="Nombre de musiciens parmi les dix élèves du théâtre">
+          </div>
+          <div class="lecture-formule js-formule" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">P(M) = 0,30 — toute la classe</span>
+            <span class="chip">P(M sachant T) = <span class="js-ptm">0,60</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">savoir T augmente les chances de M</span>
+          </div>
+        </div>
+        <div class="widget-note">La classe garde toujours 12 musiciens&nbsp;: ceux que tu retires du cadre passent chez les autres. L'indépendance, c'est le réglage où la jauge du cadre s'aligne sur le repère de la classe entière — savoir T n'apprend alors plus rien sur M.</div>
+      </figure>
+
+      <p class="prose">À \(k = 3\) musiciens dans le cadre, tout s'aligne&nbsp;: 30&nbsp;% de musiciens chez les théâtreux, 30&nbsp;% chez les autres, 30&nbsp;% partout. Apprendre que l'élève tiré fait du théâtre ne t'apprend plus <em>rien</em> sur la musique. C'est ça, l'<strong>indépendance</strong>. Et remarque le nombre du bas dans le graphique&nbsp;: à ce réglage précis, \(P(T \cap M) = 0{,}075\) — exactement \(P(T) \times P(M)\). Ce n'est pas un hasard, c'est la définition.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Deux événements A et B sont <strong>indépendants</strong> si&nbsp;: \(P(A \cap B) = P(A) \times P(B)\).</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ</div>
+        <p>Si \(P(A) \neq 0\), l'indépendance équivaut à&nbsp;: \(P_A(B) = P(B)\) — savoir que A s'est produit ne change pas la probabilité de B.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Les deux formes disent la même chose. Pars de \(P_A(B) = \dfrac{P(A \cap B)}{P(A)}\)&nbsp;: si \(P(A \cap B) = P(A) \times P(B)\), le \(P(A)\) se simplifie et il reste \(P_A(B) = P(B)\). Et en remontant le calcul, l'inverse marche aussi. La version «&nbsp;produit&nbsp;» a deux avantages&nbsp;: elle est symétrique (A et B y jouent le même rôle) et elle ne demande pas \(P(A) \neq 0\). La version «&nbsp;sachant&nbsp;» a l'avantage du sens&nbsp;: <em>l'information ne change rien</em>.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — PROUVER (OU RÉFUTER) L'INDÉPENDANCE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule séparément \(P(A)\), \(P(B)\) et \(P(A \cap B)\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Compare \(P(A \cap B)\) et \(P(A) \times P(B)\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Égalité&nbsp;: indépendants. Sinon&nbsp;: dépendants. L'intuition ne suffit jamais — c'est un calcul, pas une impression.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — PROUVER, OU RÉFUTER</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. On tire une carte d'un jeu de 32. A&nbsp;: «&nbsp;c'est un roi&nbsp;», B&nbsp;: «&nbsp;c'est un cœur&nbsp;». A et B sont-ils indépendants&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>\(P(A) = \dfrac{4}{32} = \dfrac{1}{8}\)&nbsp;; \(P(B) = \dfrac{8}{32} = \dfrac{1}{4}\)&nbsp;; \(P(A \cap B) = P(\text{roi de cœur}) = \dfrac{1}{32}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(P(A) \times P(B) = \dfrac{1}{8} \times \dfrac{1}{4} = \dfrac{1}{32} = P(A \cap B)\).</p>
+          <p class="conclusion">Conclusion&nbsp;: indépendants. Et ça se comprend&nbsp;: savoir que la carte est un cœur ne renseigne en rien sur «&nbsp;roi&nbsp;» — il y a exactement un roi sur huit cartes, dans chaque couleur.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Le dé de la section 2&nbsp;: A&nbsp;: «&nbsp;au moins 4&nbsp;», B&nbsp;: «&nbsp;pair&nbsp;». Indépendants&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>\(P(A \cap B) = \dfrac{2}{6} = \dfrac{1}{3}\), alors que \(P(A) \times P(B) = \dfrac{1}{2} \times \dfrac{1}{2} = \dfrac{1}{4}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\dfrac{1}{3} \neq \dfrac{1}{4}\)&nbsp;: dépendants. On l'avait vu autrement&nbsp;: \(P_A(B) = \dfrac{2}{3} \neq \dfrac{1}{2} = P(B)\) — l'information déplaçait les chances. Deux événements peuvent sembler «&nbsp;sans rapport&nbsp;» et être dépendants quand même&nbsp;: seul le calcul tranche.</p>
+        </div>
+      </div>
+
+      <p class="prose">Un dernier duel de vocabulaire, responsable de la moitié des erreurs du chapitre&nbsp;: <strong>indépendants</strong> n'a rien à voir avec <strong>incompatibles</strong>. Incompatibles veut dire&nbsp;: A et B ne peuvent pas se produire ensemble. Mais alors, sachant A, l'événement B devient <em>impossible</em> — l'information change tout&nbsp;! Des événements incompatibles, c'est le contraire absolu d'événements indépendants.</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>INDÉPENDANTS OU INCOMPATIBLES&nbsp;?</span>
+          <span class="bande-note">LE FACE-À-FACE</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th></th><th>indépendants</th><th>incompatibles</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="note-cellule">ce que ça raconte</td><td>savoir A n'apprend rien sur B</td><td>A et B ne peuvent pas arriver ensemble</td></tr>
+              <tr><td class="note-cellule">définition</td><td>\(P(A \cap B) = P(A) \times P(B)\)</td><td>\(A \cap B = \varnothing\), donc \(P(A \cap B) = 0\)</td></tr>
+              <tr><td class="note-cellule">sachant A, B devient</td><td>\(P(B)\) — inchangée</td><td>0 — impossible</td></tr>
+              <tr><td class="note-cellule">les deux à la fois&nbsp;?</td><td colspan="2">seulement si \(P(A) = 0\) ou \(P(B) = 0\) — jamais pour des événements de probabilité non nulle</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Indépendants&nbsp;: \(P(A \cap B) = P(A) \times P(B)\) — l'information ne change rien aux chances. Et ça se <em>vérifie par le calcul</em>, jamais à l'intuition.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>«&nbsp;A et B indépendants&nbsp;» signifie…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(P(A \cap B) = P(A) \times P(B)\)</button>
+              <button type="button" class="quiz-reponse">\(P(A \cap B) = 0\)</button>
+              <button type="button" class="quiz-reponse">\(P(A \cap B) = P(A) + P(B)\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'indépendance, c'est le <em>produit</em>. \(P(A \cap B) = 0\), c'est l'incompatibilité — un tout autre monde, voir la question 3.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>A et B sont indépendants, et \(P(B) = 0{,}4\). Alors \(P_A(B) =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,6</button>
+              <button type="button" class="quiz-reponse">0,4</button>
+              <button type="button" class="quiz-reponse">impossible à savoir sans connaître P(A)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> indépendants = savoir A ne change rien&nbsp;: \(P_A(B) = P(B) = 0{,}4\). C'est toute l'idée de la section.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>\(P(A) &gt; 0\), \(P(B) &gt; 0\), et A, B incompatibles. Alors A et B sont…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">forcément indépendants</button>
+              <button type="button" class="quiz-reponse">parfois indépendants, ça dépend</button>
+              <button type="button" class="quiz-reponse">jamais indépendants</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> sachant A, l'événement B devient impossible&nbsp;: \(P_A(B) = 0 \neq P(B)\). Être incompatibles, c'est s'interdire mutuellement — l'information maximale, pas l'absence d'information.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>\(P(A) = 0{,}2\)&nbsp;; \(P(B) = 0{,}5\)&nbsp;; \(P(A \cap B) = 0{,}1\). A et B sont…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">indépendants</button>
+              <button type="button" class="quiz-reponse">incompatibles</button>
+              <button type="button" class="quiz-reponse">dépendants</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(0{,}2 \times 0{,}5 = 0{,}1 = P(A \cap B)\)&nbsp;: indépendants — établi par le calcul, comme toujours. (Incompatibles, sûrement pas&nbsp;: \(P(A \cap B) \neq 0\).)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Confondre \(P(A \cap B)\) et \(P_A(B)\).</strong> «&nbsp;A et B&nbsp;» se mesure dans l'univers entier&nbsp;; «&nbsp;B sachant A&nbsp;» dans l'univers restreint à A. Dans la classe&nbsp;: \(6/40 = 0{,}15\) d'un côté, \(6/10 = 0{,}60\) de l'autre. Repère les mots de l'énoncé&nbsp;: «&nbsp;et&nbsp;» = intersection, «&nbsp;parmi&nbsp;» ou «&nbsp;sachant&nbsp;» = conditionnelle.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Renverser le «&nbsp;sachant&nbsp;» sans y penser.</strong> \(P_A(B) \neq P_B(A)\) en général. «&nbsp;Presque tous les malades sont positifs&nbsp;» ne dit pas «&nbsp;presque tous les positifs sont malades&nbsp;» — revois les 1&thinsp;000 points de la section 4.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Écrire \(P(B)\) sur une branche de deuxième niveau.</strong> Ces branches se lisent toujours «&nbsp;sachant d'où l'on vient&nbsp;»&nbsp;: c'est \(P_A(B)\) qu'on y pose. Contrôle-réflexe&nbsp;: chaque nœud doit sommer à 1.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Confondre indépendants et incompatibles.</strong> Incompatibles = jamais ensemble&nbsp;: sachant A, B est mort — dépendance maximale. Indépendants = savoir A ne change rien à B. Deux idées presque opposées.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Décréter l'indépendance «&nbsp;au feeling&nbsp;».</strong> Elle se vérifie&nbsp;: compare \(P(A \cap B)\) à \(P(A) \times P(B)\). Sur un dé, «&nbsp;pair&nbsp;» et «&nbsp;au moins 4&nbsp;» ont l'air étrangers — ils sont dépendants (\(1/3 \neq 1/4\)). Roi et cœur ont l'air liés — ils sont indépendants.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">SACHANT</span>
+          <p>\(P_A(B) = \dfrac{P(A \cap B)}{P(A)}\) (avec \(P(A) \neq 0\))&nbsp;: la part de B dans l'univers restreint à A.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ARBRE</span>
+          <p>Deuxième niveau = probabilités conditionnelles, «&nbsp;sachant d'où l'on vient&nbsp;»&nbsp;; chaque nœud somme à 1.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">CHEMIN</span>
+          <p>\(P(A \cap B) = P(A) \times P_A(B)\)&nbsp;: multiplier le long des branches — prendre une part d'une part.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">TOTALES</span>
+          <p>\(P(B) = P(A)\,P_A(B) + P(\overline{A})\,P_{\overline{A}}(B)\)&nbsp;: recoller les morceaux de B. Pour renverser le sachant&nbsp;: \(P_B(A) = P(A \cap B)/P(B)\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">INDÉPENDANCE</span>
+          <p>\(P(A \cap B) = P(A) \times P(B)\), autrement dit \(P_A(B) = P(B)\)&nbsp;: l'information ne change rien. À ne jamais confondre avec incompatibles.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: lecture de tableaux et probabilités conditionnelles, arbres, probabilités totales et sachant renversé, indépendance, et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· tableau croisé</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un lycée compte 200 élèves&nbsp;: 120 en Première, 80 en Terminale. 90 élèves de Première et 50 de Terminale mangent à la cantine. On tire un élève au hasard&nbsp;; on note C&nbsp;: «&nbsp;il mange à la cantine&nbsp;» et T&nbsp;: «&nbsp;il est en Terminale&nbsp;». a. Complète le tableau croisé. b. Calcule \(P(C)\). c. Calcule \(P_T(C)\). d. Calcule \(P_C(T)\) et compare-le à \(P_T(C)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>ligne Première&nbsp;: 90 cantine, 30 non, total 120. Ligne Terminale&nbsp;: 50 cantine, 30 non, total 80. Colonne cantine&nbsp;: \(90 + 50 = 140\)&nbsp;; non-cantine&nbsp;: 60&nbsp;; total général 200.</p>
+          <p><span class="etape-label">b. — </span>\(P(C) = \dfrac{140}{200} = 0{,}70\).</p>
+          <p><span class="etape-label">c. — </span>«&nbsp;sachant Terminale&nbsp;»&nbsp;: on ne compte que sur la ligne Terminale. \(P_T(C) = \dfrac{50}{80} = 0{,}625\).</p>
+          <p><span class="etape-label">d. — </span>«&nbsp;sachant cantine&nbsp;»&nbsp;: on ne compte que sur la colonne cantine. \(P_C(T) = \dfrac{50}{140} = \dfrac{5}{14} \approx 0{,}36\).</p>
+          <p class="conclusion">Conclusion&nbsp;: même case commune (les 50 Terminales de la cantine), mais deux univers différents — 80 d'un côté, 140 de l'autre. \(P_T(C) \neq P_C(T)\)&nbsp;: le sens du «&nbsp;sachant&nbsp;» compte.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· traduire un énoncé</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur une plateforme de jeux en ligne, on choisit un joueur au hasard. On note A&nbsp;: «&nbsp;le joueur a moins de 18 ans&nbsp;» et B&nbsp;: «&nbsp;le joueur paie un abonnement&nbsp;». Traduis chaque phrase en notation&nbsp;: a. «&nbsp;30&nbsp;% des joueurs sont mineurs.&nbsp;» b. «&nbsp;Parmi les mineurs, 60&nbsp;% paient un abonnement.&nbsp;» c. «&nbsp;18&nbsp;% des joueurs sont des mineurs abonnés.&nbsp;» d. Vérifie que ces trois données sont cohérentes entre elles.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(P(A) = 0{,}3\)&nbsp;: une proportion de tous les joueurs, univers entier.</p>
+          <p><span class="etape-label">b. — </span>«&nbsp;parmi les mineurs&nbsp;» restreint l'univers à A&nbsp;: \(P_A(B) = 0{,}6\).</p>
+          <p><span class="etape-label">c. — </span>«&nbsp;mineurs <em>et</em> abonnés&nbsp;», compté sur tous les joueurs&nbsp;: \(P(A \cap B) = 0{,}18\).</p>
+          <p><span class="etape-label">d. — </span>la règle du chemin doit tenir&nbsp;: \(P(A) \times P_A(B) = 0{,}3 \times 0{,}6 = 0{,}18 = P(A \cap B)\). Cohérent.</p>
+          <p class="conclusion">Conclusion&nbsp;: trois phrases presque identiques en français, trois objets différents en probabilités. Ce tri-là, c'est la moitié du chapitre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· définition</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On donne \(P(A) = 0{,}4\), \(P(B) = 0{,}5\) et \(P(A \cap B) = 0{,}1\). Calcule \(P_A(B)\) puis \(P_B(A)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(P_A(B) = \dfrac{P(A \cap B)}{P(A)} = \dfrac{0{,}1}{0{,}4} = 0{,}25\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(P_B(A) = \dfrac{P(A \cap B)}{P(B)} = \dfrac{0{,}1}{0{,}5} = 0{,}2\).</p>
+          <p class="conclusion">Conclusion&nbsp;: 0,25 et 0,20 — même numérateur, dénominateurs différents. Les deux conditionnelles d'une même paire d'événements n'ont aucune raison d'être égales.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· multiplier le long du chemin</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On donne \(P(A) = 0{,}6\) et \(P_A(B) = 0{,}3\). a. Calcule \(P(A \cap B)\). b. Que vaut \(P_A(\overline{B})\)&nbsp;? En déduire \(P(A \cap \overline{B})\). c. Vérifie que \(P(A \cap B) + P(A \cap \overline{B}) = P(A)\), et explique pourquoi c'était prévisible.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(P(A \cap B) = P(A) \times P_A(B) = 0{,}6 \times 0{,}3 = 0{,}18\).</p>
+          <p><span class="etape-label">b. — </span>les branches sœurs somment à 1&nbsp;: \(P_A(\overline{B}) = 1 - 0{,}3 = 0{,}7\), donc \(P(A \cap \overline{B}) = 0{,}6 \times 0{,}7 = 0{,}42\).</p>
+          <p><span class="etape-label">c. — </span>\(0{,}18 + 0{,}42 = 0{,}60 = P(A)\). Prévisible&nbsp;: quand A se produit, soit B se produit aussi, soit non — les deux feuilles \(A \cap B\) et \(A \cap \overline{B}\) reconstituent A en entier.</p>
+          <p class="conclusion">Conclusion&nbsp;: sur un arbre, tout se recolle. Ces vérifications gratuites attrapent la plupart des erreurs de calcul.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· arbre · sans remise</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un sac contient 5 billes rouges et 3 vertes. On tire une bille, on ne la remet pas, puis on en tire une seconde. a. Construis l'arbre pondéré de l'expérience. b. Calcule la probabilité de tirer deux billes vertes. c. Calcule la probabilité de tirer deux billes de la même couleur.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>premier niveau&nbsp;: \(P(R_1) = \dfrac{5}{8}\), \(P(V_1) = \dfrac{3}{8}\). Deuxième niveau, <em>sachant</em> le premier tirage (il reste 7 billes)&nbsp;: \(P_{R_1}(R_2) = \dfrac{4}{7}\), \(P_{R_1}(V_2) = \dfrac{3}{7}\)&nbsp;; \(P_{V_1}(R_2) = \dfrac{5}{7}\), \(P_{V_1}(V_2) = \dfrac{2}{7}\). Contrôle&nbsp;: chaque nœud somme bien à 1.</p>
+          <p><span class="etape-label">b. — </span>\(P(V_1 \cap V_2) = \dfrac{3}{8} \times \dfrac{2}{7} = \dfrac{6}{56} = \dfrac{3}{28}\).</p>
+          <p><span class="etape-label">c. — </span>deux chemins incompatibles, on additionne&nbsp;: \(P(R_1 \cap R_2) + P(V_1 \cap V_2) = \dfrac{5}{8} \times \dfrac{4}{7} + \dfrac{3}{28} = \dfrac{10}{28} + \dfrac{3}{28} = \dfrac{13}{28}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\dfrac{13}{28} \approx 0{,}46\). Le «&nbsp;sans remise&nbsp;» vit entièrement dans les probabilités conditionnelles du deuxième niveau.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· probabilités totales</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Milo joue à un jeu vidéo. 60&nbsp;% de ses parties se jouent sur la carte Désert, les autres sur la carte Forêt. Il gagne 55&nbsp;% de ses parties sur Désert et 70&nbsp;% sur Forêt. On choisit une partie au hasard&nbsp;; on note D&nbsp;: «&nbsp;la partie s'est jouée sur Désert&nbsp;» et G&nbsp;: «&nbsp;Milo l'a gagnée&nbsp;». a. Construis l'arbre pondéré. b. Calcule \(P(G)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>traduis d'abord&nbsp;: \(P(D) = 0{,}6\), \(P(\overline{D}) = 0{,}4\)&nbsp;; et les taux de victoire sont des conditionnelles&nbsp;: \(P_D(G) = 0{,}55\), \(P_{\overline{D}}(G) = 0{,}7\).</p>
+          <p><span class="etape-label">b. — </span>les deux chemins vers G&nbsp;: \(P(D \cap G) = 0{,}6 \times 0{,}55 = 0{,}33\) et \(P(\overline{D} \cap G) = 0{,}4 \times 0{,}7 = 0{,}28\). Probabilités totales&nbsp;: \(P(G) = 0{,}33 + 0{,}28 = 0{,}61\).</p>
+          <p class="conclusion">Conclusion&nbsp;: Milo gagne 61&nbsp;% de ses parties — une moyenne des deux taux (55&nbsp;% et 70&nbsp;%), pondérée par le temps passé sur chaque carte.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· probabilités totales</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un club d'escalade compte 45&nbsp;% de mineurs et 55&nbsp;% d'adultes. 80&nbsp;% des mineurs et 30&nbsp;% des adultes viennent au créneau du samedi. On choisit un membre au hasard&nbsp;: quelle est la probabilité qu'il vienne le samedi&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>note M&nbsp;: «&nbsp;mineur&nbsp;» et S&nbsp;: «&nbsp;vient le samedi&nbsp;». Données&nbsp;: \(P(M) = 0{,}45\), \(P_M(S) = 0{,}8\), \(P_{\overline{M}}(S) = 0{,}3\).</p>
+          <p><span class="etape-label">Étape 2 — </span>probabilités totales&nbsp;: \(P(S) = 0{,}45 \times 0{,}8 + 0{,}55 \times 0{,}3 = 0{,}36 + 0{,}165 = 0{,}525\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(P(S) = 0{,}525\), un peu plus d'un membre sur deux. Remarque que le résultat est <em>entre</em> 0,3 et 0,8&nbsp;: une probabilité totale est toujours entre les deux conditionnelles qu'elle recolle.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· sachant renversé</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On reprend l'exercice 06. Milo vient de gagner une partie. Quelle est la probabilité qu'elle se soit jouée sur la carte Forêt&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>on demande \(P_G(\overline{D})\)&nbsp;: le «&nbsp;sachant&nbsp;» est renversé par rapport à l'arbre. Définition&nbsp;: \(P_G(\overline{D}) = \dfrac{P(\overline{D} \cap G)}{P(G)}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>tout est déjà calculé dans l'exercice 06&nbsp;: \(P(\overline{D} \cap G) = 0{,}28\) et \(P(G) = 0{,}61\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(P_G(\overline{D}) = \dfrac{0{,}28}{0{,}61} = \dfrac{28}{61} \approx 0{,}46\).</p>
+          <p class="conclusion">Conclusion&nbsp;: presque une victoire sur deux vient de Forêt, alors que Milo n'y joue que 40&nbsp;% du temps — normal, il y gagne plus souvent. Le renversement du «&nbsp;sachant&nbsp;» raconte toujours ce genre d'histoire.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· dépistage</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une maladie touche 2&nbsp;% d'une population. Un test de dépistage est positif pour 90&nbsp;% des personnes malades, mais aussi pour 10&nbsp;% des personnes saines. Une personne est choisie au hasard et testée&nbsp;; on note M&nbsp;: «&nbsp;elle est malade&nbsp;» et T&nbsp;: «&nbsp;son test est positif&nbsp;». a. Construis l'arbre pondéré. b. Calcule \(P(T)\). c. Son test est positif&nbsp;: calcule la probabilité qu'elle soit réellement malade. d. Commente.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(P(M) = 0{,}02\)&nbsp;; \(P_M(T) = 0{,}9\) et \(P_{\overline{M}}(T) = 0{,}1\) (les deuxièmes branches sont des conditionnelles).</p>
+          <p><span class="etape-label">b. — </span>probabilités totales&nbsp;: \(P(T) = 0{,}02 \times 0{,}9 + 0{,}98 \times 0{,}1 = 0{,}018 + 0{,}098 = 0{,}116\).</p>
+          <p><span class="etape-label">c. — </span>sachant renversé&nbsp;: \(P_T(M) = \dfrac{P(M \cap T)}{P(T)} = \dfrac{0{,}018}{0{,}116} = \dfrac{9}{58} \approx 0{,}155\).</p>
+          <p><span class="etape-label">d. — </span>le test se trompe rarement, et pourtant moins d'un positif sur six est malade&nbsp;: les 98&nbsp;% de personnes saines, même trompées à 10&nbsp;%, produisent bien plus de positifs que les 2&nbsp;% de malades. C'est le graphique aux 1&thinsp;000 points du cours.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(P_T(M) \approx 0{,}155\) — à ne jamais confondre avec \(P_M(T) = 0{,}9\), la fiabilité du test.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· indépendance</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">a. On donne \(P(A) = 0{,}5\), \(P(B) = 0{,}4\) et \(P(A \cap B) = 0{,}2\). A et B sont-ils indépendants&nbsp;? b. On donne \(P(C) = 0{,}6\), \(P(D) = 0{,}3\) et \(P(C \cap D) = 0{,}12\). C et D sont-ils indépendants&nbsp;? Calcule \(P_C(D)\) pour interpréter.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(P(A) \times P(B) = 0{,}5 \times 0{,}4 = 0{,}2 = P(A \cap B)\)&nbsp;: indépendants.</p>
+          <p><span class="etape-label">b. — </span>\(P(C) \times P(D) = 0{,}6 \times 0{,}3 = 0{,}18 \neq 0{,}12\)&nbsp;: dépendants. Et \(P_C(D) = \dfrac{0{,}12}{0{,}6} = 0{,}2 &lt; 0{,}3 = P(D)\)&nbsp;: savoir que C s'est produit fait <em>baisser</em> les chances de D.</p>
+          <p class="conclusion">Conclusion&nbsp;: a. oui&nbsp;; b. non. Dans les deux cas, la réponse vient d'une seule comparaison&nbsp;: \(P(\cap)\) contre le produit.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· indépendance · valeur à trouver</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un groupe de 60 élèves, 20 font du basket et 15 jouent aux échecs. On note \(x\) le nombre d'élèves qui pratiquent les deux. On tire un élève au hasard. Pour quelle valeur de \(x\) les événements «&nbsp;basket&nbsp;» et «&nbsp;échecs&nbsp;» sont-ils indépendants&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>traduis en probabilités&nbsp;: \(P(B) = \dfrac{20}{60} = \dfrac{1}{3}\), \(P(E) = \dfrac{15}{60} = \dfrac{1}{4}\), \(P(B \cap E) = \dfrac{x}{60}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>indépendance&nbsp;: \(\dfrac{x}{60} = \dfrac{1}{3} \times \dfrac{1}{4} = \dfrac{1}{12}\), donc \(x = \dfrac{60}{12} = 5\).</p>
+          <p><span class="etape-label">Étape 3 — </span>contrôle par le sens&nbsp;: avec \(x = 5\), parmi les 20 basketteurs, \(5/20 = 0{,}25\) jouent aux échecs — exactement comme dans le groupe entier (\(15/60 = 0{,}25\)). L'information «&nbsp;basket&nbsp;» n'apprend rien sur les échecs.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(x = 5\). L'indépendance, c'est la répartition «&nbsp;au prorata&nbsp;» — le réglage exact du graphique de la section 5.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· indépendants vs incompatibles</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">A et B sont deux événements incompatibles, avec \(P(A) = 0{,}3\) et \(P(B) = 0{,}2\). a. Que vaut \(P(A \cap B)\)&nbsp;? b. A et B sont-ils indépendants&nbsp;? c. Que vaut \(P_A(B)\)&nbsp;? Interprète.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>incompatibles = jamais ensemble&nbsp;: \(A \cap B = \varnothing\), donc \(P(A \cap B) = 0\).</p>
+          <p><span class="etape-label">b. — </span>\(P(A) \times P(B) = 0{,}06 \neq 0\)&nbsp;: non, pas indépendants.</p>
+          <p><span class="etape-label">c. — </span>\(P_A(B) = \dfrac{0}{0{,}3} = 0\), alors que \(P(B) = 0{,}2\). Sachant A, l'événement B est passé de «&nbsp;possible&nbsp;» à «&nbsp;impossible&nbsp;»&nbsp;: l'information A change tout ce qu'on sait de B.</p>
+          <p class="conclusion">Conclusion&nbsp;: des événements incompatibles de probabilités non nulles ne sont <em>jamais</em> indépendants. Incompatible = information maximale, indépendant = information nulle.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· indépendance · preuve</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On tire une carte au hasard dans un jeu de 52 cartes. a. Les événements A&nbsp;: «&nbsp;c'est un as&nbsp;» et B&nbsp;: «&nbsp;c'est un pique&nbsp;» sont-ils indépendants&nbsp;? b. Et les événements A et C&nbsp;: «&nbsp;c'est une figure (valet, dame ou roi)&nbsp;»&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(P(A) = \dfrac{4}{52} = \dfrac{1}{13}\)&nbsp;; \(P(B) = \dfrac{13}{52} = \dfrac{1}{4}\)&nbsp;; \(P(A \cap B) = P(\text{as de pique}) = \dfrac{1}{52}\). Or \(\dfrac{1}{13} \times \dfrac{1}{4} = \dfrac{1}{52}\)&nbsp;: indépendants. Savoir la couleur de la carte n'apprend rien sur sa valeur.</p>
+          <p><span class="etape-label">b. — </span>une carte ne peut pas être à la fois un as et une figure&nbsp;: \(P(A \cap C) = 0\). Mais \(P(A) \times P(C) = \dfrac{1}{13} \times \dfrac{12}{52} = \dfrac{1}{13} \times \dfrac{3}{13} \neq 0\)&nbsp;: pas indépendants — incompatibles, donc dépendants au maximum.</p>
+          <p class="conclusion">Conclusion&nbsp;: a. indépendants&nbsp;; b. incompatibles et donc dépendants. Les deux notions cohabitent dans le même jeu de cartes sans jamais se confondre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur un site de vente en ligne, 70&nbsp;% des visites se font sur téléphone, le reste sur ordinateur. 4&nbsp;% des visites sur téléphone aboutissent à un achat, contre 12&nbsp;% des visites sur ordinateur. On choisit une visite au hasard&nbsp;; on note T&nbsp;: «&nbsp;visite sur téléphone&nbsp;» et A&nbsp;: «&nbsp;la visite aboutit à un achat&nbsp;». a. Calcule \(P(A)\). b. Une visite a abouti à un achat&nbsp;: probabilité qu'elle vienne d'un téléphone&nbsp;? c. Les événements T et A sont-ils indépendants&nbsp;? d. Qu'est-ce que ces résultats racontent au responsable du site&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>probabilités totales&nbsp;: \(P(A) = 0{,}7 \times 0{,}04 + 0{,}3 \times 0{,}12 = 0{,}028 + 0{,}036 = 0{,}064\)&nbsp;: 6,4&nbsp;% des visites aboutissent à un achat.</p>
+          <p><span class="etape-label">b. — </span>sachant renversé&nbsp;: \(P_A(T) = \dfrac{P(T \cap A)}{P(A)} = \dfrac{0{,}028}{0{,}064} = 0{,}4375\).</p>
+          <p><span class="etape-label">c. — </span>\(P(T \cap A) = 0{,}028\), alors que \(P(T) \times P(A) = 0{,}7 \times 0{,}064 = 0{,}0448\). Différents&nbsp;: T et A sont dépendants — le support de visite influence l'achat.</p>
+          <p><span class="etape-label">d. — </span>le téléphone fournit 70&nbsp;% des visites mais moins de 44&nbsp;% des achats&nbsp;: les visiteurs mobiles achètent nettement moins. Deux lectures possibles&nbsp;: le site mobile est peut-être moins pratique — ou on n'y fait que du repérage.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(P(A) = 0{,}064\)&nbsp;; \(P_A(T) = 0{,}4375\)&nbsp;; T et A dépendants. C'est exactement le genre de raisonnement que cache l'expression «&nbsp;analyse de données&nbsp;».</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Une usine fabrique des enceintes connectées sur deux lignes de montage. La ligne 1 produit 60&nbsp;% des enceintes, la ligne 2 le reste. Des contrôles montrent que 2&nbsp;% des enceintes de la ligne 1 et 5&nbsp;% de celles de la ligne 2 présentent un défaut. On prélève une enceinte au hasard dans la production&nbsp;; on note \(L_1\)&nbsp;: «&nbsp;elle vient de la ligne 1&nbsp;», \(L_2\)&nbsp;: «&nbsp;elle vient de la ligne 2&nbsp;» et D&nbsp;: «&nbsp;elle présente un défaut&nbsp;».</p>
+          <div class="bac-partie">PARTIE A</div>
+          <ol>
+            <li>Construis un arbre pondéré décrivant la situation.</li>
+            <li>Montre que \(P(D) = 0{,}032\).</li>
+            <li>L'enceinte prélevée présente un défaut. Quelle est la probabilité qu'elle vienne de la ligne 2&nbsp;? Commente.</li>
+          </ol>
+          <div class="bac-partie">PARTIE B</div>
+          <ol>
+            <li>Les événements \(L_1\) et D sont-ils indépendants&nbsp;? Justifie.</li>
+            <li>On règle la ligne 2, et son taux de défaut devient \(x\). Exprime \(P(D)\) en fonction de \(x\), puis détermine \(x\) pour que \(L_1\) et D soient indépendants. Interprète la valeur trouvée.</li>
+            <li>Après ce réglage, chaque enceinte a une probabilité 0,02 de présenter un défaut. On en prélève deux, dans des lots séparés, et on admet que les deux prélèvements sont indépendants. Quelle est la probabilité qu'au moins une des deux présente un défaut&nbsp;?</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>premier niveau&nbsp;: \(P(L_1) = 0{,}6\), \(P(L_2) = 0{,}4\). Deuxième niveau (conditionnelles)&nbsp;: \(P_{L_1}(D) = 0{,}02\), \(P_{L_2}(D) = 0{,}05\) — et les branches \(\overline{D}\) complètent chaque nœud à 1.</p>
+            <p><span class="etape-label">A.2 — </span>probabilités totales&nbsp;: \(P(D) = 0{,}6 \times 0{,}02 + 0{,}4 \times 0{,}05 = 0{,}012 + 0{,}02 = 0{,}032\).</p>
+            <p><span class="etape-label">A.3 — </span>\(P_D(L_2) = \dfrac{P(L_2 \cap D)}{P(D)} = \dfrac{0{,}02}{0{,}032} = 0{,}625\)&nbsp;: la ligne 2 ne produit que 40&nbsp;% des enceintes, mais fournit 62,5&nbsp;% des défauts. C'est elle qu'il faut régler en priorité.</p>
+            <p><span class="etape-label">B.1 — </span>\(P(L_1 \cap D) = 0{,}012\), alors que \(P(L_1) \times P(D) = 0{,}6 \times 0{,}032 = 0{,}0192\). Différents&nbsp;: pas indépendants — savoir la ligne renseigne sur le défaut.</p>
+            <p><span class="etape-label">B.2 — </span>\(P(D) = 0{,}6 \times 0{,}02 + 0{,}4x = 0{,}012 + 0{,}4x\). Indépendance de \(L_1\) et D&nbsp;: \(P(L_1 \cap D) = P(L_1)\,P(D)\), soit \(0{,}012 = 0{,}6\,(0{,}012 + 0{,}4x)\), d'où \(0{,}012 = 0{,}0072 + 0{,}24x\) et \(x = \dfrac{0{,}0048}{0{,}24} = 0{,}02\). Logique&nbsp;: les deux lignes ont alors le <em>même</em> taux de défaut — savoir la ligne n'apprend plus rien.</p>
+            <p><span class="etape-label">B.3 — </span>passe par le contraire&nbsp;: «&nbsp;au moins un défaut&nbsp;» est le contraire de «&nbsp;aucun défaut&nbsp;». Par indépendance, \(P(\text{aucun}) = 0{,}98 \times 0{,}98 = 0{,}9604\), donc \(P(\text{au moins un}) = 1 - 0{,}9604 = 0{,}0396\).</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">Le produit scalaire <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
