@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('nabla-theme'); } catch (e) {}
+  if (t !== 'light' && t !== 'dark') {
+    try { t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; } catch (e) { t = 'dark'; }
+  }
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<title>Mentions légales — Nabla</title>
+<meta name="description" content="Mentions légales du site Nabla.">
+<link rel="canonical" href="https://NABLA_DOMAIN/mentions-legales/">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<script type="module" src="../assets/js/theme.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="marque" href="../">
+    <span class="nabla-symbole" aria-hidden="true">∇</span>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../#chapitres">Chapitres</a>
+    <a href="../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀ clair</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-texte">
+    <div class="kicker">MENTIONS LÉGALES</div>
+    <h1>Mentions légales</h1>
+    <!-- PLACEHOLDER — à compléter par Victor : identité de l'éditeur,
+         hébergeur (GitHub Pages), contact. -->
+    <p class="hero-accroche">Éditeur du site&nbsp;: [à compléter — nom, statut, contact].</p>
+    <p class="hero-accroche">Hébergement&nbsp;: GitHub Pages (GitHub, Inc.).</p>
+    <p class="hero-accroche">Mesure d'audience&nbsp;: ce site utilise Plausible Analytics, un outil de mesure d'audience respectueux de la vie privée — sans cookies, sans suivi individuel, sans collecte de données personnelles. Aucun compte n'est nécessaire pour utiliser le site et aucune donnée personnelle n'est enregistrée.</p>
+    <div class="hero-cta">
+      <a href="../">Retour à l'accueil <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span><span class="nabla-symbole" aria-hidden="true">∇</span> Nabla — fiches de révision interactives</span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
