@@ -104,6 +104,7 @@ WCAG AA contrast in both themes. Visible `:focus-visible` outlines everywhere; s
 
 - Verify locally with `python3 -m http.server`; test both themes, 375 px and desktop, keyboard-only, and touch emulation. If a browser tool (e.g. Playwright) is available, screenshot both themes at both widths and compare against the designs before declaring done.
 - Small conventional commits (`feat:`, `fix:`, `content:`); never commit generated junk.
+- **Git: commit and push directly to `main`, without asking.** No feature/secondary branches — GitHub Pages serves `main`, and this is a one-person project.
 - End every session with a short summary: what changed, decisions taken, and an explicit list needing Victor's review (chapter README inferences, copy changes, mentions légales, domain/Plausible config, anything pedagogical).
 
 ## Definition of done — chapter page
