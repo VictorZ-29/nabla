@@ -128,12 +128,15 @@ Module `assets/js/widgets/arithmetique.js`, instance
 
 Module `assets/js/widgets/somme.js`, instance `data-n-init="8"`.
 
-- **Base staircase**: columns of 1…n cells (chip fill), column numbers
-  underneath. **Copy**: the complement of the n × (n+1) rectangle
-  (accTint2 fill), toggled by « ▸ pose la copie retournée » /
-  « ↺ enlève la copie » (aria-pressed), fade+slide reveal (instant under
-  reduced motion). Dimension labels « n = 8 lignes » / « n + 1 = 9
-  colonnes » only while the copy is posed.
+- **Base staircase**: columns of 1…n cells (chip fill) in columns 1…n of
+  the (n+1)-column frame — the first column stays free — with column
+  numbers underneath. **Second staircase**: the base rotated exactly 180°
+  (accTint2 fill), full column at the LEFT over the smallest step, so the
+  two are genuinely tête-bêche (column c holds c base cells + (n − c)
+  copy cells). Toggled by « ▸ ajoute l'escalier tête-bêche » /
+  « ↺ retire l'escalier tête-bêche » (aria-pressed), fade+slide reveal
+  (instant under reduced motion). Dimension labels « n = 8 lignes » /
+  « n + 1 = 9 colonnes » only while the second staircase is posed.
 - **Readout** (aria-live): before — « 1 + 2 + … + 8 = ? — compter les
   cases une à une, non merci. Essaie le bouton. »; after — « deux
   escaliers = un rectangle de 8 × 9 = 72 cases, donc … = 36 ». The sum
@@ -254,5 +257,14 @@ author. Specific interpretations and decisions:
     comfortable headroom for one more interactive.
 16. **« mis à jour juillet 2026 »** hand-maintained, as on dérivation.
 17. **Développé sur la branche `claude/fiche-suites-numeriques-qclhus`**
-    (consigne de session), pas directement sur `main` — merge quand tu
-    valides.
+    (consigne de session), puis mergé sur `main` à ta demande.
+
+Flag 18 comes from Victor's review (July 2026):
+
+18. **Gauss widget geometry fixed per Victor's remark**: the first version
+    drew the « copy » as the complement with its full column on the
+    RIGHT, beside the base's tallest column — not a true 180° rotation.
+    Now the base sits in columns 1…n and the second staircase's full
+    column is at the left: genuinely tête-bêche. Button wording changed
+    from « pose/enlève la copie retournée » to « ajoute/retire l'escalier
+    tête-bêche » (same request).
