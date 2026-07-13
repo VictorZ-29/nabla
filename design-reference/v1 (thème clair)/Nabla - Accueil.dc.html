@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+html, body { margin: 0; padding: 0; background: #FBFAF7; }
+body { color: #1D1B16; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+a { color: var(--accent, #2743C6); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: #1D1B16; }
+:focus-visible { outline: 2px solid var(--accent, #2743C6); outline-offset: 3px; border-radius: 2px; }
+@keyframes nablaDraw { to { stroke-dashoffset: 0; } }
+@keyframes nablaFade { to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</helmet>
+
+<div style="--accent: {{ accent }}; background: #FBFAF7; color: #1D1B16; font-family: 'Spectral', Georgia, serif; min-height: 100vh;">
+
+  <header data-screen-label="En-tête" style="max-width: 1100px; margin: 0 auto; padding: 22px clamp(20px, 5vw, 48px); display: flex; align-items: baseline; justify-content: space-between; gap: 24px;">
+    <a href="#" style="text-decoration: none; color: #1D1B16; display: inline-flex; align-items: baseline; gap: 8px;">
+      <span aria-hidden="true" style="font-family: 'STIX Two Text', serif; font-size: 22px; color: var(--accent, #2743C6);">∇</span>
+      <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.01em;">Nabla</span>
+    </a>
+    <nav style="display: flex; gap: 28px; font-family: 'IBM Plex Mono', monospace; font-size: 13px;">
+      <a href="#chapitres" style="text-decoration: none; color: #1D1B16;" style-hover="color: var(--accent, #2743C6);">Chapitres</a>
+      <a href="#apropos" style="text-decoration: none; color: #1D1B16;" style-hover="color: var(--accent, #2743C6);">À propos</a>
+    </nav>
+  </header>
+
+  <section data-screen-label="Héro" style="max-width: 1100px; margin: 0 auto; padding: clamp(36px, 6vw, 76px) clamp(20px, 5vw, 48px) clamp(44px, 6vw, 72px); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(32px, 5vw, 64px);">
+    <div style="flex: 1.15; min-width: 300px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: #8A8677;">PREMIÈRE &amp; TERMINALE — SPÉ MATHS · PHYSIQUE-CHIMIE</div>
+      <h1 style="margin: 16px 0 0; font-size: clamp(34px, 5.5vw, 54px); line-height: 1.07; font-weight: 600; letter-spacing: -0.015em; text-wrap: balance;">Les maths de spé, expliquées pour de vrai.</h1>
+      <p style="margin: 20px 0 0; font-size: clamp(16px, 2vw, 18.5px); line-height: 1.6; color: #57534A; max-width: 46ch;">Des fiches interactives où tu manipules les courbes toi-même, et des exercices corrigés pas à pas. Gratuit, sans compte, sans pub.</p>
+      <div style="margin-top: 28px;">
+        <a href="Nabla — La dérivation.dc.html" style="font-size: 17px; font-weight: 500;">Commencer par la dérivation <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div style="flex: 1; min-width: 280px;">
+      <svg viewBox="0 0 720 480" style="width: 100%; height: auto; display: block;" role="img" aria-label="Courbe de f(x) = x³ − 3x et sa tangente au point A">
+        <path d="M60 480L60 0M210 480L210 0M510 480L510 0M660 480L660 0M0 462.2L720 462.2M0 417.8L720 417.8M0 373.3L720 373.3M0 328.9L720 328.9M0 284.4L720 284.4M0 195.6L720 195.6M0 151.1L720 151.1M0 106.7L720 106.7M0 62.2L720 62.2M0 17.8L720 17.8" fill="none" stroke="#EDEAE0" stroke-width="1"></path>
+        <path d="M0 240L720 240M360 480L360 0" fill="none" stroke="#CFCBBE" stroke-width="1"></path>
+        <path d="M585 240L585 290" fill="none" stroke="#B9B4A3" stroke-width="1" stroke-dasharray="3 5"></path>
+        <text x="92" y="128" style="font-family: 'STIX Two Text', serif; font-style: italic; font-size: 21px; fill: #1D1B16;">f(x) = x³ − 3x</text>
+        <path d="M15 474.1L21.3 450.7L27.5 428.4L33.8 407.1L40.1 386.8L46.4 367.5L52.6 349.2L58.9 331.8L65.2 315.4L71.5 299.9L77.7 285.3L84 271.5L90.3 258.7L96.5 246.6L102.8 235.4L109.1 225L115.4 215.3L121.6 206.5L127.9 198.3L134.2 190.9L140.5 184.2L146.7 178.2L153 172.8L159.3 168.1L165.5 164L171.8 160.5L178.1 157.6L184.4 155.2L190.6 153.4L196.9 152.2L203.2 151.4L209.5 151.1L215.7 151.3L222 151.9L228.3 153L234.5 154.5L240.8 156.4L247.1 158.6L253.4 161.2L259.6 164.1L265.9 167.3L272.2 170.9L278.5 174.7L284.7 178.7L291 183L297.3 187.5L303.5 192.2L309.8 197.1L316.1 202.1L322.4 207.2L328.6 212.5L334.9 217.9L341.2 223.4L347.5 228.9L353.7 234.4L360 240L366.3 245.6L372.5 251.1L378.8 256.6L385.1 262.1L391.4 267.5L397.6 272.8L403.9 277.9L410.2 282.9L416.5 287.8L422.7 292.5L429 297L435.3 301.3L441.5 305.3L447.8 309.1L454.1 312.7L460.4 315.9L466.6 318.8L472.9 321.4L479.2 323.6L485.5 325.5L491.7 327L498 328.1L504.3 328.7L510.5 328.9L516.8 328.6L523.1 327.8L529.4 326.6L535.6 324.8L541.9 322.4L548.2 319.5L554.5 316L560.7 311.9L567 307.2L573.3 301.8L579.5 295.8L585.8 289.1L592.1 281.7L598.4 273.5L604.6 264.7L610.9 255L617.2 244.6L623.5 233.4L629.7 221.3L636 208.5L642.3 194.7L648.5 180.1L654.8 164.6L661.1 148.2L667.4 130.8L673.6 112.5L679.9 93.2L686.2 72.9L692.5 51.6L698.7 29.3L705 5.9" fill="none" stroke="#1D1B16" stroke-width="2.25" stroke-linecap="round" pathLength="1" style="stroke-dasharray: 1; stroke-dashoffset: 1; animation: nablaDraw 1.9s cubic-bezier(0.55, 0.06, 0.28, 0.99) 0.3s forwards;"></path>
+        <path d="M414 480L720 140" fill="none" stroke="var(--accent, #2743C6)" stroke-width="1.8" stroke-linecap="round" pathLength="1" style="stroke-dasharray: 1; stroke-dashoffset: 1; animation: nablaDraw 0.9s ease-out 2s forwards;"></path>
+        <g style="opacity: 0; animation: nablaFade 0.6s ease 2.7s forwards;">
+          <circle cx="585" cy="290" r="12" fill="none" stroke="var(--accent, #2743C6)" stroke-opacity="0.35" stroke-width="1.5"></circle>
+          <circle cx="585" cy="290" r="5.5" fill="var(--accent, #2743C6)" stroke="#FBFAF7" stroke-width="2"></circle>
+          <text x="602" y="272" style="font-family: 'STIX Two Text', serif; font-style: italic; font-size: 19px; fill: #1D1B16;">A</text>
+          <text x="470" y="416" text-anchor="end" style="font-family: 'STIX Two Text', serif; font-style: italic; font-size: 17px; fill: var(--accent, #2743C6);">y = f′(a)(x − a) + f(a)</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <section id="chapitres" data-screen-label="Chapitres" style="max-width: 1100px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px) clamp(24px, 4vw, 40px);">
+
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-top: 1px solid #1D1B16; padding-top: 18px; margin-bottom: 20px; flex-wrap: wrap;">
+      <h2 style="margin: 0; font-size: clamp(20px, 3vw, 24px); font-weight: 600;">Première · Spé Maths</h2>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8A8677;">1 chapitre en ligne · 4 en préparation</span>
+    </div>
+
+    <a href="Nabla — La dérivation.dc.html" style="display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px, 4vw, 56px); text-decoration: none; color: #1D1B16; background: #FFFFFF; border: 1px solid #1D1B16; border-radius: 12px; padding: clamp(22px, 4vw, 34px);" style-hover="border-color: var(--accent, #2743C6);">
+      <div style="flex: 1.4; min-width: 260px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--accent, #2743C6);">CHAPITRE 01 — EN LIGNE</div>
+        <div style="font-size: clamp(24px, 4vw, 30px); font-weight: 600; margin-top: 8px;">La dérivation</div>
+        <div style="margin-top: 10px; color: #57534A; font-size: 15.5px; line-height: 1.55;">Nombre dérivé · Tangente · Fonctions dérivées · Variations · 15 exercices corrigés</div>
+        <div style="margin-top: 16px; color: var(--accent, #2743C6); font-weight: 500; font-size: 16px;">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
+      </div>
+      <div style="flex: 1; min-width: 190px; max-width: 270px;">
+        <svg viewBox="0 0 80 56" style="width: 100%; height: auto; display: block; overflow: visible;" aria-hidden="true">
+          <path d="M2.7 45.3L4.2 40L5.7 35.4L7.2 31.2L8.7 27.6L10.2 24.4L11.7 21.8L13.2 19.5L14.7 17.7L16.1 16.3L17.6 15.2L19.1 14.5L20.6 14.1L22.1 14L23.6 14.2L25.1 14.6L26.6 15.3L28.1 16.2L29.6 17.3L31.1 18.5L32.5 19.9L34 21.4L35.5 22.9L37 24.6L38.5 26.3L40 28L41.5 29.7L43 31.4L44.5 33.1L46 34.6L47.5 36.1L48.9 37.5L50.4 38.7L51.9 39.8L53.4 40.7L54.9 41.4L56.4 41.8L57.9 42L59.4 41.9L60.9 41.5L62.4 40.8L63.9 39.7L65.3 38.3L66.8 36.5L68.3 34.2L69.8 31.6L71.3 28.4L72.8 24.8L74.3 20.6L75.8 16L77.3 10.7" fill="none" stroke="#1D1B16" stroke-width="1.4" stroke-linecap="round"></path>
+          <path d="M56.4 51.6L78.2 20.1" fill="none" stroke="var(--accent, #2743C6)" stroke-width="1.2" stroke-linecap="round"></path>
+          <circle cx="67.3" cy="35.9" r="2.4" fill="var(--accent, #2743C6)" stroke="#FFFFFF" stroke-width="1"></circle>
+        </svg>
+      </div>
+    </a>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 14px; margin-top: 14px;">
+      <div style="border: 1px dashed #CFCABA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A39E8E;">BIENTÔT</span>
+        <div style="font-size: 17.5px; font-weight: 500; color: #8A8677; flex: 1;">Les suites numériques</div>
+        <svg viewBox="0 0 80 56" style="width: 68px; height: auto; display: block;" aria-hidden="true">
+          <circle cx="5.7" cy="5.6" r="2.2" fill="#C9C4B4"></circle><circle cx="17.1" cy="19.7" r="2.2" fill="#C9C4B4"></circle><circle cx="28.6" cy="29.9" r="2.2" fill="#C9C4B4"></circle><circle cx="40" cy="37.2" r="2.2" fill="#C9C4B4"></circle><circle cx="51.4" cy="42.5" r="2.2" fill="#C9C4B4"></circle><circle cx="62.9" cy="46.2" r="2.2" fill="#C9C4B4"></circle><circle cx="74.3" cy="49" r="2.2" fill="#C9C4B4"></circle>
+        </svg>
+      </div>
+      <div style="border: 1px dashed #CFCABA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A39E8E;">BIENTÔT</span>
+        <div style="font-size: 17.5px; font-weight: 500; color: #8A8677; flex: 1;">Le produit scalaire</div>
+        <svg viewBox="0 0 80 56" style="width: 68px; height: auto; display: block;" aria-hidden="true">
+          <path d="M8 49L68 32.2M8 49L38 7" fill="none" stroke="#C9C4B4" stroke-width="1.5" stroke-linecap="round"></path>
+          <circle cx="68" cy="32.2" r="2.2" fill="#C9C4B4"></circle><circle cx="38" cy="7" r="2.2" fill="#C9C4B4"></circle>
+        </svg>
+      </div>
+      <div style="border: 1px dashed #CFCABA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A39E8E;">BIENTÔT</span>
+        <div style="font-size: 17.5px; font-weight: 500; color: #8A8677; flex: 1;">Probabilités conditionnelles</div>
+        <svg viewBox="0 0 80 56" style="width: 68px; height: auto; display: block;" aria-hidden="true">
+          <path d="M6.7 28L40 14M6.7 28L40 42M40 14L73.3 7M40 14L73.3 21M40 42L73.3 35M40 42L73.3 49" fill="none" stroke="#C9C4B4" stroke-width="1.5" stroke-linecap="round"></path>
+          <circle cx="6.7" cy="28" r="2" fill="#C9C4B4"></circle><circle cx="40" cy="14" r="2" fill="#C9C4B4"></circle><circle cx="40" cy="42" r="2" fill="#C9C4B4"></circle><circle cx="73.3" cy="7" r="2" fill="#C9C4B4"></circle><circle cx="73.3" cy="21" r="2" fill="#C9C4B4"></circle><circle cx="73.3" cy="35" r="2" fill="#C9C4B4"></circle><circle cx="73.3" cy="49" r="2" fill="#C9C4B4"></circle>
+        </svg>
+      </div>
+      <div style="border: 1px dashed #CFCABA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A39E8E;">BIENTÔT</span>
+        <div style="font-size: 17.5px; font-weight: 500; color: #8A8677; flex: 1;">La fonction exponentielle</div>
+        <svg viewBox="0 0 80 56" style="width: 68px; height: auto; display: block;" aria-hidden="true">
+          <path d="M1.7 55.1L3.2 55L4.7 55L6.2 54.9L7.7 54.8L9.2 54.7L10.7 54.6L12.2 54.4L13.7 54.3L15.2 54.2L16.7 54L18.2 53.8L19.7 53.7L21.2 53.5L22.7 53.3L24.2 53L25.7 52.8L27.2 52.5L28.7 52.2L30.2 51.9L31.7 51.5L33.2 51.2L34.7 50.8L36.2 50.3L37.7 49.8L39.2 49.3L40.7 48.7L42.2 48.1L43.7 47.5L45.2 46.7L46.7 46L48.2 45.1L49.7 44.2L51.2 43.2L52.7 42.1L54.2 41L55.7 39.7L57.2 38.3L58.7 36.8L60.2 35.2L61.7 33.4L63.2 31.5L64.7 29.5L66.2 27.2L67.7 24.8L69.2 22.2L70.7 19.3L72.2 16.2L73.7 12.9L75.2 9.2L76.7 5.3" fill="none" stroke="#C9C4B4" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showPhysique }}" hint-placeholder-val="{{ true }}">
+    <section data-screen-label="Chapitres Physique-Chimie" style="max-width: 1100px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px) clamp(48px, 7vw, 80px);">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-top: 1px solid #1D1B16; padding-top: 18px; margin-bottom: 20px; flex-wrap: wrap;">
+        <h2 style="margin: 0; font-size: clamp(20px, 3vw, 24px); font-weight: 600;">Première · Spé Physique-Chimie</h2>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8A8677;">4 chapitres en préparation</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 14px;">
+        <div style="border: 1px dashed #CFCABA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A39E8E;">BIENTÔT</span>
+          <div style="font-size: 17.5px; font-weight: 500; color: #8A8677; flex: 1;">Transformation chimique et avancement</div>
+          <svg viewBox="0 0 80 56" style="width: 68px; height: auto; display: block;" aria-hidden="true">
+            <path d="M3.6 56L5.1 51.7L6.5 47.8L8 44.2L9.5 40.9L10.9 37.9L12.4 35.1L13.8 32.6L15.3 30.3L16.7 28.1L18.2 26.2L19.6 24.4L21.1 22.8L22.5 21.3L24 19.9L25.5 18.7L26.9 17.5L28.4 16.5L29.8 15.5L31.3 14.7L32.7 13.8L34.2 13.1L35.6 12.4L37.1 11.8L38.5 11.3L40 10.7L41.5 10.3L42.9 9.8L44.4 9.4L45.8 9.1L47.3 8.7L48.7 8.4L50.2 8.1L51.6 7.9L53.1 7.6L54.5 7.4L56 7.2L57.5 7.1L58.9 6.9L60.4 6.7L61.8 6.6L63.3 6.5L64.7 6.4L66.2 6.2L67.6 6.2L69.1 6.1L70.5 6L72 5.9L73.5 5.8L74.9 5.8L76.4 5.7" fill="none" stroke="#C9C4B4" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div style="border: 1px dashed #CFCABA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A39E8E;">BIENTÔT</span>
+          <div style="font-size: 17.5px; font-weight: 500; color: #8A8677; flex: 1;">Mouvement et deuxième loi de Newton</div>
+          <svg viewBox="0 0 80 56" style="width: 68px; height: auto; display: block;" aria-hidden="true">
+            <path d="M4.1 42L5.5 38.9L7 36L8.4 33.2L9.8 30.6L11.3 28.1L12.7 25.7L14.1 23.5L15.6 21.3L17 19.4L18.4 17.6L19.9 15.9L21.3 14.3L22.7 12.9L24.1 11.6L25.6 10.4L27 9.4L28.4 8.6L29.9 7.8L31.3 7.2L32.7 6.7L34.2 6.4L35.6 6.2L37 6.2L38.5 6.2L39.9 6.5L41.3 6.8L42.8 7.3L44.2 7.9L45.6 8.7L47.1 9.6L48.5 10.6L49.9 11.8L51.4 13.1L52.8 14.5L54.2 16.1L55.6 17.8L57.1 19.7L58.5 21.7L59.9 23.8L61.4 26.1L62.8 28.4L64.2 31L65.7 33.7L67.1 36.5L68.5 39.4L70 42.5L71.4 45.7L72.8 49.1L74.3 52.5L75.7 56.2" fill="none" stroke="#C9C4B4" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div style="border: 1px dashed #CFCABA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A39E8E;">BIENTÔT</span>
+          <div style="font-size: 17.5px; font-weight: 500; color: #8A8677; flex: 1;">Aspects énergétiques des phénomènes mécaniques</div>
+          <svg viewBox="0 0 80 56" style="width: 68px; height: auto; display: block;" aria-hidden="true">
+            <path d="M0 51.8L2 51.8L4 51.7L6 51.5L8 51.3L10 51.1L12 50.7L14 50.3L16 49.9L18 49.4L20 48.8L22 48.2L24 47.5L26 46.8L28 46L30 45.1L32 44.2L34 43.2L36 42.2L38 41.1L40 39.9L42 38.7L44 37.4L46 36.1L48 34.7L50 33.2L52 31.7L54 30.1L56 28.5L58 26.8L60 25L62 23.2L64 21.3L66 19.4L68 17.4L70 15.4L72 13.2L74 11.1L76 8.8L78 6.6L80 4.2" fill="none" stroke="#C9C4B4" stroke-width="1.5" stroke-linecap="round"></path>
+            <path d="M0 4.2L2 4.2L4 4.3L6 4.5L8 4.7L10 4.9L12 5.3L14 5.7L16 6.1L18 6.6L20 7.2L22 7.8L24 8.5L26 9.2L28 10L30 10.9L32 11.8L34 12.8L36 13.8L38 14.9L40 16.1L42 17.3L44 18.6L46 19.9L48 21.3L50 22.8L52 24.3L54 25.9L56 27.5L58 29.2L60 31L62 32.8L64 34.7L66 36.6L68 38.6L70 40.6L72 42.8L74 44.9L76 47.2L78 49.4L80 51.8" fill="none" stroke="#C9C4B4" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3 3"></path>
+          </svg>
+        </div>
+        <div style="border: 1px dashed #CFCABA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #A39E8E;">BIENTÔT</span>
+          <div style="font-size: 17.5px; font-weight: 500; color: #8A8677; flex: 1;">Ondes mécaniques</div>
+          <svg viewBox="0 0 80 56" style="width: 68px; height: auto; display: block;" aria-hidden="true">
+            <path d="M0 28L1.3 24.4L2.7 21L4 17.7L5.3 14.6L6.7 11.9L8 9.7L9.3 7.8L10.7 6.5L12 5.8L13.3 5.6L14.7 6L16 7L17.3 8.4L18.7 10.4L20 12.9L21.3 15.7L22.7 18.8L24 22.2L25.3 25.7L26.7 29.3L28 32.9L29.3 36.3L30.7 39.5L32 42.4L33.3 45L34.7 47.1L36 48.7L37.3 49.8L38.7 50.3L40 50.3L41.3 49.7L42.7 48.6L44 46.9L45.3 44.7L46.7 42.1L48 39.2L49.3 36L50.7 32.5L52 29L53.3 25.4L54.7 21.9L56 18.5L57.3 15.4L58.7 12.6L60 10.2L61.3 8.3L62.7 6.8L64 5.9L65.3 5.6L66.7 5.8L68 6.6L69.3 8L70.7 9.8L72 12.2L73.3 14.9L74.7 18L76 21.3L77.3 24.8L78.7 28.3L80 31.9" fill="none" stroke="#C9C4B4" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <section data-screen-label="Comment ça marche" style="border-top: 1px solid #E4E1D7; border-bottom: 1px solid #E4E1D7;">
+    <div style="max-width: 1100px; margin: 0 auto; padding: clamp(28px, 4vw, 40px) clamp(20px, 5vw, 48px); display: flex; flex-wrap: wrap; gap: 18px clamp(28px, 4vw, 56px);">
+      <div style="display: flex; align-items: baseline; gap: 12px; flex: 1; min-width: 230px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--accent, #2743C6);">01</span>
+        <span style="font-size: 16px; line-height: 1.5;"><strong style="font-weight: 600;">Lis la fiche</strong><span style="color: #57534A;"> — l'essentiel du cours, sans remplissage.</span></span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 12px; flex: 1; min-width: 230px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--accent, #2743C6);">02</span>
+        <span style="font-size: 16px; line-height: 1.5;"><strong style="font-weight: 600;">Manipule les graphiques</strong><span style="color: #57534A;"> — déplace un point, la tangente suit.</span></span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 12px; flex: 1; min-width: 230px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--accent, #2743C6);">03</span>
+        <span style="font-size: 16px; line-height: 1.5;"><strong style="font-weight: 600;">Entraîne-toi</strong><span style="color: #57534A;"> — des exercices corrigés étape par étape.</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="apropos" data-screen-label="À propos" style="max-width: 1100px; margin: 0 auto; padding: clamp(48px, 7vw, 76px) clamp(20px, 5vw, 48px);">
+    <div style="max-width: 680px; display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap;">
+      <div style="width: 76px; height: 76px; flex-shrink: 0;">
+        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="portrait-auteur" shape="circle" placeholder="photo" hint-size="76px,76px" style="width: 76px; height: 76px;"></x-import>
+      </div>
+      <div style="flex: 1; min-width: 260px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #8A8677;">QUI EST DERRIÈRE CE SITE ?</div>
+        <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.65;">Nabla est écrit par une seule personne : tuteur indépendant depuis neuf ans, diplômé d'Imperial College London, spécialiste du Bac français et des lycées français à l'étranger. Chaque fiche est construite comme un cours particulier — relue et retravaillée jusqu'à ce que ce soit vraiment clair.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #E4E1D7;">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 24px clamp(20px, 5vw, 48px); display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8A8677;">
+      <span><span aria-hidden="true" style="color: var(--accent, #2743C6);">∇</span> Nabla — fiches de révision interactives</span>
+      <span style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <a href="mailto:bonjour@nabla.example" style="color: #8A8677;" style-hover="color: #1D1B16;">Écris-moi</a>
+        <a href="#" style="color: #8A8677;" style-hover="color: #1D1B16;">Mentions légales</a>
+        <span>Fait à Londres</span>
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#2743C6&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#2743C6&quot;, &quot;#0E6B4E&quot;, &quot;#A8322D&quot;], &quot;section&quot;: &quot;Identité&quot; },
+  &quot;showPhysique&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Contenu&quot; }
+}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      accent: this.props.accent ?? '#2743C6',
+      showPhysique: this.props.showPhysique ?? true
+    };
+  }
+}
+</script>
+</body>
+</html>
