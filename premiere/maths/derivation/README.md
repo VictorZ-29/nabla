@@ -43,10 +43,11 @@ All three widgets and both figures use the same reference function:
 |---|---|---|
 | `s1` | 1. À quelle vitesse, exactement ? | hook prose (+ added time/distance reading of the figure) · static sécante figure · display formula (taux) |
 | `s2` | 2. Resserre les deux points | **widget sécante** · POURQUOI ? (h≠0, limite) · DÉFINITION · display formula (limite) · MÉTHODE (calculer f′(a)) · EXEMPLE RÉSOLU (f′(2) pour x²) · À RETENIR · **quiz s2** (3 q.) |
-| `s3` | 3. La tangente à une courbe | PROPRIÉTÉ (équation) · POURQUOI ? (y = mx + p) · **widget tangente** (+ équation de T en direct) · MÉTHODE · EXEMPLE RÉSOLU (tangente de x² en 1) · **quiz s3** (3 q.) |
-| `s4` | 4. Dérivées usuelles et opérations | table DÉRIVÉES USUELLES · POURQUOI ? ((x²)′ = 2x démontré) · table OPÉRATIONS · MÉTHODE · EXEMPLES RÉSOLUS (somme, produit, quotient, inverse) · **widget construis f′** · **quiz s4** (4 q.) |
+| `s3` | 3. La tangente à une courbe | plain-language tangente gloss · PROPRIÉTÉ (équation) · POURQUOI ? (y = mx + p) · **widget tangente** (+ équation de T en direct) · MÉTHODE · EXEMPLE RÉSOLU (tangente de x² en 1) · **widget lecture** (lire f′(a), 4 manches) · **quiz s3** (3 q.) |
+| `s4` | 4. Dérivées usuelles et opérations | nombre → fonction dérivée gloss · table DÉRIVÉES USUELLES · POURQUOI ? ((x²)′ = 2x démontré) · table OPÉRATIONS · MÉTHODE · EXEMPLES RÉSOLUS (somme, produit, quotient, inverse) · **widget construis f′** · **widget associe** (f ↔ f′) · **quiz s4** (4 q.) |
 | `s5` | 5. Signe de f′ et variations | prose + **widget variations** · POURQUOI ? (zoom courbe ≈ tangente) · PROPRIÉTÉ · étude complète : TABLEAU DE SIGNES puis TABLEAU DE VARIATIONS · MÉTHODE · **quiz s5** (3 q.) |
 | `pieges` | Les pièges classiques | 4 pièges |
+| `essentiel` | L'essentiel en 5 lignes | static recap card `.bloc-essentiel` : définition-limite, équation de tangente, usuelles, opérations, règle du signe |
 | `ex` | Exercices — 15 corrigés | ex. 01–14 with corrigés (course order: taux 01 · définition 02–03 · tangentes 04–06 · usuelles 07 · produit 08 · quotient 09 · inverse 10 · variations 11–13 · problème d'optimisation 14) · **VERS LE BAC** (ex. 15, `#bac`) |
 
 ### Reusable components introduced by this chapter
@@ -172,6 +173,43 @@ Module `assets/js/widgets/variations.js`, instantiated with
 - **Hint**: « glisse-moi » near A, hidden at first interaction.
 - **Reset**: « ↺ réinitialiser » → a = −1,8.
 
+### 5. `lecture` — « Lis f′(a) sur le graphique » (§3)
+
+Module `assets/js/widgets/lecture.js`. Rounds come from a
+`<script type="application/json">` inside the figure:
+`{fn, a, choix (display strings), bonne (1-based)}`. No dragging; the whole
+interaction is buttons, so it is keyboard-accessible for free.
+
+- **View**: fixed square-unit window (viewBox 640×440, x ∈ [−3,2 ; 3,2],
+  y ∈ [−2,2 ; 2,2], 100 px per unit) so slopes are countable on the grid;
+  curves are clipped by the viewBox where they leave the window.
+- **Décor per round**: curve, full-width tangent at A, dashed reading
+  triangle A → (+1 in x) → back up/down to the tangent, labels « +1 » and
+  « ? » ; the « ? » becomes the slope value once answered.
+- **Rounds shipped**: x²/2 at a=1 (pente 1) · x²−1 at a=1 (pente 2) ·
+  1−x²/4 at a=2 (pente −1) · 2−x² at a=1 (pente −2). Distractors include
+  the sign error and the halved/doubled misreads.
+- **Flow**: wrong answer → marked + disabled + relance, retry; right →
+  explanation with the monte/descend reading, « Point suivant ▸ ». After
+  the last round: « x/4 du premier coup » and « ↺ recommencer ».
+- Reuses quiz button/feedback styles; progress chip « POINT i/4 ».
+
+### 6. `associe` — « Associe chaque f à sa dérivée » (§4)
+
+Module `assets/js/widgets/associe.js`. Card set from JSON in the figure:
+`{fn, yf: [yMin,yMax], yfp: [...]}` (x window fixed at [−2,5 ; 2,5]).
+
+- Three function cards (craie) on top, their derivatives (accent) shuffled
+  below (`Math.random`, reshuffle on « ↺ réinitialiser »). All cards are
+  `<button>`s: tap one per row, the pair is checked on the second tap.
+- Match → both cards lock green; the bottom card's label becomes
+  « ✓ f′ de n » so finished pairings stay readable. Mismatch → brief
+  `data-etat="fausse"` flash (700 ms, colour only) + relance.
+- **Deliberate trap**: the top card x²−1 has the same shape as the cubic's
+  derivative below — matching by « same shape » fails and the relance says
+  why (sommets de f ↔ zéros de f′).
+- Set shipped: x²−1 → 2x · x³/3−x → x²−1 · 1−x²/2 → −x.
+
 ## Quiz « Teste-toi » (assets/js/quiz.js — reusable)
 
 Four quizzes (ids `s2/s3/s4/s5`), 13 questions total, at the end of each
@@ -195,7 +233,7 @@ TESTE-TOI, score `x/n` in the header once ≥ 1 correct), questions
 
 | Event | Props | Fired |
 |---|---|---|
-| `widget_interact` | `widget: secante \| tangente \| derivee \| variations \| quiz-s2 \| quiz-s3 \| quiz-s4 \| quiz-s5`, `chapitre: derivation` | first interaction, then ≤ 1 / 30 s per widget/quiz |
+| `widget_interact` | `widget: secante \| tangente \| derivee \| variations \| lecture \| associe \| quiz-s2 \| quiz-s3 \| quiz-s4 \| quiz-s5`, `chapitre: derivation` | first interaction, then ≤ 1 / 30 s per widget/quiz |
 | `corrige_open` | `exercice: 01 … 14`, `chapitre: derivation` | when a corrigé is opened |
 | `bac_open` | — | when the Vers le Bac corrigé is opened |
 | `theme_toggle` | `to: light \| dark` | header button |
@@ -326,3 +364,17 @@ Flags 31–32 come from Victor's copy review (July 2026):
     (f′(a) is a number, computed everywhere it becomes the function f′);
     §5 extremum gets an inline gloss « un sommet ou un creux de la
     courbe » inside an existing sentence.
+33. **Em-dash reduction pass** (Victor's request): 31 tic-like « — » in my
+    copy rewritten as full stops, commas, colons or semicolons (128 → 97
+    occurrences page-wide). Kept: every dash in the original design copy,
+    the structural labels (« Étape 1 — », « EXACT — », « MÉTHODE — … »),
+    the title pattern in metas, and a few incises that genuinely earn it.
+34. **Two new interactives with no design mock** — lecture (§3) and associe
+    (§4); behaviour and rounds/card-sets are my design, documented above.
+    The associe shape-lookalike trap is deliberate; say the word if you
+    find it too hard for a first pass.
+35. **« L'essentiel en 5 lignes »** added as its own sommaire section
+    between pièges and exercices; formulas separated by « ; » (a « · »
+    read as a multiplication dot next to KaTeX).
+36. **JS budget nearly full**: 49,8 KB of the 50 KB first-party ceiling.
+    The next interactive on this page must trim or lazy-load something.
