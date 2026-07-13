@@ -62,7 +62,7 @@ New chapters follow the same pattern: `premiere/physique-chimie/<chapitre>/`, `t
 
 ## Theming
 
-Theme set via `data-theme="dark|light"` on `<html>`; dark is the brand default. A tiny inline `<head>` snippet resolves the theme before first paint (localStorage `nabla-theme` → `prefers-color-scheme` → dark) to avoid flash; the toggle button logic loads deferred and persists the choice. All colours flow from `tokens.css` — zero hardcoded colours anywhere else, SVG included (CSS variables / `currentColor`). SVG stroke widths differ per theme (thicker on dark, per the designs) — expose them as custom properties too.
+Theme set via `data-theme="dark|light"` on `<html>`; dark is the default for everyone — `prefers-color-scheme` is deliberately ignored. A tiny inline `<head>` snippet resolves the theme before first paint (localStorage `nabla-theme` = `light` → light, otherwise dark) to avoid flash; the toggle button logic loads deferred and persists the choice. All colours flow from `tokens.css` — zero hardcoded colours anywhere else, SVG included (CSS variables / `currentColor`). SVG stroke widths differ per theme (thicker on dark, per the designs) — expose them as custom properties too.
 
 ## Widgets — global engineering standards
 

@@ -4,13 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
 (function () {
-  var t = null;
-  try { t = localStorage.getItem('nabla-theme'); } catch (e) {}
-  if (t !== 'light' && t !== 'dark') {
-    try { t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; } catch (e) { t = 'dark'; }
-  }
-  document.documentElement.setAttribute('data-theme', t);
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
 })();
 </script>
 <title>Mentions légales — Nabla</title>
