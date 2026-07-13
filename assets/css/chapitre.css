@@ -739,6 +739,7 @@
 
 /* Chips de valeurs */
 .chips { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.chips[hidden] { display: none; } /* display:flex l'emporterait sur l'attribut hidden (widget univers) */
 .chip {
   font-family: var(--font-mono);
   font-size: 13px;
@@ -1029,6 +1030,117 @@
   text-decoration: none;
 }
 .pied-chapitre .suivant-titre a:hover { color: var(--accent); }
+
+/* --- Probabilités : population de points (figure §1, widgets univers & indépendance) ---------------------
+   L'univers est un nuage de 40 points-élèves : l'appartenance à B (musique)
+   se lit au remplissage accent, l'appartenance à A (théâtre) à la position
+   dans le cadre pointillé. Restreindre l'univers = effacer les autres. */
+
+.pt-pop { fill: var(--chip); stroke: var(--guide); stroke-width: 1; }
+.pt-pop--b { fill: var(--accent); stroke: none; }
+.pt-efface { opacity: 0.16; }
+@media (prefers-reduced-motion: no-preference) {
+  .pt-pop, .pt-vp, .pt-fn, .pt-fp, .pt-vn { transition: opacity 0.3s ease; }
+}
+.cadre-univers { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 7 5; }
+.pop-dim { font-family: var(--font-mono); font-size: 12.5px; fill: var(--muted); }
+.pop-dim--accent { fill: var(--accent); }
+
+/* Question du widget univers (au-dessus de la ligne de lecture) */
+.widget-question { margin: 0; font-size: 16px; line-height: 1.6; }
+
+/* --- Probabilités : arbre pondéré -------------------------------------------------------------------------- */
+
+.arbre-branche { stroke: var(--guide); stroke-width: var(--sw-tan-mini); fill: none; stroke-linecap: round; }
+.arbre-branche.chemin-actif { stroke: var(--accent); stroke-width: var(--sw-tan); }
+.pt-noeud { fill: var(--guide); }
+.arbre-evt { font-family: var(--font-serif); font-size: 16px; fill: var(--text); }
+.arbre-proba { font-family: var(--font-mono); font-size: 13px; fill: var(--faint); }
+.arbre-proba.chemin-actif { fill: var(--accent); font-weight: 500; }
+.arbre-feuille-val { font-family: var(--font-mono); font-size: 13.5px; fill: var(--faint); }
+.arbre-feuille-val.chemin-actif { fill: var(--accent); font-weight: 500; }
+
+/* Barre de proportion sous l'arbre : aire = probabilité */
+.seg-cadre { fill: none; stroke: var(--hair); }
+.seg-plein { fill: var(--accent); }
+.seg-vide { fill: var(--chip); }
+
+/* Feuilles cliquables (chemins de l'arbre) */
+.arbre-feuilles { display: flex; flex-wrap: wrap; gap: 8px; }
+.feuille-btn {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--muted);
+  background: var(--chip);
+  border: 1px solid transparent;
+  border-radius: var(--radius-chip);
+  padding: 9px 12px;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .feuille-btn:hover { border-color: var(--accent); }
+}
+.feuille-btn[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accTint2);
+  color: var(--accent);
+}
+
+/* Curseur avec libellé long (P(pluie), P(retard) sachant pluie…) */
+.curseur-ligne--libelle { flex-wrap: wrap; gap: 8px 14px; }
+.curseur-ligne--libelle .curseur-legende {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--muted);
+  flex: 0 0 218px;
+}
+.curseur-ligne--libelle input[type="range"] { min-width: 160px; }
+@media (max-width: 560px) {
+  .curseur-ligne--libelle .curseur-legende { flex-basis: 100%; }
+}
+
+/* --- Probabilités : dépistage (1 000 points, quatre sorts) ------------------------------------------------- */
+
+.pt-vp { fill: var(--bad); }
+.pt-fn { fill: none; stroke: var(--bad); stroke-width: 1.5; }
+.pt-fp { fill: var(--accent); }
+.pt-vn { fill: var(--tick); }
+
+/* Puces de légende (HTML) accordées aux points du SVG */
+.puces-legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+.puces-legende span { white-space: nowrap; }
+.puce {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: -1px;
+}
+.puce--vp { background: var(--bad); }
+.puce--fn { background: transparent; box-shadow: inset 0 0 0 1.5px var(--bad); }
+.puce--fp { background: var(--accent); }
+.puce--vn { background: var(--tick); }
+.puce--b { background: var(--accent); }
+
+/* --- Probabilités : jauges de comparaison (widget indépendance) -------------------------------------------- */
+
+.jauge-fond { fill: var(--chip); stroke: var(--hair); }
+.jauge-plein { fill: var(--accent); }
+.jauge-repere { stroke: var(--text); stroke-width: 1.5; stroke-dasharray: 3 4; }
+
+/* --- Tableau croisé d'effectifs : rangée et colonne des totaux --------------------------------------------- */
+
+.tableau td.total, .tableau th.total { color: var(--faint); }
+.tableau .sep-total { border-left: 1px solid var(--hair); }
+.tableau tr.ligne-total td { border-top: 1px solid var(--hair); }
 
 /* --- L'essentiel -----------------------------------------------------------------------------------------
    Le chapitre en cinq lignes, juste avant les exercices. */
