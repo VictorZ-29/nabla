@@ -63,6 +63,7 @@
 <script type="module" src="../../../assets/js/widgets/secante.js"></script>
 <script type="module" src="../../../assets/js/widgets/tangente.js"></script>
 <script type="module" src="../../../assets/js/widgets/derivee.js"></script>
+<script type="module" src="../../../assets/js/widgets/variations.js"></script>
 <script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
 </head>
 <body data-chapitre="derivation">
@@ -394,6 +395,58 @@
     <section id="s5" class="chap-section">
       <h2>5. Signe de \(f'\) et variations</h2>
       <p class="prose">Voilà pourquoi tout ce chapitre sert&nbsp;: le signe de \(f'\) raconte le sens de variation de \(f\). Une pente positive, ça monte&nbsp;; une pente négative, ça descend.</p>
+
+      <p class="prose">Vérifie-le à la main&nbsp;: déplace le point d'un bout à l'autre de la courbe. La tangente passe au vert quand ça monte, au rouge quand ça descend — et dans le tableau, dessous, c'est ta colonne qui s'allume.</p>
+
+      <figure class="widget" id="widget-variations"
+        data-widget="variations" data-fn="x3-3x"
+        data-a-init="-1.8" data-zeros="-1,1"
+        data-xmin="-2.5" data-xmax="2.5" data-ymin="-4.2" data-ymax="4.2"
+        data-domaine="-2.1,2.1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le signe de <span class="titre-math">f&hairsp;′</span> pilote les variations</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Courbe de f avec un point déplaçable ; la tangente au point change de couleur selon le signe de sa pente"></svg>
+        <div class="widget-pied">
+          <div class="chips">
+            <span class="chip">x = <span class="js-x">−1,80</span></span>
+            <span class="chip">f′(x) = <span class="js-fpx">6,72</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">f′(x) &gt; 0 — f monte</span>
+          </div>
+          <div class="tab-grille tab-grille--mini js-tableau" aria-hidden="true">
+            <div class="cel cel-entete bord-x">x</div>
+            <div class="cel cel-gauche bord-x" data-zone="0">−∞</div>
+            <div class="cel-centre bord-x" data-zone="1">−1</div>
+            <div class="bord-x" data-zone="2"></div>
+            <div class="cel-centre bord-x" data-zone="3">1</div>
+            <div class="cel cel-droite bord-x" data-zone="4">+∞</div>
+
+            <div class="cel cel-entete bord-signe">f′(x)</div>
+            <div class="cel-centre bord-signe" data-zone="0">+</div>
+            <div class="cel-centre bord-signe" data-zone="1">0</div>
+            <div class="cel-centre bord-signe" data-zone="2">−</div>
+            <div class="cel-centre bord-signe" data-zone="3">0</div>
+            <div class="cel-centre bord-signe" data-zone="4">+</div>
+
+            <div class="cel cel-entete cel-fleche">f</div>
+            <div class="cel-fleche" data-zone="0">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 50L73.8 10.8"></path><path class="fleche-pointe" d="M82 6L74.1 16.3L69.1 7.7Z"></path></svg>
+            </div>
+            <div class="val-haut" data-zone="1">2</div>
+            <div class="cel-fleche" data-zone="2">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 6L73.8 45.2"></path><path class="fleche-pointe" d="M82 50L74.1 39.7L69.1 48.3Z"></path></svg>
+            </div>
+            <div class="val-bas" data-zone="3">−2</div>
+            <div class="cel-fleche" data-zone="4">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 50L73.8 10.8"></path><path class="fleche-pointe" d="M82 6L74.1 16.3L69.1 7.7Z"></path></svg>
+            </div>
+          </div>
+        </div>
+      </figure>
 
       <div class="bloc-pourquoi">
         <div class="bloc-label">POURQUOI&nbsp;?</div>
