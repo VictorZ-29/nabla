@@ -781,19 +781,37 @@
         <h2>Exercices</h2>
         <span class="ex-compte">15 corrigés</span>
       </div>
-      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre.</p>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: taux et définition, tangentes, calcul de dérivées, variations, et un problème pour finir.</p>
 
       <article class="exercice">
         <div class="exercice-tete">
-          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· définition</span></span>
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· taux de variation</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = x^2 - 3x\). Calcule le taux de variation de \(f\) entre 1 et 4, puis interprète-le graphiquement.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Calcule les deux images&nbsp;: \(f(1) = 1 - 3 = -2\) et \(f(4) = 16 - 12 = 4\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Taux de variation&nbsp;: \(\dfrac{f(4) - f(1)}{4 - 1} = \dfrac{4 - (-2)}{3} = \dfrac{6}{3} = 2\).</p>
+          <p class="conclusion">Conclusion&nbsp;: le taux vaut 2 — la sécante qui joint les points d'abscisses 1 et 4 a une pente de 2. C'est une «&nbsp;vitesse moyenne&nbsp;» entre les deux points, pas une vitesse instantanée.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· définition</span></span>
           <span class="exercice-niveau">
             <span class="niveau-nom">niveau 1</span>
             <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
           </span>
         </div>
         <p class="exercice-enonce">Soit \(f(x) = x^2\). En utilisant la définition du nombre dérivé, calcule \(f'(3)\).</p>
-        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
-        <div class="corrige" id="corrige-01" hidden>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
           <div class="corrige-tag">CORRIGÉ</div>
           <p><span class="etape-label">Étape 1 — </span>Écris le taux de variation&nbsp;: \((f(3+h) - f(3))\,/\,h = ((3+h)^2 - 9)\,/\,h\).</p>
           <p><span class="etape-label">Étape 2 — </span>Développe&nbsp;: \((9 + 6h + h^2 - 9)\,/\,h = (6h + h^2)\,/\,h = 6 + h\).</p>
@@ -804,15 +822,53 @@
 
       <article class="exercice">
         <div class="exercice-tete">
-          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· tangente</span></span>
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· définition</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = 2x^2 - 3x\). En utilisant la définition du nombre dérivé, calcule \(f'(1)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(f(1) = 2 - 3 = -1\). Le taux s'écrit \((f(1+h) - f(1))\,/\,h = (2(1+h)^2 - 3(1+h) + 1)\,/\,h\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Développe le numérateur&nbsp;: \(2 + 4h + 2h^2 - 3 - 3h + 1 = h + 2h^2\). Donc le taux vaut \((h + 2h^2)\,/\,h = 1 + 2h\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Quand \(h \to 0\), \(1 + 2h \to 1\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(1) = 1\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· tangente</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = x^2\). Détermine l'équation de la tangente à la parabole au point d'abscisse \(a = -1\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(f(-1) = 1\)&nbsp;: le point de tangence est \((-1\;;\, 1)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(f'(x) = 2x\), donc \(f'(-1) = -2\)&nbsp;: la pente.</p>
+          <p><span class="etape-label">Étape 3 — </span>\(y = -2(x - (-1)) + 1 = -2(x + 1) + 1 = -2x - 1\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(T : y = -2x - 1\). Contrôle&nbsp;: en \(x = -1\), la droite donne \(y = 1\) — c'est bien le point de tangence.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· tangente</span></span>
           <span class="exercice-niveau">
             <span class="niveau-nom">niveau 2</span>
             <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
           </span>
         </div>
         <p class="exercice-enonce">Soit \(f(x) = x^3 - 3x\). Détermine l'équation de la tangente à la courbe de \(f\) au point d'abscisse \(a = 2\).</p>
-        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
-        <div class="corrige" id="corrige-02" hidden>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
           <div class="corrige-tag">CORRIGÉ</div>
           <p><span class="etape-label">Étape 1 — </span>Calcule \(f(2) = 2^3 - 3 \times 2 = 8 - 6 = 2\). Le point de tangence est \((2\;;\, 2)\).</p>
           <p><span class="etape-label">Étape 2 — </span>Dérive&nbsp;: \(f'(x) = 3x^2 - 3\), donc \(f'(2) = 3 \times 4 - 3 = 9\). La pente vaut 9.</p>
@@ -823,15 +879,128 @@
 
       <article class="exercice">
         <div class="exercice-tete">
-          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· variations</span></span>
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· tangente</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = x^3 - 3x\). En quels points la courbe de \(f\) admet-elle une tangente horizontale&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Tangente horizontale = pente nulle&nbsp;: on cherche \(f'(x) = 0\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(f'(x) = 3x^2 - 3 = 3(x-1)(x+1)\), qui s'annule en \(x = -1\) et \(x = 1\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Les ordonnées&nbsp;: \(f(-1) = 2\) et \(f(1) = -2\).</p>
+          <p class="conclusion">Conclusion&nbsp;: deux points, \((-1\;;\, 2)\) et \((1\;;\, -2)\) — les deux sommets que tu as manipulés dans les widgets.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· dérivées usuelles</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dérive chacune des fonctions&nbsp;: a. \(f(x) = x^7\)&nbsp;; b. \(g(x) = 5x^3 - 2x^2 + 7x - 4\)&nbsp;; c. \(h(x) = 3\sqrt{x}\) sur \(\left]0\;;\,+\infty\right[\)&nbsp;; d. \(k(x) = \dfrac{4}{x}\) sur \(\mathbb{R}^*\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(f'(x) = 7x^6\) — la ligne \(x^n\) du tableau.</p>
+          <p><span class="etape-label">b. — </span>\(g'(x) = 15x^2 - 4x + 7\) — terme à terme, et la constante \(-4\) disparaît.</p>
+          <p><span class="etape-label">c. — </span>\(h'(x) = 3 \times \dfrac{1}{2\sqrt{x}} = \dfrac{3}{2\sqrt{x}}\).</p>
+          <p><span class="etape-label">d. — </span>\(k(x) = 4 \times \dfrac{1}{x}\), donc \(k'(x) = 4 \times \left(-\dfrac{1}{x^2}\right) = -\dfrac{4}{x^2}\).</p>
+          <p class="conclusion">Objectif&nbsp;: les quatre en réflexe, sans hésiter sur le tableau.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· produit</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dérive \(f(x) = (x^2+1)(3x-2)\) de deux façons&nbsp;: avec la formule du produit, puis en développant d'abord. Vérifie que les résultats coïncident.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Produit \(u\,v\) avec \(u = x^2+1\) (\(u' = 2x\)) et \(v = 3x-2\) (\(v' = 3\))&nbsp;: \(f' = u'v + u\,v' = 2x(3x-2) + 3(x^2+1) = 6x^2 - 4x + 3x^2 + 3\).</p>
+          <p><span class="etape-label">Étape 2 — </span>En développant d'abord&nbsp;: \(f(x) = 3x^3 - 2x^2 + 3x - 2\), donc \(f'(x) = 9x^2 - 4x + 3\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = 9x^2 - 4x + 3\) dans les deux cas. Les deux chemins sont corrects — choisis le plus court.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· quotient</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dérive \(f(x) = \dfrac{2x-1}{x+3}\) sur \(\left]-3\;;\,+\infty\right[\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Quotient \(u/v\) avec \(u = 2x-1\) (\(u' = 2\)) et \(v = x+3\) (\(v' = 1\)).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(f' = \dfrac{u'v - u\,v'}{v^2} = \dfrac{2(x+3) - (2x-1)}{(x+3)^2}\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Numérateur&nbsp;: \(2x + 6 - 2x + 1 = 7\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = \dfrac{7}{(x+3)^2}\), positif partout — \(f\) est strictement croissante sur l'intervalle.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· inverse</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dérive \(f(x) = \dfrac{1}{3x-5}\) sur \(\left]\tfrac{5}{3}\;;\,+\infty\right[\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Inverse \(1/u\) avec \(u = 3x-5\), donc \(u' = 3\) — et \(u\) ne s'annule pas sur l'intervalle.</p>
+          <p><span class="etape-label">Étape 2 — </span>\(f' = -\dfrac{u'}{u^2} = -\dfrac{3}{(3x-5)^2}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = -\dfrac{3}{(3x-5)^2}\), négatif partout — \(f\) décroît sur l'intervalle.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· variations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = -x^2 + 4x - 1\). Étudie les variations de \(f\) sur \(\mathbb{R}\) et précise son extremum.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Dérive&nbsp;: \(f'(x) = -2x + 4\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Signe&nbsp;: \(f'(x) > 0 \iff x < 2\). Positive avant 2, nulle en 2, négative après.</p>
+          <p><span class="etape-label">Étape 3 — </span>Tableau&nbsp;: \(f\) croît sur \(\left]-\infty\;;\, 2\right]\), décroît sur \(\left[2\;;\, +\infty\right[\), avec \(f(2) = -4 + 8 - 1 = 3\).</p>
+          <p class="conclusion">Conclusion&nbsp;: maximum 3 atteint en \(x = 2\) — cohérent avec une parabole tournée vers le bas.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· variations</span></span>
           <span class="exercice-niveau">
             <span class="niveau-nom">niveau 3</span>
             <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
           </span>
         </div>
         <p class="exercice-enonce">Soit \(g(x) = x^3 + 3x^2 - 9x + 1\). Étudie les variations de \(g\) sur \(\mathbb{R}\) et précise ses extremums locaux.</p>
-        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
-        <div class="corrige" id="corrige-03" hidden>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
           <div class="corrige-tag">CORRIGÉ</div>
           <p><span class="etape-label">Étape 1 — </span>Dérive&nbsp;: \(g'(x) = 3x^2 + 6x - 9 = 3(x^2 + 2x - 3) = 3(x+3)(x-1)\).</p>
           <p><span class="etape-label">Étape 2 — </span>Signe&nbsp;: \(g'(x) > 0\) hors de \([-3\;;\, 1]\), \(g'(x) < 0\) entre −3 et 1.</p>
@@ -840,7 +1009,44 @@
         </div>
       </article>
 
-      <div class="ex-reste">Exercices 4 à 14 — définition et taux de variation, tangentes, calcul de dérivées avec les opérations, études de variations.</div>
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· variations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = x + \dfrac{1}{x}\) sur \(\left]0\;;\,+\infty\right[\). Étudie les variations de \(f\) et précise son minimum.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Dérive&nbsp;: \(f'(x) = 1 - \dfrac{1}{x^2} = \dfrac{x^2 - 1}{x^2}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Signe sur \(\left]0\;;\,+\infty\right[\)&nbsp;: \(x^2 > 0\), donc \(f'(x)\) a le signe de \(x^2 - 1 = (x-1)(x+1)\), c'est-à-dire celui de \(x - 1\) (car \(x + 1 > 0\) ici). Négatif sur \(\left]0\;;\, 1\right[\), nul en 1, positif après.</p>
+          <p><span class="etape-label">Étape 3 — </span>\(f\) décroît sur \(\left]0\;;\, 1\right]\), croît sur \(\left[1\;;\, +\infty\right[\), avec \(f(1) = 2\).</p>
+          <p class="conclusion">Conclusion&nbsp;: minimum 2, atteint en \(x = 1\) — la somme \(x + 1/x\) est au plus bas quand ses deux termes s'équilibrent.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans une feuille carrée de 10 cm de côté, on découpe aux quatre coins des carrés de côté \(x\), puis on plie pour former une boîte sans couvercle. Montre que le volume est \(V(x) = x(10-2x)^2\) pour \(x \in \left]0\;;\,5\right[\), puis détermine \(x\) pour que le volume soit maximal.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Après pliage, le fond est un carré de côté \(10 - 2x\) et la hauteur vaut \(x\)&nbsp;: \(V(x) = x(10-2x)^2\). Il faut \(0 < x < 5\) pour que la boîte existe.</p>
+          <p><span class="etape-label">Étape 2 — </span>Dérive (produit, et ligne \(g(ax+b)\) du tableau pour \((10-2x)^2\), dont la dérivée vaut \(-4(10-2x)\))&nbsp;: \(V'(x) = (10-2x)^2 - 4x(10-2x) = (10-2x)\big[(10-2x) - 4x\big] = (10-2x)(10-6x)\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Signe sur \(\left]0\;;\,5\right[\)&nbsp;: \(10-2x > 0\), et \(10-6x\) s'annule en \(x = \tfrac{5}{3}\), positif avant, négatif après. \(V\) croît puis décroît&nbsp;: maximum en \(x = \tfrac{5}{3}\).</p>
+          <p><span class="etape-label">Étape 4 — </span>\(V\!\left(\tfrac{5}{3}\right) = \tfrac{5}{3}\left(10 - \tfrac{10}{3}\right)^2 = \tfrac{5}{3} \times \left(\tfrac{20}{3}\right)^2 = \tfrac{2000}{27} \approx 74{,}1\ \text{cm}^3\).</p>
+          <p class="conclusion">Conclusion&nbsp;: le volume est maximal pour \(x = \tfrac{5}{3} \approx 1{,}67\) cm. C'est exactement à ça que sert la dérivation&nbsp;: trouver le meilleur choix, pas seulement remplir des tableaux.</p>
+        </div>
+      </article>
 
       <article id="bac" class="bac">
         <div class="bande-inversee">
