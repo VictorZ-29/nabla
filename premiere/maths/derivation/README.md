@@ -186,12 +186,16 @@ interaction is buttons, so it is keyboard-accessible for free.
 - **Décor per round**: curve, full-width tangent at A, dashed reading
   triangle A → (+1 in x) → back up/down to the tangent, labels « +1 » and
   « ? » ; the « ? » becomes the slope value once answered.
-- **Rounds shipped**: x²/2 at a=1 (pente 1) · x²−1 at a=1 (pente 2) ·
-  1−x²/4 at a=2 (pente −1) · 2−x² at a=1 (pente −2). Distractors include
-  the sign error and the halved/doubled misreads.
+- **Rounds shipped**: x²−x at a=1 (pente 1) · x²−2 at a=1 (pente 2) ·
+  1−x²/4 at a=2 (pente −1) · 2−x² at a=1 (pente −2). Every round has f(a)
+  and f′(a) integers, so A **and** the reading triangle land exactly on
+  grid nodes (Victor's remark: no counting from mid-square). Distractors
+  include the sign error and the halved/doubled misreads.
 - **Flow**: wrong answer → marked + disabled + relance, retry; right →
-  explanation with the monte/descend reading, « Point suivant ▸ ». After
-  the last round: « x/4 du premier coup » and « ↺ recommencer ».
+  explanation with the monte/descend reading, then a filled accent button
+  « Point suivant (i/4) ▸ » (`.btn-pill--accent`) so the next rounds are
+  impossible to miss. After the last round: « x/4 du premier coup » and
+  « ↺ recommencer ».
 - Reuses quiz button/feedback styles; progress chip « POINT i/4 ».
 
 ### 6. `associe` — « Associe chaque f à sa dérivée » (§4)

@@ -14,8 +14,10 @@ export const FONCTIONS = {
     f: (x) => x * x * x - 3 * x,
     fp: (x) => 3 * x * x - 3,
   },
-  /* Lecture graphique de f′(a) (§3) */
-  'x2s2': { f: (x) => x * x / 2, fp: (x) => x },
+  /* Lecture graphique de f′(a) (§3) — A et le triangle tombent sur des
+     nœuds du quadrillage : f(a) et f′(a) entiers pour chaque manche */
+  'x2-x': { f: (x) => x * x - x, fp: (x) => 2 * x - 1 },
+  'x2-2': { f: (x) => x * x - 2, fp: (x) => 2 * x },
   'x2-1': { f: (x) => x * x - 1, fp: (x) => 2 * x },
   '1-x2s4': { f: (x) => 1 - x * x / 4, fp: (x) => -x / 2 },
   '2-x2': { f: (x) => 2 - x * x, fp: (x) => -2 * x },

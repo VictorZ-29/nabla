@@ -90,6 +90,7 @@ function initLecture(fig) {
       fig.querySelector('.js-mystere').textContent = joli(pente);
       retour.innerHTML = `<span class="verdict verdict--bonne">EXACT —</span> depuis A, avance de 1 en x : la tangente ${pente > 0 ? 'monte' : 'descend'} de ${joli(Math.abs(pente))}. Donc f′(a) = ${joli(pente)}.`;
       if (i + 1 < manches.length) {
+        suivant.textContent = `Point suivant (${i + 2}/${manches.length}) ▸`;
         suivant.hidden = false;
       } else {
         retour.innerHTML += ` <strong>Terminé : ${sansFaute}/${manches.length} du premier coup.</strong>`;
