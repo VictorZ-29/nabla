@@ -192,8 +192,8 @@
 
       <div class="bloc-pourquoi">
         <div class="bloc-label">POURQUOI&nbsp;?</div>
-        <p>Dans le widget, impossible d'amener \(h\) jusqu'à 0 — et ce n'est pas un caprice. Pose \(h = 0\) dans la formule du taux&nbsp;: tu obtiens \((f(a) - f(a))\,/\,0\), c'est-à-dire \(0/0\). Diviser par zéro n'a pas de sens. Et géométriquement, c'est pareil&nbsp;: avec un seul point, il n'y a plus de droite du tout — il en faut deux pour définir une pente.</p>
-        <p>Alors on fait la meilleure chose possible&nbsp;: regarder ce que devient le taux quand \(h\) <em>s'approche</em> de 0 sans jamais l'atteindre. Reprends les préréglages du widget&nbsp;: 5,37 pour h&nbsp;=&nbsp;0,90, puis 2,49, puis 1,36… Les valeurs ne partent pas dans tous les sens&nbsp;: elles se rangent d'elles-mêmes vers 1,32. Ce nombre vers lequel le taux s'installe s'appelle une <strong>limite</strong> — c'est exactement ce que note le symbole \(\lim\) ci-dessous.</p>
+        <p>Dans le graphique ci-dessus, impossible d'amener \(h\) jusqu'à 0 — et ce n'est pas un caprice. Pose \(h = 0\) dans la formule du taux&nbsp;: tu obtiens \((f(a) - f(a))\,/\,0\), c'est-à-dire \(0/0\). Diviser par zéro n'a pas de sens. Et géométriquement, c'est pareil&nbsp;: avec un seul point, il n'y a plus de droite du tout — il en faut deux pour définir une pente.</p>
+        <p>Alors on fait la meilleure chose possible&nbsp;: regarder ce que devient le taux quand \(h\) <em>s'approche</em> de 0 sans jamais l'atteindre. Reprends les préréglages du graphique&nbsp;: 5,37 pour h&nbsp;=&nbsp;0,90, puis 2,49, puis 1,36… Les valeurs ne partent pas dans tous les sens&nbsp;: elles se rangent d'elles-mêmes vers 1,32. Ce nombre vers lequel le taux s'installe s'appelle une <strong>limite</strong> — c'est exactement ce que note le symbole \(\lim\) ci-dessous.</p>
       </div>
 
       <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
@@ -277,6 +277,7 @@
 
     <section id="s3" class="chap-section">
       <h2>3. La tangente à une courbe</h2>
+      <p class="prose">Le mot d'abord, simplement&nbsp;: une <strong>tangente</strong>, c'est une droite qui s'appuie sur la courbe en un point et qui suit exactement sa direction à cet endroit. Zoome sur ce point&nbsp;: la courbe et la droite se confondent presque. C'est la droite que tu as vue se stabiliser à la section 2, quand B rejoignait A.</p>
       <p class="prose">Une fois \(f'(a)\) connu, la tangente n'a plus de mystère&nbsp;: c'est une droite de pente \(f'(a)\) qui passe par le point \((a\;;\, f(a))\) — rien de plus. Son équation s'écrit directement.</p>
 
       <div class="bloc-propriete">
@@ -384,6 +385,7 @@
 
     <section id="s4" class="chap-section">
       <h2>4. Dérivées usuelles et opérations</h2>
+      <p class="prose">Un mot avant les tableaux&nbsp;: jusqu'ici, \(f'(a)\) était <em>un nombre</em>, calculé en un point précis. Si tu calcules ce nombre en chaque \(x\), tu obtiens une nouvelle fonction, notée \(f'\)&nbsp;: la <strong>fonction dérivée</strong>. C'est elle que tu construiras toi-même, point par point, dans le graphique en bas de cette section.</p>
       <p class="prose">En pratique, tu ne reviens presque jamais à la définition&nbsp;: tu utilises un tableau de dérivées connues, et des règles pour les combiner. Ces deux tableaux doivent devenir des réflexes.</p>
 
       <figure class="tableau">
@@ -700,7 +702,7 @@
         </div>
       </figure>
 
-      <p class="prose">Aux points où \(f'\) s'annule <em>en changeant de signe</em>, \(f\) admet un <strong>extremum local</strong>&nbsp;: ici un maximum local en −1 (qui vaut 2) et un minimum local en 1 (qui vaut −2). Retrouve-les sur la courbe du widget plus haut&nbsp;: ce sont les deux sommets.</p>
+      <p class="prose">Aux points où \(f'\) s'annule <em>en changeant de signe</em>, \(f\) admet un <strong>extremum local</strong> — concrètement, un sommet ou un creux de la courbe&nbsp;: ici un maximum local en −1 (qui vaut 2) et un minimum local en 1 (qui vaut −2). Retrouve-les sur le graphique interactif plus haut&nbsp;: ce sont les deux sommets.</p>
 
       <div class="bloc-methode">
         <div class="bloc-label">MÉTHODE — ÉTUDIER LES VARIATIONS D'UNE FONCTION</div>
@@ -892,7 +894,7 @@
           <p><span class="etape-label">Étape 1 — </span>Tangente horizontale = pente nulle&nbsp;: on cherche \(f'(x) = 0\).</p>
           <p><span class="etape-label">Étape 2 — </span>\(f'(x) = 3x^2 - 3 = 3(x-1)(x+1)\), qui s'annule en \(x = -1\) et \(x = 1\).</p>
           <p><span class="etape-label">Étape 3 — </span>Les ordonnées&nbsp;: \(f(-1) = 2\) et \(f(1) = -2\).</p>
-          <p class="conclusion">Conclusion&nbsp;: deux points, \((-1\;;\, 2)\) et \((1\;;\, -2)\) — les deux sommets que tu as manipulés dans les widgets.</p>
+          <p class="conclusion">Conclusion&nbsp;: deux points, \((-1\;;\, 2)\) et \((1\;;\, -2)\) — les deux sommets que tu as manipulés dans les graphiques du chapitre.</p>
         </div>
       </article>
 

@@ -309,3 +309,20 @@ intuition, more interactivity, worked examples, full exercise set):
     constant factor 3 is dismissed in the prose rather than given a row —
     the classroom convention I've seen most; easy to add a row if you
     prefer.
+
+Flags 31–32 come from Victor's copy review (July 2026):
+
+31. **« widget » removed from all student-facing prose** (Victor's request) —
+    replaced by « le graphique », « le graphique interactif », « les
+    graphiques du chapitre ». One *original design sentence* was touched:
+    §5 « Retrouve-les sur la courbe du widget plus haut » → « sur le
+    graphique interactif plus haut ». The word survives only in code
+    (classes, data-attributes, this README).
+32. **Plain-language glosses added** (Victor's request — say it simply
+    before using the term): §3 opens with what a tangente *is* (a line that
+    leans on the curve at a point and follows its direction — phrased to
+    avoid the « touches in only one point » myth that the bac exercise
+    A.3 itself contradicts); §4 opens with nombre → fonction dérivée
+    (f′(a) is a number, computed everywhere it becomes the function f′);
+    §5 extremum gets an inline gloss « un sommet ou un creux de la
+    courbe » inside an existing sentence.
