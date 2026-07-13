@@ -103,6 +103,7 @@ WCAG AA contrast in both themes. Visible `:focus-visible` outlines everywhere; s
 ## Workflow conventions
 
 - Verify locally with `python3 -m http.server`; test both themes, 375 px and desktop, keyboard-only, and touch emulation. If a browser tool (e.g. Playwright) is available, screenshot both themes at both widths and compare against the designs before declaring done.
+- **CSS cache-busting.** GitHub Pages caches assets ~10 min, so a deploy can serve new HTML with a stale stylesheet (seen live: glued chapter cards, unstyled SVG dots). All first-party CSS links carry a version query (`?v=2`). Whenever any CSS file changes, bump the version on **every** page in the same commit: `sed -i 's/css?v=2/css?v=3/g' $(grep -rl 'css?v=' --include='*.html' . | grep -v design-reference)`. JS is deliberately not versioned (ES-module imports would each need versioning too; the 10-minute window self-heals).
 - Small conventional commits (`feat:`, `fix:`, `content:`); never commit generated junk.
 - **Git: commit and push directly to `main`, without asking.** No feature/secondary branches — GitHub Pages serves `main`, and this is a one-person project.
 - End every session with a short summary: what changed, decisions taken, and an explicit list needing Victor's review (chapter README inferences, copy changes, mentions légales, domain/Plausible config, anything pedagogical).
