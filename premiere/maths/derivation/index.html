@@ -60,6 +60,7 @@
 <script type="module" src="../../../assets/js/theme.js"></script>
 <script type="module" src="../../../assets/js/sommaire.js"></script>
 <script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
 <script type="module" src="../../../assets/js/widgets/secante.js"></script>
 <script type="module" src="../../../assets/js/widgets/tangente.js"></script>
 <script type="module" src="../../../assets/js/widgets/derivee.js"></script>
@@ -224,6 +225,54 @@
         <span class="bloc-tag">À RETENIR</span>
         <p>Le nombre dérivé \(f'(a)\), c'est le coefficient directeur de la tangente au point d'abscisse \(a\).</p>
       </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(f'(a)\), c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la hauteur de la courbe au point d'abscisse \(a\)</button>
+              <button type="button" class="quiz-reponse">la pente de la tangente au point d'abscisse \(a\)</button>
+              <button type="button" class="quiz-reponse">l'aire sous la courbe</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(f(a)\) est une hauteur, \(f'(a)\) est une pente. Les confondre, c'est le piège n°&thinsp;1 du chapitre.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Quand \(h \to 0\), le taux \((f(a+h) - f(a))\,/\,h\) se rapproche de 3. Alors…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(f(a) = 3\)</button>
+              <button type="button" class="quiz-reponse">la courbe passe par 3</button>
+              <button type="button" class="quiz-reponse">\(f'(a) = 3\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est la définition même du nombre dérivé&nbsp;: la limite du taux de variation, c'est \(f'(a)\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pourquoi ne pas remplacer \(h\) par 0 directement dans le taux&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">parce qu'on diviserait par zéro</button>
+              <button type="button" class="quiz-reponse">parce que \(f(0)\) n'existe pas toujours</button>
+              <button type="button" class="quiz-reponse">parce que le calcul serait trop long</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le dénominateur est \(h\)&nbsp;: poser \(h = 0\), c'est diviser par zéro. D'où le détour par la limite — on s'approche de 0 sans jamais y poser le pied.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="s3" class="chap-section">
@@ -282,6 +331,54 @@
         <p><span class="etape-label">Étape 2 — </span>\(f'(x) = 2x\), donc \(f'(1) = 2\)&nbsp;: la pente vaut 2.</p>
         <p><span class="etape-label">Étape 3 — </span>\(y = 2(x - 1) + 1 = 2x - 1\).</p>
         <p class="conclusion">Conclusion&nbsp;: \(T : y = 2x - 1\). Contrôle-réflexe&nbsp;: en \(x = 1\), la droite donne \(y = 1\) — elle passe bien par le point de tangence. Prends cette habitude, elle attrape la moitié des erreurs.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois — la tangente</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>La tangente au point d'abscisse \(a\) passe par…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\((a\;;\, 0)\)</button>
+              <button type="button" class="quiz-reponse">\((a\;;\, f(a))\)</button>
+              <button type="button" class="quiz-reponse">\((a\;;\, f'(a))\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le point de tangence est sur la courbe, donc son ordonnée est \(f(a)\). \(f'(a)\) n'est pas une ordonnée — c'est la pente.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Si \(f'(a) = 0\), la tangente en \(a\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">verticale</button>
+              <button type="button" class="quiz-reponse">inexistante</button>
+              <button type="button" class="quiz-reponse">horizontale</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> pente nulle = droite horizontale, d'équation \(y = f(a)\). Tu verras à la section 5 tout ce que ça raconte.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>\(f(1) = 2\) et \(f'(1) = 5\). La tangente au point d'abscisse 1 a pour équation…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(y = 5x - 3\)</button>
+              <button type="button" class="quiz-reponse">\(y = 2x + 5\)</button>
+              <button type="button" class="quiz-reponse">\(y = 5x + 2\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(y = 5(x - 1) + 2 = 5x - 3\). Chaque nombre a son rôle&nbsp;: \(f'(1) = 5\) est la pente, \(f(1) = 2\) l'ordonnée du point de tangence.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -390,6 +487,66 @@
         <svg class="widget-graph graph-scinde js-graph-fp" viewBox="0 0 640 230" aria-label="Courbe de f prime construite point par point"></svg>
         <div class="widget-note">La pente de la tangente en A, en haut, devient la hauteur du point de f′, en bas — au même x.</div>
       </figure>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre dérivées de tête</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>La dérivée de \(x^5\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(5x^4\)</button>
+              <button type="button" class="quiz-reponse">\(x^4\)</button>
+              <button type="button" class="quiz-reponse">\(5x^5\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(x^n\) donne \(n\,x^{n-1}\)&nbsp;: l'exposant descend devant, puis diminue de 1.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\((u\,v)' = \)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(u'\,v'\)</button>
+              <button type="button" class="quiz-reponse">\(u'v + u\,v'\)</button>
+              <button type="button" class="quiz-reponse">\(u' + v'\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> jamais \(u'v'\) — la dérivée d'un produit n'est pas le produit des dérivées. C'est l'un des pièges classiques, tu le recroiseras plus bas.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>La dérivée de \(3x^2 - 4x + 7\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(6x + 7\)</button>
+              <button type="button" class="quiz-reponse">\(3x - 4\)</button>
+              <button type="button" class="quiz-reponse">\(6x - 4\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(6x\) pour \(3x^2\), \(-4\) pour \(-4x\)… et la constante 7 disparaît.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>\(f(x) = \dfrac{2x+1}{x^2+3}\). Avant de dériver, tu identifies…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un produit</button>
+              <button type="button" class="quiz-reponse">un quotient \(u/v\)</button>
+              <button type="button" class="quiz-reponse">une somme</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> étape 1 de la méthode, toujours&nbsp;: la structure. Ici \(u = 2x+1\) sur \(v = x^2+3\) — formule du quotient.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="s5" class="chap-section">
@@ -551,6 +708,53 @@
         <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Étudie le signe de \(f'(x)\) — factorise si besoin.</span></div>
         <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Dresse le tableau&nbsp;: signe de \(f'\) en haut, flèches de variations en dessous, valeurs aux points d'annulation.</span></div>
         <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">Conclus&nbsp;: intervalles de croissance et de décroissance, extremums locaux.</span></div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(f'(x) < 0\) sur I. Alors sur I, \(f\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">négative</button>
+              <button type="button" class="quiz-reponse">décroissante</button>
+              <button type="button" class="quiz-reponse">croissante</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le signe de \(f'\) donne le <em>sens de variation</em> de \(f\) — pas son signe&nbsp;! Une fonction peut très bien être positive et décroissante.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(f'(a) = 0\). \(f\) a forcément un extremum en \(a\)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">oui</button>
+              <button type="button" class="quiz-reponse">non</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> contre-exemple&nbsp;: \(f(x) = x^3\) en 0 — tangente horizontale, mais \(f\) ne cesse de croître. Il faut que \(f'\) <em>change de signe</em>.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Autour de \(a\), \(f'\) est positive avant, négative après. En \(a\), \(f\) admet…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un maximum local</button>
+              <button type="button" class="quiz-reponse">un minimum local</button>
+              <button type="button" class="quiz-reponse">rien de spécial</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(f\) monte, puis descend&nbsp;: un sommet. Maximum local — exactement ce que dessine la flèche du tableau de variations.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
