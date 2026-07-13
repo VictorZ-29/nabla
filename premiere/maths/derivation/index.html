@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Résolution du thème avant le premier rendu (pas de flash) :
+   localStorage 'nabla-theme' → prefers-color-scheme → dark. */
+(function () {
+  var t = null;
+  try { t = localStorage.getItem('nabla-theme'); } catch (e) {}
+  if (t !== 'light' && t !== 'dark') {
+    try { t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; } catch (e) { t = 'dark'; }
+  }
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+
+<title>La dérivation — Première Spé Maths | Nabla</title>
+<meta name="description" content="Comprends vraiment la dérivation : nombre dérivé, tangente, dérivées usuelles et variations, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/derivation/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="La dérivation — Première Spé Maths | Nabla">
+<meta property="og:description" content="Nombre dérivé, tangente, dérivées usuelles, variations : un cours interactif où tu manipules les courbes toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/derivation/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La dérivation — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Nombre dérivé, tangente, dérivées usuelles, variations : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "La dérivation — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur la dérivation : taux de variation, nombre dérivé, tangente, dérivées usuelles, variations. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/derivation/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Taux de variation, nombre dérivé, tangente à une courbe, fonctions dérivées, variations d'une fonction",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false});"></script>
+
+<link rel="stylesheet" href="../../../assets/css/tokens.css">
+<link rel="stylesheet" href="../../../assets/css/base.css">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/widgets/secante.js"></script>
+<script type="module" src="../../../assets/js/widgets/tangente.js"></script>
+<script type="module" src="../../../assets/js/widgets/derivee.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="derivation">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <span class="nabla-symbole" aria-hidden="true">∇</span>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>La dérivation</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer un nombre dérivé, construire une équation de tangente, dériver les fonctions usuelles — et t'en servir pour étudier les variations d'une fonction.</p>
+  <div class="chap-meta">≈ 40 min de lecture · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. À quelle vitesse, exactement&nbsp;?</a>
+      <a href="#s2">2. Resserre les deux points</a>
+      <a href="#s3">3. La tangente à une courbe</a>
+      <a href="#s4">4. Dérivées usuelles et opérations</a>
+      <a href="#s5">5. Signe de f′ et variations</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. À quelle vitesse, exactement&nbsp;?</a>
+        <a href="#s2">2. Resserre les deux points</a>
+        <a href="#s3">3. La tangente à une courbe</a>
+        <a href="#s4">4. Dérivées usuelles et opérations</a>
+        <a href="#s5">5. Signe de f′ et variations</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. À quelle vitesse, exactement&nbsp;?</h2>
+      <p class="prose">Une voiture parcourt 100 km en 2 heures&nbsp;: vitesse moyenne, 50 km/h. Mais au péage, le compteur n'affichait pas 50 — il affichait la vitesse <em>à cet instant-là</em>. La moyenne lisse tout&nbsp;; le compteur répond à une question plus fine. Toute la question du chapitre tient là&nbsp;: comment définir mathématiquement «&nbsp;la vitesse à un instant&nbsp;»&nbsp;?</p>
+      <p class="prose">Traduisons sur un graphique. Entre deux points d'une courbe, l'équivalent de la vitesse moyenne s'appelle le <strong>taux de variation</strong>&nbsp;: c'est la pente — le coefficient directeur — de la droite qui passe par ces deux points. Cette droite s'appelle une <strong>sécante</strong>. Tu as déjà fait tout ça en Seconde.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="Courbe avec deux points A et B, la sécante qui les relie, et le triangle montrant h et f(a+h) moins f(a)">
+          <path class="g-grid" d="M64 400L64 0M192 400L192 0M448 400L448 0M576 400L576 0M0 390.5L640 390.5M0 342.9L640 342.9M0 295.2L640 295.2M0 247.6L640 247.6M0 152.4L640 152.4M0 104.8L640 104.8M0 57.1L640 57.1M0 9.5L640 9.5"></path>
+          <path class="g-axis" d="M0 200L640 200M320 400L320 0"></path>
+          <path class="g-courbe" d="M51.2 341L56.1 322.8L61 305.5L65.9 289.1L70.7 273.4L75.6 258.6L80.5 244.6L85.4 231.3L90.3 218.8L95.2 207.1L100.1 196.1L105 185.8L109.8 176.2L114.7 167.3L119.6 159L124.5 151.5L129.4 144.5L134.3 138.2L139.2 132.4L144.1 127.3L148.9 122.7L153.8 118.7L158.7 115.3L163.6 112.3L168.5 109.9L173.4 107.9L178.3 106.5L183.2 105.5L188 104.9L192.9 104.8L197.8 105.1L202.7 105.7L207.6 106.8L212.5 108.2L217.4 110L222.3 112.1L227.1 114.5L232 117.3L236.9 120.3L241.8 123.6L246.7 127.1L251.6 130.9L256.5 134.9L261.4 139.1L266.2 143.5L271.1 148.1L276 152.8L280.9 157.7L285.8 162.7L290.7 167.8L295.6 173.1L300.5 178.4L305.3 183.7L310.2 189.1L315.1 194.5L320 200L324.9 205.5L329.8 210.9L334.7 216.3L339.5 221.6L344.4 226.9L349.3 232.2L354.2 237.3L359.1 242.3L364 247.2L368.9 251.9L373.8 256.5L378.6 260.9L383.5 265.1L388.4 269.1L393.3 272.9L398.2 276.4L403.1 279.7L408 282.7L412.9 285.5L417.7 287.9L422.6 290L427.5 291.8L432.4 293.2L437.3 294.3L442.2 294.9L447.1 295.2L452 295.1L456.8 294.5L461.7 293.5L466.6 292.1L471.5 290.1L476.4 287.7L481.3 284.7L486.2 281.3L491.1 277.3L495.9 272.7L500.8 267.6L505.7 261.8L510.6 255.5L515.5 248.5L520.4 241L525.3 232.7L530.2 223.8L535 214.2L539.9 203.9L544.8 192.9L549.7 181.2L554.6 168.7L559.5 155.4L564.4 141.4L569.3 126.6L574.1 110.9L579 94.5L583.9 77.2L588.8 59"></path>
+          <path class="g-tangente" d="M418.1 400L618.3 0"></path>
+          <path class="g-guide" stroke-dasharray="4 4" d="M473.6 289.1L588.8 289.1L588.8 59"></path>
+          <text class="etiquette-math etiquette-math--muted" font-size="15" x="531" y="308" text-anchor="middle">h</text>
+          <text class="etiquette-math etiquette-math--muted" font-size="14" transform="rotate(-90 606 174)" x="606" y="174" text-anchor="middle">f(a + h) − f(a)</text>
+          <text class="etiquette-math etiquette-math--accent" font-size="16" x="596" y="30" text-anchor="end">sécante (AB)</text>
+          <circle class="pt-fixe" cx="473.6" cy="289.1" r="5"></circle>
+          <text class="etiquette-math" font-size="17" x="456" y="314">A</text>
+          <circle class="pt-b" cx="588.8" cy="59" r="5"></circle>
+          <text class="etiquette-math" font-size="17" x="602" y="54">B</text>
+        </svg>
+        <figcaption>Entre A et B, la courbe monte de \(f(a + h) - f(a)\) pour un déplacement horizontal de \(h\). Le coefficient directeur de la sécante est le taux de variation.</figcaption>
+      </figure>
+
+      <div class="math-vitrine">$$\text{taux de variation} = \frac{f(a+h)-f(a)}{h}$$</div>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Resserre les deux points</h2>
+      <p class="prose">La vitesse moyenne entre deux instants, c'est la sécante entre deux points. Pour obtenir la vitesse <em>à un instant</em>, il faut rapprocher les deux instants. Fais-le toi-même&nbsp;: rapproche B de A et regarde ce que devient la sécante.</p>
+
+      <figure class="widget" id="widget-secante"
+        data-widget="secante" data-fn="x3-3x"
+        data-a="1.2" data-h-init="0.9" data-h-min="0.01" data-h-legende="0.05"
+        data-xmin="-2.5" data-xmax="2.5" data-ymin="-4.2" data-ymax="4.2"
+        data-domaine="-2.1,2.1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">De la sécante à la tangente</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages de l'écart h">
+            <button type="button" data-h="0.9" aria-pressed="true">h = 0,90</button>
+            <button type="button" data-h="0.3" aria-pressed="false">h = 0,30</button>
+            <button type="button" data-h="0.01" aria-pressed="false">h = 0,01</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Courbe de f avec le point A fixe, le point B déplaçable, et la sécante qui les relie"></svg>
+        <div class="widget-pied">
+          <div class="lecture-taux">
+            <span>taux&nbsp;=</span>
+            <span>\(\dfrac{f(a+h)-f(a)}{h}\)</span>
+            <span>=</span>
+            <span class="frac frac--mono"><span class="frac-num js-num">4,83</span><span class="frac-den js-h">0,90</span></span>
+            <span>=</span>
+            <span class="taux-valeur js-taux">5,37</span>
+          </div>
+          <div class="chips">
+            <span class="chip">a = 1,20</span>
+            <span class="chip">h = <span class="js-h-chip">0,90</span></span>
+            <span class="chip chip--accent">cible&nbsp;: f′(a) = 1,32</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite" hidden>«&nbsp;La droite ne bouge presque plus. Cette position limite, c'est la <strong>tangente</strong> — et sa pente, c'est <span class="terme-math">f′(a)</span>.&nbsp;»</p>
+        </div>
+      </figure>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Soit \(f\) une fonction définie sur un intervalle I, et \(a \in I\). On dit que \(f\) est <strong>dérivable en \(a\)</strong> si son taux de variation entre \(a\) et \(a + h\) admet une limite finie quand \(h\) tend vers 0. Cette limite est le <strong>nombre dérivé</strong> de \(f\) en \(a\), noté \(f'(a)\).</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$f'(a) = \lim_{h \to 0}\; \frac{f(a+h)-f(a)}{h}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER \(f'(a)\) AVEC LA DÉFINITION</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris le taux de variation \((f(a+h) - f(a))\,/\,h\) avec la valeur de \(a\) donnée.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Développe et simplifie jusqu'à pouvoir factoriser par \(h\), puis simplifie la fraction.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Fais tendre \(h\) vers 0&nbsp;: ce qui reste est \(f'(a)\).</span></div>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Le nombre dérivé \(f'(a)\), c'est le coefficient directeur de la tangente au point d'abscisse \(a\).</p>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. La tangente à une courbe</h2>
+      <p class="prose">Une fois \(f'(a)\) connu, la tangente n'a plus de mystère&nbsp;: c'est une droite de pente \(f'(a)\) qui passe par le point \((a\;;\, f(a))\) — rien de plus. Son équation s'écrit directement.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ</div>
+        <p>La tangente à la courbe de \(f\) au point d'abscisse \(a\) a pour équation&nbsp;:</p>
+        <div class="math-vitrine">$$y = f'(a)(x - a) + f(a)$$</div>
+      </div>
+
+      <figure class="widget" id="widget-tangente"
+        data-widget="tangente" data-fn="x3-3x"
+        data-a-init="1.2"
+        data-xmin="-2.5" data-xmax="2.5" data-ymin="-4.2" data-ymax="4.2"
+        data-domaine="-2.1,2.1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Explore la tangente</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Courbe de f(x) = x³ − 3x avec un point déplaçable et sa tangente"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">a</span>
+            <input type="range" class="js-curseur" min="-2.1" max="2.1" step="0.01" value="1.2" aria-label="Abscisse a du point de tangence">
+          </div>
+          <div class="chips">
+            <span class="chip">a = <span class="js-a">1,20</span></span>
+            <span class="chip">f(a) = <span class="js-fa">−1,87</span></span>
+            <span class="chip chip--accent">f′(a) = <span class="js-fpa">1,32</span> — la pente de T</span>
+          </div>
+        </div>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER L'ÉQUATION D'UNE TANGENTE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule \(f(a)\)&nbsp;: c'est l'ordonnée du point de tangence.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule \(f'(a)\)&nbsp;: c'est la pente.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Remplace dans \(y = f'(a)(x - a) + f(a)\), puis développe.</span></div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Dérivées usuelles et opérations</h2>
+      <p class="prose">En pratique, tu ne reviens presque jamais à la définition&nbsp;: tu utilises un tableau de dérivées connues, et des règles pour les combiner. Ces deux tableaux doivent devenir des réflexes.</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>DÉRIVÉES USUELLES</span>
+          <span class="bande-note">À CONNAÎTRE PAR CŒUR</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th>f(x)</th><th>f′(x)</th><th>valable sur</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>\(k\) <span class="note-cellule">(constante)</span></td><td>\(0\)</td><td>\(\mathbb{R}\)</td></tr>
+              <tr><td>\(x\)</td><td>\(1\)</td><td>\(\mathbb{R}\)</td></tr>
+              <tr><td>\(x^2\)</td><td>\(2x\)</td><td>\(\mathbb{R}\)</td></tr>
+              <tr><td>\(x^n\) <span class="note-cellule">(n ≥ 1)</span></td><td>\(n\,x^{n-1}\)</td><td>\(\mathbb{R}\)</td></tr>
+              <tr><td>\(\dfrac{1}{x}\)</td><td>\(-\,\dfrac{1}{x^2}\)</td><td>\(\mathbb{R}^*\)</td></tr>
+              <tr><td>\(\sqrt{x}\)</td><td>\(\dfrac{1}{2\sqrt{x}}\)</td><td>\(\left]0\;;\,+\infty\right[\)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>OPÉRATIONS SUR LES DÉRIVÉES</span>
+          <span class="bande-note">LA STRUCTURE D'ABORD</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th>fonction</th><th>dérivée</th><th>condition</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>\(u + v\)</td><td>\(u' + v'\)</td><td class="cellule-vide">—</td></tr>
+              <tr><td>\(k\,u\) <span class="note-cellule">(k réel)</span></td><td>\(k\,u'\)</td><td class="cellule-vide">—</td></tr>
+              <tr><td>\(u\,v\)</td><td>\(u'v + u\,v'\)</td><td class="cellule-vide">—</td></tr>
+              <tr><td>\(\dfrac{1}{u}\)</td><td>\(-\,\dfrac{u'}{u^2}\)</td><td>\(u \neq 0\)</td></tr>
+              <tr><td>\(\dfrac{u}{v}\)</td><td>\(\dfrac{u'v - u\,v'}{v^2}\)</td><td>\(v \neq 0\)</td></tr>
+              <tr><td>\(x \longmapsto g(ax + b)\)</td><td>\(a\,g'(ax + b)\)</td><td class="cellule-vide">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — DÉRIVER UNE FONCTION EN PRATIQUE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Identifie la structure&nbsp;: somme&nbsp;? produit&nbsp;? quotient&nbsp;? \(g(ax + b)\)&nbsp;?</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Applique la règle correspondante — une seule à la fois, sans brûler d'étape.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Simplifie seulement à la fin — surtout si tu dois ensuite étudier le signe de \(f'\).</span></div>
+      </div>
+
+      <figure class="widget" id="widget-derivee"
+        data-widget="derivee" data-fn="x3-3x"
+        data-a-init="1.2"
+        data-xmin="-2.5" data-xmax="2.5"
+        data-ymin-f="-4.2" data-ymax-f="4.2" data-ymin-fp="-4.5" data-ymax-fp="11"
+        data-domaine="-2.1,2.1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Construis <span class="titre-math">f&hairsp;′</span> à partir de <span class="titre-math">f</span></span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph js-graph-f" viewBox="0 0 640 230" aria-label="Courbe de f avec un point déplaçable"></svg>
+        <svg class="widget-graph graph-scinde js-graph-fp" viewBox="0 0 640 230" aria-label="Courbe de f prime construite point par point"></svg>
+        <div class="widget-note">La pente de la tangente en A, en haut, devient la hauteur du point de f′, en bas — au même x.</div>
+      </figure>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Signe de \(f'\) et variations</h2>
+      <p class="prose">Voilà pourquoi tout ce chapitre sert&nbsp;: le signe de \(f'\) raconte le sens de variation de \(f\). Une pente positive, ça monte&nbsp;; une pente négative, ça descend.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ</div>
+        <p>Sur un intervalle I&nbsp;: si \(f'(x) > 0\) sur I, alors \(f\) est strictement croissante sur I.</p>
+        <p>Si \(f'(x) < 0\) sur I, \(f\) est strictement décroissante sur I.</p>
+        <p>Si \(f'\) est nulle sur I, \(f\) est constante sur I.</p>
+      </div>
+
+      <p class="prose">Exemple complet avec \(f(x) = x^3 - 3x\)&nbsp;: on dérive, \(f'(x) = 3x^2 - 3 = 3(x-1)(x+1)\), qui s'annule en −1 et en 1.</p>
+
+      <figure class="tableau tab-variations">
+        <figcaption>
+          <span>TABLEAU DE VARIATIONS</span>
+          <span class="bande-note">f(x) = x³ − 3x</span>
+        </figcaption>
+        <div class="grille-variations">
+          <div class="cel cel-entete bord-x">x</div>
+          <div class="cel cel-gauche bord-x">−∞</div>
+          <div class="cel-centre bord-x">−1</div>
+          <div class="bord-x"></div>
+          <div class="cel-centre bord-x">1</div>
+          <div class="cel cel-droite bord-x">+∞</div>
+
+          <div class="cel cel-entete bord-signe">f′(x)</div>
+          <div class="cel-centre bord-signe">+</div>
+          <div class="cel-centre bord-signe">0</div>
+          <div class="cel-centre bord-signe">−</div>
+          <div class="cel-centre bord-signe">0</div>
+          <div class="cel-centre bord-signe">+</div>
+
+          <div class="cel cel-entete cel-fleche">f</div>
+          <div class="cel-fleche">
+            <span class="fleche" aria-hidden="true">↗</span>
+            <span class="borne borne--bas-gauche">−∞</span>
+          </div>
+          <div class="val-haut">2</div>
+          <div class="cel-fleche"><span class="fleche" aria-hidden="true">↘</span></div>
+          <div class="val-bas">−2</div>
+          <div class="cel-fleche">
+            <span class="fleche" aria-hidden="true">↗</span>
+            <span class="borne borne--haut-droite">+∞</span>
+          </div>
+        </div>
+      </figure>
+
+      <p class="prose">Aux points où \(f'\) s'annule <em>en changeant de signe</em>, \(f\) admet un <strong>extremum local</strong>&nbsp;: ici un maximum local en −1 (qui vaut 2) et un minimum local en 1 (qui vaut −2). Retrouve-les sur la courbe du widget plus haut&nbsp;: ce sont les deux sommets.</p>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — ÉTUDIER LES VARIATIONS D'UNE FONCTION</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Dérive \(f\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Étudie le signe de \(f'(x)\) — factorise si besoin.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Dresse le tableau&nbsp;: signe de \(f'\) en haut, flèches de variations en dessous, valeurs aux points d'annulation.</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">Conclus&nbsp;: intervalles de croissance et de décroissance, extremums locaux.</span></div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Confondre \(f(a)\) et \(f'(a)\).</strong> \(f(a)\) est une hauteur, \(f'(a)\) est une pente. Sur un graphique, on ne les lit pas au même endroit.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Croire que \(f'(a) = 0\) garantit un extremum.</strong> Contre-exemple&nbsp;: \(f(x) = x^3\) en 0 — tangente horizontale, mais \(f\) ne change pas de sens. Il faut que \(f'\) change de signe.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Oublier que \(|x|\) n'est pas dérivable en 0.</strong> Une courbe avec un point anguleux n'a pas de tangente à cet endroit — continue ne veut pas dire dérivable.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Dériver un produit terme à terme.</strong> \((u\,v)' \neq u'v'\). Utilise la formule, à chaque fois.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· définition</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = x^2\). En utilisant la définition du nombre dérivé, calcule \(f'(3)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Écris le taux de variation&nbsp;: \((f(3+h) - f(3))\,/\,h = ((3+h)^2 - 9)\,/\,h\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Développe&nbsp;: \((9 + 6h + h^2 - 9)\,/\,h = (6h + h^2)\,/\,h = 6 + h\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Quand \(h \to 0\), \(6 + h \to 6\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(3) = 6\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· tangente</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = x^3 - 3x\). Détermine l'équation de la tangente à la courbe de \(f\) au point d'abscisse \(a = 2\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Calcule \(f(2) = 2^3 - 3 \times 2 = 8 - 6 = 2\). Le point de tangence est \((2\;;\, 2)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Dérive&nbsp;: \(f'(x) = 3x^2 - 3\), donc \(f'(2) = 3 \times 4 - 3 = 9\). La pente vaut 9.</p>
+          <p><span class="etape-label">Étape 3 — </span>Applique la formule&nbsp;: \(y = f'(2)(x - 2) + f(2) = 9(x - 2) + 2\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(y = 9x - 16\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· variations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(g(x) = x^3 + 3x^2 - 9x + 1\). Étudie les variations de \(g\) sur \(\mathbb{R}\) et précise ses extremums locaux.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Dérive&nbsp;: \(g'(x) = 3x^2 + 6x - 9 = 3(x^2 + 2x - 3) = 3(x+3)(x-1)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Signe&nbsp;: \(g'(x) > 0\) hors de \([-3\;;\, 1]\), \(g'(x) < 0\) entre −3 et 1.</p>
+          <p><span class="etape-label">Étape 3 — </span>Tableau&nbsp;: \(g\) croît sur \(\left]-\infty\;;\, -3\right]\), décroît sur \([-3\;;\, 1]\), recroît sur \(\left[1\;;\, +\infty\right[\), avec \(g(-3) = 28\) et \(g(1) = -4\).</p>
+          <p class="conclusion">Conclusion&nbsp;: maximum local 28 en −3, minimum local −4 en 1.</p>
+        </div>
+      </article>
+
+      <div class="ex-reste">Exercices 4 à 14 — définition et taux de variation, tangentes, calcul de dérivées avec les opérations, études de variations.</div>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · SANS CALCULATRICE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">On considère la fonction \(f\) définie sur \(\mathbb{R}\) par \(f(x) = x^3 - 3x + 1\), et \(\mathcal{C}\) sa courbe représentative.</p>
+          <div class="bac-partie">PARTIE A</div>
+          <ol>
+            <li>Calcule \(f'(x)\).</li>
+            <li>Détermine l'équation de la tangente \(T\) à \(\mathcal{C}\) au point d'abscisse 0.</li>
+            <li>Étudie la position de \(\mathcal{C}\) par rapport à \(T\).</li>
+          </ol>
+          <div class="bac-partie">PARTIE B</div>
+          <ol>
+            <li>Étudie le signe de \(f'(x)\) sur \(\mathbb{R}\).</li>
+            <li>Dresse le tableau de variations de \(f\).</li>
+            <li>Montre que l'équation \(f(x) = 0\) admet exactement trois solutions.</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>\(f'(x) = 3x^2 - 3\).</p>
+            <p><span class="etape-label">A.2 — </span>\(f(0) = 1\), \(f'(0) = -3\), donc \(T : y = -3x + 1\).</p>
+            <p><span class="etape-label">A.3 — </span>\(f(x) - (-3x + 1) = x^3\)&nbsp;: négatif avant 0, positif après. \(\mathcal{C}\) est sous \(T\) puis au-dessus — elle traverse sa tangente en 0.</p>
+            <p><span class="etape-label">B.1 &amp; B.2 — </span>\(f'(x) > 0\) hors de \([-1\;;\, 1]\)&nbsp;: \(f\) croît, décroît, puis croît, avec \(f(-1) = 3\) et \(f(1) = -1\).</p>
+            <p><span class="etape-label">B.3 — </span>Sur chacun des trois intervalles, \(f\) est strictement monotone et change de signe (3 et −1 encadrent 0)&nbsp;: trois solutions, une par intervalle.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">Les suites numériques <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span><span class="nabla-symbole" aria-hidden="true">∇</span> Nabla — fiches de révision interactives</span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
