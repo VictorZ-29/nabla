@@ -114,11 +114,16 @@ function initGeometrique(fig) {
     track('widget_interact', { widget: 'geometrique', chapitre });
   }
 
+  /* les événements input peuvent dépasser la cadence d'affichage pendant un
+     drag : au plus un rendu par frame */
+  let renduPlanifie = 0;
   curseur.addEventListener('input', () => {
     if (animation) { animation.stop(); animation = null; }
     q = clamp(parseFloat(curseur.value), parseFloat(curseur.min), parseFloat(curseur.max));
     interaction();
-    rendre();
+    if (!renduPlanifie) {
+      renduPlanifie = requestAnimationFrame(() => { renduPlanifie = 0; rendre(); });
+    }
   });
 
   for (const btn of presets) {

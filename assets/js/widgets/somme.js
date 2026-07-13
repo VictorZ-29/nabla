@@ -103,10 +103,15 @@ function initSomme(fig) {
     track('widget_interact', { widget: 'somme', chapitre });
   }
 
+  /* le redessin des cases est le travail le plus lourd du widget : au plus
+     un par frame pendant un drag du curseur */
+  let renduPlanifie = 0;
   curseur.addEventListener('input', () => {
     n = parseInt(curseur.value, 10);
     interaction();
-    dessiner();
+    if (!renduPlanifie) {
+      renduPlanifie = requestAnimationFrame(() => { renduPlanifie = 0; dessiner(); });
+    }
   });
 
   toggle.addEventListener('click', () => {

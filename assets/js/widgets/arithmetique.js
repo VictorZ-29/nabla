@@ -133,15 +133,22 @@ function initArithmetique(fig) {
     track('widget_interact', { widget: 'arithmetique', chapitre });
   }
 
+  /* les événements input peuvent dépasser la cadence d'affichage pendant un
+     drag : au plus un rendu par frame */
+  let renduPlanifie = 0;
+  function planifierRendu() {
+    if (!renduPlanifie) renduPlanifie = requestAnimationFrame(() => { renduPlanifie = 0; rendre(); });
+  }
+
   curseurU0.addEventListener('input', () => {
     u0 = clamp(parseFloat(curseurU0.value), parseFloat(curseurU0.min), parseFloat(curseurU0.max));
     interaction();
-    rendre();
+    planifierRendu();
   });
   curseurR.addEventListener('input', () => {
     r = clamp(parseFloat(curseurR.value), parseFloat(curseurR.min), parseFloat(curseurR.max));
     interaction();
-    rendre();
+    planifierRendu();
   });
 
   fig.querySelector('.js-reset').addEventListener('click', () => {

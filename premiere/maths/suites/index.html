@@ -51,7 +51,11 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false});"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : les 530 formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
 
 <link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
@@ -164,7 +168,7 @@
           <circle class="pt-suite" cx="506.7" cy="76.2" r="5"></circle>
           <circle class="pt-suite" cx="573.3" cy="50.8" r="5"></circle>
           <circle class="pt-point" cx="240" cy="177.8" r="5.5"></circle>
-          <text class="etiquette-math etiquette-math--accent" font-size="16" x="252" y="168">u<tspan dy="4" font-size="11">3</tspan><tspan dy="-4">&#8201;= 160 €</tspan></text>
+          <text class="etiquette-math etiquette-math--accent" font-size="16" x="228" y="169" text-anchor="end">u<tspan dy="4" font-size="11">3</tspan><tspan dy="-4">&#8201;= 160 €</tspan></text>
         </svg>
         <figcaption>L'épargne, mois par mois. Chaque point a un numéro (son rang \(n\), en abscisse) et une valeur (le terme \(u_n\), en ordonnée). On ne relie pas les points&nbsp;: entre deux rangs, il n'y a rien.</figcaption>
       </figure>

@@ -268,3 +268,19 @@ Flag 18 comes from Victor's review (July 2026):
     column is at the left: genuinely tête-bêche. Button wording changed
     from « pose/enlève la copie retournée » to « ajoute/retire l'escalier
     tête-bêche » (same request).
+19. **Perf pass per Victor's lag report** (the machines section felt
+    laggy). Diagnosis, measured under 6× CPU throttling: the widget
+    handlers are trivial (200 slider events ≈ 7 ms) — the culprit was
+    KaTeX auto-render building 20 449 of the page's 22 758 DOM nodes in
+    ONE main-thread task (worst task 1 096 ms throttled). Fixes shipped:
+    (a) KaTeX now renders block by block, one frame each, on both chapter
+    pages — worst task 1 096 → 232 ms, total blocking time ÷3; (b) the
+    four slider widgets coalesce their `input` renders with
+    `requestAnimationFrame` (≤ 1 render/frame, same doctrine as the
+    dérivation drag helper). If lag persists on Victor's machine, the
+    next lever is reducing formula count (many single-letter \(n\)/\(q\)
+    inline maths could become styled text — ~40 DOM nodes each).
+20. **§1 figure label moved per Victor's remark**: « u₃ = 160 € » sat
+    right of the u₃ point, floating above the rank-4 point and reading as
+    its label. Now anchored to the LEFT of the point, above the dashed
+    guide, in empty space.

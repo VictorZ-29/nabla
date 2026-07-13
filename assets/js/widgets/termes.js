@@ -76,10 +76,15 @@ function initTermes(fig) {
     }
   }
 
+  /* les événements input peuvent dépasser la cadence d'affichage pendant un
+     drag : au plus un rendu par frame */
+  let renduPlanifie = 0;
   curseur.addEventListener('input', () => {
     n = parseInt(curseur.value, 10);
     interaction();
-    rendreExplicite();
+    if (!renduPlanifie) {
+      renduPlanifie = requestAnimationFrame(() => { renduPlanifie = 0; rendreExplicite(); });
+    }
   });
 
   suivant.addEventListener('click', () => {
