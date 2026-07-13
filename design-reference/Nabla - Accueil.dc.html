@@ -29,8 +29,8 @@ a:hover { color: var(--text, #F2EFE6); }
 <div style="{{ rootStyle }}">
 
   <header data-screen-label="En-tête" style="max-width: 1100px; margin: 0 auto; padding: 22px clamp(20px, 5vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 24px;">
-    <a href="#" style="text-decoration: none; color: var(--text, #F2EFE6); display: inline-flex; align-items: baseline; gap: 8px;">
-      <span aria-hidden="true" style="font-family: 'STIX Two Text', serif; font-size: 22px; color: var(--accent, #93A6F2);">∇</span>
+    <a href="#" style="text-decoration: none; color: var(--text, #F2EFE6); display: inline-flex; align-items: center; gap: 8px;">
+      <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: var(--accent, #93A6F2);"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" style="stroke-dasharray: 1; stroke-dashoffset: 1; animation: nablaDraw 0.9s cubic-bezier(0.55, 0.06, 0.28, 0.99) 0.15s forwards;"></path></svg>
       <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.01em;">Nabla</span>
     </a>
     <nav style="display: flex; align-items: center; gap: clamp(16px, 3vw, 28px); font-family: 'IBM Plex Mono', monospace; font-size: 13px;">
@@ -43,14 +43,14 @@ a:hover { color: var(--text, #F2EFE6); }
   <section data-screen-label="Héro" style="max-width: 1100px; margin: 0 auto; padding: clamp(36px, 6vw, 76px) clamp(20px, 5vw, 48px) clamp(44px, 6vw, 72px); display: flex; flex-wrap: wrap; align-items: center; gap: clamp(32px, 5vw, 64px);">
     <div style="flex: 1.15; min-width: 300px;">
       <div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--faint, #8D8776);">PREMIÈRE &amp; TERMINALE — SPÉ MATHS · PHYSIQUE-CHIMIE</div>
-      <h1 style="margin: 16px 0 0; font-size: clamp(34px, 5.5vw, 54px); line-height: 1.07; font-weight: 600; letter-spacing: -0.015em; text-wrap: balance;">Les maths de spé, expliquées pour de vrai.</h1>
-      <p style="margin: 20px 0 0; font-size: clamp(16px, 2vw, 18.5px); line-height: 1.6; color: var(--muted, #B3AC9A); max-width: 46ch;">Des fiches interactives où tu manipules les courbes toi-même, et des exercices corrigés pas à pas. Gratuit, sans compte, sans pub.</p>
+      <h1 style="margin: 16px 0 0; font-size: clamp(34px, 5.5vw, 54px); line-height: 1.07; font-weight: 600; letter-spacing: -0.015em; text-wrap: balance;">Maths et physique-chimie, expliqués pour de vrai.</h1>
+      <p style="margin: 20px 0 0; font-size: clamp(16px, 2vw, 18.5px); line-height: 1.6; color: var(--muted, #B3AC9A); max-width: 46ch;">Des fiches interactives que tu manipules toi-même, et des exercices corrigés pas à pas. Gratuit, sans compte, sans pub.</p>
       <div style="margin-top: 28px;">
-        <a href="Nabla — La dérivation.dc.html" style="font-size: 17px; font-weight: 500;">Commencer par la dérivation <span aria-hidden="true">→</span></a>
+        <a href="Nabla - La dérivation.dc.html" style="font-size: 17px; font-weight: 500;">Commencer par la dérivation <span aria-hidden="true">→</span></a>
       </div>
     </div>
     <div style="flex: 1; min-width: 280px;">
-      <svg viewBox="0 0 720 480" style="width: 100%; height: auto; display: block;" role="img" aria-label="Courbe de f(x) = x³ − 3x et sa tangente au point A">
+      <svg viewBox="0 0 720 480" style="width: 100%; height: auto; display: block;" role="img" aria-label="Courbe de f(x) = x³ − 3x et sa tangente en un point">
         <path d="M60 480L60 0M210 480L210 0M510 480L510 0M660 480L660 0M0 462.2L720 462.2M0 417.8L720 417.8M0 373.3L720 373.3M0 328.9L720 328.9M0 284.4L720 284.4M0 195.6L720 195.6M0 151.1L720 151.1M0 106.7L720 106.7M0 62.2L720 62.2M0 17.8L720 17.8" fill="none" stroke="var(--grid, #242018)" stroke-width="{{ swGrid }}"></path>
         <path d="M0 240L720 240M360 480L360 0" fill="none" stroke="var(--axis, #4C4635)" stroke-width="{{ swGrid }}"></path>
         <path d="M585 240L585 290" fill="none" stroke="var(--guide, #6B6450)" stroke-width="{{ swGrid }}" stroke-dasharray="3 5"></path>
@@ -60,8 +60,7 @@ a:hover { color: var(--text, #F2EFE6); }
         <g style="opacity: 0; animation: nablaFade 0.6s ease 2.7s forwards;">
           <circle cx="585" cy="290" r="12" fill="none" stroke="var(--accent, #93A6F2)" stroke-opacity="0.4" stroke-width="1.5"></circle>
           <circle cx="585" cy="290" r="5.5" fill="var(--accent, #93A6F2)" stroke="var(--bg, #16140F)" stroke-width="2"></circle>
-          <text x="602" y="272" style="font-family: 'STIX Two Text', serif; font-style: italic; font-size: 19px; fill: var(--text, #F2EFE6);">A</text>
-          <text x="470" y="416" text-anchor="end" style="font-family: 'STIX Two Text', serif; font-style: italic; font-size: 17px; fill: var(--accent, #93A6F2);">y = f′(a)(x − a) + f(a)</text>
+          <text x="486" y="404" text-anchor="end" style="font-family: 'STIX Two Text', serif; font-style: italic; font-size: 17px; fill: var(--accent, #93A6F2);">y = f′(a)(x − a) + f(a)</text>
         </g>
       </svg>
     </div>
@@ -74,7 +73,7 @@ a:hover { color: var(--text, #F2EFE6); }
       <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--faint, #8D8776);">1 chapitre en ligne · 4 en préparation</span>
     </div>
 
-    <a href="Nabla — La dérivation.dc.html" style="display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px, 4vw, 56px); text-decoration: none; color: var(--text, #F2EFE6); background: var(--surface, #1F1C15); border: 1px solid var(--edge, #D6D0BF); border-radius: 12px; padding: clamp(22px, 4vw, 34px);" style-hover="border-color: var(--accent, #93A6F2);">
+    <a href="Nabla - La dérivation.dc.html" style="display: flex; flex-wrap: wrap; align-items: center; gap: clamp(20px, 4vw, 56px); text-decoration: none; color: var(--text, #F2EFE6); background: var(--surface, #1F1C15); border: 1px solid var(--edge, #D6D0BF); border-radius: 12px; padding: clamp(22px, 4vw, 34px);" style-hover="border-color: var(--accent, #93A6F2);">
       <div style="flex: 1.4; min-width: 260px;">
         <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--accent, #93A6F2);">CHAPITRE 01 — EN LIGNE</div>
         <div style="font-size: clamp(24px, 4vw, 30px); font-weight: 600; margin-top: 8px;">La dérivation</div>
@@ -182,20 +181,15 @@ a:hover { color: var(--text, #F2EFE6); }
   </section>
 
   <section id="apropos" data-screen-label="À propos" style="max-width: 1100px; margin: 0 auto; padding: clamp(48px, 7vw, 76px) clamp(20px, 5vw, 48px);">
-    <div style="max-width: 680px; display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap;">
-      <div style="width: 76px; height: 76px; flex-shrink: 0;">
-        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="portrait-auteur" shape="circle" placeholder="photo" hint-size="76px,76px" style="width: 76px; height: 76px;"></x-import>
-      </div>
-      <div style="flex: 1; min-width: 260px;">
-        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--faint, #8D8776);">QUI EST DERRIÈRE CE SITE ?</div>
-        <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.65;">Nabla est écrit par une seule personne : tuteur indépendant depuis neuf ans, diplômé d'Imperial College London, spécialiste du Bac français et des lycées français à l'étranger. Chaque fiche est construite comme un cours particulier — relue et retravaillée jusqu'à ce que ce soit vraiment clair.</p>
-      </div>
+    <div style="max-width: 680px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--faint, #8D8776);">QUI EST DERRIÈRE CE SITE ?</div>
+      <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.65;">Nabla est écrit par une seule personne : neuf ans de tutorat indépendant, un master (MEng) d'ingénierie aérospatiale à Imperial College London, et une spécialité — le Bac français. Chaque fiche est relue et retravaillée jusqu'à ce que tout soit vraiment clair.</p>
     </div>
   </section>
 
   <footer style="border-top: 1px solid var(--hair, #332F24);">
     <div style="max-width: 1100px; margin: 0 auto; padding: 24px clamp(20px, 5vw, 48px); display: flex; flex-wrap: wrap; gap: 12px 28px; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--faint, #8D8776);">
-      <span><span aria-hidden="true" style="color: var(--accent, #93A6F2);">∇</span> Nabla — fiches de révision interactives</span>
+      <span style="display: inline-flex; align-items: center; gap: 7px;"><svg viewBox="0 0 32 32" width="13" height="13" aria-hidden="true" style="display: block; color: var(--accent, #93A6F2);"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
       <span style="display: flex; gap: 20px; flex-wrap: wrap;">
         <a href="mailto:bonjour@nabla.example" style="color: var(--faint, #8D8776);" style-hover="color: var(--text, #F2EFE6);">Écris-moi</a>
         <a href="#" style="color: var(--faint, #8D8776);" style-hover="color: var(--text, #F2EFE6);">Mentions légales</a>

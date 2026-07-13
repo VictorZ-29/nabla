@@ -46,6 +46,19 @@ button { font: inherit; }
 @keyframes nablaDraw { to { stroke-dashoffset: 0; } }
 @keyframes nablaFade { to { opacity: 1; } }
 
+/* Logo ∇ monotrait — un seul trait, même main que les courbes.
+   Dans l'en-tête il se trace au chargement (comme la courbe du héro). */
+.logo-nabla {
+  display: block;
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.marque .logo-nabla path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: nablaDraw 0.9s cubic-bezier(0.55, 0.06, 0.28, 0.99) 0.15s forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -95,15 +108,10 @@ button { font: inherit; }
   text-decoration: none;
   color: var(--text);
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
 }
 .marque:hover { color: var(--text); }
-.marque .nabla-symbole {
-  font-family: var(--font-math);
-  font-size: 22px;
-  color: var(--accent);
-}
 .marque .marque-nom {
   font-weight: 600;
   font-size: 19px;
@@ -138,7 +146,7 @@ button { font: inherit; }
   font-size: 12px;
   color: var(--faint);
 }
-.site-footer .nabla-symbole { color: var(--accent); }
+.site-footer .footer-marque { display: inline-flex; align-items: center; gap: 7px; }
 .site-footer .footer-liens { display: flex; gap: 20px; flex-wrap: wrap; }
 .site-footer a { color: var(--faint); }
 .site-footer a:hover { color: var(--text); }
@@ -348,30 +356,9 @@ button { font: inherit; }
   margin: 0 auto;
   padding: clamp(48px, 7vw, 76px) var(--pad-x);
 }
-.apropos-inner {
-  max-width: 680px;
-  display: flex;
-  gap: 26px;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-.portrait {
-  width: 76px;
-  height: 76px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  border: 1px dashed var(--dash);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  color: var(--faint);
-}
-.apropos-texte { flex: 1; min-width: 260px; }
-.apropos-texte .kicker { letter-spacing: 0.14em; font-size: 11px; }
-.apropos-texte p {
+.apropos-inner { max-width: 680px; }
+.apropos-inner .kicker { letter-spacing: 0.14em; font-size: 11px; }
+.apropos-inner p {
   margin: 12px 0 0;
   font-size: 17px;
   line-height: 1.65;

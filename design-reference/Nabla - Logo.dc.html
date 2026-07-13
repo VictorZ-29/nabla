@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+html, body { margin: 0; padding: 0; background: #16140F; }
+body { color: #F2EFE6; font-family: 'Spectral', Georgia, serif; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+a { color: var(--accent, #93A6F2); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--text, #F2EFE6); }
+:focus-visible { outline: 2px solid var(--accent, #93A6F2); outline-offset: 3px; border-radius: 2px; }
+@keyframes nablaDraw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition: none !important; }
+}
+</style>
+</helmet>
+
+<div style="{{ rootStyle }}">
+
+  <header data-screen-label="Planche logo — en-tête" style="max-width: 1240px; margin: 0 auto; padding: 22px clamp(20px, 5vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+    <div style="display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;">
+      <span style="font-weight: 600; font-size: 19px;">Nabla — le logo</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--faint, #8D8776);">4 pistes, puis l'affinage de la plus forte</span>
+    </div>
+    <button type="button" onClick="{{ toggleTheme }}" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted, #B3AC9A); background: none; border: 1px solid var(--hair, #332F24); border-radius: 999px; padding: 5px 12px; cursor: pointer;" style-hover="border-color: var(--text, #F2EFE6); color: var(--text, #F2EFE6);">{{ themeLabel }}</button>
+  </header>
+
+  <section data-screen-label="Pistes" style="max-width: 1240px; margin: 0 auto; padding: 8px clamp(20px, 5vw, 48px) 8px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--faint, #8D8776); border-top: 1px solid var(--hair, #332F24); padding-top: 16px;">QUATRE PISTES — JUGER PETIT D'ABORD</div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 16px;">
+
+      <div id="1a" style="background: var(--surface, #1F1C15); border: 1px solid var(--hair, #332F24); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: var(--text, #F2EFE6);">A · MONOTRAIT</span>
+          <a href="#1a" style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776); text-decoration: none; border: 1px solid var(--hair, #332F24); border-radius: 4px; padding: 2px 6px;">1a</a>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 18px 0;">
+          <svg viewBox="0 0 32 32" width="104" height="104" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div style="border-top: 1px dashed var(--dash2, #453F30); padding-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: var(--accent, #93A6F2);"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.01em;">Nabla</span>
+          </div>
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint, #8D8776);">16 px</span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted, #B3AC9A);">L'opérateur tracé d'un seul geste, sans lever la craie — la même main que les courbes.</p>
+      </div>
+
+      <div id="1b" style="background: var(--surface, #1F1C15); border: 1px solid var(--hair, #332F24); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: var(--text, #F2EFE6);">B · LE POINT</span>
+          <a href="#1b" style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776); text-decoration: none; border: 1px solid var(--hair, #332F24); border-radius: 4px; padding: 2px 6px;">1b</a>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 18px 0;">
+          <svg viewBox="0 0 32 32" width="104" height="104" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M14.2 22.1 L7 7 L25 7 L17.8 22.1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="16" cy="26" r="2.4" fill="var(--accent, #93A6F2)"></circle></svg>
+        </div>
+        <div style="border-top: 1px dashed var(--dash2, #453F30); padding-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M14.2 22.1 L7 7 L25 7 L17.8 22.1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="16" cy="26" r="2.4" fill="var(--accent, #93A6F2)"></circle></svg>
+            <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.01em;">Nabla</span>
+          </div>
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M14.2 22.1 L7 7 L25 7 L17.8 22.1" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="16" cy="26" r="2.8" fill="currentColor"></circle></svg>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint, #8D8776);">16 px</span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted, #B3AC9A);">Les trois côtés convergent vers un point — l'endroit exact où ça devient clair.</p>
+      </div>
+
+      <div id="1c" style="background: var(--surface, #1F1C15); border: 1px solid var(--hair, #332F24); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: var(--text, #F2EFE6);">C · LA PENTE</span>
+          <a href="#1c" style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776); text-decoration: none; border: 1px solid var(--hair, #332F24); border-radius: 4px; padding: 2px 6px;">1c</a>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 18px 0;">
+          <svg viewBox="0 0 32 32" width="104" height="104" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M25 8 L7 8 Q8 19 16 26 L25 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div style="border-top: 1px dashed var(--dash2, #453F30); padding-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: var(--accent, #93A6F2);"><path d="M25 8 L7 8 Q8 19 16 26 L25 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.01em;">Nabla</span>
+          </div>
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M25 8 L7 8 Q8 19 16 26 L25 8" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint, #8D8776);">16 px</span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted, #B3AC9A);">Le ∇ comme triangle des accroissements : une courbe, sa corde, un taux de variation.</p>
+      </div>
+
+      <div id="1d" style="background: var(--surface, #1F1C15); border: 1px solid var(--hair, #332F24); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; color: var(--text, #F2EFE6);">D · LA TANGENTE</span>
+          <a href="#1d" style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776); text-decoration: none; border: 1px solid var(--hair, #332F24); border-radius: 4px; padding: 2px 6px;">1d</a>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; padding: 18px 0;">
+          <svg viewBox="0 0 32 32" width="104" height="104" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M5 10 Q16 30 27 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path><path d="M13.1 23.7 L27.7 13.1" fill="none" stroke="var(--accent, #93A6F2)" stroke-width="2" stroke-linecap="round"></path><circle cx="20.4" cy="18.4" r="2.2" fill="var(--accent, #93A6F2)"></circle></svg>
+        </div>
+        <div style="border-top: 1px dashed var(--dash2, #453F30); padding-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M5 10 Q16 30 27 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path><path d="M13.1 23.7 L27.7 13.1" fill="none" stroke="var(--accent, #93A6F2)" stroke-width="2" stroke-linecap="round"></path><circle cx="20.4" cy="18.4" r="2.2" fill="var(--accent, #93A6F2)"></circle></svg>
+            <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.01em;">Nabla</span>
+          </div>
+          <div style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M5 10 Q16 30 27 10" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"></path><path d="M13.1 23.7 L27.7 13.1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"></path><circle cx="20.4" cy="18.4" r="2.4" fill="currentColor"></circle></svg>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--faint, #8D8776);">16 px</span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--muted, #B3AC9A);">Pas le symbole, l'idée : une courbe, sa tangente, le point de contact. Fragile à 16 px.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="1e" data-screen-label="Affinage" style="max-width: 1240px; margin: 24px auto 0; padding: 0 clamp(20px, 5vw, 48px) clamp(48px, 7vw, 80px);">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-top: 1px solid var(--hair, #332F24); padding-top: 16px; flex-wrap: wrap;">
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: var(--faint, #8D8776);">AFFINAGE — PISTE A RETENUE</span>
+      <a href="#1e" style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776); text-decoration: none; border: 1px solid var(--hair, #332F24); border-radius: 4px; padding: 2px 6px;">1e</a>
+    </div>
+    <p style="margin: 14px 0 0; font-size: 15.5px; line-height: 1.6; color: var(--muted, #B3AC9A); max-width: 62ch;">Un seul trait : un seul auteur, une seule idée. Et parce que c'est un trait, il se dessine au chargement exactement comme la courbe du héros — même main, même geste. L'ouverture en haut à gauche est l'endroit où la craie s'est posée.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-top: 20px;">
+
+      <div style="background: #FBFAF7; color: #1D1B16; border: 1px solid #1D1B16; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 22px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #8A8677;">THÈME CLAIR</span>
+        <div style="display: inline-flex; align-items: center; gap: 8px;">
+          <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: #2743C6;"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" style="stroke-dasharray: 1; stroke-dashoffset: 1; animation: nablaDraw 0.9s cubic-bezier(0.55, 0.06, 0.28, 0.99) 0.3s forwards;"></path></svg>
+          <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.01em;">Nabla</span>
+        </div>
+        <div style="border-top: 1px solid #E4E1D7; padding-top: 16px; display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8A8677;">
+          <svg viewBox="0 0 32 32" width="13" height="13" aria-hidden="true" style="display: block; color: #2743C6;"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span>Nabla — fiches de révision interactives</span>
+        </div>
+        <div style="display: inline-flex; align-items: center; gap: 8px;">
+          <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: #1D1B16;"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8A8677;">monochrome — avant tout accent</span>
+        </div>
+      </div>
+
+      <div style="background: #16140F; color: #F2EFE6; border: 1px solid #332F24; border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 22px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: #8D8776;">THÈME SOMBRE</span>
+        <div style="display: inline-flex; align-items: center; gap: 8px;">
+          <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: #93A6F2;"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" style="stroke-dasharray: 1; stroke-dashoffset: 1; animation: nablaDraw 0.9s cubic-bezier(0.55, 0.06, 0.28, 0.99) 0.3s forwards;"></path></svg>
+          <span style="font-weight: 600; font-size: 19px; letter-spacing: 0.01em;">Nabla</span>
+        </div>
+        <div style="border-top: 1px solid #332F24; padding-top: 16px; display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #8D8776;">
+          <svg viewBox="0 0 32 32" width="13" height="13" aria-hidden="true" style="display: block; color: #93A6F2;"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span>Nabla — fiches de révision interactives</span>
+        </div>
+        <div style="display: inline-flex; align-items: center; gap: 8px;">
+          <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" style="display: block; color: #F2EFE6;"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #8D8776;">monochrome — avant tout accent</span>
+        </div>
+      </div>
+
+      <div style="background: var(--surface, #1F1C15); border: 1px solid var(--hair, #332F24); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; gap: 18px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.16em; color: var(--faint, #8D8776);">FAVICON &amp; BADGE — TRIANGLE FERMÉ, TRAIT ÉPAISSI</span>
+        <div style="display: flex; align-items: flex-end; gap: 20px; flex-wrap: wrap;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" style="display: block;"><rect x="0" y="0" width="32" height="32" rx="7" fill="#2743C6"></rect><path d="M7.2 8.4 L24.8 8.4 L16 26 Z" fill="none" stroke="#F5F2E9" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776);">16</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" style="display: block;"><rect x="0" y="0" width="32" height="32" rx="7" fill="#2743C6"></rect><path d="M7.2 8.4 L24.8 8.4 L16 26 Z" fill="none" stroke="#F5F2E9" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776);">32</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="72" height="72" aria-hidden="true" style="display: block;"><rect x="0" y="0" width="32" height="32" rx="7" fill="#2743C6"></rect><path d="M7.2 8.4 L24.8 8.4 L16 26 Z" fill="none" stroke="#F5F2E9" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776);">social / 72</span>
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg viewBox="0 0 32 32" width="16" height="16" aria-hidden="true" style="display: block; color: var(--text, #F2EFE6);"><path d="M6.4 7.6 L25.6 7.6 L16 26.8 Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--faint, #8D8776);">16 nu</span>
+          </div>
+        </div>
+        <p style="margin: 0; font-size: 14px; line-height: 1.55; color: var(--muted, #B3AC9A);">À 16 px, l'ouverture du trait disparaîtrait : le favicon ferme le triangle et épaissit le trait. Même geste, simplifié pour la taille.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: Component.initTheme() };
+
+  static initTheme() {
+    try {
+      const s = localStorage.getItem('nabla-theme');
+      if (s === 'light' || s === 'dark') return s;
+    } catch (e) {}
+    try {
+      if (window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+    } catch (e) {}
+    return 'dark';
+  }
+
+  renderVals() {
+    const dark = this.state.theme === 'dark';
+    const A = dark ? '#93A6F2' : '#2743C6';
+
+    const vars = dark ? {
+      '--bg': '#16140F', '--surface': '#1F1C15',
+      '--text': '#F2EFE6', '--muted': '#B3AC9A', '--faint': '#8D8776',
+      '--hair': '#332F24', '--dash2': '#453F30',
+      '--accent': A
+    } : {
+      '--bg': '#FBFAF7', '--surface': '#FFFFFF',
+      '--text': '#1D1B16', '--muted': '#57534A', '--faint': '#8A8677',
+      '--hair': '#E4E1D7', '--dash2': '#CFCABA',
+      '--accent': A
+    };
+
+    const rootStyle = Object.assign({
+      minHeight: '100vh',
+      background: 'var(--bg)',
+      color: 'var(--text)',
+      fontFamily: "'Spectral', Georgia, serif"
+    }, vars);
+
+    return {
+      rootStyle,
+      themeLabel: dark ? '☀ clair' : '☾ sombre',
+      toggleTheme: () => {
+        const t = dark ? 'light' : 'dark';
+        try { localStorage.setItem('nabla-theme', t); } catch (e) {}
+        this.setState({ theme: t });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
