@@ -232,12 +232,6 @@ button { font: inherit; }
   font-size: clamp(20px, 3vw, 24px);
   font-weight: 600;
 }
-.rangee-compte {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--faint);
-}
-
 /* Carte de chapitre en ligne */
 .carte-chapitre {
   display: flex;
