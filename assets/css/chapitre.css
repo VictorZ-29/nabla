@@ -149,7 +149,7 @@
 
 .chap-section { scroll-margin-top: 90px; }
 .chap-section + .chap-section { margin-top: 56px; }
-#pieges.chap-section, #ex.chap-section { margin-top: 64px; }
+#pieges.chap-section, #essentiel.chap-section, #ex.chap-section { margin-top: 64px; }
 
 .chap-section h2 {
   margin: 8px 0 18px;
@@ -877,3 +877,85 @@
 .quiz-retour .verdict--bonne { color: var(--good); }
 .quiz-retour .verdict--fausse { color: var(--bad); }
 .quiz-score { font-family: var(--font-mono); font-size: 12px; color: var(--faint); }
+
+/* --- Lecture graphique de f′(a) ------------------------------------------------------------------------
+   Réutilise les boutons et retours du quiz ; seuls les contrôles de manche
+   sont propres au composant. */
+
+.lecture-controles { display: flex; gap: 10px; flex-wrap: wrap; }
+.lecture-controles .btn-pill[hidden] { display: none; }
+
+/* --- Association f ↔ f′ ---------------------------------------------------------------------------------
+   Cartes-graphiques appariables. Rangée du haut : f (craie) ; rangée du
+   bas : candidates pour f′ (accent), mélangées. */
+
+.associe-corps {
+  padding: 14px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.associe-rang-titre {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--faint);
+}
+.associe-rang { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.associe-carte {
+  position: relative;
+  padding: 14px 4px 4px;
+  background: transparent;
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-block);
+  cursor: pointer;
+}
+.associe-carte svg { display: block; width: 100%; height: auto; }
+@media (hover: hover) {
+  .associe-carte:not(:disabled):hover { border-color: var(--accent); }
+}
+.associe-carte[aria-pressed="true"] { border-color: var(--accent); background: var(--accTint); }
+.associe-carte[data-etat="fausse"] { border-color: var(--bad); background: var(--badTint); }
+.associe-carte.est-associee { border-color: var(--good); background: var(--goodTint); cursor: default; }
+.associe-etiquette {
+  position: absolute;
+  top: 5px;
+  left: 9px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+.associe-carte.est-associee .associe-etiquette { color: var(--good); }
+.g-courbe-mini { stroke: var(--chalk); stroke-width: var(--sw-tan-mini); fill: none; stroke-linecap: round; }
+.g-courbe-mini--derivee { stroke: var(--accent); }
+.g-axe-mini { stroke: var(--axis); stroke-width: 1; fill: none; }
+
+/* --- L'essentiel -----------------------------------------------------------------------------------------
+   Le chapitre en cinq lignes, juste avant les exercices. */
+
+.bloc-essentiel {
+  position: relative;
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-card);
+  padding: 28px 22px 10px;
+}
+.essentiel-ligne {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--hairIn);
+}
+.essentiel-ligne:last-child { border-bottom: none; padding-bottom: 20px; }
+.essentiel-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  flex: 0 0 132px;
+}
+.essentiel-ligne p { margin: 0; font-size: 16.5px; line-height: 1.7; }
+@media (max-width: 560px) {
+  .essentiel-ligne { flex-direction: column; gap: 6px; }
+  .essentiel-label { flex: none; }
+}

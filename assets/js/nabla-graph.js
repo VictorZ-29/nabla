@@ -14,6 +14,14 @@ export const FONCTIONS = {
     f: (x) => x * x * x - 3 * x,
     fp: (x) => 3 * x * x - 3,
   },
+  /* Lecture graphique de f′(a) (§3) */
+  'x2s2': { f: (x) => x * x / 2, fp: (x) => x },
+  'x2-1': { f: (x) => x * x - 1, fp: (x) => 2 * x },
+  '1-x2s4': { f: (x) => 1 - x * x / 4, fp: (x) => -x / 2 },
+  '2-x2': { f: (x) => 2 - x * x, fp: (x) => -2 * x },
+  /* Association f ↔ f′ (§4) — 'x2-1' sert aussi de fonction du haut */
+  'x3s3-x': { f: (x) => x * x * x / 3 - x, fp: (x) => x * x - 1 },
+  '1-x2s2': { f: (x) => 1 - x * x / 2, fp: (x) => -x },
 };
 
 /* Crée un élément SVG avec attributs, et l'ajoute à parent s'il est fourni. */

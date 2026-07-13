@@ -65,6 +65,8 @@
 <script type="module" src="../../../assets/js/widgets/tangente.js"></script>
 <script type="module" src="../../../assets/js/widgets/derivee.js"></script>
 <script type="module" src="../../../assets/js/widgets/variations.js"></script>
+<script type="module" src="../../../assets/js/widgets/lecture.js"></script>
+<script type="module" src="../../../assets/js/widgets/associe.js"></script>
 <script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
 </head>
 <body data-chapitre="derivation">
@@ -103,6 +105,7 @@
       <a href="#s4">4. Dérivées usuelles et opérations</a>
       <a href="#s5">5. Signe de f′ et variations</a>
       <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
       <a href="#ex">Exercices — 15 corrigés</a>
       <a href="#bac">Vers le Bac</a>
     </nav>
@@ -119,6 +122,7 @@
         <a href="#s4">4. Dérivées usuelles et opérations</a>
         <a href="#s5">5. Signe de f′ et variations</a>
         <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
         <a href="#ex">Exercices — 15 corrigés</a>
         <a href="#bac">Vers le Bac</a>
       </nav>
@@ -128,7 +132,7 @@
       <h2>1. À quelle vitesse, exactement&nbsp;?</h2>
       <p class="prose">Une voiture parcourt 100 km en 2 heures&nbsp;: vitesse moyenne, 50 km/h. Mais au péage, le compteur n'affichait pas 50 — il affichait la vitesse <em>à cet instant-là</em>. La moyenne lisse tout&nbsp;; le compteur répond à une question plus fine. Toute la question du chapitre tient là&nbsp;: comment définir mathématiquement «&nbsp;la vitesse à un instant&nbsp;»&nbsp;?</p>
       <p class="prose">Traduisons sur un graphique. Entre deux points d'une courbe, l'équivalent de la vitesse moyenne s'appelle le <strong>taux de variation</strong>&nbsp;: c'est la pente — le coefficient directeur — de la droite qui passe par ces deux points. Cette droite s'appelle une <strong>sécante</strong>. Tu as déjà fait tout ça en Seconde.</p>
-      <p class="prose">Pour fixer les idées, lis la courbe ci-dessous comme l'enregistrement d'un trajet&nbsp;: le temps en abscisse, la distance parcourue en ordonnée. Entre A et B, la pente de la sécante, c'est exactement la vitesse moyenne entre ces deux instants — plus la droite est raide, plus on a roulé vite. Tout le chapitre est déjà contenu dans cette image.</p>
+      <p class="prose">Pour fixer les idées, lis la courbe ci-dessous comme l'enregistrement d'un trajet&nbsp;: le temps en abscisse, la distance parcourue en ordonnée. Entre A et B, la pente de la sécante, c'est exactement la vitesse moyenne entre ces deux instants. Plus la droite est raide, plus on a roulé vite. Tout le chapitre est déjà contenu dans cette image.</p>
 
       <figure class="figure-graph">
         <svg viewBox="0 0 640 400" role="img" aria-label="Courbe avec deux points A et B, la sécante qui les relie, et le triangle montrant h et f(a+h) moins f(a)">
@@ -192,8 +196,8 @@
 
       <div class="bloc-pourquoi">
         <div class="bloc-label">POURQUOI&nbsp;?</div>
-        <p>Dans le graphique ci-dessus, impossible d'amener \(h\) jusqu'à 0 — et ce n'est pas un caprice. Pose \(h = 0\) dans la formule du taux&nbsp;: tu obtiens \((f(a) - f(a))\,/\,0\), c'est-à-dire \(0/0\). Diviser par zéro n'a pas de sens. Et géométriquement, c'est pareil&nbsp;: avec un seul point, il n'y a plus de droite du tout — il en faut deux pour définir une pente.</p>
-        <p>Alors on fait la meilleure chose possible&nbsp;: regarder ce que devient le taux quand \(h\) <em>s'approche</em> de 0 sans jamais l'atteindre. Reprends les préréglages du graphique&nbsp;: 5,37 pour h&nbsp;=&nbsp;0,90, puis 2,49, puis 1,36… Les valeurs ne partent pas dans tous les sens&nbsp;: elles se rangent d'elles-mêmes vers 1,32. Ce nombre vers lequel le taux s'installe s'appelle une <strong>limite</strong> — c'est exactement ce que note le symbole \(\lim\) ci-dessous.</p>
+        <p>Dans le graphique ci-dessus, impossible d'amener \(h\) jusqu'à 0, et ce n'est pas un caprice. Pose \(h = 0\) dans la formule du taux&nbsp;: tu obtiens \((f(a) - f(a))\,/\,0\), c'est-à-dire \(0/0\). Diviser par zéro n'a pas de sens. Et géométriquement, c'est pareil&nbsp;: avec un seul point, il n'y a plus de droite du tout : il en faut deux pour définir une pente.</p>
+        <p>Alors on fait la meilleure chose possible&nbsp;: regarder ce que devient le taux quand \(h\) <em>s'approche</em> de 0 sans jamais l'atteindre. Reprends les préréglages du graphique&nbsp;: 5,37 pour h&nbsp;=&nbsp;0,90, puis 2,49, puis 1,36… Les valeurs ne partent pas dans tous les sens&nbsp;: elles se rangent d'elles-mêmes vers 1,32. Ce nombre vers lequel le taux s'installe s'appelle une <strong>limite</strong>. C'est exactement ce que note le symbole \(\lim\) ci-dessous.</p>
       </div>
 
       <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
@@ -216,7 +220,7 @@
         <div class="exemple-tag">EXEMPLE RÉSOLU — LA MÉTHODE EN ACTION</div>
         <p class="exemple-enonce">Soit \(f(x) = x^2\). Calculons \(f'(2)\) avec la définition.</p>
         <p><span class="etape-label">Étape 1 — </span>Le taux de variation entre \(2\) et \(2 + h\)&nbsp;: \((f(2+h) - f(2))\,/\,h = ((2+h)^2 - 4)\,/\,h\).</p>
-        <p><span class="etape-label">Étape 2 — </span>Développe&nbsp;: \((4 + 4h + h^2 - 4)\,/\,h = (4h + h^2)\,/\,h = 4 + h\). Le \(h\) se factorise puis se simplifie — c'est lui qui rendait la division impossible, il a disparu.</p>
+        <p><span class="etape-label">Étape 2 — </span>Développe&nbsp;: \((4 + 4h + h^2 - 4)\,/\,h = (4h + h^2)\,/\,h = 4 + h\). Le \(h\) se factorise puis se simplifie. C'est lui qui rendait la division impossible, et il a disparu.</p>
         <p><span class="etape-label">Étape 3 — </span>Quand \(h \to 0\), \(4 + h \to 4\).</p>
         <p class="conclusion">Conclusion&nbsp;: \(f'(2) = 4\). Au point d'abscisse 2, la tangente à la parabole a une pente de 4.</p>
       </div>
@@ -288,7 +292,7 @@
 
       <div class="bloc-pourquoi">
         <div class="bloc-label">POURQUOI&nbsp;?</div>
-        <p>Rien de neuf sous le capot&nbsp;: c'est ton \(y = mx + p\) de Seconde, écrit autrement. Une droite de pente \(m\) qui passe par le point \((a\;;\, f(a))\), ça s'écrit \(y = m(x - a) + f(a)\). Vérifie&nbsp;: en \(x = a\), elle donne bien \(y = f(a)\) — elle passe par le point&nbsp;; et en développant, le coefficient de \(x\) est bien \(m\) — c'est la pente. Ici, la pente s'appelle \(f'(a)\), voilà tout.</p>
+        <p>Rien de neuf sous le capot&nbsp;: c'est ton \(y = mx + p\) de Seconde, écrit autrement. Une droite de pente \(m\) qui passe par le point \((a\;;\, f(a))\), ça s'écrit \(y = m(x - a) + f(a)\). Vérifie&nbsp;: en \(x = a\), elle donne bien \(y = f(a)\), donc elle passe par le point&nbsp;; et en développant, le coefficient de \(x\) est bien \(m\), la pente. Ici, la pente s'appelle \(f'(a)\), voilà tout.</p>
       </div>
 
       <figure class="widget" id="widget-tangente"
@@ -331,14 +335,44 @@
         <p><span class="etape-label">Étape 1 — </span>\(f(1) = 1\)&nbsp;: le point de tangence est \((1\;;\, 1)\).</p>
         <p><span class="etape-label">Étape 2 — </span>\(f'(x) = 2x\), donc \(f'(1) = 2\)&nbsp;: la pente vaut 2.</p>
         <p><span class="etape-label">Étape 3 — </span>\(y = 2(x - 1) + 1 = 2x - 1\).</p>
-        <p class="conclusion">Conclusion&nbsp;: \(T : y = 2x - 1\). Contrôle-réflexe&nbsp;: en \(x = 1\), la droite donne \(y = 1\) — elle passe bien par le point de tangence. Prends cette habitude, elle attrape la moitié des erreurs.</p>
+        <p class="conclusion">Conclusion&nbsp;: \(T : y = 2x - 1\). Contrôle-réflexe&nbsp;: en \(x = 1\), la droite donne \(y = 1\), elle passe bien par le point de tangence. Prends cette habitude, elle attrape la moitié des erreurs.</p>
       </div>
+
+      <p class="prose">Au bac, on te demande souvent l'inverse&nbsp;: la tangente est déjà tracée, et c'est à toi de lire \(f'(a)\). La méthode tient en une phrase&nbsp;: pars de A, avance de 1 en abscisse, et compte de combien la tangente monte ou descend sur le quadrillage.</p>
+
+      <figure class="widget" id="widget-lecture" data-widget="lecture">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Lis <span class="titre-math">f&hairsp;′(a)</span> sur le graphique</span>
+          </div>
+          <span class="quiz-score js-progression">POINT 1/4</span>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 440" aria-label="Une courbe et sa tangente en un point A, sur un quadrillage unité ; à toi de lire la pente de la tangente"></svg>
+        <div class="widget-pied">
+          <p class="quiz-enonce">La tangente est tracée au point A. Que vaut \(f'(a)\)&nbsp;?</p>
+          <div class="quiz-reponses js-reponses"></div>
+          <div class="quiz-retours" aria-live="polite"><p class="quiz-retour js-retour" hidden></p></div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill js-suivant" hidden>Point suivant ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <script type="application/json">
+        [
+          {"fn":"x2s2","a":1,"choix":["1","−1","2","0,5"],"bonne":1},
+          {"fn":"x2-1","a":1,"choix":["1","2","−2","4"],"bonne":2},
+          {"fn":"1-x2s4","a":2,"choix":["−1","1","−2","−0,5"],"bonne":1},
+          {"fn":"2-x2","a":1,"choix":["2","−2","−1","−4"],"bonne":2}
+        ]
+        </script>
+      </figure>
 
       <div class="widget quiz" data-quiz="s3">
         <div class="widget-tete">
           <div class="widget-titre-groupe">
             <span class="pill-interactif">TESTE-TOI</span>
-            <span class="widget-titre">Encore trois — la tangente</span>
+            <span class="widget-titre">Encore trois sur la tangente</span>
           </div>
           <span class="quiz-score js-quiz-score" hidden></span>
         </div>
@@ -449,7 +483,7 @@
         <div class="exemple-item">
           <p class="exemple-enonce">a. Dérive \(f(x) = 2x^3 - 5x^2 + 7\).</p>
           <p><span class="etape-label">Structure — </span>une somme de termes \(k\,x^n\)&nbsp;: on dérive terme à terme.</p>
-          <p><span class="etape-label">Calcul — </span>\(2 \times 3x^2 - 5 \times 2x + 0\) — la constante 7 disparaît.</p>
+          <p><span class="etape-label">Calcul — </span>\(2 \times 3x^2 - 5 \times 2x + 0\)&nbsp;; la constante 7 disparaît.</p>
           <p class="conclusion">\(f'(x) = 6x^2 - 10x\)</p>
         </div>
         <div class="exemple-item">
@@ -466,7 +500,7 @@
         </div>
         <div class="exemple-item">
           <p class="exemple-enonce">d. Dérive \(f(x) = \dfrac{1}{x^2+1}\).</p>
-          <p><span class="etape-label">Structure — </span>un inverse \(1/u\), avec \(u = x^2+1\) (donc \(u' = 2x\)) — et \(u\) ne s'annule jamais, pas de condition à poser.</p>
+          <p><span class="etape-label">Structure — </span>un inverse \(1/u\), avec \(u = x^2+1\) (donc \(u' = 2x\))&nbsp;; et \(u\) ne s'annule jamais, pas de condition à poser.</p>
           <p><span class="etape-label">Calcul — </span>\(-\,\dfrac{u'}{u^2} = -\,\dfrac{2x}{(x^2+1)^2}\).</p>
           <p class="conclusion">\(f'(x) = -\,\dfrac{2x}{(x^2+1)^2}\)</p>
         </div>
@@ -488,6 +522,32 @@
         <svg class="widget-graph js-graph-f" viewBox="0 0 640 230" aria-label="Courbe de f avec un point déplaçable"></svg>
         <svg class="widget-graph graph-scinde js-graph-fp" viewBox="0 0 640 230" aria-label="Courbe de f prime construite point par point"></svg>
         <div class="widget-note">La pente de la tangente en A, en haut, devient la hauteur du point de f′, en bas — au même x.</div>
+      </figure>
+
+      <p class="prose">Dernier réflexe à installer&nbsp;: reconnaître une dérivée à l'œil. Le secret tient aux sommets&nbsp;: à chaque sommet de \(f\), la pente s'annule, donc \(f'\) coupe l'axe des abscisses exactement à la même abscisse. Touche une courbe du haut, puis la dérivée qui lui correspond en bas.</p>
+
+      <figure class="widget" id="widget-associe" data-widget="associe">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Associe chaque <span class="titre-math">f</span> à sa dérivée</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <div class="associe-corps">
+          <div class="associe-rang-titre">LES FONCTIONS</div>
+          <div class="associe-rang js-rang-f"></div>
+          <div class="associe-rang-titre">LEURS DÉRIVÉES, MÉLANGÉES</div>
+          <div class="associe-rang js-rang-fp"></div>
+          <div class="quiz-retours" aria-live="polite"><p class="quiz-retour js-retour" hidden></p></div>
+        </div>
+        <script type="application/json">
+        [
+          {"fn":"x2-1","yf":[-2,5],"yfp":[-6,6]},
+          {"fn":"x3s3-x","yf":[-3,3],"yfp":[-2,6]},
+          {"fn":"1-x2s2","yf":[-3,2],"yfp":[-3,3]}
+        ]
+        </script>
       </figure>
 
       <div class="widget quiz" data-quiz="s4">
@@ -520,7 +580,7 @@
             </div>
             <div class="quiz-retours" aria-live="polite">
               <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
-              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> jamais \(u'v'\) — la dérivée d'un produit n'est pas le produit des dérivées. C'est l'un des pièges classiques, tu le recroiseras plus bas.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> jamais \(u'v'\)&nbsp;: la dérivée d'un produit n'est pas le produit des dérivées. C'est l'un des pièges classiques, tu le recroiseras plus bas.</p>
             </div>
           </div>
           <div class="quiz-question" data-bonne="3">
@@ -555,7 +615,7 @@
       <h2>5. Signe de \(f'\) et variations</h2>
       <p class="prose">Voilà pourquoi tout ce chapitre sert&nbsp;: le signe de \(f'\) raconte le sens de variation de \(f\). Une pente positive, ça monte&nbsp;; une pente négative, ça descend.</p>
 
-      <p class="prose">Vérifie-le à la main&nbsp;: déplace le point d'un bout à l'autre de la courbe. La tangente passe au vert quand ça monte, au rouge quand ça descend — et dans le tableau, dessous, c'est ta colonne qui s'allume.</p>
+      <p class="prose">Vérifie-le à la main&nbsp;: déplace le point d'un bout à l'autre de la courbe. La tangente passe au vert quand ça monte, au rouge quand ça descend. Et dans le tableau, dessous, c'est ta colonne qui s'allume.</p>
 
       <figure class="widget" id="widget-variations"
         data-widget="variations" data-fn="x3-3x"
@@ -609,7 +669,7 @@
 
       <div class="bloc-pourquoi">
         <div class="bloc-label">POURQUOI&nbsp;?</div>
-        <p>Pourquoi une pente commanderait-elle un sens de variation&nbsp;? Zoome&nbsp;: tout près d'un point, la courbe et sa tangente sont presque indiscernables — c'est l'idée du chapitre entier. Si la tangente monte à cet endroit, la courbe monte aussi&nbsp;; si elle descend, la courbe descend. Et comme \(f'(x)\) est justement la pente de la tangente au point d'abscisse \(x\), son signe raconte, point par point, le sens de \(f\).</p>
+        <p>Pourquoi une pente commanderait-elle un sens de variation&nbsp;? Zoome&nbsp;: tout près d'un point, la courbe et sa tangente sont presque indiscernables&nbsp;; c'est l'idée du chapitre entier. Si la tangente monte à cet endroit, la courbe monte aussi&nbsp;; si elle descend, la courbe descend. Et comme \(f'(x)\) est justement la pente de la tangente au point d'abscisse \(x\), son signe raconte, point par point, le sens de \(f\).</p>
       </div>
 
       <div class="bloc-propriete">
@@ -621,7 +681,7 @@
 
       <p class="prose">Exemple complet avec \(f(x) = x^3 - 3x\)&nbsp;: on dérive, \(f'(x) = 3x^2 - 3 = 3(x-1)(x+1)\), qui s'annule en −1 et en 1.</p>
 
-      <p class="prose">Avant les variations, le signe — c'est l'étape que tout le monde saute et qui fait tout rater. Chaque facteur change de signe à sa racine, et le signe du produit se lit colonne par colonne. Le facteur 3, toujours positif, ne change rien.</p>
+      <p class="prose">Avant les variations, le signe. C'est l'étape que tout le monde saute et qui fait tout rater. Chaque facteur change de signe à sa racine, et le signe du produit se lit colonne par colonne. Le facteur 3, toujours positif, ne change rien.</p>
 
       <figure class="tableau tab-signes">
         <figcaption>
@@ -661,7 +721,7 @@
         </div>
       </figure>
 
-      <p class="prose">Maintenant, le tableau de variations se remplit tout seul&nbsp;: une flèche qui monte là où \(f'\) est positive, une flèche qui descend là où elle est négative, et la valeur de \(f\) aux points où \(f'\) s'annule — ici \(f(-1) = 2\) et \(f(1) = -2\).</p>
+      <p class="prose">Maintenant, le tableau de variations se remplit tout seul&nbsp;: une flèche qui monte là où \(f'\) est positive, une flèche qui descend là où elle est négative, et la valeur de \(f\) aux points où \(f'\) s'annule : ici \(f(-1) = 2\) et \(f(1) = -2\).</p>
 
       <figure class="tableau tab-variations">
         <figcaption>
@@ -702,7 +762,7 @@
         </div>
       </figure>
 
-      <p class="prose">Aux points où \(f'\) s'annule <em>en changeant de signe</em>, \(f\) admet un <strong>extremum local</strong> — concrètement, un sommet ou un creux de la courbe&nbsp;: ici un maximum local en −1 (qui vaut 2) et un minimum local en 1 (qui vaut −2). Retrouve-les sur le graphique interactif plus haut&nbsp;: ce sont les deux sommets.</p>
+      <p class="prose">Aux points où \(f'\) s'annule <em>en changeant de signe</em>, \(f\) admet un <strong>extremum local</strong> (concrètement, un sommet ou un creux de la courbe)&nbsp;: ici un maximum local en −1 (qui vaut 2) et un minimum local en 1 (qui vaut −2). Retrouve-les sur le graphique interactif plus haut&nbsp;: ce sont les deux sommets.</p>
 
       <div class="bloc-methode">
         <div class="bloc-label">MÉTHODE — ÉTUDIER LES VARIATIONS D'UNE FONCTION</div>
@@ -730,7 +790,7 @@
             </div>
             <div class="quiz-retours" aria-live="polite">
               <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
-              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le signe de \(f'\) donne le <em>sens de variation</em> de \(f\) — pas son signe&nbsp;! Une fonction peut très bien être positive et décroissante.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le signe de \(f'\) donne le <em>sens de variation</em> de \(f\), pas son signe&nbsp;! Une fonction peut très bien être positive et décroissante.</p>
             </div>
           </div>
           <div class="quiz-question" data-bonne="2">
@@ -741,7 +801,7 @@
             </div>
             <div class="quiz-retours" aria-live="polite">
               <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
-              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> contre-exemple&nbsp;: \(f(x) = x^3\) en 0 — tangente horizontale, mais \(f\) ne cesse de croître. Il faut que \(f'\) <em>change de signe</em>.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> contre-exemple&nbsp;: \(f(x) = x^3\) en 0 : tangente horizontale, mais \(f\) ne cesse de croître. Il faut que \(f'\) <em>change de signe</em>.</p>
             </div>
           </div>
           <div class="quiz-question" data-bonne="1">
@@ -753,7 +813,7 @@
             </div>
             <div class="quiz-retours" aria-live="polite">
               <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
-              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(f\) monte, puis descend&nbsp;: un sommet. Maximum local — exactement ce que dessine la flèche du tableau de variations.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(f\) monte, puis descend&nbsp;: un sommet, donc un maximum local. C'est exactement ce que dessine la flèche du tableau de variations.</p>
             </div>
           </div>
         </div>
@@ -774,6 +834,32 @@
         </div>
         <div class="piege">
           <p><strong>Dériver un produit terme à terme.</strong> \((u\,v)' \neq u'v'\). Utilise la formule, à chaque fois.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">NOMBRE DÉRIVÉ</span>
+          <p>\(f'(a) = \displaystyle\lim_{h \to 0}\, \dfrac{f(a+h)-f(a)}{h}\)&nbsp;: la pente de la tangente au point d'abscisse \(a\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">TANGENTE EN a</span>
+          <p>\(y = f'(a)(x - a) + f(a)\)</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">USUELLES</span>
+          <p>\((x^n)' = n\,x^{n-1}\)&nbsp;; \(\left(\dfrac{1}{x}\right)' = -\,\dfrac{1}{x^2}\)&nbsp;; \((\sqrt{x}\,)' = \dfrac{1}{2\sqrt{x}}\)</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">OPÉRATIONS</span>
+          <p>\((u\,v)' = u'v + u\,v'\)&nbsp;; \(\left(\dfrac{u}{v}\right)' = \dfrac{u'v - u\,v'}{v^2}\)</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">VARIATIONS</span>
+          <p>Le signe de \(f'\) donne le sens de \(f\)&nbsp;: positive, ça monte&nbsp;; négative, ça descend. Là où \(f'\) s'annule <em>en changeant de signe</em>&nbsp;: extremum local.</p>
         </div>
       </div>
     </section>
@@ -799,7 +885,7 @@
           <div class="corrige-tag">CORRIGÉ</div>
           <p><span class="etape-label">Étape 1 — </span>Calcule les deux images&nbsp;: \(f(1) = 1 - 3 = -2\) et \(f(4) = 16 - 12 = 4\).</p>
           <p><span class="etape-label">Étape 2 — </span>Taux de variation&nbsp;: \(\dfrac{f(4) - f(1)}{4 - 1} = \dfrac{4 - (-2)}{3} = \dfrac{6}{3} = 2\).</p>
-          <p class="conclusion">Conclusion&nbsp;: le taux vaut 2 — la sécante qui joint les points d'abscisses 1 et 4 a une pente de 2. C'est une «&nbsp;vitesse moyenne&nbsp;» entre les deux points, pas une vitesse instantanée.</p>
+          <p class="conclusion">Conclusion&nbsp;: le taux vaut 2 : la sécante qui joint les points d'abscisses 1 et 4 a une pente de 2. C'est une «&nbsp;vitesse moyenne&nbsp;» entre les deux points, pas une vitesse instantanée.</p>
         </div>
       </article>
 
@@ -856,7 +942,7 @@
           <p><span class="etape-label">Étape 1 — </span>\(f(-1) = 1\)&nbsp;: le point de tangence est \((-1\;;\, 1)\).</p>
           <p><span class="etape-label">Étape 2 — </span>\(f'(x) = 2x\), donc \(f'(-1) = -2\)&nbsp;: la pente.</p>
           <p><span class="etape-label">Étape 3 — </span>\(y = -2(x - (-1)) + 1 = -2(x + 1) + 1 = -2x - 1\).</p>
-          <p class="conclusion">Conclusion&nbsp;: \(T : y = -2x - 1\). Contrôle&nbsp;: en \(x = -1\), la droite donne \(y = 1\) — c'est bien le point de tangence.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(T : y = -2x - 1\). Contrôle&nbsp;: en \(x = -1\), la droite donne \(y = 1\), c'est bien le point de tangence.</p>
         </div>
       </article>
 
@@ -894,7 +980,7 @@
           <p><span class="etape-label">Étape 1 — </span>Tangente horizontale = pente nulle&nbsp;: on cherche \(f'(x) = 0\).</p>
           <p><span class="etape-label">Étape 2 — </span>\(f'(x) = 3x^2 - 3 = 3(x-1)(x+1)\), qui s'annule en \(x = -1\) et \(x = 1\).</p>
           <p><span class="etape-label">Étape 3 — </span>Les ordonnées&nbsp;: \(f(-1) = 2\) et \(f(1) = -2\).</p>
-          <p class="conclusion">Conclusion&nbsp;: deux points, \((-1\;;\, 2)\) et \((1\;;\, -2)\) — les deux sommets que tu as manipulés dans les graphiques du chapitre.</p>
+          <p class="conclusion">Conclusion&nbsp;: deux points, \((-1\;;\, 2)\) et \((1\;;\, -2)\) : les deux sommets que tu as manipulés dans les graphiques du chapitre.</p>
         </div>
       </article>
 
@@ -910,8 +996,8 @@
         <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
         <div class="corrige" id="corrige-07" hidden>
           <div class="corrige-tag">CORRIGÉ</div>
-          <p><span class="etape-label">a. — </span>\(f'(x) = 7x^6\) — la ligne \(x^n\) du tableau.</p>
-          <p><span class="etape-label">b. — </span>\(g'(x) = 15x^2 - 4x + 7\) — terme à terme, et la constante \(-4\) disparaît.</p>
+          <p><span class="etape-label">a. — </span>\(f'(x) = 7x^6\), la ligne \(x^n\) du tableau.</p>
+          <p><span class="etape-label">b. — </span>\(g'(x) = 15x^2 - 4x + 7\)&nbsp;: terme à terme, et la constante \(-4\) disparaît.</p>
           <p><span class="etape-label">c. — </span>\(h'(x) = 3 \times \dfrac{1}{2\sqrt{x}} = \dfrac{3}{2\sqrt{x}}\).</p>
           <p><span class="etape-label">d. — </span>\(k(x) = 4 \times \dfrac{1}{x}\), donc \(k'(x) = 4 \times \left(-\dfrac{1}{x^2}\right) = -\dfrac{4}{x^2}\).</p>
           <p class="conclusion">Objectif&nbsp;: les quatre en réflexe, sans hésiter sur le tableau.</p>
@@ -932,7 +1018,7 @@
           <div class="corrige-tag">CORRIGÉ</div>
           <p><span class="etape-label">Étape 1 — </span>Produit \(u\,v\) avec \(u = x^2+1\) (\(u' = 2x\)) et \(v = 3x-2\) (\(v' = 3\))&nbsp;: \(f' = u'v + u\,v' = 2x(3x-2) + 3(x^2+1) = 6x^2 - 4x + 3x^2 + 3\).</p>
           <p><span class="etape-label">Étape 2 — </span>En développant d'abord&nbsp;: \(f(x) = 3x^3 - 2x^2 + 3x - 2\), donc \(f'(x) = 9x^2 - 4x + 3\).</p>
-          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = 9x^2 - 4x + 3\) dans les deux cas. Les deux chemins sont corrects — choisis le plus court.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = 9x^2 - 4x + 3\) dans les deux cas. Les deux chemins sont corrects&nbsp;; choisis le plus court.</p>
         </div>
       </article>
 
@@ -951,7 +1037,7 @@
           <p><span class="etape-label">Étape 1 — </span>Quotient \(u/v\) avec \(u = 2x-1\) (\(u' = 2\)) et \(v = x+3\) (\(v' = 1\)).</p>
           <p><span class="etape-label">Étape 2 — </span>\(f' = \dfrac{u'v - u\,v'}{v^2} = \dfrac{2(x+3) - (2x-1)}{(x+3)^2}\).</p>
           <p><span class="etape-label">Étape 3 — </span>Numérateur&nbsp;: \(2x + 6 - 2x + 1 = 7\).</p>
-          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = \dfrac{7}{(x+3)^2}\), positif partout — \(f\) est strictement croissante sur l'intervalle.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = \dfrac{7}{(x+3)^2}\), positif partout, donc \(f\) est strictement croissante sur l'intervalle.</p>
         </div>
       </article>
 
@@ -967,9 +1053,9 @@
         <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
         <div class="corrige" id="corrige-10" hidden>
           <div class="corrige-tag">CORRIGÉ</div>
-          <p><span class="etape-label">Étape 1 — </span>Inverse \(1/u\) avec \(u = 3x-5\), donc \(u' = 3\) — et \(u\) ne s'annule pas sur l'intervalle.</p>
+          <p><span class="etape-label">Étape 1 — </span>Inverse \(1/u\) avec \(u = 3x-5\), donc \(u' = 3\), et \(u\) ne s'annule pas sur l'intervalle.</p>
           <p><span class="etape-label">Étape 2 — </span>\(f' = -\dfrac{u'}{u^2} = -\dfrac{3}{(3x-5)^2}\).</p>
-          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = -\dfrac{3}{(3x-5)^2}\), négatif partout — \(f\) décroît sur l'intervalle.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = -\dfrac{3}{(3x-5)^2}\), négatif partout, donc \(f\) décroît sur l'intervalle.</p>
         </div>
       </article>
 
@@ -988,7 +1074,7 @@
           <p><span class="etape-label">Étape 1 — </span>Dérive&nbsp;: \(f'(x) = -2x + 4\).</p>
           <p><span class="etape-label">Étape 2 — </span>Signe&nbsp;: \(f'(x) > 0 \iff x < 2\). Positive avant 2, nulle en 2, négative après.</p>
           <p><span class="etape-label">Étape 3 — </span>Tableau&nbsp;: \(f\) croît sur \(\left]-\infty\;;\, 2\right]\), décroît sur \(\left[2\;;\, +\infty\right[\), avec \(f(2) = -4 + 8 - 1 = 3\).</p>
-          <p class="conclusion">Conclusion&nbsp;: maximum 3 atteint en \(x = 2\) — cohérent avec une parabole tournée vers le bas.</p>
+          <p class="conclusion">Conclusion&nbsp;: maximum 3 atteint en \(x = 2\), cohérent avec une parabole tournée vers le bas.</p>
         </div>
       </article>
 
@@ -1026,7 +1112,7 @@
           <p><span class="etape-label">Étape 1 — </span>Dérive&nbsp;: \(f'(x) = 1 - \dfrac{1}{x^2} = \dfrac{x^2 - 1}{x^2}\).</p>
           <p><span class="etape-label">Étape 2 — </span>Signe sur \(\left]0\;;\,+\infty\right[\)&nbsp;: \(x^2 > 0\), donc \(f'(x)\) a le signe de \(x^2 - 1 = (x-1)(x+1)\), c'est-à-dire celui de \(x - 1\) (car \(x + 1 > 0\) ici). Négatif sur \(\left]0\;;\, 1\right[\), nul en 1, positif après.</p>
           <p><span class="etape-label">Étape 3 — </span>\(f\) décroît sur \(\left]0\;;\, 1\right]\), croît sur \(\left[1\;;\, +\infty\right[\), avec \(f(1) = 2\).</p>
-          <p class="conclusion">Conclusion&nbsp;: minimum 2, atteint en \(x = 1\) — la somme \(x + 1/x\) est au plus bas quand ses deux termes s'équilibrent.</p>
+          <p class="conclusion">Conclusion&nbsp;: minimum 2, atteint en \(x = 1\). La somme \(x + 1/x\) est au plus bas quand ses deux termes s'équilibrent.</p>
         </div>
       </article>
 
