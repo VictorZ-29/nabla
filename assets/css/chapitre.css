@@ -939,6 +939,97 @@
 .g-courbe-mini--derivee { stroke: var(--accent); }
 .g-axe-mini { stroke: var(--axis); stroke-width: 1; fill: none; }
 
+/* --- Suites : classes SVG partagées ------------------------------------------------------------------------
+   Le nuage de points (n ; u_n) est l'équivalent de la courbe : craie. Les
+   constructions qui répondent aux réglages (marches, tiges) sont en accent. */
+
+.pt-suite { fill: var(--chalk); stroke: var(--bg); stroke-width: 1.5; }
+.widget .pt-suite { stroke: var(--surface); }
+.g-marche { stroke: var(--accent); stroke-width: var(--sw-tan-mini); fill: none; stroke-linecap: round; }
+
+/* Ligne de lecture mono (formule explicite instanciée, lecture de la somme) */
+.lecture-formule {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.lecture-formule .val-accent { color: var(--accent); font-weight: 500; }
+
+/* --- La machine à termes (suites, §2) : explicite vs récurrence -------------------------------------------- */
+
+.machine-corps {
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 620px) { .machine-corps { grid-template-columns: 1fr; } }
+.machine-panneau {
+  border: 1px solid var(--hairIn);
+  border-radius: var(--radius-block);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.machine-mode {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.machine-regle { font-size: 17px; min-height: 1.7em; }
+.machine-panneau .curseur-ligne { width: 100%; }
+.machine-calcul {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.machine-calcul strong, .machine-chaine strong { color: var(--accent); font-weight: 500; }
+.machine-chaine {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+.machine-chaine li { padding: 3px 0; }
+.machine-chaine li + li { border-top: 1px dashed var(--hairIn); }
+.machine-chaine .machine-donne { color: var(--faint); }
+.machine-note {
+  margin: 0;
+  font-size: 14.5px;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* --- L'escalier de Gauss (suites, §3) ----------------------------------------------------------------------- */
+
+.som-case { fill: var(--chip); stroke: var(--guide); }
+.som-copie .som-case { fill: var(--accTint2); stroke: var(--accEdge); }
+.som-copie { opacity: 0; transform: translateY(-14px); }
+.som-copie.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: no-preference) {
+  .som-copie { transition: opacity 0.35s ease, transform 0.35s ease; }
+}
+.som-dim { font-family: var(--font-mono); font-size: 12px; fill: var(--muted); }
+.som-num { font-family: var(--font-mono); font-size: 11px; fill: var(--faint); }
+
+/* --- Pied de chapitre : chapitre suivant cliquable ----------------------------------------------------------- */
+
+.pied-chapitre .suivant-titre a {
+  color: var(--text);
+  text-decoration: none;
+}
+.pied-chapitre .suivant-titre a:hover { color: var(--accent); }
+
 /* --- L'essentiel -----------------------------------------------------------------------------------------
    Le chapitre en cinq lignes, juste avant les exercices. */
 

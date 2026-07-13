@@ -105,6 +105,12 @@ export function fmtAdaptatif(v) {
   return fmt(v, Math.abs(v) > 5e-13 && Math.abs(v) < 0.1 ? 3 : 2);
 }
 
+/* « 4,00 » → « 4 », « 0,50 » → « 0,5 » : pour les réglages à pas ronds
+   (curseurs u0/r/q des widgets de suites). */
+export function fmtCourt(v, dec = 2) {
+  return fmt(v, dec).replace(/(,\d*?)0+$/, '$1').replace(/,$/, '');
+}
+
 export function mouvementReduit() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
