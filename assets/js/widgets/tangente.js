@@ -55,6 +55,7 @@ function initTangente(fig) {
   const elA = fig.querySelector('.js-a');
   const elFa = fig.querySelector('.js-fa');
   const elFpa = fig.querySelector('.js-fpa');
+  const elEq = fig.querySelector('.js-eq'); // équation de T développée (optionnel)
   const curseur = fig.querySelector('.js-curseur');
   const reset = fig.querySelector('.js-reset');
 
@@ -85,6 +86,14 @@ function initTangente(fig) {
     elA.textContent = fmt(a);
     elFa.textContent = fmt(fa);
     elFpa.textContent = fmt(pente);
+
+    /* y = f′(a)(x − a) + f(a), développée : y = f′(a)·x + (f(a) − a·f′(a)) */
+    if (elEq) {
+      const ord = fa - a * pente;
+      if (Math.abs(pente) < 0.005) elEq.textContent = `y = ${fmt(fa)}`;
+      else if (Math.abs(ord) < 0.005) elEq.textContent = `y = ${fmt(pente)}x`;
+      else elEq.textContent = `y = ${fmt(pente)}x ${ord > 0 ? '+' : '−'} ${fmt(Math.abs(ord))}`;
+    }
 
     if (parseFloat(curseur.value) !== a) curseur.value = String(a);
     const pos = ((a - domMin) / (domMax - domMin)) * 100;

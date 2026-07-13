@@ -87,7 +87,7 @@
   </div>
   <h1>La dérivation</h1>
   <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer un nombre dérivé, construire une équation de tangente, dériver les fonctions usuelles — et t'en servir pour étudier les variations d'une fonction.</p>
-  <div class="chap-meta">≈ 40 min de lecture · 15 exercices corrigés · mis à jour juillet 2026</div>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
 </section>
 
 <div class="chap-layout">
@@ -126,6 +126,7 @@
       <h2>1. À quelle vitesse, exactement&nbsp;?</h2>
       <p class="prose">Une voiture parcourt 100 km en 2 heures&nbsp;: vitesse moyenne, 50 km/h. Mais au péage, le compteur n'affichait pas 50 — il affichait la vitesse <em>à cet instant-là</em>. La moyenne lisse tout&nbsp;; le compteur répond à une question plus fine. Toute la question du chapitre tient là&nbsp;: comment définir mathématiquement «&nbsp;la vitesse à un instant&nbsp;»&nbsp;?</p>
       <p class="prose">Traduisons sur un graphique. Entre deux points d'une courbe, l'équivalent de la vitesse moyenne s'appelle le <strong>taux de variation</strong>&nbsp;: c'est la pente — le coefficient directeur — de la droite qui passe par ces deux points. Cette droite s'appelle une <strong>sécante</strong>. Tu as déjà fait tout ça en Seconde.</p>
+      <p class="prose">Pour fixer les idées, lis la courbe ci-dessous comme l'enregistrement d'un trajet&nbsp;: le temps en abscisse, la distance parcourue en ordonnée. Entre A et B, la pente de la sécante, c'est exactement la vitesse moyenne entre ces deux instants — plus la droite est raide, plus on a roulé vite. Tout le chapitre est déjà contenu dans cette image.</p>
 
       <figure class="figure-graph">
         <svg viewBox="0 0 640 400" role="img" aria-label="Courbe avec deux points A et B, la sécante qui les relie, et le triangle montrant h et f(a+h) moins f(a)">
@@ -187,6 +188,12 @@
         </div>
       </figure>
 
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Dans le widget, impossible d'amener \(h\) jusqu'à 0 — et ce n'est pas un caprice. Pose \(h = 0\) dans la formule du taux&nbsp;: tu obtiens \((f(a) - f(a))\,/\,0\), c'est-à-dire \(0/0\). Diviser par zéro n'a pas de sens. Et géométriquement, c'est pareil&nbsp;: avec un seul point, il n'y a plus de droite du tout — il en faut deux pour définir une pente.</p>
+        <p>Alors on fait la meilleure chose possible&nbsp;: regarder ce que devient le taux quand \(h\) <em>s'approche</em> de 0 sans jamais l'atteindre. Reprends les préréglages du widget&nbsp;: 5,37 pour h&nbsp;=&nbsp;0,90, puis 2,49, puis 1,36… Les valeurs ne partent pas dans tous les sens&nbsp;: elles se rangent d'elles-mêmes vers 1,32. Ce nombre vers lequel le taux s'installe s'appelle une <strong>limite</strong> — c'est exactement ce que note le symbole \(\lim\) ci-dessous.</p>
+      </div>
+
       <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
 
       <div class="bloc-definition">
@@ -203,6 +210,15 @@
         <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Fais tendre \(h\) vers 0&nbsp;: ce qui reste est \(f'(a)\).</span></div>
       </div>
 
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MÉTHODE EN ACTION</div>
+        <p class="exemple-enonce">Soit \(f(x) = x^2\). Calculons \(f'(2)\) avec la définition.</p>
+        <p><span class="etape-label">Étape 1 — </span>Le taux de variation entre \(2\) et \(2 + h\)&nbsp;: \((f(2+h) - f(2))\,/\,h = ((2+h)^2 - 4)\,/\,h\).</p>
+        <p><span class="etape-label">Étape 2 — </span>Développe&nbsp;: \((4 + 4h + h^2 - 4)\,/\,h = (4h + h^2)\,/\,h = 4 + h\). Le \(h\) se factorise puis se simplifie — c'est lui qui rendait la division impossible, il a disparu.</p>
+        <p><span class="etape-label">Étape 3 — </span>Quand \(h \to 0\), \(4 + h \to 4\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(f'(2) = 4\). Au point d'abscisse 2, la tangente à la parabole a une pente de 4.</p>
+      </div>
+
       <div class="bloc-retenir">
         <span class="bloc-tag">À RETENIR</span>
         <p>Le nombre dérivé \(f'(a)\), c'est le coefficient directeur de la tangente au point d'abscisse \(a\).</p>
@@ -217,6 +233,11 @@
         <div class="bloc-label">PROPRIÉTÉ</div>
         <p>La tangente à la courbe de \(f\) au point d'abscisse \(a\) a pour équation&nbsp;:</p>
         <div class="math-vitrine">$$y = f'(a)(x - a) + f(a)$$</div>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Rien de neuf sous le capot&nbsp;: c'est ton \(y = mx + p\) de Seconde, écrit autrement. Une droite de pente \(m\) qui passe par le point \((a\;;\, f(a))\), ça s'écrit \(y = m(x - a) + f(a)\). Vérifie&nbsp;: en \(x = a\), elle donne bien \(y = f(a)\) — elle passe par le point&nbsp;; et en développant, le coefficient de \(x\) est bien \(m\) — c'est la pente. Ici, la pente s'appelle \(f'(a)\), voilà tout.</p>
       </div>
 
       <figure class="widget" id="widget-tangente"
@@ -237,6 +258,7 @@
             <span class="curseur-label" aria-hidden="true">a</span>
             <input type="range" class="js-curseur" min="-2.1" max="2.1" step="0.01" value="1.2" aria-label="Abscisse a du point de tangence">
           </div>
+          <div class="lecture-eq"><span class="eq-t">T&nbsp;:</span><span class="js-eq">y = 1,32x − 3,46</span></div>
           <div class="chips">
             <span class="chip">a = <span class="js-a">1,20</span></span>
             <span class="chip">f(a) = <span class="js-fa">−1,87</span></span>
@@ -250,6 +272,15 @@
         <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule \(f(a)\)&nbsp;: c'est l'ordonnée du point de tangence.</span></div>
         <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule \(f'(a)\)&nbsp;: c'est la pente.</span></div>
         <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Remplace dans \(y = f'(a)(x - a) + f(a)\), puis développe.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UNE ÉQUATION DE TANGENTE</div>
+        <p class="exemple-enonce">Soit \(f(x) = x^2\). Équation de la tangente à la parabole au point d'abscisse \(a = 1\)&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>\(f(1) = 1\)&nbsp;: le point de tangence est \((1\;;\, 1)\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(f'(x) = 2x\), donc \(f'(1) = 2\)&nbsp;: la pente vaut 2.</p>
+        <p><span class="etape-label">Étape 3 — </span>\(y = 2(x - 1) + 1 = 2x - 1\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(T : y = 2x - 1\). Contrôle-réflexe&nbsp;: en \(x = 1\), la droite donne \(y = 1\) — elle passe bien par le point de tangence. Prends cette habitude, elle attrape la moitié des erreurs.</p>
       </div>
     </section>
 
@@ -278,6 +309,11 @@
           </table>
         </div>
       </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Ce tableau n'est pas un grimoire à réciter&nbsp;: chaque ligne se démontre avec la définition de la page précédente. Prends \(f(x) = x^2\) et écris le taux entre \(x\) et \(x + h\)&nbsp;: \(((x+h)^2 - x^2)\,/\,h = (2xh + h^2)\,/\,h = 2x + h\). Quand \(h\) tend vers 0, il reste \(2x\). La formule que tu utiliseras des centaines de fois, tu viens de la démontrer en deux lignes.</p>
+      </div>
 
       <figure class="tableau">
         <figcaption>
@@ -308,6 +344,34 @@
         <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Simplifie seulement à la fin — surtout si tu dois ensuite étudier le signe de \(f'\).</span></div>
       </div>
 
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — QUATRE STRUCTURES À RECONNAÎTRE</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Dérive \(f(x) = 2x^3 - 5x^2 + 7\).</p>
+          <p><span class="etape-label">Structure — </span>une somme de termes \(k\,x^n\)&nbsp;: on dérive terme à terme.</p>
+          <p><span class="etape-label">Calcul — </span>\(2 \times 3x^2 - 5 \times 2x + 0\) — la constante 7 disparaît.</p>
+          <p class="conclusion">\(f'(x) = 6x^2 - 10x\)</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Dérive \(f(x) = (2x+1)(x^2-3)\).</p>
+          <p><span class="etape-label">Structure — </span>un produit \(u\,v\), avec \(u = 2x+1\) (donc \(u' = 2\)) et \(v = x^2-3\) (donc \(v' = 2x\)).</p>
+          <p><span class="etape-label">Calcul — </span>\(u'v + u\,v' = 2(x^2-3) + (2x+1) \times 2x = 2x^2 - 6 + 4x^2 + 2x\).</p>
+          <p class="conclusion">\(f'(x) = 6x^2 + 2x - 6\)</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">c. Dérive \(f(x) = \dfrac{3x-1}{x+2}\) sur \(\left]-2\;;\,+\infty\right[\).</p>
+          <p><span class="etape-label">Structure — </span>un quotient \(u/v\), avec \(u' = 3\) et \(v' = 1\).</p>
+          <p><span class="etape-label">Calcul — </span>\(\dfrac{u'v - u\,v'}{v^2} = \dfrac{3(x+2) - (3x-1)}{(x+2)^2} = \dfrac{3x + 6 - 3x + 1}{(x+2)^2}\).</p>
+          <p class="conclusion">\(f'(x) = \dfrac{7}{(x+2)^2}\)</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">d. Dérive \(f(x) = \dfrac{1}{x^2+1}\).</p>
+          <p><span class="etape-label">Structure — </span>un inverse \(1/u\), avec \(u = x^2+1\) (donc \(u' = 2x\)) — et \(u\) ne s'annule jamais, pas de condition à poser.</p>
+          <p><span class="etape-label">Calcul — </span>\(-\,\dfrac{u'}{u^2} = -\,\dfrac{2x}{(x^2+1)^2}\).</p>
+          <p class="conclusion">\(f'(x) = -\,\dfrac{2x}{(x^2+1)^2}\)</p>
+        </div>
+      </div>
+
       <figure class="widget" id="widget-derivee"
         data-widget="derivee" data-fn="x3-3x"
         data-a-init="1.2"
@@ -331,6 +395,11 @@
       <h2>5. Signe de \(f'\) et variations</h2>
       <p class="prose">Voilà pourquoi tout ce chapitre sert&nbsp;: le signe de \(f'\) raconte le sens de variation de \(f\). Une pente positive, ça monte&nbsp;; une pente négative, ça descend.</p>
 
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi une pente commanderait-elle un sens de variation&nbsp;? Zoome&nbsp;: tout près d'un point, la courbe et sa tangente sont presque indiscernables — c'est l'idée du chapitre entier. Si la tangente monte à cet endroit, la courbe monte aussi&nbsp;; si elle descend, la courbe descend. Et comme \(f'(x)\) est justement la pente de la tangente au point d'abscisse \(x\), son signe raconte, point par point, le sens de \(f\).</p>
+      </div>
+
       <div class="bloc-propriete">
         <div class="bloc-label">PROPRIÉTÉ</div>
         <p>Sur un intervalle I&nbsp;: si \(f'(x) > 0\) sur I, alors \(f\) est strictement croissante sur I.</p>
@@ -339,6 +408,48 @@
       </div>
 
       <p class="prose">Exemple complet avec \(f(x) = x^3 - 3x\)&nbsp;: on dérive, \(f'(x) = 3x^2 - 3 = 3(x-1)(x+1)\), qui s'annule en −1 et en 1.</p>
+
+      <p class="prose">Avant les variations, le signe — c'est l'étape que tout le monde saute et qui fait tout rater. Chaque facteur change de signe à sa racine, et le signe du produit se lit colonne par colonne. Le facteur 3, toujours positif, ne change rien.</p>
+
+      <figure class="tableau tab-signes">
+        <figcaption>
+          <span>TABLEAU DE SIGNES</span>
+          <span class="bande-note">f′(x) = 3(x−1)(x+1)</span>
+        </figcaption>
+        <div class="defile">
+          <div class="tab-grille" role="img" aria-label="Tableau de signes de f′. Le facteur x plus 1 est négatif avant moins 1, nul en moins 1, positif après. Le facteur x moins 1 est négatif avant 1, nul en 1, positif après. Le produit f′ de x est donc positif avant moins 1, négatif entre moins 1 et 1, positif après 1.">
+            <div class="cel cel-entete bord-x">x</div>
+            <div class="cel cel-gauche bord-x">−∞</div>
+            <div class="cel-centre bord-x">−1</div>
+            <div class="bord-x"></div>
+            <div class="cel-centre bord-x">1</div>
+            <div class="cel cel-droite bord-x">+∞</div>
+
+            <div class="cel cel-entete bord-signe">x + 1</div>
+            <div class="cel-centre bord-signe">−</div>
+            <div class="cel-centre bord-signe">0</div>
+            <div class="cel-centre bord-signe">+</div>
+            <div class="cel-centre bord-signe"></div>
+            <div class="cel-centre bord-signe">+</div>
+
+            <div class="cel cel-entete bord-signe">x − 1</div>
+            <div class="cel-centre bord-signe">−</div>
+            <div class="cel-centre bord-signe"></div>
+            <div class="cel-centre bord-signe">−</div>
+            <div class="cel-centre bord-signe">0</div>
+            <div class="cel-centre bord-signe">+</div>
+
+            <div class="cel cel-entete cel-produit">f′(x)</div>
+            <div class="cel-centre cel-produit">+</div>
+            <div class="cel-centre cel-produit">0</div>
+            <div class="cel-centre cel-produit">−</div>
+            <div class="cel-centre cel-produit">0</div>
+            <div class="cel-centre cel-produit">+</div>
+          </div>
+        </div>
+      </figure>
+
+      <p class="prose">Maintenant, le tableau de variations se remplit tout seul&nbsp;: une flèche qui monte là où \(f'\) est positive, une flèche qui descend là où elle est négative, et la valeur de \(f\) aux points où \(f'\) s'annule — ici \(f(-1) = 2\) et \(f(1) = -2\).</p>
 
       <figure class="tableau tab-variations">
         <figcaption>
