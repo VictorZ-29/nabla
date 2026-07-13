@@ -7,7 +7,7 @@ Nabla is a free interactive learning site for French lycée students — Premiè
 - **The Claude Design handoff** (designs and context attached to the session) is canonical for **look, layout, theming, design tokens, and French copy**. It defines the homepage and the chapter pages.
   - The handoff is only attached to the current session. As part of setup, commit a copy of the received design exports into `design-reference/` so future sessions retain the spec. That folder is read-only reference from then on: never ship, serve, or link its files; strip all Claude Design machinery (`x-dc`, `sc-if`, `DCLogic`, `support.js`, template placeholders) when converting to production pages.
   - On first setup, extract the complete design system — both theme palettes, per-theme SVG stroke widths, typography, spacing patterns — from the designs into `assets/css/tokens.css`. From then on `tokens.css` is the single source of truth for the codebase; if Victor sends an updated design handoff, re-derive tokens from it rather than patching values by hand.
-  - The component vocabulary in the designs — DÉFINITION, PROPRIÉTÉ, MÉTHODE, À RETENIR, LES PIÈGES CLASSIQUES blocks, exercise units with corrigé reveals, widget frames, tables (dérivées usuelles, opérations, tableau de variations), "bientôt" cards — must each be implemented **once** as a reusable CSS/HTML pattern and reused across all chapters.
+  - The component vocabulary in the designs — DÉFINITION, PROPRIÉTÉ, MÉTHODE, À RETENIR, LES PIÈGES CLASSIQUES blocks, exercise units with corrigé reveals, the banded « VERS LE BAC » exercise, widget frames (INTERACTIF pill, preset/reset controls, chip readouts), tables (dérivées usuelles, opérations, tableau de variations), "bientôt" cards, and the CHAPITRE SUIVANT chapter footer — must each be implemented **once** as a reusable CSS/HTML pattern and reused across all chapters.
 - **`CLAUDE.md`** (this file) is canonical for **architecture, engineering standards, conventions, and workflow**.
 - **Each chapter folder gets a `README.md`**, canonical for **that chapter's content structure, widgets, and configuration**. You author it (see Chapter READMEs below); Victor reviews it.
 
@@ -49,6 +49,7 @@ Every chapter folder contains a `README.md` that you author when building the ch
 │       ├── theme.js                            # theme toggle
 │       ├── sommaire.js                         # scroll-spy + smooth scroll + mobile collapse
 │       ├── corrige.js                          # exercise reveal toggles
+│       ├── analytics.js                        # throttled Plausible event helper (see Analytics)
 │       ├── nabla-graph.js                      # shared SVG graph helper (see Widgets)
 │       └── widgets/                            # one module per widget TYPE, reused across chapters
 ├── mentions-legales/index.html                 # minimal placeholder, Victor fills in
@@ -76,7 +77,7 @@ Every widget must satisfy:
 - **Keyboard accessible**: draggable points focusable, `role="slider"` with `aria-valuenow`, arrow keys move them (Shift = fine step).
 - **`prefers-reduced-motion`**: no draw-on or transition animations; full functionality preserved.
 - Reset control restoring the initial state.
-- **French number formatting**: decimal comma (`f′(a) = 1,32`), two decimals, U+2032 prime for `′`.
+- **French number formatting**: decimal comma (`f′(a) = 1,32`), U+2032 prime for `′`, true minus U+2212. Two decimals by default; readout values with 0 < |v| < 0,1 get three (the designs show `0,014` for the small-h numerator).
 - KaTeX only for static formula shells; live numeric readouts are plain DOM text nodes — never re-render KaTeX per animation frame.
 - One throttled Plausible event per interaction session (see Analytics).
 - Drag handlers do no allocation-heavy work; batch updates with `requestAnimationFrame` if dense.
