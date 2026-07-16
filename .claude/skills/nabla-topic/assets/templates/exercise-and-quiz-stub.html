@@ -1,0 +1,60 @@
+<!-- NABLA — stubs exercice + quiz. Copie ces blocs dans la page chapitre et
+     remplis les TODO. Schéma détaillé : references/exercises-and-quizzes.md.
+
+     Rappels :
+     — corrigés : « Étape N — » pour un raisonnement, « a. — b. — » pour un
+       multi-questions ; dernière ligne = p.conclusion ;
+     — numérotation NN à trois endroits : EXERCICE NN, corrige-NN
+       (id + aria-controls), data-exercice="NN" (prop Plausible) ;
+     — quiz : data-bonne = index 1-based du bon bouton ; chaque distracteur
+       est une vraie erreur du chapitre ; l'explication nomme le piège. -->
+
+<!-- ============================ EXERCICE ============================ -->
+<article class="exercice">
+  <div class="exercice-tete">
+    <span class="exercice-label">EXERCICE TODO-NN <span class="exercice-theme">· TODO-thème</span></span>
+    <span class="exercice-niveau">
+      <span class="niveau-nom">niveau TODO-1-2-ou-3</span>
+      <!-- autant de <span class="plein"> que le niveau, 3 spans au total -->
+      <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+    </span>
+  </div>
+  <p class="exercice-enonce">TODO — l'énoncé, maths en \( … \).</p>
+  <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-TODO-NN" data-exercice="TODO-NN" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+  <div class="corrige" id="corrige-TODO-NN" hidden>
+    <div class="corrige-tag">CORRIGÉ</div>
+    <p><span class="etape-label">Étape 1 — </span>TODO.</p>
+    <p><span class="etape-label">Étape 2 — </span>TODO.</p>
+    <p class="conclusion">Conclusion&nbsp;: TODO — et si possible un réflexe de contrôle ou la morale de l'exercice.</p>
+  </div>
+</article>
+
+<!-- ========================= QUIZ TESTE-TOI ========================= -->
+<div class="widget quiz" data-quiz="TODO-sN">
+  <div class="widget-tete">
+    <div class="widget-titre-groupe">
+      <span class="pill-interactif">TESTE-TOI</span>
+      <span class="widget-titre">TODO — ex. « Trois questions, trente secondes »</span>
+    </div>
+    <span class="quiz-score js-quiz-score" hidden></span>
+  </div>
+  <div class="quiz-corps">
+
+    <div class="quiz-question" data-bonne="TODO-index-1-based">
+      <p class="quiz-enonce"><span class="quiz-num">Q1</span>TODO — la question&nbsp;?</p>
+      <div class="quiz-reponses">
+        <button type="button" class="quiz-reponse">TODO — distracteur = vraie erreur du chapitre</button>
+        <button type="button" class="quiz-reponse">TODO — la bonne réponse</button>
+        <button type="button" class="quiz-reponse">TODO — autre erreur plausible</button>
+      </div>
+      <div class="quiz-retours" aria-live="polite">
+        <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+        <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> TODO — pourquoi c'est vrai, ET quel piège tendait la réponse populaire.</p>
+      </div>
+    </div>
+
+    <!-- TODO: répéter .quiz-question (3 par quiz, 4 sur la section la plus
+         riche ; 13 questions au total sur le chapitre) -->
+
+  </div>
+</div>

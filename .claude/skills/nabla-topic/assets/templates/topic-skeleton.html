@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<!-- NABLA topic skeleton — copy to premiere/maths/<slug>/index.html and fill
+     every TODO. Structure mirrors the three shipped chapters exactly; delete
+     nothing structural without flagging it in the chapter README.
+     IMPORTANT: check the current CSS version (?v=N) on existing pages and use
+     the same N here (bump everywhere together only if you change CSS). -->
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>TODO-Titre — Première Spé Maths | Nabla</title>
+<meta name="description" content="TODO — écrite pour la recherche réelle d'un élève : notions clés, « graphiques que tu manipules toi-même », 15 exercices corrigés. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/TODO-slug/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TODO-Titre — Première Spé Maths | Nabla">
+<meta property="og:description" content="TODO — variante courte : notions + cours interactif + 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/TODO-slug/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TODO-Titre — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="TODO — encore plus courte.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "TODO-Titre — cours interactif et exercices corrigés",
+  "description": "TODO — les notions du chapitre. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/TODO-slug/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "TODO — liste des notions",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=6">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=6">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=6">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<!-- TODO: un <script type="module"> par module de widget utilisé sur la page -->
+<script type="module" src="../../../assets/js/widgets/TODO.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="TODO-cle-courte">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>TODO-Titre du chapitre</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>TODO : une phrase, les savoir-faire opérationnels du chapitre.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour TODO-mois TODO-année</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. TODO-hook</a>
+      <a href="#s2">2. TODO-geste phare</a>
+      <a href="#s3">3. TODO</a>
+      <a href="#s4">4. TODO</a>
+      <a href="#s5">5. TODO</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <!-- TODO: mêmes liens que le sommaire desktop, à l'identique -->
+        <a href="#s1">1. TODO-hook</a>
+        <a href="#s2">2. TODO-geste phare</a>
+        <a href="#s3">3. TODO</a>
+        <a href="#s4">4. TODO</a>
+        <a href="#s5">5. TODO</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <!-- §1 — L'ACCROCHE CONCRÈTE. Ni widget ni définition formelle ici :
+         une histoire du monde de l'élève + une figure statique qui EST
+         l'état initial du widget phare du §2. -->
+    <section id="s1" class="chap-section">
+      <h2>1. TODO-hook&nbsp;?</h2>
+      <p class="prose">TODO — l'histoire concrète (voiture, livret, tirage au sort…).</p>
+      <p class="prose">TODO — la traduction en image, avec le vocabulaire de Seconde.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="TODO — description française de la figure">
+          <!-- TODO: figure statique dessinée à la main (classes g-grid, g-axis,
+               g-courbe, g-guide, pt-fixe, etiquette-math…). Prévisualise le
+               widget phare. Générer les paths d'échantillonnage avec un petit
+               script jetable si besoin. -->
+        </svg>
+        <figcaption>TODO — lecture de la figure en une ou deux phrases.</figcaption>
+      </figure>
+
+      <div class="math-vitrine">$$\text{TODO — la formule de départ (niveau Seconde)}$$</div>
+    </section>
+
+    <!-- §2 — LE GESTE PHARE, PUIS LA DÉFINITION. Ordre non négociable :
+         manipulation d'abord, formalisation ensuite. -->
+    <section id="s2" class="chap-section">
+      <h2>2. TODO-geste phare</h2>
+      <p class="prose">TODO — l'invitation à manipuler (« Fais-le toi-même : … »).</p>
+
+      <!-- TODO: le widget phare — voir widget-skeleton.js et
+           interactive-patterns.md pour le cadre complet -->
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>TODO — l'intuition derrière ce que le graphique vient de montrer.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>TODO — la définition formelle, APRÈS le widget.</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$\text{TODO — LA formule centrale du chapitre}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TODO-EN-MAJUSCULES</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">TODO.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">TODO.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">TODO.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MÉTHODE EN ACTION</div>
+        <p class="exemple-enonce">TODO — l'énoncé.</p>
+        <p><span class="etape-label">Étape 1 — </span>TODO.</p>
+        <p><span class="etape-label">Étape 2 — </span>TODO.</p>
+        <p class="conclusion">Conclusion&nbsp;: TODO.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>TODO — la phrase à mémoriser.</p>
+      </div>
+
+      <!-- TODO: quiz s2 — voir exercise-and-quiz-stub.html -->
+    </section>
+
+    <!-- §3, §4, §5 — un concept chacun, même rythme interne :
+         prose d'accroche → widget → DÉFINITION/PROPRIÉTÉ → MÉTHODE →
+         EXEMPLE(S) RÉSOLU(S) → (POURQUOI ?/tableaux) → quiz.
+         L'un des trois porte un widget-jeu (manches) et l'un des quiz a
+         4 questions. -->
+    <section id="s3" class="chap-section">
+      <h2>3. TODO</h2>
+      <!-- TODO -->
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. TODO</h2>
+      <!-- TODO -->
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. TODO</h2>
+      <!-- TODO -->
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <!-- TODO: 4 ou 5 pièges — chaque .piege ouvre sur l'erreur en gras,
+             puis pourquoi c'est faux (contre-exemple si possible). Les mêmes
+             erreurs nourrissent les distracteurs des quiz. -->
+        <div class="piege">
+          <p><strong>TODO — l'erreur.</strong> TODO — pourquoi c'est faux.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <!-- TODO: EXACTEMENT 5 lignes, chacune LABEL-MONO + formule/phrase -->
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">TODO-LABEL</span>
+          <p>TODO.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: TODO-ordre-des-thèmes.</p>
+
+      <!-- TODO: 14 articles .exercice (voir exercise-and-quiz-stub.html),
+           ordre du cours, ~4 niveau 1 / ~8 niveau 2 / ~2-3 niveau 3,
+           l'exercice 14 = « problème » concret. Puis : -->
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · TODO (CALCULATRICE UTILE ou SANS CALCULATRICE)</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">TODO — la mise en situation.</p>
+          <div class="bac-partie">PARTIE A</div>
+          <ol>
+            <li>TODO.</li>
+          </ol>
+          <div class="bac-partie">PARTIE B</div>
+          <ol>
+            <li>TODO.</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>TODO.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <!-- Publié : -->
+        <!-- <div class="suivant-titre"><a href="../TODO-slug/">TODO-Titre <span aria-hidden="true">→</span></a></div> -->
+        <!-- Pas encore publié : -->
+        <div class="suivant-titre">TODO-Titre <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
