@@ -742,7 +742,303 @@
         <h2>Exercices</h2>
         <span class="ex-compte">15 corrigés</span>
       </div>
-      <!-- SECTION-EX -->
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: normes et angle, projection, coordonnées, orthogonalité, Al-Kashi — et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· normes et angle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\(\lVert \vec u \rVert = 4\) et \(\lVert \vec v \rVert = 3\). Calcule \(\vec u \cdot \vec v\) quand l'angle entre \(\vec u\) et \(\vec v\) vaut&nbsp;: a. 60°&nbsp;; b. 120°&nbsp;; c. 90°.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\vec u \cdot \vec v = 4 \times 3 \times \cos(60°) = 12 \times \dfrac{1}{2} = 6\).</p>
+          <p><span class="etape-label">b. — </span>\(\cos(120°) = -\dfrac{1}{2}\), donc \(\vec u \cdot \vec v = 12 \times \left(-\dfrac{1}{2}\right) = -6\). Angle obtus, produit négatif&nbsp;: cohérent.</p>
+          <p><span class="etape-label">c. — </span>\(\cos(90°) = 0\), donc \(\vec u \cdot \vec v = 0\)&nbsp;: les vecteurs sont orthogonaux.</p>
+          <p class="conclusion">Conclusion&nbsp;: mêmes normes, trois angles, trois signes — c'est l'angle qui commande. Ce sont exactement les trois préréglages du graphique de la section 2.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· projection</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\(A\), \(B\), \(C\) sont trois points avec \(AB = 6\). On note \(H\) le projeté orthogonal de \(C\) sur la droite \((AB)\). a. \(H\) appartient au segment \([AB]\) et \(AH = 2\)&nbsp;: calcule \(\overrightarrow{AB} \cdot \overrightarrow{AC}\). b. Même question si \(H\) est de l'autre côté de \(A\) (à l'extérieur du segment), toujours avec \(AH = 2\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Par la définition avec le projeté&nbsp;: \(\overrightarrow{AB} \cdot \overrightarrow{AC} = AB \times AH = 6 \times 2 = 12\), positif car \(\overrightarrow{AH}\) et \(\overrightarrow{AB}\) pointent dans le même sens.</p>
+          <p><span class="etape-label">b. — </span>Mêmes longueurs, mais l'ombre part à reculons&nbsp;: \(\overrightarrow{AH}\) et \(\overrightarrow{AB}\) sont de sens contraires, donc \(\overrightarrow{AB} \cdot \overrightarrow{AC} = -\,6 \times 2 = -12\).</p>
+          <p class="conclusion">Conclusion&nbsp;: la projection ne retient de \(\overrightarrow{AC}\) que son ombre sur \((AB)\) — longueur <em>et</em> sens. Le signe fait partie de la réponse.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· retrouver l'angle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\(\lVert \vec u \rVert = 4\), \(\lVert \vec v \rVert = 5\) et \(\vec u \cdot \vec v = -10\). Détermine l'angle entre \(\vec u\) et \(\vec v\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Isole le cosinus dans la formule&nbsp;: \(\cos(\vec u\;;\, \vec v) = \dfrac{\vec u \cdot \vec v}{\lVert \vec u \rVert \times \lVert \vec v \rVert} = \dfrac{-10}{4 \times 5} = -\dfrac{1}{2}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Avant de calculer, lis le signe&nbsp;: négatif, donc angle obtus. Et \(-\dfrac{1}{2}\) est une valeur classique&nbsp;: l'angle vaut 120°.</p>
+          <p class="conclusion">Conclusion&nbsp;: 120°. Le produit scalaire négatif annonçait l'angle obtus avant tout calcul — prends ce réflexe de contrôle.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· coordonnées</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un repère orthonormé, calcule \(\vec u \cdot \vec v\)&nbsp;: a. \(\vec u\,(2\;;\, 5)\) et \(\vec v\,(3\;;\, -1)\)&nbsp;; b. \(\vec u\,(4\;;\, -2)\) et \(\vec v\,(1\;;\, 3)\)&nbsp;; c. \(\vec u\,(3\;;\, 2)\) et \(\vec v\,(-4\;;\, 6)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(2 \times 3 + 5 \times (-1) = 6 - 5 = 1\).</p>
+          <p><span class="etape-label">b. — </span>\(4 \times 1 + (-2) \times 3 = 4 - 6 = -2\).</p>
+          <p><span class="etape-label">c. — </span>\(3 \times (-4) + 2 \times 6 = -12 + 12 = 0\)&nbsp;: tiens, un zéro. Ces deux vecteurs sont orthogonaux — sans que rien ne le laisse deviner dans leurs coordonnées.</p>
+          <p class="conclusion">Conclusion&nbsp;: premières coordonnées ensemble, secondes ensemble, et le signe de chaque produit posé au brouillon. Le c. annonce la section sur l'orthogonalité.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· angle par coordonnées</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un repère orthonormé, \(\vec u\,(3\;;\, 1)\) et \(\vec v\,(1\;;\, 2)\). Détermine la mesure exacte de l'angle entre \(\vec u\) et \(\vec v\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\vec u \cdot \vec v = 3 \times 1 + 1 \times 2 = 5\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\lVert \vec u \rVert = \sqrt{9 + 1} = \sqrt{10}\) et \(\lVert \vec v \rVert = \sqrt{1 + 4} = \sqrt{5}\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(\cos(\vec u\;;\, \vec v) = \dfrac{5}{\sqrt{10}\,\sqrt{5}} = \dfrac{5}{\sqrt{50}} = \dfrac{5}{5\sqrt{2}} = \dfrac{\sqrt{2}}{2}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: l'angle vaut 45°, valeur exacte. Quand \(\sqrt{50}\) apparaît, simplifie avant de sortir la calculatrice&nbsp;: les énoncés aiment les angles classiques.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· normes et identités</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On sait que \(\lVert \vec u \rVert = 2\), \(\lVert \vec v \rVert = 3\) et \(\vec u \cdot \vec v = -1\). Calcule&nbsp;: a. \(\lVert \vec u + \vec v \rVert\)&nbsp;; b. \(\lVert \vec u - \vec v \rVert\)&nbsp;; c. \((\vec u + \vec v) \cdot (\vec u - \vec v)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\lVert \vec u + \vec v \rVert^2 = \lVert \vec u \rVert^2 + 2\,\vec u \cdot \vec v + \lVert \vec v \rVert^2 = 4 - 2 + 9 = 11\), donc \(\lVert \vec u + \vec v \rVert = \sqrt{11}\).</p>
+          <p><span class="etape-label">b. — </span>Même identité avec le signe moins&nbsp;: \(4 + 2 + 9 = 15\), donc \(\lVert \vec u - \vec v \rVert = \sqrt{15}\).</p>
+          <p><span class="etape-label">c. — </span>Troisième identité remarquable&nbsp;: \((\vec u + \vec v) \cdot (\vec u - \vec v) = \lVert \vec u \rVert^2 - \lVert \vec v \rVert^2 = 4 - 9 = -5\).</p>
+          <p class="conclusion">Conclusion&nbsp;: tout le calcul littéral de collège fonctionne avec les vecteurs, à condition de passer par les carrés scalaires. Remarque que \(\sqrt{11} \neq 2 + 3\)&nbsp;: les normes ne s'additionnent pas.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· orthogonaux&nbsp;?</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un repère orthonormé, dis si les vecteurs sont orthogonaux&nbsp;: a. \(\vec u\,(6\;;\, -4)\) et \(\vec v\,(2\;;\, 3)\)&nbsp;; b. \(\vec u\,(5\;;\, 2)\) et \(\vec v\,(-2\;;\, 5)\)&nbsp;; c. \(\vec u\,(4\;;\, 2)\) et \(\vec v\,(1\;;\, -3)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(6 \times 2 + (-4) \times 3 = 12 - 12 = 0\)&nbsp;: orthogonaux.</p>
+          <p><span class="etape-label">b. — </span>\(5 \times (-2) + 2 \times 5 = -10 + 10 = 0\)&nbsp;: orthogonaux. Retiens le motif&nbsp;: \((-b\;;\, a)\) est toujours orthogonal à \((a\;;\, b)\).</p>
+          <p><span class="etape-label">c. — </span>\(4 \times 1 + 2 \times (-3) = 4 - 6 = -2 \neq 0\)&nbsp;: pas orthogonaux — presque, mais «&nbsp;presque perpendiculaire&nbsp;» n'existe pas en maths.</p>
+          <p class="conclusion">Conclusion&nbsp;: le test tient en une ligne de calcul. L'œil peut hésiter, jamais le produit scalaire.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· trouver un paramètre</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un repère orthonormé, détermine toutes les valeurs de \(t\) pour lesquelles les vecteurs sont orthogonaux&nbsp;: a. \(\vec u\,(3\;;\, -2)\) et \(\vec v\,(t\;;\, 6)\)&nbsp;; b. \(\vec u\,(t\;;\, 2)\) et \(\vec v\,(t\;;\, -8)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\vec u \cdot \vec v = 3t + (-2) \times 6 = 3t - 12\). Orthogonaux \(\iff 3t - 12 = 0 \iff t = 4\).</p>
+          <p><span class="etape-label">b. — </span>\(\vec u \cdot \vec v = t \times t + 2 \times (-8) = t^2 - 16\). Orthogonaux \(\iff t^2 = 16 \iff t = 4\) <em>ou</em> \(t = -4\).</p>
+          <p class="conclusion">Conclusion&nbsp;: l'orthogonalité se traduit en équation — et une équation peut avoir deux solutions. Ne t'arrête pas à la première.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· triangle rectangle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un repère orthonormé, \(A(-1\;;\, 2)\), \(B(3\;;\, 4)\) et \(C(2\;;\, -4)\). a. Montre que le triangle \(ABC\) est rectangle en A. b. Calcule son aire.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\overrightarrow{AB}\,(4\;;\, 2)\) et \(\overrightarrow{AC}\,(3\;;\, -6)\). Produit scalaire&nbsp;: \(4 \times 3 + 2 \times (-6) = 12 - 12 = 0\). Vecteurs non nuls et orthogonaux&nbsp;: le triangle est rectangle en A.</p>
+          <p><span class="etape-label">b. — </span>Les deux côtés de l'angle droit servent de base et de hauteur&nbsp;: \(AB = \sqrt{16 + 4} = \sqrt{20} = 2\sqrt{5}\) et \(AC = \sqrt{9 + 36} = \sqrt{45} = 3\sqrt{5}\). Aire \(= \dfrac{AB \times AC}{2} = \dfrac{2\sqrt{5} \times 3\sqrt{5}}{2} = \dfrac{6 \times 5}{2} = 15\).</p>
+          <p class="conclusion">Conclusion&nbsp;: rectangle en A, aire 15. Le produit scalaire a remplacé la réciproque de Pythagore — moins de calculs, pas de racines à comparer.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· démonstration</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\(ABCD\) est un carré. \(I\) est le milieu de \([AB]\), \(J\) celui de \([BC]\). Montre que les droites \((DI)\) et \((AJ)\) sont perpendiculaires. <em>Indication&nbsp;: place le repère \((A\;;\, \overrightarrow{AB},\, \overrightarrow{AD})\).</em></p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Le repère \((A\;;\, \overrightarrow{AB},\, \overrightarrow{AD})\) est orthonormé (côtés du carré&nbsp;: perpendiculaires et de même longueur, prise pour unité). Dans ce repère&nbsp;: \(A(0\;;\, 0)\), \(B(1\;;\, 0)\), \(C(1\;;\, 1)\), \(D(0\;;\, 1)\), donc \(I\left(\dfrac{1}{2}\;;\, 0\right)\) et \(J\left(1\;;\, \dfrac{1}{2}\right)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\overrightarrow{DI}\left(\dfrac{1}{2}\;;\, -1\right)\) et \(\overrightarrow{AJ}\left(1\;;\, \dfrac{1}{2}\right)\). Produit scalaire&nbsp;: \(\dfrac{1}{2} \times 1 + (-1) \times \dfrac{1}{2} = \dfrac{1}{2} - \dfrac{1}{2} = 0\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Produit nul, vecteurs non nuls&nbsp;: \((DI) \perp (AJ)\).</p>
+          <p class="conclusion">Conclusion&nbsp;: la perpendicularité est démontrée pour <em>tous</em> les carrés d'un coup — aucune mesure, aucun cas particulier. Poser soi-même un bon repère, c'est 80&nbsp;% de ce type d'exercice.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· Al-Kashi, un côté</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un triangle \(ABC\), \(AC = 3\), \(AB = 5\) et \(\widehat{A} = 120°\). Calcule \(BC\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Deux côtés et l'angle entre eux&nbsp;: Al-Kashi pour le côté opposé à \(\widehat{A}\), avec \(\cos(120°) = -\dfrac{1}{2}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(BC^2 = 3^2 + 5^2 - 2 \times 3 \times 5 \times \left(-\dfrac{1}{2}\right) = 9 + 25 + 15 = 49\). Le terme de correction <em>s'ajoute</em>&nbsp;: l'angle est obtus.</p>
+          <p><span class="etape-label">Étape 3 — </span>\(BC = \sqrt{49} = 7\), et \(49 > 34\)&nbsp;: cohérent avec un angle obtus.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(BC = 7\). Le double signe moins (celui de la formule, celui du cosinus) donne un plus&nbsp;: c'est le passage le plus surveillé de la copie.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· Al-Kashi, un angle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un triangle a pour côtés 4, 7 et 9. a. Sans calculatrice, dis si l'angle opposé au côté 9 est aigu, droit ou obtus. b. Calcule sa mesure au dixième de degré près.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Compare \(9^2 = 81\) à \(4^2 + 7^2 = 65\)&nbsp;: \(81 > 65\), donc le cosinus sera négatif — l'angle est obtus, avant toute calculatrice.</p>
+          <p><span class="etape-label">b. — </span>\(\cos\widehat{A} = \dfrac{4^2 + 7^2 - 9^2}{2 \times 4 \times 7} = \dfrac{65 - 81}{56} = \dfrac{-16}{56} = -\dfrac{2}{7}\). À la calculatrice&nbsp;: \(\widehat{A} \approx 106{,}6°\).</p>
+          <p class="conclusion">Conclusion&nbsp;: environ 106,6°, obtus comme annoncé. Compare toujours \(a^2\) à \(b^2 + c^2\) avant de calculer&nbsp;: c'est ton détecteur d'erreur de signe.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· le cercle de l'angle droit</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">\(A\) et \(B\) sont deux points fixés avec \(AB = 6\), et \(I\) est le milieu de \([AB]\). \(M\) est un point quelconque du plan. a. Justifie que \(\overrightarrow{MA} = \overrightarrow{MI} + \overrightarrow{IA}\) et \(\overrightarrow{MB} = \overrightarrow{MI} - \overrightarrow{IA}\). b. Déduis-en que \(\overrightarrow{MA} \cdot \overrightarrow{MB} = MI^2 - 9\). c. Décris l'ensemble des points \(M\) tels que \(\overrightarrow{MA} \cdot \overrightarrow{MB} = 0\), et interprète géométriquement.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Relation de Chasles&nbsp;: \(\overrightarrow{MA} = \overrightarrow{MI} + \overrightarrow{IA}\). Et comme \(I\) est le milieu de \([AB]\)&nbsp;: \(\overrightarrow{IB} = -\overrightarrow{IA}\), donc \(\overrightarrow{MB} = \overrightarrow{MI} + \overrightarrow{IB} = \overrightarrow{MI} - \overrightarrow{IA}\).</p>
+          <p><span class="etape-label">b. — </span>Troisième identité remarquable&nbsp;: \(\overrightarrow{MA} \cdot \overrightarrow{MB} = \left(\overrightarrow{MI} + \overrightarrow{IA}\right) \cdot \left(\overrightarrow{MI} - \overrightarrow{IA}\right) = MI^2 - IA^2\). Or \(IA = \dfrac{AB}{2} = 3\), donc \(\overrightarrow{MA} \cdot \overrightarrow{MB} = MI^2 - 9\).</p>
+          <p><span class="etape-label">c. — </span>\(\overrightarrow{MA} \cdot \overrightarrow{MB} = 0 \iff MI^2 = 9 \iff MI = 3\)&nbsp;: \(M\) décrit le cercle de centre \(I\) et de rayon 3 — le cercle de <em>diamètre</em> \([AB]\). Interprétation&nbsp;: \(\overrightarrow{MA} \cdot \overrightarrow{MB} = 0\) signifie que \(M\) voit le segment \([AB]\) sous un angle droit&nbsp;; on retrouve le cercle de Thalès du collège.</p>
+          <p class="conclusion">Conclusion&nbsp;: trois lignes de produit scalaire redémontrent un théorème de collège — et ce calcul \(MI^2 - IA^2\) est un grand classique des sujets de bac.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Retour sur le quai. Tu tires ta valise sur \(d = 200\) m, en exerçant le long de la poignée une force d'intensité \(F = 40\) N (newtons). En physique, l'énergie transmise par la force — son <em>travail</em>, en joules — est le produit scalaire \(W = \vec F \cdot \vec d\). On donne \(\sqrt{3} \approx 1{,}73\). a. La poignée fait un angle de 60° avec le quai&nbsp;: calcule \(W\). b. Ton amie tire la même valise avec la même force, mais sa poignée rallongée ne fait qu'un angle de 30°&nbsp;: calcule son travail et compare. c. Que devient \(W\) si on tire à 90°, à la verticale&nbsp;? d. Explique pourquoi les poignées de valise sont longues.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(W = F \times d \times \cos(60°) = 40 \times 200 \times \dfrac{1}{2} = 4\,000\) J. La moitié seulement de \(40 \times 200\)&nbsp;: le reste de l'effort tire vers le haut, pour rien.</p>
+          <p><span class="etape-label">b. — </span>\(W = 40 \times 200 \times \cos(30°) = 8\,000 \times \dfrac{\sqrt{3}}{2} = 4\,000\sqrt{3} \approx 6\,920\) J. Même force, même distance… et près de 1,7 fois plus d'énergie transmise à la valise&nbsp;: son geste est plus efficace.</p>
+          <p><span class="etape-label">c. — </span>\(\cos(90°) = 0\), donc \(W = 0\) J&nbsp;: tu soulèves, la valise n'avance pas. C'est l'orthogonalité de la section 4, en chair et en os.</p>
+          <p><span class="etape-label">d. — </span>Une poignée longue rapproche la direction de traction de l'horizontale&nbsp;: l'angle diminue, le cosinus grandit, et une plus grande part de ta force fait vraiment avancer la valise.</p>
+          <p class="conclusion">Conclusion&nbsp;: le produit scalaire est la formule officielle du travail d'une force — tu la retrouveras telle quelle en spé physique. La valise du début du chapitre était déjà un exercice de bac déguisé.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · SANS CALCULATRICE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Les deux parties sont indépendantes. Partie A&nbsp;: un triangle sans repère. Partie B&nbsp;: dans un repère orthonormé.</p>
+          <div class="bac-partie">PARTIE A</div>
+          <p class="prose">Dans un triangle \(ABC\), on donne \(AB = 3\), \(AC = 8\) et \(\widehat{A} = 60°\).</p>
+          <ol>
+            <li>Calcule \(\overrightarrow{AB} \cdot \overrightarrow{AC}\).</li>
+            <li>Montre que \(BC = 7\).</li>
+            <li>Montre que \(\cos\widehat{B} = -\dfrac{1}{7}\). L'angle \(\widehat{B}\) est-il aigu ou obtus&nbsp;?</li>
+          </ol>
+          <div class="bac-partie">PARTIE B</div>
+          <p class="prose">Dans un repère orthonormé, on donne \(A(2\;;\, -1)\), \(B(6\;;\, 1)\) et \(C(0\;;\, 3)\).</p>
+          <ol>
+            <li>Calcule les coordonnées de \(\overrightarrow{AB}\) et \(\overrightarrow{AC}\), puis montre que le triangle \(ABC\) est rectangle en A.</li>
+            <li>\(I\) est le milieu de \([BC]\). Calcule ses coordonnées, puis montre que \(IA = IB = IC\).</li>
+            <li>Déduis-en que les trois sommets du triangle sont sur un même cercle, dont tu préciseras le centre et le rayon. Quel lien avec l'exercice 13&nbsp;?</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>\(\overrightarrow{AB} \cdot \overrightarrow{AC} = AB \times AC \times \cos\widehat{A} = 3 \times 8 \times \dfrac{1}{2} = 12\).</p>
+            <p><span class="etape-label">A.2 — </span>Al-Kashi&nbsp;: \(BC^2 = 3^2 + 8^2 - 2 \times 3 \times 8 \times \cos(60°) = 9 + 64 - 24 = 49\), donc \(BC = 7\).</p>
+            <p><span class="etape-label">A.3 — </span>Al-Kashi depuis \(B\), pour le côté opposé \(AC\)&nbsp;: \(AC^2 = BA^2 + BC^2 - 2 \times BA \times BC \times \cos\widehat{B}\), soit \(64 = 9 + 49 - 42\cos\widehat{B}\). D'où \(42\cos\widehat{B} = -6\) et \(\cos\widehat{B} = -\dfrac{1}{7}\). Cosinus négatif&nbsp;: \(\widehat{B}\) est obtus.</p>
+            <p><span class="etape-label">B.1 — </span>\(\overrightarrow{AB}\,(4\;;\, 2)\) et \(\overrightarrow{AC}\,(-2\;;\, 4)\)&nbsp;: \(\overrightarrow{AB} \cdot \overrightarrow{AC} = 4 \times (-2) + 2 \times 4 = 0\). Vecteurs non nuls orthogonaux&nbsp;: triangle rectangle en A.</p>
+            <p><span class="etape-label">B.2 — </span>\(I\left(\dfrac{6+0}{2}\;;\, \dfrac{1+3}{2}\right) = I(3\;;\, 2)\). Puis \(IA^2 = (2-3)^2 + (-1-2)^2 = 1 + 9 = 10\), \(IB^2 = 3^2 + (-1)^2 = 10\), \(IC^2 = (-3)^2 + 1^2 = 10\)&nbsp;: \(IA = IB = IC = \sqrt{10}\).</p>
+            <p><span class="etape-label">B.3 — </span>\(I\) est à égale distance des trois sommets&nbsp;: \(A\), \(B\) et \(C\) sont sur le cercle de centre \(I\) et de rayon \(\sqrt{10}\). C'est le cercle de diamètre \([BC]\)&nbsp;: l'angle droit en \(A\) «&nbsp;voit&nbsp;» le diamètre — exactement la situation de l'exercice 13, dans l'autre sens.</p>
+          </div>
+        </div>
+      </article>
     </section>
 
     <div class="pied-chapitre">
