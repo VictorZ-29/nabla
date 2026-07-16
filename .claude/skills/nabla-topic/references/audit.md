@@ -204,3 +204,12 @@ decided on the spot.
    existing `g-motif` path can seed the carte-motif but needs re-generation
    at the carte's proportions plus an accent tangent/point — a throwaway
    node script did it (same script generated the §1 figure paths).
+8. **The KaTeX onload snippet MUST be byte-identical to an existing page**
+   (caught live: two characters dropped in retyping — `})()})();` became
+   `})();` — a silent SyntaxError, and NO maths rendered on the page).
+   Never retype it; after scaffolding run
+   `diff <(grep -o 'onload="[^"]*"' premiere/maths/derivation/index.html) <(grep -o 'onload="[^"]*"' <new page>)`
+   which must be empty. The jsdom module smoke test does not execute
+   `onload` attributes — verify KaTeX separately by installing `katex` and
+   running the extracted snippet against the jsdom document (479 formulas
+   rendered, 0 errors, on the exponentielle page).

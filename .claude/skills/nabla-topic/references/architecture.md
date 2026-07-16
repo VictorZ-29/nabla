@@ -16,7 +16,11 @@ might have drifted.
   Auto-render is invoked by an inline `onload` snippet that renders **block by
   block, one requestAnimationFrame per direct child of each `.chap-section`,
   then a final pass on `<body>`** — a measured perf fix (worst main-thread
-  task ÷4). Copy that snippet verbatim from an existing chapter head.
+  task ÷4). Copy that snippet verbatim from an existing chapter head and
+  VERIFY it byte-identical afterwards
+  (`diff <(grep -o 'onload="[^"]*"' <old>) <(grep -o 'onload="[^"]*"' <new>)`
+  must be empty) — one dropped character is a silent SyntaxError and no
+  maths renders at all (audit.md §10.8).
 - **Fonts: Google Fonts** with preconnect + `display=swap`:
   Spectral (serif body), IBM Plex Mono (labels/chips/UI), STIX Two Text
   (maths inside SVG only — HTML maths is KaTeX's own font).
