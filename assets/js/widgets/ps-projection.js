@@ -38,7 +38,7 @@ function initPsProjection(fig) {
   const vecU = creerVecteur(svg, { classeTrait: 'g-courbe', classePointe: 'vec-pointe' });
   vecU.maj(ox, oy, vue.xPx(nu), oy);
   const labU = etiquetteVecteur(svg, 'u');
-  labU.maj(vue.xPx(nu / 2), oy + 34);
+  labU.maj(vue.xPx(nu) - 24, oy + 36);
   const labO = el('text', {
     class: 'etiquette-math etiquette-math--muted', 'font-size': 15,
     x: ox - 14, y: oy + 24, 'text-anchor': 'end',

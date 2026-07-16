@@ -52,16 +52,16 @@ function initPsSigne(fig) {
       vec.maj(ox, oy, px, py);
       const L = Math.hypot(px - ox, py - oy) || 1;
       const lab = etiquetteVecteur(svg, nom, accent ? 'accent' : '');
-      lab.maj(clamp(px + ((px - ox) / L) * 26, 14, vue.largeur - 14),
-              clamp(py + ((py - oy) / L) * 26 + 6, 30, vue.hauteur - 8));
-      /* coordonnées affichées à côté de la pointe : le calcul est possible */
+      const lx = clamp(px + ((px - ox) / L) * 32, 44, vue.largeur - 44);
+      const ly = clamp(py + ((py - oy) / L) * 32 + 6, 30, vue.hauteur - 26);
+      lab.maj(lx, ly);
+      /* coordonnées affichées sous la lettre : le calcul est possible */
       const negX = coords[0] < 0 ? `−${-coords[0]}` : `${coords[0]}`;
       const negY = coords[1] < 0 ? `−${-coords[1]}` : `${coords[1]}`;
       const t = el('text', {
         class: `etiquette-mono ${accent ? 'etiquette-math--accent' : 'etiquette-math--muted'}`,
         'font-size': 12.5, 'text-anchor': 'middle',
-        x: clamp(px + ((px - ox) / L) * 26, 40, vue.largeur - 40),
-        y: clamp(py + ((py - oy) / L) * 26 + 26, 44, vue.hauteur - 8),
+        x: lx, y: ly + 17,
       }, svg);
       t.textContent = `(${negX} ; ${negY})`;
     }

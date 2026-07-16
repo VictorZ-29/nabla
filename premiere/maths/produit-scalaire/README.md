@@ -235,4 +235,79 @@ and behaviour as the other chapters. Distractors are the chapter's pièges:
 
 ## Review flags for Victor
 
-(To be completed at the end of the build.)
+Everything on this page is new authorship in your voice — no design mock,
+no pre-existing copy, and **no outline validation before building** (the
+session ran autonomously). Please read as author. Specific decisions:
+
+1. **The whole chapter design is mine**: the valise story, the
+   ombre-then-cosinus order (projection presented as THE meaning of the
+   produit scalaire, ‖u⃗‖‖v⃗‖cos θ derived from it via the Seconde
+   cosinus), coordinates in §3 with all the calculation rules, orthogonality
+   as its own §4, Al-Kashi as the §5 payoff. The programme's other
+   démonstration (ensemble des points M, MA⃗·MB⃗ = 0) is exercise 13
+   rather than course content — done by pure produit scalaire (MI² − IA²),
+   deliberately NOT via circle equations (kept for a future géométrie
+   repérée chapter).
+2. **Bilinéarité is stated, not named**: « le produit scalaire se développe
+   comme un produit de nombres » with the two rules and the identités
+   remarquables. The word « bilinéarité » never appears — my call for
+   Première readability.
+3. **The projection definition** uses the two-case formulation
+   (OA × OH / −OA × OH with H on either side of O) rather than mesures
+   algébriques (not assumed known). The essentiel line uses the
+   \(\overline{OH}\) overline notation once, KaTeX-rendered.
+4. **Mono readouts write « u·v » without vector arrows** (combining U+20D7
+   renders unreliably in IBM Plex Mono / Spectral). Proper arrows appear in
+   all KaTeX maths. Same choice for JS-composed captions.
+5. **ps-projection allows only the upper half-plane** (θ ∈ [0° ; 180°],
+   pointer below the axis clamps to 0°/180°) — the angle between vectors is
+   non-oriented, and this avoids duplicated states. Angles are quantised to
+   whole degrees so readouts stay consistent.
+6. **ARIA is bent in ps-coordonnees**: a 2-D draggable grid point is
+   exposed as `role="slider"` (1-D by spec) with arrows moving both axes
+   and `aria-valuetext` carrying the full pair + product. No better
+   standard role exists; tell me if you'd rather have four sliders.
+7. **ps-alkashi's displayed line rounds the correction term first** then
+   subtracts, so the shown arithmetic is always self-consistent (and exact
+   at 60/90/120°); the chip a = BC uses the exact value. The a² chip and
+   the a chip can therefore differ in the third decimal — invisible at
+   2 decimals.
+8. **Drag widgets use arrows ±5°, Shift ±1°** (previous chapters: ±0,05 /
+   ±0,01 in maths units) — degrees needed a bigger default step to cross
+   180° in a reasonable number of presses.
+9. **Exercise stories & numbers, all hand-checked**: ex 01 = the widget's
+   presets (6/−6/0) · ex 03 cos = −0,5 → 120° · ex 05 → 45° exact ·
+   ex 06 → √11, √15, −5 · ex 08b t² = 16 (two solutions) · ex 09 aire = 15
+   exact · ex 10 le carré (repère à poser soi-même) · ex 11 = 120° so the
+   double negative gives +15 (BC = 7) · ex 12 cos = −2/7 → 106,6° ·
+   ex 13 = the programme démonstration · ex 14 travail 4 000 J vs
+   4 000√3 ≈ 6 920 J (√3 ≈ 1,73 given) · bac A: 12, BC = 7,
+   cos B̂ = −1/7 (obtus, no calculator) · bac B: rectangle en A,
+   I(3 ; 2), IA² = IB² = IC² = 10 → circle of radius √10 (A lies on the
+   circle of diameter [BC] — closes the loop with ex 13).
+10. **Ex 14 uses the physics word « travail » (joules)** and presents
+    W = F⃗·d⃗ as the official formula — a deliberate spé-physique bridge.
+    Check the framing (the « travail utile » reading at fixed force
+    intensity).
+11. **The next chapter is announced as « La géométrie repérée »** (this
+    page's footer + a new homepage « bientôt » card with a line+circle
+    motif). Pure guess on my part — rename if your roadmap differs.
+12. **New shared code**: `creerVecteur` and `etiquetteVecteur` exported
+    from nabla-graph.js (used by all 4 widgets); chapitre.css gained one
+    banner section (arrow-tip fills, angle arc, right-angle mark, label
+    arrow strokes) — tokens only, `?v=6 → ?v=7` bumped on every page in
+    the same commit.
+13. **JS budget: 48,6 KB** first-party unminified on this page (ceiling
+    50 KB) — the heaviest chapter so far; measured with `wc -c`. If a
+    fifth widget is ever added, something must be trimmed.
+14. **Verified in a real browser** (Playwright + Chromium in the build
+    sandbox): 36 behavioural checks pass — drags (mouse + touch), keyboard
+    paths (arrows/Shift/Home/End), presets & resets, the ps-signe game
+    flow, quiz + corrigés, scroll-spy, internal links; KaTeX rendered
+    served-locally (437 formulas, 0 errors — the CDN is blocked in the
+    sandbox); CLS = 0,0000 at 375 px with maths rendered; reduced-motion
+    presets jump instantly. Screenshots taken in both themes at 375 px and
+    1280 px. **A live pass on the real site (CDN KaTeX, Lighthouse, real
+    touch) remains on your checklist.**
+15. **« mis à jour juillet 2026 »** hand-maintained, as everywhere.
+    Sitemap lastmod 2026-07-16 on /, exponentielle, produit-scalaire.

@@ -132,14 +132,14 @@ function initPsAlkashi(fig) {
     labAngle.textContent = `${deg}°`;
 
     /* étiquettes des côtés mobiles : au milieu, décalées vers l'extérieur */
-    labb.setAttribute('x', (ax + cxPx) / 2 - 16 * sinA);
-    labb.setAttribute('y', (ay + cyPx) / 2 - 16 * cosA + 4);
+    labb.setAttribute('x', (ax + cxPx) / 2 - 28 * sinA);
+    labb.setAttribute('y', (ay + cyPx) / 2 - 28 * cosA + 4);
     /* étiquette de a : au milieu de [BC], poussée à l'opposé de A */
     const mx = (bxPx + cxPx) / 2;
     const my = (ay + cyPx) / 2;
     const nL = Math.hypot(mx - ax, my - ay) || 1;
-    laba.setAttribute('x', mx + 20 * ((mx - ax) / nL));
-    laba.setAttribute('y', my + 20 * ((my - ay) / nL) + 4);
+    laba.setAttribute('x', mx + 30 * ((mx - ax) / nL));
+    laba.setAttribute('y', my + 30 * ((my - ay) / nL) + 4);
     laba.textContent = `a ≈ ${fmt(a)}`;
 
     halo.setAttribute('cx', cxPx); halo.setAttribute('cy', cyPx);
