@@ -169,6 +169,61 @@ export function rendreDraggable(cible, { surDebut, surDeplacement, surFin }) {
   cible.addEventListener('pointercancel', fin);
 }
 
+/* Vecteur dessiné : trait + pointe triangulaire (chapitre produit scalaire).
+   Le trait porte une classe de courbe existante (g-courbe = craie,
+   g-courbe-derivee = accent), la pointe une classe de remplissage
+   (vec-pointe / vec-pointe--accent). maj() reçoit des PIXELS. */
+export function creerVecteur(parent, { classeTrait = 'g-courbe', classePointe = 'vec-pointe' } = {}) {
+  const g = el('g', {}, parent);
+  const trait = el('path', { class: classeTrait }, g);
+  const pointe = el('path', { class: classePointe }, g);
+  return {
+    g, trait, pointe,
+    maj(x1, y1, x2, y2, long = 13, demiLarg = 5) {
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const L = Math.hypot(dx, dy) || 1;
+      const ux = dx / L;
+      const uy = dy / L;
+      const bx = x2 - ux * long;   // base de la pointe
+      const by = y2 - uy * long;
+      trait.setAttribute('d', `M${arrondi(x1)} ${arrondi(y1)}L${arrondi(bx)} ${arrondi(by)}`);
+      pointe.setAttribute('d',
+        `M${arrondi(x2)} ${arrondi(y2)}` +
+        `L${arrondi(bx - uy * demiLarg)} ${arrondi(by + ux * demiLarg)}` +
+        `L${arrondi(bx + uy * demiLarg)} ${arrondi(by - ux * demiLarg)}Z`);
+    },
+  };
+}
+
+/* Étiquette de vecteur : lettre italique + petite flèche tracée au-dessus
+   (pas de caractère combinant U+20D7 dans le SVG — rendu inégal).
+   variante : '' | 'accent' | 'muted' (couleurs des classes etiquette-*). */
+export function etiquetteVecteur(parent, lettre, variante = '') {
+  const suffixe = variante ? `--${variante}` : '';
+  const g = el('g', {}, parent);
+  const texte = el('text', {
+    class: `etiquette-math${variante ? ` etiquette-math${suffixe}` : ''}`,
+    'font-size': 17, 'text-anchor': 'middle',
+  }, g);
+  texte.textContent = lettre;
+  const fleche = el('path', {
+    class: `etiquette-vec-fleche${variante ? ` etiquette-vec-fleche${suffixe}` : ''}`,
+  }, g);
+  return {
+    g,
+    maj(x, y) {
+      texte.setAttribute('x', x);
+      texte.setAttribute('y', y);
+      /* flèche de 12 px au-dessus de la lettre, pointe à droite */
+      const fy = y - 15;
+      fleche.setAttribute('d',
+        `M${arrondi(x - 6)} ${arrondi(fy)}L${arrondi(x + 6)} ${arrondi(fy)}` +
+        `M${arrondi(x + 2.6)} ${arrondi(fy - 2.6)}L${arrondi(x + 6)} ${arrondi(fy)}L${arrondi(x + 2.6)} ${arrondi(fy + 2.6)}`);
+    },
+  };
+}
+
 /* Étiquette « glisse-moi » (indice de première interaction). */
 export function creerHint(parent, { x, y, filDe, filVers }) {
   const g = el('g', { class: 'hint-tag', 'aria-hidden': 'true' }, parent);
