@@ -1217,3 +1217,9 @@
 /* Boutons d'espèce (réutilisent .feuille-btn) + indices chimiques compacts */
 .especes-boutons { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip sub, .lecture-formule sub, .avc-tableau sub, .feuille-btn sub, .quiz-reponse sub { line-height: 0; }
+
+/* Correctif partagé : la copie MathML de KaTeX (position: absolute) posée
+   dans une cellule de tableau s'échappait du conteneur défilant .defile
+   (non positionné) et élargissait la page à 375 px. Ancrée ici, elle reste
+   rognée dans la zone de défilement. */
+.tableau .defile { position: relative; }
