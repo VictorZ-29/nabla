@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Le produit scalaire — Première Spé Maths | Nabla</title>
+<meta name="description" content="Comprends vraiment le produit scalaire : l'ombre d'un vecteur sur un autre, les formules avec le cosinus, les coordonnées et les normes, l'orthogonalité et le théorème d'Al-Kashi, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/produit-scalaire/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Le produit scalaire — Première Spé Maths | Nabla">
+<meta property="og:description" content="L'ombre d'un vecteur sur un autre, les trois formules du produit scalaire, l'orthogonalité et le théorème d'Al-Kashi : un cours interactif où tu manipules les vecteurs toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/produit-scalaire/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Le produit scalaire — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Projection, cosinus, coordonnées, orthogonalité et Al-Kashi : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Le produit scalaire — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur le produit scalaire : projection orthogonale, formules avec cosinus, coordonnées et normes, orthogonalité de vecteurs, théorème d'Al-Kashi. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/produit-scalaire/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Produit scalaire de deux vecteurs, projection orthogonale, formules du produit scalaire (cosinus, coordonnées, normes), orthogonalité de vecteurs, théorème d'Al-Kashi",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=7">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=7">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=7">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/ps-projection.js"></script>
+<script type="module" src="../../../assets/js/widgets/ps-coordonnees.js"></script>
+<script type="module" src="../../../assets/js/widgets/ps-signe.js"></script>
+<script type="module" src="../../../assets/js/widgets/ps-alkashi.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="scalaire">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>Le produit scalaire</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer un produit scalaire de trois façons (angle, projection, coordonnées), démontrer que deux vecteurs sont orthogonaux — et trouver un côté ou un angle d'un triangle quelconque avec le théorème d'Al-Kashi.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. Tirer dans le bon sens</a>
+      <a href="#s2">2. L'ombre d'un vecteur</a>
+      <a href="#s3">3. Avec des coordonnées</a>
+      <a href="#s4">4. L'orthogonalité</a>
+      <a href="#s5">5. Al-Kashi</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. Tirer dans le bon sens</a>
+        <a href="#s2">2. L'ombre d'un vecteur</a>
+        <a href="#s3">3. Avec des coordonnées</a>
+        <a href="#s4">4. L'orthogonalité</a>
+        <a href="#s5">5. Al-Kashi</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. Tirer dans le bon sens</h2>
+      <!-- SECTION-S1 -->
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. L'ombre d'un vecteur sur l'autre</h2>
+      <!-- SECTION-S2 -->
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Le produit scalaire sans rapporteur&nbsp;: les coordonnées</h2>
+      <!-- SECTION-S3 -->
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. L'orthogonalité&nbsp;: quand le produit s'annule</h2>
+      <!-- SECTION-S4 -->
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Al-Kashi&nbsp;: Pythagore pour tous les triangles</h2>
+      <!-- SECTION-S5 -->
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <!-- SECTION-PIEGES -->
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <!-- SECTION-ESSENTIEL -->
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <!-- SECTION-EX -->
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">La géométrie repérée <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

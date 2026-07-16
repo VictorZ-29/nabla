@@ -1171,3 +1171,14 @@
   .essentiel-ligne { flex-direction: column; gap: 6px; }
   .essentiel-label { flex: none; }
 }
+
+/* --- Produit scalaire : vecteurs, ombre et angles -----------------------------------------------------------
+   Les traits des vecteurs réutilisent .g-courbe (craie = le vecteur de
+   référence) et .g-courbe-derivee (accent = celui qui répond au geste) ;
+   seules les pointes triangulaires, l'arc d'angle et la marque d'angle
+   droit sont nouveaux. Couleurs et épaisseurs : tokens uniquement. */
+
+.vec-pointe { fill: var(--chalk); }
+.vec-pointe--accent { fill: var(--accent); }
+.arc-angle { stroke: var(--accent); stroke-width: var(--sw-tan-mini); fill: none; }
+.marque-droit { stroke: var(--accent); stroke-width: var(--sw-tan-mini); fill: none; }
