@@ -1186,3 +1186,40 @@
 .etiquette-vec-fleche { fill: none; stroke: var(--text); stroke-width: 1.2; }
 .etiquette-vec-fleche--accent { stroke: var(--accent); }
 .etiquette-vec-fleche--muted { stroke: var(--muted); }
+
+/* --- Avancement (physique-chimie) : barres d'espèces, tableau vivant, droites n(x) --------------------------
+   Même partage des rôles que courbe/tangente : les réactifs sont des barres
+   « craie » (contour craie, fond chip), les produits répondent en accent.
+   Couleurs et épaisseurs : tokens uniquement. */
+
+.avc-barre-reactif { fill: var(--chip); stroke: var(--chalk); stroke-width: var(--sw-grid); }
+.avc-barre-produit { fill: var(--accTint2); stroke: var(--accent); stroke-width: var(--sw-grid); }
+.avc-repere { stroke: var(--guide); stroke-width: var(--sw-grid); stroke-dasharray: 3 4; fill: none; }
+.avc-fleche { stroke: var(--muted); stroke-width: var(--sw-tan-mini); fill: none; }
+.avc-fleche-pointe { fill: var(--muted); }
+.avc-valeur { font-family: var(--font-mono); font-size: 13px; fill: var(--text); }
+.avc-nom { font-family: var(--font-mono); font-size: 13.5px; fill: var(--muted); }
+.avc-nom--accent { fill: var(--accent); }
+.avc-candidat { font-family: var(--font-mono); font-size: 12px; fill: var(--faint); }
+.avc-impossible { fill: var(--faint); }
+
+/* Tableau d'avancement vivant (widget avancement) : trois lignes — état
+   initial, expressions littérales, ligne « où tu en es » mise à jour en
+   direct. Défile horizontalement sur mobile. */
+.avc-tableau { overflow-x: auto; border: 1px solid var(--hairIn); border-radius: var(--radius-block); }
+.avc-tableau table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 13px; }
+.avc-tableau th, .avc-tableau td { padding: 8px 10px; text-align: center; white-space: nowrap; }
+.avc-tableau thead th { font-weight: 500; font-size: 12.5px; color: var(--text); border-bottom: 1px solid var(--hair); background: var(--chip); }
+.avc-tableau tbody tr + tr td { border-top: 1px solid var(--hairIn); }
+.avc-tableau th:first-child, .avc-tableau td:first-child { text-align: left; color: var(--muted); font-size: 12px; }
+.avc-tableau .ligne-vive td { color: var(--accent); font-weight: 500; background: var(--accTint); }
+
+/* Boutons d'espèce (réutilisent .feuille-btn) + indices chimiques compacts */
+.especes-boutons { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip sub, .lecture-formule sub, .avc-tableau sub, .feuille-btn sub, .quiz-reponse sub { line-height: 0; }
+
+/* Correctif partagé : la copie MathML de KaTeX (position: absolute) posée
+   dans une cellule de tableau s'échappait du conteneur défilant .defile
+   (non positionné) et élargissait la page à 375 px. Ancrée ici, elle reste
+   rognée dans la zone de défilement. */
+.tableau .defile { position: relative; }
