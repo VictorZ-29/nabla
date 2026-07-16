@@ -1182,3 +1182,7 @@
 .vec-pointe--accent { fill: var(--accent); }
 .arc-angle { stroke: var(--accent); stroke-width: var(--sw-tan-mini); fill: none; }
 .marque-droit { stroke: var(--accent); stroke-width: var(--sw-tan-mini); fill: none; }
+/* Petite flèche au-dessus de la lettre d'un vecteur (etiquetteVecteur) */
+.etiquette-vec-fleche { fill: none; stroke: var(--text); stroke-width: 1.2; }
+.etiquette-vec-fleche--accent { stroke: var(--accent); }
+.etiquette-vec-fleche--muted { stroke: var(--muted); }

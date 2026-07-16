@@ -136,35 +136,605 @@
 
     <section id="s1" class="chap-section">
       <h2>1. Tirer dans le bon sens</h2>
-      <!-- SECTION-S1 -->
+      <p class="prose">Gare de Lyon, quai 12. Tu tires ta valise à roulettes, la poignée inclinée. Ta main tire fort le long de la poignée — mais la valise, elle, n'avance que le long du quai. Une partie de ton effort la fait avancer&nbsp;; le reste tire vers le haut, pour rien. Plus la poignée se redresse, plus tu fatigues pour moins d'effet.</p>
+      <p class="prose">Deux flèches racontent la scène&nbsp;: le <em>déplacement</em>, le long du quai, et la <em>force</em>, le long de la poignée. Tu sais depuis la Seconde que ces flèches s'appellent des vecteurs. La question du chapitre tient alors en une phrase&nbsp;: <strong>quelle part d'un vecteur agit dans le sens d'un autre&nbsp;?</strong></p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="Le vecteur déplacement horizontal, le vecteur force incliné à 60 degrés, et l'ombre de la force projetée sur la direction du déplacement, marquée par un segment épais de O à H">
+          <path class="g-grid" d="M0 400L0 0M40 400L40 0M80 400L80 0M120 400L120 0M160 400L160 0M200 400L200 0M280 400L280 0M320 400L320 0M360 400L360 0M400 400L400 0M440 400L440 0M480 400L480 0M520 400L520 0M560 400L560 0M600 400L600 0M640 400L640 0M0 400L640 400M0 360L640 360M0 320L640 320M0 240L640 240M0 200L640 200M0 160L640 160M0 120L640 120M0 80L640 80M0 40L640 40M0 0L640 0"></path>
+          <path class="g-axis" d="M0 280L640 280M240 400L240 0"></path>
+          <path class="g-courbe-derivee" d="M240 280L300 280"></path>
+          <path class="g-guide" stroke-dasharray="4 4" d="M300 176.1L300 280"></path>
+          <path class="arc-angle" d="M276 280A36 36 0 0 0 258 248.8"></path>
+          <text class="etiquette-mono etiquette-math--accent" font-size="12.5" x="286.8" y="257" text-anchor="middle">60°</text>
+          <path class="g-courbe" d="M240 280L387 280"></path>
+          <path class="vec-pointe" d="M400 280L387 285L387 275Z"></path>
+          <path class="g-courbe-derivee" d="M240 280L293.5 187.3"></path>
+          <path class="vec-pointe--accent" d="M300 176.1L297.8 189.8L289.2 184.8Z"></path>
+          <circle class="pt-derivee" cx="300" cy="280" r="4.5"></circle>
+          <text class="etiquette-math etiquette-math--muted" font-size="15" x="226" y="304" text-anchor="end">O</text>
+          <text class="etiquette-math etiquette-math--muted" font-size="15" x="300" y="304" text-anchor="middle">H</text>
+          <text class="etiquette-math" font-size="16" x="350" y="312" text-anchor="middle">déplacement</text>
+          <text class="etiquette-math etiquette-math--accent" font-size="16" x="282" y="156" text-anchor="middle">force</text>
+        </svg>
+        <figcaption>La force tire en biais. Son ombre sur la direction du déplacement — le segment épais, de O à H — est la seule part qui fasse avancer la valise. Ici, la poignée est inclinée à 60°.</figcaption>
+      </figure>
+
+      <p class="prose">Regarde le segment épais&nbsp;: c'est l'<em>ombre</em> de la force sur le quai, comme sous un soleil de midi. C'est elle qui travaille. Le produit scalaire, que tu vas construire à la section suivante, mesure exactement ça. Une seule formule de Seconde à réveiller avant de commencer — la longueur d'un vecteur, qu'on appelle sa <strong>norme</strong> et qu'on note \(\lVert \vec u \rVert\). Pour \(\vec u\,(x\;;\, y)\) dans un repère orthonormé&nbsp;:</p>
+
+      <div class="math-vitrine">$$\lVert \vec u \rVert = \sqrt{x^2 + y^2}$$</div>
     </section>
 
     <section id="s2" class="chap-section">
       <h2>2. L'ombre d'un vecteur sur l'autre</h2>
-      <!-- SECTION-S2 -->
+      <p class="prose">Fais-le toi-même&nbsp;: attrape le bout de \(\vec v\) et fais-le tourner autour de O. Regarde l'ombre — le segment épais — s'étirer, rétrécir, disparaître à 90°, puis repartir à l'envers. Et surveille le nombre juste en dessous&nbsp;: il raconte la même histoire.</p>
+
+      <figure class="widget" id="widget-ps-projection"
+        data-widget="ps-projection" data-nu="4" data-nv="3" data-theta-init="60"
+        data-xmin="-6" data-xmax="10" data-ymin="-3" data-ymax="7">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">L'ombre qui fait le produit</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages de l'angle entre les vecteurs">
+            <button type="button" data-theta="60" aria-pressed="false">60°</button>
+            <button type="button" data-theta="90" aria-pressed="false">90°</button>
+            <button type="button" data-theta="120" aria-pressed="false">120°</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Le vecteur u est fixé sur l'axe horizontal ; le vecteur v tourne autour de l'origine, et son ombre projetée sur la droite qui porte u s'étire, disparaît à 90 degrés puis repart en sens contraire"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule"><span class="js-ligne1">u·v = 4 × OH = 4 × 1,50 = 6,00</span></div>
+          <div class="lecture-formule"><span class="js-ligne2">OH = 3 × cos(60°) = 1,50</span></div>
+          <div class="chips">
+            <span class="chip">angle = <span class="js-theta">60°</span></span>
+            <span class="chip chip--accent">u·v = <span class="js-produit">6,00</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">angle aigu — produit positif</span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Angle aigu&nbsp;: l'ombre tombe du côté de u, le produit scalaire est positif.</p>
+        </div>
+        <div class="widget-note">Les longueurs sont fixées — norme de u = 4, norme de v = 3 — seul l'angle bouge. H est le projeté orthogonal du bout de v sur la droite qui porte u&nbsp;: le segment épais [OH], c'est l'ombre. OH est compté négatif quand H passe de l'autre côté de O.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi multiplier l'ombre par la norme de \(\vec u\)&nbsp;? Parce qu'un effet dépend des <em>deux</em> vecteurs. Reprends la valise&nbsp;: un trajet deux fois plus long, c'est deux fois plus d'effet&nbsp;; une force deux fois plus grande aussi. Le produit scalaire multiplie donc les deux grandeurs — c'est un <em>produit</em>, et chaque vecteur y pèse proportionnellement.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Soit \(\vec u\) et \(\vec v\) deux vecteurs non nuls. On pose \(\vec u = \overrightarrow{OA}\), \(\vec v = \overrightarrow{OB}\), et on appelle H le projeté orthogonal de B sur la droite \((OA)\). Le <strong>produit scalaire</strong> de \(\vec u\) par \(\vec v\) est le <strong>nombre réel</strong>&nbsp;:</p>
+        <p>\(\vec u \cdot \vec v = OA \times OH\) si H est du côté de A, et \(\vec u \cdot \vec v = -\,OA \times OH\) si H est de l'autre côté de O.</p>
+        <p>Si l'un des deux vecteurs est nul, on pose \(\vec u \cdot \vec v = 0\).</p>
+      </div>
+
+      <p class="prose">Et la formule qui relie l'ombre à l'angle&nbsp;? Dans le triangle rectangle formé par \(\vec v\), son ombre et la verticale en pointillé, le cosinus de Seconde donne directement&nbsp;: ombre \(= \lVert \vec v \rVert \cos\theta\). En remplaçant, on obtient <em>la</em> formule du chapitre&nbsp;:</p>
+
+      <div class="math-vitrine math-vitrine--grande">$$\vec u \cdot \vec v = \lVert \vec u \rVert \times \lVert \vec v \rVert \times \cos(\vec u\;;\, \vec v)$$</div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE SIGNE DIT L'ANGLE</div>
+        <p>Le cosinus est positif pour un angle aigu, nul à 90°, négatif pour un angle obtus. Le produit scalaire hérite de ce signe&nbsp;: <strong>aigu → positif</strong>, <strong>droit → nul</strong>, <strong>obtus → négatif</strong>.</p>
+        <p>Et l'ordre des vecteurs n'a aucune importance&nbsp;: \(\vec u \cdot \vec v = \vec v \cdot \vec u\) — l'angle entre les deux est le même.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER AVEC LES NORMES ET L'ANGLE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Repère les deux normes et l'angle <em>entre</em> les vecteurs (entre 0° et 180°). Attention aux vecteurs qui partent du même point&nbsp;: c'est là que l'angle se lit.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Applique \(\lVert \vec u \rVert \times \lVert \vec v \rVert \times \cos(\vec u\;;\, \vec v)\), avec les valeurs exactes du cosinus quand l'angle est classique (30°, 45°, 60°, 90°…).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle le signe&nbsp;: angle aigu → résultat positif, angle obtus → résultat négatif. Un signe incohérent, et c'est le cosinus qui a été oublié.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MÉTHODE EN ACTION</div>
+        <p class="exemple-enonce">Dans un triangle, \(AB = 2\), \(AC = 5\) et \(\widehat{A} = 60°\). Calcule \(\overrightarrow{AB} \cdot \overrightarrow{AC}\).</p>
+        <p><span class="etape-label">Étape 1 — </span>Les deux vecteurs partent de A&nbsp;: normes 2 et 5, angle 60° entre eux.</p>
+        <p><span class="etape-label">Étape 2 — </span>\(\overrightarrow{AB} \cdot \overrightarrow{AC} = 2 \times 5 \times \cos(60°) = 10 \times \dfrac{1}{2} = 5\).</p>
+        <p><span class="etape-label">Étape 3 — </span>60° est aigu, le résultat est positif&nbsp;: cohérent.</p>
+        <p class="conclusion">Conclusion&nbsp;: \(\overrightarrow{AB} \cdot \overrightarrow{AC} = 5\). Un nombre, pas un vecteur — c'est toute la nouveauté.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Un produit scalaire est un <strong>nombre</strong>, jamais un vecteur — et son signe raconte l'angle.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le produit scalaire de deux vecteurs, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un vecteur</button>
+              <button type="button" class="quiz-reponse">un nombre</button>
+              <button type="button" class="quiz-reponse">un angle</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> «&nbsp;scalaire&nbsp;» veut dire «&nbsp;nombre&nbsp;». C'est LE piège du chapitre&nbsp;: on multiplie deux vecteurs et on obtient… un réel, positif, négatif ou nul.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(\lVert \vec u \rVert = 2\), \(\lVert \vec v \rVert = 5\), angle de 60° entre les deux. \(\vec u \cdot \vec v =\)&nbsp;…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(5\)</button>
+              <button type="button" class="quiz-reponse">\(10\)</button>
+              <button type="button" class="quiz-reponse">\(7\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(2 \times 5 \times \cos(60°) = 10 \times 0{,}5 = 5\). Répondre 10, c'est oublier le cosinus&nbsp;; répondre 7, c'est additionner les normes — deux réflexes à désapprendre.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>L'angle entre \(\vec u\) et \(\vec v\) est obtus. Leur produit scalaire est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">nul</button>
+              <button type="button" class="quiz-reponse">positif</button>
+              <button type="button" class="quiz-reponse">négatif</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> au-delà de 90°, le cosinus devient négatif — dans le graphique, l'ombre partait à reculons. Le produit scalaire suit le signe du cosinus.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="s3" class="chap-section">
       <h2>3. Le produit scalaire sans rapporteur&nbsp;: les coordonnées</h2>
-      <!-- SECTION-S3 -->
+      <p class="prose">La formule de la section 2 est belle, mais elle exige de connaître l'angle — et au bac, personne ne te le donne. On te donne un repère orthonormé et des coordonnées. Bonne nouvelle&nbsp;: dans un repère orthonormé, le produit scalaire se calcule en une ligne, sans rapporteur.</p>
+      <p class="prose">Vérifie-la à la main&nbsp;: déplace les deux vecteurs de nœud en nœud et regarde le calcul se refaire. Puis relève le défi&nbsp;: <strong>rends le produit nul</strong>. Que vois-tu apparaître entre les deux vecteurs&nbsp;?</p>
+
+      <figure class="widget" id="widget-ps-coordonnees"
+        data-widget="ps-coordonnees" data-u-init="3,1" data-v-init="2,3"
+        data-xmin="-8" data-xmax="8" data-ymin="-5" data-ymax="5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le produit scalaire sans rapporteur</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Deux vecteurs u et v partant de l'origine, dont les extrémités s'aimantent aux nœuds de la grille ; le produit scalaire x x prime plus y y prime est recalculé en direct"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule"><span class="js-ligne">u·v = 3×2 + 1×3 = 9</span></div>
+          <div class="chips">
+            <span class="chip">u = <span class="js-u">(3 ; 1)</span></span>
+            <span class="chip">v = <span class="js-v">(2 ; 3)</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">produit &gt; 0 — angle aigu</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite" hidden>Produit nul&nbsp;: les deux vecteurs sont orthogonaux, et l'angle droit se lit sur la grille. C'est le défi réussi — et tout l'objet de la section 4.</p>
+        </div>
+        <div class="widget-note">Les extrémités s'aimantent aux nœuds de la grille&nbsp;: toutes les coordonnées restent entières, tous les calculs sont exacts. Clavier&nbsp;: flèches gauche/droite pour la première coordonnée, haut/bas pour la seconde.</div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — EN REPÈRE ORTHONORMÉ</div>
+        <p>Dans un repère <strong>orthonormé</strong>, si \(\vec u\,(x\;;\, y)\) et \(\vec v\,(x'\;;\, y')\), alors&nbsp;:</p>
+        <div class="math-vitrine">$$\vec u \cdot \vec v = xx' + yy'$$</div>
+        <p>Les premières coordonnées ensemble, les secondes ensemble — on ne croise jamais.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Décompose sur les vecteurs du repère&nbsp;: \(\vec u = x\,\vec i + y\,\vec j\) et \(\vec v = x'\,\vec i + y'\,\vec j\). Développe le produit comme un produit de parenthèses — c'est permis, voir les règles ci-dessous — et il vient quatre termes. Or \(\vec i \cdot \vec i = 1\) et \(\vec j \cdot \vec j = 1\) (un vecteur de norme 1 projeté sur lui-même), tandis que \(\vec i \cdot \vec j = 0\)&nbsp;: à 90°, l'ombre disparaît, tu l'as vu de tes yeux. Les termes croisés meurent, il reste \(xx' + yy'\). Voilà pourquoi le repère doit être orthonormé&nbsp;: c'est lui qui tue les termes croisés.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE CARRÉ SCALAIRE ET LES RÈGLES DE CALCUL</div>
+        <p>Le produit scalaire d'un vecteur par lui-même s'appelle son <strong>carré scalaire</strong>&nbsp;: \(\vec u \cdot \vec u = \lVert \vec u \rVert^2\) (l'angle est nul, le cosinus vaut 1). On le note \(\vec u^{\,2}\).</p>
+        <p>Et le produit scalaire se développe comme un produit de nombres&nbsp;: pour tous vecteurs \(\vec u\), \(\vec v\), \(\vec w\) et tout réel \(k\), \(\ \vec u \cdot (\vec v + \vec w) = \vec u \cdot \vec v + \vec u \cdot \vec w\ \) et \(\ (k\,\vec u) \cdot \vec v = k\,(\vec u \cdot \vec v)\). D'où les identités remarquables, comme en calcul littéral&nbsp;:</p>
+        <div class="math-vitrine">$$\lVert \vec u + \vec v \rVert^2 = \lVert \vec u \rVert^2 + 2\,\vec u \cdot \vec v + \lVert \vec v \rVert^2$$</div>
+      </div>
+
+      <p class="prose">Retourne cette identité comme une crêpe et tu obtiens une <em>troisième</em> expression du produit scalaire — avec des normes seulement, sans angle ni coordonnées. Trois routes vers le même nombre&nbsp;: tu choisiras toujours celle dont tu as les données.</p>
+
+      <div class="math-vitrine">$$\vec u \cdot \vec v = \frac{1}{2}\left(\lVert \vec u + \vec v \rVert^2 - \lVert \vec u \rVert^2 - \lVert \vec v \rVert^2\right)$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER UN ANGLE AVEC LES COORDONNÉES</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule le produit scalaire avec les coordonnées&nbsp;: \(xx' + yy'\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule les deux normes&nbsp;: \(\sqrt{x^2 + y^2}\) pour chacun.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Isole le cosinus dans la formule de la section 2&nbsp;: \(\cos(\vec u\;;\, \vec v) = \dfrac{\vec u \cdot \vec v}{\lVert \vec u \rVert \times \lVert \vec v \rVert}\), puis remonte à l'angle (valeur classique, ou touche arccos de la calculatrice).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LES TROIS ROUTES</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Dans un repère orthonormé, \(\vec u\,(1\;;\, 3)\) et \(\vec v\,(2\;;\, 1)\). Quel angle forment-ils&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>\(\vec u \cdot \vec v = 1 \times 2 + 3 \times 1 = 5\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\lVert \vec u \rVert = \sqrt{1 + 9} = \sqrt{10}\) et \(\lVert \vec v \rVert = \sqrt{4 + 1} = \sqrt{5}\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(\cos(\vec u\;;\, \vec v) = \dfrac{5}{\sqrt{10}\,\sqrt{5}} = \dfrac{5}{\sqrt{50}} = \dfrac{5}{5\sqrt{2}} = \dfrac{\sqrt{2}}{2}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: l'angle vaut 45° — une valeur exacte, sans rapporteur ni calculatrice.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. On sait seulement que \(\lVert \vec u \rVert = 2\), \(\lVert \vec v \rVert = 3\) et \(\lVert \vec u + \vec v \rVert = 4\). Calcule \(\vec u \cdot \vec v\).</p>
+          <p><span class="etape-label">Étape 1 — </span>Ni angle ni coordonnées&nbsp;: c'est la troisième route. \(\vec u \cdot \vec v = \dfrac{1}{2}\left(4^2 - 2^2 - 3^2\right) = \dfrac{16 - 4 - 9}{2}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\vec u \cdot \vec v = \dfrac{3}{2} = 1{,}5\). Trois normes suffisent.</p>
+        </div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur les coordonnées</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>En repère orthonormé, \(\vec u\,(3\;;\, -2)\) et \(\vec v\,(1\;;\, 4)\). \(\vec u \cdot \vec v =\)&nbsp;…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(-5\)</button>
+              <button type="button" class="quiz-reponse">\(11\)</button>
+              <button type="button" class="quiz-reponse">\(10\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(3 \times 1 + (-2) \times 4 = 3 - 8 = -5\). Répondre 10, c'est croiser les coordonnées (\(3 \times 4 - 2 \times 1\))&nbsp;: on ne croise jamais. Répondre 11, c'est perdre le signe du \(-2\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(\vec u \cdot \vec u\) vaut toujours…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\lVert \vec u \rVert\)</button>
+              <button type="button" class="quiz-reponse">\(\lVert \vec u \rVert^2\)</button>
+              <button type="button" class="quiz-reponse">\(0\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> angle nul, cosinus 1&nbsp;: \(\vec u \cdot \vec u = \lVert \vec u \rVert \times \lVert \vec u \rVert = \lVert \vec u \rVert^2\). C'est le carré scalaire — le pont entre produit scalaire et longueurs.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>\(\lVert \vec u + \vec v \rVert^2\) est <em>toujours</em> égal à…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\lVert \vec u \rVert^2 + \lVert \vec v \rVert^2\)</button>
+              <button type="button" class="quiz-reponse">\((\lVert \vec u \rVert + \lVert \vec v \rVert)^2\)</button>
+              <button type="button" class="quiz-reponse">\(\lVert \vec u \rVert^2 + 2\,\vec u \cdot \vec v + \lVert \vec v \rVert^2\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'identité remarquable, avec son double produit. La première réponse n'est vraie <em>que</em> si \(\vec u\) et \(\vec v\) sont orthogonaux (c'est Pythagore&nbsp;!), la deuxième presque jamais&nbsp;: les normes ne s'additionnent pas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="s4" class="chap-section">
       <h2>4. L'orthogonalité&nbsp;: quand le produit s'annule</h2>
-      <!-- SECTION-S4 -->
+      <p class="prose">Reviens sur le quai une seconde. Tire la poignée à la verticale, à 90° du déplacement&nbsp;: la valise n'avance plus du tout. Effort réel, effet nul — produit scalaire zéro. Ce zéro n'est pas un accident de calcul&nbsp;: c'est un <strong>détecteur d'angle droit</strong>, et c'est l'usage le plus fréquent du produit scalaire dans les exercices.</p>
+      <p class="prose">Entraîne l'œil d'abord&nbsp;: positif, négatif ou nul&nbsp;? Quand l'angle est franc, le coup d'œil suffit. Quand il hésite… calcule \(xx' + yy'\), le signe est dedans.</p>
+
+      <figure class="widget" id="widget-ps-signe" data-widget="ps-signe">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Positif, négatif ou nul&nbsp;?</span>
+          </div>
+          <span class="quiz-score js-progression">PAIRE 1/4</span>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Deux vecteurs à coordonnées entières sont tracés sur une grille ; à toi de décider si leur produit scalaire est positif, négatif ou nul"></svg>
+        <div class="widget-pied">
+          <p class="quiz-enonce">Le produit scalaire de ces deux vecteurs est…</p>
+          <div class="quiz-reponses">
+            <button type="button" class="quiz-reponse js-choix">positif</button>
+            <button type="button" class="quiz-reponse js-choix">nul</button>
+            <button type="button" class="quiz-reponse js-choix">négatif</button>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> calcule \(xx' + yy'\) avec les coordonnées affichées&nbsp;: le signe est dedans.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> l'angle est franchement aigu, pas besoin de calculer&nbsp;: l'ombre de \(\vec v\) tombe du côté de \(\vec u\). Vérification&nbsp;: \(4 \times 2 + 1 \times 3 = 11 > 0\).</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> \(3 \times (-1) + 1 \times 3 = -3 + 3 = 0\)&nbsp;: orthogonaux, alors qu'aucun des deux n'est aligné sur les axes. L'angle droit ne se voit bien qu'au calcul.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> l'angle est largement obtus&nbsp;: \(3 \times (-4) + 2 \times (-1) = -14\). Les deux vecteurs tirent presque à contresens.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> le piège&nbsp;: elle ressemble à la paire n°&thinsp;2, mais \(3 \times (-1) + 1 \times 2 = -1 \neq 0\). Presque perpendiculaires ne compte pas — l'œil hésite, le calcul tranche.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Paire suivante ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <script type="application/json">
+        [
+          {"u": [4, 1], "v": [2, 3], "bonne": 1},
+          {"u": [3, 1], "v": [-1, 3], "bonne": 2},
+          {"u": [3, 2], "v": [-4, -1], "bonne": 3},
+          {"u": [3, 1], "v": [-1, 2], "bonne": 3}
+        ]
+        </script>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Deux vecteurs \(\vec u\) et \(\vec v\) sont <strong>orthogonaux</strong> quand leur produit scalaire est nul&nbsp;: \(\vec u \cdot \vec v = 0\).</p>
+        <p>Pour deux vecteurs non nuls, cela signifie exactement que leurs directions sont perpendiculaires. Le vecteur nul, lui, est orthogonal à tous les vecteurs.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE TEST EN COORDONNÉES</div>
+        <p>Dans un repère orthonormé&nbsp;: \(\vec u\,(x\;;\, y)\) et \(\vec v\,(x'\;;\, y')\) sont orthogonaux si et seulement si \(xx' + yy' = 0\).</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — DÉMONTRER UNE PERPENDICULARITÉ</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Traduis en vecteurs — les bons&nbsp;: pour montrer \((AB) \perp (CD)\), ce sont \(\overrightarrow{AB}\) et \(\overrightarrow{CD}\) qu'il faut prendre.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule leur produit scalaire — avec les coordonnées le plus souvent&nbsp;; place toi-même un repère orthonormé si la figure n'en a pas.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Conclus&nbsp;: produit nul → vecteurs orthogonaux → droites perpendiculaires. Rédige les trois maillons.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LE DÉTECTEUR EN ACTION</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Pour quelle valeur de \(t\) les vecteurs \(\vec u\,(3\;;\, -2)\) et \(\vec v\,(t\;;\, 6)\) sont-ils orthogonaux&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>\(\vec u \cdot \vec v = 3t + (-2) \times 6 = 3t - 12\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Orthogonaux \(\iff 3t - 12 = 0 \iff t = 4\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(t = 4\). L'orthogonalité devient une simple équation.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Dans un repère orthonormé, \(A(1\;;\, 1)\), \(B(4\;;\, 3)\) et \(C(-1\;;\, 4)\). Montre que le triangle \(ABC\) est rectangle en A.</p>
+          <p><span class="etape-label">Étape 1 — </span>\(\overrightarrow{AB}\,(3\;;\, 2)\) et \(\overrightarrow{AC}\,(-2\;;\, 3)\)&nbsp;: les deux vecteurs issus de A.</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\overrightarrow{AB} \cdot \overrightarrow{AC} = 3 \times (-2) + 2 \times 3 = -6 + 6 = 0\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Produit scalaire nul, vecteurs non nuls&nbsp;: \((AB) \perp (AC)\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(ABC\) est rectangle en A — sans mesurer un seul angle.</p>
+        </div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois réflexes d'orthogonalité</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(\vec u \cdot \vec v = 0\). Alors forcément…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\vec u = \vec 0\) ou \(\vec v = \vec 0\)</button>
+              <button type="button" class="quiz-reponse">\(\vec u\) et \(\vec v\) sont orthogonaux</button>
+              <button type="button" class="quiz-reponse">\(\vec u = \vec v\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est la définition. Le réflexe «&nbsp;produit nul → un facteur nul&nbsp;» vaut pour les nombres, pas ici&nbsp;: deux vecteurs bien vivants peuvent avoir un produit scalaire nul — il suffit d'un angle droit.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(\vec u\,(2\;;\, 3)\) et \(\vec v\,(-6\;;\, t)\) sont orthogonaux pour…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(t = 4\)</button>
+              <button type="button" class="quiz-reponse">\(t = -4\)</button>
+              <button type="button" class="quiz-reponse">aucune valeur de \(t\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(2 \times (-6) + 3t = -12 + 3t = 0\), donc \(t = 4\). Le signe se perd facilement dans le \(-12\)&nbsp;: pose le calcul.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Soit \(\vec u\) un vecteur non nul. Combien de vecteurs <em>non nuls</em> sont orthogonaux à \(\vec u\)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">aucun</button>
+              <button type="button" class="quiz-reponse">exactement un</button>
+              <button type="button" class="quiz-reponse">une infinité</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> tous les vecteurs portés par la perpendiculaire, quelle que soit leur longueur&nbsp;: dans le graphique de la section 3, une fois le produit annulé, tu pouvais encore étirer \(\vec v\) sans rien casser.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="s5" class="chap-section">
       <h2>5. Al-Kashi&nbsp;: Pythagore pour tous les triangles</h2>
-      <!-- SECTION-S5 -->
+      <p class="prose">Pythagore est l'outil-roi du collège… mais il exige un angle droit. Que devient \(a^2 = b^2 + c^2\) quand l'angle s'ouvre ou se referme&nbsp;? Il ne meurt pas&nbsp;: il se corrige. Fais tourner l'angle \(\widehat{A}\) et regarde le terme de correction vivre — puis passe par 90° et regarde-le mourir.</p>
+
+      <figure class="widget" id="widget-ps-alkashi"
+        data-widget="ps-alkashi" data-b="6" data-c="8" data-angle-init="75"
+        data-xmin="-9" data-xmax="11" data-ymin="-3.5" data-ymax="9">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Pythagore, corrigé par l'angle</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages de l'angle au sommet A">
+            <button type="button" data-angle="60" aria-pressed="false">60°</button>
+            <button type="button" data-angle="90" aria-pressed="false">90°</button>
+            <button type="button" data-angle="120" aria-pressed="false">120°</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Un triangle ABC dont les côtés AC égale 6 et AB égale 8 sont fixés ; on fait tourner l'angle en A et le troisième côté BC répond, recalculé par le théorème d'Al-Kashi"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule"><span class="js-ligne">a² = 6² + 8² − 2×6×8×cos(75°) ≈ 100 − 24,85 ≈ 75,15</span></div>
+          <div class="chips">
+            <span class="chip">Â = <span class="js-angle">75°</span></span>
+            <span class="chip">a² = <span class="js-a2">75,15</span></span>
+            <span class="chip chip--accent">a = BC ≈ <span class="js-a">8,67</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">Â aigu — a² &lt; b² + c²</span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Angle aigu&nbsp;: le terme de correction se soustrait, le côté a est plus court que ne le dirait Pythagore.</p>
+        </div>
+        <div class="widget-note">b = AC = 6 et c = AB = 8 sont fixés&nbsp;; seul l'angle Â bouge, et le côté opposé a = BC répond. La ligne Â = 90° est exactement Pythagore.</div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE THÉORÈME D'AL-KASHI</div>
+        <p>Dans un triangle \(ABC\), avec les notations usuelles \(a = BC\), \(b = AC\), \(c = AB\)&nbsp;:</p>
+        <div class="math-vitrine">$$a^2 = b^2 + c^2 - 2bc\,\cos\widehat{A}$$</div>
+        <p>L'angle qui apparaît est celui qui fait <strong>face</strong> au côté que tu calcules. La formule tourne&nbsp;: \(b^2 = a^2 + c^2 - 2ac\,\cos\widehat{B}\), et de même pour \(c\).</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Trois lignes de produit scalaire. Écris \(\overrightarrow{BC} = \overrightarrow{BA} + \overrightarrow{AC} = \overrightarrow{AC} - \overrightarrow{AB}\), puis prends le carré scalaire des deux côtés avec l'identité remarquable&nbsp;: \(BC^2 = AC^2 - 2\,\overrightarrow{AC} \cdot \overrightarrow{AB} + AB^2\). Or \(\overrightarrow{AC} \cdot \overrightarrow{AB} = b\,c\,\cos\widehat{A}\) — la formule de la section 2. D'où \(a^2 = b^2 + c^2 - 2bc\cos\widehat{A}\). Et si \(\widehat{A} = 90°\), le cosinus s'annule&nbsp;: Pythagore n'est que le cas particulier où la correction meurt.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER UN CÔTÉ</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Identifie ce que tu as&nbsp;: deux côtés et l'angle <em>entre</em> eux (l'angle opposé au côté cherché).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Écris Al-Kashi avec ces lettres-là, calcule \(a^2\) — garde la valeur exacte du cosinus tant que tu peux.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Prends la racine carrée à la fin seulement, et contrôle&nbsp;: angle aigu → \(a^2 < b^2 + c^2\), angle obtus → \(a^2 > b^2 + c^2\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UN CÔTÉ SANS ANGLE DROIT</div>
+        <p class="exemple-enonce">Dans un triangle \(ABC\), \(AC = 5\), \(AB = 8\) et \(\widehat{A} = 60°\). Calcule \(BC\).</p>
+        <p><span class="etape-label">Étape 1 — </span>Deux côtés et l'angle entre eux&nbsp;: c'est Al-Kashi pour le côté opposé à \(\widehat{A}\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(BC^2 = 5^2 + 8^2 - 2 \times 5 \times 8 \times \cos(60°) = 25 + 64 - 80 \times \dfrac{1}{2} = 89 - 40 = 49\).</p>
+        <p><span class="etape-label">Étape 3 — </span>\(BC = \sqrt{49} = 7\). Et \(49 < 89\)&nbsp;: cohérent avec un angle aigu.</p>
+        <p class="conclusion">Conclusion&nbsp;: \(BC = 7\). Sans angle droit, sans mesurer — Pythagore corrigé a suffi.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER UN ANGLE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Trois côtés connus&nbsp;? Écris Al-Kashi depuis l'angle cherché et isole le cosinus&nbsp;: \(\cos\widehat{A} = \dfrac{b^2 + c^2 - a^2}{2bc}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Le signe du résultat te dit déjà tout&nbsp;: positif → angle aigu, nul → droit, négatif → obtus.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Remonte à l'angle&nbsp;: valeur classique si tu la reconnais, touche arccos sinon.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UN ANGLE SANS RAPPORTEUR</div>
+        <p class="exemple-enonce">Un triangle a pour côtés 5, 6 et 7. Quelle est la mesure de l'angle opposé au côté de longueur 7&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>\(\cos\widehat{A} = \dfrac{5^2 + 6^2 - 7^2}{2 \times 5 \times 6} = \dfrac{25 + 36 - 49}{60} = \dfrac{12}{60} = 0{,}2\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(0{,}2 > 0\)&nbsp;: l'angle est aigu — le triangle 5-6-7 n'est <em>pas</em> rectangle, contrairement à son cousin 3-4-5.</p>
+        <p><span class="etape-label">Étape 3 — </span>À la calculatrice&nbsp;: \(\widehat{A} \approx 78{,}5°\).</p>
+        <p class="conclusion">Conclusion&nbsp;: environ 78,5°. Trois longueurs suffisent à connaître tous les angles d'un triangle.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>\(a^2 = b^2 + c^2 - 2bc\cos\widehat{A}\)&nbsp;: Pythagore, plus un terme de correction qui meurt à 90°.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Dans un triangle \(ABC\) (avec \(a = BC\), \(b = AC\), \(c = AB\)), le théorème d'Al-Kashi s'écrit…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(a^2 = b^2 + c^2 - 2bc\cos\widehat{A}\)</button>
+              <button type="button" class="quiz-reponse">\(a^2 = b^2 + c^2 + 2bc\cos\widehat{A}\)</button>
+              <button type="button" class="quiz-reponse">\(a^2 = b^2 + c^2 - bc\cos\widehat{A}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le signe <em>moins</em> et le facteur <em>2</em>, les deux pièges de la formule. Ils viennent tout droit du double produit de l'identité remarquable.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(b = 3\), \(c = 5\), \(\widehat{A} = 60°\). Alors \(a^2 =\)&nbsp;…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(4\)</button>
+              <button type="button" class="quiz-reponse">\(19\)</button>
+              <button type="button" class="quiz-reponse">\(34\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(9 + 25 - 30 \times 0{,}5 = 34 - 15 = 19\). Répondre 34, c'est oublier toute la correction&nbsp;; répondre 4, c'est oublier le cosinus dans \(-2bc\cos\widehat{A}\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Quand \(\widehat{A} = 90°\), le théorème d'Al-Kashi devient…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le théorème de Thalès</button>
+              <button type="button" class="quiz-reponse">le théorème de Pythagore</button>
+              <button type="button" class="quiz-reponse">une formule fausse</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\cos(90°) = 0\)&nbsp;: la correction disparaît et il reste \(a^2 = b^2 + c^2\). Pythagore n'est qu'un cas particulier — tu l'as vu mourir en direct dans le graphique.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Un triangle a pour côtés 5, 6 et 7. L'angle opposé au côté 7 est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">aigu</button>
+              <button type="button" class="quiz-reponse">droit</button>
+              <button type="button" class="quiz-reponse">obtus</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> compare \(7^2 = 49\) à \(5^2 + 6^2 = 61\)&nbsp;: \(49 < 61\), donc \(\cos\widehat{A} > 0\), angle aigu. Le réflexe «&nbsp;ça ressemble à 3-4-5 donc c'est rectangle&nbsp;» ne survit pas au calcul.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="pieges" class="chap-section">
-      <!-- SECTION-PIEGES -->
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Croire que le produit scalaire est un vecteur.</strong> \(\vec u \cdot \vec v\) est un <em>nombre</em> — «&nbsp;scalaire&nbsp;» veut dire ça. Écrire une flèche sur le résultat, ou «&nbsp;additionner&nbsp;» des produits scalaires comme des vecteurs, n'a aucun sens.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Croiser les coordonnées.</strong> \(\vec u \cdot \vec v = xx' + yy'\)&nbsp;: les premières coordonnées ensemble, les secondes ensemble. Le calcul croisé \(xy' + x'y\) (ou \(xy' - x'y\)) est un autre objet — pas le produit scalaire.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Conclure «&nbsp;produit nul, donc un vecteur nul&nbsp;».</strong> Pour des nombres, \(ab = 0\) force \(a = 0\) ou \(b = 0\). Pas ici&nbsp;: \(\vec u \cdot \vec v = 0\) avec deux vecteurs bien vivants, il suffit d'un angle droit. Et dans l'autre sens, on ne «&nbsp;simplifie&nbsp;» jamais par un vecteur&nbsp;: \(\vec u \cdot \vec v = \vec u \cdot \vec w\) n'entraîne pas \(\vec v = \vec w\).</p>
+        </div>
+        <div class="piege">
+          <p><strong>Additionner les normes.</strong> \(\lVert \vec u + \vec v \rVert \neq \lVert \vec u \rVert + \lVert \vec v \rVert\) en général. Le vrai développement passe par le carré&nbsp;: \(\lVert \vec u + \vec v \rVert^2 = \lVert \vec u \rVert^2 + 2\,\vec u \cdot \vec v + \lVert \vec v \rVert^2\), avec son double produit.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Massacrer Al-Kashi.</strong> Trois blessures classiques&nbsp;: perdre le signe moins, perdre le facteur 2, et prendre le mauvais angle. Retiens la structure&nbsp;: \(a^2 = b^2 + c^2 - 2bc\cos\widehat{A}\), où \(\widehat{A}\) est l'angle <em>opposé</em> au côté \(a\) que tu calcules.</p>
+        </div>
+      </div>
     </section>
 
     <section id="essentiel" class="chap-section">
-      <!-- SECTION-ESSENTIEL -->
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">DÉFINITION</span>
+          <p>\(\vec u \cdot \vec v = \lVert \vec u \rVert\, \lVert \vec v \rVert \cos(\vec u\;;\, \vec v)\) — un <strong>nombre</strong>&nbsp;: positif si l'angle est aigu, nul à 90°, négatif s'il est obtus.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">PROJECTION</span>
+          <p>Projette \(\vec v\) sur la droite de \(\vec u\)&nbsp;: \(\vec u \cdot \vec v = \lVert \vec u \rVert \times \overline{OH}\), l'ombre comptée avec son signe.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">COORDONNÉES</span>
+          <p>En repère orthonormé&nbsp;: \(\vec u \cdot \vec v = xx' + yy'\)&nbsp;; et \(\vec u \cdot \vec u = \lVert \vec u \rVert^2\) (carré scalaire).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ORTHOGONALITÉ</span>
+          <p>\(\vec u \cdot \vec v = 0 \iff \vec u\) et \(\vec v\) orthogonaux&nbsp;: le détecteur d'angle droit — \(xx' + yy' = 0\) en coordonnées.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">AL-KASHI</span>
+          <p>\(a^2 = b^2 + c^2 - 2bc\cos\widehat{A}\)&nbsp;: Pythagore corrigé par l'angle, valable dans <em>tout</em> triangle.</p>
+        </div>
+      </div>
     </section>
 
     <section id="ex" class="chap-section">
