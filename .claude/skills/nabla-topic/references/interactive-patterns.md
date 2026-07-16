@@ -149,14 +149,23 @@ When every number is fixed, ALL readouts are static HTML in the page
 Same doctrine as quiz.js: never build HTML with maths in JS — KaTeX renders
 once at load.
 
-### D. Rounds answered by buttons (lecture, sens)
+Unbounded curves (e^x family) must be truncated at the top of the view:
+compute the visible x-range analytically (e.g. x ≤ ln(yMax) − a) or
+end-scan before sampling — never let the polyline shoot off-scale.
+Non-square units (different px-per-unit in x and y) are fully supported by
+`creerVue`/`grilleUnite`.
+
+### D. Rounds answered by buttons (lecture, sens, exp-courbes)
 A game: draw round i, answer buttons (`.quiz-reponse` styles reused), wrong →
 mark + disable + generic relance, retry; right → lock, explanation, accent
 « suivant (i/n) ▸ » button; after the last round « x/n du premier coup » +
 « ↺ recommencer ». Progress chip in the header (`.js-progression`,
 quiz-score styling). Rounds in JSON in the figure; explanations either
 static HTML per round (sens — KaTeX-safe) or built text (lecture — plain
-strings only). No dragging → accessible for free.
+strings only). If the ANSWER BUTTONS themselves contain maths, make them
+static per-round groups too (`.js-manche` divs toggled by `hidden`,
+exp-courbes) — JS-built buttons would miss the KaTeX pass. No dragging →
+accessible for free.
 
 ### E. Matching / classification cards (associe)
 Cards are `<button>`s in rows; select one per row, check on second tap;
@@ -175,7 +184,9 @@ relance. Shuffle with `Math.random` on init and reset.
   pattern — reuse it.
 - Instantiated formula line (`.lecture-formule`): the general formula with
   live values substituted — « u₈ = u₀ + 8 × r = −2 + 8 × 0,75 = 4 »
-  (negative values parenthesised).
+  (negative values parenthesised). If the same live value appears more than
+  once (or signs flip), compose the WHOLE line in JS as `textContent` into
+  one `.js-ligne` span instead of a static shell with multiple hooks.
 - Revealed caption (`.widget-legende`, `aria-live="polite"`, `hidden`):
   appears when the student reaches the state the caption narrates
   (secante: |h| ≤ 0,05). The payoff sentence of the widget.

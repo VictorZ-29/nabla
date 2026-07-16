@@ -24,6 +24,8 @@ export const FONCTIONS = {
   /* Association f ↔ f′ (§4) — 'x2-1' sert aussi de fonction du haut */
   'x3s3-x': { f: (x) => x * x * x / 3 - x, fp: (x) => x * x - 1 },
   '1-x2s2': { f: (x) => 1 - x * x / 2, fp: (x) => -x },
+  /* La fonction exponentielle (chapitre 04) — sa propre dérivée */
+  'exp': { f: Math.exp, fp: Math.exp },
 };
 
 /* Crée un élément SVG avec attributs, et l'ajoute à parent s'il est fourni. */

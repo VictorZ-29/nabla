@@ -114,8 +114,14 @@ and desktop; every widget by mouse, touch (emulated), and keyboard; KaTeX
 renders with no layout shift; sommaire scroll-spy + mobile collapse; all
 corrigés and quizzes toggle; internal links resolve; JS budget
 (`wc -c` on the page's modules, < 50 KB); analytics events fire (watch
-`plausible` calls in the console or network tab). If CSS changed, bump
-`?v=N` on every page in the same commit.
+`plausible` calls in the console or network tab); quiz answer positions
+spread over all slots (`grep -o 'data-bonne="[0-9]"' page | sort |
+uniq -c`). If CSS changed, bump `?v=N` on every page in the same commit.
+If no browser tool is available, a jsdom harness (shim `svg.viewBox`
+from the attribute, stub matchMedia/requestAnimationFrame, import the
+page's modules, dispatch clicks/keys/inputs) verifies the interactive
+behaviour end-to-end — see audit.md §10.5; the two-theme visual pass then
+goes on Victor's review list.
 
 ### 8. Self-check, README, summary
 

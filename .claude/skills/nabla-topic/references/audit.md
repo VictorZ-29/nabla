@@ -169,8 +169,38 @@ labels take their own line under 560 px).
 
 ## <a name="gaps"></a>10. Gaps found while validating the skill (Phase 4)
 
-Recorded during the dry-run build of « La fonction exponentielle » —
-things the audit/templates didn't specify and had to be decided on the spot.
-Tighten the skill with these.
+Recorded during the dry-run build of « La fonction exponentielle »
+(July 2026) — things the audit/templates didn't specify and had to be
+decided on the spot.
 
-*(filled in during Phase 4 — see end of file)*
+1. **Quiz answer-position spread needs a mechanical check.** The doctrine
+   said "vary the position" but the first draft still landed 0 correct
+   answers in position 3 across 13 questions. Fix applied; verification
+   command now recommended: `grep -o 'data-bonne="[0-9]"' page | sort |
+   uniq -c` — the spread should cover every position.
+2. **Live values that repeat inside one formula line**: the static-shell +
+   `.js-*` spans idiom breaks when the same value appears 2–3 times (signs
+   change too). Convention chosen: compose the whole line in JS as
+   `textContent` into a single `.js-ligne` span inside `.lecture-formule`
+   (mono, plain text, no KaTeX) — precedent: arbre.js's `.js-calcul`.
+3. **Round-based widgets whose ANSWER BUTTONS contain maths**: lecture.js
+   builds plain-text buttons (fine for numbers), sens.js has one static
+   button set for all rounds. A third variant was needed — per-round static
+   button groups (`.js-manche`, toggled by `hidden`) so KaTeX in the labels
+   renders at load. Added to interactive-patterns.md §4-D.
+4. **Unbounded curves must be truncated at the view top** (e^x-family):
+   compute the x-limit analytically (x ≤ ln(yMax) − a, x ≤ ln(yMax)/k) or
+   end-scan before sampling. grilleUnite/cheminCourbe handle non-square
+   units fine. Added to interactive-patterns.md §4-A/B note.
+5. **Headless verification recipe**: with no browser tool available, a
+   jsdom harness (shim `svg.viewBox.baseVal` from the attribute, stub
+   matchMedia/requestAnimationFrame) can import all page modules and drive
+   clicks/keyboard/inputs — it caught real behaviour end-to-end. Recipe
+   worth keeping; a full two-theme visual pass in a browser remains on
+   Victor's checklist.
+6. **Measure the JS budget before writing the README flag** (`wc -c` over
+   the modules the page loads); the first draft guessed and was 5 KB off.
+7. **Homepage « bientôt » motif reuse**: when promoting a bientôt card, the
+   existing `g-motif` path can seed the carte-motif but needs re-generation
+   at the carte's proportions plus an accent tangent/point — a throwaway
+   node script did it (same script generated the §1 figure paths).

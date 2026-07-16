@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>La fonction exponentielle — Première Spé Maths | Nabla</title>
+<meta name="description" content="Comprends vraiment la fonction exponentielle : une fonction égale à sa propre dérivée, le nombre e, les règles de calcul, e^(kx) et les variations, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/exponentielle/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="La fonction exponentielle — Première Spé Maths | Nabla">
+<meta property="og:description" content="Une fonction égale à sa propre dérivée, le nombre e, les règles de calcul, e^(kx) et les variations : un cours interactif où tu manipules les courbes toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/exponentielle/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La fonction exponentielle — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Le nombre e, les règles de calcul, e^(kx) et les variations : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "La fonction exponentielle — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur la fonction exponentielle : définition par f′ = f, nombre e, propriétés algébriques, fonctions e^(kx), dérivation et étude de fonctions. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/exponentielle/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Fonction exponentielle, équation fonctionnelle f′ = f, nombre e, propriétés algébriques de l'exponentielle, fonctions x ↦ e^(kx), étude de fonctions avec exponentielle",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=6">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=6">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=6">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/exp-pente.js"></script>
+<script type="module" src="../../../assets/js/widgets/exp-decale.js"></script>
+<script type="module" src="../../../assets/js/widgets/exp-mondes.js"></script>
+<script type="module" src="../../../assets/js/widgets/exp-courbes.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="exponentielle">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>La fonction exponentielle</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>dériver avec \(e^x\), manier les règles de calcul, résoudre des équations et inéquations avec des exponentielles — et étudier les variations d'une fonction qui en contient une.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. Plus il y en a, plus ça pousse</a>
+      <a href="#s2">2. La courbe qui est sa propre pente</a>
+      <a href="#s3">3. Le nombre e et les règles</a>
+      <a href="#s4">4. Croître ou fondre&nbsp;: eᵏˣ</a>
+      <a href="#s5">5. Étudier une fonction avec exp</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. Plus il y en a, plus ça pousse</a>
+        <a href="#s2">2. La courbe qui est sa propre pente</a>
+        <a href="#s3">3. Le nombre e et les règles</a>
+        <a href="#s4">4. Croître ou fondre&nbsp;: eᵏˣ</a>
+        <a href="#s5">5. Étudier une fonction avec exp</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. Plus il y en a, plus ça pousse</h2>
+      <p class="prose">Une culture de bactéries dans une boîte&nbsp;: chaque bactérie se divise, encore et encore. Plus la colonie est grosse, plus il naît de bactéries chaque minute. Autrement dit, la <em>vitesse</em> de croissance est proportionnelle à la quantité déjà présente. Ce mécanisme est partout&nbsp;: des intérêts qui rapportent des intérêts, une épidémie qui démarre, la caféine que ton corps élimine — d'autant plus vite qu'il en reste.</p>
+      <p class="prose">La vitesse, tu sais la nommer depuis le chapitre sur <a href="../derivation/">la dérivation</a>&nbsp;: c'est la dérivée. « La vitesse de croissance est proportionnelle à la quantité » se traduit donc par «&nbsp;\(f'\) est proportionnelle à \(f\)&nbsp;». Prenons le cas le plus simple, coefficient 1&nbsp;: le problème du chapitre tient en trois symboles.</p>
+
+      <div class="math-vitrine">$$f' = f$$</div>
+
+      <p class="prose">Quelle fonction est égale à sa propre dérivée&nbsp;? Voici sa courbe. Regarde bien la tangente&nbsp;: au point A, la courbe est à la hauteur \(e \approx 2{,}72\)… et la tangente monte de \(2{,}72\) pour un pas de 1. Pente = hauteur. Et c'est vrai partout.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="Courbe de la fonction exponentielle avec sa tangente au point A d'abscisse 1 : la tangente monte de e pour un pas de 1 et coupe l'axe des abscisses à l'origine">
+          <path class="g-grid" d="M64 400L64 0M192 400L192 0M448 400L448 0M576 400L576 0M0 380L640 380M0 300L640 300M0 260L640 260M0 220L640 220M0 180L640 180M0 140L640 140M0 100L640 100M0 60L640 60M0 20L640 20"></path>
+          <path class="g-axis" d="M0 340L640 340M320 400L320 0"></path>
+          <path class="g-courbe" d="M12.8 336.4L18.6 336.2L24.3 336L30.1 335.8L35.8 335.7L41.6 335.5L47.4 335.2L53.1 335L58.9 334.8L64.6 334.6L70.4 334.3L76.2 334L81.9 333.8L87.7 333.5L93.4 333.2L99.2 332.9L105 332.5L110.7 332.2L116.5 331.8L122.2 331.5L128 331.1L133.8 330.7L139.5 330.2L145.3 329.8L151 329.3L156.8 328.8L162.6 328.3L168.3 327.8L174.1 327.2L179.8 326.6L185.6 326L191.4 325.4L197.1 324.7L202.9 324L208.6 323.2L214.4 322.5L220.2 321.7L225.9 320.8L231.7 319.9L237.4 319L243.2 318L249 317L254.7 316L260.5 314.9L266.2 313.7L272 312.5L277.8 311.2L283.5 309.9L289.3 308.5L295 307.1L300.8 305.6L306.6 304L312.3 302.3L318.1 300.6L323.8 298.8L329.6 296.9L335.4 294.9L341.1 292.8L346.9 290.7L352.6 288.4L358.4 286L364.2 283.5L369.9 280.9L375.7 278.2L381.4 275.4L387.2 272.4L393 269.3L398.7 266L404.5 262.6L410.2 259L416 255.3L421.8 251.4L427.5 247.3L433.3 243.1L439 238.6L444.8 234L450.6 229.1L456.3 224L462.1 218.6L467.8 213L473.6 207.2L479.4 201.1L485.1 194.7L490.9 188L496.6 181L502.4 173.7L508.2 166L513.9 158L519.7 149.6L525.4 140.9L531.2 131.7L537 122.1L542.7 112.1L548.5 101.6L554.2 90.6L560 79.2L565.8 67.2L571.5 54.6L577.3 41.5L583 27.7L588.8 13.4"></path>
+          <path class="g-tangente" d="M249.4 400L640 68.2"></path>
+          <path class="g-guide" stroke-dasharray="4 4" d="M448 340L448 231.3"></path>
+          <circle class="pt-fixe" cx="320" cy="340" r="4"></circle>
+          <text class="etiquette-math etiquette-math--muted" font-size="14" x="384" y="359" text-anchor="middle">1</text>
+          <text class="etiquette-math etiquette-math--muted" font-size="14" x="457" y="290.6">e</text>
+          <text class="etiquette-math etiquette-math--accent" font-size="15" x="600" y="100" text-anchor="end">tangente en A</text>
+          <text class="etiquette-math" font-size="17" x="545" y="28" text-anchor="end">exp</text>
+          <circle class="pt-point" cx="448" cy="231.3" r="5.5"></circle>
+          <text class="etiquette-math" font-size="17" x="424" y="222">A</text>
+        </svg>
+        <figcaption>La tangente en A part du point de l'axe situé une unité à gauche&nbsp;: elle monte donc de toute la hauteur \(e\) sur un pas de 1. Sa pente est la hauteur du point.</figcaption>
+      </figure>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. La courbe qui est sa propre pente</h2>
+      <p class="prose">Vérifie-le toi-même&nbsp;: déplace A le long de la courbe et compare les deux nombres, la hauteur du point et la pente de la tangente. Ils ne se quitteront pas.</p>
+
+      <figure class="widget" id="widget-exp-pente"
+        data-widget="exp-pente" data-fn="exp"
+        data-a-init="1"
+        data-xmin="-2.5" data-xmax="2.5" data-ymin="-1.5" data-ymax="8.5"
+        data-domaine="-2.4,2.1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La pente, c'est la hauteur</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Courbe de la fonction exponentielle avec un point A déplaçable et sa tangente ; la pente de la tangente est toujours égale à la hauteur du point"></svg>
+        <div class="widget-pied">
+          <div class="chips">
+            <span class="chip">a = <span class="js-a">1,00</span></span>
+            <span class="chip">hauteur&nbsp;: f(a) = <span class="js-fa">2,72</span></span>
+            <span class="chip chip--accent">pente&nbsp;: f′(a) = <span class="js-fpa">2,72</span></span>
+          </div>
+        </div>
+        <div class="widget-note">La tangente coupe l'axe des abscisses exactement 1 unité à gauche de A, partout. La pente vaut donc hauteur ÷ 1&nbsp;: deux lectures, un seul nombre.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Une fonction égale à sa propre dérivée, est-ce que ça existe seulement&nbsp;? Et pourrait-il y en avoir plusieurs&nbsp;? En Première, on <em>admet</em> la réponse&nbsp;: il en existe une et une seule qui vaut 1 en 0. La condition \(f(0) = 1\) n'est pas décorative&nbsp;: sans elle, le double d'une solution serait encore une solution (dérive \(2f\)&nbsp;: tu obtiens \(2f'\), c'est-à-dire \(2f\)), et il y en aurait une infinité. Ce point de départ commun cale l'échelle une fois pour toutes.</p>
+      </div>
+
+      <p class="prose">Cette fonction unique mérite un nom. Le voici.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>La <strong>fonction exponentielle</strong>, notée \(\exp\), est l'unique fonction dérivable sur \(\mathbb{R}\) qui est égale à sa propre dérivée et qui vaut 1 en 0.</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$\exp' = \exp \qquad \text{et} \qquad \exp(0) = 1$$</div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ</div>
+        <p>Pour tout réel \(x\), \(\exp(x) > 0\)&nbsp;: l'exponentielle ne s'annule jamais et n'est jamais négative.</p>
+        <p>La fonction \(\exp\) est strictement croissante sur \(\mathbb{R}\).</p>
+      </div>
+
+      <p class="prose">La deuxième ligne découle de la première&nbsp;: la dérivée de \(\exp\), c'est \(\exp\) elle-même, strictement positive — et une dérivée strictement positive fait croître. C'est exactement la règle du signe du chapitre sur la dérivation, qui se mord ici la queue.</p>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — DÉRIVER UNE EXPRESSION AVEC \(e^x\)</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Identifie la structure&nbsp;: somme&nbsp;? produit&nbsp;? — comme au chapitre précédent.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Applique les règles habituelles, avec une ligne de plus au tableau des dérivées&nbsp;: \(\exp\) se dérive en \(\exp\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Ne touche pas à l'exponentielle&nbsp;: elle traverse le calcul intacte.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UNE TANGENTE CÉLÈBRE</div>
+        <p class="exemple-enonce">Soit \(f(x) = \exp(x)\). Équation de la tangente à sa courbe au point d'abscisse 0&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>\(f(0) = 1\)&nbsp;: le point de tangence est \((0\;;\, 1)\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(f' = \exp\), donc \(f'(0) = \exp(0) = 1\)&nbsp;: la pente vaut 1.</p>
+        <p><span class="etape-label">Étape 3 — </span>\(y = 1 \times (x - 0) + 1 = x + 1\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(T : y = x + 1\). Retiens l'image&nbsp;: la courbe de l'exponentielle décolle en frôlant la droite \(y = x + 1\) — elle reste toujours au-dessus (tu le démontreras à l'exercice 12).</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>L'exponentielle est sa propre dérivée, vaut 1 en 0 — et ne s'annule jamais.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>La dérivée de \(x \longmapsto e^x\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(x\,e^{x-1}\)</button>
+              <button type="button" class="quiz-reponse">\(e^x\)</button>
+              <button type="button" class="quiz-reponse">\(e\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est sa définition même. La première réponse applique la règle de \(x^n\)&nbsp;: elle vaut pour une puissance de \(x\), pas quand \(x\) est <em>dans l'exposant</em>.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(e^0\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(0\)</button>
+              <button type="button" class="quiz-reponse">\(e\)</button>
+              <button type="button" class="quiz-reponse">\(1\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\exp(0) = 1\), c'est la condition de départ de la définition. Toutes les courbes du chapitre passeront par \((0\;;\, 1)\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Existe-t-il un réel \(x\) tel que \(e^x < 0\)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">oui, quand \(x\) est très négatif</button>
+              <button type="button" class="quiz-reponse">non, jamais</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> quand \(x\) est très négatif, \(e^x\) devient très <em>petit</em>… mais reste strictement positif. La courbe fond vers l'axe sans jamais le toucher.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Le nombre \(e\) et les règles de calcul</h2>
+      <p class="prose">La valeur \(\exp(1)\) a reçu un nom&nbsp;: c'est le <strong>nombre \(e\)</strong>, environ \(2{,}718\). Et on note \(\exp(x) = e^x\), comme une puissance de \(e\). Cette notation n'est pas un abus&nbsp;: l'exponentielle se comporte exactement comme des puissances. Sa propriété reine — celle qui commande toutes les autres&nbsp;: elle transforme les <em>additions</em> en <em>multiplications</em>.</p>
+      <p class="prose">Regarde-la à l'œuvre. Dans le graphique, décale la courbe de \(a\)&nbsp;: tu obtiens \(e^{x+a}\). Or décaler ne fait que… multiplier toute la courbe par le nombre fixe \(e^a\). Ajouter dans l'exposant, c'est multiplier la valeur.</p>
+
+      <figure class="widget" id="widget-exp-decale"
+        data-widget="exp-decale"
+        data-a-init="0.7"
+        data-xmin="-2.5" data-xmax="2.5" data-ymin="-0.5" data-ymax="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Décaler, c'est multiplier</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Courbe de exponentielle de x en craie, et courbe décalée exponentielle de x plus a en accent ; le facteur e puissance a se lit sur l'axe des ordonnées"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">a</span>
+            <input type="range" class="js-curseur" min="-1.5" max="1.5" step="0.1" value="0.7" aria-label="Décalage a de la courbe">
+          </div>
+          <div class="lecture-formule"><span class="js-ligne">e^(x + 0,7) = e^(0,7) × e^x ≈ 2,01 × e^x</span></div>
+          <div class="chips">
+            <span class="chip">a = <span class="js-a">0,7</span></span>
+            <span class="chip">facteur e^a ≈ <span class="js-facteur">2,01</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">a &gt; 0 — facteur 2,01&nbsp;: la courbe s'élève</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Décaler la courbe de 0,7 vers la gauche, c'est exactement la multiplier par e^0,7 ≈ 2,01. Même geste, deux lectures.</p>
+        </div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA RELATION FONCTIONNELLE</div>
+        <p>Pour tous réels \(a\) et \(b\)&nbsp;:</p>
+        <div class="math-vitrine">$$e^{a+b} = e^a \times e^b$$</div>
+        <p>Et ses conséquences, pour tous réels \(a\), \(b\) et tout entier \(n\)&nbsp;: \(e^{-a} = \dfrac{1}{e^a}\)&nbsp;; \(\quad e^{a-b} = \dfrac{e^a}{e^b}\)&nbsp;; \(\quad \left(e^a\right)^n = e^{na}\).</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Les trois conséquences ne sont pas de nouvelles formules à apprendre&nbsp;: elles sortent toutes de la relation reine. Un exemple&nbsp;: \(e^a \times e^{-a} = e^{a + (-a)} = e^0 = 1\), donc \(e^{-a}\) est l'inverse de \(e^a\). Voilà d'ailleurs une deuxième raison pour laquelle \(e^x\) n'est jamais nul&nbsp;: chaque valeur possède un inverse, et 0 n'en a pas.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — SIMPLIFIER UNE EXPRESSION AVEC DES EXPONENTIELLES</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Mets tout sous la forme \(e^{\dots}\)&nbsp;: transforme les puissances avec \(\left(e^a\right)^n = e^{na}\) et les inverses avec \(e^{-a}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Un produit d'exponentielles = une seule exponentielle&nbsp;: <em>additionne</em> les exposants (un quotient&nbsp;: soustrais-les).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Réduis l'exposant obtenu&nbsp;: le résultat doit tenir en un seul \(e^{\dots}\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LES RÈGLES EN ACTION</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Simplifie \(\left(e^{2x}\right)^3 \times e^{-5x}\).</p>
+          <p><span class="etape-label">Étape 1 — </span>la puissance d'abord&nbsp;: \(\left(e^{2x}\right)^3 = e^{6x}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>le produit ensuite&nbsp;: \(e^{6x} \times e^{-5x} = e^{6x - 5x}\).</p>
+          <p class="conclusion">Résultat&nbsp;: \(e^x\). Trois étages d'exposants, une seule exponentielle.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Simplifie \(\dfrac{e^{x+1}}{e^{x-1}}\).</p>
+          <p><span class="etape-label">Étape 1 — </span>un quotient&nbsp;: on soustrait les exposants. \((x+1) - (x-1) = 2\).</p>
+          <p class="conclusion">Résultat&nbsp;: \(e^2\). Le \(x\) a disparu&nbsp;: l'expression était constante sans en avoir l'air.</p>
+        </div>
+      </div>
+
+      <p class="prose">Dernier outil de la section, et il est puissant&nbsp;: comme \(\exp\) est strictement croissante, deux exponentielles sont égales <em>uniquement</em> quand leurs exposants le sont — et se comparent comme leurs exposants. Toute équation ou inéquation entre exponentielles se ramène donc aux exposants.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — MÊME EXPOSANT, MÊME EXPONENTIELLE</div>
+        <p>Pour tous réels \(a\) et \(b\)&nbsp;: \(e^a = e^b \iff a = b\)&nbsp;; \(\quad e^a < e^b \iff a < b\).</p>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UNE ÉQUATION, UNE INÉQUATION</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Résous \(e^{2x+1} = e^{3-x}\).</p>
+          <p><span class="etape-label">Étape 1 — </span>mêmes exponentielles, donc mêmes exposants&nbsp;: \(2x + 1 = 3 - x\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(3x = 2\), donc \(x = \dfrac{2}{3}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: une seule solution, \(x = \dfrac{2}{3}\).</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Résous \(e^{3x} < 1\).</p>
+          <p><span class="etape-label">Étape 1 — </span>écris 1 comme une exponentielle&nbsp;: \(1 = e^0\). L'inéquation devient \(e^{3x} < e^0\).</p>
+          <p><span class="etape-label">Étape 2 — </span>par croissance stricte&nbsp;: \(3x < 0\), donc \(x < 0\).</p>
+          <p class="conclusion">Conclusion&nbsp;: les solutions sont \(\left]-\infty\;;\, 0\right[\).</p>
+        </div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur les règles</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(e^{a+b}\), c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(e^a + e^b\)</button>
+              <button type="button" class="quiz-reponse">\(e^{ab}\)</button>
+              <button type="button" class="quiz-reponse">\(e^a \times e^b\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'exponentielle transforme les additions en multiplications. \(e^a + e^b\), c'est LE piège du chapitre&nbsp;: l'addition ne traverse jamais l'exponentielle telle quelle.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(e^{-3}\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">négatif</button>
+              <button type="button" class="quiz-reponse">égal à \(\dfrac{1}{e^3}\), donc positif</button>
+              <button type="button" class="quiz-reponse">impossible à définir</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le signe moins vit dans l'exposant&nbsp;: il inverse, il ne rend pas négatif. \(e^{-3} \approx 0{,}05\)&nbsp;: petit, mais strictement positif.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>L'équation \(e^{5x} = e^{x+8}\) a pour solution…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(x = 2\)</button>
+              <button type="button" class="quiz-reponse">\(x = \dfrac{8}{5}\)</button>
+              <button type="button" class="quiz-reponse">aucune solution</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> mêmes exponentielles, mêmes exposants&nbsp;: \(5x = x + 8\), donc \(4x = 8\) et \(x = 2\). Le réflexe \(8/5\) oublie le \(x\) du membre de droite.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Croître ou fondre&nbsp;: la fonction \(e^{kx}\)</h2>
+      <p class="prose">Dans les problèmes concrets, tu croiseras rarement \(e^x\) tout nu. La population de bactéries du début, c'est plutôt \(e^{0{,}3t}\)&nbsp;; la caféine éliminée, \(e^{-0{,}2t}\). Le coefficient \(k\) règle la vitesse — et son <em>signe</em> décide du destin&nbsp;: croissance qui s'emballe, ou fonte vers zéro.</p>
+      <p class="prose">Fais varier \(k\) et regarde les trois mondes défiler. Un point ne bouge jamais&nbsp;: en \(x = 0\), toutes les courbes valent \(e^0 = 1\).</p>
+
+      <figure class="widget" id="widget-exp-mondes"
+        data-widget="exp-mondes"
+        data-k-init="0.8"
+        data-xmin="-3.2" data-xmax="3.2" data-ymin="-0.5" data-ymax="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le coefficient <span class="titre-math">k</span> change le monde</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages du coefficient k">
+            <button type="button" data-k="1" aria-pressed="false">k = 1</button>
+            <button type="button" data-k="0" aria-pressed="false">k = 0</button>
+            <button type="button" data-k="-1" aria-pressed="false">k = −1</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Courbe de exponentielle de k x, pilotée par le curseur k ; toutes les courbes passent par le point zéro un"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">k</span>
+            <input type="range" class="js-curseur" min="-1.5" max="1.5" step="0.05" value="0.8" aria-label="Coefficient k de l'exposant">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="lecture-formule"><span class="js-ligne">dérivée : (e^(0,8x))′ = 0,8 × e^(0,8x)</span></div>
+          <div class="chips">
+            <span class="chip">k = <span class="js-k">0,8</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">k &gt; 0 — ça explose</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Croissance exponentielle : chaque pas de 1 vers la droite multiplie la hauteur par e^0,8 ≈ 2,23.</p>
+        </div>
+        <div class="widget-note">La dérivée s'affiche au-dessus&nbsp;: le k descend de l'exposant et se met en facteur. C'est la propriété ci-dessous.</div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — DÉRIVÉE DE \(e^{kx}\)</div>
+        <p>Pour tout réel \(k\), la fonction \(x \longmapsto e^{kx}\) est dérivable sur \(\mathbb{R}\) et&nbsp;:</p>
+        <div class="math-vitrine">$$\left(e^{kx}\right)' = k\,e^{kx}$$</div>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Rien de neuf&nbsp;: c'est la ligne \(x \longmapsto g(ax + b)\) du tableau des opérations, au chapitre sur la dérivation — sa dérivée est \(a\,g'(ax+b)\). Prends \(g = \exp\) et \(a = k\)&nbsp;: la dérivée de \(e^{kx}\) est \(k \exp'(kx) = k\,e^{kx}\). Le \(k\) descend en facteur, l'exponentielle reste intacte.</p>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LE k QUI DESCEND</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Dérive \(f(x) = 5\,e^{2x}\).</p>
+          <p><span class="etape-label">Calcul — </span>\(f'(x) = 5 \times 2\,e^{2x}\)&nbsp;: le 2 descend, le 5 était déjà là.</p>
+          <p class="conclusion">\(f'(x) = 10\,e^{2x}\)</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Dérive \(g(x) = e^{-3x} + 4x\).</p>
+          <p><span class="etape-label">Calcul — </span>terme à terme&nbsp;: \(\left(e^{-3x}\right)' = -3\,e^{-3x}\), et \((4x)' = 4\). Ne perds pas le signe du \(k\).</p>
+          <p class="conclusion">\(g'(x) = -3\,e^{-3x} + 4\)</p>
+        </div>
+      </div>
+
+      <p class="prose">Un dernier pont, vers le chapitre sur les suites cette fois. Relève les valeurs de \(e^{kx}\) aux entiers&nbsp;: \(x = 0, 1, 2, \dots\) Tu obtiens une suite, et grâce à la relation fonctionnelle, chaque terme se déduit du précédent en multipliant par le même nombre \(e^k\).</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA SUITE DES VALEURS</div>
+        <p>Pour tout réel \(k\), la suite \(u_n = e^{kn}\) est <strong>géométrique</strong>, de premier terme \(u_0 = 1\) et de raison \(e^k\)&nbsp;: en effet \(u_{n+1} = e^{k(n+1)} = e^{kn} \times e^k\).</p>
+      </div>
+
+      <p class="prose">Tout se recoupe&nbsp;: \(k > 0\) donne une raison \(e^k > 1\) — le monde «&nbsp;ça s'emballe&nbsp;» des suites géométriques&nbsp;; \(k < 0\) donne une raison entre 0 et 1 — le monde «&nbsp;ça fond&nbsp;». Les trois mondes du graphique, tu les connaissais déjà.</p>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois réflexes sur le coefficient</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>La dérivée de \(x \longmapsto e^{-4x}\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(e^{-4x}\)</button>
+              <button type="button" class="quiz-reponse">\(-4\,e^{-4x}\)</button>
+              <button type="button" class="quiz-reponse">\(-4x\,e^{-4x}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le \(k = -4\) descend en facteur, tout entier et avec son signe. L'oublier — première réponse — est le piège n°&thinsp;4 du chapitre.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Si \(k < 0\), la fonction \(x \longmapsto e^{kx}\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">négative</button>
+              <button type="button" class="quiz-reponse">d'abord positive, puis négative</button>
+              <button type="button" class="quiz-reponse">décroissante, mais toujours positive</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> ne confonds pas le sens de variation et le signe&nbsp;: la courbe descend, mais elle fond vers 0 sans jamais passer dessous. Une exponentielle est toujours strictement positive.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>La suite \(u_n = e^{0{,}5n}\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">géométrique de raison \(e^{0{,}5}\)</button>
+              <button type="button" class="quiz-reponse">arithmétique de raison \(0{,}5\)</button>
+              <button type="button" class="quiz-reponse">géométrique de raison \(0{,}5\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(u_{n+1} = e^{0{,}5n + 0{,}5} = u_n \times e^{0{,}5}\)&nbsp;: on multiplie chaque fois par \(e^{0{,}5} \approx 1{,}65\). L'addition dans l'exposant devient une multiplication des termes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Étudier une fonction qui contient \(e^x\)</h2>
+      <p class="prose">Au bac, l'exponentielle arrive rarement seule&nbsp;: on te donne \(x\,e^x\), \((x+2)\,e^{-x}\)… et on te demande des variations. Le réflexe qui commande toute la section&nbsp;: une exponentielle est <em>strictement positive</em>. Dans un produit, elle ne pèse donc rien sur le signe — tout se joue sur l'autre facteur.</p>
+      <p class="prose">Mais d'abord, muscle ton œil. Une seule des trois formules correspond à la courbe tracée&nbsp;: laquelle&nbsp;? Commence toujours par lire la valeur en 0.</p>
+
+      <figure class="widget" id="widget-exp-courbes" data-widget="exp-courbes">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">À chaque courbe sa formule</span>
+          </div>
+          <span class="quiz-score js-progression">COURBE 1/4</span>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Une courbe est tracée ; à toi de trouver laquelle des trois formules proposées lui correspond"></svg>
+        <div class="widget-pied">
+          <p class="quiz-enonce">Cette courbe, c'est celle de…</p>
+          <div class="quiz-reponses js-manche">
+            <button type="button" class="quiz-reponse">\(e^x\)</button>
+            <button type="button" class="quiz-reponse">\(e^{-x}\)</button>
+            <button type="button" class="quiz-reponse">\(x^2\)</button>
+          </div>
+          <div class="quiz-reponses js-manche" hidden>
+            <button type="button" class="quiz-reponse">\(-e^{x}\)</button>
+            <button type="button" class="quiz-reponse">\(e^{-x}\)</button>
+            <button type="button" class="quiz-reponse">\(e^{x}\)</button>
+          </div>
+          <div class="quiz-reponses js-manche" hidden>
+            <button type="button" class="quiz-reponse">\(x\,e^x\)</button>
+            <button type="button" class="quiz-reponse">\(e^x - 1\)</button>
+            <button type="button" class="quiz-reponse">\(x\,e^{-x}\)</button>
+          </div>
+          <div class="quiz-reponses js-manche" hidden>
+            <button type="button" class="quiz-reponse">\(e^{-3x}\)</button>
+            <button type="button" class="quiz-reponse">\(3\,e^{-x}\)</button>
+            <button type="button" class="quiz-reponse">\(3 - e^{x}\)</button>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> lis la valeur en 0, puis demande-toi si la courbe monte ou descend — et si elle passe sous l'axe.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> elle passe par \((0\;;\, 1)\) et grimpe de plus en plus vite&nbsp;: le portrait de \(e^x\). Une parabole \(x^2\) passerait par l'origine et remonterait aussi à gauche.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> la courbe descend mais reste au-dessus de l'axe&nbsp;: le signe moins est dans l'exposant. \(-e^x\), elle, vivrait entièrement sous l'axe.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> le creux sous l'axe puis l'explosion à droite, c'est la signature du produit \(x\,e^x\). \(e^x - 1\) monte sans jamais creuser, et \(x\,e^{-x}\) finirait par fondre vers 0.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> la valeur en 0 tranche&nbsp;: la courbe part de 3, et \(3\,e^{-0} = 3\). \(e^{-3x}\) partirait de 1&nbsp;; \(3 - e^x\) partirait de 2 puis plongerait sous l'axe.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Courbe suivante ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <script type="application/json">
+        [
+          {"courbe":"exp","ymin":-1,"ymax":6,"bonne":1},
+          {"courbe":"exp-moins","ymin":-1,"ymax":6,"bonne":2},
+          {"courbe":"x-exp","ymin":-1.5,"ymax":5,"bonne":1},
+          {"courbe":"3exp-moins","ymin":-1,"ymax":6,"bonne":2}
+        ]
+        </script>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — ÉTUDIER UN PRODUIT AVEC UNE EXPONENTIELLE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Dérive avec la formule du produit&nbsp;: \((u\,v)' = u'v + u\,v'\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps"><strong>Factorise par l'exponentielle</strong>&nbsp;: elle apparaît dans chaque terme, elle sort toujours.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Le signe de \(f'\) est celui du facteur restant, puisque \(e^{\dots} > 0\).</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">Dresse le tableau de variations, comme au chapitre sur la dérivation.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — L'ÉTUDE COMPLÈTE DE \(x\,e^x\)</div>
+        <p class="exemple-enonce">Soit \(f(x) = x\,e^x\), définie sur \(\mathbb{R}\). Étudions ses variations.</p>
+        <p><span class="etape-label">Étape 1 — </span>Produit \(u\,v\) avec \(u = x\) (donc \(u' = 1\)) et \(v = e^x\) (donc \(v' = e^x\))&nbsp;: \(f'(x) = e^x + x\,e^x\).</p>
+        <p><span class="etape-label">Étape 2 — </span>Factorise&nbsp;: \(f'(x) = (1 + x)\,e^x\).</p>
+        <p><span class="etape-label">Étape 3 — </span>\(e^x > 0\) pour tout \(x\)&nbsp;: le signe de \(f'\) est celui de \(1 + x\). Négatif avant \(-1\), nul en \(-1\), positif après.</p>
+        <p><span class="etape-label">Étape 4 — </span>\(f\) décroît sur \(\left]-\infty\;;\, -1\right]\), croît sur \(\left[-1\;;\, +\infty\right[\), avec un minimum \(f(-1) = -e^{-1} \approx -0{,}37\).</p>
+        <p class="conclusion">Conclusion&nbsp;: le creux que tu as identifié dans le jeu de courbes, le voilà calculé&nbsp;: minimum \(-\dfrac{1}{e}\) atteint en \(x = -1\).</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Dans un produit, \(e^{\dots}\) ne change jamais le signe&nbsp;: factorise, puis étudie le facteur qui reste.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(f(x) = (x - 2)\,e^x\). L'équation \(f(x) = 0\) a pour solution(s)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(x = 2\) seulement</button>
+              <button type="button" class="quiz-reponse">\(x = 2\), ou \(e^x = 0\)</button>
+              <button type="button" class="quiz-reponse">aucune</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> un produit est nul quand l'un des facteurs l'est… et \(e^x\) ne s'annule <em>jamais</em>. Seul \(x - 2 = 0\) compte.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>La dérivée de \(f(x) = x\,e^x\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(e^x\)</button>
+              <button type="button" class="quiz-reponse">\((x + 1)\,e^x\)</button>
+              <button type="button" class="quiz-reponse">\(1 + e^x\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> formule du produit puis factorisation&nbsp;: \(e^x + x\,e^x = (x+1)\,e^x\). La réponse \(e^x\) est le vieux piège \(u'v'\) du chapitre sur la dérivation.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Le signe de \((3 - x)\,e^{-x}\) est celui de…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(-x\)</button>
+              <button type="button" class="quiz-reponse">il est toujours positif</button>
+              <button type="button" class="quiz-reponse">\(3 - x\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(e^{-x} > 0\) quel que soit \(x\)&nbsp;: il ne pèse pas sur le signe. Tout se joue sur \(3 - x\)&nbsp;: positif avant 3, négatif après.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>\(f'(x) = (x + 1)\,e^x\)&nbsp;: négative avant \(-1\), positive après. En \(-1\), \(f\) admet…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un minimum local</button>
+              <button type="button" class="quiz-reponse">un maximum local</button>
+              <button type="button" class="quiz-reponse">rien de spécial</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(f\) descend puis monte&nbsp;: un creux, donc un minimum local. La règle du signe de \(f'\) du chapitre sur la dérivation s'applique à l'identique ici.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Dériver \(e^x\) comme une puissance.</strong> \(\left(e^x\right)' \neq x\,e^{x-1}\). La règle de \(x^n\) vaut quand \(x\) est la base&nbsp;; ici \(x\) est dans l'exposant, et \(\left(e^x\right)' = e^x\), point.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Écrire \(e^{a+b} = e^a + e^b\).</strong> L'exponentielle transforme les additions en <em>multiplications</em>&nbsp;: \(e^{a+b} = e^a \times e^b\). L'addition ne traverse jamais telle quelle.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Croire que \(e^{-x}\) est négatif.</strong> Le signe moins vit dans l'exposant&nbsp;: il inverse (\(e^{-x} = 1/e^x\)), il ne rend pas négatif. Une exponentielle est <em>toujours</em> strictement positive.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Oublier le \(k\) en dérivant \(e^{kx}\).</strong> \(\left(e^{kx}\right)' = k\,e^{kx}\)&nbsp;: le coefficient descend en facteur, tout entier et avec son signe.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Chercher les solutions de \(e^x = 0\).</strong> Il n'y en a pas. Dans un produit nul ou un tableau de signes, le facteur exponentiel ne fournit ni racine ni changement de signe&nbsp;: seul l'autre facteur compte.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">DÉFINITION</span>
+          <p>\(\exp\) est l'unique fonction telle que \(\exp' = \exp\) et \(\exp(0) = 1\)&nbsp;; on note \(\exp(x) = e^x\), avec \(e \approx 2{,}718\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">SIGNE &amp; SENS</span>
+          <p>\(e^x > 0\) pour tout \(x\)&nbsp;; \(\exp\) strictement croissante&nbsp;; \(e^a = e^b \iff a = b\) et \(e^a < e^b \iff a < b\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">RÈGLES</span>
+          <p>\(e^{a+b} = e^a\,e^b\)&nbsp;; \(e^{-a} = \dfrac{1}{e^a}\)&nbsp;; \(e^{a-b} = \dfrac{e^a}{e^b}\)&nbsp;; \(\left(e^a\right)^n = e^{na}\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">DÉRIVÉES</span>
+          <p>\(\left(e^x\right)' = e^x\)&nbsp;; \(\left(e^{kx}\right)' = k\,e^{kx}\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ÉTUDE</span>
+          <p>Dans un produit, \(e^{\dots}\) ne change ni le signe ni les racines&nbsp;: factorise par l'exponentielle et étudie le facteur restant.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: définition et premières dérivées, règles de calcul, équations, \(e^{kx}\), produits et variations, et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· définition</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Vrai ou faux, en justifiant&nbsp;: a. la dérivée de \(\exp\) est \(\exp\)&nbsp;; b. \(e^0 = 0\)&nbsp;; c. il existe un réel \(x\) tel que \(e^x = -1\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Vrai&nbsp;: c'est la définition même de la fonction exponentielle.</p>
+          <p><span class="etape-label">b. — </span>Faux&nbsp;: \(e^0 = 1\), l'autre moitié de la définition. Une exponentielle ne vaut jamais 0.</p>
+          <p><span class="etape-label">c. — </span>Faux&nbsp;: \(e^x > 0\) pour tout réel \(x\), donc \(e^x = -1\) n'a aucune solution.</p>
+          <p class="conclusion">Trois questions, trois retours à la définition&nbsp;: c'est elle qui décide de tout dans ce chapitre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· dériver avec eˣ</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dérive chacune des fonctions, définies sur \(\mathbb{R}\)&nbsp;: a. \(f(x) = 4\,e^x + x^2 - 3\)&nbsp;; b. \(g(x) = 2\,e^x - 5x\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Terme à terme&nbsp;: \(f'(x) = 4\,e^x + 2x\). La constante \(-3\) disparaît, l'exponentielle traverse intacte.</p>
+          <p><span class="etape-label">b. — </span>\(g'(x) = 2\,e^x - 5\).</p>
+          <p class="conclusion">Conclusion&nbsp;: une seule nouveauté au tableau des dérivées — \(\exp\) se dérive en \(\exp\) — et toutes les règles du chapitre précédent continuent de s'appliquer.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· tangente</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Détermine l'équation de la tangente à la courbe de \(\exp\) au point d'abscisse \(a = 1\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\exp(1) = e\)&nbsp;: le point de tangence est \((1\;;\, e)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\exp' = \exp\), donc la pente vaut aussi \(e\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(y = e(x - 1) + e = e\,x\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(T : y = e\,x\) — la tangente passe par l'origine. C'est exactement ce que montre le premier graphique du chapitre&nbsp;: la tangente en A coupe l'axe une unité à gauche du point.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· règles de calcul</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Écris chaque expression sous la forme \(e^n\) avec \(n\) entier (ou comme un nombre)&nbsp;: a. \(e^3 \times e^{-3}\)&nbsp;; b. \(\dfrac{e^5}{e^2}\)&nbsp;; c. \(\left(e^2\right)^4\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(e^3 \times e^{-3} = e^{3-3} = e^0 = 1\).</p>
+          <p><span class="etape-label">b. — </span>\(\dfrac{e^5}{e^2} = e^{5-2} = e^3\).</p>
+          <p><span class="etape-label">c. — </span>\(\left(e^2\right)^4 = e^{2 \times 4} = e^8\).</p>
+          <p class="conclusion">Conclusion&nbsp;: produit → on additionne, quotient → on soustrait, puissance → on multiplie. Exactement les règles des puissances.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· règles de calcul</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Simplifie, pour \(x\) réel&nbsp;: a. \(\left(e^x\right)^2 \times e^{1-2x}\)&nbsp;; b. \(\dfrac{e^{3x}}{e^{x-2}}\)&nbsp;; c. \(\left(e^{-x}\right)^3 \times \left(e^x\right)^2\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(e^{2x} \times e^{1-2x} = e^{2x + 1 - 2x} = e^1 = e\). L'expression était constante.</p>
+          <p><span class="etape-label">b. — </span>\(e^{3x - (x-2)} = e^{2x+2}\). Attention à la parenthèse&nbsp;: on soustrait <em>tout</em> l'exposant du bas.</p>
+          <p><span class="etape-label">c. — </span>\(e^{-3x} \times e^{2x} = e^{-x} = \dfrac{1}{e^x}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: tout mettre sous la forme \(e^{\dots}\), puis faire l'arithmétique des exposants. Une seule exponentielle à la fin.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· équations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Résous dans \(\mathbb{R}\)&nbsp;: a. \(e^{2x+1} = e^{3-x}\)&nbsp;; b. \(e^{x^2} = e^4\)&nbsp;; c. \(e^x = 1\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Mêmes exposants&nbsp;: \(2x + 1 = 3 - x\), donc \(3x = 2\) et \(x = \dfrac{2}{3}\).</p>
+          <p><span class="etape-label">b. — </span>\(x^2 = 4\), donc \(x = 2\) <em>ou</em> \(x = -2\). L'équation sur les exposants peut très bien avoir deux solutions — ne t'arrête pas à la première.</p>
+          <p><span class="etape-label">c. — </span>Écris \(1 = e^0\)&nbsp;: \(e^x = e^0\), donc \(x = 0\).</p>
+          <p class="conclusion">Conclusion&nbsp;: le réflexe est toujours le même — tout écrire comme \(e^{\dots} = e^{\dots}\), puis résoudre sur les exposants.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· inéquations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Résous dans \(\mathbb{R}\)&nbsp;: a. \(e^{-x} \geq e^{2x-3}\)&nbsp;; b. \(e^{3x} < 1\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Par croissance stricte de \(\exp\), l'inégalité passe aux exposants dans le même sens&nbsp;: \(-x \geq 2x - 3\), donc \(3 \geq 3x\), donc \(x \leq 1\). Solutions&nbsp;: \(\left]-\infty\;;\, 1\right]\).</p>
+          <p><span class="etape-label">b. — </span>\(1 = e^0\), donc \(3x < 0\), donc \(x < 0\). Solutions&nbsp;: \(\left]-\infty\;;\, 0\right[\).</p>
+          <p class="conclusion">Conclusion&nbsp;: la croissance stricte autorise à comparer les exposants directement — sans changer le sens de l'inégalité.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· dériver eᵏˣ</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dérive chacune des fonctions, définies sur \(\mathbb{R}\)&nbsp;: a. \(f(x) = e^{5x}\)&nbsp;; b. \(g(x) = e^{-2x}\)&nbsp;; c. \(h(x) = 4\,e^{0{,}5x}\)&nbsp;; d. \(k(x) = 3\,e^{-x} + 2x\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(f'(x) = 5\,e^{5x}\).</p>
+          <p><span class="etape-label">b. — </span>\(g'(x) = -2\,e^{-2x}\)&nbsp;: le signe descend avec le coefficient.</p>
+          <p><span class="etape-label">c. — </span>\(h'(x) = 4 \times 0{,}5\,e^{0{,}5x} = 2\,e^{0{,}5x}\).</p>
+          <p><span class="etape-label">d. — </span>\(k'(x) = -3\,e^{-x} + 2\) (ici \(k = -1\) dans l'exposant).</p>
+          <p class="conclusion">Objectif&nbsp;: le \(k\) qui descend en facteur doit devenir un réflexe — signe compris.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· suites</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(u_n = e^{0{,}2n}\) pour \(n\) entier naturel. a. Montre que \((u_n)\) est géométrique et précise sa raison. b. Quel est son sens de variation&nbsp;? c. Exprime \(u_n\) comme une puissance.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(u_{n+1} = e^{0{,}2(n+1)} = e^{0{,}2n} \times e^{0{,}2} = u_n \times e^{0{,}2}\)&nbsp;: chaque terme se déduit du précédent en multipliant par la constante \(e^{0{,}2}\). \((u_n)\) est géométrique de raison \(e^{0{,}2}\), de premier terme \(u_0 = e^0 = 1\).</p>
+          <p><span class="etape-label">b. — </span>\(0{,}2 > 0\), donc \(e^{0{,}2} > e^0 = 1\)&nbsp;: raison supérieure à 1 et termes positifs, la suite est strictement croissante.</p>
+          <p><span class="etape-label">c. — </span>\(u_n = e^{0{,}2n} = \left(e^{0{,}2}\right)^n\)&nbsp;: la forme \(u_0 \times q^n\) du chapitre sur les suites, avec \(q = e^{0{,}2} \approx 1{,}22\).</p>
+          <p class="conclusion">Conclusion&nbsp;: échantillonner une exponentielle aux entiers donne toujours une suite géométrique — les deux chapitres racontent la même croissance.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· produit</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dérive \(f(x) = (2x + 1)\,e^x\) et écris \(f'(x)\) sous forme factorisée.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Produit \(u\,v\) avec \(u = 2x + 1\) (\(u' = 2\)) et \(v = e^x\) (\(v' = e^x\))&nbsp;: \(f'(x) = 2\,e^x + (2x+1)\,e^x\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Factorise par \(e^x\)&nbsp;: \(f'(x) = (2 + 2x + 1)\,e^x = (2x + 3)\,e^x\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(f'(x) = (2x+3)\,e^x\). La forme factorisée n'est pas un caprice&nbsp;: c'est elle qui donnera le signe de \(f'\) en un coup d'œil.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· variations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = (x - 1)\,e^x\), définie sur \(\mathbb{R}\). Étudie les variations de \(f\) et précise son minimum.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Dérive puis factorise&nbsp;: \(f'(x) = e^x + (x-1)\,e^x = x\,e^x\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(e^x > 0\)&nbsp;: le signe de \(f'\) est celui de \(x\). Négatif avant 0, nul en 0, positif après.</p>
+          <p><span class="etape-label">Étape 3 — </span>\(f\) décroît sur \(\left]-\infty\;;\, 0\right]\), croît sur \(\left[0\;;\, +\infty\right[\), avec \(f(0) = (0-1)\,e^0 = -1\).</p>
+          <p class="conclusion">Conclusion&nbsp;: minimum \(-1\) atteint en \(x = 0\). Tout l'exercice tient dans la factorisation et le réflexe «&nbsp;\(e^x\) ne pèse pas sur le signe&nbsp;».</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· variations · preuve</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = e^x - x\), définie sur \(\mathbb{R}\). a. Étudie les variations de \(f\). b. Déduis-en que pour tout réel \(x\), \(e^x > x\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(f'(x) = e^x - 1\). Or \(e^x > 1 \iff x > 0\) (croissance stricte et \(e^0 = 1\))&nbsp;: \(f'\) est négative avant 0, nulle en 0, positive après. \(f\) décroît puis croît, avec un minimum \(f(0) = e^0 - 0 = 1\).</p>
+          <p><span class="etape-label">b. — </span>Le minimum de \(f\) vaut 1, strictement positif&nbsp;: donc \(f(x) \geq 1 > 0\) pour tout \(x\), c'est-à-dire \(e^x - x > 0\), c'est-à-dire \(e^x > x\).</p>
+          <p class="conclusion">Conclusion&nbsp;: la courbe de l'exponentielle reste strictement au-dessus de la droite \(y = x\). C'est la méthode reine des preuves d'inégalités&nbsp;: étudier la différence et regarder son minimum.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· variations avec eᵏˣ</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = x\,e^{-x}\), définie sur \(\mathbb{R}\). Étudie les variations de \(f\) et précise son maximum.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Produit avec \(u = x\) (\(u' = 1\)) et \(v = e^{-x}\) (\(v' = -e^{-x}\), le \(k = -1\) descend)&nbsp;: \(f'(x) = e^{-x} - x\,e^{-x}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Factorise&nbsp;: \(f'(x) = (1 - x)\,e^{-x}\), du signe de \(1 - x\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(f\) croît sur \(\left]-\infty\;;\, 1\right]\), décroît sur \(\left[1\;;\, +\infty\right[\), avec \(f(1) = e^{-1} = \dfrac{1}{e} \approx 0{,}37\).</p>
+          <p class="conclusion">Conclusion&nbsp;: maximum \(\dfrac{1}{e}\) atteint en \(x = 1\)&nbsp;: la fonction monte, culmine, puis fond vers 0 — c'est la quatrième courbe qu'il fallait savoir reconnaître dans le jeu de la section 5.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une culture de bactéries compte \(N(t) = 200\,e^{0{,}3t}\) individus, où \(t\) est le temps en heures. a. Combien de bactéries au départ&nbsp;? b. Calcule \(N'(t)\) et vérifie que \(N'(t) = 0{,}3\,N(t)\). Comment l'interpréter&nbsp;? c. Montre que d'une heure à la suivante, la population est multipliée par un facteur constant, et donne sa valeur approchée. d. La croissance peut-elle ralentir un jour, d'après ce modèle&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(N(0) = 200\,e^0 = 200\) bactéries.</p>
+          <p><span class="etape-label">b. — </span>\(N'(t) = 200 \times 0{,}3\,e^{0{,}3t} = 60\,e^{0{,}3t}\), et l'on reconnaît \(0{,}3 \times N(t)\). Interprétation&nbsp;: la vitesse de croissance est proportionnelle à la population présente — exactement le mécanisme «&nbsp;plus il y en a, plus ça pousse&nbsp;» qui ouvrait le chapitre.</p>
+          <p><span class="etape-label">c. — </span>\(\dfrac{N(t+1)}{N(t)} = \dfrac{200\,e^{0{,}3(t+1)}}{200\,e^{0{,}3t}} = e^{0{,}3} \approx 1{,}35\)&nbsp;: chaque heure, la population est multipliée par le même facteur, environ \(+35\,\%\). Les relevés horaires forment une suite géométrique de raison \(e^{0{,}3}\).</p>
+          <p><span class="etape-label">d. — </span>Non&nbsp;: \(N'(t) = 60\,e^{0{,}3t}\) est strictement positive et <em>croissante</em> — le modèle accélère sans fin. C'est sa limite (aucune boîte n'est infinie)&nbsp;: un modèle exponentiel ne décrit bien que le début d'une croissance réelle.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(N' = 0{,}3\,N\), facteur horaire \(e^{0{,}3}\)&nbsp;: dérivée, suites et exponentielle racontent ici la même histoire — c'est exactement à ça que sert ce chapitre.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · SANS CALCULATRICE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">On considère la fonction \(f\) définie sur \(\mathbb{R}\) par \(f(x) = (x + 2)\,e^{-x}\), et \(\mathcal{C}\) sa courbe représentative.</p>
+          <div class="bac-partie">PARTIE A</div>
+          <ol>
+            <li>Calcule \(f(0)\) et \(f(-2)\).</li>
+            <li>Montre que pour tout réel \(x\), \(f'(x) = -(x + 1)\,e^{-x}\).</li>
+            <li>Détermine l'équation de la tangente \(T\) à \(\mathcal{C}\) au point d'abscisse 0.</li>
+          </ol>
+          <div class="bac-partie">PARTIE B</div>
+          <ol>
+            <li>Étudie le signe de \(f'(x)\) sur \(\mathbb{R}\).</li>
+            <li>Dresse le tableau de variations de \(f\) et précise la valeur exacte de son maximum.</li>
+            <li>Déduis-en que pour tout réel \(x\), \((x + 2)\,e^{-x} \leq e\).</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>\(f(0) = 2\,e^0 = 2\) et \(f(-2) = 0 \times e^2 = 0\)&nbsp;: la courbe coupe l'axe des abscisses en \(-2\) (et seulement là — l'exponentielle ne s'annule jamais).</p>
+            <p><span class="etape-label">A.2 — </span>Produit avec \(u = x + 2\) (\(u' = 1\)) et \(v = e^{-x}\) (\(v' = -e^{-x}\))&nbsp;: \(f'(x) = e^{-x} - (x+2)\,e^{-x} = (1 - x - 2)\,e^{-x} = -(x+1)\,e^{-x}\).</p>
+            <p><span class="etape-label">A.3 — </span>\(f(0) = 2\), \(f'(0) = -1\), donc \(T : y = -x + 2\).</p>
+            <p><span class="etape-label">B.1 — </span>\(e^{-x} > 0\)&nbsp;: le signe de \(f'\) est celui de \(-(x+1)\) — positif avant \(-1\), nul en \(-1\), négatif après.</p>
+            <p><span class="etape-label">B.2 — </span>\(f\) croît sur \(\left]-\infty\;;\, -1\right]\) puis décroît&nbsp;: maximum \(f(-1) = (-1+2)\,e^{1} = e\).</p>
+            <p><span class="etape-label">B.3 — </span>Le maximum global de \(f\) vaut \(e\), donc \(f(x) \leq e\) pour tout réel \(x\)&nbsp;: l'inégalité demandée. Même méthode qu'à l'exercice 12&nbsp;: un extremum global démontre une inégalité.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">Le produit scalaire <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
