@@ -829,7 +829,271 @@
       </div>
       <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: équations et recettes, tableaux d'avancement, réactif limitant, stœchiométrie, bilans de matière, et un problème pour finir.</p>
 
-      <!-- 14 exercices + Vers le Bac : commit exercices -->
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· ajuster une équation</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Ajuste les équations suivantes (formules interdites de retouche, seulement les nombres devant)&nbsp;: a. \(\mathrm{C_3H_8} + \mathrm{O_2} \longrightarrow \mathrm{CO_2} + \mathrm{H_2O}\) (combustion du propane). b. \(\mathrm{Al} + \mathrm{O_2} \longrightarrow \mathrm{Al_2O_3}\). c. \(\mathrm{N_2} + \mathrm{H_2} \longrightarrow \mathrm{NH_3}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>carbone d'abord&nbsp;: 3 \(\mathrm{CO_2}\). Hydrogène&nbsp;: 8 H à caser, donc 4 \(\mathrm{H_2O}\). Oxygène en dernier&nbsp;: \(6 + 4 = 10\) O à droite, donc 5 \(\mathrm{O_2}\)&nbsp;: \(\mathrm{C_3H_8} + 5\,\mathrm{O_2} \longrightarrow 3\,\mathrm{CO_2} + 4\,\mathrm{H_2O}\).</p>
+          <p><span class="etape-label">b. — </span>\(4\,\mathrm{Al} + 3\,\mathrm{O_2} \longrightarrow 2\,\mathrm{Al_2O_3}\)&nbsp;: 4 Al et 6 O de chaque côté.</p>
+          <p><span class="etape-label">c. — </span>\(\mathrm{N_2} + 3\,\mathrm{H_2} \longrightarrow 2\,\mathrm{NH_3}\)&nbsp;: 2 N et 6 H de chaque côté.</p>
+          <p class="conclusion">Conclusion&nbsp;: toujours le même ordre — les éléments «&nbsp;rares&nbsp;» d'abord, l'oxygène (ou le plus répandu) en dernier, et un recomptage final des atomes.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· l'équation-recette</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">L'éthène (éthylène) brûle selon \(\mathrm{C_2H_4} + 3\,\mathrm{O_2} \longrightarrow 2\,\mathrm{CO_2} + 2\,\mathrm{H_2O}\). a. Quelle quantité de dioxygène faut-il pour consommer 0,50&nbsp;mol d'éthène&nbsp;? b. Quelle quantité de \(\mathrm{CO_2}\) se forme alors&nbsp;? c. Vrai ou faux&nbsp;: «&nbsp;d'après l'équation, le système contient 1&nbsp;mol d'éthène et 3&nbsp;mol de dioxygène au départ&nbsp;».</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>la recette dit «&nbsp;3 dioxygènes pour 1 éthène&nbsp;»&nbsp;: \(3 \times 0{,}50 = 1{,}50\)&nbsp;mol de \(\mathrm{O_2}\). C'est une proportionnalité.</p>
+          <p><span class="etape-label">b. — </span>«&nbsp;2 \(\mathrm{CO_2}\) pour 1 éthène&nbsp;»&nbsp;: \(2 \times 0{,}50 = 1{,}00\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>faux, et c'est le piège n°3 du chapitre&nbsp;: l'équation donne les <em>proportions</em> de la recette, pas le contenu du placard. Les quantités initiales sont une donnée d'énoncé, indépendante de l'équation.</p>
+          <p class="conclusion">Conclusion&nbsp;: une équation se lit «&nbsp;pour… il faut… il se forme…&nbsp;», jamais «&nbsp;il y a&nbsp;».</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· tableau d'avancement</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un pot catalytique, le monoxyde de carbone est transformé en dioxyde de carbone&nbsp;: \(2\,\mathrm{CO} + \mathrm{O_2} \longrightarrow 2\,\mathrm{CO_2}\). Le mélange initial contient 0,60&nbsp;mol de CO et 0,50&nbsp;mol de \(\mathrm{O_2}\). a. Établis le tableau d'avancement (ligne «&nbsp;en cours&nbsp;» en fonction de \(x\)). b. Donne la composition du système quand \(x = 0{,}10\)&nbsp;mol.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>état initial&nbsp;: 0,60&nbsp;; 0,50&nbsp;; 0. En cours&nbsp;: \(n(\mathrm{CO}) = 0{,}60 - 2x\)&nbsp;; \(n(\mathrm{O_2}) = 0{,}50 - x\)&nbsp;; \(n(\mathrm{CO_2}) = 2x\). Le coefficient 2 suit le CO et le \(\mathrm{CO_2}\).</p>
+          <p><span class="etape-label">b. — </span>à \(x = 0{,}10\)&nbsp;: \(n(\mathrm{CO}) = 0{,}40\)&nbsp;mol&nbsp;; \(n(\mathrm{O_2}) = 0{,}40\)&nbsp;mol&nbsp;; \(n(\mathrm{CO_2}) = 0{,}20\)&nbsp;mol.</p>
+          <p class="conclusion">Conclusion&nbsp;: contrôle-réflexe — à \(x = 0\), la ligne «&nbsp;en cours&nbsp;» redonne bien 0,60&nbsp;; 0,50&nbsp;; 0.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· expressions en fonction de x</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On fait réagir 0,35&nbsp;mol de dihydrogène avec 0,50&nbsp;mol de dichlore&nbsp;: \(\mathrm{H_2} + \mathrm{Cl_2} \longrightarrow 2\,\mathrm{HCl}\). a. Écris les trois quantités en fonction de \(x\). b. À un certain moment, \(n(\mathrm{H_2}) = 0{,}15\)&nbsp;mol&nbsp;: que valent \(x\), \(n(\mathrm{Cl_2})\) et \(n(\mathrm{HCl})\)&nbsp;? c. Pour quelle valeur de \(x\) le dihydrogène serait-il épuisé&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n(\mathrm{H_2}) = 0{,}35 - x\)&nbsp;; \(n(\mathrm{Cl_2}) = 0{,}50 - x\)&nbsp;; \(n(\mathrm{HCl}) = 2x\).</p>
+          <p><span class="etape-label">b. — </span>\(0{,}35 - x = 0{,}15\) donne \(x = 0{,}20\)&nbsp;mol. Alors \(n(\mathrm{Cl_2}) = 0{,}30\)&nbsp;mol et \(n(\mathrm{HCl}) = 0{,}40\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>\(0{,}35 - x = 0\) donne \(x = 0{,}35\)&nbsp;mol — et il resterait encore \(0{,}15\)&nbsp;mol de dichlore. Tu viens de calculer un «&nbsp;candidat&nbsp;»&nbsp;: c'est tout le travail de la section 3.</p>
+          <p class="conclusion">Conclusion&nbsp;: le tableau d'avancement transforme une question de chimie en petite équation du premier degré. La machine à résoudre, tu l'as depuis longtemps.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· réactif limitant</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Synthèse de l'eau&nbsp;: \(2\,\mathrm{H_2} + \mathrm{O_2} \longrightarrow 2\,\mathrm{H_2O}\), avec au départ 0,50&nbsp;mol de \(\mathrm{H_2}\) et 0,20&nbsp;mol de \(\mathrm{O_2}\). a. Détermine le réactif limitant et \(x_{\max}\). b. Donne la composition complète de l'état final (transformation totale).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>candidats&nbsp;: \(\mathrm{H_2}\)&nbsp;: \(0{,}50/2 = 0{,}25\)&nbsp;; \(\mathrm{O_2}\)&nbsp;: \(0{,}20/1 = 0{,}20\). Le plus petit gagne&nbsp;: \(\mathrm{O_2}\) est limitant et \(x_{\max} = 0{,}20\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>à \(x = 0{,}20\)&nbsp;: \(n(\mathrm{H_2}) = 0{,}50 - 0{,}40 = 0{,}10\)&nbsp;mol&nbsp;; \(n(\mathrm{O_2}) = 0\)&nbsp;; \(n(\mathrm{H_2O}) = 0{,}40\)&nbsp;mol.</p>
+          <p class="conclusion">Conclusion&nbsp;: le limitant tombe sur 0, l'excès reste positif — si l'un des deux sort négatif, c'est que le mauvais candidat a été choisi.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· les candidats</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On oxyde de l'aluminium&nbsp;: \(4\,\mathrm{Al} + 3\,\mathrm{O_2} \longrightarrow 2\,\mathrm{Al_2O_3}\), avec au départ 0,60&nbsp;mol d'aluminium et 0,60&nbsp;mol de dioxygène. Sacha affirme&nbsp;: «&nbsp;mêmes quantités, donc mélange stœchiométrique&nbsp;». a. Qu'en penses-tu&nbsp;? Détermine le limitant et \(x_{\max}\). b. Compose l'état final.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>mêmes stocks ne veut pas dire mêmes candidats&nbsp;: \(\mathrm{Al}\)&nbsp;: \(0{,}60/4 = 0{,}15\)&nbsp;; \(\mathrm{O_2}\)&nbsp;: \(0{,}60/3 = 0{,}20\). L'aluminium est limitant, \(x_{\max} = 0{,}15\)&nbsp;mol. Sacha compare les tas, pas les proportions de la recette.</p>
+          <p><span class="etape-label">b. — </span>\(n(\mathrm{Al}) = 0\)&nbsp;; \(n(\mathrm{O_2}) = 0{,}60 - 3 \times 0{,}15 = 0{,}15\)&nbsp;mol&nbsp;; \(n(\mathrm{Al_2O_3}) = 2 \times 0{,}15 = 0{,}30\)&nbsp;mol.</p>
+          <p class="conclusion">Conclusion&nbsp;: «&nbsp;autant de chaque&nbsp;» n'est stœchiométrique que si les coefficients sont égaux. Ici la recette réclame 4 Al pour 3 \(\mathrm{O_2}\)&nbsp;: à stocks égaux, l'aluminium part plus vite.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· état final</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un réchaud de camping brûle du propane&nbsp;: \(\mathrm{C_3H_8} + 5\,\mathrm{O_2} \longrightarrow 3\,\mathrm{CO_2} + 4\,\mathrm{H_2O}\). Le mélange initial contient 0,20&nbsp;mol de propane et 1,20&nbsp;mol de dioxygène. Établis le tableau d'avancement complet — trois lignes — et conclus sur la composition finale.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>en cours&nbsp;: \(0{,}20 - x\)&nbsp;; \(1{,}20 - 5x\)&nbsp;; \(3x\)&nbsp;; \(4x\).</p>
+          <p><span class="etape-label">Étape 2 — </span>candidats&nbsp;: \(0{,}20/1 = 0{,}20\) et \(1{,}20/5 = 0{,}24\). Le propane est limitant, \(x_{\max} = 0{,}20\)&nbsp;mol.</p>
+          <p><span class="etape-label">Étape 3 — </span>état final&nbsp;: \(n(\mathrm{C_3H_8}) = 0\)&nbsp;; \(n(\mathrm{O_2}) = 1{,}20 - 1{,}00 = 0{,}20\)&nbsp;mol&nbsp;; \(n(\mathrm{CO_2}) = 0{,}60\)&nbsp;mol&nbsp;; \(n(\mathrm{H_2O}) = 0{,}80\)&nbsp;mol.</p>
+          <p class="conclusion">Conclusion&nbsp;: la bouteille se vide avant l'air — heureusement pour le campeur&nbsp;: c'est le scénario prévu par le fabricant.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· mélange stœchiométrique</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Synthèse de l'ammoniac&nbsp;: \(\mathrm{N_2} + 3\,\mathrm{H_2} \longrightarrow 2\,\mathrm{NH_3}\). a. Le mélange «&nbsp;0,40&nbsp;mol de \(\mathrm{N_2}\) et 1,20&nbsp;mol de \(\mathrm{H_2}\)&nbsp;» est-il stœchiométrique&nbsp;? b. On ajoute 0,20&nbsp;mol de \(\mathrm{N_2}\) au mélange précédent. Qui devient limitant, et que reste-t-il à la fin&nbsp;? c. Quelle quantité de \(\mathrm{H_2}\) faudrait-il alors ajouter pour retrouver un mélange stœchiométrique&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>candidats&nbsp;: \(0{,}40/1 = 0{,}40\) et \(1{,}20/3 = 0{,}40\). Égaux&nbsp;: mélange stœchiométrique.</p>
+          <p><span class="etape-label">b. — </span>désormais \(n_0(\mathrm{N_2}) = 0{,}60\)&nbsp;: candidats \(0{,}60\) contre \(0{,}40\). \(\mathrm{H_2}\) devient limitant, \(x_{\max} = 0{,}40\)&nbsp;mol&nbsp;; il reste \(0{,}60 - 0{,}40 = 0{,}20\)&nbsp;mol de \(\mathrm{N_2}\) (et \(0{,}80\)&nbsp;mol de \(\mathrm{NH_3}\) se sont formées).</p>
+          <p><span class="etape-label">c. — </span>pour égaliser les candidats avec \(0{,}60\)&nbsp;mol de \(\mathrm{N_2}\), il faut \(3 \times 0{,}60 = 1{,}80\)&nbsp;mol de \(\mathrm{H_2}\)&nbsp;: on en ajoute \(1{,}80 - 1{,}20 = 0{,}60\)&nbsp;mol.</p>
+          <p class="conclusion">Conclusion&nbsp;: la stœchiométrie est fragile — ajouter d'<em>un</em> réactif la détruit, et il faut compenser dans les proportions de l'équation, pas à l'identique.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· le graphique rejoué</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Reprends, par le calcul, le réglage initial du graphique de la section 3&nbsp;: \(2\,\mathrm{H_2} + \mathrm{O_2} \longrightarrow 2\,\mathrm{H_2O}\), avec 1,20&nbsp;mol de \(\mathrm{H_2}\) et 0,40&nbsp;mol de \(\mathrm{O_2}\). a. Candidats, limitant, \(x_{\max}\). b. Composition finale. c. De combien descend \(n(\mathrm{H_2})\) quand \(x\) augmente de 0,10&nbsp;mol&nbsp;? Que représente ce nombre sur le graphique&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>candidats&nbsp;: \(1{,}20/2 = 0{,}60\) et \(0{,}40/1 = 0{,}40\)&nbsp;: \(\mathrm{O_2}\) limitant, \(x_{\max} = 0{,}40\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>\(n(\mathrm{H_2}) = 1{,}20 - 0{,}80 = 0{,}40\)&nbsp;mol&nbsp;; \(n(\mathrm{O_2}) = 0\)&nbsp;; \(n(\mathrm{H_2O}) = 0{,}80\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>\(n(\mathrm{H_2}) = 1{,}20 - 2x\)&nbsp;: quand \(x\) gagne 0,10, \(n(\mathrm{H_2})\) perd \(2 \times 0{,}10 = 0{,}20\)&nbsp;mol. C'est la <em>pente</em> de la droite — le coefficient stœchiométrique, visible à l'œil nu.</p>
+          <p class="conclusion">Conclusion&nbsp;: ce que le graphique montrait (la droite la plus pentue n'est pas forcément la première à zéro), le calcul le confirme — et il donne les valeurs exactes.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· lire un tableau</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Pour une réaction entre trois espèces A, B et C, la ligne «&nbsp;en cours&nbsp;» d'un tableau d'avancement indique&nbsp;: \(n(\mathrm{A}) = 0{,}45 - 3x\)&nbsp;; \(n(\mathrm{B}) = 0{,}30 - x\)&nbsp;; \(n(\mathrm{C}) = 2x\). a. Retrouve l'équation de la réaction. b. Donne les quantités initiales. c. Détermine \(x_{\max}\) et le réactif limitant.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>les signes disent les rôles (− = réactif, + = produit), les coefficients sont devant \(x\)&nbsp;: \(3\,\mathrm{A} + \mathrm{B} \longrightarrow 2\,\mathrm{C}\).</p>
+          <p><span class="etape-label">b. — </span>en posant \(x = 0\)&nbsp;: \(n_0(\mathrm{A}) = 0{,}45\)&nbsp;mol, \(n_0(\mathrm{B}) = 0{,}30\)&nbsp;mol, et C absent au départ.</p>
+          <p><span class="etape-label">c. — </span>candidats&nbsp;: \(0{,}45/3 = 0{,}15\) et \(0{,}30/1 = 0{,}30\)&nbsp;: A est limitant et \(x_{\max} = 0{,}15\)&nbsp;mol.</p>
+          <p class="conclusion">Conclusion&nbsp;: le tableau d'avancement se lit dans les deux sens — l'équation le fabrique, mais lui sait aussi raconter l'équation.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· bilan en grammes</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">En TP, on enflamme un ruban de magnésium de 4,8&nbsp;g dans un flacon contenant 0,050&nbsp;mol de dioxygène&nbsp;: \(2\,\mathrm{Mg} + \mathrm{O_2} \longrightarrow 2\,\mathrm{MgO}\). Données&nbsp;: M(Mg) = 24&nbsp;g·mol⁻¹, M(O) = 16&nbsp;g·mol⁻¹. a. Calcule \(n_0(\mathrm{Mg}\)). b. Détermine le limitant et \(x_{\max}\). c. Donne les masses finales de chaque espèce. d. Vérifie la conservation de la masse.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n_0(\mathrm{Mg}) = \dfrac{4{,}8}{24} = 0{,}20\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>candidats&nbsp;: \(0{,}20/2 = 0{,}10\) et \(0{,}050/1 = 0{,}050\)&nbsp;: le dioxygène est limitant (le flacon est petit&nbsp;!), \(x_{\max} = 0{,}050\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>état final en moles&nbsp;: \(n(\mathrm{Mg}) = 0{,}20 - 0{,}10 = 0{,}10\)&nbsp;mol&nbsp;; \(n(\mathrm{O_2}) = 0\)&nbsp;; \(n(\mathrm{MgO}) = 0{,}10\)&nbsp;mol. En grammes&nbsp;: \(m(\mathrm{Mg}) = 0{,}10 \times 24 = 2{,}4\)&nbsp;g&nbsp;; \(m(\mathrm{MgO}) = 0{,}10 \times 40 = 4{,}0\)&nbsp;g.</p>
+          <p><span class="etape-label">d. — </span>initial&nbsp;: \(4{,}8 + 0{,}050 \times 32 = 4{,}8 + 1{,}6 = 6{,}4\)&nbsp;g. Final&nbsp;: \(2{,}4 + 4{,}0 = 6{,}4\)&nbsp;g. Lavoisier tient.</p>
+          <p class="conclusion">Conclusion&nbsp;: la flamme s'éteint quand le flacon n'a plus d'air — le ruban survivant en témoigne. Et la masse totale, elle, n'a pas bronché.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· bilan avec un gaz</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un détartrant à base d'acide chlorhydrique attaque le calcaire d'une bouilloire&nbsp;: \(\mathrm{CaCO_3} + 2\,\mathrm{HCl} \longrightarrow \mathrm{CaCl_2} + \mathrm{H_2O} + \mathrm{CO_2}\). La bouilloire contient 2,0&nbsp;g de tartre (\(\mathrm{CaCO_3}\), M = 100&nbsp;g·mol⁻¹)&nbsp;; on verse 30&nbsp;mL de solution d'acide à 1,0&nbsp;mol·L⁻¹. Données&nbsp;: \(V_m = 24\)&nbsp;L·mol⁻¹. a. Calcule les quantités initiales. b. Détermine le limitant et \(x_{\max}\). c. Quel volume de \(\mathrm{CO_2}\) se dégage&nbsp;? d. Tout le tartre a-t-il disparu&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n(\mathrm{CaCO_3}) = \dfrac{2{,}0}{100} = 0{,}020\)&nbsp;mol&nbsp;; \(n(\mathrm{HCl}) = c \times V = 1{,}0 \times 0{,}030 = 0{,}030\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>candidats&nbsp;: \(0{,}020/1 = 0{,}020\) et \(0{,}030/2 = 0{,}015\)&nbsp;: l'acide est limitant, \(x_{\max} = 0{,}015\)&nbsp;mol. (Surprise&nbsp;: il y avait «&nbsp;plus&nbsp;» d'acide que de tartre — mais son coefficient 2 le vide plus vite.)</p>
+          <p><span class="etape-label">c. — </span>\(n(\mathrm{CO_2}) = x_{\max} = 0{,}015\)&nbsp;mol, donc \(V = 0{,}015 \times 24 = 0{,}36\)&nbsp;L, soit 360&nbsp;mL — les bulles que tu vois pétiller.</p>
+          <p><span class="etape-label">d. — </span>non&nbsp;: il reste \(0{,}020 - 0{,}015 = 0{,}005\)&nbsp;mol de \(\mathrm{CaCO_3}\), soit 0,5&nbsp;g de tartre. Il faudra reverser du détartrant.</p>
+          <p class="conclusion">Conclusion&nbsp;: trois conversions dans un même exercice (m/M, c·V, n·V\(_m\)) — mais un seul raisonnement, toujours le même, en moles au milieu.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· transformation non totale</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un réacteur, on tente la synthèse de l'ammoniac&nbsp;: \(\mathrm{N_2} + 3\,\mathrm{H_2} \longrightarrow 2\,\mathrm{NH_3}\), à partir de 0,25&nbsp;mol de \(\mathrm{N_2}\) et 0,45&nbsp;mol de \(\mathrm{H_2}\). Quand plus rien n'évolue, on mesure \(n(\mathrm{NH_3}) = 0{,}20\)&nbsp;mol. a. Calcule l'avancement final \(x_f\). b. Donne la composition finale complète. c. Calcule \(x_{\max}\). d. La transformation est-elle totale&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n(\mathrm{NH_3}) = 2x_f = 0{,}20\), donc \(x_f = 0{,}10\)&nbsp;mol. (Pas 0,20&nbsp;: le coefficient 2, encore lui.)</p>
+          <p><span class="etape-label">b. — </span>\(n(\mathrm{N_2}) = 0{,}25 - 0{,}10 = 0{,}15\)&nbsp;mol&nbsp;; \(n(\mathrm{H_2}) = 0{,}45 - 3 \times 0{,}10 = 0{,}15\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>candidats&nbsp;: \(0{,}25/1 = 0{,}25\) et \(0{,}45/3 = 0{,}15\)&nbsp;: \(x_{\max} = 0{,}15\)&nbsp;mol (\(\mathrm{H_2}\) limitant).</p>
+          <p><span class="etape-label">d. — </span>\(x_f = 0{,}10 &lt; x_{\max} = 0{,}15\)&nbsp;: la transformation s'est arrêtée en route, elle est <strong>non totale</strong>. Indice qui ne trompe pas&nbsp;: il reste <em>les deux</em> réactifs à l'état final.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(x_{\max}\) est une borne théorique, \(x_f\) la réalité mesurée. Comparer les deux dit si la réaction est allée au bout — c'est l'un des grands sujets de Terminale.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème · l'airbag</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">En cas de choc, un airbag se gonfle en 30 millisecondes grâce à la décomposition explosive de l'azoture de sodium&nbsp;: \(2\,\mathrm{NaN_3} \longrightarrow 2\,\mathrm{Na} + 3\,\mathrm{N_2}\). Le sac du conducteur doit recevoir 72&nbsp;L de diazote. Données&nbsp;: \(V_m = 24\)&nbsp;L·mol⁻¹&nbsp;; M(Na) = 23&nbsp;g·mol⁻¹, M(N) = 14&nbsp;g·mol⁻¹. a. Quelle quantité de \(\mathrm{N_2}\) faut-il produire&nbsp;? b. Établis le tableau d'avancement et détermine l'avancement nécessaire. c. Quelle masse d'azoture de sodium le constructeur doit-il embarquer dans le volant&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n(\mathrm{N_2}) = \dfrac{V}{V_m} = \dfrac{72}{24} = 3{,}0\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>un seul réactif, le tableau marche pareil&nbsp;: \(n(\mathrm{NaN_3}) = n_0 - 2x\)&nbsp;; \(n(\mathrm{Na}) = 2x\)&nbsp;; \(n(\mathrm{N_2}) = 3x\). Il faut \(3x = 3{,}0\), donc \(x = 1{,}0\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>la décomposition doit être totale et consommer juste le stock&nbsp;: \(n_0 = 2x = 2{,}0\)&nbsp;mol. Avec \(M(\mathrm{NaN_3}) = 23 + 3 \times 14 = 65\)&nbsp;g·mol⁻¹&nbsp;: \(m = 2{,}0 \times 65 = 130\)&nbsp;g.</p>
+          <p class="conclusion">Conclusion&nbsp;: 130&nbsp;g de poudre dans le volant, dimensionnés au tableau d'avancement près. (La réaction produit aussi 46&nbsp;g de sodium métallique, très réactif&nbsp;: les airbags réels embarquent d'autres espèces pour le neutraliser — la chimie de sécurité ne s'arrête pas à notre équation.)</p>
+        </div>
+      </article>
 
       <article id="bac" class="bac">
         <div class="bande-inversee">
@@ -837,7 +1101,33 @@
           <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
         </div>
         <div class="bac-corps">
-          <!-- rempli au commit exercices -->
+          <p class="prose">Deux volets indépendants&nbsp;: la technique du tableau d'avancement sur la synthèse industrielle de l'ammoniac, puis une étude de document sur les bus à hydrogène. Données pour tout l'exercice&nbsp;: M(H) = 1&nbsp;g·mol⁻¹, M(N) = 14&nbsp;g·mol⁻¹, M(O) = 16&nbsp;g·mol⁻¹&nbsp;; \(V_m = 24\)&nbsp;L·mol⁻¹&nbsp;; l'air contient 20&nbsp;% de dioxygène en volume.</p>
+          <div class="bac-partie">PARTIE A — LA SYNTHÈSE DE L'AMMONIAC</div>
+          <p class="prose">L'ammoniac \(\mathrm{NH_3}\), à la base de la plupart des engrais azotés, est synthétisé selon \(\mathrm{N_2} + 3\,\mathrm{H_2} \longrightarrow 2\,\mathrm{NH_3}\). Un réacteur d'essai est chargé avec 0,40&nbsp;mol de diazote et 0,90&nbsp;mol de dihydrogène. La transformation est considérée comme totale.</p>
+          <ol>
+            <li>Établis le tableau d'avancement du système.</li>
+            <li>Détermine le réactif limitant et l'avancement maximal.</li>
+            <li>Donne la composition du système à l'état final, puis la masse d'ammoniac obtenue.</li>
+            <li>Quelle quantité de dihydrogène aurait-il fallu charger, avec le même diazote, pour un mélange stœchiométrique&nbsp;?</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — LE BUS À HYDROGÈNE</div>
+          <p class="prose">Un bus à hydrogène embarque 5,0&nbsp;kg de dihydrogène. Dans la pile à combustible, le dihydrogène réagit avec le dioxygène de l'air&nbsp;: \(2\,\mathrm{H_2} + \mathrm{O_2} \longrightarrow 2\,\mathrm{H_2O}\). On considère la transformation totale, le dihydrogène étant le réactif limitant (l'air est renouvelé en continu).</p>
+          <ol>
+            <li>Calcule la quantité de dihydrogène embarquée.</li>
+            <li>Quel volume d'air le bus devra-t-il aspirer pour consommer tout son dihydrogène&nbsp;?</li>
+            <li>Quelle masse d'eau le bus rejettera-t-il&nbsp;? Commente&nbsp;: c'est le seul «&nbsp;gaz d'échappement&nbsp;» de ce bus.</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>état initial&nbsp;: 0,40&nbsp;; 0,90&nbsp;; 0. En cours&nbsp;: \(0{,}40 - x\)&nbsp;; \(0{,}90 - 3x\)&nbsp;; \(2x\).</p>
+            <p><span class="etape-label">A.2 — </span>candidats&nbsp;: \(0{,}40/1 = 0{,}40\) et \(0{,}90/3 = 0{,}30\)&nbsp;: le dihydrogène est limitant, \(x_{\max} = 0{,}30\)&nbsp;mol.</p>
+            <p><span class="etape-label">A.3 — </span>état final&nbsp;: \(n(\mathrm{N_2}) = 0{,}10\)&nbsp;mol&nbsp;; \(n(\mathrm{H_2}) = 0\)&nbsp;; \(n(\mathrm{NH_3}) = 0{,}60\)&nbsp;mol. Avec \(M(\mathrm{NH_3}) = 17\)&nbsp;g·mol⁻¹&nbsp;: \(m = 0{,}60 \times 17 = 10{,}2\)&nbsp;g.</p>
+            <p><span class="etape-label">A.4 — </span>candidats égaux&nbsp;: \(n(\mathrm{H_2}) = 3 \times 0{,}40 = 1{,}20\)&nbsp;mol.</p>
+            <p><span class="etape-label">B.1 — </span>\(n(\mathrm{H_2}) = \dfrac{5\,000}{2} = 2\,500\)&nbsp;mol.</p>
+            <p><span class="etape-label">B.2 — </span>stœchiométrie&nbsp;: \(n(\mathrm{O_2}) = \dfrac{2\,500}{2} = 1\,250\)&nbsp;mol, soit \(V(\mathrm{O_2}) = 1\,250 \times 24 = 30\,000\)&nbsp;L = 30&nbsp;m³. L'air n'en contient que 20&nbsp;%&nbsp;: \(V(\text{air}) = 5 \times 30 = 150\)&nbsp;m³. (Le bus ne les stocke pas&nbsp;: il les aspire en roulant.)</p>
+            <p><span class="etape-label">B.3 — </span>\(x_{\max} = 1\,250\)&nbsp;mol, donc \(n(\mathrm{H_2O}) = 2\,500\)&nbsp;mol et \(m = 2\,500 \times 18 = 45\,000\)&nbsp;g = 45&nbsp;kg d'eau. Ni \(\mathrm{CO_2}\), ni particules&nbsp;: le tableau d'avancement explique l'argument écologique de l'hydrogène — à condition, bien sûr, de produire ce dihydrogène proprement.</p>
+          </div>
         </div>
       </article>
     </section>
