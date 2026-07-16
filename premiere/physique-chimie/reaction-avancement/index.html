@@ -59,9 +59,9 @@
 
 <link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
-<link rel="stylesheet" href="../../../assets/css/tokens.css?v=7">
-<link rel="stylesheet" href="../../../assets/css/base.css?v=7">
-<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=7">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=8">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=8">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=8">
 
 <script type="module" src="../../../assets/js/theme.js"></script>
 <script type="module" src="../../../assets/js/sommaire.js"></script>
@@ -135,40 +135,690 @@
 
     <section id="s1" class="chap-section">
       <h2>1. La chimie est une recette de cuisine</h2>
-      <!-- rempli au commit contenu -->
+      <p class="prose">Samedi soir, crêpes chez toi. La recette est claire&nbsp;: 2 œufs, 250&nbsp;g de farine et un demi-litre de lait donnent une fournée de 8 crêpes. Tu ouvres le placard&nbsp;: 6 œufs, 1&nbsp;kg de farine, 2&nbsp;L de lait. Combien de fournées&nbsp;? Tu le vois de tête. Les œufs n'autorisent que 3 fournées, la farine en permettrait 4, le lait aussi. À la troisième fournée&nbsp;: plus d'œufs, tout s'arrête — et il reste 250&nbsp;g de farine et un demi-litre de lait sur le plan de travail.</p>
+      <p class="prose">Ce raisonnement — les proportions d'une recette, l'ingrédient qui manque en premier, ce qui reste à la fin — c'est, sans exagérer, tout le programme de ce chapitre. Parce qu'une réaction chimique est exactement ça&nbsp;: une recette. Sous ta poêle, la gazinière brûle du méthane. Chaque «&nbsp;fournée&nbsp;» microscopique consomme une molécule de méthane et deux molécules de dioxygène, et fabrique une molécule de dioxyde de carbone et deux molécules d'eau. La recette s'écrit&nbsp;:</p>
+
+      <div class="math-vitrine">$$\mathrm{CH_4} \;+\; 2\,\mathrm{O_2} \;\longrightarrow\; \mathrm{CO_2} \;+\; 2\,\mathrm{H_2O}$$</div>
+
+      <p class="prose">Lis-la comme une recette, pas comme une formule magique. Les nombres placés devant les formules — les <strong>nombres stœchiométriques</strong> — sont les proportions de la recette&nbsp;: «&nbsp;pour 1 méthane, il faut 2 dioxygènes, et il sort 1 dioxyde de carbone et 2 eaux&nbsp;». Ils ne disent pas ce qu'il y a dans ton placard&nbsp;: ils disent dans quelles proportions ça réagit. Au passage, deux mots pour une même histoire&nbsp;: la <strong>transformation chimique</strong>, c'est le phénomène réel dans le brûleur&nbsp;; la <strong>réaction chimique</strong>, c'est le modèle qu'on en écrit — la recette.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION — NIVEAU SECONDE</span>
+        <p>Une transformation chimique est modélisée par une réaction chimique, résumée par une <strong>équation de réaction</strong>&nbsp;: réactifs à gauche, produits à droite. Les nombres stœchiométriques indiquent les <em>proportions</em> dans lesquelles les réactifs sont consommés et les produits formés. On les ajuste pour que chaque type d'atome soit conservé&nbsp;: la réaction réorganise les atomes, elle n'en crée ni n'en détruit.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — AJUSTER UNE ÉQUATION (RÉVISION DE SECONDE)</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris les formules des réactifs et des produits. Elles ne bougeront plus&nbsp;: on n'ajuste <em>jamais</em> en modifiant une formule, seulement les nombres devant.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Équilibre les éléments un par un, en commençant par ceux qui n'apparaissent que dans une espèce de chaque côté (souvent C, puis H)&nbsp;; garde l'oxygène pour la fin.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: recompte chaque type d'atome des deux côtés. Sur la combustion du méthane&nbsp;: 1 carbone, 4 hydrogènes, 4 oxygènes de chaque côté.</span></div>
+      </div>
+
+      <p class="prose">Voici maintenant le système que tu vas manipuler pendant tout le chapitre&nbsp;: un brûleur qui contient 0,60&nbsp;mol de méthane et 1,00&nbsp;mol de dioxygène. Quatre espèces, quatre barres — photographiées avant que la première molécule ne réagisse.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 330" role="img" aria-label="Quatre barres de quantités de matière à l'état initial : 0,60 mole de méthane et 1,00 mole de dioxygène à gauche, dioxyde de carbone et eau encore à zéro à droite">
+          <path class="g-axis" d="M20 282L620 282"></path>
+          <path class="avc-fleche" d="M300 148L340 148"></path>
+          <path class="avc-fleche-pointe" d="M340 148L331 143.5L331 152.5Z"></path>
+          <path class="avc-repere" d="M56 136.8L144 136.8"></path>
+          <path class="avc-repere" d="M196 40L284 40"></path>
+          <rect class="avc-barre-reactif" x="64" y="136.8" width="72" height="145.2" rx="3"></rect>
+          <rect class="avc-barre-reactif" x="204" y="40" width="72" height="242" rx="3"></rect>
+          <text class="avc-valeur" x="100" y="128.8" text-anchor="middle">0,60</text>
+          <text class="avc-valeur" x="240" y="32" text-anchor="middle">1,00</text>
+          <text class="avc-valeur" x="400" y="274" text-anchor="middle">0,00</text>
+          <text class="avc-valeur" x="540" y="274" text-anchor="middle">0,00</text>
+          <text class="avc-nom" x="100" y="306" text-anchor="middle">CH<tspan dy="4" font-size="0.72em">4</tspan></text>
+          <text class="avc-nom" x="240" y="306" text-anchor="middle">2 O<tspan dy="4" font-size="0.72em">2</tspan></text>
+          <text class="avc-nom" x="400" y="306" text-anchor="middle">CO<tspan dy="4" font-size="0.72em">2</tspan></text>
+          <text class="avc-nom" x="540" y="306" text-anchor="middle">2 H<tspan dy="4" font-size="0.72em">2</tspan><tspan dy="-4">O</tspan></text>
+        </svg>
+        <figcaption>L'état initial, photographié avant la première «&nbsp;fournée&nbsp;»&nbsp;: 0,60&nbsp;mol de méthane, 1,00&nbsp;mol de dioxygène — et rien encore côté produits. Remarque le déséquilibre&nbsp;: il y a <em>plus</em> de dioxygène que de méthane. Garde-le en tête, il va nous jouer un tour à la section suivante.</figcaption>
+      </figure>
     </section>
 
     <section id="s2" class="chap-section">
       <h2>2. L'avancement&nbsp;: le compteur de la réaction</h2>
-      <!-- rempli au commit contenu -->
+      <p class="prose">Allume la gazinière. Le graphique ci-dessous reprend exactement l'état initial de la section 1 — mais cette fois, c'est toi qui fais réagir le système&nbsp;: le curseur pousse la réaction en avant. Avant de toucher quoi que ce soit, un pronostic&nbsp;: le dioxygène est le plus gros tas au départ (1,00&nbsp;mol contre 0,60). Peut-il quand même être le premier à manquer&nbsp;? Manipule, et regarde qui descend, à quelle vitesse — et qui s'arrête net.</p>
+
+      <figure class="widget" id="widget-avancement" data-widget="avancement" data-nom="avancement"
+        data-x-init="0" data-x-max="0.5" data-echelle="1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Fais avancer la réaction</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 330" aria-label="Quatre barres de quantités de matière : quand l'avancement augmente, le méthane et le dioxygène descendent, le dioxyde de carbone et l'eau montent"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">avancement x&nbsp;: <span class="js-x">0,00</span>&nbsp;mol</span>
+            <input type="range" class="js-curseur" min="0" max="0.5" step="0.05" value="0" aria-label="Avancement x, en moles">
+          </div>
+          <div class="avc-tableau">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">en mol</th>
+                  <th scope="col">CH<sub>4</sub></th>
+                  <th scope="col">+&nbsp;&nbsp;2 O<sub>2</sub></th>
+                  <th scope="col">→&nbsp;&nbsp;CO<sub>2</sub></th>
+                  <th scope="col">+&nbsp;&nbsp;2 H<sub>2</sub>O</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>état initial (x = 0)</td>
+                  <td>0,60</td><td>1,00</td><td>0</td><td>0</td>
+                </tr>
+                <tr>
+                  <td>en cours (avancement x)</td>
+                  <td>0,60 − x</td><td>1,00 − 2x</td><td>x</td><td>2x</td>
+                </tr>
+                <tr class="ligne-vive">
+                  <td>ici&nbsp;: x = <span class="js-x-tab">0,00</span></td>
+                  <td class="js-cell">0,60</td><td class="js-cell">1,00</td><td class="js-cell">0,00</td><td class="js-cell">0,00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="especes-boutons" role="group" aria-label="Choisis une espèce pour détailler son calcul">
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">CH<sub>4</sub></button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="true">O<sub>2</sub></button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">CO<sub>2</sub></button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">H<sub>2</sub>O</button>
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent js-etat" aria-live="polite">x = 0 — état initial</span>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">x = 0&nbsp;: rien n'a encore réagi. Cette ligne du bas, c'est la photographie de la section 1 — et elle va suivre ton curseur.</p>
+            <p class="widget-legende js-leg-cours" hidden>Chaque cran de x est une «&nbsp;fournée&nbsp;»&nbsp;: 1&nbsp;mol de méthane et 2&nbsp;mol de dioxygène disparaissent, 1&nbsp;mol de dioxyde de carbone et 2&nbsp;mol d'eau apparaissent. Chaque barre bouge à la vitesse de son coefficient.</p>
+            <p class="widget-legende js-leg-fin" hidden>Plus une molécule de dioxygène — alors qu'il en restait <strong>plus que de méthane</strong> au départ. Son coefficient 2 l'a vidé deux fois plus vite. Ce réactif «&nbsp;à bout&nbsp;», tu lui donneras un nom à la section 3.</p>
+          </div>
+        </div>
+        <div class="widget-note">Le dioxygène porte un coefficient 2&nbsp;: sa barre descend deux fois plus vite que celle du méthane. Les pointillés marquent les quantités de départ.</div>
+        <script type="application/json">
+        {
+          "choisie": 1,
+          "especes": [
+            {"formule": "CH4", "coef": 1, "role": "reactif", "n0": 0.6},
+            {"formule": "O2", "coef": 2, "role": "reactif", "n0": 1},
+            {"formule": "CO2", "coef": 1, "role": "produit", "n0": 0},
+            {"formule": "H2O", "coef": 2, "role": "produit", "n0": 0}
+          ]
+        }
+        </script>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi un seul curseur suffit-il à piloter quatre espèces&nbsp;? Parce que la recette verrouille tout. Impossible de consommer du méthane sans consommer deux fois plus de dioxygène&nbsp;; impossible de former du dioxyde de carbone sans former deux fois plus d'eau. Il ne reste qu'une seule liberté&nbsp;: <em>combien de fois la recette s'est exécutée</em>. Ce compteur de fournées, compté en moles, pilote tout le système — c'est de la proportionnalité, rien de plus.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>L'<strong>avancement</strong> d'une réaction, noté \(x\) et exprimé en moles, mesure combien de fois la réaction décrite par l'équation s'est produite depuis l'état initial. Quand l'avancement vaut \(x\)&nbsp;: un réactif de nombre stœchiométrique \(a\) a perdu \(a \times x\) moles&nbsp;; un produit de nombre stœchiométrique \(b\) en a gagné \(b \times x\).</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$n(\text{réactif}) = n_0 - a\,x \qquad\quad n(\text{produit}) = n_0 + b\,x$$</div>
+
+      <p class="prose">(\(n_0\) désigne la quantité initiale de l'espèce, et \(a\), \(b\) son nombre stœchiométrique.) Le petit tableau que le graphique remplissait tout seul porte un nom&nbsp;: le <strong>tableau d'avancement</strong>. C'est la carte d'identité d'une transformation — l'équation en tête, et une ligne par moment de l'histoire&nbsp;: d'où l'on part, où l'on en est, où l'on finit.</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>LE TABLEAU D'AVANCEMENT DE LA GAZINIÈRE</span>
+          <span class="bande-note">EN MOL</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th></th><th>CH<sub>4</sub></th><th>+&nbsp;&nbsp;2 O<sub>2</sub></th><th>→&nbsp;&nbsp;CO<sub>2</sub></th><th>+&nbsp;&nbsp;2 H<sub>2</sub>O</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="note-cellule">état initial (x = 0)</td><td>0,60</td><td>1,00</td><td>0</td><td>0</td></tr>
+              <tr><td class="note-cellule">en cours (avancement x)</td><td>\(0{,}60 - x\)</td><td>\(1{,}00 - 2x\)</td><td>\(x\)</td><td>\(2x\)</td></tr>
+              <tr><td class="note-cellule">état final (x = 0,50)</td><td>0,10</td><td>0</td><td>0,50</td><td>1,00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — ÉTABLIR UN TABLEAU D'AVANCEMENT</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Pose l'équation ajustée en tête de tableau, et les quantités initiales <em>en moles</em> sur la première ligne (0 pour un produit absent au départ).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Ligne «&nbsp;en cours&nbsp;»&nbsp;: chaque réactif s'écrit \(n_0 - (\text{coefficient}) \times x\), chaque produit \(n_0 + (\text{coefficient}) \times x\). Le coefficient de l'équation, pas un autre.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: en remplaçant \(x\) par 0, ta ligne «&nbsp;en cours&nbsp;» doit redonner exactement la ligne initiale.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE TABLEAU DE L'AMMONIAC</div>
+        <p class="exemple-enonce">L'industrie fabrique l'ammoniac \(\mathrm{NH_3}\) (l'ingrédient clé des engrais) selon \(\mathrm{N_2} + 3\,\mathrm{H_2} \longrightarrow 2\,\mathrm{NH_3}\). Au départ&nbsp;: 0,50&nbsp;mol de \(\mathrm{N_2}\) et 0,90&nbsp;mol de \(\mathrm{H_2}\). Établis le tableau d'avancement, puis donne la composition du système quand \(x = 0{,}10\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 1 — </span>équation en tête, quantités initiales en moles&nbsp;: 0,50&nbsp;; 0,90&nbsp;; 0.</p>
+        <p><span class="etape-label">Étape 2 — </span>ligne «&nbsp;en cours&nbsp;»&nbsp;: \(n(\mathrm{N_2}) = 0{,}50 - x\)&nbsp;; \(n(\mathrm{H_2}) = 0{,}90 - 3x\)&nbsp;; \(n(\mathrm{NH_3}) = 2x\). Le 3 de \(3\,\mathrm{H_2}\) passe dans la formule, le 2 de \(2\,\mathrm{NH_3}\) aussi.</p>
+        <p><span class="etape-label">Étape 3 — </span>à \(x = 0{,}10\)&nbsp;mol&nbsp;: \(n(\mathrm{N_2}) = 0{,}40\)&nbsp;mol, \(n(\mathrm{H_2}) = 0{,}60\)&nbsp;mol, \(n(\mathrm{NH_3}) = 0{,}20\)&nbsp;mol.</p>
+        <p class="conclusion">Conclusion&nbsp;: un seul nombre, \(x\), et les trois quantités suivent. Et le contrôle est gratuit&nbsp;: à \(x = 0\), on retrouve bien 0,50&nbsp;; 0,90&nbsp;; 0.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>L'avancement \(x\) compte les «&nbsp;fournées&nbsp;», en moles. Réactif&nbsp;: \(n_0 - \text{coef} \times x\). Produit&nbsp;: \(n_0 + \text{coef} \times x\). Le coefficient de l'équation suit son espèce partout.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>L'avancement \(x\) d'une réaction, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la quantité de produit formé, en moles</button>
+              <button type="button" class="quiz-reponse">le nombre de fois, en moles, que la «&nbsp;recette&nbsp;» de l'équation s'est produite</button>
+              <button type="button" class="quiz-reponse">le temps écoulé depuis le début de la réaction</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(x\) est un compteur, pas un chronomètre ni un stock. La quantité de produit formé vaut \(\text{coef} \times x\)&nbsp;: elle n'est égale à \(x\) que si le coefficient vaut 1.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Dans le brûleur (1,00&nbsp;mol de \(\mathrm{O_2}\) au départ), que vaut \(n(\mathrm{O_2})\) quand \(x = 0{,}20\)&nbsp;mol&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,60 mol</button>
+              <button type="button" class="quiz-reponse">0,80 mol</button>
+              <button type="button" class="quiz-reponse">0,40 mol</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n(\mathrm{O_2}) = 1{,}00 - 2x = 1{,}00 - 0{,}40 = 0{,}60\)&nbsp;mol. Répondre 0,80, c'est oublier le coefficient 2&nbsp;: le dioxygène part deux fois plus vite.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Toujours à \(x = 0{,}20\)&nbsp;mol&nbsp;: quelle quantité d'eau s'est formée&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,20 mol</button>
+              <button type="button" class="quiz-reponse">0,10 mol</button>
+              <button type="button" class="quiz-reponse">0,40 mol</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n(\mathrm{H_2O}) = 2x = 0{,}40\)&nbsp;mol&nbsp;: le coefficient multiplie aussi les produits. Répondre 0,20, c'est confondre \(x\) avec la quantité formée — le piège classique de la fin du chapitre.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="s3" class="chap-section">
       <h2>3. Le réactif limitant&nbsp;: le premier à zéro</h2>
-      <!-- rempli au commit contenu -->
+      <p class="prose">Change d'échelle. Dans le moteur principal d'une fusée, deux réservoirs&nbsp;: du dihydrogène, du dioxygène. La recette est l'une des plus célèbres de la chimie&nbsp;: \(2\,\mathrm{H_2} + \mathrm{O_2} \longrightarrow 2\,\mathrm{H_2O}\) — on brûle de l'hydrogène, il sort de la vapeur d'eau. La question des ingénieurs est exactement celle des œufs de la section 1&nbsp;: <em>quel réservoir se vide en premier&nbsp;?</em></p>
+      <p class="prose">Le graphique change de point de vue&nbsp;: on trace maintenant les quantités <em>en fonction de l'avancement</em>. Chaque espèce devient une droite qui descend (ou monte) à la vitesse de son coefficient. Fais varier le remplissage des réservoirs et regarde la course. Puis relève le défi&nbsp;: trouve un réglage où les deux droites touchent zéro <em>exactement ensemble</em>.</p>
+
+      <figure class="widget" id="widget-limitant" data-widget="limitant" data-h2-init="1.2" data-o2-init="0.4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La course vers zéro</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 360" aria-label="Les quantités de dihydrogène, de dioxygène et d'eau en fonction de l'avancement : deux droites descendent, et la première à toucher zéro arrête la réaction"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">n<sub>0</sub>(H<sub>2</sub>)&nbsp;: <span class="js-lect-h2">1,20</span>&nbsp;mol</span>
+            <input type="range" class="js-h2" min="0.2" max="2" step="0.1" value="1.2" aria-label="Quantité initiale de dihydrogène, en moles">
+          </div>
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">n<sub>0</sub>(O<sub>2</sub>)&nbsp;: <span class="js-lect-o2">0,40</span>&nbsp;mol</span>
+            <input type="range" class="js-o2" min="0.1" max="1" step="0.05" value="0.4" aria-label="Quantité initiale de dioxygène, en moles">
+          </div>
+          <div class="chips">
+            <span class="chip js-cand-h2">H<sub>2</sub> à zéro pour x = 0,60</span>
+            <span class="chip js-cand-o2">O<sub>2</sub> à zéro pour x = 0,40</span>
+            <span class="chip chip--bad js-etat" aria-live="polite">limitant&nbsp;: O<sub>2</sub></span>
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <p class="widget-legende js-legende" aria-live="polite"></p>
+        </div>
+        <div class="widget-note">Pente = coefficient&nbsp;: la droite de H<sub>2</sub> perd 2&nbsp;mol quand x gagne 1&nbsp;mol, celle de O<sub>2</sub> en perd 1. Les pointillés prolongent les droites là où la réaction ne peut pas aller.</div>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Le <strong>réactif limitant</strong> est le réactif entièrement consommé en premier&nbsp;: c'est lui qui arrête la réaction. La valeur de l'avancement qui l'épuise est l'<strong>avancement maximal</strong> \(x_{\max}\)&nbsp;: la réaction ne peut pas aller plus loin. Les autres réactifs, encore présents à l'état final, sont dits <strong>en excès</strong>.</p>
+      </div>
+
+      <div class="math-vitrine">$$n_0 - a\,x_{\max} = 0 \quad\Longleftrightarrow\quad x_{\max} = \frac{n_0}{a} \qquad \text{pour chaque réactif — le plus petit gagne}$$</div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi «&nbsp;le plus petit gagne&nbsp;»&nbsp;? Parce que l'avancement est <em>commun</em> à tout le monde&nbsp;: une seule réaction, un seul compteur. Chaque réactif a sa valeur de \(x\) qui le viderait — son «&nbsp;candidat&nbsp;». Mais dès que le premier candidat est atteint, ce réactif est à zéro et plus rien ne peut réagir&nbsp;: les autres candidats ne seront jamais atteints. Continuer au-delà, ce serait rendre une quantité négative — regarde les pointillés du graphique plonger sous l'axe&nbsp;: la nature n'a pas de stocks négatifs.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER LE RÉACTIF LIMITANT</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Pour chaque réactif, calcule son candidat&nbsp;: la valeur de \(x\) qui le viderait, solution de \(n_0 - \text{coef} \times x = 0\), c'est-à-dire \(n_0/\text{coef}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Le plus petit candidat gagne&nbsp;: c'est \(x_{\max}\), et son réactif est le limitant.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: remplace \(x_{\max}\) dans la ligne «&nbsp;en cours&nbsp;» du tableau. Le limitant doit tomber exactement sur 0, et tous les autres rester positifs. Un résultat négatif = mauvais candidat choisi.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LES RÉSERVOIRS DÉSÉQUILIBRÉS</div>
+        <p class="exemple-enonce">Dans un moteur, on injecte 0,90&nbsp;mol de \(\mathrm{H_2}\) et 0,60&nbsp;mol de \(\mathrm{O_2}\) (\(2\,\mathrm{H_2} + \mathrm{O_2} \longrightarrow 2\,\mathrm{H_2O}\)). Réactif limitant, avancement maximal, composition de l'état final&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>les candidats&nbsp;: \(\mathrm{H_2}\)&nbsp;: \(\dfrac{0{,}90}{2} = 0{,}45\)&nbsp;mol&nbsp;; \(\mathrm{O_2}\)&nbsp;: \(\dfrac{0{,}60}{1} = 0{,}60\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 2 — </span>\(0{,}45 &lt; 0{,}60\)&nbsp;: le dihydrogène est limitant, et \(x_{\max} = 0{,}45\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 3 — </span>état final&nbsp;: \(n(\mathrm{H_2}) = 0\)&nbsp;; \(n(\mathrm{O_2}) = 0{,}60 - 0{,}45 = 0{,}15\)&nbsp;mol&nbsp;; \(n(\mathrm{H_2O}) = 2 \times 0{,}45 = 0{,}90\)&nbsp;mol.</p>
+        <p class="conclusion">Conclusion&nbsp;: le limitant n'est pas le plus petit tas — ici c'est le plus <em>gros</em> (0,90&nbsp;mol contre 0,60) qui s'épuise en premier, coefficient 2 oblige. Compare toujours les \(n_0/\text{coef}\), jamais les \(n_0\).</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions sur le limitant</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le réactif limitant, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">celui qui a le plus petit nombre stœchiométrique</button>
+              <button type="button" class="quiz-reponse">celui présent en plus petite quantité au départ</button>
+              <button type="button" class="quiz-reponse">celui qui s'épuise en premier quand la réaction avance</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> «&nbsp;premier à zéro&nbsp;», rien d'autre. Le «&nbsp;plus petit tas&nbsp;» ne marche que si les coefficients sont égaux&nbsp;: dès qu'ils diffèrent, seul le calcul des candidats \(n_0/\text{coef}\) tranche.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(\mathrm{A} + 3\,\mathrm{B} \longrightarrow 2\,\mathrm{C}\), avec au départ 0,40&nbsp;mol de A et 0,90&nbsp;mol de B. Alors \(x_{\max} =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,30 mol</button>
+              <button type="button" class="quiz-reponse">0,40 mol</button>
+              <button type="button" class="quiz-reponse">0,90 mol</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> candidats&nbsp;: \(0{,}40/1 = 0{,}40\) et \(0{,}90/3 = 0{,}30\). Le plus petit gagne&nbsp;: B est limitant. Répondre 0,40 parce que «&nbsp;0,40 &lt; 0,90&nbsp;», c'est comparer les tas en oubliant les coefficients.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>À l'état final d'une transformation totale, la quantité du réactif limitant vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">il en reste toujours un peu</button>
+              <button type="button" class="quiz-reponse">exactement zéro — c'est sa définition</button>
+              <button type="button" class="quiz-reponse">impossible à savoir sans plus d'informations</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(x_{\max}\) est justement <em>défini</em> comme la valeur qui annule le limitant&nbsp;: \(n_0 - \text{coef} \times x_{\max} = 0\). C'est d'ailleurs comme ça qu'on le calcule.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Sur le graphique de la fusée, pourquoi la réaction ne continue-t-elle pas au-delà de \(x_{\max}\)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">il faudrait une quantité de matière négative</button>
+              <button type="button" class="quiz-reponse">l'eau formée finit par bloquer la réaction</button>
+              <button type="button" class="quiz-reponse">les coefficients changent quand un réactif s'épuise</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est le pointillé qui plonge sous l'axe&nbsp;: continuer donnerait \(n &lt; 0\), un stock négatif de molécules. Les coefficients, eux, ne changent jamais — ils appartiennent à l'équation, pas au mélange.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="s4" class="chap-section">
       <h2>4. Le mélange stœchiométrique&nbsp;: les proportions exactes</h2>
-      <!-- rempli au commit contenu -->
+      <p class="prose">Retour en cuisine. Il existe un placard parfait&nbsp;: 6 œufs, 750&nbsp;g de farine, 1,5&nbsp;L de lait — trois fournées tout rond, et plus <em>rien</em> sur le plan de travail. Pas de gâchis, pas de reste&nbsp;: les ingrédients étaient exactement dans les proportions de la recette. En chimie, ce mélange-là porte un nom, et tu l'as peut-être déjà fabriqué toi-même dans le graphique de la section 3, en faisant atterrir les deux droites ensemble. Avant la définition, entraîne l'œil&nbsp;: quatre mélanges, à toi de dire qui s'épuise en premier.</p>
+
+      <figure class="widget" id="widget-stoechio" data-widget="stoechio-jeu">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Qui s'épuise en premier&nbsp;?</span>
+          </div>
+          <span class="quiz-score js-progression">MÉLANGE 1/4</span>
+        </div>
+        <div class="widget-pied">
+          <div class="js-manche">
+            <p class="quiz-enonce">\(\mathrm{Fe} + \mathrm{S} \longrightarrow \mathrm{FeS}\) — au départ&nbsp;: 0,25&nbsp;mol de fer et 0,20&nbsp;mol de soufre.</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le fer Fe</button>
+              <button type="button" class="quiz-reponse">le soufre S</button>
+              <button type="button" class="quiz-reponse">ils s'épuisent ensemble</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">\(\mathrm{CH_4} + 2\,\mathrm{O_2} \longrightarrow \mathrm{CO_2} + 2\,\mathrm{H_2O}\) — au départ&nbsp;: 0,30&nbsp;mol de méthane et 0,50&nbsp;mol de dioxygène.</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le méthane CH<sub>4</sub></button>
+              <button type="button" class="quiz-reponse">le dioxygène O<sub>2</sub></button>
+              <button type="button" class="quiz-reponse">ils s'épuisent ensemble</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">\(\mathrm{N_2} + 3\,\mathrm{H_2} \longrightarrow 2\,\mathrm{NH_3}\) — au départ&nbsp;: 0,20&nbsp;mol de diazote et 0,60&nbsp;mol de dihydrogène.</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le diazote N<sub>2</sub></button>
+              <button type="button" class="quiz-reponse">le dihydrogène H<sub>2</sub></button>
+              <button type="button" class="quiz-reponse">ils s'épuisent ensemble</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">\(\mathrm{C_3H_8} + 5\,\mathrm{O_2} \longrightarrow 3\,\mathrm{CO_2} + 4\,\mathrm{H_2O}\) — au départ&nbsp;: 0,08&nbsp;mol de propane et 0,45&nbsp;mol de dioxygène.</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le propane C<sub>3</sub>H<sub>8</sub></button>
+              <button type="button" class="quiz-reponse">le dioxygène O<sub>2</sub></button>
+              <button type="button" class="quiz-reponse">ils s'épuisent ensemble</button>
+            </div>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> calcule les deux candidats \(n_0/\text{coef}\) et compare-les&nbsp;: le plus petit désigne le limitant.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> coefficients tous à 1&nbsp;: les candidats sont les stocks eux-mêmes, 0,25 contre 0,20. Le plus petit tas limite — le raccourci marche… tant que les coefficients sont égaux. Savoure, c'est la dernière fois qu'il suffit.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> candidats&nbsp;: \(0{,}30/1 = 0{,}30\) et \(0{,}50/2 = 0{,}25\). Le dioxygène limite <em>alors que c'est le plus gros tas</em> — le raccourci du «&nbsp;plus petit tas&nbsp;» vient de mourir sous tes yeux.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> candidats&nbsp;: \(0{,}20/1 = 0{,}20\) et \(0{,}60/3 = 0{,}20\). Égalité parfaite&nbsp;: les deux réactifs finissent ensemble. C'est le mélange stœchiométrique — la définition arrive juste en dessous.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> candidats&nbsp;: \(0{,}08/1 = 0{,}08\) et \(0{,}45/5 = 0{,}09\). Photo-finish&nbsp;: \(0{,}08 &lt; 0{,}09\), le propane s'épuise le premier. À l'œil, impossible à voir — seul le calcul tranche.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Mélange suivant ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <script type="application/json">[2, 2, 3, 1]</script>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Un mélange initial est <strong>stœchiométrique</strong> quand les quantités de réactifs sont exactement dans les proportions des nombres stœchiométriques de l'équation. Les réactifs s'épuisent alors <em>ensemble</em>&nbsp;: à l'état final, il ne reste rien d'aucun d'eux.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE TEST DE LA STŒCHIOMÉTRIE</div>
+        <p>Pour une réaction \(a\,\mathrm{A} + b\,\mathrm{B} \longrightarrow \dots\), le mélange initial est stœchiométrique si et seulement si les deux candidats sont égaux&nbsp;:</p>
+        <div class="math-vitrine">$$\frac{n_0(\mathrm{A})}{a} = \frac{n_0(\mathrm{B})}{b}$$</div>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — RECONNAÎTRE (OU FABRIQUER) UN MÉLANGE STŒCHIOMÉTRIQUE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule \(n_0/\text{coef}\) pour chaque réactif — les mêmes candidats qu'à la section 3.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Candidats égaux&nbsp;: mélange stœchiométrique. Sinon&nbsp;: le plus petit désigne le limitant, l'autre réactif est en excès.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Pour <em>rendre</em> un mélange stœchiométrique&nbsp;: fixe la quantité d'un réactif, et déduis l'autre en égalisant les candidats (une règle de trois).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE BON DOSAGE</div>
+        <p class="exemple-enonce">Pour la synthèse de l'ammoniac \(\mathrm{N_2} + 3\,\mathrm{H_2} \longrightarrow 2\,\mathrm{NH_3}\), on dispose de 0,30&nbsp;mol de \(\mathrm{N_2}\). a. Quelle quantité de \(\mathrm{H_2}\) faut-il pour un mélange stœchiométrique&nbsp;? b. Et si on n'en met que 0,60&nbsp;mol&nbsp;?</p>
+        <p><span class="etape-label">a. — </span>candidats égaux&nbsp;: \(\dfrac{n_0(\mathrm{H_2})}{3} = \dfrac{0{,}30}{1}\), donc \(n_0(\mathrm{H_2}) = 3 \times 0{,}30 = 0{,}90\)&nbsp;mol.</p>
+        <p><span class="etape-label">b. — </span>avec 0,60&nbsp;mol&nbsp;: candidats \(0{,}30\) et \(0{,}60/3 = 0{,}20\). Le dihydrogène est limitant, \(x_{\max} = 0{,}20\)&nbsp;mol, et il restera \(0{,}30 - 0{,}20 = 0{,}10\)&nbsp;mol de \(\mathrm{N_2}\).</p>
+        <p class="conclusion">Conclusion&nbsp;: «&nbsp;stœchiométrique&nbsp;» ne veut pas dire «&nbsp;autant de chaque&nbsp;»&nbsp;: il faut ici trois fois <em>plus</em> de dihydrogène, parce que l'équation en consomme trois fois plus.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur les proportions</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Mélange stœchiométrique pour \(2\,\mathrm{H_2} + \mathrm{O_2} \longrightarrow 2\,\mathrm{H_2O}\)&nbsp;: il faut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(n_0(\mathrm{H_2}) = n_0(\mathrm{O_2})\)</button>
+              <button type="button" class="quiz-reponse">\(n_0(\mathrm{H_2}) = 2 \times n_0(\mathrm{O_2})\)</button>
+              <button type="button" class="quiz-reponse">\(n_0(\mathrm{O_2}) = 2 \times n_0(\mathrm{H_2})\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la réaction consomme deux \(\mathrm{H_2}\) pour chaque \(\mathrm{O_2}\)&nbsp;: il en faut donc deux fois plus. «&nbsp;Autant de chaque&nbsp;» n'est stœchiométrique que si les coefficients sont égaux.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>À l'état final d'un mélange stœchiométrique (transformation totale), il reste…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un peu du réactif le plus abondant</button>
+              <button type="button" class="quiz-reponse">un peu de chaque réactif</button>
+              <button type="button" class="quiz-reponse">aucun des réactifs</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> candidats égaux = tout le monde touche zéro au même \(x_{\max}\). C'est le placard parfait&nbsp;: rien sur le plan de travail. Il ne reste que les produits.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>0,15&nbsp;mol de \(\mathrm{N_2}\) et 0,60&nbsp;mol de \(\mathrm{H_2}\), pour \(\mathrm{N_2} + 3\,\mathrm{H_2} \longrightarrow 2\,\mathrm{NH_3}\). Ce mélange est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">non stœchiométrique&nbsp;: H<sub>2</sub> est en excès</button>
+              <button type="button" class="quiz-reponse">stœchiométrique</button>
+              <button type="button" class="quiz-reponse">non stœchiométrique&nbsp;: H<sub>2</sub> est limitant</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> candidats&nbsp;: \(0{,}15\) et \(0{,}60/3 = 0{,}20\). C'est \(\mathrm{N_2}\) qui limite, donc \(\mathrm{H_2}\) est en excès. Stœchiométrique aurait exigé \(3 \times 0{,}15 = 0{,}45\)&nbsp;mol de \(\mathrm{H_2}\) — pas 0,60.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="s5" class="chap-section">
       <h2>5. Le bilan de matière&nbsp;: des grammes aux grammes</h2>
-      <!-- rempli au commit contenu -->
+      <p class="prose">Dernier obstacle entre toi et n'importe quel exercice du chapitre&nbsp;: la balance. Le tableau d'avancement raisonne en moles, mais aucun flacon n'affiche des moles — l'étiquette annonce des grammes, l'éprouvette des millilitres. Le pont, tu l'as déjà&nbsp;: \(n = \dfrac{m}{M}\), vu au chapitre sur la composition d'un système. Le graphique reprend le geste de la section 2, avec une ligne de lecture en plus&nbsp;: les masses. Une cheminée d'appoint brûle de l'éthanol&nbsp;: \(\mathrm{C_2H_6O} + 3\,\mathrm{O_2} \longrightarrow 2\,\mathrm{CO_2} + 3\,\mathrm{H_2O}\). Pousse \(x\) jusqu'au bout — et surveille la pastille «&nbsp;masse totale&nbsp;».</p>
+
+      <figure class="widget" id="widget-bilan" data-widget="avancement" data-nom="bilan"
+        data-x-init="0" data-x-max="0.2" data-echelle="0.75">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le bilan, en moles et en grammes</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 330" aria-label="Quatre barres de quantités de matière pour la combustion de l'éthanol ; les masses correspondantes se lisent dans le tableau sous le graphique"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">avancement x&nbsp;: <span class="js-x">0,00</span>&nbsp;mol</span>
+            <input type="range" class="js-curseur" min="0" max="0.2" step="0.05" value="0" aria-label="Avancement x, en moles">
+          </div>
+          <div class="avc-tableau">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col">C<sub>2</sub>H<sub>6</sub>O</th>
+                  <th scope="col">+&nbsp;&nbsp;3 O<sub>2</sub></th>
+                  <th scope="col">→&nbsp;&nbsp;2 CO<sub>2</sub></th>
+                  <th scope="col">+&nbsp;&nbsp;3 H<sub>2</sub>O</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>état initial, en mol</td>
+                  <td>0,20</td><td>0,75</td><td>0</td><td>0</td>
+                </tr>
+                <tr class="ligne-vive">
+                  <td>ici&nbsp;: x = <span class="js-x-tab">0,00</span></td>
+                  <td class="js-cell">0,20</td><td class="js-cell">0,75</td><td class="js-cell">0,00</td><td class="js-cell">0,00</td>
+                </tr>
+                <tr>
+                  <td>en grammes (m = n × M)</td>
+                  <td class="js-masse">9,2</td><td class="js-masse">24,0</td><td class="js-masse">0,0</td><td class="js-masse">0,0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="especes-boutons" role="group" aria-label="Choisis une espèce pour détailler son calcul">
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">C<sub>2</sub>H<sub>6</sub>O</button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">O<sub>2</sub></button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="true">CO<sub>2</sub></button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">H<sub>2</sub>O</button>
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="lecture-formule js-ligne-masse" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent js-etat" aria-live="polite">x = 0 — état initial</span>
+            <span class="chip">masse totale&nbsp;: <span class="js-masse-totale">33,2</span>&nbsp;g</span>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">x = 0&nbsp;: 9,2&nbsp;g d'éthanol (0,20&nbsp;mol) et 24,0&nbsp;g de dioxygène (0,75&nbsp;mol). Masse totale&nbsp;: 33,2&nbsp;g. Retiens ce nombre.</p>
+            <p class="widget-legende js-leg-cours" hidden>Les moles suivent \(x\), et les masses suivent les moles. Mais additionne les quatre masses à n'importe quel moment&nbsp;: toujours 33,2&nbsp;g. Les atomes ne font que changer d'équipe — <strong>rien ne se perd, rien ne se crée</strong> (Lavoisier).</p>
+            <p class="widget-legende js-leg-fin" hidden>L'éthanol est épuisé — cette fois c'était bien le plus petit tas, coefficient 1 oblige. Restent 4,8&nbsp;g de dioxygène en excès, 17,6&nbsp;g de dioxyde de carbone, 10,8&nbsp;g d'eau. Total&nbsp;: 33,2&nbsp;g, évidemment.</p>
+          </div>
+        </div>
+        <div class="widget-note">M(C<sub>2</sub>H<sub>6</sub>O) = 46&nbsp;g·mol⁻¹ · M(O<sub>2</sub>) = 32&nbsp;g·mol⁻¹ · M(CO<sub>2</sub>) = 44&nbsp;g·mol⁻¹ · M(H<sub>2</sub>O) = 18&nbsp;g·mol⁻¹. La masse se déduit toujours des moles&nbsp;: m = n × M.</div>
+        <script type="application/json">
+        {
+          "choisie": 2,
+          "especes": [
+            {"formule": "C2H6O", "coef": 1, "role": "reactif", "n0": 0.2, "M": 46},
+            {"formule": "O2", "coef": 3, "role": "reactif", "n0": 0.75, "M": 32},
+            {"formule": "CO2", "coef": 2, "role": "produit", "n0": 0, "M": 44},
+            {"formule": "H2O", "coef": 3, "role": "produit", "n0": 0, "M": 18}
+          ]
+        }
+        </script>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — TRANSFORMATION TOTALE</div>
+        <p>Une transformation est <strong>totale</strong> quand la réaction avance jusqu'à épuiser le réactif limitant&nbsp;: l'avancement final atteint l'avancement maximal.</p>
+        <div class="math-vitrine">$$x_f = x_{\max}$$</div>
+        <p>C'est le cas de toutes les transformations de ce chapitre. Certaines transformations s'arrêtent pourtant en route (\(x_f &lt; x_{\max}\), et il reste alors <em>tous</em> les réactifs)&nbsp;: elles sont dites <strong>non totales</strong> — tu les étudieras en Terminale. L'exercice 13 t'en donne un premier aperçu.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — LE BILAN DE MATIÈRE COMPLET</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Convertis toutes les données en moles&nbsp;: \(n = \dfrac{m}{M}\) pour une masse, \(n = c \times V\) pour une solution, \(n = \dfrac{V}{V_m}\) pour un gaz.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Tableau d'avancement, candidats \(n_0/\text{coef}\), réactif limitant, \(x_{\max}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Compose l'état final en moles, en remplaçant \(x\) par \(x_{\max}\) (transformation totale&nbsp;: \(x_f = x_{\max}\)).</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">Reconvertis dans l'unité demandée (\(m = n \times M\)…). Contrôle-réflexe&nbsp;: la masse totale du système ne doit pas avoir bougé.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — L'ALUMINIUM ET LE SOUFRE</div>
+        <p class="exemple-enonce">Au laboratoire, on chauffe 2,7&nbsp;g de poudre d'aluminium avec 9,6&nbsp;g de soufre&nbsp;: \(2\,\mathrm{Al} + 3\,\mathrm{S} \longrightarrow \mathrm{Al_2S_3}\). Quelle est la composition finale, en grammes&nbsp;? (M(Al) = 27&nbsp;g·mol⁻¹, M(S) = 32&nbsp;g·mol⁻¹.)</p>
+        <p><span class="etape-label">Étape 1 — </span>en moles&nbsp;: \(n(\mathrm{Al}) = \dfrac{2{,}7}{27} = 0{,}10\)&nbsp;mol&nbsp;; \(n(\mathrm{S}) = \dfrac{9{,}6}{32} = 0{,}30\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 2 — </span>candidats&nbsp;: \(\dfrac{0{,}10}{2} = 0{,}05\) et \(\dfrac{0{,}30}{3} = 0{,}10\). L'aluminium est limitant, \(x_{\max} = 0{,}05\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 3 — </span>état final en moles&nbsp;: \(n(\mathrm{Al}) = 0\)&nbsp;; \(n(\mathrm{S}) = 0{,}30 - 3 \times 0{,}05 = 0{,}15\)&nbsp;mol&nbsp;; \(n(\mathrm{Al_2S_3}) = 0{,}05\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 4 — </span>en grammes&nbsp;: \(m(\mathrm{S}) = 0{,}15 \times 32 = 4{,}8\)&nbsp;g&nbsp;; \(m(\mathrm{Al_2S_3}) = 0{,}05 \times 150 = 7{,}5\)&nbsp;g (M = 2 × 27 + 3 × 32 = 150&nbsp;g·mol⁻¹). Contrôle&nbsp;: \(4{,}8 + 7{,}5 = 12{,}3 = 2{,}7 + 9{,}6\). Rien ne s'est perdu.</p>
+        <p class="conclusion">Conclusion&nbsp;: toute la chaîne tient en une ligne — grammes → moles → \(x_{\max}\) → moles → grammes. Et le contrôle de Lavoisier est gratuit&nbsp;: si la masse totale a bougé, une étape a lâché.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Le tableau d'avancement ne mange que des moles. Grammes, litres&nbsp;: tout se convertit à l'entrée (\(n = m/M\), \(c \times V\), \(V/V_m\)) — et tout se reconvertit à la sortie.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Pour trouver le limitant entre 10&nbsp;g de \(\mathrm{H_2}\) et 10&nbsp;g de \(\mathrm{O_2}\) (\(2\,\mathrm{H_2} + \mathrm{O_2} \longrightarrow 2\,\mathrm{H_2O}\)), je compare…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">les masses&nbsp;: 10 g = 10 g, mélange stœchiométrique</button>
+              <button type="button" class="quiz-reponse">les masses divisées par les coefficients</button>
+              <button type="button" class="quiz-reponse">les quantités en moles, divisées par les coefficients</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> 10&nbsp;g de \(\mathrm{H_2}\), c'est 5,0&nbsp;mol&nbsp;; 10&nbsp;g de \(\mathrm{O_2}\), c'est 0,31&nbsp;mol. Mêmes masses, stocks de molécules très différents&nbsp;: la balance ne compte pas les molécules, la mole si.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>«&nbsp;Transformation totale&nbsp;» signifie…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la réaction va jusqu'à \(x_{\max}\)&nbsp;: le limitant est entièrement consommé</button>
+              <button type="button" class="quiz-reponse">tous les réactifs sont entièrement consommés</button>
+              <button type="button" class="quiz-reponse">la masse des produits égale la masse des réactifs consommés</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> totale = le <em>limitant</em> va au bout (\(x_f = x_{\max}\))&nbsp;; l'excès, lui, reste. «&nbsp;Tout s'épuise&nbsp;», c'est le mélange stœchiométrique — une autre notion. Et l'égalité des masses, c'est Lavoisier&nbsp;: vraie pour <em>toute</em> réaction.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pendant une transformation chimique, la masse totale du système…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">diminue si un gaz se forme</button>
+              <button type="button" class="quiz-reponse">reste constante</button>
+              <button type="button" class="quiz-reponse">augmente&nbsp;: des produits apparaissent</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> les atomes changent d'équipe, aucun ne disparaît&nbsp;: la masse totale est conservée (Lavoisier). Une bouteille qui «&nbsp;perd&nbsp;» de la masse laisse juste le gaz s'échapper — le système était ouvert, il a triché.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="pieges" class="chap-section">
       <div class="bloc-pieges">
         <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
-        <!-- rempli au commit contenu -->
+        <div class="piege">
+          <p><strong>Choisir le limitant «&nbsp;au plus petit tas&nbsp;».</strong> Le limitant n'est pas forcément le réactif le moins abondant. À la gazinière de la section 2, le dioxygène était le plus <em>gros</em> tas (1,00&nbsp;mol contre 0,60) — et le premier épuisé, coefficient 2 oblige. Compare les candidats \(n_0/\text{coef}\), jamais les stocks bruts. Le raccourci ne marche que si les coefficients sont égaux.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Oublier les coefficients dans le tableau.</strong> Écrire \(n_0 - x\) pour tout le monde, c'est faire descendre toutes les barres à la même vitesse. Pour \(2\,\mathrm{O_2}\), c'est \(n_0 - 2x\)&nbsp;: le coefficient est la <em>pente</em> de la droite, il suit son espèce dans chaque case du tableau.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Croire que l'équation donne les quantités présentes.</strong> \(\mathrm{CH_4} + 2\,\mathrm{O_2}\) ne dit pas qu'il y a 1&nbsp;mol de méthane et 2&nbsp;mol de dioxygène dans le brûleur. L'équation donne la <em>recette</em> (les proportions)&nbsp;; le tableau d'avancement donne le <em>placard</em> (l'état initial). Deux informations indépendantes — c'est bien pour ça qu'on te donne toujours les quantités initiales dans l'énoncé.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Confondre \(x\) et la quantité de produit formé.</strong> Pour \(2\,\mathrm{H_2O}\), la quantité formée vaut \(2x\), pas \(x\). L'avancement compte les «&nbsp;fournées&nbsp;», pas les molécules produites — les deux ne coïncident que pour un coefficient 1.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Comparer des grammes.</strong> 10&nbsp;g de \(\mathrm{H_2}\) et 10&nbsp;g de \(\mathrm{O_2}\), ça a l'air équilibré — c'est 5,0&nbsp;mol contre 0,31&nbsp;mol. La balance pèse, elle ne compte pas. Toute comparaison entre réactifs se fait en moles, après conversion.</p>
+        </div>
       </div>
     </section>
 
     <section id="essentiel" class="chap-section">
       <div class="bloc-essentiel">
         <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
-        <!-- rempli au commit contenu -->
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">AVANCEMENT</span>
+          <p>\(x\) (en mol) compte combien de fois la réaction s'est produite. Réactif&nbsp;: \(n_0 - a\,x\)&nbsp;; produit&nbsp;: \(n_0 + b\,x\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">TABLEAU</span>
+          <p>Équation en tête, trois lignes&nbsp;: état initial (\(x = 0\)), en cours (en fonction de \(x\)), état final (\(x = x_{\max}\)).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">LIMITANT</span>
+          <p>Le premier réactif à zéro. \(x_{\max}\) = le plus petit des candidats \(n_0/\text{coef}\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">STŒCHIOMÉTRIE</span>
+          <p>\(n_0(\mathrm{A})/a = n_0(\mathrm{B})/b\)&nbsp;: les réactifs s'épuisent exactement ensemble, il ne reste que les produits.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">BILAN</span>
+          <p>Toujours en moles (\(n = m/M\), \(c \times V\), \(V/V_m\)). Transformation totale&nbsp;: \(x_f = x_{\max}\). Masse totale conservée&nbsp;: le contrôle gratuit.</p>
+        </div>
       </div>
     </section>
 

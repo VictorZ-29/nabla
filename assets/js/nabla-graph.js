@@ -224,6 +224,33 @@ export function etiquetteVecteur(parent, lettre, variante = '') {
   };
 }
 
+/* Texte de formule chimique dans un SVG : les chiffres qui suivent une
+   lettre deviennent des indices (tspan abaissé, corps réduit) — pas de
+   caractères Unicode indice, couverture de police inégale. « 2 H2O » :
+   le 2 de tête reste plein corps, celui de H2 descend. (chapitre
+   avancement, physique-chimie). */
+export function texteChimie(parent, formule, attrs = {}) {
+  const t = el('text', attrs, parent);
+  let precedent = '';
+  let abaisse = false;
+  for (const m of formule.matchAll(/\d+|\D+/g)) {
+    const seg = m[0];
+    const indice = /^\d+$/.test(seg) && /[A-Za-z)]$/.test(precedent);
+    const attrsTspan = {};
+    if (indice) {
+      attrsTspan['font-size'] = '0.72em';
+      if (!abaisse) attrsTspan.dy = 4;
+    } else if (abaisse) {
+      attrsTspan.dy = -4;
+    }
+    const ts = el('tspan', attrsTspan, t);
+    ts.textContent = seg;
+    abaisse = indice;
+    precedent = seg;
+  }
+  return t;
+}
+
 /* Étiquette « glisse-moi » (indice de première interaction). */
 export function creerHint(parent, { x, y, filDe, filVers }) {
   const g = el('g', { class: 'hint-tag', 'aria-hidden': 'true' }, parent);
