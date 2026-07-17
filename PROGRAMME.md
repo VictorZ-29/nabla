@@ -111,7 +111,7 @@ aux chapitres existants.**
 
 ## Physique-chimie — Première spécialité (programme 2019, toujours en vigueur)
 
-**Bilan : 1 chapitre en ligne · 15 à faire.** Découpage proposé : un
+**Bilan : 2 chapitres en ligne · 14 à faire.** Découpage proposé : un
 chapitre Nabla par sous-partie officielle (des regroupements restent
 possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 
@@ -119,7 +119,7 @@ possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 
 | Chapitre Nabla | Sous-partie officielle & contenus | Statut |
 |---|---|---|
-| La composition d'un système chimique | « Détermination de la composition du système initial à l'aide de grandeurs physiques » : masse molaire, quantité de matière n = m/M ; concentration en quantité de matière c = n/V ; volume molaire des gaz ; absorbance, loi de Beer-Lambert, dosage par étalonnage. | ⬜ À faire — prérequis direct du chapitre avancement (qui le suppose « fait en classe ») |
+| La composition d'un système chimique | « Détermination de la composition du système initial à l'aide de grandeurs physiques » : masse molaire, quantité de matière n = m/M ; concentration en quantité de matière c = n/V ; volume molaire des gaz ; absorbance, loi de Beer-Lambert, dosage par étalonnage. | ✅ `premiere/physique-chimie/composition-systeme/` |
 | La réaction chimique et l'avancement | « Suivi et modélisation de l'évolution d'un système siège d'une transformation chimique » : avancement x, tableau d'avancement, réactif limitant, x_max/x_f, transformations totale et non totale, mélange stœchiométrique. | ✅ `premiere/physique-chimie/reaction-avancement/` |
 | L'oxydoréduction et les titrages | « Détermination d'une quantité de matière grâce à une transformation chimique » : couples oxydant/réducteur, demi-équations électroniques, réactions d'oxydoréduction ; titrage colorimétrique, équivalence. | ⬜ À faire |
 | La polarité des entités | « De la structure à la polarité d'une entité » : schéma de Lewis, géométrie des entités, électronégativité, polarisation des liaisons, polarité d'une molécule. | ⬜ À faire |
