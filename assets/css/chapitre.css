@@ -1252,3 +1252,12 @@
    .carte-motif dans base.css — les étalons héritaient du fill noir par
    défaut, invisibles en thème sombre. Même recette que .pt-suite. */
 .pt-craie { fill: var(--chalk); stroke: var(--surface); stroke-width: 1.5; }
+
+/* --- Mouvement d'un système (physique-chimie) : la caisse du chariot ----------------------------------------
+   Chronophotographies et vecteurs : tout réutilise l'existant (.pt-craie,
+   .g-courbe/.g-tangente + pointes .vec-pointe(--accent), étiquettes mono
+   .avc-nom/.avc-candidat, valeurs .etl-valeur). Nouveau ici : les caisses
+   du chariot de la section 5 (fond chip, contour craie — même partage des
+   rôles que les barres du chapitre avancement). */
+
+.mvt-caisse { fill: var(--chip); stroke: var(--chalk); stroke-width: var(--sw-grid); }
