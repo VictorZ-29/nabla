@@ -43,10 +43,10 @@ All three widgets and both figures use the same reference function:
 |---|---|---|
 | `s1` | 1. À quelle vitesse, exactement ? | hook prose (+ added time/distance reading of the figure) · static sécante figure · display formula (taux) |
 | `s2` | 2. Resserre les deux points | **widget sécante** · POURQUOI ? (h≠0, limite) · DÉFINITION · display formula (limite) · MÉTHODE (calculer f′(a)) · EXEMPLE RÉSOLU (f′(2) pour x²) · À RETENIR · **quiz s2** (3 q.) |
-| `s3` | 3. La tangente à une courbe | plain-language tangente gloss · PROPRIÉTÉ (équation) · POURQUOI ? (y = mx + p) · **widget tangente** (+ équation de T en direct) · MÉTHODE · EXEMPLE RÉSOLU (tangente de x² en 1) · **widget lecture** (lire f′(a), 4 manches) · **quiz s3** (3 q.) |
+| `s3` | 3. La tangente à une courbe | plain-language tangente gloss · PROPRIÉTÉ (équation) · POURQUOI ? (y = mx + p) · **widget tangente** (+ équation de T en direct) · MÉTHODE · EXEMPLE RÉSOLU (tangente de x² en 1) · PROPRIÉTÉ (approximation affine, programme 2026) · POURQUOI ? (définition du nombre dérivé relue ; callback aux lectures du widget sécante à h = 0,01) · EXEMPLE RÉSOLU (1,02² de tête) · **widget lecture** (lire f′(a), 4 manches) · **quiz s3** (4 q.) |
 | `s4` | 4. Dérivées usuelles et opérations | nombre → fonction dérivée gloss · table DÉRIVÉES USUELLES · POURQUOI ? ((x²)′ = 2x démontré) · table OPÉRATIONS · MÉTHODE · EXEMPLES RÉSOLUS (somme, produit, quotient, inverse) · **widget construis f′** · **widget associe** (f ↔ f′) · **quiz s4** (4 q.) |
 | `s5` | 5. Signe de f′ et variations | prose + **widget variations** · POURQUOI ? (zoom courbe ≈ tangente) · PROPRIÉTÉ · étude complète : TABLEAU DE SIGNES puis TABLEAU DE VARIATIONS · MÉTHODE · **quiz s5** (3 q.) |
-| `pieges` | Les pièges classiques | 4 pièges |
+| `pieges` | Les pièges classiques | 5 pièges (5ᵉ : approximation affine avec h trop grand) |
 | `essentiel` | L'essentiel en 5 lignes | static recap card `.bloc-essentiel` : définition-limite, équation de tangente, usuelles, opérations, règle du signe |
 | `ex` | Exercices — 15 corrigés | ex. 01–14 with corrigés (course order: taux 01 · définition 02–03 · tangentes 04–06 · usuelles 07 · produit 08 · quotient 09 · inverse 10 · variations 11–13 · problème d'optimisation 14) · **VERS LE BAC** (ex. 15, `#bac`) |
 
@@ -216,7 +216,8 @@ Module `assets/js/widgets/associe.js`. Card set from JSON in the figure:
 
 ## Quiz « Teste-toi » (assets/js/quiz.js — reusable)
 
-Four quizzes (ids `s2/s3/s4/s5`), 13 questions total, at the end of each
+Four quizzes (ids `s2/s3/s4/s5`), 14 questions total (3+4+4+3 — s3 grew
+a fourth, approximation-affine question in July 2026), at the end of each
 course section. Markup: `.widget.quiz[data-quiz]` (widget frame, pill
 TESTE-TOI, score `x/n` in the header once ≥ 1 correct), questions
 `.quiz-question[data-bonne=<1-based index>]` with `.quiz-reponse` buttons.
@@ -382,3 +383,37 @@ Flags 31–32 come from Victor's copy review (July 2026):
     read as a multiplication dot next to KaTeX).
 36. **JS budget nearly full**: 49,8 KB of the 50 KB first-party ceiling.
     The next interactive on this page must trim or lazy-load something.
+
+Flags 37+ come from the July 2026 « programme 2026 » extension pass
+(approximation affine, PROGRAMME.md):
+
+37. **Approximation affine added to §3** (2026 programme enriches
+    dérivation with l'approximation affine locale). Placement: right
+    after the tangent-equation EXEMPLE RÉSOLU, as the tangent's « third
+    talent » — prose gloss, PROPRIÉTÉ (f(a+h) ≈ f(a) + f′(a)·h, vitrine),
+    POURQUOI (the limit definition reread, multiplied by h; callback to
+    the secante widget's own readouts at h = 0,01 : 0,014 vs 1,32 × 0,01
+    = 0,0132), EXEMPLE RÉSOLU (1,02² ≈ 1,04 reusing f(1) = 1, f′(1) = 2
+    from the example above; the « local only » warning via x = 2 where T
+    announces 3 against 2² = 4). All of it my words in your voice.
+    Because the page's JS budget is full (flag 36), the addition is
+    deliberately **JS-free**: the manipulation lives in the existing
+    secante widget's numbers, no new interactive.
+38. **Quiz s3 now has 4 questions** (14 total on the page, two
+    4-question quizzes) — deviation from the 13 = 3+3+4+3 house pattern;
+    Q4 is the mental-arithmetic 1,03² ≈ 1,06, distractors 0,06 (forgot
+    f(a)) and 2,06 (started from f′(1)).
+39. **Copy touched on existing elements**: chap-savoir gained
+    « approcher une fonction tout près d'un point » ; the essentiel
+    TANGENTE line gained « ; près de a : f(a+h) ≈ f(a) + f′(a) × h » ;
+    JSON-LD `teaches` gained « approximation affine ». A 5th piège was
+    added (h trop grand — within the 4–5 house range).
+40. **Exercise 05 extended** with a part b (approcher f(2,01) from the
+    tangent y = 9x − 16 computed in part a; true value 2,090601) instead
+    of inserting a new exercise — keeps the 01…14 numbering and the
+    `corrige_open` analytics props stable post-launch. Énoncé now a./b.,
+    corrigé keeps its Étape labels for a. and adds « b. — ».
+41. **No JS and no CSS changed** on this page (budget untouched at
+    49,8 KB; no `?v=` bump needed). KaTeX verified: all 483 formulas on
+    the page render with 0 errors (jsdom + katex 0.16.11). The two-theme
+    visual pass remains on your checklist for the new blocks.

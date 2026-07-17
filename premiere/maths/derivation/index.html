@@ -39,7 +39,7 @@
   "isAccessibleForFree": true,
   "learningResourceType": "fiche de révision interactive",
   "educationalLevel": "Première générale — spécialité mathématiques",
-  "teaches": "Taux de variation, nombre dérivé, tangente à une courbe, fonctions dérivées, variations d'une fonction",
+  "teaches": "Taux de variation, nombre dérivé, tangente à une courbe, approximation affine, fonctions dérivées, variations d'une fonction",
   "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
   "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
 }
@@ -98,7 +98,7 @@
     <span>Première · Spé Maths</span>
   </div>
   <h1>La dérivation</h1>
-  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer un nombre dérivé, construire une équation de tangente, dériver les fonctions usuelles — et t'en servir pour étudier les variations d'une fonction.</p>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer un nombre dérivé, construire une équation de tangente, approcher une fonction tout près d'un point, dériver les fonctions usuelles — et t'en servir pour étudier les variations d'une fonction.</p>
   <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
 </section>
 
@@ -346,6 +346,29 @@
         <p class="conclusion">Conclusion&nbsp;: \(T : y = 2x - 1\). Contrôle-réflexe&nbsp;: en \(x = 1\), la droite donne \(y = 1\), elle passe bien par le point de tangence. Prends cette habitude, elle attrape la moitié des erreurs.</p>
       </div>
 
+      <p class="prose">La tangente a un troisième talent, après sa pente et son équation&nbsp;: tout près de A, elle <em>remplace</em> la courbe. Zoome par la pensée sur le point de tangence&nbsp;: les deux tracés se confondent. Alors pour estimer \(f\) juste à côté de \(a\), inutile de calculer \(f\) — la droite suffit.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — L'APPROXIMATION AFFINE</div>
+        <p>Pour \(h\) proche de 0&nbsp;:</p>
+        <div class="math-vitrine">$$f(a + h) \approx f(a) + f'(a) \times h$$</div>
+        <p>C'est l'ordonnée que donne la tangente en \(x = a + h\)&nbsp;: on approche la courbe par sa tangente. On dit que \(f(a) + f'(a) \times h\) est l'<strong>approximation affine</strong> de \(f(a+h)\).</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Relis la définition du nombre dérivé&nbsp;: pour \(h\) proche de 0, le taux \(\dfrac{f(a+h) - f(a)}{h}\) vaut presque \(f'(a)\). Multiplie les deux côtés par \(h\)&nbsp;: \(f(a+h) - f(a) \approx f'(a) \times h\), et voilà. Tu peux même le <em>voir</em> sur le graphique de la section 2&nbsp;: à \(h = 0{,}01\), l'écart réel \(f(a+h) - f(a)\) affiche 0,014, et \(f'(a) \times h = 1{,}32 \times 0{,}01 = 0{,}0132\) — les deux nombres racontent la même histoire.</p>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UN CARRÉ DE TÊTE</div>
+        <p class="exemple-enonce">Sans calculatrice, donne une valeur approchée de \(1{,}02^2\).</p>
+        <p><span class="etape-label">Étape 1 — </span>pose \(f(x) = x^2\) et \(a = 1\)&nbsp;: tu cherches \(f(1 + 0{,}02)\), avec \(h = 0{,}02\) tout petit.</p>
+        <p><span class="etape-label">Étape 2 — </span>l'exemple précédent a tout préparé&nbsp;: \(f(1) = 1\) et \(f'(1) = 2\).</p>
+        <p><span class="etape-label">Étape 3 — </span>\(f(1{,}02) \approx f(1) + f'(1) \times h = 1 + 2 \times 0{,}02 = 1{,}04\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(1{,}02^2 \approx 1{,}04\) — la vraie valeur est \(1{,}0404\), l'erreur est de 4 dix-millièmes. Mais attention, ce tour de magie est <em>local</em>&nbsp;: loin du point de tangence, la droite décroche de la courbe. En \(x = 2\), elle annonce \(2 \times 2 - 1 = 3\)… alors que \(2^2 = 4\).</p>
+      </div>
+
       <p class="prose">Au bac, on te demande souvent l'inverse&nbsp;: la tangente est déjà tracée, et c'est à toi de lire \(f'(a)\). La méthode tient en une phrase&nbsp;: pars de A, avance de 1 en abscisse, et compte de combien la tangente monte ou descend sur le quadrillage.</p>
 
       <figure class="widget" id="widget-lecture" data-widget="lecture">
@@ -380,7 +403,7 @@
         <div class="widget-tete">
           <div class="widget-titre-groupe">
             <span class="pill-interactif">TESTE-TOI</span>
-            <span class="widget-titre">Encore trois sur la tangente</span>
+            <span class="widget-titre">Encore quatre sur la tangente</span>
           </div>
           <span class="quiz-score js-quiz-score" hidden></span>
         </div>
@@ -419,6 +442,18 @@
             <div class="quiz-retours" aria-live="polite">
               <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
               <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(y = 5(x - 1) + 2 = 5x - 3\). Chaque nombre a son rôle&nbsp;: \(f'(1) = 5\) est la pente, \(f(1) = 2\) l'ordonnée du point de tangence.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>\(f(x) = x^2\), donc \(f(1) = 1\) et \(f'(1) = 2\). Sans calculatrice, \(1{,}03^2 \approx\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">1,06</button>
+              <button type="button" class="quiz-reponse">0,06</button>
+              <button type="button" class="quiz-reponse">2,06</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(f(1+h) \approx f(1) + f'(1) \times h = 1 + 2 \times 0{,}03 = 1{,}06\). Repars toujours de la hauteur \(f(a)\)&nbsp;: la correction \(f'(a) \times h\) s'y <em>ajoute</em>. (Vraie valeur&nbsp;: 1,0609 — pas mal, pour un calcul de tête.)</p>
             </div>
           </div>
         </div>
@@ -843,6 +878,9 @@
         <div class="piege">
           <p><strong>Dériver un produit terme à terme.</strong> \((u\,v)' \neq u'v'\). Utilise la formule, à chaque fois.</p>
         </div>
+        <div class="piege">
+          <p><strong>Utiliser l'approximation affine avec un \(h\) trop grand.</strong> \(f(a+h) \approx f(a) + f'(a) \times h\) n'est fiable que tout près de \(a\)&nbsp;: la tangente colle à la courbe au voisinage du point de tangence, pas ailleurs. À \(h = 0{,}02\), excellente&nbsp;; à \(h = 1\), elle raconte n'importe quoi.</p>
+        </div>
       </div>
     </section>
 
@@ -855,7 +893,7 @@
         </div>
         <div class="essentiel-ligne">
           <span class="essentiel-label">TANGENTE EN a</span>
-          <p>\(y = f'(a)(x - a) + f(a)\)</p>
+          <p>\(y = f'(a)(x - a) + f(a)\)&nbsp;; près de \(a\)&nbsp;: \(f(a+h) \approx f(a) + f'(a) \times h\).</p>
         </div>
         <div class="essentiel-ligne">
           <span class="essentiel-label">USUELLES</span>
@@ -962,14 +1000,15 @@
             <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
           </span>
         </div>
-        <p class="exercice-enonce">Soit \(f(x) = x^3 - 3x\). Détermine l'équation de la tangente à la courbe de \(f\) au point d'abscisse \(a = 2\).</p>
+        <p class="exercice-enonce">Soit \(f(x) = x^3 - 3x\). a. Détermine l'équation de la tangente à la courbe de \(f\) au point d'abscisse \(a = 2\). b. Déduis-en, sans calculatrice, une valeur approchée de \(f(2{,}01)\).</p>
         <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
         <div class="corrige" id="corrige-05" hidden>
           <div class="corrige-tag">CORRIGÉ</div>
           <p><span class="etape-label">Étape 1 — </span>Calcule \(f(2) = 2^3 - 3 \times 2 = 8 - 6 = 2\). Le point de tangence est \((2\;;\, 2)\).</p>
           <p><span class="etape-label">Étape 2 — </span>Dérive&nbsp;: \(f'(x) = 3x^2 - 3\), donc \(f'(2) = 3 \times 4 - 3 = 9\). La pente vaut 9.</p>
-          <p><span class="etape-label">Étape 3 — </span>Applique la formule&nbsp;: \(y = f'(2)(x - 2) + f(2) = 9(x - 2) + 2\).</p>
-          <p class="conclusion">Conclusion&nbsp;: \(y = 9x - 16\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Applique la formule&nbsp;: \(y = f'(2)(x - 2) + f(2) = 9(x - 2) + 2\), soit \(y = 9x - 16\).</p>
+          <p><span class="etape-label">b. — </span>\(2{,}01\) est tout près de 2&nbsp;: la tangente fait le travail. \(f(2{,}01) \approx 9 \times 2{,}01 - 16 = 18{,}09 - 16 = 2{,}09\) — ou directement \(f(2) + f'(2) \times 0{,}01 = 2 + 0{,}09\). La vraie valeur est \(2{,}090601\)&nbsp;: si près du point, l'approximation affine est excellente.</p>
+          <p class="conclusion">Conclusion&nbsp;: a. \(y = 9x - 16\)&nbsp;; b. \(f(2{,}01) \approx 2{,}09\).</p>
         </div>
       </article>
 

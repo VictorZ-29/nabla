@@ -63,8 +63,7 @@ depuis cet environnement, voir « À vérifier » en bas de fichier.
 
 ## Mathématiques — Première spécialité (programme 2026)
 
-**Bilan : 5 chapitres en ligne · 5 à faire · 2 compléments 2026 à apporter
-aux chapitres existants.**
+**Bilan : 5 chapitres en ligne (à jour du programme 2026) · 5 à faire.**
 
 ### Algèbre
 
@@ -77,7 +76,7 @@ aux chapitres existants.**
 
 | Chapitre Nabla | Contenus du programme | Statut |
 |---|---|---|
-| La dérivation | Taux de variation, nombre dérivé, tangente ; fonctions dérivées des fonctions usuelles ; opérations (somme, produit, quotient…) ; signe de f′ → variations et extremums ; tableaux de signes et de variations. | ✅ `premiere/maths/derivation/` — **complément 2026 à ajouter : approximation affine locale** |
+| La dérivation | Taux de variation, nombre dérivé, tangente ; fonctions dérivées des fonctions usuelles ; opérations (somme, produit, quotient…) ; signe de f′ → variations et extremums ; tableaux de signes et de variations ; **approximation affine (2026)**. | ✅ `premiere/maths/derivation/` — complément 2026 (approximation affine) ajouté au §3 le 17-07-2026 |
 | La fonction exponentielle | Définition (f′ = f, f(0) = 1) ; propriétés algébriques ; variations, courbe ; suites géométriques exp(na) ; équations et inéquations. | ✅ `premiere/maths/exponentielle/` |
 | La trigonométrie | Cercle trigonométrique, enroulement de la droite des réels, radian ; cosinus et sinus d'un réel ; valeurs remarquables ; angles associés ; cos²+sin² = 1. **Hors programme Première depuis 2026 : les fonctions x ↦ sin x, x ↦ cos x (parité, périodicité, courbes, dérivées, variations) — parties en Terminale.** | ⬜ À faire |
 
@@ -92,7 +91,7 @@ aux chapitres existants.**
 
 | Chapitre Nabla | Contenus du programme | Statut |
 |---|---|---|
-| Les probabilités conditionnelles | P_A(B), arbres pondérés, tableaux ; formule des probabilités totales ; renversement ; indépendance de deux événements. | ✅ `premiere/maths/probabilites-conditionnelles/` — **complément 2026 à évaluer : succession de n ≤ 4 épreuves de Bernoulli (arbres, sans loi binomiale) — ici ou dans le chapitre variables aléatoires** |
+| Les probabilités conditionnelles | P_A(B), arbres pondérés, tableaux ; formule des probabilités totales ; renversement ; indépendance de deux événements ; **succession de n ≤ 4 épreuves de Bernoulli, sans loi binomiale (2026)**. | ✅ `premiere/maths/probabilites-conditionnelles/` — complément 2026 (répétition d'épreuves) ajouté en §6 le 17-07-2026 |
 | Les variables aléatoires | Variable aléatoire réelle, loi de probabilité ; espérance, variance, écart type ; interprétation (moyenne des valeurs sur un grand nombre de répétitions). | ⬜ À faire |
 | Statistiques — analyse de données | Nouveauté 2026 : place renforcée des données — regroupement par classes, statistiques bivariées (nuages de points). **Contour exact à vérifier dans l'annexe officielle avant de scoper le chapitre.** | ⬜ À faire |
 
