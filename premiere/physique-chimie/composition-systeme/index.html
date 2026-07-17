@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>La composition d'un système chimique — Première Spé Physique-Chimie | Nabla</title>
+<meta name="description" content="Comprends vraiment la mole et la composition d'un système chimique : masse molaire et n = m/M, concentration et dilution, volume molaire des gaz, loi de Beer-Lambert et dosage par étalonnage, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé physique-chimie, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/physique-chimie/composition-systeme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="La composition d'un système chimique — Première Spé Physique-Chimie | Nabla">
+<meta property="og:description" content="Mole et masse molaire, concentration et dilution, volume molaire des gaz, loi de Beer-Lambert et dosage par étalonnage : un cours interactif où tu comptes les molécules toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/physique-chimie/composition-systeme/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La composition d'un système chimique — Première Spé Physique-Chimie | Nabla">
+<meta name="twitter:description" content="Mole, masse molaire, concentration, volume molaire, Beer-Lambert : cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "La composition d'un système chimique — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé physique-chimie sur la détermination de la composition d'un système : mole et masse molaire (n = m/M), concentration en quantité de matière, dissolution et dilution, volume molaire des gaz, absorbance, loi de Beer-Lambert et dosage par étalonnage. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/physique-chimie/composition-systeme/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité physique-chimie",
+  "teaches": "Quantité de matière, mole, masse molaire, concentration en quantité de matière, dissolution, dilution, volume molaire d'un gaz, absorbance, loi de Beer-Lambert, dosage par étalonnage",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=9">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=9">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=9">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/pesee.js"></script>
+<script type="module" src="../../../assets/js/widgets/dilution.js"></script>
+<script type="module" src="../../../assets/js/widgets/stoechio-jeu.js"></script>
+<script type="module" src="../../../assets/js/widgets/etalonnage.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="composition">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Physique-Chimie</span>
+  </div>
+  <h1>La composition d'un système chimique</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer une masse molaire et convertir une masse en quantité de matière, utiliser la concentration en quantité de matière, préparer une solution par dissolution ou dilution, compter un gaz avec le volume molaire, et déterminer une concentration inconnue par dosage par étalonnage avec la loi de Beer-Lambert.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. Compter l'invisible</a>
+      <a href="#s2">2. Mole et masse molaire</a>
+      <a href="#s3">3. Concentration et dilution</a>
+      <a href="#s4">4. Le volume molaire des gaz</a>
+      <a href="#s5">5. Doser avec la lumière</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. Compter l'invisible</a>
+        <a href="#s2">2. Mole et masse molaire</a>
+        <a href="#s3">3. Concentration et dilution</a>
+        <a href="#s4">4. Le volume molaire des gaz</a>
+        <a href="#s5">5. Doser avec la lumière</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. Compter ce qu'on ne peut pas voir</h2>
+      <p class="prose">Apporte ta tirelire à la banque. Personne n'y comptera tes pièces une à une&nbsp;: la machine les verse sur une balance, et trois secondes plus tard elle annonce «&nbsp;127 pièces de 10 centimes&nbsp;». Aucune magie. Chaque pièce de 10 centimes pèse exactement 4,10&nbsp;g&nbsp;; la machine a pesé le tas, divisé par 4,10, et rendu son verdict. <strong>Elle a compté en pesant.</strong></p>
+      <p class="prose">Le chimiste a exactement le même problème que la banque, en un million de fois pire. Dans le moindre verre de menthe à l'eau, les molécules se comptent par milliards de milliards&nbsp;: aucune pince, aucun microscope, aucun ordinateur ne les dénombrera une à une. Et pourtant tout ce chapitre — et tout le chapitre suivant sur les réactions — a besoin de savoir <em>combien</em> il y en a. La solution est celle de la banque&nbsp;: on ne compte pas les entités, on les compte <em>par paquets</em>. Le paquet du chimiste s'appelle la mole, et tu l'as rencontré en Seconde.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION — NIVEAU SECONDE</span>
+        <p>Une <strong>mole</strong> d'entités (atomes, molécules, ions…) est un paquet de \(N_A = 6{,}02 \times 10^{23}\) entités identiques. \(N_A\) est la <strong>constante d'Avogadro</strong>. Un échantillon qui contient \(N\) entités contient donc une quantité de matière \(n = \dfrac{N}{N_A}\), en moles&nbsp;: \(N = n \times N_A\).</p>
+      </div>
+
+      <p class="prose">Une douzaine géante, rien de plus&nbsp;: «&nbsp;une mole de molécules d'eau&nbsp;», c'est \(6{,}02 \times 10^{23}\) molécules d'eau, comme «&nbsp;une douzaine d'œufs&nbsp;», c'est 12 œufs. Toute la question du chapitre tient alors en une ligne&nbsp;: <strong>comment mesurer \(n\) sans jamais voir les entités&nbsp;?</strong> Tu vas apprendre les quatre instruments qui répondent — la balance, la fiole graduée, le ballon de gaz, et même un rayon de lumière. À la fin, tu sauras dire combien de molécules de colorant nagent dans un verre de menthe à l'eau… en le regardant à travers une lampe.</p>
+      <p class="prose">Commençons par la balance. Voici quatre tas posés dessus&nbsp;: de l'eau, de l'aluminium, du sel, du cuivre. Les quatre tas contiennent <em>exactement le même nombre d'entités</em>&nbsp;: une mole chacun. Regarde ce qu'affiche la balance.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 330" role="img" aria-label="Quatre tas d'une mole chacun : 18 grammes d'eau, 27 grammes d'aluminium, 58,5 grammes de sel et 63,5 grammes de cuivre — même nombre d'entités, masses toutes différentes">
+          <path class="g-axis" d="M20 282L620 282"></path>
+          <path class="avc-repere" d="M56 213.4L144 213.4"></path>
+          <path class="avc-repere" d="M203 179.1L291 179.1"></path>
+          <path class="avc-repere" d="M349 59.1L437 59.1"></path>
+          <path class="avc-repere" d="M496 40L584 40"></path>
+          <rect class="avc-barre-reactif" x="64" y="213.4" width="72" height="68.6" rx="3"></rect>
+          <rect class="avc-barre-reactif" x="211" y="179.1" width="72" height="102.9" rx="3"></rect>
+          <rect class="avc-barre-reactif" x="357" y="59.1" width="72" height="222.9" rx="3"></rect>
+          <rect class="avc-barre-reactif" x="504" y="40" width="72" height="242" rx="3"></rect>
+          <text class="avc-valeur" x="100" y="205.4" text-anchor="middle">18 g</text>
+          <text class="avc-valeur" x="247" y="171.1" text-anchor="middle">27 g</text>
+          <text class="avc-valeur" x="393" y="51.1" text-anchor="middle">58,5 g</text>
+          <text class="avc-valeur" x="540" y="32" text-anchor="middle">63,5 g</text>
+          <text class="avc-nom" x="100" y="304" text-anchor="middle">H<tspan dy="4" font-size="0.72em">2</tspan><tspan dy="-4">O</tspan></text>
+          <text class="avc-nom" x="247" y="304" text-anchor="middle">Al</text>
+          <text class="avc-nom" x="393" y="304" text-anchor="middle">NaCl</text>
+          <text class="avc-nom" x="540" y="304" text-anchor="middle">Cu</text>
+          <text class="avc-candidat" x="100" y="322" text-anchor="middle">eau</text>
+          <text class="avc-candidat" x="247" y="322" text-anchor="middle">aluminium</text>
+          <text class="avc-candidat" x="393" y="322" text-anchor="middle">sel</text>
+          <text class="avc-candidat" x="540" y="322" text-anchor="middle">cuivre</text>
+        </svg>
+        <figcaption>Quatre tas, une mole chacun&nbsp;: \(6{,}02 \times 10^{23}\) entités par tas, pas une de plus chez le voisin. Et pourtant la balance affiche quatre masses différentes. Même nombre, poids différents&nbsp;: c'est toute l'affaire de la section suivante.</figcaption>
+      </figure>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. La mole et la masse molaire&nbsp;: la balance qui compte</h2>
+      <p class="prose">Reprends les quatre tas de la section 1 — mais cette fois, c'est toi qui tiens le curseur&nbsp;: il règle le <em>nombre</em> d'entités posées sur la balance, le même pour les quatre tas. Fais-le descendre, remonte-le, et regarde les masses suivre. Une question à garder en tête pendant que tu manipules&nbsp;: si deux tas ont la même masse, ont-ils le même nombre d'entités&nbsp;?</p>
+
+      <figure class="widget" id="widget-pesee" data-widget="pesee" data-n-init="1" data-n-max="1">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La balance ne compte pas</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 330" aria-label="Quatre tas contenant le même nombre d'entités : quand la quantité de matière varie, les quatre masses varient ensemble mais restent toutes différentes"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">quantité de chaque tas&nbsp;: n = <span class="js-n">1,00</span>&nbsp;mol</span>
+            <input type="range" class="js-curseur" min="0" max="1" step="0.1" value="1" aria-label="Quantité de matière de chaque tas, en moles">
+          </div>
+          <div class="especes-boutons" role="group" aria-label="Choisis une espèce pour détailler son calcul">
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">eau</button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">aluminium</button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="false">sel</button>
+            <button type="button" class="feuille-btn js-espece" aria-pressed="true">cuivre</button>
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent js-entites" aria-live="polite"></span>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Une mole de chaque&nbsp;: même nombre d'entités partout, et quatre masses différentes. La masse d'une mole est la carte d'identité de l'espèce&nbsp;— on va lui donner un nom juste en dessous.</p>
+            <p class="widget-legende js-leg-cours" hidden>Le nombre d'entités est identique dans les quatre tas, et pourtant aucune masse n'est égale à sa voisine. La balance ne compte pas les entités&nbsp;: elle pèse leur espèce. Remarque les pointillés&nbsp;: la masse d'<em>une</em> mole, elle, ne bouge jamais.</p>
+            <p class="widget-legende js-leg-zero" hidden>Zéro mole, zéro gramme — pour tout le monde. Remonte le curseur et observe&nbsp;: chaque tas grossit à sa propre vitesse, proportionnelle à la masse d'une de ses moles.</p>
+          </div>
+        </div>
+        <div class="widget-note">Les pointillés marquent la masse d'une mole de chaque espèce&nbsp;: 18&nbsp;g pour l'eau, 27&nbsp;g pour l'aluminium, 58,5&nbsp;g pour le sel, 63,5&nbsp;g pour le cuivre.</div>
+        <script type="application/json">
+        {
+          "choisie": 3,
+          "especes": [
+            {"formule": "H2O", "nom": "eau", "M": 18},
+            {"formule": "Al", "nom": "aluminium", "M": 27},
+            {"formule": "NaCl", "nom": "sel", "M": 58.5},
+            {"formule": "Cu", "nom": "cuivre", "M": 63.5}
+          ]
+        }
+        </script>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi peser permet-il de compter&nbsp;? Parce que toutes les entités d'une même espèce ont exactement la même masse. Si chaque pièce de 10&nbsp;centimes pèse 4,10&nbsp;g, un sac de 410&nbsp;g contient 100 pièces — une division suffit. La chimie fait pareil, à un détail près&nbsp;: au lieu de la masse d'une pièce, on utilise la masse d'un <em>paquet</em> d'entités, la masse d'une mole. C'est plus commode&nbsp;: elle se compte en grammes, pas en milliardièmes de milliardième de gramme.</p>
+      </div>
+
+      <p class="prose">Ce que le graphique t'a montré à la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>La <strong>masse molaire</strong> \(M\) d'une espèce est la masse d'une mole de cette espèce, en grammes par mole (g·mol⁻¹). Pour une molécule ou un composé ionique, elle s'obtient en additionnant les <strong>masses molaires atomiques</strong> (lues dans le tableau périodique) de tous les atomes de la formule.</p>
+      </div>
+
+      <p class="prose">Et une fois la masse molaire connue, la balance devient un compteur d'entités. La masse \(m\) d'un échantillon, c'est \(n\) paquets de \(M\) grammes&nbsp;: \(m = n \times M\). Dans la vraie vie, on lit \(m\) sur la balance et on cherche \(n\) — on inverse. Voici la formule centrale du chapitre&nbsp;:</p>
+
+      <div class="math-vitrine math-vitrine--grande">$$n = \frac{m}{M} \qquad\quad \text{— } m \text{ en g, } M \text{ en g·mol}^{-1},\ n \text{ en mol}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — COMPTER PAR PESÉE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris la formule brute de l'espèce et calcule \(M\)&nbsp;: la somme des masses molaires atomiques, chacune multipliée par le nombre d'atomes dans la formule.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Convertis la masse pesée en quantité de matière&nbsp;: \(n = \dfrac{m}{M}\), avec \(m\) en grammes. La masse en haut, la masse molaire en bas — «&nbsp;des grammes divisés par des grammes par mole, il reste des moles&nbsp;».</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: compare \(m\) à \(M\). Si \(m\) est plus petit que \(M\), tu dois trouver moins d'une mole&nbsp;; s'il en est le double, deux moles. Un \(n\) absurde signale presque toujours une division à l'envers.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE SUCRE DU SIROP</div>
+        <p class="exemple-enonce">Pour préparer un sirop, on pèse 34,2&nbsp;g de sucre — du saccharose, de formule \(\mathrm{C_{12}H_{22}O_{11}}\). Quelle quantité de matière, et combien de molécules&nbsp;? (M(C) = 12&nbsp;g·mol⁻¹, M(H) = 1&nbsp;g·mol⁻¹, M(O) = 16&nbsp;g·mol⁻¹.)</p>
+        <p><span class="etape-label">Étape 1 — </span>\(M = 12 \times 12 + 22 \times 1 + 11 \times 16 = 144 + 22 + 176 = 342\)&nbsp;g·mol⁻¹.</p>
+        <p><span class="etape-label">Étape 2 — </span>\(n = \dfrac{m}{M} = \dfrac{34{,}2}{342} = 0{,}100\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 3 — </span>contrôle&nbsp;: 34,2&nbsp;g est bien le dixième de 342&nbsp;g (une mole entière)&nbsp;: un dixième de mole, cohérent. Nombre de molécules&nbsp;: \(N = n \times N_A = 0{,}100 \times 6{,}02 \times 10^{23} = 6{,}02 \times 10^{22}\).</p>
+        <p class="conclusion">Conclusion&nbsp;: une pesée de trois secondes vient de compter soixante mille milliards de milliards de molécules. La balance ne compte pas — mais la balance <em>plus</em> la masse molaire, si.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>La balance donne \(m\), la mole compte les entités, et le pont entre les deux s'appelle la masse molaire&nbsp;: \(n = \dfrac{m}{M}\) — les grammes en haut, les grammes par mole en bas.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Une mole, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">une masse de 6,02 grammes</button>
+              <button type="button" class="quiz-reponse">un paquet de \(6{,}02 \times 10^{23}\) entités identiques</button>
+              <button type="button" class="quiz-reponse">le volume occupé par un gaz</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la mole est un <em>nombre</em>, pas une masse ni un volume&nbsp;: une douzaine géante. La masse d'une mole, elle, dépend de l'espèce — c'est justement la masse molaire.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>M(H₂O) = 18&nbsp;g·mol⁻¹. Quelle quantité de matière dans 36&nbsp;g d'eau&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,50 mol</button>
+              <button type="button" class="quiz-reponse">648 mol</button>
+              <button type="button" class="quiz-reponse">2,0 mol</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n = \dfrac{36}{18} = 2{,}0\)&nbsp;mol&nbsp;: deux fois la masse d'une mole, donc deux moles. Répondre 0,50, c'est diviser à l'envers (\(M/m\))&nbsp;; 648, c'est multiplier au lieu de diviser. Le contrôle de l'étape 3 attrape les deux.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>10&nbsp;g d'eau et 10&nbsp;g de cuivre. Qui contient le plus d'entités&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">l'eau</button>
+              <button type="button" class="quiz-reponse">le cuivre</button>
+              <button type="button" class="quiz-reponse">autant l'un que l'autre&nbsp;: même masse</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\dfrac{10}{18} \approx 0{,}56\)&nbsp;mol d'eau contre \(\dfrac{10}{63{,}5} \approx 0{,}16\)&nbsp;mol de cuivre&nbsp;: à masse égale, l'espèce la plus légère par entité est la plus nombreuse. «&nbsp;Même masse, donc autant&nbsp;», c'est le piège n°1 du chapitre.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. La concentration&nbsp;: des moles dans un volume</h2>
+      <p class="prose">Deuxième instrument. Beaucoup d'espèces chimiques ne se présentent pas en poudre à peser, mais <em>dissoutes</em> dans un liquide&nbsp;: le sucre dans un sirop, le sel dans l'eau de mer, le diiode dans un antiseptique. Impossible de peser le sucre une fois qu'il a disparu dans l'eau. Et pourtant ta langue, elle, sait mesurer autre chose&nbsp;: un sirop de menthe pur est imbuvable, trop fort — alors tu ajoutes de l'eau. Fais-le ici. Verse, et observe ce qui change… et ce qui ne change pas.</p>
+
+      <figure class="widget" id="widget-dilution" data-widget="dilution" data-n="0.04" data-v-init="20" data-v-min="20" data-v-max="200">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Allonge le sirop</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 330" aria-label="Un verre que l'on remplit d'eau : le niveau monte et la couleur pâlit, la jauge de concentration descend, mais la quantité de sucre reste identique"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">volume total&nbsp;: V = <span class="js-v">20</span>&nbsp;mL</span>
+            <input type="range" class="js-curseur" min="20" max="200" step="20" value="20" aria-label="Volume total de la solution, en millilitres">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent">n(sucre) = 0,040&nbsp;mol — quoi que tu verses</span>
+            <span class="chip js-c" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-verser">verser jusqu'à la menthe à l'eau (200&nbsp;mL)</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Le sirop pur&nbsp;: 0,040&nbsp;mol de sucre serrées dans 20&nbsp;mL. Concentration maximale, couleur maximale — et ta langue est d'accord.</p>
+            <p class="widget-legende js-leg-cours" hidden>Tu n'as ni ajouté ni retiré de sucre&nbsp;: n est figé à 0,040&nbsp;mol. Mais le volume grandit, alors chaque gorgée en contient moins&nbsp;: c = n/V chute, et la couleur pâlit avec elle.</p>
+            <p class="widget-legende js-leg-fin" hidden>Dix fois plus de volume, concentration divisée par dix — et toujours, exactement, 0,040&nbsp;mol de sucre. Diluer ne retire rien&nbsp;: ça étale. Retiens aussi ce que tes yeux viennent de voir&nbsp;: la couleur suit la concentration. La section 5 en fera un instrument de mesure.</p>
+          </div>
+        </div>
+        <div class="widget-note">La dose de sirop apporte 0,040&nbsp;mol de saccharose (13,7&nbsp;g)&nbsp;: l'eau versée n'en contient pas. La jauge de droite affiche c = n/V.</div>
+      </figure>
+
+      <p class="prose">Ce que ta langue appelle «&nbsp;fort&nbsp;» ou «&nbsp;léger&nbsp;», la chimie le mesure&nbsp;: c'est la concentration.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>La <strong>concentration en quantité de matière</strong> (ou concentration molaire) d'un soluté dans une solution est la quantité de soluté par litre de solution&nbsp;: \(c = \dfrac{n}{V}\), avec \(n\) en mol, \(V\) en <em>litres</em>, et \(c\) en mol·L⁻¹. À l'envers&nbsp;: un volume \(V\) de cette solution apporte \(n = c \times V\) moles de soluté.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — DEUX CONCENTRATIONS, UN PONT</div>
+        <p>En Seconde tu utilisais la <strong>concentration en masse</strong> \(C_m = \dfrac{m}{V}\), en g·L⁻¹ — celle des étiquettes. Les deux décrivent la même solution, et la masse molaire fait le pont&nbsp;:</p>
+        <div class="math-vitrine">$$C_m = c \times M$$</div>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA DILUTION CONSERVE LE SOLUTÉ</div>
+        <p><strong>Diluer</strong> une solution, c'est y ajouter du solvant (de l'eau). On n'ajoute ni ne retire de soluté&nbsp;: sa quantité \(n\) est la même avant et après. En écrivant \(n\) des deux façons&nbsp;:</p>
+        <div class="math-vitrine">$$c_0 \times V_0 = c_f \times V_f$$</div>
+        <p>(\(c_0\), \(V_0\)&nbsp;: solution de départ prélevée&nbsp;; \(c_f\), \(V_f\)&nbsp;: solution finale.) Le <strong>facteur de dilution</strong> \(F = \dfrac{c_0}{c_f} = \dfrac{V_f}{V_0}\) dit combien de fois la solution a été «&nbsp;allongée&nbsp;».</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — PRÉPARER UNE SOLUTION DILUÉE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule le volume à prélever dans la solution mère&nbsp;: \(V_0 = \dfrac{c_f \times V_f}{c_0}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Prélève \(V_0\) à la <em>pipette jaugée</em> et verse-le dans une <em>fiole jaugée</em> de volume \(V_f\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Complète avec de l'eau distillée jusqu'au trait de jauge, bouche, retourne pour homogénéiser. Contrôle-réflexe&nbsp;: le facteur de dilution en volumes (\(V_f/V_0\)) doit égaler celui en concentrations (\(c_0/c_f\)).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MENTHE À L'EAU DU LABO</div>
+        <p class="exemple-enonce">Le sirop de la paillasse est une solution de saccharose à \(c_0 = 2{,}0\)&nbsp;mol·L⁻¹. a. Quelle quantité de sucre dans une dose de 20&nbsp;mL&nbsp;? b. Comment préparer 100&nbsp;mL de solution à \(0{,}20\)&nbsp;mol·L⁻¹&nbsp;?</p>
+        <p><span class="etape-label">a. — </span>\(n = c_0 \times V = 2{,}0 \times 0{,}020 = 0{,}040\)&nbsp;mol. (Les 20&nbsp;mL deviennent 0,020&nbsp;L <em>avant</em> d'entrer dans la formule.)</p>
+        <p><span class="etape-label">b. — </span>\(V_0 = \dfrac{c_f \times V_f}{c_0} = \dfrac{0{,}20 \times 0{,}100}{2{,}0} = 0{,}010\)&nbsp;L, soit 10&nbsp;mL&nbsp;: pipette jaugée de 10&nbsp;mL, fiole jaugée de 100&nbsp;mL, eau distillée jusqu'au trait.</p>
+        <p class="conclusion">Conclusion&nbsp;: facteur de dilution 10 dans les deux lectures — les volumes (10&nbsp;mL → 100&nbsp;mL) comme les concentrations (2,0 → 0,20). Si les deux facteurs ne concordent pas, une conversion de millilitres a lâché quelque part.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Diluer, c'est étaler le <em>même</em> soluté dans plus d'eau&nbsp;: \(n\) ne bouge pas, \(c\) chute. \(c_0 V_0 = c_f V_f\) — et \(V\) toujours en litres.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions sur les solutions</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>La concentration en quantité de matière \(c\), c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la quantité de soluté (en mol) par litre de solution</button>
+              <button type="button" class="quiz-reponse">la masse de soluté par litre de solution</button>
+              <button type="button" class="quiz-reponse">la quantité totale de soluté dans le récipient</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(c = n/V\) est un «&nbsp;par litre&nbsp;»&nbsp;: une force, pas un stock. La masse par litre existe aussi — c'est \(C_m\), en g·L⁻¹ — et le stock total, c'est \(n\)&nbsp;: trois grandeurs différentes.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>On double le volume d'une solution en ajoutant de l'eau. Sa concentration…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">double aussi</button>
+              <button type="button" class="quiz-reponse">ne change pas&nbsp;: le soluté n'a pas changé</button>
+              <button type="button" class="quiz-reponse">est divisée par deux</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n\) est inchangé mais \(V\) a doublé&nbsp;: \(c = n/V\) est divisée par deux. «&nbsp;Le soluté n'a pas changé, donc c ne change pas&nbsp;» confond justement le stock \(n\) (inchangé) et la force \(c\) (diluée) — relis le verre de la section.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Un jus de raisin affiche \(C_m = 90\)&nbsp;g·L⁻¹ de glucose (M = 180&nbsp;g·mol⁻¹). Sa concentration molaire vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">2,0 mol·L⁻¹</button>
+              <button type="button" class="quiz-reponse">0,50 mol·L⁻¹</button>
+              <button type="button" class="quiz-reponse">90 mol·L⁻¹&nbsp;: grammes ou moles, c'est pareil</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(c = \dfrac{C_m}{M} = \dfrac{90}{180} = 0{,}50\)&nbsp;mol·L⁻¹. Répondre 2,0, c'est diviser à l'envers&nbsp;; et 90&nbsp;mol·L⁻¹ oublie que grammes et moles ne comptent pas la même chose — c'est le pont \(C_m = c \times M\) qui les relie.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Quelle quantité de soluté dans 500&nbsp;mL d'une solution à \(0{,}20\)&nbsp;mol·L⁻¹&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">100 mol</button>
+              <button type="button" class="quiz-reponse">0,10 mol</button>
+              <button type="button" class="quiz-reponse">0,40 mol</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n = c \times V = 0{,}20 \times 0{,}500 = 0{,}10\)&nbsp;mol. Trouver 100, c'est avoir laissé \(V\) en millilitres — l'erreur multiplie tout par mille&nbsp;; 0,40, c'est avoir divisé au lieu de multiplier.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Les gaz&nbsp;: le volume molaire</h2>
+      <p class="prose">Troisième instrument, pour un état de la matière qui échappe aux deux premiers&nbsp;: le gaz. Verser du dioxyde de carbone dans une éprouvette&nbsp;? Il s'échappe. Le peser&nbsp;? Bon courage&nbsp;: un ballon de 2,4&nbsp;L de dioxygène pèse à peine plus de 3&nbsp;g. Ce qu'on mesure facilement pour un gaz, c'est son <em>volume</em>. Avant la formule, un jeu — quatre duels d'échantillons, à toi de désigner le plus riche en matière. Un indice t'accompagne, garde-le précieusement&nbsp;: dans les conditions de la salle, une mole de gaz — n'importe lequel — occupe 24&nbsp;L.</p>
+
+      <figure class="widget" id="widget-matiere" data-widget="stoechio-jeu" data-nom="matiere-jeu" data-progression="MANCHE" data-suivant="Manche suivante">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Quel échantillon est le plus riche&nbsp;?</span>
+          </div>
+          <span class="quiz-score js-progression">MANCHE 1/4</span>
+        </div>
+        <div class="widget-pied">
+          <div class="js-manche">
+            <p class="quiz-enonce">Sur la table&nbsp;: un fond de verre avec 9,0&nbsp;g d'eau, et une pièce de collection de 12,7&nbsp;g de cuivre pur. Le plus riche en entités&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">les 9,0 g d'eau</button>
+              <button type="button" class="quiz-reponse">les 12,7 g de cuivre</button>
+              <button type="button" class="quiz-reponse">à égalité</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">Un demi-verre d'eau sucrée&nbsp;: 50&nbsp;mL à \(0{,}10\)&nbsp;mol·L⁻¹ de saccharose. À côté, une cuillerée de sucre en poudre&nbsp;: 3,42&nbsp;g. Où y a-t-il le plus de saccharose&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">dans le demi-verre</button>
+              <button type="button" class="quiz-reponse">dans la cuillerée</button>
+              <button type="button" class="quiz-reponse">à égalité</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">Un ballon de baudruche gonflé de 2,4&nbsp;L de dioxygène, contre une cuillère à café d'eau&nbsp;: 3,6&nbsp;g. Le plus riche en entités&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le ballon de dioxygène</button>
+              <button type="button" class="quiz-reponse">la cuillère d'eau</button>
+              <button type="button" class="quiz-reponse">à égalité</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">Deux ballons identiques de 1,2&nbsp;L, gonflés dans la même salle&nbsp;: l'un de dihydrogène (la plus légère des molécules), l'autre de dioxygène (seize fois plus lourde). Le plus riche en molécules&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le ballon de dihydrogène</button>
+              <button type="button" class="quiz-reponse">le ballon de dioxygène</button>
+              <button type="button" class="quiz-reponse">à égalité</button>
+            </div>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> convertis chaque échantillon en moles (\(m/M\), \(c \times V\), \(V/24\)) et compare les \(n\).</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n(\text{eau}) = \dfrac{9{,}0}{18} = 0{,}50\)&nbsp;mol contre \(n(\text{Cu}) = \dfrac{12{,}7}{63{,}5} = 0{,}200\)&nbsp;mol. Le tas le plus lourd est le plus pauvre&nbsp;: un atome de cuivre pèse trois fois et demie plus qu'une molécule d'eau. La balance pèse, elle ne compte pas.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> le verre&nbsp;: \(n = c \times V = 0{,}10 \times 0{,}050 = 0{,}0050\)&nbsp;mol. La cuillerée&nbsp;: \(n = \dfrac{3{,}42}{342} = 0{,}0100\)&nbsp;mol. Deux fois plus de saccharose dans la petite cuillerée que dans le grand verre&nbsp;: le volume impressionne, la concentration décide.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> le ballon&nbsp;: \(n = \dfrac{2{,}4}{24} = 0{,}10\)&nbsp;mol. La cuillère&nbsp;: \(n = \dfrac{3{,}6}{18} = 0{,}20\)&nbsp;mol. Le ballon fait le malin, mais un gaz est surtout du vide&nbsp;: ses molécules sont très espacées. Deux fois plus de matière dans la cuillère.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n = \dfrac{1{,}2}{24} = 0{,}050\)&nbsp;mol… chacun. Même volume, mêmes conditions&nbsp;: même nombre de molécules, quelle que soit leur masse. C'est la loi d'Avogadro-Ampère — et c'est elle qui autorise un volume molaire commun à tous les gaz. La formalisation arrive juste en dessous.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Manche suivante ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <div class="widget-note">Données&nbsp;: M(H₂O) = 18&nbsp;g·mol⁻¹, M(Cu) = 63,5&nbsp;g·mol⁻¹, M(saccharose) = 342&nbsp;g·mol⁻¹ · une mole de gaz occupe 24&nbsp;L dans les conditions de la salle.</div>
+        <script type="application/json">[1, 2, 2, 3]</script>
+      </figure>
+
+      <p class="prose">La quatrième manche vient de te livrer le secret des gaz&nbsp;: leur volume ne dépend pas de l'espèce. Voilà l'énoncé propre.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE VOLUME MOLAIRE DES GAZ</div>
+        <p>À température et pression données, une mole de gaz occupe le même volume <em>quel que soit le gaz</em>&nbsp;: le <strong>volume molaire</strong> \(V_m\), en L·mol⁻¹. Dans les conditions usuelles de la salle (20&nbsp;°C, pression atmosphérique normale), \(V_m \approx 24\)&nbsp;L·mol⁻¹. Un volume \(V\) de gaz contient donc&nbsp;:</p>
+        <div class="math-vitrine">$$n = \frac{V}{V_m}$$</div>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Comment des molécules aussi différentes peuvent-elles occuper le même volume&nbsp;? Parce qu'un gaz, c'est surtout du vide. Les molécules y sont si espacées que leur taille propre ne compte plus&nbsp;: le volume d'un gaz mesure l'espace qu'on laisse aux molécules, pas les molécules elles-mêmes. À conditions égales, cet espace par molécule est le même pour tous les gaz — d'où un volume molaire commun. Rien de tel pour un liquide ou un solide, où les entités se touchent&nbsp;: là, chaque espèce a son propre encombrement.</p>
+      </div>
+
+      <p class="prose">Et voilà le chapitre presque complet&nbsp;: trois façons de mesurer une quantité de matière, une par état du système. C'est la table de conversion à connaître par cœur.</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>LES TROIS PORTES VERS LA MOLE</span>
+          <span class="bande-note">V TOUJOURS EN LITRES</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th>Ce que tu mesures</th><th>La formule</th><th>Exemple</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="note-cellule">une masse \(m\) (balance)</td><td>\(n = \dfrac{m}{M}\)</td><td>9,0&nbsp;g d'eau → 0,50&nbsp;mol</td></tr>
+              <tr><td class="note-cellule">un volume \(V\) de solution de concentration \(c\)</td><td>\(n = c \times V\)</td><td>250&nbsp;mL à 0,16&nbsp;mol·L⁻¹ → 0,040&nbsp;mol</td></tr>
+              <tr><td class="note-cellule">un volume \(V\) de gaz</td><td>\(n = \dfrac{V}{V_m}\)</td><td>4,8&nbsp;L de gaz → 0,20&nbsp;mol</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE BALLON QUI NE PÈSE RIEN</div>
+        <p class="exemple-enonce">On gonfle un ballon de baudruche avec 3,0&nbsp;L d'hélium (M(He) = 4,0&nbsp;g·mol⁻¹, \(V_m\) = 24&nbsp;L·mol⁻¹). Quelle quantité de matière, et quelle masse de gaz&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>\(n = \dfrac{V}{V_m} = \dfrac{3{,}0}{24} = 0{,}125\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 2 — </span>\(m = n \times M = 0{,}125 \times 4{,}0 = 0{,}50\)&nbsp;g.</p>
+        <p class="conclusion">Conclusion&nbsp;: un demi-gramme — le ballon «&nbsp;ne pèse rien&nbsp;», et contient pourtant \(7{,}5 \times 10^{22}\) atomes. Voilà pourquoi on compte les gaz avec un litre plutôt qu'avec une balance.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur les gaz</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le volume molaire \(V_m = 24\)&nbsp;L·mol⁻¹ s'applique…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">uniquement au dioxygène</button>
+              <button type="button" class="quiz-reponse">aux gaz, aux liquides et aux solides</button>
+              <button type="button" class="quiz-reponse">à tous les gaz, dans les mêmes conditions</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> tous les gaz, aucun liquide ni solide. Une mole d'eau <em>liquide</em> tient dans 18&nbsp;mL — pas dans 24&nbsp;L&nbsp;: le volume molaire commun est un privilège du vide entre molécules.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Quelle quantité de matière dans 4,8&nbsp;L de dioxyde de carbone (\(V_m\) = 24&nbsp;L·mol⁻¹)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,20 mol</button>
+              <button type="button" class="quiz-reponse">5,0 mol</button>
+              <button type="button" class="quiz-reponse">115 mol</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n = \dfrac{4{,}8}{24} = 0{,}20\)&nbsp;mol. Trouver 5,0, c'est diviser à l'envers (\(24/4{,}8\))&nbsp;; 115, c'est multiplier. Le contrôle d'ordre de grandeur sauve&nbsp;: 4,8&nbsp;L, c'est <em>moins</em> qu'une mole entière (24&nbsp;L).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Un litre de dihydrogène et un litre de dioxyde de carbone, mêmes conditions. Lequel contient le plus de molécules&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le CO₂&nbsp;: ses molécules sont plus lourdes</button>
+              <button type="button" class="quiz-reponse">aucun&nbsp;: même volume, même nombre</button>
+              <button type="button" class="quiz-reponse">impossible à dire sans peser les ballons</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est la loi d'Avogadro-Ampère, la manche 4 du jeu&nbsp;: à volume et conditions égaux, même nombre de molécules. La masse des molécules change la masse du ballon, pas leur nombre.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Doser avec la lumière&nbsp;: la loi de Beer-Lambert</h2>
+      <p class="prose">Dernier instrument, le plus élégant. Souviens-toi du verre de la section 3&nbsp;: plus la solution était concentrée, plus sa couleur était soutenue. Ton œil sait donc déjà «&nbsp;mesurer&nbsp;» une concentration — grossièrement. Le <strong>spectrophotomètre</strong> est un œil qui met des chiffres&nbsp;: il envoie un rayon de lumière à travers la solution et mesure la part de lumière retenue au passage. Ce nombre s'appelle l'absorbance, notée \(A\), sans unité. Solution incolore&nbsp;: \(A\) proche de 0. Solution foncée&nbsp;: \(A\) grandit.</p>
+      <p class="prose">Voici le geste des laboratoires, celui du dosage du colorant d'un sirop de menthe. On prépare d'abord une <em>gamme</em> de solutions du même colorant, de concentrations connues, et on mesure l'absorbance de chacune&nbsp;: cinq points, remarquablement alignés sur une droite qui passe par l'origine. Ensuite, on mesure l'absorbance de la solution inconnue — et la droite fait le reste. Fais-le toi-même&nbsp;: déplace l'absorbance mesurée, puis presse le bouton «&nbsp;ta mesure&nbsp;».</p>
+
+      <figure class="widget" id="widget-etalonnage" data-widget="etalonnage" data-k="0.075" data-a-init="0.3" data-a-max="0.75" data-a-mesure="0.54">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Dose avec la lumière</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 360" aria-label="La droite d'étalonnage d'un colorant : cinq points étalons alignés depuis l'origine, et des guides qui traduisent une absorbance mesurée en concentration"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">absorbance mesurée&nbsp;: A = <span class="js-a">0,30</span></span>
+            <input type="range" class="js-curseur" min="0" max="0.75" step="0.03" value="0.3" aria-label="Absorbance mesurée par le spectrophotomètre">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip js-chip-a"></span>
+            <span class="chip chip--accent js-chip-c" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-mesure" aria-pressed="false">ta mesure&nbsp;: le sirop, A = 0,54</button>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite"></p>
+        </div>
+        <div class="widget-note">La gamme&nbsp;: cinq solutions étalons du même colorant (points craie). Quand c augmente de 1&nbsp;µmol/L, A augmente de 0,075&nbsp;: la droite passe par l'origine. Au-delà du dernier étalon, elle est en pointillé — hors de la gamme, on ne lit plus.</div>
+        <script type="application/json">[2, 4, 6, 8, 10]</script>
+      </figure>
+
+      <p class="prose">L'alignement des cinq étalons n'est pas un hasard&nbsp;: c'est une loi.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA LOI DE BEER-LAMBERT</div>
+        <p>Pour une solution suffisamment diluée, l'absorbance est <strong>proportionnelle</strong> à la concentration de l'espèce colorée&nbsp;:</p>
+        <div class="math-vitrine">$$A = k \times c$$</div>
+        <p>Le coefficient \(k\) n'a rien d'universel&nbsp;: il dépend de l'espèce dissoute, de la longueur d'onde de la lumière choisie et de l'épaisseur de la cuve. C'est pour cela qu'on le mesure à chaque dosage, avec la gamme d'étalonnage — jamais dans un livre.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — LE DOSAGE PAR ÉTALONNAGE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Prépare une <em>gamme étalon</em>&nbsp;: plusieurs solutions de l'espèce à doser, de concentrations connues — souvent par dilutions successives d'une solution mère (méthode de la section 3).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Mesure l'absorbance de chaque étalon et trace \(A\) en fonction de \(c\)&nbsp;: les points s'alignent sur une droite passant par l'origine — la <em>droite d'étalonnage</em>.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Mesure l'absorbance de la solution inconnue, puis lis sa concentration sur la droite (ou calcule \(c = A/k\)). Contrôle-réflexe&nbsp;: la valeur lue doit tomber <em>dans</em> la gamme — sinon on dilue l'inconnue et on recommence.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA GRENADINE</div>
+        <p class="exemple-enonce">Pour un colorant rouge, l'étalon à \(4{,}0\)&nbsp;µmol·L⁻¹ donne \(A = 0{,}30\). La grenadine diluée du placard donne \(A = 0{,}66\). Quelle est sa concentration en colorant&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>le coefficient de la droite&nbsp;: \(k = \dfrac{A}{c} = \dfrac{0{,}30}{4{,}0} = 0{,}075\) par µmol·L⁻¹.</p>
+        <p><span class="etape-label">Étape 2 — </span>\(c = \dfrac{A}{k} = \dfrac{0{,}66}{0{,}075} = 8{,}8\)&nbsp;µmol·L⁻¹.</p>
+        <p><span class="etape-label">Étape 3 — </span>contrôle&nbsp;: 8,8 est dans la gamme (les étalons montent à 10)&nbsp;: la lecture est légitime.</p>
+        <p class="conclusion">Conclusion&nbsp;: une proportionnalité, une division — le plus difficile dans un dosage par étalonnage n'est pas le calcul, c'est de préparer une gamme propre.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>On double la concentration du colorant (même cuve, même lumière). L'absorbance…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">double aussi</button>
+              <button type="button" class="quiz-reponse">ne change pas</button>
+              <button type="button" class="quiz-reponse">est divisée par deux</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(A = k \times c\) est une proportionnalité&nbsp;: deux fois plus de molécules colorées sur le trajet de la lumière, deux fois plus de lumière retenue. C'est toute la force de la droite d'étalonnage.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Avec \(k = 0{,}075\) par µmol·L⁻¹, une solution d'absorbance \(A = 0{,}60\) a pour concentration…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,045 µmol·L⁻¹</button>
+              <button type="button" class="quiz-reponse">0,60 µmol·L⁻¹&nbsp;: A et c, c'est pareil</button>
+              <button type="button" class="quiz-reponse">8,0 µmol·L⁻¹</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(c = \dfrac{A}{k} = \dfrac{0{,}60}{0{,}075} = 8{,}0\)&nbsp;µmol·L⁻¹. Trouver 0,045, c'est multiplier au lieu de diviser&nbsp;; et \(A\) n'est pas une concentration — c'est une mesure de lumière, sans unité.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>La droite d'étalonnage du colorant de la menthe peut-elle servir à doser un colorant orange&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">non&nbsp;: k dépend de l'espèce, de la cuve et de la longueur d'onde</button>
+              <button type="button" class="quiz-reponse">oui&nbsp;: k est une constante universelle</button>
+              <button type="button" class="quiz-reponse">oui, si les deux couleurs se ressemblent</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> chaque espèce a son \(k\), mesuré dans des conditions précises&nbsp;: changer de colorant, c'est refaire la gamme. Il n'existe pas de \(k\) «&nbsp;dans un livre&nbsp;» — c'est même la raison d'être de l'étalonnage.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Confondre la masse et la quantité de matière.</strong> «&nbsp;100&nbsp;g d'eau et 100&nbsp;g de cuivre, c'est autant de matière&nbsp;»&nbsp;: non. C'est 5,6&nbsp;mol d'eau contre 1,6&nbsp;mol de cuivre — trois fois et demie plus de molécules d'eau. La balance pèse, la mole compte&nbsp;; toute comparaison d'échantillons se fait en moles.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Mélanger les deux concentrations.</strong> \(C_m = m/V\) (en g·L⁻¹, celle des étiquettes) et \(c = n/V\) (en mol·L⁻¹, celle de cette année) ne sont pas interchangeables. Le pont est \(C_m = c \times M\). Avant toute formule, lis l'unité de l'énoncé&nbsp;: des grammes par litre ne rentrent jamais tels quels dans \(n = c \times V\).</p>
+        </div>
+        <div class="piege">
+          <p><strong>Croire que diluer retire du soluté.</strong> Diluer 10 fois divise la <em>concentration</em> par 10 — la <em>quantité</em> de soluté, elle, ne bouge pas d'un microgramme&nbsp;: on n'a versé que de l'eau. C'est tout le sens de \(c_0 V_0 = c_f V_f\)&nbsp;: le produit est constant parce que \(n\) l'est.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Appliquer le volume molaire à un liquide.</strong> \(V_m = 24\)&nbsp;L·mol⁻¹ vaut pour <em>tous les gaz</em>… et rien que pour les gaz. Une mole d'eau liquide occupe 18&nbsp;mL, pas 24&nbsp;L&nbsp;: dans un liquide, les molécules se touchent, chaque espèce a son encombrement propre.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Laisser les volumes en millilitres.</strong> \(c = n/V\) et \(n = c \times V\) mangent des litres. Un volume resté en mL fausse le résultat d'un facteur 1&thinsp;000 — l'erreur la plus fréquente du chapitre, et la plus facile à attraper&nbsp;: 500&nbsp;mL = 0,500&nbsp;L, à convertir <em>avant</em> la formule.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">MOLE</span>
+          <p>Le paquet du chimiste&nbsp;: \(N_A = 6{,}02 \times 10^{23}\) entités. \(N = n \times N_A\)&nbsp;: on compte par paquets, jamais une à une.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">PESÉE</span>
+          <p>\(n = \dfrac{m}{M}\) — \(m\) en g, \(M\) en g·mol⁻¹ (somme des masses molaires atomiques de la formule).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">SOLUTION</span>
+          <p>\(c = \dfrac{n}{V}\) et \(n = c \times V\), \(V\) en litres. Diluer&nbsp;: \(n\) constant, \(c_0 V_0 = c_f V_f\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">GAZ</span>
+          <p>\(n = \dfrac{V}{V_m}\), avec \(V_m \approx 24\)&nbsp;L·mol⁻¹ pour <em>tous</em> les gaz (20&nbsp;°C, pression ordinaire).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">LUMIÈRE</span>
+          <p>\(A = k \times c\)&nbsp;: l'absorbance est proportionnelle à la concentration — la droite d'étalonnage transforme une mesure de lumière en dosage.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: la mole et la pesée, les solutions et la dilution, les gaz, la lumière, et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· compter par paquets</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">a. Combien de molécules dans 0,25&nbsp;mol d'eau&nbsp;? b. Un échantillon de fer contient \(3{,}01 \times 10^{23}\) atomes&nbsp;: quelle quantité de matière&nbsp;? c. Vrai ou faux&nbsp;: «&nbsp;une mole de molécules d'eau et une mole d'atomes de cuivre contiennent le même nombre d'entités&nbsp;».</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(N = n \times N_A = 0{,}25 \times 6{,}02 \times 10^{23} \approx 1{,}5 \times 10^{23}\) molécules.</p>
+          <p><span class="etape-label">b. — </span>\(n = \dfrac{N}{N_A} = \dfrac{3{,}01 \times 10^{23}}{6{,}02 \times 10^{23}} = 0{,}500\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>vrai, par définition&nbsp;: une mole est un <em>nombre</em>, \(6{,}02 \times 10^{23}\), quelle que soit l'entité comptée. Ce sont leurs masses qui diffèrent.</p>
+          <p class="conclusion">Conclusion&nbsp;: la mole est une douzaine géante — le paquet est toujours le même, seul son contenu change d'espèce.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· masse molaire</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Calcule la masse molaire des espèces suivantes. a. Le dioxyde de carbone \(\mathrm{CO_2}\). b. Le saccharose \(\mathrm{C_{12}H_{22}O_{11}}\). c. Le chlorure de sodium \(\mathrm{NaCl}\). (M(C) = 12&nbsp;; M(O) = 16&nbsp;; M(H) = 1&nbsp;; M(Na) = 23&nbsp;; M(Cl) = 35,5 — en g·mol⁻¹.)</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(M(\mathrm{CO_2}) = 12 + 2 \times 16 = 44\)&nbsp;g·mol⁻¹.</p>
+          <p><span class="etape-label">b. — </span>\(M = 12 \times 12 + 22 \times 1 + 11 \times 16 = 144 + 22 + 176 = 342\)&nbsp;g·mol⁻¹.</p>
+          <p><span class="etape-label">c. — </span>\(M(\mathrm{NaCl}) = 23 + 35{,}5 = 58{,}5\)&nbsp;g·mol⁻¹ — la formule d'un composé ionique s'additionne pareil.</p>
+          <p class="conclusion">Conclusion&nbsp;: chaque atome de la formule apporte sa masse molaire atomique, multipliée par son indice. Un indice oublié, et tout le chapitre déraille — recompte toujours.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· n = m/M</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Convertis en quantité de matière&nbsp;: a. 9,0&nbsp;g d'eau (M = 18&nbsp;g·mol⁻¹). b. 8,1&nbsp;g d'aluminium (M = 27&nbsp;g·mol⁻¹). c. 17,1&nbsp;g de saccharose (M = 342&nbsp;g·mol⁻¹).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n = \dfrac{9{,}0}{18} = 0{,}50\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>\(n = \dfrac{8{,}1}{27} = 0{,}30\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>\(n = \dfrac{17{,}1}{342} = 0{,}050\)&nbsp;mol.</p>
+          <p class="conclusion">Conclusion&nbsp;: trois pesées très différentes, trois quantités du même ordre — c'est la masse molaire qui fait toute la différence. Contrôle&nbsp;: chaque \(m\) est plus petit que son \(M\), chaque \(n\) est bien inférieur à 1.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· la pesée à rebours</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">a. Quelle masse peser pour obtenir 0,20&nbsp;mol de chlorure de sodium (M = 58,5&nbsp;g·mol⁻¹)&nbsp;? b. L'aspirine a pour formule \(\mathrm{C_9H_8O_4}\)&nbsp;: vérifie que M = 180&nbsp;g·mol⁻¹, puis calcule la quantité de matière d'un comprimé dosé à 500&nbsp;mg.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>à rebours, on multiplie&nbsp;: \(m = n \times M = 0{,}20 \times 58{,}5 = 11{,}7\)&nbsp;g.</p>
+          <p><span class="etape-label">b. — </span>\(M = 9 \times 12 + 8 \times 1 + 4 \times 16 = 108 + 8 + 64 = 180\)&nbsp;g·mol⁻¹. Puis, avec la masse en grammes&nbsp;: \(n = \dfrac{0{,}500}{180} \approx 2{,}8 \times 10^{-3}\)&nbsp;mol, soit 2,8&nbsp;millimoles.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(n = m/M\) dans un sens, \(m = n \times M\) dans l'autre — et les 500&nbsp;mg deviennent 0,500&nbsp;g <em>avant</em> la formule. Les unités d'abord, le calcul ensuite.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· c = n/V</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On dissout 0,040&nbsp;mol de saccharose dans de l'eau, et on complète jusqu'à un volume total de 250&nbsp;mL. Quelle est la concentration en quantité de matière de la solution&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>le volume en litres&nbsp;: \(V = 250\)&nbsp;mL \(= 0{,}250\)&nbsp;L.</p>
+          <p><span class="etape-label">Étape 2 — </span>\(c = \dfrac{n}{V} = \dfrac{0{,}040}{0{,}250} = 0{,}16\)&nbsp;mol·L⁻¹.</p>
+          <p class="conclusion">Conclusion&nbsp;: la conversion des millilitres est la première ligne du calcul, jamais une pensée après coup — c'est le piège n°5 du chapitre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· n = c × V</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un soda contient du saccharose à la concentration \(c = 0{,}35\)&nbsp;mol·L⁻¹. a. Quelle quantité de saccharose dans une bouteille de 1,5&nbsp;L&nbsp;? b. Quelle masse cela représente-t-il (M = 342&nbsp;g·mol⁻¹)&nbsp;? c. Compare à des morceaux de sucre de 6&nbsp;g.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n = c \times V = 0{,}35 \times 1{,}5 = 0{,}525\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>\(m = n \times M = 0{,}525 \times 342 \approx 180\)&nbsp;g.</p>
+          <p><span class="etape-label">c. — </span>\(180 / 6 = 30\)&nbsp;morceaux de sucre dans la bouteille.</p>
+          <p class="conclusion">Conclusion&nbsp;: la chaîne \(c \to n \to m\) traduit une étiquette abstraite en une image très concrète. Trente morceaux — la chimie sert aussi à lire ce qu'on boit.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· C<sub>m</sub> et c</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">a. Un jus de raisin affiche 90&nbsp;g de glucose par litre (M(glucose) = 180&nbsp;g·mol⁻¹)&nbsp;: quelle est sa concentration en quantité de matière&nbsp;? b. À l'inverse, une eau sucrée a une concentration molaire en saccharose de 0,10&nbsp;mol·L⁻¹ (M = 342&nbsp;g·mol⁻¹)&nbsp;: quelle est sa concentration en masse&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(c = \dfrac{C_m}{M} = \dfrac{90}{180} = 0{,}50\)&nbsp;mol·L⁻¹.</p>
+          <p><span class="etape-label">b. — </span>\(C_m = c \times M = 0{,}10 \times 342 = 34{,}2\)&nbsp;g·L⁻¹.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(C_m = c \times M\) fait le pont dans les deux sens. Les étiquettes parlent en grammes, les tableaux d'avancement en moles&nbsp;: tu traduiras toute l'année.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· préparer une dilution</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Au labo, tu disposes d'une solution mère de concentration \(c_0 = 1{,}0\)&nbsp;mol·L⁻¹ et tu dois préparer 100&nbsp;mL de solution fille à \(c_f = 0{,}10\)&nbsp;mol·L⁻¹. a. Quel volume de solution mère prélever&nbsp;? b. Décris le protocole (verrerie comprise). c. Quel est le facteur de dilution&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(V_0 = \dfrac{c_f \times V_f}{c_0} = \dfrac{0{,}10 \times 0{,}100}{1{,}0} = 0{,}010\)&nbsp;L, soit 10&nbsp;mL.</p>
+          <p><span class="etape-label">b. — </span>prélever 10,0&nbsp;mL de solution mère à la pipette jaugée, les verser dans une fiole jaugée de 100&nbsp;mL, compléter à l'eau distillée jusqu'au trait de jauge, boucher et homogénéiser.</p>
+          <p><span class="etape-label">c. — </span>\(F = \dfrac{c_0}{c_f} = \dfrac{V_f}{V_0} = 10\)&nbsp;: les deux lectures concordent, le protocole est cohérent.</p>
+          <p class="conclusion">Conclusion&nbsp;: pipette pour le prélèvement précis, fiole pour le volume final précis — et le facteur de dilution comme contrôle gratuit.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· le graphique rejoué</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Retour au verre de la section 3&nbsp;: une dose de 20&nbsp;mL de sirop à \(2{,}0\)&nbsp;mol·L⁻¹ de saccharose, que l'on allonge à l'eau. a. Vérifie que la dose apporte 0,040&nbsp;mol de saccharose. b. Quelle est la concentration quand le volume total atteint 100&nbsp;mL&nbsp;? c. Quel volume total faut-il pour descendre à \(0{,}25\)&nbsp;mol·L⁻¹&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n = c_0 \times V_0 = 2{,}0 \times 0{,}020 = 0{,}040\)&nbsp;mol — et il ne changera plus&nbsp;: on ne verse que de l'eau.</p>
+          <p><span class="etape-label">b. — </span>\(c = \dfrac{n}{V} = \dfrac{0{,}040}{0{,}100} = 0{,}40\)&nbsp;mol·L⁻¹.</p>
+          <p><span class="etape-label">c. — </span>\(V = \dfrac{n}{c} = \dfrac{0{,}040}{0{,}25} = 0{,}160\)&nbsp;L, soit 160&nbsp;mL.</p>
+          <p class="conclusion">Conclusion&nbsp;: une seule quantité fixe (\(n = 0{,}040\)&nbsp;mol) et toutes les questions deviennent des divisions. Compare avec le graphique&nbsp;: 100&nbsp;mL et 160&nbsp;mL sont deux crans du curseur.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· compter un gaz</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">En dégazant complètement une bouteille de soda de 1,5&nbsp;L, on recueille 6,0&nbsp;L de dioxyde de carbone gazeux. (\(V_m\) = 24&nbsp;L·mol⁻¹&nbsp;; M(\(\mathrm{CO_2}\)) = 44&nbsp;g·mol⁻¹.) a. Quelle quantité de \(\mathrm{CO_2}\) la bouteille contenait-elle&nbsp;? b. Quelle masse de gaz s'est échappée&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n = \dfrac{V}{V_m} = \dfrac{6{,}0}{24} = 0{,}25\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>\(m = n \times M = 0{,}25 \times 44 = 11\)&nbsp;g.</p>
+          <p class="conclusion">Conclusion&nbsp;: 6&nbsp;litres de gaz tenaient dissous dans une bouteille de 1,5&nbsp;L — et ne pèsent que 11&nbsp;g. Le volume d'un gaz est spectaculaire, sa masse presque discrète&nbsp;: deux grandeurs, deux histoires.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· la loi d'Avogadro-Ampère</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Deux ballons de 2,4&nbsp;L sont gonflés dans la même salle, l'un à l'hélium (M = 4,0&nbsp;g·mol⁻¹), l'autre au dioxyde de carbone (M = 44&nbsp;g·mol⁻¹). (\(V_m\) = 24&nbsp;L·mol⁻¹.) a. Quelle quantité de gaz dans chaque ballon&nbsp;? b. Quelle masse de gaz dans chacun&nbsp;? c. Que retenir&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>même volume, mêmes conditions&nbsp;: \(n = \dfrac{2{,}4}{24} = 0{,}10\)&nbsp;mol… pour les deux.</p>
+          <p><span class="etape-label">b. — </span>\(m(\mathrm{He}) = 0{,}10 \times 4{,}0 = 0{,}40\)&nbsp;g&nbsp;; \(m(\mathrm{CO_2}) = 0{,}10 \times 44 = 4{,}4\)&nbsp;g — onze fois plus lourd.</p>
+          <p><span class="etape-label">c. — </span>le volume d'un gaz compte ses molécules sans se soucier de leur masse&nbsp;: même \(V\), même \(n\). C'est la masse molaire qui sépare ensuite les deux ballons sur la balance.</p>
+          <p class="conclusion">Conclusion&nbsp;: pour un gaz, le litre compte et le gramme pèse — deux instruments, deux informations différentes.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· le tri des échantillons</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Trois flacons sur la paillasse. A&nbsp;: 5,85&nbsp;g de chlorure de sodium solide (M = 58,5&nbsp;g·mol⁻¹). B&nbsp;: 250&nbsp;mL d'une solution à \(0{,}30\)&nbsp;mol·L⁻¹. C&nbsp;: 3,6&nbsp;L de dioxygène gazeux (\(V_m\) = 24&nbsp;L·mol⁻¹, M(\(\mathrm{O_2}\)) = 32&nbsp;g·mol⁻¹). a. Classe A, B et C par quantité de matière décroissante. b. Calcule la masse de gaz du flacon C et commente.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>tout en moles, une porte chacun&nbsp;: \(n_A = \dfrac{5{,}85}{58{,}5} = 0{,}10\)&nbsp;mol&nbsp;; \(n_B = 0{,}30 \times 0{,}250 = 0{,}075\)&nbsp;mol&nbsp;; \(n_C = \dfrac{3{,}6}{24} = 0{,}15\)&nbsp;mol.</p>
+          <p><span class="etape-label">Étape 2 — </span>classement&nbsp;: \(n_C &gt; n_A &gt; n_B\) — le gaz gagne.</p>
+          <p><span class="etape-label">b. — </span>\(m_C = 0{,}15 \times 32 = 4{,}8\)&nbsp;g&nbsp;: le flacon le plus riche en matière est aussi le plus léger des trois échantillons pesables. La quantité de matière ne se voit ni à l'œil ni à la balance&nbsp;: elle se calcule.</p>
+          <p class="conclusion">Conclusion&nbsp;: c'est le jeu de la section 4 en vrai — trois états, trois formules, une seule unité commune&nbsp;: la mole.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· la droite d'étalonnage</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Pour doser un colorant bleu, on mesure la gamme suivante — c (µmol·L⁻¹)&nbsp;: 2,0&nbsp;; 4,0&nbsp;; 6,0&nbsp;; 8,0&nbsp;; 10,0 — A&nbsp;: 0,15&nbsp;; 0,30&nbsp;; 0,45&nbsp;; 0,60&nbsp;; 0,75. a. Montre que ces mesures suivent la loi de Beer-Lambert et détermine \(k\). b. Une solution du même colorant donne \(A = 0{,}51\)&nbsp;: quelle est sa concentration&nbsp;? c. Une autre donne \(A = 0{,}90\)&nbsp;: pourquoi ne conclut-on pas directement&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>le rapport \(A/c\) vaut \(0{,}15/2{,}0 = 0{,}075\) pour chaque couple — il est constant&nbsp;: \(A\) est proportionnelle à \(c\), et \(k = 0{,}075\) par µmol·L⁻¹.</p>
+          <p><span class="etape-label">b. — </span>\(c = \dfrac{A}{k} = \dfrac{0{,}51}{0{,}075} = 6{,}8\)&nbsp;µmol·L⁻¹ — bien dans la gamme (entre 2 et 10)&nbsp;: lecture légitime.</p>
+          <p><span class="etape-label">c. — </span>\(A = 0{,}90\) dépasse le dernier étalon (0,75)&nbsp;: on serait <em>hors gamme</em>, là où la proportionnalité n'est plus garantie. On dilue la solution (par exemple 2 fois), on mesure à nouveau, et on multiplie le résultat par le facteur de dilution.</p>
+          <p class="conclusion">Conclusion&nbsp;: la droite d'étalonnage n'a d'autorité qu'entre ses étalons. Hors gamme, un seul réflexe&nbsp;: diluer — la section 3 au service de la section 5.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème&nbsp;: le verre de menthe à l'eau</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">La promesse de la section 1, enfin tenue. Le sirop de menthe pur est trop foncé pour le spectrophotomètre&nbsp;: on le dilue 20 fois, et la solution diluée donne \(A = 0{,}54\). La gamme d'étalonnage du colorant (celle du graphique de la section 5) donne \(k = 0{,}075\) par µmol·L⁻¹. a. Quelle est la concentration en colorant de la solution diluée&nbsp;? b. Celle du sirop pur&nbsp;? c. Un verre de menthe à l'eau contient 10&nbsp;mL de sirop&nbsp;: quelle quantité de colorant avale-t-on&nbsp;? d. Combien de molécules cela fait-il&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(c_{\text{diluée}} = \dfrac{A}{k} = \dfrac{0{,}54}{0{,}075} = 7{,}2\)&nbsp;µmol·L⁻¹ — dans la gamme, la lecture est valable.</p>
+          <p><span class="etape-label">b. — </span>la dilution avait divisé la concentration par 20&nbsp;; on remonte&nbsp;: \(c_{\text{sirop}} = 20 \times 7{,}2 = 144\)&nbsp;µmol·L⁻¹, soit \(1{,}44 \times 10^{-4}\)&nbsp;mol·L⁻¹.</p>
+          <p><span class="etape-label">c. — </span>\(n = c \times V = 1{,}44 \times 10^{-4} \times 0{,}010 = 1{,}44 \times 10^{-6}\)&nbsp;mol — un peu moins d'un micromol et demi.</p>
+          <p><span class="etape-label">d. — </span>\(N = n \times N_A = 1{,}44 \times 10^{-6} \times 6{,}02 \times 10^{23} \approx 8{,}7 \times 10^{17}\) molécules.</p>
+          <p class="conclusion">Conclusion&nbsp;: presque un milliard de milliards de molécules de colorant dans un seul verre — comptées sans pince ni microscope, avec une lampe, une droite et deux divisions. C'était la promesse du chapitre.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Le diiode \(\mathrm{I_2}\) est l'espèce active de nombreux antiseptiques. On se propose de vérifier l'étiquette d'un flacon du commerce, qui annonce «&nbsp;2,0&nbsp;g de diiode pour 250&nbsp;mL&nbsp;». Donnée&nbsp;: M(I) = 127&nbsp;g·mol⁻¹.</p>
+          <div class="bac-partie">PARTIE A — LA SOLUTION MÈRE ET LA GAMME</div>
+          <ol>
+            <li>Au laboratoire, on dissout 1,27&nbsp;g de diiode dans une fiole jaugée de 1,00&nbsp;L. Montre que la concentration de cette solution mère vaut \(c_0 = 5{,}0\)&nbsp;mmol·L⁻¹.</li>
+            <li>Décris précisément comment préparer 50,0&nbsp;mL d'une solution étalon à \(1{,}0\)&nbsp;mmol·L⁻¹ à partir de la mère (volume prélevé, verrerie).</li>
+            <li>La gamme complète donne — c (mmol·L⁻¹)&nbsp;: 0,50&nbsp;; 1,0&nbsp;; 1,5&nbsp;; 2,0&nbsp;; 2,5 — A&nbsp;: 0,13&nbsp;; 0,26&nbsp;; 0,39&nbsp;; 0,52&nbsp;; 0,65. Montre que ces mesures sont compatibles avec la loi de Beer-Lambert et détermine le coefficient \(k\).</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — LE DOSAGE DE L'ANTISEPTIQUE</div>
+          <ol>
+            <li>L'antiseptique du commerce est trop concentré pour la gamme&nbsp;: on le dilue 20 fois. La solution diluée donne \(A = 0{,}39\). Détermine sa concentration en diiode.</li>
+            <li>Déduis-en la concentration en diiode de l'antiseptique du flacon.</li>
+            <li>Calcule la quantité puis la masse de diiode contenues dans le flacon de 250&nbsp;mL.</li>
+            <li>L'étiquette est-elle honnête&nbsp;? Conclus en comparant à la valeur annoncée.</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>\(M(\mathrm{I_2}) = 2 \times 127 = 254\)&nbsp;g·mol⁻¹, donc \(n = \dfrac{1{,}27}{254} = 5{,}0 \times 10^{-3}\)&nbsp;mol dans 1,00&nbsp;L&nbsp;: \(c_0 = 5{,}0\)&nbsp;mmol·L⁻¹.</p>
+            <p><span class="etape-label">A.2 — </span>\(V_0 = \dfrac{c_f \times V_f}{c_0} = \dfrac{1{,}0 \times 50{,}0}{5{,}0} = 10{,}0\)&nbsp;mL, à la pipette jaugée, versés dans une fiole jaugée de 50,0&nbsp;mL complétée à l'eau distillée jusqu'au trait (facteur de dilution 5).</p>
+            <p><span class="etape-label">A.3 — </span>\(A/c = 0{,}13/0{,}50 = 0{,}26\) pour les cinq couples&nbsp;: proportionnalité vérifiée, \(k = 0{,}26\) par mmol·L⁻¹.</p>
+            <p><span class="etape-label">B.1 — </span>\(c = \dfrac{A}{k} = \dfrac{0{,}39}{0{,}26} = 1{,}5\)&nbsp;mmol·L⁻¹ (dans la gamme&nbsp;: lecture valable).</p>
+            <p><span class="etape-label">B.2 — </span>\(c_{\text{flacon}} = 20 \times 1{,}5 = 30\)&nbsp;mmol·L⁻¹ \(= 0{,}030\)&nbsp;mol·L⁻¹.</p>
+            <p><span class="etape-label">B.3 — </span>\(n = c \times V = 0{,}030 \times 0{,}250 = 7{,}5 \times 10^{-3}\)&nbsp;mol, puis \(m = n \times M = 7{,}5 \times 10^{-3} \times 254 \approx 1{,}9\)&nbsp;g.</p>
+            <p><span class="etape-label">B.4 — </span>1,9&nbsp;g mesurés contre 2,0&nbsp;g annoncés&nbsp;: un écart de 5&nbsp;%, tout à fait compatible avec la précision d'un dosage par étalonnage. L'étiquette est honnête.</p>
+            <p class="conclusion">Conclusion&nbsp;: pesée, dilution, gamme, lecture — les quatre sections du chapitre dans un seul dosage. Et le réflexe final du physicien&nbsp;: on ne dit pas «&nbsp;faux&nbsp;» pour 5&nbsp;%, on compare l'écart à la précision de la méthode.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre"><a href="../reaction-avancement/">La réaction chimique et l'avancement <span aria-hidden="true">→</span></a></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>

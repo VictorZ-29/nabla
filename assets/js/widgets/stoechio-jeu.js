@@ -1,12 +1,14 @@
 /* Nabla — widgets/stoechio-jeu.js
-   « Qui s'épuise en premier ? » : quatre mélanges initiaux, l'élève désigne
-   le réactif limitant — ou déclare le mélange stœchiométrique. Les manches
-   sont graduées : coefficients égaux (le raccourci « plus petit tas »
-   marche encore), coefficients différents (il meurt), mélange exact, puis
-   photo-finish où seul le calcul des candidats n₀/coef tranche. Énoncés,
-   boutons et explications sont du HTML statique par manche (KaTeX rendu au
-   chargement, le JS ne fait que masquer/démasquer — doctrine exp-courbes).
-   Spec : premiere/physique-chimie/reaction-avancement/README.md. */
+   Jeu à manches générique : une question par manche, l'élève choisit parmi
+   des boutons, mauvaise réponse → relance et nouvel essai, bonne réponse →
+   explication puis manche suivante. Énoncés, boutons et explications sont
+   du HTML statique par manche (KaTeX rendu au chargement, le JS ne fait
+   que masquer/démasquer — doctrine exp-courbes).
+   Première instance : « Qui s'épuise en premier ? » (avancement, §4) —
+   quatre mélanges initiaux, l'élève désigne le réactif limitant. Réutilisé
+   tel quel par « Quel échantillon est le plus riche ? » (composition, §4)
+   via data-nom / data-progression / data-suivant.
+   Specs : premiere/physique-chimie/<chapitre>/README.md. */
 
 import { track } from '../analytics.js';
 
@@ -14,6 +16,9 @@ const chapitre = document.body.dataset.chapitre || '';
 
 function initStoechioJeu(fig) {
   const bonnes = JSON.parse(fig.querySelector('script[type="application/json"]').textContent);
+  const nomWidget = fig.dataset.nom || 'stoechio-jeu';
+  const motManche = fig.dataset.progression || 'MÉLANGE';
+  const motSuivant = fig.dataset.suivant || 'Mélange suivant';
   const groupes = [...fig.querySelectorAll('.js-manche')];
   const explications = [...fig.querySelectorAll('.js-expl')];
   const relance = fig.querySelector('.js-relance');
@@ -43,11 +48,11 @@ function initStoechioJeu(fig) {
     suivant.hidden = true;
     recommencer.hidden = true;
     fauteManche = false;
-    progression.textContent = `MÉLANGE ${i + 1}/${bonnes.length}`;
+    progression.textContent = `${motManche} ${i + 1}/${bonnes.length}`;
   }
 
   function repondre(bouton, kChoix) {
-    track('widget_interact', { widget: 'stoechio-jeu', chapitre });
+    track('widget_interact', { widget: nomWidget, chapitre });
     if (kChoix === bonnes[i]) {
       bouton.dataset.etat = 'bonne';
       for (const b of groupes[i].querySelectorAll('.quiz-reponse')) b.disabled = true;
@@ -55,7 +60,7 @@ function initStoechioJeu(fig) {
       explications[i].hidden = false;
       if (!fauteManche) sansFaute += 1;
       if (i + 1 < bonnes.length) {
-        suivant.textContent = `Mélange suivant (${i + 2}/${bonnes.length}) ▸`;
+        suivant.textContent = `${motSuivant} (${i + 2}/${bonnes.length}) ▸`;
         suivant.hidden = false;
       } else {
         finalTxt.textContent = `Terminé : ${sansFaute}/${bonnes.length} du premier coup.`;
