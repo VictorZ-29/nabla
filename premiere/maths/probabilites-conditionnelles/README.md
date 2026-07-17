@@ -41,8 +41,20 @@ hook → picture → manipulation → formal definition), never to be reordered:
    musicians in the frame aligns every gauge on 0,30); then définition
    (product form), equivalence with P_A(B) = P(B), the méthode (always a
    calculation), and the indépendants/incompatibles face-à-face table.
-6. **Consolidation** — 5 pièges classiques, l'essentiel en 5 lignes,
-   15 exercices corrigés, Vers le Bac (usine à deux lignes : totales,
+6. **Répétition d'épreuves** (§6 — added July 2026 for the 2026
+   programme: succession de n ≤ 4 épreuves de Bernoulli indépendantes et
+   identiques, sans loi binomiale) — the **bernoulli** widget (three
+   lancers francs, an 8-leaf tree, a p slider and an event picker
+   « 0/1/2/3/au moins 1 succès ») grounds the gesture *first*; then
+   DÉFINITION (épreuve/succession de Bernoulli), PROPRIÉTÉ
+   (produit le long d'un chemin, somme des chemins), POURQUOI (§3 × §5:
+   the tree always multiplies, independence makes every level carry the
+   same numbers), MÉTHODE (n ≤ 4; count ALL orders; « au moins un » via
+   the contraire 1 − (1−p)ⁿ), EXEMPLES RÉSOLUS (archère 3 flèches
+   exactly-2 = 0,243; chevalier de Méré, au moins un six en 4 lancers
+   ≈ 0,52), quiz s6 (3 q.).
+7. **Consolidation** — 6 pièges classiques, l'essentiel en 5 lignes,
+   17 exercices corrigés, Vers le Bac (usine à deux lignes : totales,
    renversement, indépendance, réglage rendant D indépendant, complément
    « au moins un »).
 
@@ -71,6 +83,13 @@ No `FONCTIONS` registry entries are used (no curves in this chapter).
   r = 5, origin (11, 11), viewBox 640×395. Category order (row-major):
   vrais positifs, malades non détectés, faux positifs, vrais négatifs —
   malades contiguous so prevalence reads as a block.
+- **Bernoulli tree** (`bernoulli.js`): viewBox 640×404; root (30, 202);
+  level-1 nodes (190, 106)/(190, 298); level-2 (350, 58/154/250/346);
+  leaves x = 510, y = 34 + 48·i (i = 0…7, order SSS→EEE, bit = échec);
+  leaf values at x = 544; branch probability labels centred at
+  x = 103/283/437, offset ±14 px (±10 px at level 3) from branch
+  midpoints. p restricted to the 0,1 grid ([0,1 ; 0,9], step 0,1) so
+  every leaf probability is exact in 3 decimals (p^s·(1−p)^(3−s)).
 
 ## Section structure
 
@@ -81,9 +100,10 @@ No `FONCTIONS` registry entries are used (no curves in this chapter).
 | `s3` | 3. L'arbre pondéré | hook (expériences en étapes ; les conditionnelles vivent sur les branches) · **widget arbre** · PROPRIÉTÉ (les trois règles) · POURQUOI ? (une part d'une part ; la définition lue à l'envers) · MÉTHODE · EXEMPLE RÉSOLU (sac sans remise) · **quiz s3** (3 q.) |
 | `s4` | 4. Les probabilités totales | prose (les deux chemins vers R, renvoi à la barre du §3) · PROPRIÉTÉ · POURQUOI ? (recoller les morceaux) · MÉTHODE (P(B) par l'arbre) · EXEMPLE RÉSOLU (Jade vélo/bus + renversement) · MÉTHODE (renverser le sachant) · prose paradoxe · **widget depistage** · morale (P_malade(positif) ≠ P_positif(malade)) · **quiz s4** (3 q.) |
 | `s5` | 5. L'indépendance | hook (aurait-elle pu ne rien changer ?) · **widget independance** · prose k = 3 · DÉFINITION (produit) · PROPRIÉTÉ (P_A(B) = P(B)) · POURQUOI ? (équivalence) · MÉTHODE · EXEMPLES (roi/cœur oui ; dé du §2 non) · prose + table FACE-À-FACE indépendants/incompatibles · À RETENIR · **quiz s5** (4 q.) |
-| `pieges` | Les pièges classiques | 5 pièges (∩ vs sachant · sachant renversé · P(B) sur une branche · indépendant vs incompatible · indépendance au feeling) |
-| `essentiel` | L'essentiel en 5 lignes | SACHANT · ARBRE · CHEMIN · TOTALES · INDÉPENDANCE |
-| `ex` | Exercices — 15 corrigés | course order: tableau 01 · traduction 02 · définition 03 · chemin 04 · arbre sans remise 05 · totales 06–07 · renversé 08–09 · indépendance 10–13 · problème 14 (site e-commerce) · **VERS LE BAC** (ex. 15, `#bac`, usine deux lignes) |
+| `s6` | 6. Répéter l'expérience | hook (lancers francs, p = 0,6, indépendance au sens du §5) · **widget bernoulli** · DÉFINITION (épreuve/succession de Bernoulli) · PROPRIÉTÉ (produit d'un chemin, somme des chemins) · POURQUOI ? (§3 rejoint §5) · MÉTHODE (n ≤ 4 · tous les ordres · contraire pour « au moins un ») · EXEMPLES RÉSOLUS (archère 0,243 ; Méré 671/1296 ≈ 0,52) · **quiz s6** (3 q.) |
+| `pieges` | Les pièges classiques | 6 pièges (∩ vs sachant · sachant renversé · P(B) sur une branche · indépendant vs incompatible · indépendance au feeling · ordres oubliés d'un même score) |
+| `essentiel` | L'essentiel en 5 lignes | SACHANT · ARBRE · CHEMIN · TOTALES · INDÉPENDANCE (inchangé — pas de ligne Bernoulli, voir flag 24) |
+| `ex` | Exercices — 17 corrigés | course order: tableau 01 · traduction 02 · définition 03 · chemin 04 · arbre sans remise 05 · totales 06–07 · renversé 08–09 · indépendance 10–13 · répétition d'épreuves 14 (Léna, 3 lancers) · au moins un 15 (coffres, n = 4) · problème 16 (site e-commerce) · **VERS LE BAC** (ex. 17, `#bac`, usine deux lignes) |
 
 ### Components introduced by this chapter
 
@@ -191,21 +211,53 @@ Module `assets/js/widgets/independance.js`, instance `data-k-init="6"`.
   baisse les chances de M » / « ne change rien — indépendants ! »).
 - **Reset**: header button → k = 6.
 
+### 5. `bernoulli` — « Trois lancers francs » (§6, added July 2026)
+
+Module `assets/js/widgets/bernoulli.js`, instance `data-p-init="0.6"`.
+Archetype B (native controls only — keyboard and touch free); reuses the
+`arbre.js` SVG vocabulary (`.arbre-branche/-evt/-proba/-feuille-val`,
+`.chemin-actif`, `.pt-noeud`) — **zero new CSS**.
+
+- **Fixed**: n = 3 throws (an n = 4 tree is unreadable at 375 px; n = 4
+  is exercised via the contraire in ex 15 and the Méré example).
+- **Controls**: slider p ∈ [0,1 ; 0,9] step 0,1 (0,1 grid ⇒ every leaf
+  value exact in 3 decimals); segmented event picker « 0 / 1 / 2 / 3 /
+  au moins 1 » (aria-pressed, exclusive), default « 3 ».
+- **Drawing**: 14 branches, 14 letters S/E, live branch probabilities
+  (2 decimals — the same pair repeated at every level, deliberately),
+  8 leaf values (3 decimals). Branches, probability labels and leaf
+  values on paths realising the chosen event get `.chemin-actif`
+  (accent); « au moins 1 » lights 7 of 8 paths — visually loud on
+  purpose (the « too many paths, use the contraire » lesson).
+- **Readouts**: two-line composed text in `.lecture-formule`
+  (aria-live) — line 1 counts the paths in words, line 2 unrolls the
+  computation with the result in `.val-accent` (static span structure,
+  textContent-only updates: k = 3/0 « produit d'un seul chemin »,
+  k = 1/2 « 3 chemins × valeur », « au moins 1 » via 1 − P(0 succès)).
+  Chips: « chaque étage : S avec 0,60, E avec 0,40 » (live) and
+  accent chip « somme des 8 feuilles : 1,000 » (invariant shown, as on
+  the arbre widget). Static `.widget-note` names « identiques et
+  indépendantes » as what authorises multiplying without conditionals.
+- **Reset**: header button → p = 0,6, event « 3 ».
+- Renders coalesced per frame (`planifierRendu`), same idiom as arbre.
+
 ## Quiz « Teste-toi » (reuses assets/js/quiz.js)
 
-Four quizzes (`s2/s3/s4/s5`), 13 questions total, same markup and
-behaviour as the other chapters (static relance/explication HTML, wrong
-= marked+disabled+retry, right = locked+explanation, score in header).
-Distractors are the chapter's real errors: P(A∩B) vs P_A(B), produit vs
-somme, sachant renversé, branches non pondérées (0,8), indépendant vs
-incompatible, « environ 90 % » on the test question.
+Five quizzes (`s2/s3/s4/s5/s6`), 16 questions total (3+3+3+4+3), same
+markup and behaviour as the other chapters (static relance/explication
+HTML, wrong = marked+disabled+retry, right = locked+explanation, score
+in header). Distractors are the chapter's real errors: P(A∩B) vs
+P_A(B), produit vs somme, sachant renversé, branches non pondérées
+(0,8), indépendant vs incompatible, « environ 90 % » on the test
+question — and for s6: additionner au lieu de multiplier (1,5), l'ordre
+unique oublié (0,125), p × n pour « au moins un » (0,8).
 
 ## Analytics (Plausible, throttled ≈ 1 event / interaction session)
 
 | Event | Props | Fired |
 |---|---|---|
-| `widget_interact` | `widget: univers \| arbre \| depistage \| independance \| quiz-s2 \| quiz-s3 \| quiz-s4 \| quiz-s5`, `chapitre: probabilites` | first interaction, then ≤ 1 / 30 s per widget/quiz |
-| `corrige_open` | `exercice: 01 … 14`, `chapitre: probabilites` | when a corrigé is opened |
+| `widget_interact` | `widget: univers \| arbre \| depistage \| independance \| bernoulli \| quiz-s2 \| quiz-s3 \| quiz-s4 \| quiz-s5 \| quiz-s6`, `chapitre: probabilites` | first interaction, then ≤ 1 / 30 s per widget/quiz |
+| `corrige_open` | `exercice: 01 … 16`, `chapitre: probabilites` | when a corrigé is opened |
 | `bac_open` | — | when the Vers le Bac corrigé is opened |
 
 `chapitre` read from `<body data-chapitre="probabilites">` (kept short,
@@ -269,7 +321,8 @@ Specific interpretations and decisions:
 13. **Vers le Bac B.3 uses one step beyond the chapter** (répétition de
     deux épreuves indépendantes + événement contraire) — standard in
     bac subjects on this chapter, but tell me if you'd rather keep it
-    strictly inside the cours.
+    strictly inside the cours. *(Update July 2026: with the new §6 this
+    question is now fully inside the cours — flag resolved.)*
 14. **Ex. 09 duplicates the dépistage widget's logic on purpose** (with
     a 2 % prevalence) so the student re-derives by hand what the graphic
     showed.
@@ -285,3 +338,57 @@ Specific interpretations and decisions:
 18. **Développé sur la branche
     `claude/probabilites-conditionnelles-fiche-bz25um`** (consigne de
     session) — merge to `main` when you're happy.
+
+Flags 19+ come from the July 2026 « programme 2026 » extension pass
+(succession d'épreuves de Bernoulli, PROGRAMME.md):
+
+19. **New §6 added for the 2026 programme** (BO n°14 du 2 avril 2026:
+    succession de n ≤ 4 épreuves de Bernoulli indépendantes et
+    identiques, sans loi binomiale). Every word of §6 — prose,
+    DÉFINITION, PROPRIÉTÉ, POURQUOI, MÉTHODE, the archère and Méré
+    examples, quiz s6, exercises 14–15 and their corrigés — is my
+    writing in your voice; please read as author. The exact official
+    wording of the annexe could not be fetched from the sandbox (see
+    PROGRAMME.md « À vérifier ») — the scope implemented is
+    cross-checked from concordant secondary sources.
+20. **Six course sections instead of the canonical five** — the house
+    anatomy (audit.md) says 5; the programme addition earns its own
+    section rather than bloating §5. Sommaire now has 10 links.
+21. **The bernoulli widget is my design** (no mock): n = 3 fixed,
+    p on the 0,1 grid so every displayed number is exact, event picker
+    instead of clickable leaves (the event—not the single path—is the
+    2026 skill), « au moins 1 » as a fifth segment delivering the
+    contraire lesson. Specs above.
+22. **Exercises renumbered post-launch**: the problème « site
+    e-commerce » moved 14 → 16 and the bac 15 → 17 so the two new
+    Bernoulli exercises (14–15) sit in course order. The `corrige_open`
+    analytics props change accordingly — two weeks of launch data on
+    « exercice 14/15 » now refer to different exercises.
+23. **s5 quiz retitled** « Quatre questions pour finir » → « Quatre
+    questions sur l'indépendance » (it no longer closes the chapter).
+    One original sentence touched.
+24. **Six pièges** (house rule says 4–5): the « ordres oubliés » trap
+    earned the sixth slot rather than evicting an existing piège. Say
+    the word to trim. **L'essentiel stays at exactly 5 lines** with no
+    Bernoulli line (hard house rule); if you want one, my suggestion is
+    to fold CHEMIN and TOTALES together and add « RÉPÉTITION :
+    P(au moins un) = 1 − (1−p)ⁿ ».
+25. **Chevalier de Méré**: the historical claim (he won the « at least
+    one six in four throws » bet and wrote to Pascal) is the standard
+    telling of the 1654 correspondence; reword if you find it too
+    storybook.
+26. **Header meta** now « ≈ 70 min de travail · 17 exercices
+    corrigés »; head description/OG/JSON-LD and the homepage card
+    updated to name répétition d'épreuves and 17 exercices.
+27. **JS budget re-measured**: 48,5 KB unminified for everything the
+    page loads (theme, sommaire, corrige, quiz, analytics, nabla-graph,
+    univers, arbre, depistage, independance, bernoulli 7,4 KB) — under
+    the 50 KB ceiling but nearly full; flag 16's earlier « 38,9 KB »
+    was measured over a narrower module set. Verified end-to-end with a
+    jsdom harness (29 checks: tree drawing, all four event modes,
+    slider, reset, quiz s6, corrigé toggles 14/15/16/17, no duplicate
+    ids) + KaTeX render of all 337 formulas, 0 errors. The two-theme
+    visual pass at 375 px/desktop remains on your checklist (no browser
+    in this session).
+28. **No CSS changed** (the widget reuses the arbre vocabulary), so no
+    `?v=` bump was needed anywhere.

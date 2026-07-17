@@ -16,30 +16,30 @@
 </script>
 
 <title>Les probabilités conditionnelles — Première Spé Maths | Nabla</title>
-<meta name="description" content="Comprends vraiment les probabilités conditionnelles : le « sachant », les arbres pondérés, les probabilités totales et l'indépendance, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<meta name="description" content="Comprends vraiment les probabilités conditionnelles : le « sachant », les arbres pondérés, les probabilités totales, l'indépendance et la répétition d'épreuves, avec des graphiques que tu manipules toi-même et 17 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
 <link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/probabilites-conditionnelles/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Les probabilités conditionnelles — Première Spé Maths | Nabla">
-<meta property="og:description" content="Probabilité sachant, arbres pondérés, probabilités totales, indépendance : un cours interactif où tu manipules les univers toi-même, et 15 exercices corrigés.">
+<meta property="og:description" content="Probabilité sachant, arbres pondérés, probabilités totales, indépendance, répétition d'épreuves : un cours interactif où tu manipules les univers toi-même, et 17 exercices corrigés.">
 <meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/probabilites-conditionnelles/">
 <meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
 <meta property="og:locale" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Les probabilités conditionnelles — Première Spé Maths | Nabla">
-<meta name="twitter:description" content="Probabilité sachant, arbres pondérés, probabilités totales, indépendance : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:description" content="Probabilité sachant, arbres pondérés, probabilités totales, indépendance, répétition d'épreuves : un cours interactif et 17 exercices corrigés.">
 <meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LearningResource",
   "name": "Les probabilités conditionnelles — cours interactif et exercices corrigés",
-  "description": "Chapitre interactif de Première spé maths sur les probabilités conditionnelles : probabilité de B sachant A, tableaux croisés, arbres pondérés, formule des probabilités totales, indépendance de deux événements. 15 exercices corrigés.",
+  "description": "Chapitre interactif de Première spé maths sur les probabilités conditionnelles : probabilité de B sachant A, tableaux croisés, arbres pondérés, formule des probabilités totales, indépendance de deux événements, répétition d'épreuves de Bernoulli indépendantes. 17 exercices corrigés.",
   "url": "https://NABLA_DOMAIN/premiere/maths/probabilites-conditionnelles/",
   "inLanguage": "fr",
   "isAccessibleForFree": true,
   "learningResourceType": "fiche de révision interactive",
   "educationalLevel": "Première générale — spécialité mathématiques",
-  "teaches": "Probabilités conditionnelles, tableaux croisés, arbres pondérés, formule des probabilités totales, indépendance de deux événements",
+  "teaches": "Probabilités conditionnelles, tableaux croisés, arbres pondérés, formule des probabilités totales, indépendance de deux événements, succession d'épreuves de Bernoulli indépendantes et identiques",
   "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
   "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
 }
@@ -71,6 +71,7 @@
 <script type="module" src="../../../assets/js/widgets/arbre.js"></script>
 <script type="module" src="../../../assets/js/widgets/depistage.js"></script>
 <script type="module" src="../../../assets/js/widgets/independance.js"></script>
+<script type="module" src="../../../assets/js/widgets/bernoulli.js"></script>
 <script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
 </head>
 <body data-chapitre="probabilites">
@@ -96,8 +97,8 @@
     <span>Première · Spé Maths</span>
   </div>
   <h1>Les probabilités conditionnelles</h1>
-  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer une probabilité conditionnelle, construire et exploiter un arbre pondéré, utiliser la formule des probabilités totales — et reconnaître quand deux événements sont indépendants.</p>
-  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer une probabilité conditionnelle, construire et exploiter un arbre pondéré, utiliser la formule des probabilités totales, reconnaître quand deux événements sont indépendants — et répéter une même épreuve pour calculer un «&nbsp;au moins un succès&nbsp;».</p>
+  <div class="chap-meta">≈ 70 min de travail · 17 exercices corrigés · mis à jour juillet 2026</div>
 </section>
 
 <div class="chap-layout">
@@ -110,9 +111,10 @@
       <a href="#s3">3. L'arbre pondéré</a>
       <a href="#s4">4. Les probabilités totales</a>
       <a href="#s5">5. L'indépendance</a>
+      <a href="#s6">6. Répéter l'expérience</a>
       <a href="#pieges">Les pièges classiques</a>
       <a href="#essentiel">L'essentiel en 5 lignes</a>
-      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#ex">Exercices — 17 corrigés</a>
       <a href="#bac">Vers le Bac</a>
     </nav>
   </aside>
@@ -127,9 +129,10 @@
         <a href="#s3">3. L'arbre pondéré</a>
         <a href="#s4">4. Les probabilités totales</a>
         <a href="#s5">5. L'indépendance</a>
+        <a href="#s6">6. Répéter l'expérience</a>
         <a href="#pieges">Les pièges classiques</a>
         <a href="#essentiel">L'essentiel en 5 lignes</a>
-        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#ex">Exercices — 17 corrigés</a>
         <a href="#bac">Vers le Bac</a>
       </nav>
     </details>
@@ -695,7 +698,7 @@
         <div class="widget-tete">
           <div class="widget-titre-groupe">
             <span class="pill-interactif">TESTE-TOI</span>
-            <span class="widget-titre">Quatre questions pour finir</span>
+            <span class="widget-titre">Quatre questions sur l'indépendance</span>
           </div>
           <span class="quiz-score js-quiz-score" hidden></span>
         </div>
@@ -752,6 +755,133 @@
       </div>
     </section>
 
+    <section id="s6" class="chap-section">
+      <h2>6. Répéter l'expérience&nbsp;: trois lancers, un arbre</h2>
+      <p class="prose">Une dernière situation, que tu vas croiser partout&nbsp;: la <em>même</em> expérience, rejouée plusieurs fois. Au basket, tu réussis tes lancers francs six fois sur dix. À chaque lancer, deux issues seulement&nbsp;: le succès, probabilité 0,6, ou l'échec, probabilité 0,4. Tu tires trois lancers, et le résultat d'un lancer n'influence pas le suivant&nbsp;: les épreuves sont <strong>indépendantes</strong>, exactement au sens de la section 5.</p>
+      <p class="prose">Un arbre raconte tout&nbsp;: trois étages, un par lancer, et à chaque étage le même duel S / E avec les mêmes nombres. Choisis un événement sous le graphique — «&nbsp;2 succès&nbsp;», «&nbsp;au moins 1&nbsp;» — et regarde quels chemins s'allument.</p>
+
+      <figure class="widget" id="widget-bernoulli" data-widget="bernoulli" data-p-init="0.6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Trois lancers francs</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 404" aria-label="Arbre d'une répétition de trois lancers : à chaque étage, succès S ou échec E avec les mêmes probabilités ; les chemins de l'événement choisi s'allument en couleur, avec la probabilité de chaque chemin au bout"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">probabilité de réussir un lancer&nbsp;: p = <span class="js-p">0,6</span></span>
+            <input type="range" class="js-curseur" min="0.1" max="0.9" step="0.1" value="0.6" aria-label="Probabilité de succès d'un lancer">
+          </div>
+          <p class="widget-question">Combien de succès sur les trois lancers&nbsp;?</p>
+          <div class="segmente js-choix">
+            <button type="button" data-k="0" aria-pressed="false">0</button>
+            <button type="button" data-k="1" aria-pressed="false">1</button>
+            <button type="button" data-k="2" aria-pressed="false">2</button>
+            <button type="button" data-k="3" aria-pressed="true">3</button>
+            <button type="button" data-k="plus" aria-pressed="false">au moins 1</button>
+          </div>
+          <div class="lecture-formule" aria-live="polite"><span class="js-ligne1"></span><br><span class="js-l2pre"></span><span class="val-accent js-l2val"></span></div>
+          <div class="chips">
+            <span class="chip">chaque étage&nbsp;: S avec <span class="js-chip-p">0,60</span>, E avec <span class="js-chip-q">0,40</span></span>
+            <span class="chip chip--accent">somme des 8 feuilles&nbsp;: <span class="js-somme">1,000</span></span>
+          </div>
+        </div>
+        <div class="widget-note">Chaque étage rejoue le même duel S / E avec les mêmes probabilités, et un lancer n'influence pas le suivant&nbsp;: les épreuves sont identiques et indépendantes. C'est ce qui autorise à multiplier des probabilités «&nbsp;brutes&nbsp;» le long d'un chemin, sans conditionnelles.</div>
+      </figure>
+
+      <p class="prose">Ce que tu viens de manipuler porte un nom. Une expérience à deux issues, c'est une <strong>épreuve de Bernoulli</strong>&nbsp;; la rejouer plusieurs fois dans les mêmes conditions, c'est une <strong>succession d'épreuves de Bernoulli</strong>.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une <strong>épreuve de Bernoulli</strong> est une expérience aléatoire à deux issues&nbsp;: le <strong>succès</strong>, de probabilité \(p\), et l'<strong>échec</strong>, de probabilité \(1 - p\). Répéter \(n\) fois cette épreuve, à l'identique et de façon <strong>indépendante</strong>, donne une <strong>succession d'épreuves de Bernoulli</strong>, que l'on représente par un arbre à \(2^n\) chemins.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ</div>
+        <p>Sur l'arbre d'une succession d'épreuves indépendantes&nbsp;: la probabilité d'un chemin est le <strong>produit</strong> des probabilités inscrites sur ses branches&nbsp;; la probabilité d'un événement est la <strong>somme</strong> des probabilités des chemins qui le réalisent.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Rien de neuf&nbsp;: ce sont les sections 3 et 5 qui se rejoignent. L'arbre multiplie toujours le long d'un chemin (section 3)&nbsp;: \(P(S_1 \cap S_2) = P(S_1) \times P_{S_1}(S_2)\). Et l'indépendance (section 5) dit que \(P_{S_1}(S_2) = P(S_2)\)&nbsp;: la probabilité d'une branche ne dépend pas d'où l'on vient. Voilà pourquoi chaque étage porte les mêmes nombres — et pourquoi on multiplie des probabilités simples, sans «&nbsp;sachant&nbsp;».</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER SUR UNE RÉPÉTITION D'ÉPREUVES</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Vérifie la situation&nbsp;: deux issues, mêmes probabilités à chaque répétition, épreuves indépendantes. Dessine l'arbre — en Première, \(n\) ne dépasse pas 4.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Repère <em>tous</em> les chemins qui réalisent ton événement&nbsp;: «&nbsp;2 succès sur 3&nbsp;» passe par trois chemins, un par position de l'échec. Chaque chemin vaut le produit de ses branches.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Additionne les chemins. Pour «&nbsp;au moins un succès&nbsp;», passe par le contraire&nbsp;: la probabilité de n'avoir aucun succès vaut \((1-p)^n\), donc celle d'en avoir au moins un vaut \(1 - (1-p)^n\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — COMPTER LES CHEMINS, OU PASSER PAR LE CONTRAIRE</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Une archère touche la cible avec une probabilité de 0,9 à chaque flèche, ses tirs étant indépendants. Elle tire trois flèches. Probabilité qu'elle touche exactement deux fois&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>une épreuve de Bernoulli (touché / manqué, \(p = 0{,}9\)), répétée 3 fois à l'identique&nbsp;: un arbre à 8 chemins.</p>
+          <p><span class="etape-label">Étape 2 — </span>trois chemins donnent exactement deux touchés — le tir manqué peut être le 1ᵉʳ, le 2ᵉ ou le 3ᵉ. Chacun vaut \(0{,}9 \times 0{,}9 \times 0{,}1 = 0{,}081\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(P = 3 \times 0{,}081 = 0{,}243\).</p>
+          <p class="conclusion">Conclusion&nbsp;: environ une chance sur quatre. Le réflexe qui sauve&nbsp;: compter les <em>ordres</em> possibles avant de multiplier.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Tu lances un dé équilibré quatre fois. Probabilité d'obtenir au moins un six&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>«&nbsp;au moins un six&nbsp;» a un contraire tout simple&nbsp;: «&nbsp;aucun six&nbsp;». À chaque lancer, la probabilité de ne pas faire six vaut \(\dfrac{5}{6}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>quatre lancers indépendants&nbsp;: \(P(\text{aucun six}) = \left(\dfrac{5}{6}\right)^4 = \dfrac{625}{1296}\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(P(\text{au moins un six}) = 1 - \dfrac{625}{1296} = \dfrac{671}{1296} \approx 0{,}52\).</p>
+          <p class="conclusion">Conclusion&nbsp;: un peu mieux qu'une chance sur deux — c'est le pari que le chevalier de Méré gagnait à la chaîne au XVII<sup>e</sup> siècle, avant d'écrire à Pascal pour comprendre pourquoi. Retiens la route&nbsp;: «&nbsp;au moins un&nbsp;» = 1 − «&nbsp;aucun&nbsp;».</p>
+        </div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois dernières questions</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>On répète 3 fois, de façon indépendante, une épreuve de Bernoulli de succès \(p = 0{,}5\). La probabilité d'obtenir 3 succès vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(0{,}5^3 = 0{,}125\)</button>
+              <button type="button" class="quiz-reponse">\(0{,}5\)</button>
+              <button type="button" class="quiz-reponse">\(0{,}5 + 0{,}5 + 0{,}5 = 1{,}5\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> un seul chemin (S-S-S), et on <em>multiplie</em> le long du chemin&nbsp;: \(0{,}5 \times 0{,}5 \times 0{,}5\). Additionner donnerait 1,5… qui n'est même pas une probabilité.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Toujours \(p = 0{,}5\), 3 répétitions. La probabilité d'obtenir exactement 2 succès vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,125</button>
+              <button type="button" class="quiz-reponse">0,25</button>
+              <button type="button" class="quiz-reponse">0,375</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> <em>trois</em> chemins réalisent 2 succès (S-S-E, S-E-S, E-S-S), chacun de probabilité \(0{,}125\)&nbsp;: \(3 \times 0{,}125 = 0{,}375\). Le piège classique, c'est d'oublier les ordres et de répondre 0,125.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Un jeu réussit avec une probabilité de 0,2 à chaque essai, essais indépendants. Sur 4 essais, la probabilité d'au moins un succès vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(0{,}2 \times 4 = 0{,}8\)</button>
+              <button type="button" class="quiz-reponse">\(1 - 0{,}8^4 \approx 0{,}59\)</button>
+              <button type="button" class="quiz-reponse">\(0{,}2^4 \approx 0{,}0016\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> «&nbsp;au moins un&nbsp;» = 1 − «&nbsp;aucun&nbsp;» = \(1 - 0{,}8^4\). Multiplier \(p\) par \(n\) ne fabrique pas une probabilité (avec 6 essais, ça «&nbsp;dépasserait&nbsp;» 1&nbsp;!), et \(0{,}2^4\), c'est la probabilité de réussir <em>tous</em> les essais, pas au moins un.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="pieges" class="chap-section">
       <div class="bloc-pieges">
         <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
@@ -769,6 +899,9 @@
         </div>
         <div class="piege">
           <p><strong>Décréter l'indépendance «&nbsp;au feeling&nbsp;».</strong> Elle se vérifie&nbsp;: compare \(P(A \cap B)\) à \(P(A) \times P(B)\). Sur un dé, «&nbsp;pair&nbsp;» et «&nbsp;au moins 4&nbsp;» ont l'air étrangers — ils sont dépendants (\(1/3 \neq 1/4\)). Roi et cœur ont l'air liés — ils sont indépendants.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Oublier les autres ordres d'un même score.</strong> «&nbsp;Exactement 2 succès sur 3 lancers&nbsp;», ce n'est pas un chemin mais trois (S-S-E, S-E-S, E-S-S)&nbsp;: additionne-les. Avant de multiplier, compte toujours les chemins qui réalisent l'événement.</p>
         </div>
       </div>
     </section>
@@ -802,9 +935,9 @@
     <section id="ex" class="chap-section">
       <div class="ex-tete">
         <h2>Exercices</h2>
-        <span class="ex-compte">15 corrigés</span>
+        <span class="ex-compte">17 corrigés</span>
       </div>
-      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: lecture de tableaux et probabilités conditionnelles, arbres, probabilités totales et sachant renversé, indépendance, et un problème pour finir.</p>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: lecture de tableaux et probabilités conditionnelles, arbres, probabilités totales et sachant renversé, indépendance, répétition d'épreuves, et un problème pour finir.</p>
 
       <article class="exercice">
         <div class="exercice-tete">
@@ -1053,15 +1186,53 @@
 
       <article class="exercice">
         <div class="exercice-tete">
-          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· répétition d'épreuves</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Léna réussit ses lancers francs avec une probabilité de 0,8, et ses lancers sont supposés indépendants. Elle en tire trois. a. Représente la situation par un arbre. b. Quelle est la probabilité qu'elle réussisse les trois&nbsp;? c. Qu'elle en réussisse exactement un&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>trois étages identiques&nbsp;: à chaque lancer, S avec 0,8 et E avec 0,2. L'arbre a \(2^3 = 8\) chemins — c'est celui du graphique de la section 6, avec \(p = 0{,}8\).</p>
+          <p><span class="etape-label">b. — </span>un seul chemin (S-S-S), produit le long du chemin&nbsp;: \(0{,}8^3 = 0{,}512\).</p>
+          <p><span class="etape-label">c. — </span>trois chemins (S-E-E, E-S-E, E-E-S), chacun de probabilité \(0{,}8 \times 0{,}2 \times 0{,}2 = 0{,}032\)&nbsp;: \(P = 3 \times 0{,}032 = 0{,}096\).</p>
+          <p class="conclusion">Conclusion&nbsp;: b. \(0{,}512\)&nbsp;; c. \(0{,}096\). Contrôle-réflexe&nbsp;: un score donné = compter les chemins, puis multiplier <em>dans</em> chaque chemin et additionner <em>entre</em> les chemins.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 15 <span class="exercice-theme">· au moins un</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un jeu vidéo, chaque coffre contient un objet rare avec une probabilité de 0,1, indépendamment des autres coffres. Tu en ouvres quatre. a. Quelle est la probabilité de ne trouver aucun objet rare&nbsp;? b. Déduis-en la probabilité d'en trouver au moins un. c. Un joueur affirme&nbsp;: «&nbsp;0,1 × 4 = 0,4, donc 40&nbsp;% de chances.&nbsp;» Explique pourquoi son calcul est faux.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-15" data-exercice="15" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-15" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>quatre épreuves de Bernoulli indépendantes, échec (pas d'objet rare) de probabilité 0,9&nbsp;: \(P(\text{aucun}) = 0{,}9^4 = 0{,}6561\).</p>
+          <p><span class="etape-label">b. — </span>par le contraire&nbsp;: \(P(\text{au moins un}) = 1 - 0{,}6561 = 0{,}3439\), soit environ 34&nbsp;%.</p>
+          <p><span class="etape-label">c. — </span>additionner (ou multiplier par \(n\)) des probabilités d'événements qui peuvent se produire <em>ensemble</em> ne donne pas une probabilité&nbsp;: avec 20 coffres, son calcul donnerait \(0{,}1 \times 20 = 2\), soit «&nbsp;200&nbsp;%&nbsp;». La bonne route passe toujours par le contraire&nbsp;: \(1 - 0{,}9^{20} \approx 0{,}88\), et jamais plus de 1.</p>
+          <p class="conclusion">Conclusion&nbsp;: a. \(0{,}6561\)&nbsp;; b. \(0{,}3439\). «&nbsp;Au moins un&nbsp;» = 1 − «&nbsp;aucun&nbsp;»&nbsp;: le réflexe à garder pour le bac.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 16 <span class="exercice-theme">· problème</span></span>
           <span class="exercice-niveau">
             <span class="niveau-nom">niveau 3</span>
             <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
           </span>
         </div>
         <p class="exercice-enonce">Sur un site de vente en ligne, 70&nbsp;% des visites se font sur téléphone, le reste sur ordinateur. 4&nbsp;% des visites sur téléphone aboutissent à un achat, contre 12&nbsp;% des visites sur ordinateur. On choisit une visite au hasard&nbsp;; on note T&nbsp;: «&nbsp;visite sur téléphone&nbsp;» et A&nbsp;: «&nbsp;la visite aboutit à un achat&nbsp;». a. Calcule \(P(A)\). b. Une visite a abouti à un achat&nbsp;: probabilité qu'elle vienne d'un téléphone&nbsp;? c. Les événements T et A sont-ils indépendants&nbsp;? d. Qu'est-ce que ces résultats racontent au responsable du site&nbsp;?</p>
-        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
-        <div class="corrige" id="corrige-14" hidden>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-16" data-exercice="16" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-16" hidden>
           <div class="corrige-tag">CORRIGÉ</div>
           <p><span class="etape-label">a. — </span>probabilités totales&nbsp;: \(P(A) = 0{,}7 \times 0{,}04 + 0{,}3 \times 0{,}12 = 0{,}028 + 0{,}036 = 0{,}064\)&nbsp;: 6,4&nbsp;% des visites aboutissent à un achat.</p>
           <p><span class="etape-label">b. — </span>sachant renversé&nbsp;: \(P_A(T) = \dfrac{P(T \cap A)}{P(A)} = \dfrac{0{,}028}{0{,}064} = 0{,}4375\).</p>
@@ -1073,7 +1244,7 @@
 
       <article id="bac" class="bac">
         <div class="bande-inversee">
-          <span>VERS LE BAC — EXERCICE 15</span>
+          <span>VERS LE BAC — EXERCICE 17</span>
           <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
         </div>
         <div class="bac-corps">
@@ -1090,7 +1261,7 @@
             <li>On règle la ligne 2, et son taux de défaut devient \(x\). Exprime \(P(D)\) en fonction de \(x\), puis détermine \(x\) pour que \(L_1\) et D soient indépendants. Interprète la valeur trouvée.</li>
             <li>Après ce réglage, chaque enceinte a une probabilité 0,02 de présenter un défaut. On en prélève deux, dans des lots séparés, et on admet que les deux prélèvements sont indépendants. Quelle est la probabilité qu'au moins une des deux présente un défaut&nbsp;?</li>
           </ol>
-          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="17" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
           <div class="corrige" id="corrige-bac" hidden>
             <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
             <p><span class="etape-label">A.1 — </span>premier niveau&nbsp;: \(P(L_1) = 0{,}6\), \(P(L_2) = 0{,}4\). Deuxième niveau (conditionnelles)&nbsp;: \(P_{L_1}(D) = 0{,}02\), \(P_{L_2}(D) = 0{,}05\) — et les branches \(\overline{D}\) complètent chaque nœud à 1.</p>
