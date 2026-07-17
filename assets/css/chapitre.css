@@ -1223,3 +1223,16 @@
    (non positionné) et élargissait la page à 375 px. Ancrée ici, elle reste
    rognée dans la zone de défilement. */
 .tableau .defile { position: relative; }
+
+/* --- Composition d'un système (physique-chimie) : verre de dilution, lecture d'étalonnage -------------------
+   La pesée réutilise les barres .avc-* (barre choisie = accent, comme
+   courbe/tangente), la jauge de concentration réutilise .jauge-*, les
+   boutons d'espèces .feuille-btn. Nouveaux ici : le verre (contour craie,
+   liquide accent dont seule l'opacité varie — la teinte vient des tokens)
+   et la valeur accent lue sur les axes de la droite d'étalonnage.
+   Couleurs et épaisseurs : tokens uniquement. */
+
+.dil-verre { fill: none; stroke: var(--chalk); stroke-width: var(--sw-curve); stroke-linecap: round; }
+.dil-liquide { fill: var(--accent); }
+.etl-valeur { font-family: var(--font-mono); font-size: 13px; fill: var(--accent); }
+.chip sup { line-height: 0; }
