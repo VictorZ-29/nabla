@@ -39,7 +39,7 @@
   "isAccessibleForFree": true,
   "learningResourceType": "fiche de révision interactive",
   "educationalLevel": "Première générale — spécialité mathématiques",
-  "teaches": "Taux de variation, nombre dérivé, tangente à une courbe, approximation affine, fonctions dérivées, variations d'une fonction",
+  "teaches": "Taux de variation, nombre dérivé, tangente à une courbe, approximation linéaire, fonctions dérivées, variations d'une fonction",
   "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
   "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
 }
@@ -349,10 +349,10 @@
       <p class="prose">La tangente a un troisième talent, après sa pente et son équation&nbsp;: tout près de A, elle <em>remplace</em> la courbe. Zoome par la pensée sur le point de tangence&nbsp;: les deux tracés se confondent. Alors pour estimer \(f\) juste à côté de \(a\), inutile de calculer \(f\) — la droite suffit.</p>
 
       <div class="bloc-propriete">
-        <div class="bloc-label">PROPRIÉTÉ — L'APPROXIMATION AFFINE</div>
+        <div class="bloc-label">PROPRIÉTÉ — L'APPROXIMATION LINÉAIRE</div>
         <p>Pour \(h\) proche de 0&nbsp;:</p>
         <div class="math-vitrine">$$f(a + h) \approx f(a) + f'(a) \times h$$</div>
-        <p>C'est l'ordonnée que donne la tangente en \(x = a + h\)&nbsp;: on approche la courbe par sa tangente. On dit que \(f(a) + f'(a) \times h\) est l'<strong>approximation affine</strong> de \(f(a+h)\).</p>
+        <p>C'est l'ordonnée que donne la tangente en \(x = a + h\)&nbsp;: on remplace \(f\) par sa <strong>fonction affine tangente</strong> \(x \mapsto f(a) + f'(a)(x - a)\). On dit que \(f(a) + f'(a) \times h\) est l'<strong>approximation linéaire</strong> de \(f(a+h)\).</p>
       </div>
 
       <div class="bloc-pourquoi">
@@ -879,7 +879,7 @@
           <p><strong>Dériver un produit terme à terme.</strong> \((u\,v)' \neq u'v'\). Utilise la formule, à chaque fois.</p>
         </div>
         <div class="piege">
-          <p><strong>Utiliser l'approximation affine avec un \(h\) trop grand.</strong> \(f(a+h) \approx f(a) + f'(a) \times h\) n'est fiable que tout près de \(a\)&nbsp;: la tangente colle à la courbe au voisinage du point de tangence, pas ailleurs. À \(h = 0{,}02\), excellente&nbsp;; à \(h = 1\), elle raconte n'importe quoi.</p>
+          <p><strong>Utiliser l'approximation linéaire avec un \(h\) trop grand.</strong> \(f(a+h) \approx f(a) + f'(a) \times h\) n'est fiable que tout près de \(a\)&nbsp;: la tangente colle à la courbe au voisinage du point de tangence, pas ailleurs. À \(h = 0{,}02\), excellente&nbsp;; à \(h = 1\), elle raconte n'importe quoi.</p>
         </div>
       </div>
     </section>
@@ -1007,7 +1007,7 @@
           <p><span class="etape-label">Étape 1 — </span>Calcule \(f(2) = 2^3 - 3 \times 2 = 8 - 6 = 2\). Le point de tangence est \((2\;;\, 2)\).</p>
           <p><span class="etape-label">Étape 2 — </span>Dérive&nbsp;: \(f'(x) = 3x^2 - 3\), donc \(f'(2) = 3 \times 4 - 3 = 9\). La pente vaut 9.</p>
           <p><span class="etape-label">Étape 3 — </span>Applique la formule&nbsp;: \(y = f'(2)(x - 2) + f(2) = 9(x - 2) + 2\), soit \(y = 9x - 16\).</p>
-          <p><span class="etape-label">b. — </span>\(2{,}01\) est tout près de 2&nbsp;: la tangente fait le travail. \(f(2{,}01) \approx 9 \times 2{,}01 - 16 = 18{,}09 - 16 = 2{,}09\) — ou directement \(f(2) + f'(2) \times 0{,}01 = 2 + 0{,}09\). La vraie valeur est \(2{,}090601\)&nbsp;: si près du point, l'approximation affine est excellente.</p>
+          <p><span class="etape-label">b. — </span>\(2{,}01\) est tout près de 2&nbsp;: la tangente fait le travail. \(f(2{,}01) \approx 9 \times 2{,}01 - 16 = 18{,}09 - 16 = 2{,}09\) — ou directement \(f(2) + f'(2) \times 0{,}01 = 2 + 0{,}09\). La vraie valeur est \(2{,}090601\)&nbsp;: si près du point, l'approximation linéaire est excellente.</p>
           <p class="conclusion">Conclusion&nbsp;: a. \(y = 9x - 16\)&nbsp;; b. \(f(2{,}01) \approx 2{,}09\).</p>
         </div>
       </article>

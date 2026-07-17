@@ -392,3 +392,17 @@ Flags 19+ come from the July 2026 « programme 2026 » extension pass
     in this session).
 28. **No CSS changed** (the widget reuses the arbre vocabulary), so no
     `?v=` bump was needed anywhere.
+29. **Checked against the official annexe** (BO n°14 du 2 avril 2026 PDF,
+    provided by Victor on 17-07-2026): §6's scope matches the official
+    item word for word (« Pour n ⩽ 4, répétition de n épreuves de
+    Bernoulli indépendantes et identiques », represent the tree to
+    compute probabilities — flag 19's caveat is resolved). Two adjacent
+    official items are not (yet) on the page and are tracked in
+    PROGRAMME.md as possible compléments: the vocabulary « partition de
+    l'univers / système complet d'évènements » (the page's probabilités
+    totales use the {A, Ā} case), and the representation of a succession
+    of two independent trials by a **tableau** (the page only uses
+    trees). Also worth knowing: the 2026 programme initiates conditional
+    probabilities in Seconde (entretien via automatismes in Première) —
+    this chapter teaching them from scratch is exactly right for
+    revision + formalisation.

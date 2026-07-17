@@ -43,10 +43,10 @@ All three widgets and both figures use the same reference function:
 |---|---|---|
 | `s1` | 1. À quelle vitesse, exactement ? | hook prose (+ added time/distance reading of the figure) · static sécante figure · display formula (taux) |
 | `s2` | 2. Resserre les deux points | **widget sécante** · POURQUOI ? (h≠0, limite) · DÉFINITION · display formula (limite) · MÉTHODE (calculer f′(a)) · EXEMPLE RÉSOLU (f′(2) pour x²) · À RETENIR · **quiz s2** (3 q.) |
-| `s3` | 3. La tangente à une courbe | plain-language tangente gloss · PROPRIÉTÉ (équation) · POURQUOI ? (y = mx + p) · **widget tangente** (+ équation de T en direct) · MÉTHODE · EXEMPLE RÉSOLU (tangente de x² en 1) · PROPRIÉTÉ (approximation affine, programme 2026) · POURQUOI ? (définition du nombre dérivé relue ; callback aux lectures du widget sécante à h = 0,01) · EXEMPLE RÉSOLU (1,02² de tête) · **widget lecture** (lire f′(a), 4 manches) · **quiz s3** (4 q.) |
+| `s3` | 3. La tangente à une courbe | plain-language tangente gloss · PROPRIÉTÉ (équation) · POURQUOI ? (y = mx + p) · **widget tangente** (+ équation de T en direct) · MÉTHODE · EXEMPLE RÉSOLU (tangente de x² en 1) · PROPRIÉTÉ (approximation linéaire, programme 2026) · POURQUOI ? (définition du nombre dérivé relue ; callback aux lectures du widget sécante à h = 0,01) · EXEMPLE RÉSOLU (1,02² de tête) · **widget lecture** (lire f′(a), 4 manches) · **quiz s3** (4 q.) |
 | `s4` | 4. Dérivées usuelles et opérations | nombre → fonction dérivée gloss · table DÉRIVÉES USUELLES · POURQUOI ? ((x²)′ = 2x démontré) · table OPÉRATIONS · MÉTHODE · EXEMPLES RÉSOLUS (somme, produit, quotient, inverse) · **widget construis f′** · **widget associe** (f ↔ f′) · **quiz s4** (4 q.) |
 | `s5` | 5. Signe de f′ et variations | prose + **widget variations** · POURQUOI ? (zoom courbe ≈ tangente) · PROPRIÉTÉ · étude complète : TABLEAU DE SIGNES puis TABLEAU DE VARIATIONS · MÉTHODE · **quiz s5** (3 q.) |
-| `pieges` | Les pièges classiques | 5 pièges (5ᵉ : approximation affine avec h trop grand) |
+| `pieges` | Les pièges classiques | 5 pièges (5ᵉ : approximation linéaire avec h trop grand) |
 | `essentiel` | L'essentiel en 5 lignes | static recap card `.bloc-essentiel` : définition-limite, équation de tangente, usuelles, opérations, règle du signe |
 | `ex` | Exercices — 15 corrigés | ex. 01–14 with corrigés (course order: taux 01 · définition 02–03 · tangentes 04–06 · usuelles 07 · produit 08 · quotient 09 · inverse 10 · variations 11–13 · problème d'optimisation 14) · **VERS LE BAC** (ex. 15, `#bac`) |
 
@@ -385,10 +385,10 @@ Flags 31–32 come from Victor's copy review (July 2026):
     The next interactive on this page must trim or lazy-load something.
 
 Flags 37+ come from the July 2026 « programme 2026 » extension pass
-(approximation affine, PROGRAMME.md):
+(approximation linéaire, PROGRAMME.md):
 
-37. **Approximation affine added to §3** (2026 programme enriches
-    dérivation with l'approximation affine locale). Placement: right
+37. **Approximation linéaire added to §3** (2026 programme enriches
+    dérivation with the fonction affine tangente). Placement: right
     after the tangent-equation EXEMPLE RÉSOLU, as the tangent's « third
     talent » — prose gloss, PROPRIÉTÉ (f(a+h) ≈ f(a) + f′(a)·h, vitrine),
     POURQUOI (the limit definition reread, multiplied by h; callback to
@@ -406,7 +406,7 @@ Flags 37+ come from the July 2026 « programme 2026 » extension pass
 39. **Copy touched on existing elements**: chap-savoir gained
     « approcher une fonction tout près d'un point » ; the essentiel
     TANGENTE line gained « ; près de a : f(a+h) ≈ f(a) + f′(a) × h » ;
-    JSON-LD `teaches` gained « approximation affine ». A 5th piège was
+    JSON-LD `teaches` gained « approximation linéaire ». A 5th piège was
     added (h trop grand — within the 4–5 house range).
 40. **Exercise 05 extended** with a part b (approcher f(2,01) from the
     tangent y = 9x − 16 computed in part a; true value 2,090601) instead
@@ -417,3 +417,15 @@ Flags 37+ come from the July 2026 « programme 2026 » extension pass
     49,8 KB; no `?v=` bump needed). KaTeX verified: all 483 formulas on
     the page render with 0 errors (jsdom + katex 0.16.11). The two-theme
     visual pass remains on your checklist for the new blocks.
+42. **Checked against the official annexe** (BO n°14 du 2 avril 2026 PDF,
+    provided by Victor on 17-07-2026): the official term is
+    « approximation **linéaire** » / « fonction affine tangente » — the
+    page initially said « approximation affine » and was renamed
+    accordingly (PROPRIÉTÉ label + sentence, piège 5, ex 05 b, JSON-LD
+    `teaches`). The annexe capacité « Calculer une valeur approchée de
+    f(a + h) » is exactly what ex 05 b and quiz s3 Q4 train. Two annexe
+    items adjacent to this chapter are NOT yet on the page and are
+    tracked in PROGRAMME.md: fonctions paires/impaires and position
+    relative de deux courbes (section « Variations et courbes », partiel)
+    and the étude de la dérivabilité de |x| en 0 (currently a piège
+    only).
