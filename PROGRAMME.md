@@ -111,7 +111,7 @@ aux chapitres existants.**
 
 ## Physique-chimie — Première spécialité (programme 2019, toujours en vigueur)
 
-**Bilan : 3 chapitres en ligne · 13 à faire.** Découpage proposé : un
+**Bilan : 4 chapitres en ligne · 12 à faire.** Découpage proposé : un
 chapitre Nabla par sous-partie officielle (des regroupements restent
 possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 
@@ -134,7 +134,7 @@ possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 |---|---|---|
 | Interactions et champs | « Interactions fondamentales et introduction à la notion de champ » : électrisation, loi de Coulomb ; champ électrostatique E = F/q ; champ de gravitation ; cartes de champ. | ⬜ À faire |
 | Les fluides au repos | « Description d'un fluide au repos » : modèle microscopique, pression, force pressante ; loi de Mariotte ; loi fondamentale de la statique des fluides. | ⬜ À faire |
-| Le mouvement d'un système | « Mouvement d'un système » : vecteur vitesse, vecteur variation de vitesse entre deux instants voisins ; lien qualitatif entre ΣF⃗ et Δv⃗ (préfiguration de la 2ᵉ loi de Newton — la loi complète est en Terminale). | ⬜ À faire — carte « BIENTÔT » sur l'accueil (« Mouvement et deuxième loi de Newton » — titre à recadrer : en Première c'est le lien ΣF⃗ ↔ Δv⃗, pas la loi complète) |
+| Le mouvement d'un système | « Mouvement d'un système » : vecteur vitesse, vecteur variation de vitesse entre deux instants voisins ; lien qualitatif entre ΣF⃗ et Δv⃗ (préfiguration de la 2ᵉ loi de Newton — la loi complète est en Terminale). | ✅ `premiere/physique-chimie/mouvement-systeme/` — titre recadré en « Le mouvement d'un système » sur l'accueil, comme prévu |
 
 ### Thème 3 — L'énergie : conversions et transferts
 
