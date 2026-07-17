@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Le mouvement d'un système — Première Spé Physique-Chimie | Nabla</title>
+<meta name="description" content="Comprends vraiment le mouvement d'un système : le vecteur vitesse et comment le tracer sur une chronophotographie, le vecteur variation de vitesse Δv entre deux instants voisins, le lien avec la somme des forces et le rôle de la masse — la préparation directe de la deuxième loi de Newton — avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé physique-chimie, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/physique-chimie/mouvement-systeme/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Le mouvement d'un système — Première Spé Physique-Chimie | Nabla">
+<meta property="og:description" content="Vecteur vitesse, vecteur variation de vitesse Δv, lien avec la somme des forces, rôle de la masse : un cours interactif où tu lis les chronophotographies toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/physique-chimie/mouvement-systeme/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Le mouvement d'un système — Première Spé Physique-Chimie | Nabla">
+<meta name="twitter:description" content="Vecteur vitesse, variation de vitesse Δv, somme des forces, rôle de la masse : cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Le mouvement d'un système — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé physique-chimie sur le mouvement d'un système : lecture d'une chronophotographie, vecteur vitesse (direction, sens, norme), vecteur variation de vitesse entre deux instants voisins, lien qualitatif avec la somme des forces appliquées, principe d'inertie et rôle de la masse. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/physique-chimie/mouvement-systeme/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité physique-chimie",
+  "teaches": "Vecteur vitesse d'un point d'un système, chronophotographie, vecteur variation de vitesse entre deux instants voisins, lien entre la variation du vecteur vitesse et la somme des forces appliquées, principe d'inertie, rôle de la masse",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=11">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=11">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=11">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/chrono-vecteurs.js"></script>
+<script type="module" src="../../../assets/js/widgets/mouvement-forces.js"></script>
+<script type="module" src="../../../assets/js/widgets/mouvement-masse.js"></script>
+<script type="module" src="../../../assets/js/widgets/stoechio-jeu.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="mouvement">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Physique-Chimie</span>
+  </div>
+  <h1>Le mouvement d'un système</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>décrire le mouvement d'un système par celui d'un point, tracer et caractériser le vecteur vitesse sur une chronophotographie (direction, sens, norme v&nbsp;=&nbsp;d/Δt), construire le vecteur variation de vitesse Δv entre deux instants voisins, et relier sa direction à la somme des forces appliquées — sans oublier le rôle de la masse.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. Le lancer au ralenti</a>
+      <a href="#s2">2. Le vecteur vitesse</a>
+      <a href="#s3">3. La variation de vitesse</a>
+      <a href="#s4">4. Le lien avec les forces</a>
+      <a href="#s5">5. Le rôle de la masse</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. Le lancer au ralenti</a>
+        <a href="#s2">2. Le vecteur vitesse</a>
+        <a href="#s3">3. La variation de vitesse</a>
+        <a href="#s4">4. Le lien avec les forces</a>
+        <a href="#s5">5. Le rôle de la masse</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. Un lancer franc, filmé au ralenti</h2>
+      <p class="prose">Dernière seconde du match, ton équipe à un point. Le tireur pose ses appuis, respire, et lance. La balle quitte ses mains, monte, semble hésiter au sommet, puis plonge vers le cercle. Tu as filmé la scène au ralenti avec ton téléphone — 240 images par seconde. En posant côte à côte une image sur quarante-huit, soit une toutes les 0,20&nbsp;s, tu obtiens le document préféré des physiciens&nbsp;: une <strong>chronophotographie</strong> — toutes les positions successives de la balle, figées sur une seule image.</p>
+      <p class="prose">Regarde-la. Huit positions, de M<sub>0</sub> à M<sub>7</sub>, séparées par la <em>même</em> durée. Et déjà, deux choses sautent aux yeux&nbsp;: la trajectoire — la cloche que dessine la balle — et les espacements, étirés au départ et à l'arrivée, resserrés autour du sommet. Même durée entre deux images, mais pas la même distance&nbsp;: la balle va plus vite en bas qu'en haut. Toute l'information sur ce mouvement tient dans ces huit points.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 440" role="img" aria-label="Chronophotographie d'un lancer de basket : huit positions M0 à M7 dessinent une cloche ; les points sont écartés au départ et à l'arrivée, resserrés au sommet ; une flèche accent part de M1 vers M2, tangente à la trajectoire">
+          <path class="g-grid" d="M69.6 0L69.6 440M208.7 0L208.7 440M347.8 0L347.8 440M487 0L487 440M626.1 0L626.1 440M0 224.3L640 224.3M0 85.2L640 85.2"></path>
+          <path class="g-axis" d="M0 363.5L640 363.5"></path>
+          <path class="g-tangente" d="M139.1 196.5L201.8 96.2"></path>
+          <path class="vec-pointe--accent" d="M208.7 85.2L206 98.9L197.6 93.6Z"></path>
+          <circle class="pt-craie" cx="69.6" cy="363.5" r="4"></circle>
+          <text class="avc-candidat" x="69.6" y="382.5" text-anchor="middle">M0</text>
+          <circle class="pt-craie" cx="139.1" cy="196.5" r="4"></circle>
+          <text class="avc-candidat" x="139.1" y="215.5" text-anchor="middle">M1</text>
+          <circle class="pt-craie" cx="208.7" cy="85.2" r="4"></circle>
+          <text class="avc-candidat" x="208.7" y="104.2" text-anchor="middle">M2</text>
+          <circle class="pt-craie" cx="278.3" cy="29.6" r="4"></circle>
+          <text class="avc-candidat" x="278.3" y="48.6" text-anchor="middle">M3</text>
+          <circle class="pt-craie" cx="347.8" cy="29.6" r="4"></circle>
+          <text class="avc-candidat" x="347.8" y="48.6" text-anchor="middle">M4</text>
+          <circle class="pt-craie" cx="417.4" cy="85.2" r="4"></circle>
+          <text class="avc-candidat" x="417.4" y="104.2" text-anchor="middle">M5</text>
+          <circle class="pt-craie" cx="487" cy="196.5" r="4"></circle>
+          <text class="avc-candidat" x="487" y="215.5" text-anchor="middle">M6</text>
+          <circle class="pt-craie" cx="556.5" cy="363.5" r="4"></circle>
+          <text class="avc-candidat" x="556.5" y="382.5" text-anchor="middle">M7</text>
+          <circle class="pt-halo" cx="139.1" cy="196.5" r="11"></circle>
+          <circle class="pt-point" cx="139.1" cy="196.5" r="5"></circle>
+          <text class="etiquette-math etiquette-math--accent" font-size="17" text-anchor="middle" x="151.9" y="133.1">v</text>
+          <path class="etiquette-vec-fleche etiquette-vec-fleche--accent" d="M145.9 118.1L157.9 118.1M154.5 115.5L157.9 118.1L154.5 120.7"></path>
+        </svg>
+        <figcaption>Le lancer franc en huit images, une toutes les 0,20&nbsp;s (chaque carreau vaut 1&nbsp;m). La flèche posée sur M<sub>1</sub> est précisément l'objet de ce chapitre — descends d'un écran pour la construire toi-même.</figcaption>
+      </figure>
+
+      <p class="prose">Le vocabulaire, tu l'as depuis la Seconde&nbsp;: on choisit un <strong>référentiel</strong> (ici la salle, le sol — le référentiel terrestre), on réduit le système «&nbsp;ballon&nbsp;» à un <strong>point</strong> (son centre), et on suit sa <strong>trajectoire</strong>. Tu sais aussi calculer une vitesse&nbsp;:</p>
+
+      <div class="math-vitrine">$$v = \frac{d}{\Delta t}$$</div>
+
+      <p class="prose">Une distance divisée par une durée — c'est la vitesse du compteur, un simple nombre. Et c'est justement le problème&nbsp;: un compteur dit «&nbsp;50&nbsp;km/h&nbsp;», il ne dit pas <em>où tu vas</em>. Pour prévoir un mouvement, la physique a besoin de flèches. C'est tout le programme de ce chapitre.</p>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Le vecteur vitesse&nbsp;: la flèche du mouvement</h2>
+      <p class="prose">Voici la chronophotographie — et cette fois, la flèche t'obéit. Le curseur choisit une image&nbsp;: la flèche se trace du point sélectionné vers le suivant. Fais l'aller complet, du départ au panier, et observe-la&nbsp;: où est-elle la plus longue&nbsp;? la plus courte&nbsp;? dans quel sens pointe-t-elle&nbsp;?</p>
+
+      <figure class="widget" id="widget-vitesse" data-widget="chrono-vecteurs" data-nom="vitesse" data-mode="vitesse">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La flèche du mouvement, image par image</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 440" aria-label="Chronophotographie du lancer de basket ; une flèche accent se trace du point sélectionné vers le point suivant : tangente à la trajectoire, dans le sens du mouvement, plus courte au sommet qu'au départ"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">image choisie&nbsp;: <span class="js-image">M0</span></span>
+            <input type="range" class="js-curseur" min="0" max="6" step="1" value="0" aria-label="Choix de l'image de la chronophotographie">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">Δt = 0,20&nbsp;s entre deux images</span>
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-rejouer">▸ rejoue le lancer</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Fais glisser le curseur d'image en image, ou rejoue le lancer en entier. Surveille la longueur de la flèche pendant la montée, au sommet, puis dans la descente.</p>
+            <p class="widget-legende js-leg-cours" hidden>La flèche \(\vec v\) va toujours du point sélectionné vers le suivant&nbsp;: tangente à la trajectoire, dans le sens du mouvement. Sa longueur, elle, raconte la norme.</p>
+            <p class="widget-legende js-leg-sommet" hidden>Autour du sommet, la balle ne s'arrête pas&nbsp;: \(\vec v\) est horizontal, et sa norme passe par un minimum — 2,5&nbsp;m/s, pas zéro. La balle continue d'avancer.</p>
+            <p class="widget-legende js-leg-fin" hidden>La flèche s'est retournée vers le bas et rallonge&nbsp;: la chute accélère. Tangente à la trajectoire, dans le sens du mouvement, longue comme la vitesse — c'est ça, le vecteur vitesse.</p>
+          </div>
+        </div>
+        <div class="widget-note">Chaque carreau&nbsp;: 1&nbsp;m. À l'échelle du graphique, la flèche relie exactement le point à son suivant&nbsp;: sa longueur est proportionnelle à la norme de la vitesse.</div>
+        <script type="application/json">{"dt": 0.2, "points": [[0, 0], [0.5, 1.2], [1, 2], [1.5, 2.4], [2, 2.4], [2.5, 2], [3, 1.2], [3.5, 0]]}</script>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi une flèche, et pas un simple nombre&nbsp;? Parce qu'un nombre ne suffit pas à prévoir. Dis «&nbsp;la balle va à 6,5&nbsp;m/s&nbsp;»&nbsp;: tu ne sais toujours pas si elle monte, retombe ou part en touche. Prévoir exige trois informations d'un coup — une direction, un sens, une intensité. Et tu connais déjà, depuis les maths, l'objet qui porte ces trois informations à la fois&nbsp;: le vecteur. La vitesse en est un.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Le <strong>vecteur vitesse</strong> d'un point du système, à l'instant où il passe en \(M_i\), se construit avec la position suivante \(M_{i+1}\), atteinte une petite durée \(\Delta t\) plus tard. Il a&nbsp;: la <strong>direction</strong> de la droite \((M_iM_{i+1})\) — tangente à la trajectoire&nbsp;; le <strong>sens</strong> du mouvement&nbsp;; pour <strong>norme</strong> la vitesse \(v_i = \dfrac{M_iM_{i+1}}{\Delta t}\), en m·s⁻¹.</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$\vec v_i = \frac{\overrightarrow{M_iM_{i+1}}}{\Delta t}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TRACER UN VECTEUR VITESSE SUR UNE CHRONOPHOTOGRAPHIE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Mesure la distance \(d = M_iM_{i+1}\) avec l'échelle du document, et calcule la norme&nbsp;: \(v = \dfrac{d}{\Delta t}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Trace la flèche à partir de \(M_i\), dirigée vers \(M_{i+1}\)&nbsp;: tangente à la trajectoire, dans le sens du mouvement.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Donne-lui une longueur proportionnelle à \(v\), avec une échelle de vitesses écrite en légende (par exemple 1&nbsp;cm ↔ 2&nbsp;m/s) — et contrôle l'ordre de grandeur du résultat.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE LANCER FRANC, EN CHIFFRES</div>
+        <p class="exemple-enonce">Sur la chronophotographie du lancer (Δt = 0,20&nbsp;s), on mesure M<sub>0</sub>M<sub>1</sub> = 1,30&nbsp;m et M<sub>3</sub>M<sub>4</sub> = 0,50&nbsp;m. a. Calcule la vitesse de la balle au départ (en M<sub>0</sub>) puis au sommet (en M<sub>3</sub>). b. Représente \(\vec v_3\) avec l'échelle 1&nbsp;cm ↔ 1,0&nbsp;m/s.</p>
+        <p><span class="etape-label">a. — </span>\(v_0 = \dfrac{1{,}30}{0{,}20} = 6{,}5\)&nbsp;m·s⁻¹ et \(v_3 = \dfrac{0{,}50}{0{,}20} = 2{,}5\)&nbsp;m·s⁻¹. La balle a perdu plus de la moitié de sa vitesse en montant.</p>
+        <p><span class="etape-label">b. — </span>le segment M<sub>3</sub>M<sub>4</sub> est horizontal&nbsp;: \(\vec v_3\) est horizontal, dans le sens du mouvement, et mesure 2,5&nbsp;cm avec l'échelle choisie.</p>
+        <p class="conclusion">Conclusion&nbsp;: au sommet, la balle avance encore à 2,5&nbsp;m/s — un vecteur vitesse n'est jamais nul tant que ça bouge. Garde cette image en tête&nbsp;: elle tue un piège célèbre.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Le vecteur vitesse se lit sur la chronophotographie&nbsp;: de \(M_i\) vers \(M_{i+1}\) — tangent à la trajectoire, dans le sens du mouvement, de norme \(v = \dfrac{d}{\Delta t}\).</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Sur une chronophotographie, le vecteur vitesse au point \(M_i\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">relie \(M_i\) à l'origine du repère</button>
+              <button type="button" class="quiz-reponse">pointe vers le point suivant — tangent à la trajectoire</button>
+              <button type="button" class="quiz-reponse">pointe toujours vers le sol</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\vec v_i\) se construit avec \(\overrightarrow{M_iM_{i+1}}\)&nbsp;: il épouse la trajectoire à cet endroit et suit le sens du mouvement. L'origine du repère n'a rien à voir avec la vitesse.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Entre deux images séparées de 0,20&nbsp;s, un mobile parcourt 0,50&nbsp;m. Sa vitesse vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">2,5 m/s</button>
+              <button type="button" class="quiz-reponse">0,10 m/s</button>
+              <button type="button" class="quiz-reponse">0,40 m/s</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(v = \dfrac{d}{\Delta t} = \dfrac{0{,}50}{0{,}20} = 2{,}5\)&nbsp;m·s⁻¹. Trouver 0,10, c'est multiplier au lieu de diviser&nbsp;; 0,40, c'est diviser à l'envers. Les unités trahissent les deux erreurs.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Au sommet de sa trajectoire en cloche, une balle…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">a une vitesse nulle — elle s'arrête un instant</button>
+              <button type="button" class="quiz-reponse">a un vecteur vitesse vertical</button>
+              <button type="button" class="quiz-reponse">a un vecteur vitesse horizontal, non nul</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> au sommet, la balle ne monte plus mais avance toujours&nbsp;: \(\vec v\) est horizontal, de norme 2,5&nbsp;m/s sur notre lancer. «&nbsp;Vitesse nulle au sommet&nbsp;» n'est vraie que pour un tir parfaitement vertical.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Le vecteur variation de vitesse&nbsp;: ce qui a changé</h2>
+      <p class="prose">Dans un virage serré ou un freinage d'urgence, ton corps le sent immédiatement&nbsp;: <em>quelque chose</em> a changé. Pas forcément le chiffre du compteur — parfois c'est la direction qui tourne. Pour dire précisément ce qui a changé entre deux instants voisins, la physique compare les deux vecteurs vitesse… en les soustrayant. Le résultat est un troisième vecteur — et sur le lancer franc, il réserve une surprise.</p>
+      <p class="prose">En haut, la chronophotographie avec les deux flèches successives&nbsp;: \(\vec v\) «&nbsp;avant&nbsp;» et \(\vec v\) «&nbsp;après&nbsp;». En bas, l'établi&nbsp;: les deux mêmes flèches, ramenées au même point pour être comparées. Change d'image plusieurs fois, et surveille la flèche qui va d'une pointe à l'autre.</p>
+
+      <figure class="widget" id="widget-deltav" data-widget="chrono-vecteurs" data-nom="deltav" data-mode="delta">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Deux flèches, et leur différence</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 440" aria-label="Chronophotographie du lancer de basket avec deux vecteurs vitesse successifs dessinés bout à bout sur la trajectoire"></svg>
+        <svg class="widget-graph graph-scinde" viewBox="0 0 640 300" aria-label="L'établi : les deux vecteurs vitesse reportés depuis la même origine ; le vecteur variation de vitesse, en accent, va de la pointe du premier à la pointe du second — vertical, vers le bas, identique pour toutes les images"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">image choisie&nbsp;: <span class="js-image">M0</span></span>
+            <input type="range" class="js-curseur" min="0" max="5" step="1" value="0" aria-label="Choix de l'image de la chronophotographie">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">Δt = 0,20&nbsp;s entre deux images</span>
+            <span class="chip chip--accent">Δv&nbsp;: de la pointe de «&nbsp;avant&nbsp;» à la pointe de «&nbsp;après&nbsp;»</span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-rejouer">▸ rejoue le lancer</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">L'établi du bas ramène les deux flèches au même point&nbsp;: l'écart entre leurs pointes, c'est \(\Delta \vec v\). Change d'image et surveille-le.</p>
+            <p class="widget-legende js-leg-cours" hidden>Les deux flèches changent d'une image à l'autre — c'est normal, la balle tourne et change d'allure. Continue&nbsp;: encore une image ou deux, et regarde bien \(\Delta \vec v\).</p>
+            <p class="widget-legende js-leg-fin" hidden>Tu peux changer d'image autant que tu veux&nbsp;: \(\Delta \vec v\) ne bouge pas — vertical, vers le bas, 2,0&nbsp;m/s. Quelque chose tire la balle vers le bas, toujours de la même façon… tu vois où on va.</p>
+          </div>
+        </div>
+        <div class="widget-note">L'établi du bas a sa propre échelle&nbsp;: 1 carreau = 2&nbsp;m/s. La flèche accent, Δv, va de la pointe de la flèche «&nbsp;avant&nbsp;» à la pointe de la flèche «&nbsp;après&nbsp;» — «&nbsp;après moins avant&nbsp;».</div>
+        <script type="application/json">{"dt": 0.2, "points": [[0, 0], [0.5, 1.2], [1, 2], [1.5, 2.4], [2, 2.4], [2.5, 2], [3, 1.2], [3.5, 0]]}</script>
+      </figure>
+
+      <p class="prose">Ce vecteur que tu viens de voir refuser de changer, voilà son nom.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Le <strong>vecteur variation de vitesse</strong> entre deux instants voisins est la différence «&nbsp;après moins avant&nbsp;» des deux vecteurs vitesse&nbsp;:</p>
+        <div class="math-vitrine">$$\Delta \vec v = \vec v_{i+1} - \vec v_i$$</div>
+        <p>Sa direction et son sens décrivent <em>comment</em> le mouvement change (il accélère, freine ou tourne)&nbsp;; sa norme, en m·s⁻¹, mesure l'ampleur du changement.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CONSTRUIRE Δv⃗ SUR UNE CHRONOPHOTOGRAPHIE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Trace \(\vec v_i\) et \(\vec v_{i+1}\), chacun en son point de la trajectoire (méthode de la section 2).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Reporte les deux vecteurs au même point, sans les faire tourner — une simple translation.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Trace \(\Delta \vec v\) <em>de la pointe de \(\vec v_i\) vers la pointe de \(\vec v_{i+1}\)</em> — «&nbsp;après moins avant&nbsp;». Contrôle-réflexe&nbsp;: \(\vec v_i + \Delta \vec v\) doit redonner \(\vec v_{i+1}\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — AVEC LES COORDONNÉES</div>
+        <p class="exemple-enonce">Sur le lancer, les vecteurs vitesse des intervalles qui entourent le sommet ont pour coordonnées, en m/s&nbsp;: \(\vec v_2 = (2{,}5\;;\, 2{,}0)\) et \(\vec v_3 = (2{,}5\;;\, 0)\). a. Calcule les coordonnées de \(\Delta \vec v\). b. Donne sa direction, son sens et sa norme. c. Vérifie que \(\vec v_2 + \Delta \vec v = \vec v_3\).</p>
+        <p><span class="etape-label">a. — </span>coordonnée par coordonnée, toujours «&nbsp;après moins avant&nbsp;»&nbsp;: \(\Delta \vec v = (2{,}5 - 2{,}5\;;\, 0 - 2{,}0) = (0\;;\, -2{,}0)\).</p>
+        <p><span class="etape-label">b. — </span>première coordonnée nulle&nbsp;: \(\Delta \vec v\) est vertical. Seconde négative&nbsp;: il pointe vers le bas. Sa norme vaut 2,0&nbsp;m·s⁻¹.</p>
+        <p><span class="etape-label">c. — </span>\((2{,}5\;;\, 2{,}0) + (0\;;\, -2{,}0) = (2{,}5\;;\, 0)\)&nbsp;: on retombe bien sur \(\vec v_3\).</p>
+        <p class="conclusion">Conclusion&nbsp;: la balle monte, ralentit, tourne — et pourtant \(\Delta \vec v\) pointe toujours vers le bas, avec la même norme. Un vecteur aussi têtu, ce n'est pas un hasard&nbsp;: quelque chose le fabrique. Réponse à la section suivante.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur Δv⃗</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le vecteur variation de vitesse entre deux instants voisins, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\vec v_{i+1} + \vec v_i\)</button>
+              <button type="button" class="quiz-reponse">\(\vec v_{i+1} - \vec v_i\)</button>
+              <button type="button" class="quiz-reponse">la distance entre \(M_i\) et \(M_{i+1}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> une <em>variation</em>, c'est toujours «&nbsp;après moins avant&nbsp;» — comme le Δ des maths. La somme ne mesure rien ici, et la distance entre deux points est une longueur, pas une variation de vitesse.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Sur une route droite, \(\vec v\) passe de 3,0&nbsp;m/s à 1,0&nbsp;m/s, toujours vers l'avant. \(\Delta \vec v\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">2,0 m/s vers l'avant</button>
+              <button type="button" class="quiz-reponse">4,0 m/s vers l'avant</button>
+              <button type="button" class="quiz-reponse">2,0 m/s vers l'arrière</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> «&nbsp;après moins avant&nbsp;»&nbsp;: \(1{,}0 - 3{,}0 = -2{,}0\). Le signe moins dit le sens&nbsp;: vers l'arrière — c'est un freinage. Répondre «&nbsp;vers l'avant&nbsp;», c'est confondre \(\Delta \vec v\) avec le mouvement lui-même.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Sur le lancer de basket, d'une image à l'autre, \(\Delta \vec v\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">est le même partout&nbsp;: vertical, vers le bas</button>
+              <button type="button" class="quiz-reponse">suit la trajectoire, comme \(\vec v\)</button>
+              <button type="button" class="quiz-reponse">se retourne au passage du sommet</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est la surprise de l'établi&nbsp;: \(\vec v\) change sans cesse, mais \(\Delta \vec v\) reste vertical, vers le bas, de norme 2,0&nbsp;m/s. Il ne suit pas la trajectoire et ne se retourne jamais — rejoue le graphique si tu doutes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Le lien avec les forces&nbsp;: qui tord le mouvement&nbsp;?</h2>
+      <p class="prose">Reprends le verdict de la section 3&nbsp;: sur le lancer franc, \(\Delta \vec v\) est partout le même — vertical, vers le bas, 2,0&nbsp;m/s. Or il existe précisément une chose qui, pendant tout le vol, tire la balle vers le bas, toujours de la même façon&nbsp;: son <strong>poids</strong>. Coïncidence&nbsp;? Instruis l'affaire toi-même, sur trois scènes. Dans chacune, compare la flèche \(\Delta \vec v\) (trait plein) à la somme des forces \(\sum \vec F\) (trait pointillé).</p>
+
+      <figure class="widget" id="widget-forces" data-widget="mouvement-forces" data-nom="forces">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Trois scènes, une seule règle</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Choix de la scène">
+            <button type="button" data-scene="air" aria-pressed="true">en l'air</button>
+            <button type="button" data-scene="glace" aria-pressed="false">sur la glace</button>
+            <button type="button" data-scene="manege" aria-pressed="false">au manège</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 440" aria-label="Chronophotographie au choix : la balle en l'air, un palet sur la glace ou un manège vu de dessus ; à chaque image, les deux vecteurs vitesse successifs, le vecteur variation de vitesse en trait plein accent et la somme des forces en pointillé accent, toujours alignés"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">images&nbsp;: <span class="js-image">M0 à M2</span></span>
+            <input type="range" class="js-curseur" min="0" max="5" step="1" value="0" aria-label="Choix des images de la chronophotographie">
+          </div>
+          <div aria-live="polite">
+            <p class="lecture-formule js-stat-air">entre deux images&nbsp;: Δv = 2,0&nbsp;m/s, vertical, vers le bas — la direction du poids</p>
+            <p class="lecture-formule js-stat-glace" hidden>entre deux images&nbsp;: Δv = 0 — le vecteur vitesse est le même d'une image à l'autre</p>
+            <p class="lecture-formule js-stat-manege" hidden>entre deux images&nbsp;: Δv vise le centre — la norme de v ne change pas, sa direction si</p>
+          </div>
+          <div class="chips" aria-live="polite">
+            <span class="chip chip--accent js-stat-air">ΣF = le poids, vers le bas — et Δv vers le bas, partout</span>
+            <span class="chip chip--accent js-stat-glace" hidden>ΣF = 0 — et Δv = 0&nbsp;: le mouvement ne change pas</span>
+            <span class="chip chip--accent js-stat-manege" hidden>ΣF vers le centre — et Δv vers le centre, à chaque image</span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-rejouer">▸ image par image</button>
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-stat-air">La balle tourne, ralentit puis accélère — mais \(\Delta \vec v\), aligné sur le poids, ne bouge pas d'un degré. La somme des forces impose sa direction et son sens à \(\Delta \vec v\).</p>
+            <p class="widget-legende js-stat-glace" hidden>Personne ne pousse, personne ne freine&nbsp;: le poids \(\vec P\) et la réaction \(\vec R\) de la glace se compensent, \(\sum \vec F = \vec 0\) — et le palet garde exactement son vecteur vitesse. C'est le principe d'inertie de Seconde, relu avec des vecteurs.</p>
+            <p class="widget-legende js-stat-manege" hidden>Ici, la norme de la vitesse est constante… et pourtant \(\Delta \vec v\) n'est pas nul&nbsp;: la <em>direction</em> tourne. La force qui te tient sur le manège tire vers le centre — et \(\Delta \vec v\) la suit fidèlement.</p>
+          </div>
+        </div>
+        <div class="widget-note">Δv est dessiné à l'échelle des flèches de vitesse&nbsp;; ΣF (pointillé) a sa propre échelle — seuls sa direction et son sens comptent ici. Sur la glace, le poids P et la réaction R du sol se compensent.</div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA SOMME DES FORCES PILOTE Δv⃗</div>
+        <p>Entre deux instants voisins, le vecteur variation de vitesse d'un système modélisé par un point a <strong>la direction et le sens de la somme des forces</strong> qui s'appliquent sur lui&nbsp;: \(\Delta \vec v\) et \(\sum \vec F\) sont colinéaires, de même sens. En particulier&nbsp;: si \(\sum \vec F = \vec 0\), alors \(\Delta \vec v = \vec 0\) — le vecteur vitesse ne change pas (repos, ou mouvement rectiligne uniforme) — et réciproquement. C'est le <strong>principe d'inertie</strong>.</p>
+        <p>La relation complète entre \(\sum \vec F\), la masse et la variation de vitesse — la deuxième loi de Newton — t'attend en Terminale. En Première, on te demande ce lien qualitatif&nbsp;: direction et sens.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi les forces pilotent-elles \(\Delta \vec v\), et pas \(\vec v\)&nbsp;? Pendant deux mille ans, on a cru le contraire — «&nbsp;pas de mouvement sans force&nbsp;», disait Aristote. Faux&nbsp;: lancé sur la glace, le palet file tout droit sans que personne le pousse. Une force n'entretient pas le mouvement, elle le <em>modifie</em>. Son vrai partenaire n'est donc pas la vitesse, mais son changement. C'est l'idée la plus contre-intuitive du chapitre — et la fondation de toute la mécanique de Newton.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — L'ENQUÊTE, DE LA CHRONOPHOTO AUX FORCES (ET RETOUR)</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Construis \(\Delta \vec v\) entre deux images voisines (méthode de la section 3). Cas express&nbsp;: espacements réguliers en ligne droite → \(\Delta \vec v = \vec 0\) → \(\sum \vec F = \vec 0\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Sens «&nbsp;photo → forces&nbsp;»&nbsp;: \(\sum \vec F\) a la direction et le sens de \(\Delta \vec v\). Vérifie avec le bilan des forces (poids, contact, frottements…) que la somme colle.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Sens «&nbsp;forces → mouvement&nbsp;»&nbsp;: le bilan donne \(\sum \vec F\), donc la direction de \(\Delta \vec v\) — dans le sens de \(\vec v\), ça accélère&nbsp;; contre \(\vec v\), ça freine&nbsp;; de côté, ça tourne.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE PALET ET LA BALLE</div>
+        <p class="exemple-enonce">a. Un palet de hockey glisse en ligne droite, à espacements réguliers sur la chronophotographie. Que vaut \(\sum \vec F\)&nbsp;? Quelles forces s'appliquent pourtant sur lui&nbsp;? b. Pour la balle du lancer franc, déduis de \(\Delta \vec v\) la force dominante pendant le vol.</p>
+        <p><span class="etape-label">a. — </span>ligne droite + espacements réguliers&nbsp;: \(\vec v\) constant, \(\Delta \vec v = \vec 0\), donc \(\sum \vec F = \vec 0\). Des forces s'appliquent pourtant — le poids et la réaction de la glace — mais elles se compensent. «&nbsp;Somme nulle&nbsp;» ne veut pas dire «&nbsp;aucune force&nbsp;».</p>
+        <p><span class="etape-label">b. — </span>\(\Delta \vec v\) est vertical, vers le bas, constant&nbsp;: \(\sum \vec F\) aussi. C'est le portrait du poids — les frottements de l'air, négligeables ici, ne pèsent pas dans la somme.</p>
+        <p class="conclusion">Conclusion&nbsp;: la chronophotographie est un détecteur de forces. \(\Delta \vec v\) est l'empreinte que la somme des forces laisse sur le mouvement.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>\(\Delta \vec v\) a toujours la direction et le sens de \(\sum \vec F\). Et si \(\sum \vec F = \vec 0\), le vecteur vitesse ne change pas&nbsp;: c'est le principe d'inertie.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions sur le lien</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Un mobile avance tout droit, à vitesse constante. La somme des forces qui s'appliquent sur lui…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">pointe vers l'avant — sinon il s'arrêterait</button>
+              <button type="button" class="quiz-reponse">ne peut pas être nulle, puisqu'il bouge</button>
+              <button type="button" class="quiz-reponse">est nulle</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\vec v\) constant → \(\Delta \vec v = \vec 0\) → \(\sum \vec F = \vec 0\)&nbsp;: c'est le principe d'inertie. Bouger n'exige aucune force&nbsp;; <em>changer</em> de vitesse, si. Aristote se trompait, le palet le prouve.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Entre deux instants voisins, \(\Delta \vec v\) a toujours…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la direction et le sens de \(\sum \vec F\)</button>
+              <button type="button" class="quiz-reponse">la direction du mouvement</button>
+              <button type="button" class="quiz-reponse">la direction de \(\vec v\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est LE lien du chapitre. \(\Delta \vec v\) ne suit ni la trajectoire ni \(\vec v\)&nbsp;: sur le lancer de basket, \(\vec v\) tourne sans cesse pendant que \(\Delta \vec v\) reste vertical, aligné sur le poids.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Au manège, la norme de la vitesse est constante. La somme des forces…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">est nulle — la vitesse ne change pas</button>
+              <button type="button" class="quiz-reponse">pointe vers le centre</button>
+              <button type="button" class="quiz-reponse">pointe vers l'extérieur — la force centrifuge</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la norme est constante, mais la <em>direction</em> de \(\vec v\) tourne&nbsp;: \(\Delta \vec v \neq \vec 0\), et il vise le centre — \(\sum \vec F\) aussi. La sensation d'être «&nbsp;jeté vers l'extérieur&nbsp;», c'est ton inertie, pas une force.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Une balle monte, lancée en l'air (frottements négligés). Pendant la montée, \(\sum \vec F\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">pointe vers le haut, puisqu'elle monte</button>
+              <button type="button" class="quiz-reponse">pointe vers le bas — c'est pour ça qu'elle ralentit</button>
+              <button type="button" class="quiz-reponse">est nulle au sommet</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> en vol, la seule force est le poids&nbsp;: vers le bas, montée comprise — c'est lui qui grignote la vitesse verticale. Et il ne s'éteint pas au sommet&nbsp;: \(\sum \vec F\) ne suit pas le mouvement, elle le tord.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Le rôle de la masse&nbsp;: l'inertie</h2>
+      <p class="prose">Il manque un acteur au tableau. Pousse un caddie vide&nbsp;: il bondit. Pousse le même caddie plein à ras bord, exactement de la même façon&nbsp;: il daigne à peine accélérer. Même poussée, effets très différents — la différence s'appelle la masse. Compare toi-même&nbsp;: la poussée ci-dessous est rigoureusement identique à chaque essai (même force, même durée), seule la masse du chariot change.</p>
+
+      <figure class="widget" id="widget-masse" data-widget="mouvement-masse" data-nom="masse">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La même poussée, trois chariots</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 270" aria-label="Deux photos d'un chariot, avant puis après une poussée identique ; sur la photo d'après, le fantôme pointillé de la vitesse d'avant permet de voir la variation de vitesse, d'autant plus petite que le chariot porte de caisses"></svg>
+        <div class="widget-pied">
+          <div class="especes-boutons js-sens" role="group" aria-label="Sens de la poussée">
+            <button type="button" class="feuille-btn" data-sens="avec" aria-pressed="true">pousser vers l'avant</button>
+            <button type="button" class="feuille-btn" data-sens="contre" aria-pressed="false">freiner</button>
+          </div>
+          <div class="especes-boutons js-masse" role="group" aria-label="Masse du chariot">
+            <button type="button" class="feuille-btn" data-masse="1" aria-pressed="true">1&nbsp;kg</button>
+            <button type="button" class="feuille-btn" data-masse="2" aria-pressed="false">2&nbsp;kg</button>
+            <button type="button" class="feuille-btn" data-masse="3" aria-pressed="false">3&nbsp;kg</button>
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Essaie les trois masses, dans les deux sens. La poussée ne change jamais — regarde ce que devient la flèche Δv.</p>
+            <p class="widget-legende js-leg-fin" hidden>À poussée égale, doubler la masse divise Δv par deux, la tripler le divise par trois. La masse mesure l'<em>inertie</em>&nbsp;: la résistance du système au changement de vitesse.</p>
+          </div>
+        </div>
+        <div class="widget-note">La poussée est identique à chaque essai&nbsp;: même force, même durée (0,50&nbsp;s). Sur la photo «&nbsp;après&nbsp;», le fantôme pointillé est la vitesse d'avant&nbsp;: l'écart entre les deux pointes, c'est Δv.</div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA MASSE, C'EST L'INERTIE</div>
+        <p>Pour une même somme des forces appliquée pendant la même durée, la variation de vitesse est <strong>d'autant plus petite que la masse est grande</strong>&nbsp;: à \(\sum \vec F\) égale, doubler \(m\) divise la norme de \(\Delta \vec v\) par deux. La masse mesure l'<strong>inertie</strong> du système — sa résistance au changement de vitesse. Elle ne change ni la direction ni le sens de \(\Delta \vec v\)&nbsp;: seulement son ampleur.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — PRÉVOIR L'EFFET D'UNE FORCE, LE BILAN COMPLET</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Fais le bilan des forces qui s'appliquent sur le système, et raisonne sur leur somme \(\sum \vec F\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">\(\Delta \vec v\) prend la direction et le sens de \(\sum \vec F\)&nbsp;: dans le sens de \(\vec v\), ça accélère&nbsp;; opposé, ça freine&nbsp;; de côté, ça tourne.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Module l'ampleur avec la masse&nbsp;: plus le système est massif, plus la même somme des forces produit un petit \(\Delta \vec v\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA PÉTANQUE ET LE PING-PONG</div>
+        <p class="exemple-enonce">Le même geste du poignet — même force, même durée — lance une balle de ping-pong (2,7&nbsp;g) puis une boule de pétanque (700&nbsp;g). a. Laquelle part le plus vite, et pourquoi&nbsp;? b. Estime le rapport de leurs variations de vitesse. c. On lâche ensuite les deux en même temps (chute, frottements négligés)&nbsp;: montre que le raisonnement ne dit <em>pas</em> que la pétanque tombe plus vite.</p>
+        <p><span class="etape-label">a. — </span>même poussée, masse bien plus petite&nbsp;: la balle de ping-pong encaisse une variation de vitesse bien plus grande — elle part beaucoup plus vite.</p>
+        <p><span class="etape-label">b. — </span>à force et durée égales, \(\Delta v\) est inversement proportionnelle à la masse&nbsp;: rapport \(\approx \dfrac{700}{2{,}7} \approx 260\).</p>
+        <p><span class="etape-label">c. — </span>en chute, la force n'est plus la même pour les deux&nbsp;: le poids \(P = m \times g\) grandit avec la masse. Boule 260 fois plus massive, poids 260 fois plus grand — les deux effets se compensent exactement&nbsp;: même \(\Delta \vec v\), elles tombent ensemble (tant que l'air ne s'en mêle pas).</p>
+        <p class="conclusion">Conclusion&nbsp;: l'inertie retient les massifs, mais la gravité les tire d'autant plus fort — c'est pour ça que, dans le vide, un marteau et une plume tombent de concert. (Les astronautes d'Apollo&nbsp;15 l'ont vérifié sur la Lune.)</p>
+      </div>
+
+      <p class="prose">Avant les exercices, mène l'enquête&nbsp;: quatre chronophotographies, quatre verdicts. Le réflexe, toujours le même — d'abord \(\Delta \vec v\), ensuite \(\sum \vec F\).</p>
+
+      <figure class="widget" id="widget-jeu" data-widget="stoechio-jeu" data-nom="mouvement-jeu" data-progression="ENQUÊTE" data-suivant="Enquête suivante">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">L'inspecteur du mouvement</span>
+          </div>
+          <span class="quiz-score js-progression">ENQUÊTE 1/4</span>
+        </div>
+        <div class="widget-pied">
+          <div class="js-manche">
+            <svg class="widget-graph" viewBox="0 0 640 160" role="img" aria-label="Chronophotographie d'un mobile en ligne droite : huit positions régulièrement espacées, de gauche à droite">
+              <path class="g-guide" d="M20 118L620 118"></path>
+              <circle class="pt-craie" cx="60" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="60" y="140" text-anchor="middle">M0</text>
+              <circle class="pt-craie" cx="132" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="132" y="140" text-anchor="middle">M1</text>
+              <circle class="pt-craie" cx="204" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="204" y="140" text-anchor="middle">M2</text>
+              <circle class="pt-craie" cx="276" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="276" y="140" text-anchor="middle">M3</text>
+              <circle class="pt-craie" cx="348" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="348" y="140" text-anchor="middle">M4</text>
+              <circle class="pt-craie" cx="420" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="420" y="140" text-anchor="middle">M5</text>
+              <circle class="pt-craie" cx="492" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="492" y="140" text-anchor="middle">M6</text>
+              <circle class="pt-craie" cx="564" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="564" y="140" text-anchor="middle">M7</text>
+              <text class="avc-candidat" x="8" y="20">CHRONOPHOTOGRAPHIE — Δt identique entre deux images · le mobile va vers la droite</text>
+            </svg>
+            <p class="quiz-enonce">Premier dossier. Que vaut la somme des forces qui s'appliquent sur ce mobile&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">nulle — le vecteur vitesse ne change pas</button>
+              <button type="button" class="quiz-reponse">vers l'avant — sinon il n'avancerait pas</button>
+              <button type="button" class="quiz-reponse">vers l'arrière — les frottements</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 160" role="img" aria-label="Chronophotographie d'un mobile en ligne droite : huit positions de plus en plus espacées vers la droite">
+              <path class="g-guide" d="M20 118L620 118"></path>
+              <circle class="pt-craie" cx="60" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="60" y="140" text-anchor="middle">M0</text>
+              <circle class="pt-craie" cx="90" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="90" y="140" text-anchor="middle">M1</text>
+              <circle class="pt-craie" cx="130" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="130" y="140" text-anchor="middle">M2</text>
+              <circle class="pt-craie" cx="182" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="182" y="140" text-anchor="middle">M3</text>
+              <circle class="pt-craie" cx="248" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="248" y="140" text-anchor="middle">M4</text>
+              <circle class="pt-craie" cx="330" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="330" y="140" text-anchor="middle">M5</text>
+              <circle class="pt-craie" cx="430" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="430" y="140" text-anchor="middle">M6</text>
+              <circle class="pt-craie" cx="550" cy="100" r="4"></circle>
+              <text class="avc-candidat" x="550" y="140" text-anchor="middle">M7</text>
+              <text class="avc-candidat" x="8" y="20">CHRONOPHOTOGRAPHIE — Δt identique entre deux images · le mobile va vers la droite</text>
+            </svg>
+            <p class="quiz-enonce">Deuxième dossier. Les espacements grandissent. La somme des forces est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">nulle — la trajectoire est une droite</button>
+              <button type="button" class="quiz-reponse">vers l'arrière</button>
+              <button type="button" class="quiz-reponse">vers l'avant — Δv est dans le sens du mouvement</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 250" role="img" aria-label="Chronophotographie d'une balle lancée en cloche : huit positions dessinent une parabole, resserrées au sommet">
+              <path class="g-axis" d="M0 225L640 225"></path>
+              <circle class="pt-craie" cx="70" cy="225" r="4"></circle>
+              <text class="avc-candidat" x="70" y="243" text-anchor="middle">M0</text>
+              <circle class="pt-craie" cx="140" cy="141" r="4"></circle>
+              <text class="avc-candidat" x="140" y="159" text-anchor="middle">M1</text>
+              <circle class="pt-craie" cx="210" cy="85" r="4"></circle>
+              <text class="avc-candidat" x="210" y="103" text-anchor="middle">M2</text>
+              <circle class="pt-craie" cx="280" cy="57" r="4"></circle>
+              <text class="avc-candidat" x="280" y="75" text-anchor="middle">M3</text>
+              <circle class="pt-craie" cx="350" cy="57" r="4"></circle>
+              <text class="avc-candidat" x="350" y="75" text-anchor="middle">M4</text>
+              <circle class="pt-craie" cx="420" cy="85" r="4"></circle>
+              <text class="avc-candidat" x="420" y="103" text-anchor="middle">M5</text>
+              <circle class="pt-craie" cx="490" cy="141" r="4"></circle>
+              <text class="avc-candidat" x="490" y="159" text-anchor="middle">M6</text>
+              <circle class="pt-craie" cx="560" cy="225" r="4"></circle>
+              <text class="avc-candidat" x="560" y="243" text-anchor="middle">M7</text>
+              <text class="avc-candidat" x="8" y="20">UNE BALLE LANCÉE EN CLOCHE — frottements négligés</text>
+            </svg>
+            <p class="quiz-enonce">Troisième dossier. Dans quelle direction pointe \(\Delta \vec v\), d'une image à l'autre&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le long de la trajectoire, dans le sens du mouvement</button>
+              <button type="button" class="quiz-reponse">vertical, vers le bas — aligné sur le poids</button>
+              <button type="button" class="quiz-reponse">vers le haut pendant la montée, vers le bas ensuite</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 240" role="img" aria-label="Chronophotographie d'un manège vu de dessus : huit positions régulièrement réparties sur un cercle autour du centre">
+              <circle class="g-guide" fill="none" stroke-dasharray="3 4" cx="320" cy="128" r="82"></circle>
+              <circle class="pt-craie" cx="320" cy="128" r="3.5"></circle>
+              <text class="avc-candidat" x="320" y="148" text-anchor="middle">centre</text>
+              <circle class="pt-craie" cx="320" cy="46" r="4"></circle>
+              <text class="avc-candidat" x="320" y="26" text-anchor="middle">M0</text>
+              <circle class="pt-craie" cx="378" cy="70" r="4"></circle>
+              <text class="avc-candidat" x="395" y="57" text-anchor="middle">M1</text>
+              <circle class="pt-craie" cx="402" cy="128" r="4"></circle>
+              <text class="avc-candidat" x="426" y="132" text-anchor="middle">M2</text>
+              <circle class="pt-craie" cx="378" cy="186" r="4"></circle>
+              <text class="avc-candidat" x="395" y="207" text-anchor="middle">M3</text>
+              <circle class="pt-craie" cx="320" cy="210" r="4"></circle>
+              <text class="avc-candidat" x="320" y="238" text-anchor="middle">M4</text>
+              <circle class="pt-craie" cx="262" cy="186" r="4"></circle>
+              <text class="avc-candidat" x="245" y="207" text-anchor="middle">M5</text>
+              <circle class="pt-craie" cx="238" cy="128" r="4"></circle>
+              <text class="avc-candidat" x="214" y="132" text-anchor="middle">M6</text>
+              <circle class="pt-craie" cx="262" cy="70" r="4"></circle>
+              <text class="avc-candidat" x="245" y="57" text-anchor="middle">M7</text>
+              <text class="avc-candidat" x="8" y="20">UN MANÈGE VU DE DESSUS — la norme de la vitesse est constante</text>
+            </svg>
+            <p class="quiz-enonce">Dernier dossier. Que vaut la somme des forces sur le passager du manège&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">nulle — la vitesse est constante</button>
+              <button type="button" class="quiz-reponse">vers l'extérieur — la force centrifuge</button>
+              <button type="button" class="quiz-reponse">vers le centre — Δv y pointe à chaque image</button>
+            </div>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> construis d'abord \(\Delta \vec v\)&nbsp;: les espacements changent-ils&nbsp;? la direction tourne-t-elle&nbsp;? Ensuite seulement, aligne \(\sum \vec F\) dessus.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> espacements réguliers, ligne droite&nbsp;: \(\vec v\) est identique d'une image à l'autre, \(\Delta \vec v = \vec 0\), donc \(\sum \vec F = \vec 0\). Avancer n'exige aucune force&nbsp;; changer de vitesse, oui.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> les espacements grandissent&nbsp;: la norme de \(\vec v\) augmente, \(\Delta \vec v\) pointe vers l'avant, \(\sum \vec F\) aussi. Répondre «&nbsp;nulle&nbsp;» confond ligne droite et vitesse constante&nbsp;: ici la direction ne change pas, mais la norme, si.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> la construction de \(\Delta \vec v\) donne partout le même vecteur&nbsp;: vertical, vers le bas — le portrait du poids, seule force en vol. \(\Delta \vec v\) ne suit pas la trajectoire, et il ne se retourne pas au sommet.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> la norme de \(\vec v\) est constante, mais sa direction tourne&nbsp;: \(\Delta \vec v\) n'est pas nul et vise le centre — comme la force qui te retient. La «&nbsp;force centrifuge&nbsp;» que tu crois sentir, c'est ton inertie qui voudrait filer tout droit.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Enquête suivante ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <div class="widget-note">Sur chaque dossier, Δt est le même entre deux images. Le réflexe de l'inspecteur&nbsp;: d'abord Δv (espacements, direction), ensuite ΣF.</div>
+        <script type="application/json">[1, 3, 2, 3]</script>
+      </figure>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>La même poussée s'applique à un chariot de 1&nbsp;kg puis à un chariot de 3&nbsp;kg. Le second…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">subit une variation de vitesse trois fois plus grande</button>
+              <button type="button" class="quiz-reponse">subit une variation de vitesse trois fois plus petite</button>
+              <button type="button" class="quiz-reponse">subit la même variation de vitesse</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> à somme des forces et durée égales, \(\Delta v\) est inversement proportionnelle à la masse&nbsp;: trois fois plus lourd, trois fois moins de variation. C'est exactement ce que montrait le graphique des chariots.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>La masse d'un système mesure…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">sa résistance au changement de vitesse</button>
+              <button type="button" class="quiz-reponse">la force qu'il exerce sur le sol</button>
+              <button type="button" class="quiz-reponse">sa capacité à aller vite</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est la définition de l'inertie. La force sur le sol, c'est le poids — il dépend de la masse mais aussi de la planète&nbsp;; et un TGV massif va très vite&nbsp;: la masse ne borne pas la vitesse, elle freine ses <em>changements</em>.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pour arrêter en 2&nbsp;s un camion et une voiture roulant à la même vitesse, il faut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la même somme de forces pour les deux</button>
+              <button type="button" class="quiz-reponse">une force plus petite pour le camion</button>
+              <button type="button" class="quiz-reponse">une force bien plus grande pour le camion</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> même \(\Delta \vec v\) à produire dans la même durée, mais une masse bien plus grande&nbsp;: il faut une somme de forces bien plus intense. C'est pour ça que les distances de sécurité des poids lourds sont plus longues.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>«&nbsp;S'il bouge, c'est qu'une force le pousse.&nbsp;»</strong> Non — le palet lancé sur la glace file tout droit, somme des forces nulle. Les forces n'expliquent pas le mouvement, elles expliquent ses <em>changements</em>&nbsp;: mouvement rectiligne uniforme ⇔ \(\sum \vec F = \vec 0\). C'est le principe d'inertie — et l'erreur d'Aristote.</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;Au sommet, la vitesse est nulle.&nbsp;»</strong> Sur une trajectoire en cloche, seule la composante <em>verticale</em> s'annule au sommet&nbsp;: la balle avance toujours, \(\vec v\) y est horizontal et non nul (2,5&nbsp;m/s sur notre lancer). Vitesse nulle au sommet, c'est réservé au tir parfaitement vertical.</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;Vitesse constante, donc rien ne change.&nbsp;»</strong> Au manège, le compteur ne bouge pas — et pourtant le <em>vecteur</em> vitesse change à chaque instant, puisque sa direction tourne. \(\Delta \vec v \neq \vec 0\), donc \(\sum \vec F \neq \vec 0\), dirigée vers le centre. Un vecteur, c'est trois informations&nbsp;: il suffit qu'une seule change.</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;La force centrifuge me tire vers l'extérieur.&nbsp;»</strong> Ce que tu sens au manège, c'est ton inertie&nbsp;: ton corps voudrait continuer tout droit, et le siège t'en empêche en te tirant vers le centre. La somme des forces pointe vers l'intérieur — la preuve&nbsp;: lâche tout, et tu pars <em>tangent</em>, pas vers l'extérieur.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Aligner \(\sum \vec F\) sur le mouvement.</strong> La somme des forces s'aligne sur \(\Delta \vec v\), jamais nécessairement sur \(\vec v\)&nbsp;: pendant un freinage, \(\sum \vec F\) pointe vers l'arrière alors qu'on avance&nbsp;; pendant la montée de la balle, le poids tire vers le bas alors qu'elle monte. Demande-toi toujours «&nbsp;qu'est-ce qui change&nbsp;?&nbsp;», pas «&nbsp;où va-t-il&nbsp;?&nbsp;».</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">VITESSE</span>
+          <p>\(\vec v_i = \dfrac{\overrightarrow{M_iM_{i+1}}}{\Delta t}\)&nbsp;: tangent à la trajectoire, dans le sens du mouvement, de norme \(v = \dfrac{d}{\Delta t}\) (m·s⁻¹).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">VARIATION</span>
+          <p>\(\Delta \vec v = \vec v_{i+1} - \vec v_i\), entre deux instants voisins — construit en reportant les deux vecteurs au même point, de pointe à pointe («&nbsp;après moins avant&nbsp;»).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">LE LIEN</span>
+          <p>\(\Delta \vec v\) a la direction et le sens de \(\sum \vec F\), la somme des forces appliquées au système.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">INERTIE</span>
+          <p>\(\sum \vec F = \vec 0 \iff\) le vecteur vitesse ne change pas&nbsp;: repos ou mouvement rectiligne uniforme.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">MASSE</span>
+          <p>À \(\sum \vec F\) égale, plus la masse est grande, plus \(\Delta \vec v\) est petit&nbsp;: la masse mesure l'inertie du système.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: lire une chronophotographie, le vecteur vitesse, le vecteur \(\Delta \vec v\), le lien avec les forces, le rôle de la masse, et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· lire une chronophoto</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un skateur est filmé par une caméra posée sur le trottoir, une image toutes les 0,50&nbsp;s. Sur la chronophotographie, ses positions sont d'abord espacées de 1,0&nbsp;m (quatre premiers intervalles), puis de 1,5&nbsp;m. a. Dans quel référentiel ce mouvement est-il décrit&nbsp;? b. Calcule sa vitesse sur la première phase. c. Sur la seconde. Que s'est-il passé entre les deux&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>le référentiel terrestre&nbsp;: le trottoir, où la caméra est posée. Toujours le préciser — un mouvement n'existe que par rapport à quelque chose.</p>
+          <p><span class="etape-label">b. — </span>\(v = \dfrac{d}{\Delta t} = \dfrac{1{,}0}{0{,}50} = 2{,}0\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">c. — </span>\(v = \dfrac{1{,}5}{0{,}50} = 3{,}0\)&nbsp;m·s⁻¹&nbsp;: il a accéléré — un coup de pied entre les deux phases. Sur une chronophotographie, l'espacement <em>est</em> la vitesse.</p>
+          <p class="conclusion">Conclusion&nbsp;: même durée entre les images, donc espacements serrés = lent, espacements étirés = rapide. Ce réflexe de lecture sert dans tous les exercices qui suivent.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· la norme de v⃗</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur la chronophotographie du lancer franc (Δt = 0,20&nbsp;s), on mesure M<sub>0</sub>M<sub>1</sub> = 1,30&nbsp;m. a. Calcule la norme du vecteur vitesse en M<sub>0</sub>. b. Convertis-la en km/h. c. Pourquoi cette vitesse est-elle une vitesse «&nbsp;moyenne&nbsp;»&nbsp;? Pourquoi est-ce quand même une bonne valeur pour «&nbsp;la vitesse en M<sub>0</sub>&nbsp;»&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(v_0 = \dfrac{M_0M_1}{\Delta t} = \dfrac{1{,}30}{0{,}20} = 6{,}5\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">b. — </span>\(6{,}5 \times 3{,}6 = 23{,}4\)&nbsp;km/h. (Pour passer des m/s aux km/h, on multiplie par 3,6.)</p>
+          <p><span class="etape-label">c. — </span>c'est la vitesse moyenne <em>entre</em> M<sub>0</sub> et M<sub>1</sub>. Mais les deux instants sont voisins (0,20&nbsp;s)&nbsp;: la vitesse n'a guère le temps de changer, et on assimile cette moyenne à la vitesse au passage en M<sub>0</sub>.</p>
+          <p class="conclusion">Conclusion&nbsp;: «&nbsp;entre deux instants voisins&nbsp;» n'est pas une formule décorative — c'est elle qui autorise toute la construction du chapitre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· caractériser v⃗</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une cycliste parcourt un rond-point à allure régulière, 18&nbsp;km/h au compteur. a. Donne les trois caractéristiques de son vecteur vitesse en un point du rond-point. b. Un quart de tour plus loin, ce vecteur est-il le même&nbsp;? Justifie.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>direction&nbsp;: la tangente au cercle en ce point&nbsp;; sens&nbsp;: celui du parcours&nbsp;; norme&nbsp;: \(v = \dfrac{18}{3{,}6} = 5{,}0\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">b. — </span>non&nbsp;: la norme n'a pas changé (5,0&nbsp;m/s), mais la direction de la tangente a tourné d'un quart de tour. Deux vecteurs ne sont égaux que si <em>tout</em> coïncide — direction, sens et norme.</p>
+          <p class="conclusion">Conclusion&nbsp;: «&nbsp;vitesse constante&nbsp;» au compteur ne veut pas dire «&nbsp;vecteur vitesse constant&nbsp;». Cette nuance est le cœur de la section 4.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· représenter à l'échelle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur une trajectoire, un mobile passe en A à 6,0&nbsp;m/s puis en B à 4,0&nbsp;m/s. On choisit l'échelle 1&nbsp;cm ↔ 2,0&nbsp;m/s. a. Quelle longueur pour la flèche du vecteur vitesse en A&nbsp;? en B&nbsp;? b. Qu'est-ce qui, sur le dessin, ne dépend pas de l'échelle&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>en A&nbsp;: \(\dfrac{6{,}0}{2{,}0} = 3{,}0\)&nbsp;cm&nbsp;; en B&nbsp;: \(\dfrac{4{,}0}{2{,}0} = 2{,}0\)&nbsp;cm.</p>
+          <p><span class="etape-label">b. — </span>la direction (tangente à la trajectoire) et le sens (celui du mouvement)&nbsp;: l'échelle ne règle que la longueur. Et n'oublie pas d'écrire l'échelle en légende — sans elle, la flèche ne dit plus rien.</p>
+          <p class="conclusion">Conclusion&nbsp;: une flèche de vecteur vitesse, c'est trois décisions&nbsp;— tangente, sens, longueur à l'échelle — et une légende.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· construire Δv⃗</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur une route droite, le vecteur vitesse d'une voiture vaut d'abord 3,0&nbsp;m/s vers l'avant, puis, un peu plus tard, 5,0&nbsp;m/s vers l'avant. a. Caractérise \(\Delta \vec v\) (direction, sens, norme). b. Même question si la seconde vitesse vaut 1,0&nbsp;m/s. c. Dans chaque cas, donne le sens de la somme des forces.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>même direction (la route), les deux vers l'avant&nbsp;: \(\Delta v = 5{,}0 - 3{,}0 = 2{,}0\)&nbsp;m·s⁻¹, dirigé <em>vers l'avant</em> — la voiture accélère.</p>
+          <p><span class="etape-label">b. — </span>«&nbsp;après moins avant&nbsp;»&nbsp;: \(1{,}0 - 3{,}0 = -2{,}0\). Norme 2,0&nbsp;m·s⁻¹, mais sens <em>opposé au mouvement</em>&nbsp;: c'est un freinage.</p>
+          <p><span class="etape-label">c. — </span>\(\sum \vec F\) suit \(\Delta \vec v\)&nbsp;: vers l'avant dans le cas a (le moteur l'emporte), vers l'arrière dans le cas b (le freinage l'emporte).</p>
+          <p class="conclusion">Conclusion&nbsp;: même norme de \(\Delta \vec v\), deux histoires opposées — le signe du «&nbsp;après moins avant&nbsp;» raconte tout.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· Δv⃗ en coordonnées</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">De part et d'autre du sommet de sa trajectoire, un ballon a pour vecteurs vitesse, en m/s&nbsp;: \(\vec v_i = (4{,}0\;;\, 1{,}0)\) puis \(\vec v_{i+1} = (4{,}0\;;\, -1{,}0)\). a. Calcule les coordonnées de \(\Delta \vec v\), puis sa direction, son sens et sa norme. b. Compare les normes de \(\vec v_i\) et \(\vec v_{i+1}\). Que constates-tu&nbsp;? c. Donne la direction et le sens de \(\sum \vec F\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\Delta \vec v = (4{,}0 - 4{,}0\;;\, -1{,}0 - 1{,}0) = (0\;;\, -2{,}0)\)&nbsp;: direction verticale, sens vers le bas, norme 2,0&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">b. — </span>\(\lVert\vec v_i\rVert = \sqrt{4{,}0^2 + 1{,}0^2} = \sqrt{17} \approx 4{,}1\)&nbsp;m·s⁻¹, et la même chose pour \(\vec v_{i+1}\)&nbsp;: les normes sont égales… et pourtant le vecteur a changé — sa direction a basculé.</p>
+          <p><span class="etape-label">c. — </span>\(\sum \vec F\) a la direction et le sens de \(\Delta \vec v\)&nbsp;: verticale, vers le bas. C'est le poids du ballon.</p>
+          <p class="conclusion">Conclusion&nbsp;: un \(\Delta \vec v\) non nul avec des normes égales, c'est possible — il suffit que la direction tourne. Les coordonnées ne mentent jamais&nbsp;: «&nbsp;après moins avant&nbsp;», composante par composante.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· la balle en cloche</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On lance une balle vers le haut, légèrement inclinée&nbsp;; les frottements de l'air sont négligés. a. Quelle est la seule force qui s'applique sur la balle pendant le vol&nbsp;? b. Donne la direction et le sens de \(\Delta \vec v\) tout au long du vol. c. Explique sans calcul pourquoi la balle ralentit à la montée et accélère à la descente. d. Au sommet, que vaut son vecteur vitesse&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>son poids, vertical, vers le bas — le contact avec la main a cessé, l'air est négligé.</p>
+          <p><span class="etape-label">b. — </span>\(\Delta \vec v\) a la direction et le sens de \(\sum \vec F = \vec P\)&nbsp;: vertical, vers le bas, du début à la fin du vol.</p>
+          <p><span class="etape-label">c. — </span>à la montée, \(\Delta \vec v\) (vers le bas) s'oppose à la composante verticale de \(\vec v\)&nbsp;: il la grignote, la balle ralentit. À la descente, il s'y ajoute&nbsp;: la balle accélère. Une seule cause, deux effets selon le sens de \(\vec v\).</p>
+          <p><span class="etape-label">d. — </span>horizontal, non nul&nbsp;: la balle avance encore. Seule la composante verticale s'est annulée.</p>
+          <p class="conclusion">Conclusion&nbsp;: tout le vol se raconte avec un seul vecteur constant, \(\Delta \vec v\) — c'est la force de ce chapitre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· le palet</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">La chronophotographie d'un palet de hockey montre une ligne droite aux espacements parfaitement réguliers. a. Que vaut \(\Delta \vec v\)&nbsp;? Qu'en déduis-tu pour \(\sum \vec F\)&nbsp;? b. Cite les forces qui s'appliquent pourtant sur le palet, et conclus. c. En réalité, le palet finit par s'arrêter au bout de la patinoire. Qu'est-ce que cela révèle&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>ligne droite + espacements réguliers&nbsp;: le vecteur vitesse est constant, \(\Delta \vec v = \vec 0\), donc \(\sum \vec F = \vec 0\) (principe d'inertie).</p>
+          <p><span class="etape-label">b. — </span>le poids (vers le bas) et la réaction de la glace (vers le haut)&nbsp;: elles existent, mais se compensent. Somme nulle ≠ absence de forces.</p>
+          <p><span class="etape-label">c. — </span>s'il s'arrête, \(\vec v\) change&nbsp;: la somme n'est plus tout à fait nulle. Il existe une petite force vers l'arrière — les frottements, faibles sur la glace mais réels. Sur la chronophotographie, on verrait les espacements se resserrer lentement.</p>
+          <p class="conclusion">Conclusion&nbsp;: le mouvement perpétuel n'a pas besoin de moteur, seulement d'une somme de forces nulle — c'est l'imperfection de la glace qui arrête le palet, pas la «&nbsp;fatigue&nbsp;» du mouvement.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· l'enquête</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Deux chronophotographies d'un même chariot sur un rail rectiligne horizontal. Document 1&nbsp;: les espacements <em>augmentent</em> régulièrement. Document 2&nbsp;: ils <em>diminuent</em>. a. Pour chaque document, donne le sens de \(\Delta \vec v\), puis celui de \(\sum \vec F\). b. Propose une cause physique plausible pour chaque document.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>document 1&nbsp;: la vitesse augmente, \(\Delta \vec v\) pointe dans le sens du mouvement, \(\sum \vec F\) aussi. Document 2&nbsp;: la vitesse diminue, \(\Delta \vec v\) et \(\sum \vec F\) pointent vers l'arrière.</p>
+          <p><span class="etape-label">b. — </span>document 1&nbsp;: une traction (un fil tiré, un ventilateur embarqué, une pente descendante…). Document 2&nbsp;: des frottements dominants, ou un freinage.</p>
+          <p class="conclusion">Conclusion&nbsp;: sur un rail droit, l'enquête tient en une question — les espacements grandissent-ils ou rétrécissent-ils&nbsp;? Le sens de \(\sum \vec F\) s'en déduit d'un coup.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· le rond-point</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une voiture parcourt un rond-point à 30&nbsp;km/h constants au compteur. a. Son vecteur vitesse est-il constant&nbsp;? b. Qu'en déduis-tu pour \(\sum \vec F\), et dans quelle direction pointe-t-elle&nbsp;? c. Quelle interaction fournit cette force&nbsp;? d. Sur une plaque de verglas, cette interaction disparaît presque. Décris le mouvement de la voiture.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>non&nbsp;: sa norme est constante, mais sa direction tourne en permanence le long du cercle.</p>
+          <p><span class="etape-label">b. — </span>\(\vec v\) change, donc \(\Delta \vec v \neq \vec 0\), donc \(\sum \vec F \neq \vec 0\)&nbsp;— dirigée vers le centre du rond-point, comme \(\Delta \vec v\).</p>
+          <p><span class="etape-label">c. — </span>l'adhérence des pneus sur la route (le frottement latéral)&nbsp;: c'est elle qui «&nbsp;tord&nbsp;» la trajectoire vers l'intérieur.</p>
+          <p><span class="etape-label">d. — </span>plus d'adhérence&nbsp;: \(\sum \vec F \approx \vec 0\), donc \(\vec v\) ne change plus — la voiture continue <em>tout droit, tangente au cercle</em>, à vitesse constante. C'est l'inertie, pas une force qui l'«&nbsp;éjecte&nbsp;».</p>
+          <p class="conclusion">Conclusion&nbsp;: tourner est un effort permanent. Dès que la force disparaît, le mouvement redevient rectiligne uniforme — jamais «&nbsp;vers l'extérieur&nbsp;».</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· le train qui freine</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur une ligne droite, un train passe de 30,0&nbsp;m/s à 22,0&nbsp;m/s. a. Caractérise \(\Delta \vec v\). b. Donne le sens de \(\sum \vec F\) pendant cette phase. c. Le train roule ensuite longuement à 22,0&nbsp;m/s constants. Que vaut alors \(\sum \vec F\)&nbsp;? Le moteur pousse pourtant toujours — explique.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\Delta v = 22{,}0 - 30{,}0 = -8{,}0\)&nbsp;: norme 8,0&nbsp;m·s⁻¹, direction celle de la voie, sens opposé au mouvement.</p>
+          <p><span class="etape-label">b. — </span>comme \(\Delta \vec v\)&nbsp;: vers l'arrière. Le freinage (et les frottements) l'emportent sur la traction.</p>
+          <p><span class="etape-label">c. — </span>\(\vec v\) constant → \(\Delta \vec v = \vec 0\) → \(\sum \vec F = \vec 0\). Le moteur pousse vers l'avant, les frottements (rails, air) tirent vers l'arrière&nbsp;: à vitesse stabilisée, les deux se compensent exactement.</p>
+          <p class="conclusion">Conclusion&nbsp;: «&nbsp;somme nulle&nbsp;» ne signifie pas «&nbsp;moteur coupé&nbsp;»&nbsp;— ça signifie équilibre des forces. Le compteur immobile du TGV est un théorème vivant.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· le rôle de la masse</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">La même poussée (même force, même durée) est appliquée à deux chariots, l'un de 1&nbsp;kg, l'autre de 3&nbsp;kg. Le premier gagne 3,0&nbsp;m/s. a. Quelle variation de vitesse pour le second&nbsp;? b. Que faudrait-il pour donner 3,0&nbsp;m/s au chariot de 3&nbsp;kg dans la même durée&nbsp;? c. Comment appelle-t-on la propriété de la matière mise en évidence ici&nbsp;? Définis-la.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>à poussée égale, \(\Delta v\) est inversement proportionnelle à la masse&nbsp;: \(\dfrac{3{,}0}{3} = 1{,}0\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">b. — </span>une poussée trois fois plus intense (ou la même force appliquée trois fois plus longtemps).</p>
+          <p><span class="etape-label">c. — </span>l'inertie&nbsp;: la résistance d'un système au changement de son vecteur vitesse. C'est la masse qui la mesure.</p>
+          <p class="conclusion">Conclusion&nbsp;: la masse ne dit pas si un objet peut aller vite — elle dit combien il coûte de changer sa vitesse.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· la chronophoto complète</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Le début du vol d'un lob au tennis, pointé toutes les 0,50&nbsp;s (frottements négligés)&nbsp;: aux instants t = 0&nbsp;; 0,5&nbsp;; 1,0&nbsp;; 1,5&nbsp;s, la balle occupe les positions de coordonnées, en mètres&nbsp;: (0&nbsp;; 0), (1,0&nbsp;; 0,9), (2,0&nbsp;; 1,6), (3,0&nbsp;; 2,1). a. Calcule les coordonnées du vecteur vitesse sur chacun des trois intervalles. b. Calcule \(\Delta \vec v\) entre intervalles successifs. Que remarques-tu&nbsp;? c. Déduis-en la direction et le sens de \(\sum \vec F\), et vérifie la cohérence avec le bilan des forces.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>chaque coordonnée vaut «&nbsp;déplacement divisé par 0,50&nbsp;s&nbsp;»&nbsp;: \(\vec v_{01} = (2{,}0\;;\, 1{,}8)\), \(\vec v_{12} = (2{,}0\;;\, 1{,}4)\), \(\vec v_{23} = (2{,}0\;;\, 1{,}0)\), en m·s⁻¹.</p>
+          <p><span class="etape-label">b. — </span>\(\vec v_{12} - \vec v_{01} = (0\;;\, -0{,}4)\) et \(\vec v_{23} - \vec v_{12} = (0\;;\, -0{,}4)\)&nbsp;: \(\Delta \vec v\) est <em>le même</em> — vertical, vers le bas, de norme 0,4&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">c. — </span>\(\sum \vec F\) est donc verticale, vers le bas, constante&nbsp;: exactement le portrait du poids, seule force en vol quand l'air est négligé. Tout est cohérent.</p>
+          <p class="conclusion">Conclusion&nbsp;: l'horizontale ne change jamais (aucune force horizontale), la verticale perd 0,4&nbsp;m/s à chaque intervalle (le poids au travail). Une chronophotographie bien lue, c'est déjà de la mécanique de Terminale.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Le crash-test. Un mannequin d'essai est assis, <strong>sans ceinture</strong>, dans une voiture qui roule à 54&nbsp;km/h. La voiture heurte un mur et s'arrête en 0,40&nbsp;s. a. Convertis 54&nbsp;km/h en m/s. b. Pendant le choc, quelles forces horizontales s'appliquent sur le mannequin (frottements du siège négligés)&nbsp;? Qu'en déduis-tu pour son mouvement&nbsp;? c. Explique pourquoi il heurte le pare-brise «&nbsp;à 54&nbsp;km/h&nbsp;». d. Avec les mots du chapitre, explique le rôle de la ceinture de sécurité.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\dfrac{54}{3{,}6} = 15\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">b. — </span>verticalement, poids et réaction du siège se compensent&nbsp;; horizontalement, (presque) rien&nbsp;: \(\sum \vec F \approx \vec 0\). Donc \(\Delta \vec v \approx \vec 0\)&nbsp;: son vecteur vitesse ne change pas — il continue tout droit, à 15&nbsp;m/s.</p>
+          <p><span class="etape-label">c. — </span>la voiture s'arrête en 0,40&nbsp;s, lui non&nbsp;: rien ne l'a freiné. L'habitacle ralentit autour de lui pendant qu'il file encore à 15&nbsp;m/s — d'où l'impact au pare-brise à la vitesse initiale. Personne ne l'a «&nbsp;projeté en avant&nbsp;»&nbsp;: il a simplement continué.</p>
+          <p><span class="etape-label">d. — </span>pour s'arrêter avec la voiture, il lui faut un \(\Delta \vec v\) vers l'arrière — donc une force vers l'arrière. La ceinture <em>est</em> cette force&nbsp;: elle solidarise le passager avec la voiture, étale son freinage sur toute la durée du choc, et l'applique sur des zones solides du corps.</p>
+          <p class="conclusion">Conclusion&nbsp;: la ceinture ne te «&nbsp;retient&nbsp;» pas contre une projection — rien ne te projette. Elle est la force qui te fait ralentir avec la voiture. Attache-la.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · SANS CALCULATRICE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Deux volets indépendants&nbsp;: l'étude chiffrée du lancer franc du cours, puis un rond-point par temps de verglas — l'enquête qualitative complète.</p>
+          <div class="bac-partie">PARTIE A — LE LANCER FRANC, CHRONOPHOTOGRAPHIE À L'APPUI</div>
+          <p class="prose">La chronophotographie du cours (Δt = 0,20&nbsp;s) donne&nbsp;: M<sub>0</sub>M<sub>1</sub> = 1,30&nbsp;m, et, autour du sommet, les vecteurs vitesse \(\vec v_2 = (2{,}5\;;\, 2{,}0)\) et \(\vec v_3 = (2{,}5\;;\, 0)\), en m/s. Échelle des vitesses&nbsp;: 1&nbsp;cm ↔ 2,0&nbsp;m/s.</p>
+          <ol>
+            <li>Rappelle la définition du vecteur vitesse en M<sub>0</sub>, calcule sa norme, puis la longueur de la flèche qui le représente à l'échelle.</li>
+            <li>Calcule les coordonnées de \(\Delta \vec v = \vec v_3 - \vec v_2\), puis donne sa direction, son sens et sa norme.</li>
+            <li>Déduis-en la direction et le sens de la somme des forces appliquées à la balle, identifie cette somme, et justifie que le résultat reste vrai au sommet de la trajectoire.</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — LE ROND-POINT SOUS LE VERGLAS</div>
+          <p class="prose">Une voiture aborde un rond-point à vitesse constante au compteur.</p>
+          <ol>
+            <li>Son vecteur vitesse est-il constant&nbsp;? Justifie soigneusement.</li>
+            <li>Montre que la somme des forces n'est pas nulle, donne sa direction, et précise quelle interaction la fournit.</li>
+            <li>Sur une plaque de verglas, cette interaction disparaît presque totalement. Décris le mouvement de la voiture, et explique pourquoi les traces laissées sur la neige sont <em>rectilignes</em>, tangentes au rond-point.</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>\(\vec v_0 = \dfrac{\overrightarrow{M_0M_1}}{\Delta t}\)&nbsp;: tangent à la trajectoire, dans le sens du mouvement, de norme \(v_0 = \dfrac{1{,}30}{0{,}20} = 6{,}5\)&nbsp;m·s⁻¹. À l'échelle&nbsp;: \(\dfrac{6{,}5}{2{,}0} = 3{,}25\)&nbsp;cm.</p>
+            <p><span class="etape-label">A.2 — </span>\(\Delta \vec v = (2{,}5 - 2{,}5\;;\, 0 - 2{,}0) = (0\;;\, -2{,}0)\)&nbsp;: direction verticale, sens vers le bas, norme 2,0&nbsp;m·s⁻¹.</p>
+            <p><span class="etape-label">A.3 — </span>\(\sum \vec F\) a la direction et le sens de \(\Delta \vec v\)&nbsp;: verticale, vers le bas — c'est le poids (frottements négligés). Le poids ne dépendant pas de la position, le résultat vaut partout, sommet compris&nbsp;: \(\Delta \vec v\) n'y est pas nul, même si \(\vec v\) y est horizontal.</p>
+            <p><span class="etape-label">B.1 — </span>non&nbsp;: sa norme est constante mais sa direction tourne le long du cercle — un vecteur change dès qu'une seule de ses caractéristiques change.</p>
+            <p><span class="etape-label">B.2 — </span>\(\vec v\) change → \(\Delta \vec v \neq \vec 0\) → \(\sum \vec F \neq \vec 0\), dirigée comme \(\Delta \vec v\) vers le centre du rond-point. C'est l'adhérence des pneus sur la chaussée qui la fournit.</p>
+            <p><span class="etape-label">B.3 — </span>sans adhérence, \(\sum \vec F \approx \vec 0\)&nbsp;: le vecteur vitesse se fige (principe d'inertie) et la voiture part en mouvement rectiligne uniforme, dans la direction qu'avait \(\vec v\) — la tangente au cercle. D'où des traces droites, tangentes, jamais «&nbsp;éjectées vers l'extérieur&nbsp;».</p>
+            <p class="conclusion">Conclusion&nbsp;: la partie A teste la technique (norme, échelle, «&nbsp;après moins avant&nbsp;»), la partie B le raisonnement qualitatif — les deux moitiés du chapitre, et l'esprit exact de l'épreuve.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">L'énergie mécanique <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
