@@ -1236,3 +1236,19 @@
 .dil-liquide { fill: var(--accent); }
 .etl-valeur { font-family: var(--font-mono); font-size: 13px; fill: var(--accent); }
 .chip sup { line-height: 0; }
+
+/* --- Ondes mécaniques (physique-chimie) : crochets de mesure + point craie -----------------------------------
+   La corde et les sinusoïdes réutilisent .g-courbe (craie), la pince et la
+   crête marquée .pt-halo/.pt-point (accent), les rails .g-guide, le front
+   .g-guide-accent, la flèche de célérité .g-courbe-derivee +
+   .vec-pointe--accent, les valeurs .etl-valeur. Nouveau ici : le crochet
+   de mesure accent (λ, T, distance d'avance — trait + serifs).
+   Couleurs et épaisseurs : tokens uniquement. */
+
+.ond-mesure { stroke: var(--accent); stroke-width: var(--sw-tan); fill: none; }
+
+/* Correctif partagé : etalonnage.js (chapitre composition) pose des points
+   .pt-craie dans ses SVG, mais la classe n'existait que scopée à
+   .carte-motif dans base.css — les étalons héritaient du fill noir par
+   défaut, invisibles en thème sombre. Même recette que .pt-suite. */
+.pt-craie { fill: var(--chalk); stroke: var(--surface); stroke-width: 1.5; }
