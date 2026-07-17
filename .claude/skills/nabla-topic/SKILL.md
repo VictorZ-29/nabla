@@ -54,7 +54,10 @@ Ask the user for (or confirm from context):
   previous chapter's footer should now link to).
 
 Check the actual programme scope for that level so nothing taught is
-off-programme; anything beyond it must be qualitative and flagged.
+off-programme; anything beyond it must be qualitative and flagged. Start
+with `/PROGRAMME.md` (official programme referential + coverage status —
+note maths Première follows the NEW 2026 programme); read the chapter's
+row there, and update its status in the commit that ships the chapter.
 
 ### 2. Outline — and confirm with the user
 
