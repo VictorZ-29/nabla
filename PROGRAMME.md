@@ -111,7 +111,7 @@ aux chapitres existants.**
 
 ## Physique-chimie — Première spécialité (programme 2019, toujours en vigueur)
 
-**Bilan : 4 chapitres en ligne · 12 à faire.** Découpage proposé : un
+**Bilan : 5 chapitres en ligne · 11 à faire.** Découpage proposé : un
 chapitre Nabla par sous-partie officielle (des regroupements restent
 possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 
@@ -141,7 +141,7 @@ possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 | Chapitre Nabla | Sous-partie officielle & contenus | Statut |
 |---|---|---|
 | L'énergie électrique | « Aspects énergétiques des phénomènes électriques » : porteurs de charge, intensité ; source réelle de tension, caractéristique, point de fonctionnement ; puissance, énergie, effet Joule ; rendement d'un convertisseur. | ⬜ À faire |
-| L'énergie mécanique | « Aspects énergétiques des phénomènes mécaniques » : énergie cinétique, théorème de l'énergie cinétique ; travail d'une force, travail du poids ; forces conservatives, énergie potentielle de pesanteur ; énergie mécanique, conservation et non-conservation. | ⬜ À faire — carte « BIENTÔT » sur l'accueil |
+| L'énergie mécanique | « Aspects énergétiques des phénomènes mécaniques » : énergie cinétique, théorème de l'énergie cinétique ; travail d'une force, travail du poids ; forces conservatives, énergie potentielle de pesanteur ; énergie mécanique, conservation et non-conservation. | ✅ `premiere/physique-chimie/energie-mecanique/` |
 
 ### Thème 4 — Ondes et signaux
 
