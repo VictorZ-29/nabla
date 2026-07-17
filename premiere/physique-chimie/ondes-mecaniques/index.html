@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Les ondes mécaniques — Première Spé Physique-Chimie | Nabla</title>
+<meta name="description" content="Comprends vraiment les ondes mécaniques : la propagation d'une perturbation sans transport de matière, la célérité et le retard, la période et la longueur d'onde sur les bonnes représentations, et la relation λ = v·T, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé physique-chimie, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/physique-chimie/ondes-mecaniques/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Les ondes mécaniques — Première Spé Physique-Chimie | Nabla">
+<meta property="og:description" content="Onde progressive, célérité, retard, période et longueur d'onde, relation λ = v·T : un cours interactif où tu propages les ondes toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/physique-chimie/ondes-mecaniques/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Les ondes mécaniques — Première Spé Physique-Chimie | Nabla">
+<meta name="twitter:description" content="Onde progressive, célérité, retard, période, longueur d'onde, λ = v·T : cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Les ondes mécaniques — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé physique-chimie sur les ondes mécaniques : onde progressive et propagation sans transport de matière, célérité, retard, ondes périodiques, période, fréquence, longueur d'onde, représentations spatiale et temporelle, relation λ = v·T. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/physique-chimie/ondes-mecaniques/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité physique-chimie",
+  "teaches": "Onde mécanique progressive, propagation sans transport de matière, célérité, retard, onde périodique, période, fréquence, longueur d'onde, représentations spatiale et temporelle, relation λ = v·T",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=10">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=10">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=10">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/onde-corde.js"></script>
+<script type="module" src="../../../assets/js/widgets/onde-sinus.js"></script>
+<script type="module" src="../../../assets/js/widgets/onde-relation.js"></script>
+<script type="module" src="../../../assets/js/widgets/stoechio-jeu.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="ondes">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Physique-Chimie</span>
+  </div>
+  <h1>Les ondes mécaniques</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>décrire la propagation d'une perturbation sans transport de matière, calculer une célérité et exploiter le retard τ&nbsp;=&nbsp;d/v, distinguer la période T (à lire sur un graphique temporel) de la longueur d'onde λ (à lire sur un graphique spatial), et justifier puis utiliser la relation λ&nbsp;=&nbsp;v&nbsp;×&nbsp;T.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. La ola du stade</a>
+      <a href="#s2">2. L'onde et la célérité</a>
+      <a href="#s3">3. Le retard</a>
+      <a href="#s4">4. La photo et le film</a>
+      <a href="#s5">5. La relation λ = v × T</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. La ola du stade</a>
+        <a href="#s2">2. L'onde et la célérité</a>
+        <a href="#s3">3. Le retard</a>
+        <a href="#s4">4. La photo et le film</a>
+        <a href="#s5">5. La relation λ = v × T</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. La ola&nbsp;: une onde de spectateurs</h2>
+      <p class="prose">Samedi soir de match, le stade est plein. Dans le virage nord, quelques dizaines de spectateurs se lèvent d'un coup, bras au ciel, puis se rassoient. Leurs voisins les imitent une demi-seconde plus tard&nbsp;; puis les voisins des voisins. En moins d'une minute, la vague a fait le tour complet du stade&nbsp;: c'est la ola. Vue de loin, on jurerait qu'une <em>chose</em> court sur les gradins.</p>
+      <p class="prose">Question piège&nbsp;: qu'est-ce qui a fait le tour du stade&nbsp;? Pas les spectateurs — chacun a gardé son siège, son voisin de droite et son sachet de pop-corn. Chacun n'a fait qu'un seul geste, vertical&nbsp;: debout, assis. Ce qui a voyagé, c'est <strong>le geste lui-même</strong>, transmis de proche en proche. Ce genre d'objet — une perturbation qui se déplace dans un milieu dont chaque morceau reste à sa place — la physique l'appelle une onde. Il y en a partout&nbsp;: la vague qui soulève le bouchon du pêcheur sans l'emporter, le tonnerre qui te parvient longtemps après l'éclair, la secousse d'un séisme qui traverse la planète.</p>
+      <p class="prose">Pour l'étudier de près, pas besoin d'un stade&nbsp;: une corde à linge suffit. Attache une extrémité, tends-la, donne un coup sec vers le haut. Une bosse part et court le long de la corde — et la pince à linge accrochée plus loin attend son tour, parfaitement immobile.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 300" role="img" aria-label="Une bosse court le long d'une corde à linge horizontale, de gauche à droite ; une flèche accent indique sa célérité ; la pince à linge accrochée à 6 mètres est encore parfaitement immobile sur la corde au repos">
+          <path class="g-grid" d="M85.1 0L85.1 300M143.9 0L143.9 300M202.6 0L202.6 300M261.3 0L261.3 300M320 0L320 300M378.7 0L378.7 300M437.4 0L437.4 300M496.1 0L496.1 300M554.9 0L554.9 300M613.6 0L613.6 300"></path>
+          <path class="g-axis" d="M0 192.3L640 192.3"></path>
+          <path class="g-guide" stroke-dasharray="3 4" d="M378.7 74.4L378.7 212.8"></path>
+          <path class="g-guide-accent" stroke-dasharray="4 5" d="M202.6 43.6L202.6 212.8"></path>
+          <path class="g-courbe" d="M26.4 192.3L28.7 192.3L30.9 192.3L33.2 192.3L35.5 192.3L37.7 192.3L40 192.3L42.2 192.3L44.5 192.3L46.7 192.3L49 192.3L51.3 192.3L53.5 192.3L55.8 192.3L58 192.3L60.3 192.3L62.6 192.3L64.8 192.3L67.1 192.3L69.3 192.3L71.6 192.3L73.8 192.3L76.1 192.3L78.4 192.3L80.6 192.3L82.9 192.3L85.1 192.3L87.4 191.9L89.7 190.8L91.9 189L94.2 186.4L96.4 183.2L98.7 179.4L100.9 175L103.2 170.2L105.5 164.9L107.7 159.2L110 153.3L112.2 147.2L114.5 141L116.8 134.8L119 128.8L121.3 122.8L123.5 117.2L125.8 111.9L128 107L130.3 102.6L132.6 98.8L134.8 95.6L137.1 93.1L139.3 91.2L141.6 90.1L143.9 89.7L146.1 90.1L148.4 91.2L150.6 93.1L152.9 95.6L155.1 98.8L157.4 102.6L159.7 107L161.9 111.9L164.2 117.2L166.4 122.8L168.7 128.8L171 134.8L173.2 141L175.5 147.2L177.7 153.3L180 159.2L182.2 164.9L184.5 170.2L186.8 175L189 179.4L191.3 183.2L193.5 186.4L195.8 189L198.1 190.8L200.3 191.9L202.6 192.3L204.8 192.3L207.1 192.3L209.3 192.3L211.6 192.3L213.9 192.3L216.1 192.3L218.4 192.3L220.6 192.3L222.9 192.3L225.2 192.3L227.4 192.3L229.7 192.3L231.9 192.3L234.2 192.3L236.4 192.3L238.7 192.3L241 192.3L243.2 192.3L245.5 192.3L247.7 192.3L250 192.3L252.3 192.3L254.5 192.3L256.8 192.3L259 192.3L261.3 192.3L263.5 192.3L265.8 192.3L268.1 192.3L270.3 192.3L272.6 192.3L274.8 192.3L277.1 192.3L279.4 192.3L281.6 192.3L283.9 192.3L286.1 192.3L288.4 192.3L290.6 192.3L292.9 192.3L295.2 192.3L297.4 192.3L299.7 192.3L301.9 192.3L304.2 192.3L306.5 192.3L308.7 192.3L311 192.3L313.2 192.3L315.5 192.3L317.7 192.3L320 192.3L322.3 192.3L324.5 192.3L326.8 192.3L329 192.3L331.3 192.3L333.5 192.3L335.8 192.3L338.1 192.3L340.3 192.3L342.6 192.3L344.8 192.3L347.1 192.3L349.4 192.3L351.6 192.3L353.9 192.3L356.1 192.3L358.4 192.3L360.6 192.3L362.9 192.3L365.2 192.3L367.4 192.3L369.7 192.3L371.9 192.3L374.2 192.3L376.5 192.3L378.7 192.3L381 192.3L383.2 192.3L385.5 192.3L387.7 192.3L390 192.3L392.3 192.3L394.5 192.3L396.8 192.3L399 192.3L401.3 192.3L403.6 192.3L405.8 192.3L408.1 192.3L410.3 192.3L412.6 192.3L414.8 192.3L417.1 192.3L419.4 192.3L421.6 192.3L423.9 192.3L426.1 192.3L428.4 192.3L430.7 192.3L432.9 192.3L435.2 192.3L437.4 192.3L439.7 192.3L441.9 192.3L444.2 192.3L446.5 192.3L448.7 192.3L451 192.3L453.2 192.3L455.5 192.3L457.8 192.3L460 192.3L462.3 192.3L464.5 192.3L466.8 192.3L469 192.3L471.3 192.3L473.6 192.3L475.8 192.3L478.1 192.3L480.3 192.3L482.6 192.3L484.9 192.3L487.1 192.3L489.4 192.3L491.6 192.3L493.9 192.3L496.1 192.3L498.4 192.3L500.7 192.3L502.9 192.3L505.2 192.3L507.4 192.3L509.7 192.3L512 192.3L514.2 192.3L516.5 192.3L518.7 192.3L521 192.3L523.2 192.3L525.5 192.3L527.8 192.3L530 192.3L532.3 192.3L534.5 192.3L536.8 192.3L539.1 192.3L541.3 192.3L543.6 192.3L545.8 192.3L548.1 192.3L550.3 192.3L552.6 192.3L554.9 192.3L557.1 192.3L559.4 192.3L561.6 192.3L563.9 192.3L566.2 192.3L568.4 192.3L570.7 192.3L572.9 192.3L575.2 192.3L577.4 192.3L579.7 192.3L582 192.3L584.2 192.3L586.5 192.3L588.7 192.3L591 192.3L593.3 192.3L595.5 192.3L597.8 192.3L600 192.3L602.3 192.3L604.5 192.3L606.8 192.3L609.1 192.3L611.3 192.3L613.6 192.3"></path>
+          <path class="g-courbe-derivee" d="M111.6 48.7L165.1 48.7"></path>
+          <path class="vec-pointe--accent" d="M176.1 48.7L165.1 44.2L165.1 53.2Z"></path>
+          <circle class="pt-halo" cx="378.7" cy="192.3" r="12"></circle>
+          <circle class="pt-point" cx="378.7" cy="192.3" r="5.5"></circle>
+          <text class="etl-valeur" x="143.9" y="38.7" text-anchor="middle">v = 2,0 m/s</text>
+          <text class="avc-candidat" x="26.4" y="212.3" text-anchor="middle">0</text>
+          <text class="avc-candidat" x="320" y="212.3" text-anchor="middle">5</text>
+          <text class="avc-candidat" x="613.6" y="212.3" text-anchor="end">10 m</text>
+          <text class="avc-nom" x="378.7" y="232.3" text-anchor="middle">la pince</text>
+        </svg>
+        <figcaption>La secousse est partie de la main il y a 1,5&nbsp;seconde&nbsp;: la bosse court vers la droite à 2,0&nbsp;m/s. La pince à linge, elle, n'a pas encore bougé — et quand la bosse l'atteindra, elle montera puis redescendra <em>sur place</em>. À toi de le vérifier juste en dessous.</figcaption>
+      </figure>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. L'onde progressive&nbsp;: la forme voyage, pas la matière</h2>
+      <p class="prose">Voici la corde à linge, et cette fois c'est toi qui tiens le temps&nbsp;: le curseur fait avancer le film seconde par seconde, le bouton le lance en entier. Une question à garder en tête pendant que tu manipules&nbsp;: à la fin, la pince aura-t-elle avancé le long de la corde, même un peu&nbsp;?</p>
+
+      <figure class="widget" id="widget-corde" data-widget="onde-corde" data-nom="corde" data-v="2" data-longueur="10" data-t-max="5" data-largeur="2" data-amplitude="0.4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La forme voyage, pas la corde</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 300" aria-label="Une bosse se propage le long d'une corde quand le temps avance ; la pince à linge accrochée à six mètres monte et redescend sur place à son passage, sans jamais se déplacer horizontalement"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">temps écoulé&nbsp;: t = <span class="js-t">0,00</span>&nbsp;s</span>
+            <input type="range" class="js-curseur" min="0" max="5" step="0.25" value="0" aria-label="Temps écoulé depuis la secousse, en secondes">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-lancer">▸ lance l'onde</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">La corde au repos, la pince accrochée à 6,0&nbsp;m. Fais glisser le temps — ou lance l'onde — et surveille la pince&nbsp;: avance-t-elle avec la bosse&nbsp;?</p>
+            <p class="widget-legende js-leg-cours" hidden>La bosse court vers la droite à 2,0&nbsp;m/s. Chaque morceau de corde monte et redescend quand elle passe — puis tout redevient exactement comme avant.</p>
+            <p class="widget-legende js-leg-fin" hidden>L'onde est sortie du cadre — et la pince est précisément là où elle a toujours été, à 6,0&nbsp;m. Elle a bougé (un aller-retour vertical), mais elle n'a pas voyagé. La forme voyage&nbsp;; la matière reste.</p>
+          </div>
+        </div>
+        <div class="widget-note">La corde à linge transmet la secousse à v = 2,0&nbsp;m/s. Le pointillé vertical accent marque le front de l'onde&nbsp;; la pince glisse le long de son rail, jamais le long de la corde.</div>
+        <script type="application/json">[{"x": 6, "nom": "la pince"}]</script>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Comment la bosse peut-elle avancer si la corde ne part pas avec elle&nbsp;? Parce que chaque morceau de corde tire sur son voisin&nbsp;: le morceau soulevé soulève le suivant, qui soulève le suivant — chacun <em>refait le geste</em> du précédent, exactement comme les spectateurs de la ola. Le son marche pareil&nbsp;: une tranche d'air comprimée pousse la tranche voisine, qui pousse la suivante — la ola de l'air. Aucune molécule ne traverse la pièce quand quelqu'un te parle&nbsp;; c'est la compression qui voyage.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire à la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une <strong>onde mécanique progressive</strong> est la propagation d'une perturbation dans un milieu matériel (corde, eau, air…), <strong>sans transport de matière</strong>&nbsp;: chaque point du milieu reproduit la perturbation puis revient à sa place. Ce que l'onde transporte, c'est de l'énergie.</p>
+      </div>
+
+      <p class="prose">Et à quelle vitesse la perturbation avance-t-elle&nbsp;? Comme rien de matériel ne se déplace avec elle, on lui réserve un mot à elle&nbsp;: la <strong>célérité</strong>. Elle se calcule comme toutes les vitesses de Seconde — une distance divisée par une durée&nbsp;:</p>
+
+      <div class="math-vitrine math-vitrine--grande">$$v = \frac{d}{\Delta t} \qquad\quad \text{— } d \text{ en m, } \Delta t \text{ en s, } v \text{ en m·s}^{-1}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — MESURER UNE CÉLÉRITÉ</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Choisis un repère facile à suivre sur l'onde — le front, une crête — et note sa position à deux instants.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule \(v = \dfrac{d}{\Delta t}\), avec \(d\) la distance parcourue entre les deux instants et \(\Delta t\) la durée du trajet. Unités cohérentes&nbsp;: des mètres et des secondes donnent des m·s⁻¹.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: compare à un ordre de grandeur connu — quelques m/s pour une corde ou la houle, 340&nbsp;m/s pour le son dans l'air, 1&thinsp;500&nbsp;m/s dans l'eau, quelques km/s pour un séisme.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA OLA DU STADE DE FRANCE</div>
+        <p class="exemple-enonce">Au Stade de France, la ola boucle le tour des tribunes — environ 800&nbsp;m — en 64&nbsp;s. a. Quelle est sa célérité&nbsp;? b. Combien de temps met-elle pour atteindre le virage opposé, à 400&nbsp;m&nbsp;?</p>
+        <p><span class="etape-label">a. — </span>\(v = \dfrac{d}{\Delta t} = \dfrac{800}{64} = 12{,}5\)&nbsp;m·s⁻¹. Une belle vitesse&nbsp;: 45&nbsp;km/h, sans qu'un seul spectateur quitte son siège.</p>
+        <p><span class="etape-label">b. — </span>\(\Delta t = \dfrac{d}{v} = \dfrac{400}{12{,}5} = 32\)&nbsp;s. Contrôle&nbsp;: la moitié du tour, la moitié du temps — cohérent.</p>
+        <p class="conclusion">Conclusion&nbsp;: à la question b, tu viens de calculer le temps que met une onde pour arriver quelque part. Ce temps-là a un nom — le retard — et c'est toute la section suivante.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Une onde transporte une forme et de l'énergie, jamais la matière&nbsp;: chaque point du milieu refait le geste <em>sur place</em>. Sa vitesse s'appelle la célérité&nbsp;: \(v = \dfrac{d}{\Delta t}\).</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Quand la ola fait le tour du stade, qu'est-ce qui se déplace&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">les spectateurs, de proche en proche</button>
+              <button type="button" class="quiz-reponse">le geste — une perturbation transmise de voisin en voisin</button>
+              <button type="button" class="quiz-reponse">l'air du stade, poussé par la vague</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> chaque spectateur reste à sa place et refait le geste du voisin&nbsp;: c'est la définition même d'une onde. La perturbation voyage, la matière reste.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Une perturbation parcourt 15&nbsp;m en 6,0&nbsp;s. Sa célérité vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">90 m/s</button>
+              <button type="button" class="quiz-reponse">0,40 m/s</button>
+              <button type="button" class="quiz-reponse">2,5 m/s</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(v = \dfrac{15}{6{,}0} = 2{,}5\)&nbsp;m·s⁻¹. Trouver 90, c'est multiplier au lieu de diviser&nbsp;; 0,40, c'est diviser à l'envers. Le contrôle d'ordre de grandeur (une corde&nbsp;: quelques m/s) attrape les deux.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Après le passage complet de la bosse, la pince à linge…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">est exactement là où elle était</button>
+              <button type="button" class="quiz-reponse">a été emportée un peu plus loin sur la corde</button>
+              <button type="button" class="quiz-reponse">est plus haute qu'avant</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> elle a fait un aller-retour vertical <em>sur place</em>, puis tout est redevenu comme avant&nbsp;: une onde ne transporte pas la matière — rejoue le graphique si tu doutes encore.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Le retard&nbsp;: l'onde n'arrive jamais tout de suite</h2>
+      <p class="prose">Un soir d'orage, l'éclair illumine le ciel… et le tonnerre ne gronde que plusieurs secondes après. Les deux sont pourtant nés au même endroit, au même instant. Mais la lumière voyage si vite (300&thinsp;000&nbsp;km/s) qu'elle te parvient quasi instantanément, tandis que le son traîne à 340&nbsp;m/s&nbsp;: le silence entre l'éclair et le tonnerre, c'est le temps de trajet du son. Une onde met toujours du temps à arriver — et ce temps se calcule.</p>
+      <p class="prose">Regarde-le sur la corde&nbsp;: deux pinces, A et B. La secousse passe d'abord chez A, puis chez B. Lance l'onde et chronomètre-les.</p>
+
+      <figure class="widget" id="widget-retard" data-widget="onde-corde" data-nom="retard" data-v="2" data-longueur="10" data-t-max="6" data-largeur="2" data-amplitude="0.4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le retard de B sur A</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 300" aria-label="Une bosse se propage le long d'une corde et rencontre deux pinces : A à deux mètres puis B à huit mètres ; B reproduit le mouvement de A avec trois secondes de retard"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">temps écoulé&nbsp;: t = <span class="js-t">0,00</span>&nbsp;s</span>
+            <input type="range" class="js-curseur" min="0" max="6" step="0.25" value="0" aria-label="Temps écoulé depuis la secousse, en secondes">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">d(A→B) = 6,0&nbsp;m</span>
+            <span class="chip chip--accent">retard&nbsp;: τ = d / v = 3,0&nbsp;s</span>
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-lancer">▸ lance l'onde</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Deux pinces&nbsp;: A à 2,0&nbsp;m, B à 8,0&nbsp;m. Elles vont faire exactement le même geste — mais pas en même temps. Lance l'onde et chronomètre-les.</p>
+            <p class="widget-legende js-leg-cours" hidden>A s'agite dès t = 1,0&nbsp;s&nbsp;; B doit attendre son tour. La perturbation met d/v = 6,0/2,0 = 3,0&nbsp;s pour aller de l'une à l'autre.</p>
+            <p class="widget-legende js-leg-fin" hidden>B a refait exactement le geste de A, 3,0&nbsp;s plus tard&nbsp;: c'est le retard, τ = d/v. Tout ce que fait la source arrive à distance — en différé.</p>
+          </div>
+        </div>
+        <div class="widget-note">Même corde qu'à la section 2, même célérité&nbsp;: v = 2,0&nbsp;m/s. Les chips donnent la distance A→B et le retard qui s'en déduit.</div>
+        <script type="application/json">[{"x": 2, "nom": "A"}, {"x": 8, "nom": "B"}]</script>
+      </figure>
+
+      <p class="prose">Ce que tu viens de chronométrer porte un nom.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Le <strong>retard</strong> \(\tau\) est la durée que met la perturbation pour aller d'un point à un autre, distants de \(d\)&nbsp;: chaque point du milieu reproduit le mouvement de la source avec le retard</p>
+        <div class="math-vitrine">$$\tau = \frac{d}{v}$$</div>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — LOCALISER UNE SOURCE AVEC UN RETARD</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Identifie la célérité de l'onde dans le milieu — c'est une donnée&nbsp;: 340&nbsp;m·s⁻¹ pour le son dans l'air, 1&thinsp;500&nbsp;m·s⁻¹ dans l'eau…</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Mesure le retard \(\tau\) entre l'émission et la réception, puis convertis-le en distance&nbsp;: \(d = v \times \tau\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: si l'onde a fait un <em>aller-retour</em> (écho, sonar), la distance cherchée est \(d/2\) — divise par deux avant de conclure.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — À QUELLE DISTANCE TOMBE LA FOUDRE&nbsp;?</div>
+        <p class="exemple-enonce">Tu vois l'éclair, tu comptes&nbsp;: le tonnerre arrive 6,0&nbsp;s après. Le son se propage à 340&nbsp;m·s⁻¹. a. À quelle distance la foudre est-elle tombée&nbsp;? b. D'où vient la règle «&nbsp;compte les secondes, divise par trois, tu as des kilomètres&nbsp;»&nbsp;?</p>
+        <p><span class="etape-label">a. — </span>l'éclair arrive quasi instantanément&nbsp;: le retard mesuré est celui du son. \(d = v \times \tau = 340 \times 6{,}0 = 2\,040\)&nbsp;m, soit environ 2,0&nbsp;km.</p>
+        <p><span class="etape-label">b. — </span>pour parcourir 1&nbsp;km, le son met \(\tau = \dfrac{1\,000}{340} \approx 2{,}9\)&nbsp;s — presque exactement 3&nbsp;s. Trois secondes de silence, un kilomètre d'orage.</p>
+        <p class="conclusion">Conclusion&nbsp;: le retard n'est pas une gêne, c'est un instrument de mesure — la règle du randonneur, le sonar et l'échographie fonctionnent tous sur \(d = v \times \tau\).</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur le retard</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Pourquoi le tonnerre arrive-t-il après l'éclair&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">parce que le tonnerre est produit après l'éclair</button>
+              <button type="button" class="quiz-reponse">parce que les nuages ralentissent la lumière</button>
+              <button type="button" class="quiz-reponse">parce que le son voyage bien plus lentement que la lumière</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> les deux naissent ensemble, mais 340&nbsp;m/s contre 300&thinsp;000&nbsp;km/s&nbsp;: seul le son accumule un retard perceptible. Le silence entre les deux, c'est τ = d/v.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Sur la corde (v = 2,0&nbsp;m/s), le point C est à 3,0&nbsp;m de la source. Le début de la perturbation l'atteint après…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">1,5 s</button>
+              <button type="button" class="quiz-reponse">6,0 s</button>
+              <button type="button" class="quiz-reponse">0,67 s</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\tau = \dfrac{d}{v} = \dfrac{3{,}0}{2{,}0} = 1{,}5\)&nbsp;s. Trouver 6,0, c'est multiplier (\(d \times v\))&nbsp;; 0,67, c'est diviser à l'envers (\(v/d\)). La formule se retrouve avec les unités&nbsp;: des mètres divisés par des m/s laissent des secondes.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Le sonar d'un bateau reçoit l'écho du fond 0,10&nbsp;s après l'émission (v = 1&thinsp;500&nbsp;m/s dans l'eau). Profondeur&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">150 m</button>
+              <button type="button" class="quiz-reponse">75 m</button>
+              <button type="button" class="quiz-reponse">15 m</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(1\,500 \times 0{,}10 = 150\)&nbsp;m… <em>aller-retour</em>. Le fond est à \(150/2 = 75\)&nbsp;m. Répondre 150, c'est oublier que l'écho a fait le voyage deux fois — le piège classique du sonar.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Les ondes périodiques&nbsp;: la photo et le film</h2>
+      <p class="prose">Jusqu'ici, une seule secousse. Maintenant, secoue la corde <em>en cadence</em>, régulièrement, sans t'arrêter&nbsp;: la corde entière devient une sinusoïde qui avance — comme la houle au large, où les vagues se suivent à intervalles réguliers. Pour décrire une telle onde, les physiciens utilisent deux graphiques qui se ressemblent à s'y méprendre&nbsp;: <strong>la photo</strong> (toute la corde, figée à un instant) et <strong>le film</strong> (un seul point, suivi au fil du temps). Les confondre est LE piège favori des sujets de bac. Manipule d'abord, tu verras la différence de tes propres yeux.</p>
+
+      <figure class="widget" id="widget-photofilm" data-widget="onde-sinus" data-nom="photo-film" data-periode="2" data-lambda="4" data-amplitude="0.3" data-t-max="8" data-pos-init="0">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La photo et le film</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 230" aria-label="La photo : toute la corde sinusoïdale à l'instant t, axe gradué en mètres ; un crochet accent mesure la longueur d'onde de quatre mètres entre deux crêtes, et le bouchon choisi est marqué d'un point accent"></svg>
+        <svg class="widget-graph graph-scinde" viewBox="0 0 640 230" aria-label="Le film : la hauteur du bouchon choisi au fil du temps, axe gradué en secondes ; un crochet accent mesure la période de deux secondes entre deux crêtes, et un curseur vertical marque l'instant t"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">temps&nbsp;: t = <span class="js-t">0,00</span>&nbsp;s</span>
+            <input type="range" class="js-curseur" min="0" max="8" step="0.25" value="0" aria-label="Instant de la photo, en secondes">
+          </div>
+          <div class="especes-boutons" role="group" aria-label="Choisis le bouchon à suivre sur le film">
+            <button type="button" class="feuille-btn js-bouchon" aria-pressed="true">bouchon à 3,0&nbsp;m</button>
+            <button type="button" class="feuille-btn js-bouchon" aria-pressed="false">bouchon à 5,0&nbsp;m</button>
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent">λ = 4,0&nbsp;m — sur la photo (axe en mètres)</span>
+            <span class="chip chip--accent">T = 2,0&nbsp;s — sur le film (axe en secondes)</span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-defiler">▸ fais défiler le temps</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Deux graphiques, deux axes. LA PHOTO montre toute la corde à l'instant t&nbsp;: son axe est en mètres, on y mesure λ. LE FILM suit un seul bouchon&nbsp;: son axe est en secondes, on y mesure T.</p>
+            <p class="widget-legende js-leg-cours" hidden>Le point accent est le même bouchon sur les deux graphiques&nbsp;: même hauteur au même instant. La photo défile&nbsp;; le film, lui, est écrit une fois pour toutes.</p>
+            <p class="widget-legende js-leg-tour" hidden>Le bouchon vient de boucler un motif complet&nbsp;: T = 2,0&nbsp;s. Et pendant chaque période, la photo se décale d'exactement 4,0&nbsp;m — une longueur d'onde. Ce n'est pas un hasard&nbsp;: la section 5 en fait une formule.</p>
+          </div>
+        </div>
+        <div class="widget-note">La source impose sa cadence&nbsp;: un motif toutes les T = 2,0&nbsp;s. La corde répond par un motif tous les λ = 4,0&nbsp;m. Les crochets mesurent chacun sur son propre graphique.</div>
+        <script type="application/json">[3, 5]</script>
+      </figure>
+
+      <p class="prose">Maintenant que tes yeux ont fait la différence, les mots officiels.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une onde est <strong>périodique</strong> quand la source répète le même motif à intervalles de temps réguliers. La <strong>période</strong> \(T\) (en s) est la durée d'un motif complet — elle se lit sur le graphique <em>temporel</em> (le film d'un point). La <strong>fréquence</strong> \(f\) compte le nombre de motifs par seconde, en hertz (Hz)&nbsp;:</p>
+        <div class="math-vitrine">$$f = \frac{1}{T}$$</div>
+      </div>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>La <strong>longueur d'onde</strong> \(\lambda\) (en m) est la distance entre deux motifs consécutifs — entre deux crêtes voisines, par exemple. Elle se lit sur le graphique <em>spatial</em> (la photo du milieu à un instant donné). C'est la période de l'onde <em>dans l'espace</em>, comme \(T\) est sa période <em>dans le temps</em>.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — LIRE T ET λ SANS SE TROMPER</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Regarde l'axe des abscisses <em>avant</em> de mesurer&nbsp;: des secondes → c'est un film, tu y liras \(T\)&nbsp;; des mètres → c'est une photo, tu y liras \(\lambda\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Mesure d'une crête à la crête <em>suivante</em> — un motif complet. D'une crête au creux voisin, tu n'as qu'un demi-motif&nbsp;: \(T/2\) ou \(\lambda/2\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: \(T\) s'exprime en secondes, \(\lambda\) en mètres. Si ta «&nbsp;longueur d'onde&nbsp;» sort en secondes, tu as mesuré sur le mauvais graphique.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE BOUCHON DU PÊCHEUR</div>
+        <p class="exemple-enonce">Un pêcheur filme son bouchon soulevé par la houle&nbsp;: il fait 5 allers-retours complets en 20&nbsp;s. Une photo du plan d'eau montre par ailleurs des crêtes régulièrement espacées de 12&nbsp;m. a. Période et fréquence&nbsp;? b. Longueur d'onde&nbsp;?</p>
+        <p><span class="etape-label">a. — </span>cinq motifs en 20&nbsp;s&nbsp;: \(T = \dfrac{20}{5} = 4{,}0\)&nbsp;s, et \(f = \dfrac{1}{T} = \dfrac{1}{4{,}0} = 0{,}25\)&nbsp;Hz. (Le film donne le temps.)</p>
+        <p><span class="etape-label">b. — </span>la distance entre deux crêtes voisines se lit sur la photo&nbsp;: \(\lambda = 12\)&nbsp;m. Aucun calcul — juste le bon graphique.</p>
+        <p class="conclusion">Conclusion&nbsp;: deux grandeurs, deux graphiques. Le film chronomètre le motif, la photo le mesure au mètre. Le lien entre les deux — il existe — est l'affaire de la section 5.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions sur les deux graphiques</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Sur quel graphique lis-tu la longueur d'onde \(\lambda\)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le film d'un point (axe en secondes)</button>
+              <button type="button" class="quiz-reponse">la photo du milieu (axe en mètres)</button>
+              <button type="button" class="quiz-reponse">les deux&nbsp;: ils montrent la même chose</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\lambda\) est une <em>distance</em>&nbsp;: elle vit sur l'axe en mètres, donc sur la photo. Le film, avec son axe en secondes, ne peut donner que \(T\) — même si les deux courbes se ressemblent trait pour trait.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Sur un film, il s'écoule 1,0&nbsp;s entre une crête et le creux qui la suit. La période vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">1,0 s</button>
+              <button type="button" class="quiz-reponse">0,50 s</button>
+              <button type="button" class="quiz-reponse">2,0 s</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> crête → creux n'est qu'un <em>demi</em>-motif&nbsp;: \(T/2 = 1{,}0\)&nbsp;s donc \(T = 2{,}0\)&nbsp;s. Répondre 1,0&nbsp;s, c'est le piège du demi-motif&nbsp;; 0,50&nbsp;s le double à l'envers.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Une onde a une période T = 0,50&nbsp;s. Sa fréquence vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">2,0 Hz</button>
+              <button type="button" class="quiz-reponse">0,50 Hz</button>
+              <button type="button" class="quiz-reponse">5,0 Hz</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(f = \dfrac{1}{T} = \dfrac{1}{0{,}50} = 2{,}0\)&nbsp;Hz&nbsp;: deux motifs par seconde. Répondre 0,50, c'est recopier \(T\) en changeant l'unité — \(f\) et \(T\) sont inverses, pas synonymes.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Deux graphiques sinusoïdaux ont exactement la même allure. Comment savoir lequel est la photo et lequel est le film&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la photo est la plus lisse des deux</button>
+              <button type="button" class="quiz-reponse">impossible sans connaître la corde</button>
+              <button type="button" class="quiz-reponse">en lisant l'axe des abscisses&nbsp;: mètres = photo, secondes = film</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'allure ne dit rien&nbsp;: seule l'unité de l'axe tranche. C'est le réflexe n°1 du chapitre — et la première chose à vérifier sur un sujet de bac.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. La relation λ = v × T&nbsp;: une période, une longueur d'onde</h2>
+      <p class="prose">Il reste à relier les deux mondes — le temps et l'espace. Pose-toi la question&nbsp;: pendant que le bouchon fait <em>un</em> aller-retour complet (une période T), que fait l'onde&nbsp;? Elle avance, à sa célérité v, pendant la durée T&nbsp;: elle parcourt donc v × T. Et ce trajet-là n'est pas n'importe lequel. Marque une crête et regarde-la faire.</p>
+
+      <figure class="widget" id="widget-relation" data-widget="onde-relation" data-nom="relation" data-v-init="2" data-periode-init="2" data-amplitude="0.3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Une période, une longueur d'onde</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 300" aria-label="Une onde sinusoïdale sur une corde ; une crête marquée part d'une ligne de départ et avance pendant exactement une période : la distance parcourue, mesurée par un crochet accent, égale la longueur d'onde"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">célérité v — fixée par le milieu&nbsp;: <span class="js-v">2,0</span>&nbsp;m/s</span>
+            <input type="range" class="js-curseur-v" min="0.5" max="3" step="0.5" value="2" aria-label="Célérité de l'onde, en mètres par seconde">
+          </div>
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">période T — choisie par la source&nbsp;: <span class="js-periode">2,0</span>&nbsp;s</span>
+            <input type="range" class="js-curseur-t" min="1" max="4" step="0.5" value="2" aria-label="Période de la source, en secondes">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent js-lambda" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-avancer">▸ avance d'une période</button>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite"></p>
+        </div>
+        <div class="widget-note">λ = v × T est exacte pour tous les réglages&nbsp;: chaque pas des curseurs vaut 0,5. Bouger un curseur remet la crête sur la ligne de départ.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pendant une période \(T\), la source fabrique exactement <em>un</em> motif. Pendant cette même durée, le motif précédent s'est éloigné de \(d = v \times T\). La distance entre deux motifs consécutifs — la longueur d'onde — vaut donc précisément \(v \times T\). C'est la justification que le programme te demande de savoir refaire&nbsp;: elle tient en deux phrases, et tu viens de la <em>voir</em>.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA RELATION ENTRE λ, v ET T</div>
+        <p>Pour une onde périodique de célérité \(v\) et de période \(T\)&nbsp;:</p>
+        <div class="math-vitrine">$$\lambda = v \times T = \frac{v}{f}$$</div>
+        <p>\(\lambda\) en m, \(v\) en m·s⁻¹, \(T\) en s, \(f\) en Hz. Attention au partage des rôles&nbsp;: la source choisit \(T\) (et donc \(f\)), le <em>milieu</em> fixe \(v\) — et \(\lambda\) encaisse&nbsp;: secouer plus vite ne fait pas courir l'onde plus vite, ça resserre ses motifs.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — EXPLOITER λ = v × T</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris ce que tu connais en unités SI&nbsp;: \(\lambda\) en m, \(T\) en s, \(f\) en Hz, \(v\) en m·s⁻¹ (convertis les cm et les kHz <em>avant</em>).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Isole l'inconnue&nbsp;: \(\lambda = v \times T\), ou \(v = \dfrac{\lambda}{T} = \lambda \times f\), ou \(T = \dfrac{\lambda}{v}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: dans un même milieu, \(v\) ne bouge pas. Si \(f\) double, \(\lambda\) est divisée par deux — le produit \(\lambda \times f\) doit toujours redonner \(v\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE HAUT-PARLEUR</div>
+        <p class="exemple-enonce">Un haut-parleur émet un son de fréquence 425&nbsp;Hz dans l'air (v = 340&nbsp;m·s⁻¹). a. Quelle est la longueur d'onde de ce son&nbsp;? b. On monte à l'octave&nbsp;: f = 850&nbsp;Hz. Que devient \(\lambda\)&nbsp;? Et \(v\)&nbsp;?</p>
+        <p><span class="etape-label">a. — </span>\(\lambda = \dfrac{v}{f} = \dfrac{340}{425} = 0{,}80\)&nbsp;m&nbsp;: entre deux compressions successives de l'air, 80&nbsp;cm.</p>
+        <p><span class="etape-label">b. — </span>\(\lambda = \dfrac{340}{850} = 0{,}40\)&nbsp;m — la moitié. La célérité, elle, n'a pas bougé&nbsp;: c'est l'air qui la fixe, pas le haut-parleur. Un son plus aigu ne va pas plus vite&nbsp;; ses motifs se resserrent.</p>
+        <p class="conclusion">Conclusion&nbsp;: \(f\) et \(\lambda\) jouent en balançoire autour d'un \(v\) imposé par le milieu. C'est le contrôle-réflexe de la méthode — et le piège n°5 de la liste qui arrive.</p>
+      </div>
+
+      <p class="prose">Avant les exercices, vérifie ton œil&nbsp;: quatre graphiques, quatre lectures. Un seul réflexe compte — l'axe des abscisses d'abord.</p>
+
+      <figure class="widget" id="widget-lecture" data-widget="stoechio-jeu" data-nom="ondes-lecture" data-progression="GRAPHIQUE" data-suivant="Graphique suivant">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Lis les graphiques</span>
+          </div>
+          <span class="quiz-score js-progression">GRAPHIQUE 1/4</span>
+        </div>
+        <div class="widget-pied">
+          <div class="js-manche">
+            <svg class="widget-graph" viewBox="0 0 640 220" role="img" aria-label="Une sinusoïde sur un axe gradué en mètres, de zéro à dix ; les crêtes sont à un, cinq et neuf mètres">
+              <path class="g-grid" d="M87.3 0L87.3 220M145.5 0L145.5 220M203.6 0L203.6 220M261.8 0L261.8 220M320 0L320 220M378.2 0L378.2 220M436.4 0L436.4 220M494.5 0L494.5 220M552.7 0L552.7 220M610.9 0L610.9 220"></path>
+              <path class="g-axis" d="M0 123.1L640 123.1"></path>
+              <path class="g-courbe" d="M29.1 123.1L31.5 119.1L33.9 115.3L36.4 111.4L38.8 107.6L41.2 103.9L43.6 100.2L46.1 96.7L48.5 93.2L50.9 89.9L53.3 86.7L55.8 83.7L58.2 80.9L60.6 78.2L63 75.7L65.5 73.4L67.9 71.4L70.3 69.5L72.7 67.9L75.2 66.6L77.6 65.4L80 64.5L82.4 63.9L84.8 63.5L87.3 63.4L89.7 63.5L92.1 63.9L94.5 64.5L97 65.4L99.4 66.6L101.8 67.9L104.2 69.5L106.7 71.4L109.1 73.4L111.5 75.7L113.9 78.2L116.4 80.9L118.8 83.7L121.2 86.7L123.6 89.9L126.1 93.2L128.5 96.7L130.9 100.2L133.3 103.9L135.8 107.6L138.2 111.4L140.6 115.3L143 119.1L145.5 123.1L147.9 127L150.3 130.8L152.7 134.7L155.2 138.5L157.6 142.2L160 145.9L162.4 149.4L164.8 152.9L167.3 156.2L169.7 159.4L172.1 162.4L174.5 165.2L177 167.9L179.4 170.4L181.8 172.7L184.2 174.7L186.7 176.6L189.1 178.2L191.5 179.5L193.9 180.7L196.4 181.6L198.8 182.2L201.2 182.6L203.6 182.7L206.1 182.6L208.5 182.2L210.9 181.6L213.3 180.7L215.8 179.5L218.2 178.2L220.6 176.6L223 174.7L225.5 172.7L227.9 170.4L230.3 167.9L232.7 165.2L235.2 162.4L237.6 159.4L240 156.2L242.4 152.9L244.8 149.4L247.3 145.9L249.7 142.2L252.1 138.5L254.5 134.7L257 130.8L259.4 127L261.8 123.1L264.2 119.1L266.7 115.3L269.1 111.4L271.5 107.6L273.9 103.9L276.4 100.2L278.8 96.7L281.2 93.2L283.6 89.9L286.1 86.7L288.5 83.7L290.9 80.9L293.3 78.2L295.8 75.7L298.2 73.4L300.6 71.4L303 69.5L305.5 67.9L307.9 66.6L310.3 65.4L312.7 64.5L315.2 63.9L317.6 63.5L320 63.4L322.4 63.5L324.8 63.9L327.3 64.5L329.7 65.4L332.1 66.6L334.5 67.9L337 69.5L339.4 71.4L341.8 73.4L344.2 75.7L346.7 78.2L349.1 80.9L351.5 83.7L353.9 86.7L356.4 89.9L358.8 93.2L361.2 96.7L363.6 100.2L366.1 103.9L368.5 107.6L370.9 111.4L373.3 115.3L375.8 119.1L378.2 123.1L380.6 127L383 130.8L385.5 134.7L387.9 138.5L390.3 142.2L392.7 145.9L395.2 149.4L397.6 152.9L400 156.2L402.4 159.4L404.8 162.4L407.3 165.2L409.7 167.9L412.1 170.4L414.5 172.7L417 174.7L419.4 176.6L421.8 178.2L424.2 179.5L426.7 180.7L429.1 181.6L431.5 182.2L433.9 182.6L436.4 182.7L438.8 182.6L441.2 182.2L443.6 181.6L446.1 180.7L448.5 179.5L450.9 178.2L453.3 176.6L455.8 174.7L458.2 172.7L460.6 170.4L463 167.9L465.5 165.2L467.9 162.4L470.3 159.4L472.7 156.2L475.2 152.9L477.6 149.4L480 145.9L482.4 142.2L484.8 138.5L487.3 134.7L489.7 130.8L492.1 127L494.5 123.1L497 119.1L499.4 115.3L501.8 111.4L504.2 107.6L506.7 103.9L509.1 100.2L511.5 96.7L513.9 93.2L516.4 89.9L518.8 86.7L521.2 83.7L523.6 80.9L526.1 78.2L528.5 75.7L530.9 73.4L533.3 71.4L535.8 69.5L538.2 67.9L540.6 66.6L543 65.4L545.5 64.5L547.9 63.9L550.3 63.5L552.7 63.4L555.2 63.5L557.6 63.9L560 64.5L562.4 65.4L564.8 66.6L567.3 67.9L569.7 69.5L572.1 71.4L574.5 73.4L577 75.7L579.4 78.2L581.8 80.9L584.2 83.7L586.7 86.7L589.1 89.9L591.5 93.2L593.9 96.7L596.4 100.2L598.8 103.9L601.2 107.6L603.6 111.4L606.1 115.3L608.5 119.1L610.9 123.1"></path>
+              <text class="avc-candidat" x="8" y="15">LA PHOTO DE LA CORDE — x en mètres</text>
+              <text class="avc-candidat" x="29.1" y="139.1" text-anchor="middle">0</text>
+              <text class="avc-candidat" x="320" y="139.1" text-anchor="middle">5</text>
+              <text class="avc-candidat" x="610.9" y="139.1" text-anchor="end">10 m</text>
+            </svg>
+            <p class="quiz-enonce">Voici la photo d'une corde. Que vaut la longueur d'onde&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">λ = 2,0 m</button>
+              <button type="button" class="quiz-reponse">λ = 4,0 m</button>
+              <button type="button" class="quiz-reponse">λ = 4,0 s</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 220" role="img" aria-label="Une sinusoïde sur un axe gradué en secondes, de zéro à six ; les crêtes sont à une demi-seconde, deux secondes, trois secondes et demie et cinq secondes">
+              <path class="g-grid" d="M77.6 0L77.6 220M126.1 0L126.1 220M174.5 0L174.5 220M223 0L223 220M271.5 0L271.5 220M320 0L320 220M368.5 0L368.5 220M417 0L417 220M465.5 0L465.5 220M513.9 0L513.9 220M562.4 0L562.4 220M610.9 0L610.9 220"></path>
+              <path class="g-axis" d="M0 123.1L640 123.1"></path>
+              <path class="g-courbe" d="M29.1 152.9L31.5 147.3L33.9 141.5L36.4 135.5L38.8 129.3L41.2 123.1L43.6 116.8L46.1 110.6L48.5 104.6L50.9 98.8L53.3 93.2L55.8 88L58.2 83.1L60.6 78.7L63 74.8L65.5 71.4L67.9 68.5L70.3 66.3L72.7 64.7L75.2 63.7L77.6 63.4L80 63.7L82.4 64.7L84.8 66.3L87.3 68.5L89.7 71.4L92.1 74.8L94.5 78.7L97 83.1L99.4 88L101.8 93.2L104.2 98.8L106.7 104.6L109.1 110.6L111.5 116.8L113.9 123.1L116.4 129.3L118.8 135.5L121.2 141.5L123.6 147.3L126.1 152.9L128.5 158.1L130.9 163L133.3 167.4L135.8 171.3L138.2 174.7L140.6 177.6L143 179.8L145.5 181.4L147.9 182.4L150.3 182.7L152.7 182.4L155.2 181.4L157.6 179.8L160 177.6L162.4 174.7L164.8 171.3L167.3 167.4L169.7 163L172.1 158.1L174.5 152.9L177 147.3L179.4 141.5L181.8 135.5L184.2 129.3L186.7 123.1L189.1 116.8L191.5 110.6L193.9 104.6L196.4 98.8L198.8 93.2L201.2 88L203.6 83.1L206.1 78.7L208.5 74.8L210.9 71.4L213.3 68.5L215.8 66.3L218.2 64.7L220.6 63.7L223 63.4L225.5 63.7L227.9 64.7L230.3 66.3L232.7 68.5L235.2 71.4L237.6 74.8L240 78.7L242.4 83.1L244.8 88L247.3 93.2L249.7 98.8L252.1 104.6L254.5 110.6L257 116.8L259.4 123.1L261.8 129.3L264.2 135.5L266.7 141.5L269.1 147.3L271.5 152.9L273.9 158.1L276.4 163L278.8 167.4L281.2 171.3L283.6 174.7L286.1 177.6L288.5 179.8L290.9 181.4L293.3 182.4L295.8 182.7L298.2 182.4L300.6 181.4L303 179.8L305.5 177.6L307.9 174.7L310.3 171.3L312.7 167.4L315.2 163L317.6 158.1L320 152.9L322.4 147.3L324.8 141.5L327.3 135.5L329.7 129.3L332.1 123.1L334.5 116.8L337 110.6L339.4 104.6L341.8 98.8L344.2 93.2L346.7 88L349.1 83.1L351.5 78.7L353.9 74.8L356.4 71.4L358.8 68.5L361.2 66.3L363.6 64.7L366.1 63.7L368.5 63.4L370.9 63.7L373.3 64.7L375.8 66.3L378.2 68.5L380.6 71.4L383 74.8L385.5 78.7L387.9 83.1L390.3 88L392.7 93.2L395.2 98.8L397.6 104.6L400 110.6L402.4 116.8L404.8 123.1L407.3 129.3L409.7 135.5L412.1 141.5L414.5 147.3L417 152.9L419.4 158.1L421.8 163L424.2 167.4L426.7 171.3L429.1 174.7L431.5 177.6L433.9 179.8L436.4 181.4L438.8 182.4L441.2 182.7L443.6 182.4L446.1 181.4L448.5 179.8L450.9 177.6L453.3 174.7L455.8 171.3L458.2 167.4L460.6 163L463 158.1L465.5 152.9L467.9 147.3L470.3 141.5L472.7 135.5L475.2 129.3L477.6 123.1L480 116.8L482.4 110.6L484.8 104.6L487.3 98.8L489.7 93.2L492.1 88L494.5 83.1L497 78.7L499.4 74.8L501.8 71.4L504.2 68.5L506.7 66.3L509.1 64.7L511.5 63.7L513.9 63.4L516.4 63.7L518.8 64.7L521.2 66.3L523.6 68.5L526.1 71.4L528.5 74.8L530.9 78.7L533.3 83.1L535.8 88L538.2 93.2L540.6 98.8L543 104.6L545.5 110.6L547.9 116.8L550.3 123.1L552.7 129.3L555.2 135.5L557.6 141.5L560 147.3L562.4 152.9L564.8 158.1L567.3 163L569.7 167.4L572.1 171.3L574.5 174.7L577 177.6L579.4 179.8L581.8 181.4L584.2 182.4L586.7 182.7L589.1 182.4L591.5 181.4L593.9 179.8L596.4 177.6L598.8 174.7L601.2 171.3L603.6 167.4L606.1 163L608.5 158.1L610.9 152.9"></path>
+              <text class="avc-candidat" x="8" y="15">LE FILM D'UN POINT — t en secondes</text>
+              <text class="avc-candidat" x="29.1" y="139.1" text-anchor="middle">0</text>
+              <text class="avc-candidat" x="320" y="139.1" text-anchor="middle">3</text>
+              <text class="avc-candidat" x="610.9" y="139.1" text-anchor="end">6 s</text>
+            </svg>
+            <p class="quiz-enonce">Voici le film d'un point du milieu. Que vaut la période&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">T = 1,5 s</button>
+              <button type="button" class="quiz-reponse">T = 0,75 s</button>
+              <button type="button" class="quiz-reponse">T = 3,0 s</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 360" role="img" aria-label="Deux graphiques empilés pour la même onde : en haut la photo, axe en mètres, crêtes à un et sept mètres ; en bas le film d'un point, axe en secondes, crêtes à une, quatre et sept secondes">
+              <g transform="translate(0 10)">
+              <path class="g-grid" d="M73.3 0L73.3 150M122.1 0L122.1 150M171 0L171 150M219.8 0L219.8 150M268.7 0L268.7 150M317.6 0L317.6 150M366.4 0L366.4 150M415.3 0L415.3 150M464.1 0L464.1 150M513 0L513 150M561.8 0L561.8 150M610.7 0L610.7 150"></path>
+              <path class="g-axis" d="M0 86.5L640 86.5"></path>
+              <path class="g-courbe" d="M24.4 68.1L26.9 66.4L29.3 64.8L31.8 63.3L34.2 61.8L36.6 60.4L39.1 59.1L41.5 57.8L44 56.7L46.4 55.6L48.9 54.6L51.3 53.6L53.7 52.8L56.2 52.1L58.6 51.4L61.1 50.9L63.5 50.4L66 50.1L68.4 49.8L70.8 49.7L73.3 49.6L75.7 49.7L78.2 49.8L80.6 50.1L83.1 50.4L85.5 50.9L87.9 51.4L90.4 52.1L92.8 52.8L95.3 53.6L97.7 54.6L100.2 55.6L102.6 56.7L105 57.8L107.5 59.1L109.9 60.4L112.4 61.8L114.8 63.3L117.3 64.8L119.7 66.4L122.1 68.1L124.6 69.8L127 71.5L129.5 73.3L131.9 75.1L134.4 77L136.8 78.9L139.2 80.8L141.7 82.7L144.1 84.6L146.6 86.5L149 88.5L151.5 90.4L153.9 92.3L156.3 94.2L158.8 96.1L161.2 97.9L163.7 99.8L166.1 101.6L168.5 103.3L171 105L173.4 106.6L175.9 108.2L178.3 109.8L180.8 111.2L183.2 112.6L185.6 114L188.1 115.2L190.5 116.4L193 117.5L195.4 118.5L197.9 119.4L200.3 120.3L202.7 121L205.2 121.7L207.6 122.2L210.1 122.7L212.5 123L215 123.3L217.4 123.4L219.8 123.5L222.3 123.4L224.7 123.3L227.2 123L229.6 122.7L232.1 122.2L234.5 121.7L236.9 121L239.4 120.3L241.8 119.4L244.3 118.5L246.7 117.5L249.2 116.4L251.6 115.2L254 114L256.5 112.6L258.9 111.2L261.4 109.8L263.8 108.2L266.3 106.6L268.7 105L271.1 103.3L273.6 101.6L276 99.8L278.5 97.9L280.9 96.1L283.4 94.2L285.8 92.3L288.2 90.4L290.7 88.5L293.1 86.5L295.6 84.6L298 82.7L300.5 80.8L302.9 78.9L305.3 77L307.8 75.1L310.2 73.3L312.7 71.5L315.1 69.8L317.6 68.1L320 66.4L322.4 64.8L324.9 63.3L327.3 61.8L329.8 60.4L332.2 59.1L334.7 57.8L337.1 56.7L339.5 55.6L342 54.6L344.4 53.6L346.9 52.8L349.3 52.1L351.8 51.4L354.2 50.9L356.6 50.4L359.1 50.1L361.5 49.8L364 49.7L366.4 49.6L368.9 49.7L371.3 49.8L373.7 50.1L376.2 50.4L378.6 50.9L381.1 51.4L383.5 52.1L386 52.8L388.4 53.6L390.8 54.6L393.3 55.6L395.7 56.7L398.2 57.8L400.6 59.1L403.1 60.4L405.5 61.8L407.9 63.3L410.4 64.8L412.8 66.4L415.3 68.1L417.7 69.8L420.2 71.5L422.6 73.3L425 75.1L427.5 77L429.9 78.9L432.4 80.8L434.8 82.7L437.3 84.6L439.7 86.5L442.1 88.5L444.6 90.4L447 92.3L449.5 94.2L451.9 96.1L454.4 97.9L456.8 99.8L459.2 101.6L461.7 103.3L464.1 105L466.6 106.6L469 108.2L471.5 109.8L473.9 111.2L476.3 112.6L478.8 114L481.2 115.2L483.7 116.4L486.1 117.5L488.5 118.5L491 119.4L493.4 120.3L495.9 121L498.3 121.7L500.8 122.2L503.2 122.7L505.6 123L508.1 123.3L510.5 123.4L513 123.5L515.4 123.4L517.9 123.3L520.3 123L522.7 122.7L525.2 122.2L527.6 121.7L530.1 121L532.5 120.3L535 119.4L537.4 118.5L539.8 117.5L542.3 116.4L544.7 115.2L547.2 114L549.6 112.6L552.1 111.2L554.5 109.8L556.9 108.2L559.4 106.6L561.8 105L564.3 103.3L566.7 101.6L569.2 99.8L571.6 97.9L574 96.1L576.5 94.2L578.9 92.3L581.4 90.4L583.8 88.5L586.3 86.5L588.7 84.6L591.1 82.7L593.6 80.8L596 78.9L598.5 77L600.9 75.1L603.4 73.3L605.8 71.5L608.2 69.8L610.7 68.1"></path>
+              <text class="avc-candidat" x="8" y="12">LA PHOTO — x en mètres</text>
+              <text class="avc-candidat" x="24.4" y="101.5" text-anchor="middle">0</text>
+              <text class="avc-candidat" x="317.6" y="101.5" text-anchor="middle">6</text>
+              <text class="avc-candidat" x="610.7" y="101.5" text-anchor="end">12 m</text>
+              </g>
+              <g transform="translate(0 200)">
+              <path class="g-grid" d="M98.7 0L98.7 150M171.9 0L171.9 150M245 0L245 150M318.2 0L318.2 150M391.3 0L391.3 150M464.5 0L464.5 150M537.6 0L537.6 150M610.7 0L610.7 150"></path>
+              <path class="g-axis" d="M0 86.5L640 86.5"></path>
+              <path class="g-courbe" d="M25.6 105L28 102.7L30.5 100.4L32.9 97.9L35.4 95.5L37.8 93L40.2 90.4L42.7 87.8L45.1 85.2L47.5 82.7L50 80.1L52.4 77.6L54.9 75.1L57.3 72.7L59.7 70.4L62.2 68.1L64.6 65.9L67 63.8L69.5 61.8L71.9 60L74.4 58.3L76.8 56.7L79.2 55.2L81.7 53.9L84.1 52.8L86.6 51.8L89 51L91.4 50.4L93.9 50L96.3 49.7L98.7 49.6L101.2 49.7L103.6 50L106.1 50.4L108.5 51L110.9 51.8L113.4 52.8L115.8 53.9L118.2 55.2L120.7 56.7L123.1 58.3L125.6 60L128 61.8L130.4 63.8L132.9 65.9L135.3 68.1L137.8 70.4L140.2 72.7L142.6 75.1L145.1 77.6L147.5 80.1L149.9 82.7L152.4 85.2L154.8 87.8L157.3 90.4L159.7 93L162.1 95.5L164.6 97.9L167 100.4L169.4 102.7L171.9 105L174.3 107.2L176.8 109.3L179.2 111.2L181.6 113.1L184.1 114.8L186.5 116.4L189 117.9L191.4 119.1L193.8 120.3L196.3 121.2L198.7 122L201.1 122.7L203.6 123.1L206 123.4L208.5 123.5L210.9 123.4L213.3 123.1L215.8 122.7L218.2 122L220.6 121.2L223.1 120.3L225.5 119.1L228 117.9L230.4 116.4L232.8 114.8L235.3 113.1L237.7 111.2L240.2 109.3L242.6 107.2L245 105L247.5 102.7L249.9 100.4L252.3 97.9L254.8 95.5L257.2 93L259.7 90.4L262.1 87.8L264.5 85.2L267 82.7L269.4 80.1L271.8 77.6L274.3 75.1L276.7 72.7L279.2 70.4L281.6 68.1L284 65.9L286.5 63.8L288.9 61.8L291.4 60L293.8 58.3L296.2 56.7L298.7 55.2L301.1 53.9L303.5 52.8L306 51.8L308.4 51L310.9 50.4L313.3 50L315.7 49.7L318.2 49.6L320.6 49.7L323 50L325.5 50.4L327.9 51L330.4 51.8L332.8 52.8L335.2 53.9L337.7 55.2L340.1 56.7L342.6 58.3L345 60L347.4 61.8L349.9 63.8L352.3 65.9L354.7 68.1L357.2 70.4L359.6 72.7L362.1 75.1L364.5 77.6L366.9 80.1L369.4 82.7L371.8 85.2L374.2 87.8L376.7 90.4L379.1 93L381.6 95.5L384 97.9L386.4 100.4L388.9 102.7L391.3 105L393.8 107.2L396.2 109.3L398.6 111.2L401.1 113.1L403.5 114.8L405.9 116.4L408.4 117.9L410.8 119.1L413.3 120.3L415.7 121.2L418.1 122L420.6 122.7L423 123.1L425.4 123.4L427.9 123.5L430.3 123.4L432.8 123.1L435.2 122.7L437.6 122L440.1 121.2L442.5 120.3L445 119.1L447.4 117.9L449.8 116.4L452.3 114.8L454.7 113.1L457.1 111.2L459.6 109.3L462 107.2L464.5 105L466.9 102.7L469.3 100.4L471.8 97.9L474.2 95.5L476.6 93L479.1 90.4L481.5 87.8L484 85.2L486.4 82.7L488.8 80.1L491.3 77.6L493.7 75.1L496.2 72.7L498.6 70.4L501 68.1L503.5 65.9L505.9 63.8L508.3 61.8L510.8 60L513.2 58.3L515.7 56.7L518.1 55.2L520.5 53.9L523 52.8L525.4 51.8L527.8 51L530.3 50.4L532.7 50L535.2 49.7L537.6 49.6L540 49.7L542.5 50L544.9 50.4L547.4 51L549.8 51.8L552.2 52.8L554.7 53.9L557.1 55.2L559.5 56.7L562 58.3L564.4 60L566.9 61.8L569.3 63.8L571.7 65.9L574.2 68.1L576.6 70.4L579 72.7L581.5 75.1L583.9 77.6L586.4 80.1L588.8 82.7L591.2 85.2L593.7 87.8L596.1 90.4L598.6 93L601 95.5L603.4 97.9L605.9 100.4L608.3 102.7L610.7 105"></path>
+              <text class="avc-candidat" x="8" y="12">LE FILM D'UN POINT — t en secondes</text>
+              <text class="avc-candidat" x="25.6" y="101.5" text-anchor="middle">0</text>
+              <text class="avc-candidat" x="318.2" y="101.5" text-anchor="middle">4</text>
+              <text class="avc-candidat" x="610.7" y="101.5" text-anchor="end">8 s</text>
+              </g>
+            </svg>
+            <p class="quiz-enonce">Même onde, les deux graphiques. Que vaut la célérité&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">v = 0,50 m/s</button>
+              <button type="button" class="quiz-reponse">v = 2,0 m/s</button>
+              <button type="button" class="quiz-reponse">v = 18 m/s</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 220" role="img" aria-label="Une sinusoïde sur un axe gradué en secondes, de zéro à huit ; les crêtes sont espacées de deux secondes">
+              <path class="g-grid" d="M96.7 0L96.7 220M171.2 0L171.2 220M245.6 0L245.6 220M320 0L320 220M394.4 0L394.4 220M468.8 0L468.8 220M543.3 0L543.3 220M617.7 0L617.7 220"></path>
+              <path class="g-axis" d="M0 123.1L640 123.1"></path>
+              <path class="g-courbe" d="M22.3 182.7L24.8 182.4L27.3 181.4L29.8 179.8L32.2 177.6L34.7 174.7L37.2 171.3L39.7 167.4L42.2 163L44.7 158.1L47.1 152.9L49.6 147.3L52.1 141.5L54.6 135.5L57.1 129.3L59.5 123.1L62 116.8L64.5 110.6L67 104.6L69.5 98.8L71.9 93.2L74.4 88L76.9 83.1L79.4 78.7L81.9 74.8L84.3 71.4L86.8 68.5L89.3 66.3L91.8 64.7L94.3 63.7L96.7 63.4L99.2 63.7L101.7 64.7L104.2 66.3L106.7 68.5L109.1 71.4L111.6 74.8L114.1 78.7L116.6 83.1L119.1 88L121.6 93.2L124 98.8L126.5 104.6L129 110.6L131.5 116.8L134 123.1L136.4 129.3L138.9 135.5L141.4 141.5L143.9 147.3L146.4 152.9L148.8 158.1L151.3 163L153.8 167.4L156.3 171.3L158.8 174.7L161.2 177.6L163.7 179.8L166.2 181.4L168.7 182.4L171.2 182.7L173.6 182.4L176.1 181.4L178.6 179.8L181.1 177.6L183.6 174.7L186 171.3L188.5 167.4L191 163L193.5 158.1L196 152.9L198.4 147.3L200.9 141.5L203.4 135.5L205.9 129.3L208.4 123.1L210.9 116.8L213.3 110.6L215.8 104.6L218.3 98.8L220.8 93.2L223.3 88L225.7 83.1L228.2 78.7L230.7 74.8L233.2 71.4L235.7 68.5L238.1 66.3L240.6 64.7L243.1 63.7L245.6 63.4L248.1 63.7L250.5 64.7L253 66.3L255.5 68.5L258 71.4L260.5 74.8L262.9 78.7L265.4 83.1L267.9 88L270.4 93.2L272.9 98.8L275.3 104.6L277.8 110.6L280.3 116.8L282.8 123.1L285.3 129.3L287.8 135.5L290.2 141.5L292.7 147.3L295.2 152.9L297.7 158.1L300.2 163L302.6 167.4L305.1 171.3L307.6 174.7L310.1 177.6L312.6 179.8L315 181.4L317.5 182.4L320 182.7L322.5 182.4L325 181.4L327.4 179.8L329.9 177.6L332.4 174.7L334.9 171.3L337.4 167.4L339.8 163L342.3 158.1L344.8 152.9L347.3 147.3L349.8 141.5L352.2 135.5L354.7 129.3L357.2 123.1L359.7 116.8L362.2 110.6L364.7 104.6L367.1 98.8L369.6 93.2L372.1 88L374.6 83.1L377.1 78.7L379.5 74.8L382 71.4L384.5 68.5L387 66.3L389.5 64.7L391.9 63.7L394.4 63.4L396.9 63.7L399.4 64.7L401.9 66.3L404.3 68.5L406.8 71.4L409.3 74.8L411.8 78.7L414.3 83.1L416.7 88L419.2 93.2L421.7 98.8L424.2 104.6L426.7 110.6L429.1 116.8L431.6 123.1L434.1 129.3L436.6 135.5L439.1 141.5L441.6 147.3L444 152.9L446.5 158.1L449 163L451.5 167.4L454 171.3L456.4 174.7L458.9 177.6L461.4 179.8L463.9 181.4L466.4 182.4L468.8 182.7L471.3 182.4L473.8 181.4L476.3 179.8L478.8 177.6L481.2 174.7L483.7 171.3L486.2 167.4L488.7 163L491.2 158.1L493.6 152.9L496.1 147.3L498.6 141.5L501.1 135.5L503.6 129.3L506 123.1L508.5 116.8L511 110.6L513.5 104.6L516 98.8L518.4 93.2L520.9 88L523.4 83.1L525.9 78.7L528.4 74.8L530.9 71.4L533.3 68.5L535.8 66.3L538.3 64.7L540.8 63.7L543.3 63.4L545.7 63.7L548.2 64.7L550.7 66.3L553.2 68.5L555.7 71.4L558.1 74.8L560.6 78.7L563.1 83.1L565.6 88L568.1 93.2L570.5 98.8L573 104.6L575.5 110.6L578 116.8L580.5 123.1L582.9 129.3L585.4 135.5L587.9 141.5L590.4 147.3L592.9 152.9L595.3 158.1L597.8 163L600.3 167.4L602.8 171.3L605.3 174.7L607.8 177.6L610.2 179.8L612.7 181.4L615.2 182.4L617.7 182.7"></path>
+              <text class="avc-candidat" x="8" y="15">t en secondes</text>
+              <text class="avc-candidat" x="22.3" y="139.1" text-anchor="middle">0</text>
+              <text class="avc-candidat" x="320" y="139.1" text-anchor="middle">4</text>
+              <text class="avc-candidat" x="617.7" y="139.1" text-anchor="end">8 s</text>
+            </svg>
+            <p class="quiz-enonce">Le piège du bac. Sur ce graphique, peut-on lire la longueur d'onde&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">oui&nbsp;: λ = 2,0 m, ça se lit pareil</button>
+              <button type="button" class="quiz-reponse">oui&nbsp;: λ = 2,0 s, avec l'unité du graphique</button>
+              <button type="button" class="quiz-reponse">non&nbsp;: l'axe est en secondes, on y lit T, jamais λ</button>
+            </div>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> regarde l'axe des abscisses avant de mesurer, puis compte les carreaux d'une crête à la crête <em>suivante</em>.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> d'une crête (1&nbsp;m) à la suivante (5&nbsp;m)&nbsp;: λ = 4,0&nbsp;m. Répondre 2,0&nbsp;m, c'est mesurer crête → creux (un demi-motif)&nbsp;; et «&nbsp;4,0&nbsp;s&nbsp;» donne des secondes à un axe gradué en mètres.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> d'une crête (0,5&nbsp;s) à la suivante (2,0&nbsp;s)&nbsp;: T = 1,5&nbsp;s. 0,75&nbsp;s, c'est le demi-motif crête → creux&nbsp;; 3,0&nbsp;s, c'est deux motifs comptés comme un seul.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> la photo donne λ = 6,0&nbsp;m, le film donne T = 3,0&nbsp;s, donc \(v = \dfrac{\lambda}{T} = \dfrac{6{,}0}{3{,}0} = 2{,}0\)&nbsp;m/s. 0,50, c'est la division à l'envers (\(T/\lambda\))&nbsp;; 18, c'est le produit \(\lambda \times T\), qui ne mesure rien.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> l'axe est en secondes&nbsp;: ce graphique est un film, on y lit T = 2,0&nbsp;s — jamais λ. «&nbsp;λ = 2,0&nbsp;s&nbsp;» mélange une longueur et une durée&nbsp;; «&nbsp;λ = 2,0&nbsp;m&nbsp;» invente des mètres que le graphique ne montre pas. Pour obtenir λ ici, il faudrait la célérité&nbsp;: λ = v × T.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Graphique suivant ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <div class="widget-note">Chaque graphique porte son axe&nbsp;: c'est lui qui décide de ce qu'on peut y lire. Un carreau vaut 1&nbsp;m ou 1&nbsp;s (0,5&nbsp;s sur le deuxième graphique).</div>
+        <script type="application/json">[2, 1, 2, 3]</script>
+      </figure>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>\(\lambda = v \times T\)&nbsp;: pendant une période, l'onde avance d'une longueur d'onde. \(\lambda\) se lit sur la photo (mètres), \(T\) sur le film (secondes) — et c'est le milieu qui fixe \(v\).</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Pendant une période T, une onde périodique avance de…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">une longueur d'onde</button>
+              <button type="button" class="quiz-reponse">une amplitude</button>
+              <button type="button" class="quiz-reponse">ça dépend du nombre de crêtes</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est la définition en mouvement de \(\lambda = v \times T\)&nbsp;: un motif fabriqué, un motif d'avance. L'amplitude, elle, mesure la hauteur du motif — rien à voir avec son avance.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>La houle a une période de 3,0&nbsp;s et une célérité de 2,0&nbsp;m/s. Sa longueur d'onde vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">1,5 m</button>
+              <button type="button" class="quiz-reponse">6,0 m</button>
+              <button type="button" class="quiz-reponse">0,67 m</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\lambda = v \times T = 2{,}0 \times 3{,}0 = 6{,}0\)&nbsp;m. Les deux autres réponses divisent — dans un sens ou dans l'autre. Mémo-réflexe&nbsp;: λ est un <em>produit</em>, «&nbsp;une période d'avance à la vitesse v&nbsp;».</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>On secoue la corde deux fois plus vite (f double). Sa célérité…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">double aussi</button>
+              <button type="button" class="quiz-reponse">est divisée par deux</button>
+              <button type="button" class="quiz-reponse">ne change pas — c'est le milieu qui la fixe</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la célérité dépend de la corde (sa tension, sa masse), pas de la main qui secoue. Ce qui change quand f double, c'est \(\lambda = v/f\)&nbsp;: les motifs se resserrent de moitié. Rejoue le graphique de la section si tu doutes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Croire que l'onde emporte la matière.</strong> Le bouchon ne suit pas la vague, la pince reste sur son rail, aucun spectateur ne fait le tour du stade. Chaque point du milieu fait un aller-retour <em>sur place</em>&nbsp;; ce que l'onde transporte, c'est de l'énergie. «&nbsp;Sans transport de matière&nbsp;» est le mot-clé attendu dans la définition.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Lire λ sur un axe en secondes.</strong> Une sinusoïde ne dit rien tant qu'on n'a pas lu son axe des abscisses&nbsp;: des secondes → un film → on y lit T&nbsp;; des mètres → une photo → on y lit λ. Écrire «&nbsp;λ = 2,0&nbsp;s&nbsp;», c'est donner une durée à une longueur — l'erreur la plus corrigée des copies de bac.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Mesurer d'une crête au creux.</strong> Crête → creux, c'est un <em>demi</em>-motif&nbsp;: T/2 sur un film, λ/2 sur une photo. Le motif complet va d'une crête à la crête <em>suivante</em>. Compte aussi les intervalles, pas les crêtes&nbsp;: entre la 1ʳᵉ et la 5ᵉ crête, il y a 4 longueurs d'onde.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Mélanger les unités — et oublier l'aller-retour.</strong> \(d = v \times \tau\) mange des m/s et des secondes&nbsp;; convertis les km et les minutes <em>avant</em>. Et quand l'onde revient en écho (sonar, échographie), elle a fait le trajet <em>deux fois</em>&nbsp;: la distance cherchée est la moitié de \(v \times \tau\).</p>
+        </div>
+        <div class="piege">
+          <p><strong>Croire que secouer plus vite accélère l'onde.</strong> La célérité est une propriété du <em>milieu</em>&nbsp;: tension de la corde, profondeur de l'eau, nature de l'air. Augmenter la fréquence de la source ne change pas v d'un millimètre par seconde&nbsp;: ça resserre les motifs, \(\lambda = v/f\) diminue. Le produit \(\lambda \times f\), lui, redonne toujours v.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ONDE</span>
+          <p>Une perturbation se propage dans un milieu <strong>sans transport de matière</strong>&nbsp;: chaque point refait le geste sur place. L'onde transporte de l'énergie.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">CÉLÉRITÉ</span>
+          <p>\(v = \dfrac{d}{\Delta t}\), en m·s⁻¹ — la vitesse de la perturbation, fixée par le milieu.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">RETARD</span>
+          <p>Un point à distance \(d\) de la source répète son mouvement avec le retard \(\tau = \dfrac{d}{v}\). Écho et sonar&nbsp;: penser à l'aller-retour.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">PÉRIODES</span>
+          <p>\(T\) (s) se lit sur le <em>film</em> d'un point&nbsp;; \(\lambda\) (m) se lit sur la <em>photo</em> du milieu&nbsp;; \(f = \dfrac{1}{T}\) (Hz). L'axe des abscisses décide.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">RELATION</span>
+          <p>\(\lambda = v \times T = \dfrac{v}{f}\)&nbsp;: pendant une période, l'onde avance d'une longueur d'onde.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: l'onde et sa célérité, le retard, les périodes, la relation λ = v × T, et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· onde ou pas&nbsp;?</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Pour chaque situation, dis s'il s'agit d'une onde mécanique, et justifie en une phrase. a. La ola dans un stade. b. La houle qui soulève un bouchon de pêche. c. Le courant d'une rivière qui emporte une feuille.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>oui&nbsp;: le geste se transmet de spectateur en spectateur, mais chacun reste à sa place — une perturbation se propage sans transport de matière.</p>
+          <p><span class="etape-label">b. — </span>oui&nbsp;: le bouchon monte et redescend sur place au passage de chaque vague — preuve vivante que l'eau ne part pas avec l'onde.</p>
+          <p><span class="etape-label">c. — </span>non&nbsp;: là, l'eau se déplace vraiment, et la feuille part avec elle. Il y a transport de matière — c'est un courant, pas une onde.</p>
+          <p class="conclusion">Conclusion&nbsp;: le test infaillible est toujours le même — est-ce que la matière voyage, ou seulement le mouvement&nbsp;?</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· la célérité</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">La ola boucle le tour d'un stade — 800&nbsp;m de tribunes — en 64&nbsp;s. a. Calcule sa célérité. b. Un spectateur est assis à 300&nbsp;m du point de départ&nbsp;: combien de temps après le départ de la ola se lèvera-t-il&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(v = \dfrac{d}{\Delta t} = \dfrac{800}{64} = 12{,}5\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">b. — </span>\(\Delta t = \dfrac{d}{v} = \dfrac{300}{12{,}5} = 24\)&nbsp;s.</p>
+          <p class="conclusion">Conclusion&nbsp;: la même formule dans les deux sens — \(v = d/\Delta t\) pour mesurer, \(\Delta t = d/v\) pour prévoir. La question b est déjà un calcul de retard.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· le retard</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur la corde à linge du cours, la secousse se propage à 2,0&nbsp;m/s. a. Quel est le retard d'une pince accrochée à 5,0&nbsp;m de la main&nbsp;? b. Une deuxième pince est accrochée à 8,0&nbsp;m&nbsp;: avec quel retard répète-t-elle le geste de la première&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\tau = \dfrac{d}{v} = \dfrac{5{,}0}{2{,}0} = 2{,}5\)&nbsp;s.</p>
+          <p><span class="etape-label">b. — </span>entre les deux pinces, \(d = 8{,}0 - 5{,}0 = 3{,}0\)&nbsp;m&nbsp;: \(\tau = \dfrac{3{,}0}{2{,}0} = 1{,}5\)&nbsp;s.</p>
+          <p class="conclusion">Conclusion&nbsp;: le retard se calcule entre <em>deux points quelconques</em> — la source n'est qu'un point parmi d'autres. La distance qui compte est celle qui les sépare.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· l'orage</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Tu vois un éclair, et le tonnerre gronde 6,0&nbsp;s plus tard. Le son se propage à 340&nbsp;m·s⁻¹. a. Pourquoi peut-on considérer que la lumière de l'éclair arrive «&nbsp;instantanément&nbsp;»&nbsp;? b. À quelle distance la foudre est-elle tombée&nbsp;? c. Retrouve la règle du randonneur&nbsp;: «&nbsp;compte les secondes et divise par 3, tu as des kilomètres&nbsp;».</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>la lumière parcourt 300&thinsp;000&nbsp;km chaque seconde&nbsp;: pour 2&nbsp;km, il lui faut quelques <em>millionièmes</em> de seconde — imperceptible. Tout le retard mesuré est donc celui du son.</p>
+          <p><span class="etape-label">b. — </span>\(d = v \times \tau = 340 \times 6{,}0 = 2\,040\)&nbsp;m, soit environ 2,0&nbsp;km.</p>
+          <p><span class="etape-label">c. — </span>pour 1&nbsp;km, le son met \(\dfrac{1\,000}{340} \approx 2{,}9 \approx 3\)&nbsp;s. Chaque tranche de 3&nbsp;s de silence vaut donc un kilomètre&nbsp;: 6&nbsp;s → 2&nbsp;km, cohérent avec la question b.</p>
+          <p class="conclusion">Conclusion&nbsp;: une règle de grand-mère, démontrée en une ligne avec \(\tau = d/v\). La physique adore ce genre de vérification.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· prévoir un point</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une perturbation de largeur 1,0&nbsp;m se propage à 2,0&nbsp;m/s le long d'une corde. À t = 0, son front (l'avant de la bosse) est à x = 3,0&nbsp;m. Le point M est à x = 7,0&nbsp;m. a. À quel instant M commence-t-il à bouger&nbsp;? b. Pendant combien de temps M est-il en mouvement&nbsp;? c. À t = 3,0&nbsp;s, que fait M&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>le front doit parcourir \(7{,}0 - 3{,}0 = 4{,}0\)&nbsp;m&nbsp;: M s'ébranle à \(t = \dfrac{4{,}0}{2{,}0} = 2{,}0\)&nbsp;s.</p>
+          <p><span class="etape-label">b. — </span>M bouge tant que la bosse le traverse&nbsp;: une longueur de 1,0&nbsp;m à 2,0&nbsp;m/s, soit \(\dfrac{1{,}0}{2{,}0} = 0{,}50\)&nbsp;s. M est en mouvement de t = 2,0&nbsp;s à t = 2,5&nbsp;s.</p>
+          <p><span class="etape-label">c. — </span>à t = 3,0&nbsp;s, la bosse est passée depuis 0,5&nbsp;s&nbsp;: M est revenu au repos, exactement à sa place. (Le front, lui, est à \(3{,}0 + 2{,}0 \times 3{,}0 = 9{,}0\)&nbsp;m.)</p>
+          <p class="conclusion">Conclusion&nbsp;: pour prévoir l'état d'un point, deux questions suffisent — la perturbation est-elle déjà arrivée&nbsp;? est-elle déjà repartie&nbsp;? Tout se calcule avec des retards.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· le sonar</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Le sondeur d'un voilier émet une impulsion ultrasonore vers le fond et reçoit son écho 0,30&nbsp;s plus tard. Dans l'eau de mer, le son se propage à 1&thinsp;500&nbsp;m·s⁻¹. a. Quelle distance l'impulsion a-t-elle parcourue en tout&nbsp;? b. Quelle est la profondeur&nbsp;? c. Pourquoi la réponse de a n'est-elle pas la profondeur&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(d = v \times \tau = 1\,500 \times 0{,}30 = 450\)&nbsp;m.</p>
+          <p><span class="etape-label">b. — </span>l'impulsion est <em>descendue puis remontée</em>&nbsp;: la profondeur vaut \(\dfrac{450}{2} = 225\)&nbsp;m.</p>
+          <p><span class="etape-label">c. — </span>parce que le retard mesuré couvre l'aller <em>et</em> le retour&nbsp;: oublier de diviser par deux double la profondeur — le piège classique du sonar, de l'échographie et du radar.</p>
+          <p class="conclusion">Conclusion&nbsp;: dès que le mot «&nbsp;écho&nbsp;» apparaît, écris «&nbsp;aller-retour&nbsp;» dans la marge avant tout calcul.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· T et f</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un bouchon soulevé par la houle fait 3 allers-retours complets en 6,0&nbsp;s. a. Quelle est la période de la houle&nbsp;? b. Sa fréquence&nbsp;? c. Combien d'allers-retours le bouchon fera-t-il en une minute&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>trois motifs en 6,0&nbsp;s&nbsp;: \(T = \dfrac{6{,}0}{3} = 2{,}0\)&nbsp;s. (On divise par le <em>nombre de motifs</em>, pas par le nombre de passages en haut.)</p>
+          <p><span class="etape-label">b. — </span>\(f = \dfrac{1}{T} = \dfrac{1}{2{,}0} = 0{,}50\)&nbsp;Hz&nbsp;: un demi-motif par seconde.</p>
+          <p><span class="etape-label">c. — </span>en 60&nbsp;s&nbsp;: \(\dfrac{60}{2{,}0} = 30\) allers-retours.</p>
+          <p class="conclusion">Conclusion&nbsp;: mesurer plusieurs motifs et diviser, c'est LE geste de précision — une seule oscillation chronométrée à la main est toujours trop imprécise.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· photo et film</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Pour une même onde sur une corde, on dispose de deux documents&nbsp;: la <em>photo</em> de la corde montre deux crêtes successives séparées de 6,0&nbsp;m&nbsp;; le <em>film</em> d'un point montre deux crêtes successives séparées de 3,0&nbsp;s. a. Que vaut la longueur d'onde, et quel document l'a donnée&nbsp;? b. Que vaut la période, et quel document l'a donnée&nbsp;? c. Pourquoi serait-il absurde d'écrire «&nbsp;λ = 3,0&nbsp;s&nbsp;»&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\lambda = 6{,}0\)&nbsp;m, lue sur la <em>photo</em>&nbsp;: c'est le seul document dont l'axe est en mètres.</p>
+          <p><span class="etape-label">b. — </span>\(T = 3{,}0\)&nbsp;s, lue sur le <em>film</em>&nbsp;: son axe est en secondes.</p>
+          <p><span class="etape-label">c. — </span>parce que λ est une <em>longueur</em>&nbsp;: elle ne peut pas s'exprimer en secondes. Une valeur en secondes lue sur une sinusoïde est forcément une période.</p>
+          <p class="conclusion">Conclusion&nbsp;: chaque document ne sait donner qu'une seule des deux grandeurs. (Et si tu veux la célérité&nbsp;: \(v = \lambda/T = 2{,}0\)&nbsp;m/s — les deux documents ensemble.)</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· λ = v × T</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Au large, la houle a une période de 8,0&nbsp;s et se propage à 1,5&nbsp;m/s. a. Calcule la distance entre deux crêtes successives. b. Un surfeur laisse passer une vague&nbsp;: combien de temps attend-il la suivante&nbsp;? c. De combien l'onde avance-t-elle pendant deux périodes&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\lambda = v \times T = 1{,}5 \times 8{,}0 = 12\)&nbsp;m.</p>
+          <p><span class="etape-label">b. — </span>une période&nbsp;: \(T = 8{,}0\)&nbsp;s. Les crêtes défilent au rythme de la source.</p>
+          <p><span class="etape-label">c. — </span>deux longueurs d'onde&nbsp;: \(2\lambda = 24\)&nbsp;m — «&nbsp;une période, une longueur d'onde&nbsp;», donc deux périodes, deux longueurs d'onde.</p>
+          <p class="conclusion">Conclusion&nbsp;: c'est le graphique de la section 5 en chiffres réels — la houle est l'exemple parfait de λ = v × T à l'échelle humaine.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· le son</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une enceinte joue une note grave de fréquence 85&nbsp;Hz. Le son se propage dans l'air à 340&nbsp;m·s⁻¹. a. Calcule la longueur d'onde de ce son. b. Calcule sa période. c. La même enceinte joue ensuite une note à 170&nbsp;Hz&nbsp;: que deviennent λ et v&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\lambda = \dfrac{v}{f} = \dfrac{340}{85} = 4{,}0\)&nbsp;m&nbsp;: les compressions de l'air se suivent à quatre mètres d'écart.</p>
+          <p><span class="etape-label">b. — </span>\(T = \dfrac{1}{f} = \dfrac{1}{85} \approx 0{,}012\)&nbsp;s, soit environ 12&nbsp;millisecondes.</p>
+          <p><span class="etape-label">c. — </span>\(\lambda = \dfrac{340}{170} = 2{,}0\)&nbsp;m — divisée par deux&nbsp;; \(v\) ne change pas, c'est toujours le même air. Un son plus aigu n'est pas un son plus rapide.</p>
+          <p class="conclusion">Conclusion&nbsp;: f double, λ moitié, v inchangée — le trio à connaître par réflexe.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· la cuve à ondes</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">En TP, un vibreur frappe la surface de l'eau d'une cuve à ondes à la fréquence de 20&nbsp;Hz. Sur une photo (vue de dessus, avec l'échelle), on mesure 8,0&nbsp;cm entre la 1ʳᵉ et la 5ᵉ crête circulaire. a. Montre que λ = 2,0&nbsp;cm — attention au nombre d'intervalles. b. Calcule la célérité des ondes à la surface. c. On double la fréquence du vibreur&nbsp;: que devient la célérité&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>entre la 1ʳᵉ et la 5ᵉ crête, il y a <em>4</em> intervalles, pas 5&nbsp;: \(\lambda = \dfrac{8{,}0}{4} = 2{,}0\)&nbsp;cm.</p>
+          <p><span class="etape-label">b. — </span>en unités SI&nbsp;: \(\lambda = 0{,}020\)&nbsp;m, donc \(v = \lambda \times f = 0{,}020 \times 20 = 0{,}40\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">c. — </span>elle ne change pas&nbsp;: c'est l'eau de la cuve qui fixe v. C'est λ qui s'adapte&nbsp;: \(\lambda = \dfrac{0{,}40}{40} = 1{,}0\)&nbsp;cm.</p>
+          <p class="conclusion">Conclusion&nbsp;: deux pièges dans un seul TP — compter les intervalles (pas les crêtes), et convertir les centimètres <em>avant</em> la formule.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· le séisme</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un séisme émet en même temps deux ondes qui traversent la croûte terrestre&nbsp;: les ondes P (célérité 6,0&nbsp;km/s) et les ondes S, plus lentes (4,0&nbsp;km/s) — valeurs simplifiées. Une station sismique enregistre l'arrivée des ondes P, puis celle des ondes S <strong>20&nbsp;s plus tard</strong>. On note d la distance (en km) entre le séisme et la station. a. Exprime les durées de trajet des deux ondes en fonction de d. b. Déduis-en d. c. Combien de temps après le séisme les ondes P sont-elles arrivées&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(t_P = \dfrac{d}{6{,}0}\) et \(t_S = \dfrac{d}{4{,}0}\) (en secondes, avec d en km).</p>
+          <p><span class="etape-label">b. — </span>l'écart vaut \(t_S - t_P = \dfrac{d}{4{,}0} - \dfrac{d}{6{,}0} = \dfrac{3d - 2d}{12} = \dfrac{d}{12} = 20\)&nbsp;s, donc \(d = 240\)&nbsp;km.</p>
+          <p><span class="etape-label">c. — </span>\(t_P = \dfrac{240}{6{,}0} = 40\)&nbsp;s.</p>
+          <p class="conclusion">Conclusion&nbsp;: deux ondes parties ensemble à des vitesses différentes, c'est une horloge naturelle — c'est exactement ainsi que les sismologues localisent les épicentres.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· la houle piégée</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Le film d'une bouée montre qu'elle passe par un sommet toutes les 4,0&nbsp;s. La houle se propage à 3,0&nbsp;m/s. a. Quelle grandeur ce film donne-t-il&nbsp;: T ou λ&nbsp;? Justifie. b. Calcule la longueur d'onde de la houle. c. Une seconde bouée flotte à 6,0&nbsp;m de la première, dans le sens de propagation&nbsp;: avec quel retard répète-t-elle ses mouvements&nbsp;? Que remarques-tu&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>un film suit <em>un</em> point au fil du temps&nbsp;: son axe est en secondes, il donne la période, \(T = 4{,}0\)&nbsp;s. λ ne se lit jamais sur un graphique temporel.</p>
+          <p><span class="etape-label">b. — </span>\(\lambda = v \times T = 3{,}0 \times 4{,}0 = 12\)&nbsp;m.</p>
+          <p><span class="etape-label">c. — </span>\(\tau = \dfrac{d}{v} = \dfrac{6{,}0}{3{,}0} = 2{,}0\)&nbsp;s — exactement une demi-période (6,0&nbsp;m est une demi-longueur d'onde)&nbsp;: quand la première bouée culmine, la seconde est au creux.</p>
+          <p class="conclusion">Conclusion&nbsp;: le retard et la double périodicité racontent la même histoire — la question c s'attaque au piège du bac avec les outils du chapitre entier.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">En randonnée, tu surveilles un orage au loin. À 15&nbsp;h&nbsp;10, tu comptes 9,0&nbsp;s entre l'éclair et le tonnerre. À 15&nbsp;h&nbsp;15, plus que 6,0&nbsp;s. (v(son) = 340&nbsp;m·s⁻¹.) a. Calcule la distance de l'orage à chacun des deux instants. b. À quelle vitesse moyenne l'orage se rapproche-t-il&nbsp;? Donne-la en m/s puis en km/h. c. Si rien ne change, dans combien de temps sera-t-il au-dessus de toi&nbsp;? Que fais-tu&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>à 15&nbsp;h&nbsp;10&nbsp;: \(d_1 = 340 \times 9{,}0 = 3\,060\)&nbsp;m. À 15&nbsp;h&nbsp;15&nbsp;: \(d_2 = 340 \times 6{,}0 = 2\,040\)&nbsp;m.</p>
+          <p><span class="etape-label">b. — </span>l'orage s'est rapproché de \(3\,060 - 2\,040 = 1\,020\)&nbsp;m en 5,0&nbsp;min = 300&nbsp;s&nbsp;: \(v = \dfrac{1\,020}{300} = 3{,}4\)&nbsp;m·s⁻¹, soit environ 12&nbsp;km/h.</p>
+          <p><span class="etape-label">c. — </span>\(\Delta t = \dfrac{2\,040}{3{,}4} = 600\)&nbsp;s = 10&nbsp;min. Tu ne finis pas le sandwich&nbsp;: tu t'éloignes des crêtes et des arbres isolés, maintenant.</p>
+          <p class="conclusion">Conclusion&nbsp;: deux comptages de secondes et la formule du retard suffisent à transformer un orage en problème de cinématique — et à prendre la bonne décision.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Deux volets indépendants&nbsp;: un TP de cuve à ondes côté technique, puis l'étude du sonar d'un chalutier. Donnée pour la partie B&nbsp;: dans l'eau de mer, les ultrasons se propagent à \(v = 1\,500\)&nbsp;m·s⁻¹.</p>
+          <div class="bac-partie">PARTIE A — LA CUVE À ONDES</div>
+          <p class="prose">Au laboratoire, un vibreur frappe la surface de l'eau à la fréquence \(f = 25\)&nbsp;Hz&nbsp;: des rides circulaires se propagent. Sur une photographie prise avec son échelle, on mesure 10,0&nbsp;cm entre la première et la sixième crête.</p>
+          <ol>
+            <li>Définis la longueur d'onde d'une onde périodique, puis montre que celle des rides vaut \(\lambda = 2{,}0\)&nbsp;cm.</li>
+            <li>Calcule la célérité des ondes à la surface de l'eau.</li>
+            <li>On règle le vibreur à 50&nbsp;Hz sans rien changer d'autre. Justifie sans calcul que la célérité ne change pas, puis calcule la nouvelle longueur d'onde.</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — LE SONAR DU CHALUTIER</div>
+          <p class="prose">Le sonar d'un chalutier émet vers le fond de brèves impulsions ultrasonores de fréquence \(f = 50\)&nbsp;kHz. L'écho renvoyé par le fond revient 0,20&nbsp;s après l'émission&nbsp;; un banc de poissons renvoie un autre écho, reçu 0,12&nbsp;s après l'émission.</p>
+          <ol>
+            <li>Calcule la longueur d'onde des ultrasons dans l'eau de mer.</li>
+            <li>Détermine la profondeur du fond sous le chalutier.</li>
+            <li>Détermine la profondeur du banc de poissons, puis sa hauteur au-dessus du fond.</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>la longueur d'onde est la distance entre deux motifs consécutifs (deux crêtes voisines), lue sur une représentation <em>spatiale</em>. Entre la 1ʳᵉ et la 6ᵉ crête&nbsp;: 5 intervalles, donc \(\lambda = \dfrac{10{,}0}{5} = 2{,}0\)&nbsp;cm.</p>
+            <p><span class="etape-label">A.2 — </span>\(v = \lambda \times f = 0{,}020 \times 25 = 0{,}50\)&nbsp;m·s⁻¹ (λ converti en mètres <em>avant</em> le calcul).</p>
+            <p><span class="etape-label">A.3 — </span>la célérité est fixée par le milieu — la même eau, la même cuve&nbsp;: v = 0,50&nbsp;m·s⁻¹ inchangée. Alors \(\lambda = \dfrac{v}{f} = \dfrac{0{,}50}{50} = 0{,}010\)&nbsp;m = 1,0&nbsp;cm&nbsp;: fréquence doublée, motifs resserrés de moitié.</p>
+            <p><span class="etape-label">B.1 — </span>\(\lambda = \dfrac{v}{f} = \dfrac{1\,500}{50\,000} = 0{,}030\)&nbsp;m = 3,0&nbsp;cm.</p>
+            <p><span class="etape-label">B.2 — </span>l'écho a fait l'aller-retour&nbsp;: \(p = \dfrac{v \times \tau}{2} = \dfrac{1\,500 \times 0{,}20}{2} = 150\)&nbsp;m.</p>
+            <p><span class="etape-label">B.3 — </span>\(p' = \dfrac{1\,500 \times 0{,}12}{2} = 90\)&nbsp;m&nbsp;: le banc nage à \(150 - 90 = 60\)&nbsp;m au-dessus du fond.</p>
+            <p class="conclusion">Conclusion&nbsp;: la partie A teste les réflexes de lecture (intervalles, unités, «&nbsp;le milieu décide de v&nbsp;»), la partie B le retard et son aller-retour — tout le chapitre en un sujet.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">Le mouvement d'un système <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
