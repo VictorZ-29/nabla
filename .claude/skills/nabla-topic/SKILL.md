@@ -77,9 +77,12 @@ absent, proceed with the outline and flag it prominently for review.)
   `?v=N` — check what existing pages use).
 - Start the chapter `README.md` from the outline (structure in
   content-and-pedagogy.md § "The chapter README") — it grows with the build.
-- Register the chapter: homepage card (promote the « bientôt » card if one
-  exists), previous chapter's CHAPITRE SUIVANT link, `sitemap.xml`. Apply
-  these directly.
+- Register the chapter: homepage card under its official programme theme
+  subheading (`.groupe-theme` — promote the « bientôt » card if one exists;
+  card numbers follow homepage display order within the matière), previous
+  chapter's CHAPITRE SUIVANT link, `sitemap.xml`, and the search index
+  `assets/js/recherche-data.js` (one chapter entry + one entry per section
+  s1–s5 with search keywords). Apply these directly.
 
 ### 4. Build the widgets FIRST
 
@@ -151,8 +154,9 @@ Victor's review.
       commas, U+2212, no ↗/↘, no « widget » in prose)
 - [ ] Head complete (title pattern, description, canonical, OG/Twitter,
       JSON-LD, correct `?v=N`); `body data-chapitre` short key
-- [ ] Registered: homepage card + motif, previous chapter's footer link,
-      sitemap.xml, own footer announces the next chapter
+- [ ] Registered: homepage card + motif under the right theme subheading,
+      previous chapter's footer link, sitemap.xml, search index
+      (recherche-data.js), own footer announces the next chapter
 - [ ] Both themes × both widths checked; JS < 50 KB; all links resolve
 - [ ] Chapter README complete with numbered review flags; session summary
       written; committed to `main`

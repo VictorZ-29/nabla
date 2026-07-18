@@ -35,10 +35,11 @@
 
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
-<link rel="stylesheet" href="assets/css/tokens.css?v=13">
-<link rel="stylesheet" href="assets/css/base.css?v=13">
+<link rel="stylesheet" href="assets/css/tokens.css?v=14">
+<link rel="stylesheet" href="assets/css/base.css?v=14">
 
 <script type="module" src="assets/js/theme.js" defer></script>
+<script type="module" src="assets/js/accueil.js" defer></script>
 <script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
@@ -77,30 +78,44 @@
   </div>
 </section>
 
-<section id="chapitres" class="rangee-chapitres">
+<section id="chapitres" class="outils-chapitres" aria-label="Trouver un chapitre">
+  <div class="recherche js-recherche">
+    <svg class="recherche-loupe" viewBox="0 0 20 20" aria-hidden="true">
+      <circle cx="9" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"></circle>
+      <path d="M13.2 13.2 L17.5 17.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+    </svg>
+    <input class="recherche-input" type="search" role="combobox" aria-expanded="false"
+           aria-controls="recherche-resultats" aria-autocomplete="list" autocomplete="off"
+           aria-label="Chercher un chapitre ou une notion"
+           placeholder="Cherche un chapitre ou une notion…">
+    <div class="recherche-resultats" id="recherche-resultats" role="listbox" aria-label="Résultats de recherche" hidden></div>
+  </div>
+  <div class="filtres">
+    <div class="filtre-groupe" role="group" aria-label="Niveau">
+      <button type="button" class="btn-pill" aria-pressed="true">Première</button>
+      <button type="button" class="btn-pill filtre-bientot" disabled>Terminale — bientôt</button>
+    </div>
+    <div class="filtre-groupe" role="group" aria-label="Matière">
+      <button type="button" class="btn-pill" data-matiere="tout" aria-pressed="true">Tout</button>
+      <button type="button" class="btn-pill" data-matiere="maths" aria-pressed="false">Maths</button>
+      <button type="button" class="btn-pill" data-matiere="physique-chimie" aria-pressed="false">Physique-chimie</button>
+    </div>
+  </div>
+</section>
+
+<div class="catalogue">
+
+<section class="rangee-chapitres" data-niveau="premiere" data-matiere="maths">
   <div class="rangee-tete">
     <h2>Première · Spé Maths</h2>
   </div>
 
-  <a class="carte-chapitre" href="premiere/maths/derivation/">
-    <div class="carte-info">
-      <div class="carte-statut">CHAPITRE 01</div>
-      <div class="carte-titre">La dérivation</div>
-      <div class="carte-desc">Taux de variation · Nombre dérivé · Tangente · Fonctions dérivées · Variations · 15 exercices corrigés</div>
-      <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
-    </div>
-    <div class="carte-motif">
-      <svg viewBox="0 0 80 56" aria-hidden="true">
-        <path class="g-courbe" d="M2.7 45.3L4.2 40L5.7 35.4L7.2 31.2L8.7 27.6L10.2 24.4L11.7 21.8L13.2 19.5L14.7 17.7L16.1 16.3L17.6 15.2L19.1 14.5L20.6 14.1L22.1 14L23.6 14.2L25.1 14.6L26.6 15.3L28.1 16.2L29.6 17.3L31.1 18.5L32.5 19.9L34 21.4L35.5 22.9L37 24.6L38.5 26.3L40 28L41.5 29.7L43 31.4L44.5 33.1L46 34.6L47.5 36.1L48.9 37.5L50.4 38.7L51.9 39.8L53.4 40.7L54.9 41.4L56.4 41.8L57.9 42L59.4 41.9L60.9 41.5L62.4 40.8L63.9 39.7L65.3 38.3L66.8 36.5L68.3 34.2L69.8 31.6L71.3 28.4L72.8 24.8L74.3 20.6L75.8 16L77.3 10.7"></path>
-        <path class="g-tangente" d="M56.4 51.6L78.2 20.1"></path>
-        <circle class="pt-point" cx="67.3" cy="35.9" r="2.4"></circle>
-      </svg>
-    </div>
-  </a>
+  <div class="groupe-theme">
+  <h3 class="theme-tete">Algèbre</h3>
 
   <a class="carte-chapitre" href="premiere/maths/suites/">
     <div class="carte-info">
-      <div class="carte-statut">CHAPITRE 02</div>
+      <div class="carte-statut">CHAPITRE 01</div>
       <div class="carte-titre">Les suites numériques</div>
       <div class="carte-desc">Termes et récurrence · Suites arithmétiques · Suites géométriques · Sommes · Sens de variation · 15 exercices corrigés</div>
       <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
@@ -119,24 +134,38 @@
     </div>
   </a>
 
-  <a class="carte-chapitre" href="premiere/maths/probabilites-conditionnelles/">
+  <a class="carte-chapitre" href="premiere/maths/second-degre/">
     <div class="carte-info">
-      <div class="carte-statut">CHAPITRE 03</div>
-      <div class="carte-titre">Les probabilités conditionnelles</div>
-      <div class="carte-desc">Probabilité sachant · Tableaux croisés · Arbres pondérés · Probabilités totales · Indépendance · 15 exercices corrigés</div>
+      <div class="carte-statut">CHAPITRE 02</div>
+      <div class="carte-titre">Le second degré</div>
+      <div class="carte-desc">Parabole et forme canonique · Sommet et variations · Discriminant et racines · Factorisation · Signe et inéquations · 15 exercices corrigés</div>
       <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
     </div>
     <div class="carte-motif">
       <svg viewBox="0 0 80 56" aria-hidden="true">
-        <path class="g-courbe" d="M6.7 28L40 42M40 42L73.3 35M40 42L73.3 49M40 14L73.3 21"></path>
-        <path class="g-tangente" d="M6.7 28L40 14M40 14L73.3 7"></path>
-        <circle class="pt-craie" cx="6.7" cy="28" r="2.4"></circle>
-        <circle class="pt-craie" cx="40" cy="42" r="2.4"></circle>
-        <circle class="pt-craie" cx="73.3" cy="21" r="2.4"></circle>
-        <circle class="pt-craie" cx="73.3" cy="35" r="2.4"></circle>
-        <circle class="pt-craie" cx="73.3" cy="49" r="2.4"></circle>
-        <circle class="pt-craie" cx="40" cy="14" r="2.4"></circle>
-        <circle class="pt-point" cx="73.3" cy="7" r="2.4"></circle>
+        <path class="g-courbe" d="M6 52.4L8 48L10 43.9L12 40L14 36.4L16 33.1L18 30.1L20 27.3L22 24.8L24 22.5L26 20.5L28 18.8L30 17.3L32 16.1L34 15.2L36 14.5L38 14.1L40 14L42 14.1L44 14.5L46 15.2L48 16.1L50 17.3L52 18.8L54 20.5L56 22.5L58 24.8L60 27.3L62 30.1L64 33.1L66 36.4L68 40L70 43.9L72 48L74 52.4"></path>
+        <path class="g-tangente" stroke-dasharray="3 3" d="M40 6L40 50"></path>
+        <circle class="pt-point" cx="40" cy="14" r="2.4"></circle>
+      </svg>
+    </div>
+  </a>
+  </div>
+
+  <div class="groupe-theme">
+  <h3 class="theme-tete">Analyse</h3>
+
+  <a class="carte-chapitre" href="premiere/maths/derivation/">
+    <div class="carte-info">
+      <div class="carte-statut">CHAPITRE 03</div>
+      <div class="carte-titre">La dérivation</div>
+      <div class="carte-desc">Taux de variation · Nombre dérivé · Tangente · Fonctions dérivées · Variations · 15 exercices corrigés</div>
+      <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
+    </div>
+    <div class="carte-motif">
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-courbe" d="M2.7 45.3L4.2 40L5.7 35.4L7.2 31.2L8.7 27.6L10.2 24.4L11.7 21.8L13.2 19.5L14.7 17.7L16.1 16.3L17.6 15.2L19.1 14.5L20.6 14.1L22.1 14L23.6 14.2L25.1 14.6L26.6 15.3L28.1 16.2L29.6 17.3L31.1 18.5L32.5 19.9L34 21.4L35.5 22.9L37 24.6L38.5 26.3L40 28L41.5 29.7L43 31.4L44.5 33.1L46 34.6L47.5 36.1L48.9 37.5L50.4 38.7L51.9 39.8L53.4 40.7L54.9 41.4L56.4 41.8L57.9 42L59.4 41.9L60.9 41.5L62.4 40.8L63.9 39.7L65.3 38.3L66.8 36.5L68.3 34.2L69.8 31.6L71.3 28.4L72.8 24.8L74.3 20.6L75.8 16L77.3 10.7"></path>
+        <path class="g-tangente" d="M56.4 51.6L78.2 20.1"></path>
+        <circle class="pt-point" cx="67.3" cy="35.9" r="2.4"></circle>
       </svg>
     </div>
   </a>
@@ -156,6 +185,10 @@
       </svg>
     </div>
   </a>
+  </div>
+
+  <div class="groupe-theme">
+  <h3 class="theme-tete">Géométrie</h3>
 
   <a class="carte-chapitre" href="premiere/maths/produit-scalaire/">
     <div class="carte-info">
@@ -175,22 +208,6 @@
     </div>
   </a>
 
-  <a class="carte-chapitre" href="premiere/maths/second-degre/">
-    <div class="carte-info">
-      <div class="carte-statut">CHAPITRE 06</div>
-      <div class="carte-titre">Le second degré</div>
-      <div class="carte-desc">Parabole et forme canonique · Sommet et variations · Discriminant et racines · Factorisation · Signe et inéquations · 15 exercices corrigés</div>
-      <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
-    </div>
-    <div class="carte-motif">
-      <svg viewBox="0 0 80 56" aria-hidden="true">
-        <path class="g-courbe" d="M6 52.4L8 48L10 43.9L12 40L14 36.4L16 33.1L18 30.1L20 27.3L22 24.8L24 22.5L26 20.5L28 18.8L30 17.3L32 16.1L34 15.2L36 14.5L38 14.1L40 14L42 14.1L44 14.5L46 15.2L48 16.1L50 17.3L52 18.8L54 20.5L56 22.5L58 24.8L60 27.3L62 30.1L64 33.1L66 36.4L68 40L70 43.9L72 48L74 52.4"></path>
-        <path class="g-tangente" stroke-dasharray="3 3" d="M40 6L40 50"></path>
-        <circle class="pt-point" cx="40" cy="14" r="2.4"></circle>
-      </svg>
-    </div>
-  </a>
-
   <div class="grille-bientot">
     <div class="carte-bientot">
       <span class="bientot-tag">BIENTÔT</span>
@@ -202,12 +219,42 @@
       </svg>
     </div>
   </div>
+  </div>
+
+  <div class="groupe-theme">
+  <h3 class="theme-tete">Probabilités et statistiques</h3>
+
+  <a class="carte-chapitre" href="premiere/maths/probabilites-conditionnelles/">
+    <div class="carte-info">
+      <div class="carte-statut">CHAPITRE 06</div>
+      <div class="carte-titre">Les probabilités conditionnelles</div>
+      <div class="carte-desc">Probabilité sachant · Tableaux croisés · Arbres pondérés · Probabilités totales · Indépendance · 15 exercices corrigés</div>
+      <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
+    </div>
+    <div class="carte-motif">
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-courbe" d="M6.7 28L40 42M40 42L73.3 35M40 42L73.3 49M40 14L73.3 21"></path>
+        <path class="g-tangente" d="M6.7 28L40 14M40 14L73.3 7"></path>
+        <circle class="pt-craie" cx="6.7" cy="28" r="2.4"></circle>
+        <circle class="pt-craie" cx="40" cy="42" r="2.4"></circle>
+        <circle class="pt-craie" cx="73.3" cy="21" r="2.4"></circle>
+        <circle class="pt-craie" cx="73.3" cy="35" r="2.4"></circle>
+        <circle class="pt-craie" cx="73.3" cy="49" r="2.4"></circle>
+        <circle class="pt-craie" cx="40" cy="14" r="2.4"></circle>
+        <circle class="pt-point" cx="73.3" cy="7" r="2.4"></circle>
+      </svg>
+    </div>
+  </a>
+  </div>
 </section>
 
-<section class="rangee-chapitres">
+<section class="rangee-chapitres" data-niveau="premiere" data-matiere="physique-chimie">
   <div class="rangee-tete">
     <h2>Première · Spé Physique-Chimie</h2>
   </div>
+
+  <div class="groupe-theme">
+  <h3 class="theme-tete">Constitution et transformations de la matière</h3>
 
   <a class="carte-chapitre" href="premiere/physique-chimie/composition-systeme/">
     <div class="carte-info">
@@ -246,26 +293,14 @@
       </svg>
     </div>
   </a>
+  </div>
 
-  <a class="carte-chapitre" href="premiere/physique-chimie/ondes-mecaniques/">
-    <div class="carte-info">
-      <div class="carte-statut">CHAPITRE 03</div>
-      <div class="carte-titre">Les ondes mécaniques</div>
-      <div class="carte-desc">Onde progressive · Célérité et retard · Période et longueur d'onde · La relation λ = v·T · 15 exercices corrigés</div>
-      <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
-    </div>
-    <div class="carte-motif">
-      <svg viewBox="0 0 80 56" aria-hidden="true">
-        <path class="g-courbe" d="M0 30L1.6 26.6L3.2 23.5L4.8 21.1L6.4 19.5L8 19L9.6 19.5L11.2 21.1L12.8 23.5L14.4 26.6L16 30L17.6 33.4L19.2 36.5L20.8 38.9L22.4 40.5L24 41L25.6 40.5L27.2 38.9L28.8 36.5L30.4 33.4L32 30L33.6 26.6L35.2 23.5L36.8 21.1L38.4 19.5L40 19L41.6 19.5L43.2 21.1L44.8 23.5L46.4 26.6L48 30L49.6 33.4L51.2 36.5L52.8 38.9L54.4 40.5L56 41L57.6 40.5L59.2 38.9L60.8 36.5L62.4 33.4L64 30L65.6 26.6L67.2 23.5L68.8 21.1L70.4 19.5L72 19L73.6 19.5L75.2 21.1L76.8 23.5L78.4 26.6L80 30"></path>
-        <path class="g-tangente" stroke-dasharray="3 3" d="M8 9L40 9M8 5L8 13M40 5L40 13"></path>
-        <circle class="pt-point" cx="40" cy="19" r="2.4"></circle>
-      </svg>
-    </div>
-  </a>
+  <div class="groupe-theme">
+  <h3 class="theme-tete">Mouvement et interactions</h3>
 
   <a class="carte-chapitre" href="premiere/physique-chimie/mouvement-systeme/">
     <div class="carte-info">
-      <div class="carte-statut">CHAPITRE 04</div>
+      <div class="carte-statut">CHAPITRE 03</div>
       <div class="carte-titre">Le mouvement d'un système</div>
       <div class="carte-desc">Chronophotographie et vecteur vitesse · Le vecteur variation de vitesse · Le lien avec la somme des forces · Inertie et rôle de la masse · 15 exercices corrigés</div>
       <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
@@ -285,10 +320,14 @@
       </svg>
     </div>
   </a>
+  </div>
+
+  <div class="groupe-theme">
+  <h3 class="theme-tete">L'énergie&nbsp;: conversions et transferts</h3>
 
   <a class="carte-chapitre" href="premiere/physique-chimie/energie-mecanique/">
     <div class="carte-info">
-      <div class="carte-statut">CHAPITRE 05</div>
+      <div class="carte-statut">CHAPITRE 04</div>
       <div class="carte-titre">L'énergie mécanique</div>
       <div class="carte-desc">Énergie cinétique et potentielle · Le travail d'une force · Théorème de l'énergie cinétique · Conservation de Em et frottements · 15 exercices corrigés</div>
       <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
@@ -313,7 +352,30 @@
       </svg>
     </div>
   </div>
+  </div>
+
+  <div class="groupe-theme">
+  <h3 class="theme-tete">Ondes et signaux</h3>
+
+  <a class="carte-chapitre" href="premiere/physique-chimie/ondes-mecaniques/">
+    <div class="carte-info">
+      <div class="carte-statut">CHAPITRE 05</div>
+      <div class="carte-titre">Les ondes mécaniques</div>
+      <div class="carte-desc">Onde progressive · Célérité et retard · Période et longueur d'onde · La relation λ = v·T · 15 exercices corrigés</div>
+      <div class="carte-ouvrir">Ouvrir le chapitre <span aria-hidden="true">→</span></div>
+    </div>
+    <div class="carte-motif">
+      <svg viewBox="0 0 80 56" aria-hidden="true">
+        <path class="g-courbe" d="M0 30L1.6 26.6L3.2 23.5L4.8 21.1L6.4 19.5L8 19L9.6 19.5L11.2 21.1L12.8 23.5L14.4 26.6L16 30L17.6 33.4L19.2 36.5L20.8 38.9L22.4 40.5L24 41L25.6 40.5L27.2 38.9L28.8 36.5L30.4 33.4L32 30L33.6 26.6L35.2 23.5L36.8 21.1L38.4 19.5L40 19L41.6 19.5L43.2 21.1L44.8 23.5L46.4 26.6L48 30L49.6 33.4L51.2 36.5L52.8 38.9L54.4 40.5L56 41L57.6 40.5L59.2 38.9L60.8 36.5L62.4 33.4L64 30L65.6 26.6L67.2 23.5L68.8 21.1L70.4 19.5L72 19L73.6 19.5L75.2 21.1L76.8 23.5L78.4 26.6L80 30"></path>
+        <path class="g-tangente" stroke-dasharray="3 3" d="M8 9L40 9M8 5L8 13M40 5L40 13"></path>
+        <circle class="pt-point" cx="40" cy="19" r="2.4"></circle>
+      </svg>
+    </div>
+  </a>
+  </div>
 </section>
+
+</div>
 
 <section class="bande-comment">
   <div class="bande-inner">
