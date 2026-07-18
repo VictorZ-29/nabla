@@ -83,6 +83,20 @@ export const CHAPITRES = [
     ],
   },
   {
+    titre: 'La géométrie repérée',
+    url: 'premiere/maths/geometrie-reperee/',
+    niveau: 'Première',
+    matiere: 'Spé Maths',
+    mots: 'géométrie repérée vecteur normal équation de droite équation cartésienne projeté orthogonal distance point droite équation de cercle centre rayon cercle de diamètre exercices corrigés',
+    sections: [
+      { id: 's1', titre: 'La ville en coordonnées', mots: 'repère orthonormé coordonnées distance entre deux points formule racine' },
+      { id: 's2', titre: 'Le vecteur normal', mots: 'vecteur normal directeur équation cartésienne ax+by+c=0 droites parallèles perpendiculaires' },
+      { id: 's3', titre: 'Le projeté orthogonal', mots: 'projeté orthogonal pied de la perpendiculaire distance d’un point à une droite système' },
+      { id: 's4', titre: 'L’équation du cercle', mots: 'équation de cercle centre rayon forme canonique reconnaître appartenance' },
+      { id: 's5', titre: 'Le cercle de diamètre [AB]', mots: 'cercle de diamètre MA·MB=0 angle droit triangle rectangle inscrit milieu' },
+    ],
+  },
+  {
     titre: 'Les probabilités conditionnelles',
     url: 'premiere/maths/probabilites-conditionnelles/',
     niveau: 'Première',
