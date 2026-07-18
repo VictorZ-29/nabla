@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://NABLA_DOMAIN/</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-07-18</lastmod>
   </url>
   <url>
     <loc>https://NABLA_DOMAIN/premiere/maths/derivation/</loc>
@@ -22,7 +22,11 @@
   </url>
   <url>
     <loc>https://NABLA_DOMAIN/premiere/maths/produit-scalaire/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <lastmod>2026-07-18</lastmod>
+  </url>
+  <url>
+    <loc>https://NABLA_DOMAIN/premiere/maths/second-degre/</loc>
+    <lastmod>2026-07-18</lastmod>
   </url>
   <url>
     <loc>https://NABLA_DOMAIN/premiere/physique-chimie/composition-systeme/</loc>

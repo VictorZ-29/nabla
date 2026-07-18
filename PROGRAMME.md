@@ -63,7 +63,7 @@ depuis cet environnement, voir « À vérifier » en bas de fichier.
 
 ## Mathématiques — Première spécialité (programme 2026)
 
-**Bilan : 5 chapitres en ligne · 5 à faire · 2 compléments 2026 à apporter
+**Bilan : 6 chapitres en ligne · 4 à faire · 2 compléments 2026 à apporter
 aux chapitres existants.**
 
 ### Algèbre
@@ -71,7 +71,7 @@ aux chapitres existants.**
 | Chapitre Nabla | Contenus du programme | Statut |
 |---|---|---|
 | Les suites numériques | Modèles discrets ; suites explicites et récurrentes ; suites arithmétiques et géométriques (terme général, sommes) ; sens de variation. | ✅ `premiere/maths/suites/` |
-| Le second degré | Fonction polynôme du second degré : forme canonique, allure, symétrie, variations ; équation du second degré, discriminant, racines ; factorisation ; signe du trinôme ; inéquations. | ⬜ À faire |
+| Le second degré | Fonction polynôme du second degré : forme canonique, allure, symétrie, variations ; équation du second degré, discriminant, racines ; factorisation ; signe du trinôme ; inéquations. | ✅ `premiere/maths/second-degre/` |
 
 ### Analyse
 
