@@ -63,8 +63,8 @@ depuis cet environnement, voir « À vérifier » en bas de fichier.
 
 ## Mathématiques — Première spécialité (programme 2026)
 
-**Bilan : 8 chapitres en ligne · 2 à faire · 2 compléments 2026 à apporter
-aux chapitres existants.**
+**Bilan : 9 chapitres en ligne · 1 à faire · 1 complément 2026 à apporter
+aux chapitres existants (dérivation : approximation affine).**
 
 ### Algèbre
 
@@ -92,8 +92,8 @@ aux chapitres existants.**
 
 | Chapitre Nabla | Contenus du programme | Statut |
 |---|---|---|
-| Les probabilités conditionnelles | P_A(B), arbres pondérés, tableaux ; formule des probabilités totales ; renversement ; indépendance de deux événements. | ✅ `premiere/maths/probabilites-conditionnelles/` — **complément 2026 à évaluer : succession de n ≤ 4 épreuves de Bernoulli (arbres, sans loi binomiale) — ici ou dans le chapitre variables aléatoires** |
-| Les variables aléatoires | Variable aléatoire réelle, loi de probabilité ; espérance, variance, écart type ; interprétation (moyenne des valeurs sur un grand nombre de répétitions). | ⬜ À faire |
+| Les probabilités conditionnelles | P_A(B), arbres pondérés, tableaux ; formule des probabilités totales ; renversement ; indépendance de deux événements. | ✅ `premiere/maths/probabilites-conditionnelles/` — le complément 2026 « succession d'épreuves de Bernoulli » est traité dans le chapitre variables aléatoires (§5) |
+| Les variables aléatoires | Variable aléatoire réelle, loi de probabilité ; espérance, variance, écart type ; interprétation (moyenne des valeurs sur un grand nombre de répétitions). **Inclut le complément 2026 : succession de n ≤ 4 épreuves de Bernoulli indépendantes et identiques (arbres, sans loi binomiale).** | ✅ `premiere/maths/variables-aleatoires/` — formule V(X) = E(X²) − E(X)² et absence de E(aX+b) à confirmer sur l'annexe 2026 (cf. « À vérifier ») |
 | Statistiques — analyse de données | Nouveauté 2026 : place renforcée des données — regroupement par classes, statistiques bivariées (nuages de points). **Contour exact à vérifier dans l'annexe officielle avant de scoper le chapitre.** | ⬜ À faire |
 
 ### Transversal (pas de chapitre dédié — à tisser dans les chapitres)
@@ -176,7 +176,10 @@ session avec accès (ou par Victor) :
    l'**approximation affine** et de la **succession d'épreuves de
    Bernoulli** ; qu'aucun autre contenu n'a bougé (notamment variables
    aléatoires et géométrie repérée, confirmés seulement par sources
-   secondaires).
+   secondaires). Pour le chapitre variables aléatoires en ligne :
+   confirmer que la formule V(X) = E(X²) − E(X)² figure toujours au
+   programme, et que E(aX+b)/V(aX) n'y figurent pas (le chapitre les
+   omet).
 2. Confirmer qu'**aucun nouvel arrêté physique-chimie** n'est paru pour la
    Première après le BO spécial n°1 du 22-01-2019 (rien trouvé en juillet
    2026).

@@ -124,6 +124,20 @@ export const CHAPITRES = [
       { id: 's5', titre: 'L’indépendance', mots: 'événements indépendants indépendance P(A∩B) = P(A)×P(B)' },
     ],
   },
+  {
+    titre: 'Les variables aléatoires',
+    url: 'premiere/maths/variables-aleatoires/',
+    niveau: 'Première',
+    matiere: 'Spé Maths',
+    mots: 'variable aléatoire loi de probabilité espérance variance écart type gain jeu Bernoulli épreuve répétée exercices corrigés',
+    sections: [
+      { id: 's1', titre: 'La roue de la kermesse', mots: 'jeu de hasard gain net mise issues équiprobables' },
+      { id: 's2', titre: 'La loi de probabilité', mots: 'variable aléatoire loi de probabilité P(X=x) tableau somme des probabilités égale 1' },
+      { id: 's3', titre: 'L’espérance', mots: 'espérance E(X) moyenne pondérée gain moyen jeu équitable favorable défavorable simulation' },
+      { id: 's4', titre: 'Variance et écart type', mots: 'variance V(X) écart type sigma dispersion risque E(X²) moins E(X)²' },
+      { id: 's5', titre: 'Répéter une épreuve', mots: 'épreuve de Bernoulli succès échec répétition indépendante arbre nombre de succès au moins un' },
+    ],
+  },
 
   /* ---------------- Première · Spé Physique-Chimie ---------------- */
 
