@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>La géométrie repérée — Première Spé Maths | Nabla</title>
+<meta name="description" content="Mets les droites et les cercles en équation : vecteur normal, équation cartésienne, projeté orthogonal et distance d'un point à une droite, équation de cercle, cercle de diamètre [AB] — avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/geometrie-reperee/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="La géométrie repérée — Première Spé Maths | Nabla">
+<meta property="og:description" content="Vecteur normal, équations de droites, projeté orthogonal, équations de cercles et cercle de diamètre [AB] : un cours interactif où tu manipules les figures toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/geometrie-reperee/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La géométrie repérée — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Vecteur normal, projeté orthogonal, équations de droites et de cercles : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "La géométrie repérée — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur la géométrie repérée : vecteur normal à une droite, équations cartésiennes de droites, projeté orthogonal d'un point sur une droite, équation de cercle, cercle de diamètre [AB]. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/geometrie-reperee/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Vecteur normal à une droite, équation cartésienne de droite, projeté orthogonal d'un point sur une droite, distance d'un point à une droite, équation de cercle, cercle de diamètre [AB]",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=14">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=14">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=14">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/geo-normale.js"></script>
+<script type="module" src="../../../assets/js/widgets/geo-projete.js"></script>
+<script type="module" src="../../../assets/js/widgets/geo-cercle.js"></script>
+<script type="module" src="../../../assets/js/widgets/geo-diametre.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="reperee">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>La géométrie repérée</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>trouver une équation de droite avec un point et un vecteur normal, calculer le projeté orthogonal d'un point sur une droite et la distance qui va avec, écrire et reconnaître l'équation d'un cercle — et caractériser le cercle de diamètre [AB] par le produit scalaire.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. La ville en coordonnées</a>
+      <a href="#s2">2. Le vecteur normal</a>
+      <a href="#s3">3. Le projeté orthogonal</a>
+      <a href="#s4">4. L'équation du cercle</a>
+      <a href="#s5">5. Le cercle de diamètre [AB]</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. La ville en coordonnées</a>
+        <a href="#s2">2. Le vecteur normal</a>
+        <a href="#s3">3. Le projeté orthogonal</a>
+        <a href="#s4">4. L'équation du cercle</a>
+        <a href="#s5">5. Le cercle de diamètre [AB]</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. La ville en coordonnées</h2>
+      <p class="prose">Ouvre le plan de ta ville sur ton téléphone. «&nbsp;Vous êtes à 350&nbsp;m de l'avenue.&nbsp;» «&nbsp;Réseau disponible à moins de 2&nbsp;km de l'antenne.&nbsp;» Le téléphone ne <em>voit</em> rien&nbsp;: pour lui, la ville n'est qu'un repère, et toi, l'avenue, l'antenne — des coordonnées. Comment fait-il alors pour savoir où est la rue tout entière, et à quelle distance tu en es&nbsp;?</p>
+      <p class="prose">Voilà le programme du chapitre&nbsp;: décrire une figure <em>entière</em> — une droite, un cercle — par une seule équation sur les coordonnées, puis mesurer des distances qui ne suivent pas les axes. Les outils, tu les as déjà&nbsp;: le repère orthonormé de Seconde, et le détecteur d'angle droit du chapitre précédent — le produit scalaire. Ce chapitre les branche l'un sur l'autre.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="Sur un quadrillage, une rue rectiligne passe par un point A ; un vecteur n est planté en A, perpendiculairement à la rue, avec une petite équerre qui marque l'angle droit">
+          <path class="g-grid" d="M40 400L40 0M80 400L80 0M120 400L120 0M160 400L160 0M200 400L200 0M240 400L240 0M320 400L320 0M360 400L360 0M400 400L400 0M440 400L440 0M480 400L480 0M520 400L520 0M560 400L560 0M600 400L600 0M0 40L640 40M0 80L640 80M0 120L640 120M0 160L640 160M0 200L640 200M0 280L640 280M0 320L640 320M0 360L640 360"></path>
+          <path class="g-axis" d="M0 240L640 240M280 400L280 0"></path>
+          <path class="g-courbe" d="M220 0L420 400"></path>
+          <path class="marque-droit" d="M330.7 194.6L325.4 183.8L314.6 189.3"></path>
+          <path class="g-courbe-derivee" d="M320 200L388.4 165.8"></path>
+          <path class="vec-pointe--accent" d="M400 160L390.6 170.3L386.2 161.3Z"></path>
+          <circle class="pt-fixe" cx="320" cy="200" r="5"></circle>
+          <text class="etiquette-math etiquette-math--muted" font-size="15" x="310" y="224" text-anchor="middle">A</text>
+          <text class="etiquette-math etiquette-math--accent" font-size="17" x="426" y="158" text-anchor="middle">n</text>
+          <path class="etiquette-vec-fleche etiquette-vec-fleche--accent" d="M420 143L432 143M428.6 140.4L432 143L428.6 145.6"></path>
+          <text class="etiquette-math etiquette-math--muted" font-size="16" x="440" y="356" text-anchor="middle">la rue</text>
+        </svg>
+        <figcaption>Une rue, un point A de la rue, et une flèche plantée perpendiculairement — l'équerre en témoigne. Ce trio suffit à mettre la rue en équation&nbsp;: c'est le graphique de la section&nbsp;2, figé à son état de départ.</figcaption>
+      </figure>
+
+      <p class="prose">Une seule formule de Seconde à réveiller avant de commencer&nbsp;: la distance entre deux points d'un repère <strong>orthonormé</strong> — Pythagore en coordonnées. C'est elle qui travaillera à chaque section&nbsp;:</p>
+
+      <div class="math-vitrine">$$AB = \sqrt{(x_B - x_A)^2 + (y_B - y_A)^2}$$</div>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Le vecteur qui commande la droite</h2>
+      <p class="prose">En Seconde, tu décrivais une droite par sa pente&nbsp;: \(y = mx + p\). Voici une commande plus puissante&nbsp;: un point A, et une flèche <em>perpendiculaire</em> à la droite. Fais-le toi-même&nbsp;: attrape le bout de \(\vec n\) et fais-le tourner autour de A. La droite suit, toujours à angle droit — et regarde l'équation juste en dessous se réécrire. Que reconnais-tu dans les coefficients de \(x\) et de \(y\)&nbsp;? Essaie aussi de rendre la droite verticale, puis horizontale.</p>
+
+      <figure class="widget" id="widget-geo-normale"
+        data-widget="geo-normale" data-ax="1" data-ay="1" data-n-init="2,1"
+        data-nx-dom="-5,5" data-ny-dom="-4,4"
+        data-xmin="-7" data-xmax="9" data-ymin="-4" data-ymax="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La droite au bout de la flèche</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Le point A est fixé ; le vecteur normal n tourne autour de A en s'aimantant aux nœuds de la grille, et la droite passant par A perpendiculaire à n suit, pendant que son équation cartésienne se réécrit"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule"><span class="js-ligne1">d : 2x + y − 3 = 0</span></div>
+          <div class="lecture-formule"><span class="js-ligne2">2×1 + 1×1 − 3 = 0 — A est bien sur d</span></div>
+          <div class="chips">
+            <span class="chip">A = (1 ; 1)</span>
+            <span class="chip chip--accent">n = <span class="js-n">(2 ; 1)</span></span>
+            <span class="chip js-etat" aria-live="polite">équation complète — droite oblique</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Les coefficients de x et de y, lus dans l'ordre, sont exactement les coordonnées de n. Tourne n&nbsp;: l'équation suit.</p>
+        </div>
+        <div class="widget-note">A = (1 ; 1) est fixé, l'extrémité de n s'aimante aux nœuds de la grille&nbsp;: tous les coefficients restent entiers. La deuxième ligne remplace x et y par les coordonnées de A — elle retombe sur 0 à chaque fois. Clavier&nbsp;: flèches gauche/droite pour la première coordonnée de n, haut/bas pour la seconde.</div>
+      </figure>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Un <strong>vecteur normal</strong> à une droite \(d\) est un vecteur <strong>non nul</strong> orthogonal à un vecteur directeur de \(d\) — une flèche perpendiculaire à la direction de \(d\).</p>
+        <p>Une droite a une infinité de vecteurs normaux&nbsp;: tous colinéaires entre eux. N'importe lequel suffit à la décrire.</p>
+      </div>
+
+      <p class="prose">Et le lien avec l'équation, que le graphique t'a fait toucher du doigt&nbsp;: les coefficients de \(x\) et de \(y\) <em>sont</em> un vecteur normal. Retiens l'aller-retour — l'équation à gauche, sa flèche à droite&nbsp;:</p>
+
+      <div class="math-vitrine math-vitrine--grande">$$d \;:\; ax + by + c = 0 \qquad\qquad \vec n\,(a\;;\, b)$$</div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>D'où sort cette équation&nbsp;? Prends un point \(M(x\;;\, y)\) quelconque. M est sur \(d\) exactement quand \(\overrightarrow{AM}\) est orthogonal à \(\vec n\) — c'est-à-dire quand \(\vec n \cdot \overrightarrow{AM} = 0\)&nbsp;: le détecteur d'angle droit du chapitre précédent. Avec \(\vec n\,(a\;;\, b)\) et \(\overrightarrow{AM}\,(x - x_A\;;\, y - y_A)\), ce produit scalaire s'écrit \(a(x - x_A) + b(y - y_A) = 0\). Développe&nbsp;: \(ax + by + c = 0\), avec \(c = -(ax_A + by_A)\). Une droite, c'est une équation — et ses coefficients, une flèche perpendiculaire.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LIRE UNE ÉQUATION CARTÉSIENNE</div>
+        <p>Toute droite du plan admet une équation de la forme \(ax + by + c = 0\), avec \(a\) et \(b\) non tous les deux nuls. Sur cette équation se lisent&nbsp;: un vecteur <strong>normal</strong> \(\vec n\,(a\;;\, b)\), et un vecteur <strong>directeur</strong> \(\vec u\,(-b\;;\, a)\) — celui de Seconde.</p>
+        <p>Deux droites sont <strong>parallèles</strong> quand leurs vecteurs normaux sont colinéaires, <strong>perpendiculaires</strong> quand leurs vecteurs normaux sont orthogonaux — produit scalaire nul, comme toujours.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER UNE ÉQUATION AVEC UN POINT ET UN VECTEUR NORMAL</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Recopie \(\vec n\,(a\;;\, b)\) dans les coefficients&nbsp;: l'équation est \(ax + by + c = 0\), il ne manque que \(c\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Remplace \(x\) et \(y\) par les coordonnées du point connu, et résous pour trouver \(c\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle&nbsp;: les coordonnées du point doivent vérifier l'équation finale — sinon, une erreur de signe s'est glissée.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MÉTHODE EN ACTION</div>
+        <p class="exemple-enonce">Détermine une équation de la droite \(d\) passant par \(A(-1\;;\, 2)\), de vecteur normal \(\vec n\,(2\;;\, -3)\).</p>
+        <p><span class="etape-label">Étape 1 — </span>Les coefficients sont ceux de \(\vec n\)&nbsp;: \(d : 2x - 3y + c = 0\).</p>
+        <p><span class="etape-label">Étape 2 — </span>A est sur \(d\)&nbsp;: \(2 \times (-1) - 3 \times 2 + c = 0\), soit \(-8 + c = 0\), donc \(c = 8\).</p>
+        <p><span class="etape-label">Étape 3 — </span>Contrôle&nbsp;: \(2 \times (-1) - 3 \times 2 + 8 = -2 - 6 + 8 = 0\)&nbsp;: cohérent.</p>
+        <p class="conclusion">Conclusion&nbsp;: \(d : 2x - 3y + 8 = 0\). Un point, une flèche perpendiculaire — et toute la droite est décrite.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Dans \(ax + by + c = 0\), les coefficients de \(x\) et de \(y\), lus dans l'ordre, sont les coordonnées d'un <strong>vecteur normal</strong>.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Un vecteur normal à la droite d'équation \(3x - 2y + 7 = 0\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\vec n\,(2\;;\, 3)\)</button>
+              <button type="button" class="quiz-reponse">\(\vec n\,(3\;;\, -2)\)</button>
+              <button type="button" class="quiz-reponse">\(\vec n\,(3\;;\, 2)\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> les coefficients, dans l'ordre et avec leurs signes&nbsp;: \((3\;;\, -2)\). Le couple \((2\;;\, 3)\), c'est le vecteur <em>directeur</em> \((-b\;;\, a)\) — l'autre flèche, celle qui suit la droite au lieu de la traverser.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>La droite passant par \(A(1\;;\, 2)\), de vecteur normal \(\vec n\,(2\;;\, 1)\), a pour équation…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(2x + y - 4 = 0\)</button>
+              <button type="button" class="quiz-reponse">\(2x + y + 4 = 0\)</button>
+              <button type="button" class="quiz-reponse">\(x + 2y - 5 = 0\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(2x + y + c = 0\) et \(2 \times 1 + 2 + c = 0\) donnent \(c = -4\). La troisième équation passe bien par A, mais son vecteur normal est \((1\;;\, 2)\)&nbsp;: pas le bon. Vérifie toujours <em>les deux</em>&nbsp;: le point et la flèche.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>La droite verticale d'équation \(x = 5\) a pour vecteur normal…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\vec n\,(0\;;\, 1)\)</button>
+              <button type="button" class="quiz-reponse">\(\vec n\,(1\;;\, 0)\)</button>
+              <button type="button" class="quiz-reponse">aucun&nbsp;: elle n'a pas d'équation cartésienne</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(x = 5\), c'est \(1x + 0y - 5 = 0\)&nbsp;: normal \((1\;;\, 0)\), horizontal — perpendiculaire à une droite verticale, logique. C'est la force de l'équation cartésienne&nbsp;: elle décrit <em>toutes</em> les droites, verticales comprises, là où \(y = mx + p\) cale.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Le projeté orthogonal&nbsp;: la vraie distance</h2>
+      <p class="prose">Reviens au plan de la ville. «&nbsp;À 350&nbsp;m de l'avenue&nbsp;», dit l'application. 350&nbsp;mètres comment&nbsp;? Pas le long d'un chemin quelconque&nbsp;: la distance entre toi et la rue, c'est celle du chemin <em>le plus court</em>. Et le chemin le plus court vers une droite, tu vas le voir, arrive toujours à angle droit.</p>
+      <p class="prose">Promène M et compare les deux chemins&nbsp;: la verticale grise, tentante, et le segment [MH], perpendiculaire à \(d\). Lequel est le plus court, toujours&nbsp;? Trouve aussi les positions où M tombe pile sur \(d\).</p>
+
+      <figure class="widget" id="widget-geo-projete"
+        data-widget="geo-projete" data-da="3" data-db="4" data-dc="-12"
+        data-m-init="5,4" data-xdom="-4,9" data-ydom="-3,5"
+        data-xmin="-5" data-xmax="11" data-ymin="-4" data-ymax="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La distance la plus courte</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="La droite d est fixée ; le point M se déplace de nœud en nœud, son projeté orthogonal H glisse sur d, et la distance MH est comparée à la distance verticale, toujours plus longue"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule"><span class="js-ligne1">H = (2,72 ; 0,96)</span></div>
+          <div class="lecture-formule"><span class="js-ligne2">distance de M à d : MH = 3,80</span></div>
+          <div class="chips">
+            <span class="chip">M = <span class="js-m">(5 ; 4)</span></span>
+            <span class="chip chip--good">MH = <span class="js-mh">3,80</span></span>
+            <span class="chip chip--bad">verticale = <span class="js-vert">4,75</span></span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">La verticale grise a l'air directe, mais elle est toujours plus longue&nbsp;: la distance d'un point à une droite se mesure à angle droit, le long de [MH].</p>
+        </div>
+        <div class="widget-note">La droite d : 3x + 4y − 12 = 0 est fixée, M s'aimante aux nœuds de la grille. H est le projeté orthogonal de M sur d&nbsp;; l'équerre marque l'angle droit. Clavier&nbsp;: flèches gauche/droite pour l'abscisse de M, haut/bas pour l'ordonnée.</div>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Le <strong>projeté orthogonal</strong> d'un point M sur une droite \(d\) est le point d'intersection H de \(d\) et de la perpendiculaire à \(d\) passant par M — le pied de la perpendiculaire.</p>
+        <p>Si M est sur \(d\), son projeté orthogonal est M lui-même.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE POINT LE PLUS PROCHE</div>
+        <p>H est le point de \(d\) <strong>le plus proche</strong> de M. La <strong>distance de M à la droite</strong> \(d\) est donc la longueur MH — mesurée le long de la perpendiculaire, jamais autrement.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Prends n'importe quel autre point P sur \(d\). Le triangle MHP est rectangle en H, et Pythagore donne \(MP^2 = MH^2 + HP^2\). Dès que P n'est pas H, \(HP^2 > 0\), donc \(MP > MH\)&nbsp;: tout autre point de \(d\) est strictement plus loin. La perpendiculaire gagne toujours — la verticale grise du graphique ne fait pas exception.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER LES COORDONNÉES DE H</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris l'équation de la perpendiculaire \(\Delta\) à \(d\) passant par M&nbsp;: son vecteur normal est un vecteur <em>directeur</em> de \(d\) — prends \(\vec u\,(-b\;;\, a)\) — et M fournit le \(c\), comme à la section&nbsp;2.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Résous le système formé par les équations de \(d\) et de \(\Delta\), par substitution&nbsp;: la solution est le couple des coordonnées de H.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Si l'énoncé demande la distance de M à \(d\), calcule MH avec la formule de la section&nbsp;1 — et vérifie au passage que H vérifie bien les <em>deux</em> équations.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MÉTHODE EN ACTION</div>
+        <p class="exemple-enonce">Soit \(d : 2x + y - 4 = 0\) et \(M(3\;;\, 3)\). Calcule les coordonnées du projeté orthogonal H de M sur \(d\), puis la distance de M à \(d\).</p>
+        <p><span class="etape-label">Étape 1 — </span>Vecteur directeur de \(d\)&nbsp;: \(\vec u\,(-1\;;\, 2)\). C'est le vecteur normal de \(\Delta\)&nbsp;: \(\Delta : -x + 2y + c = 0\), et avec M&nbsp;: \(-3 + 6 + c = 0\), donc \(c = -3\). Ainsi \(\Delta : -x + 2y - 3 = 0\).</p>
+        <p><span class="etape-label">Étape 2 — </span>Système&nbsp;: \(2x + y = 4\) et \(-x + 2y = 3\). La seconde donne \(x = 2y - 3\)&nbsp;; dans la première&nbsp;: \(2(2y - 3) + y = 4\), soit \(5y = 10\), donc \(y = 2\) et \(x = 1\). Ainsi \(H(1\;;\, 2)\) — qui vérifie bien les deux équations.</p>
+        <p><span class="etape-label">Étape 3 — </span>\(MH = \sqrt{(3 - 1)^2 + (3 - 2)^2} = \sqrt{5} \approx 2{,}24\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(H(1\;;\, 2)\), et la distance de M à \(d\) vaut \(\sqrt{5}\). Le mot «&nbsp;distance&nbsp;» cache toujours un projeté orthogonal.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur le projeté</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le projeté orthogonal H de M sur une droite \(d\), c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le point de \(d\) juste en dessous de M</button>
+              <button type="button" class="quiz-reponse">le point de \(d\) le plus proche de M</button>
+              <button type="button" class="quiz-reponse">le symétrique de M par rapport à \(d\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le pied de la perpendiculaire est le point de \(d\) le plus proche de M — Pythagore l'impose. «&nbsp;Juste en dessous&nbsp;», c'est la verticale grise du graphique&nbsp;: presque toujours plus longue.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Le segment [MH] est toujours porté par…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un vecteur normal de \(d\)</button>
+              <button type="button" class="quiz-reponse">un vecteur directeur de \(d\)</button>
+              <button type="button" class="quiz-reponse">la verticale du repère</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> [MH] est perpendiculaire à \(d\)&nbsp;: il suit un vecteur normal. C'est d'ailleurs la méthode&nbsp;: la perpendiculaire \(\Delta\) a pour vecteur <em>normal</em> un vecteur <em>directeur</em> de \(d\) — les deux flèches échangent leurs rôles.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>La distance de \(M(5\;;\, 6)\) à la droite d'équation \(y = 2\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(5\)</button>
+              <button type="button" class="quiz-reponse">\(6\)</button>
+              <button type="button" class="quiz-reponse">\(4\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la droite est horizontale, la perpendiculaire est donc verticale&nbsp;: \(H(5\;;\, 2)\) et \(MH = 6 - 2 = 4\). Répondre 6, c'est confondre distance à la droite et ordonnée de M.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Le cercle mis en équation</h2>
+      <p class="prose">L'antenne, maintenant. «&nbsp;Réseau disponible à moins de 2&nbsp;km&nbsp;»&nbsp;: la zone couverte est un disque, et sa frontière un cercle — l'ensemble de <em>tous</em> les points situés à exactement \(r\) du centre. Or «&nbsp;être à distance \(r\) de \(\Omega\)&nbsp;», depuis la section&nbsp;1, tu sais l'écrire en coordonnées. L'équation du cercle va tomber toute seule.</p>
+      <p class="prose">Déplace le centre, règle le rayon, et regarde l'équation se réécrire — surveille surtout les <em>signes</em> dans les parenthèses. Puis relève le défi&nbsp;: <strong>fais passer le cercle par P</strong>. Il y a plusieurs façons d'y arriver.</p>
+
+      <figure class="widget" id="widget-geo-cercle"
+        data-widget="geo-cercle" data-omega-init="-1,1" data-r-init="2" data-p="3,2"
+        data-xdom="-5,9" data-ydom="-3,5"
+        data-xmin="-6" data-xmax="10" data-ymin="-4" data-ymax="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Fais passer le cercle par P</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Un cercle dont le centre se déplace de nœud en nœud et dont le rayon se règle au curseur ; son équation se réécrit en direct, et un point P fixé sert de cible à atteindre"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule"><span class="js-ligne1">(x + 1)² + (y − 1)² = 4</span></div>
+          <div class="lecture-formule"><span class="js-ligne2">ΩP² = 4² + 1² = 17</span></div>
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">rayon r</span>
+            <input type="range" class="js-r" min="1" max="5" step="1" value="2" aria-label="Rayon du cercle">
+          </div>
+          <div class="chips">
+            <span class="chip">Ω = <span class="js-omega">(−1 ; 1)</span></span>
+            <span class="chip chip--accent">r = <span class="js-r-val">2</span></span>
+            <span class="chip js-etat" aria-live="polite">ΩP² = 17 &gt; 4 — P est dehors</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">ΩP² &gt; r²&nbsp;: P est trop loin du centre, hors du cercle. Rapproche Ω, ou agrandis le rayon.</p>
+        </div>
+        <div class="widget-note">Le centre s'aimante aux nœuds et le rayon est entier&nbsp;: ΩP² et r² sont des entiers, la comparaison est exacte. Dans l'équation, remarque que les signes s'inversent&nbsp;: centre (−1 ; 1), parenthèses (x + 1) et (y − 1). Clavier&nbsp;: flèches pour déplacer Ω, curseur pour le rayon.</div>
+      </figure>
+
+      <p class="prose">Ce que le graphique écrit à chaque déplacement, voilà d'où ça vient.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — L'ÉQUATION D'UN CERCLE</div>
+        <p>Dans un repère orthonormé, le cercle de centre \(\Omega(a\;;\, b)\) et de rayon \(r\) est l'ensemble des points \(M(x\;;\, y)\) tels que \(\Omega M = r\), c'est-à-dire \(\Omega M^2 = r^2\)&nbsp;:</p>
+        <div class="math-vitrine">$$(x - a)^2 + (y - b)^2 = r^2$$</div>
+        <p>Un point appartient au cercle si et seulement si ses coordonnées vérifient l'équation.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>\(\Omega M = r\) et \(\Omega M^2 = r^2\), c'est la même condition — les deux nombres sont positifs. On élève au carré pour faire disparaître la racine carrée de la formule de distance&nbsp;: l'équation devient polynomiale, et tout ton calcul du chapitre second degré s'applique. C'est aussi pour ça que le rayon se cache <em>au carré</em> dans le membre de droite.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — RECONNAÎTRE UN CERCLE DANS UNE ÉQUATION DÉVELOPPÉE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Regroupe les termes en \(x\) ensemble, les termes en \(y\) ensemble, la constante à droite. (Si \(x^2\) et \(y^2\) ont un coefficient commun, divise tout par ce coefficient d'abord.)</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Mets chaque groupe sous forme canonique — le geste du chapitre second degré&nbsp;: \(x^2 - 6x = (x - 3)^2 - 9\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Conclus selon le membre de droite&nbsp;: strictement positif → un cercle, de rayon sa racine carrée&nbsp;; nul → un seul point&nbsp;; négatif → aucun point du tout.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — RETROUVER CENTRE ET RAYON</div>
+        <p class="exemple-enonce">L'équation \(x^2 + y^2 - 6x + 4y - 3 = 0\) décrit-elle un cercle&nbsp;? Si oui, lequel&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>Regroupe&nbsp;: \((x^2 - 6x) + (y^2 + 4y) = 3\).</p>
+        <p><span class="etape-label">Étape 2 — </span>Formes canoniques&nbsp;: \((x - 3)^2 - 9 + (y + 2)^2 - 4 = 3\).</p>
+        <p><span class="etape-label">Étape 3 — </span>\((x - 3)^2 + (y + 2)^2 = 16\), et \(16 > 0\)&nbsp;: c'est un cercle.</p>
+        <p class="conclusion">Conclusion&nbsp;: cercle de centre \(\Omega(3\;;\, -2)\) et de rayon \(\sqrt{16} = 4\). Les signes du centre sont l'inverse de ceux des parenthèses — et le rayon n'est pas 16.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Le centre se lit en <strong>inversant les signes</strong> — \((x - 3)^2 + (y + 2)^2 = 16\), c'est \(\Omega(3\;;\, -2)\) — et le rayon est la <strong>racine carrée</strong> du membre de droite&nbsp;: 4, pas 16.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions sur les cercles</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le cercle d'équation \((x - 3)^2 + (y + 2)^2 = 25\) a pour centre et rayon…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\Omega(3\;;\, -2)\) et \(r = 5\)</button>
+              <button type="button" class="quiz-reponse">\(\Omega(-3\;;\, 2)\) et \(r = 5\)</button>
+              <button type="button" class="quiz-reponse">\(\Omega(3\;;\, -2)\) et \(r = 25\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le centre annule chaque parenthèse&nbsp;: \(x = 3\), \(y = -2\). Et le membre de droite est \(r^2\)&nbsp;: le rayon vaut \(\sqrt{25} = 5\). Les deux autres réponses sont les deux pièges du chapitre, réunis.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Le cercle de centre \((0\;;\, 2)\) et de rayon 3 a pour équation…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(x^2 + (y + 2)^2 = 9\)</button>
+              <button type="button" class="quiz-reponse">\(x^2 + (y - 2)^2 = 9\)</button>
+              <button type="button" class="quiz-reponse">\(x^2 + (y - 2)^2 = 3\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \((x - 0)^2 + (y - 2)^2 = 3^2\)&nbsp;: on soustrait les coordonnées du centre, et on élève le rayon au carré. Écrire \(= 3\), c'est décrire un cercle de rayon \(\sqrt{3}\) — pas le tien.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>L'ensemble des points vérifiant \(x^2 + y^2 + 4x - 2y + 6 = 0\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un cercle</button>
+              <button type="button" class="quiz-reponse">un seul point</button>
+              <button type="button" class="quiz-reponse">vide&nbsp;: aucun point</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la forme canonique donne \((x + 2)^2 + (y - 1)^2 = -1\), et une somme de carrés ne peut pas être négative&nbsp;: aucun point. Une équation qui <em>ressemble</em> à un cercle n'en est pas forcément un — vérifie toujours le membre de droite.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Le cercle d'équation \((x - 1)^2 + (y + 3)^2 = 25\) passe-t-il par \(A(4\;;\, 1)\)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">oui</button>
+              <button type="button" class="quiz-reponse">non</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> remplace&nbsp;: \((4 - 1)^2 + (1 + 3)^2 = 9 + 16 = 25\)&nbsp;: l'équation est vérifiée, A est sur le cercle. «&nbsp;Appartient-il&nbsp;?&nbsp;» se règle toujours en dix secondes&nbsp;: on remplace, on compare.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Le cercle de diamètre [AB]</h2>
+      <p class="prose">Un dernier ensemble de points, le plus élégant. Prends deux points A et B. Un photographe veut cadrer la façade [AB] avec un objectif qui ouvre exactement à 90°&nbsp;: d'où peut-il se placer&nbsp;? Autrement dit&nbsp;: où sont <em>tous</em> les points M d'où l'on voit [AB] sous un angle droit&nbsp;? Ton détecteur d'angle droit connaît la réponse&nbsp;: ce sont les points où \(\overrightarrow{MA} \cdot \overrightarrow{MB} = 0\).</p>
+      <p class="prose">Promène M&nbsp;: le produit scalaire se recalcule à chaque nœud. Chaque angle droit trouvé laisse une marque — trouves-en trois, et la figure qu'ils dessinent se révélera d'elle-même.</p>
+
+      <figure class="widget" id="widget-geo-diametre"
+        data-widget="geo-diametre" data-a="-4,-1" data-b="4,5" data-m-init="3,1"
+        data-xdom="-8,8" data-ydom="-3,7"
+        data-xmin="-10" data-xmax="10" data-ymin="-4" data-ymax="8.5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Trois angles droits, un cercle</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Deux points A et B sont fixés ; le point M se déplace de nœud en nœud et le produit scalaire MA scalaire MB est recalculé ; chaque position où il s'annule est marquée, et les marques finissent par dessiner le cercle de diamètre AB"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule"><span class="js-ligne">MA·MB = (−7)×1 + (−2)×4 = −15</span></div>
+          <div class="chips">
+            <span class="chip">MA = <span class="js-ma">(−7 ; −2)</span></span>
+            <span class="chip">MB = <span class="js-mb">(1 ; 4)</span></span>
+            <span class="chip chip--bad js-etat" aria-live="polite">produit &lt; 0 — angle obtus</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Promène M et cherche les positions d'où l'on voit [AB] sous un angle droit&nbsp;: produit nul. Il y en a plus d'une.</p>
+        </div>
+        <div class="widget-note">A = (−4 ; −1) et B = (4 ; 5) sont fixés, M s'aimante aux nœuds (sauf sur A et B)&nbsp;: le produit scalaire est entier partout. Le segment [AB] est en pointillé. Clavier&nbsp;: flèches gauche/droite pour l'abscisse de M, haut/bas pour l'ordonnée.</div>
+      </figure>
+
+      <p class="prose">Ce que le graphique t'a fait découvrir, voilà son nom — et sa démonstration.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA CARACTÉRISATION PAR LE PRODUIT SCALAIRE</div>
+        <p>Le <strong>cercle de diamètre [AB]</strong> est l'ensemble des points M tels que&nbsp;:</p>
+        <div class="math-vitrine">$$\overrightarrow{MA} \cdot \overrightarrow{MB} = 0$$</div>
+        <p>Il contient A et B (le vecteur nul est orthogonal à tout vecteur)&nbsp;; son centre est le milieu I de [AB], son rayon vaut \(\dfrac{AB}{2}\). Conséquence&nbsp;: un triangle AMB est <strong>rectangle en M</strong> exactement quand M est sur ce cercle — A et B exceptés.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Trois lignes, avec I le milieu de [AB]. Décompose&nbsp;: \(\overrightarrow{MA} \cdot \overrightarrow{MB} = (\overrightarrow{MI} + \overrightarrow{IA}) \cdot (\overrightarrow{MI} + \overrightarrow{IB})\). Or \(\overrightarrow{IB} = -\overrightarrow{IA}\), et le développement donne \(MI^2 - IA^2\). Ce nombre est nul exactement quand \(MI = IA = \dfrac{AB}{2}\)&nbsp;: quand M est à distance \(\dfrac{AB}{2}\) du milieu, donc sur le cercle. Bonus&nbsp;: il est négatif quand \(MI\) est plus petit — M à l'intérieur — et positif à l'extérieur. Exactement ce que le graphique racontait.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — L'ÉQUATION DU CERCLE DE DIAMÈTRE [AB]</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule le centre&nbsp;: I, milieu de [AB] — la moyenne des coordonnées.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule le rayon&nbsp;: \(r = \dfrac{AB}{2}\), ou directement \(r^2 = IA^2\), souvent plus rapide.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Écris \((x - x_I)^2 + (y - y_I)^2 = r^2\), comme à la section&nbsp;4. Autre route, sans milieu&nbsp;: développer \((x - x_A)(x - x_B) + (y - y_A)(y - y_B) = 0\) — c'est \(\overrightarrow{MA} \cdot \overrightarrow{MB} = 0\) écrit en coordonnées.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LE CERCLE ET SON ANGLE DROIT</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Détermine l'équation du cercle \(\Gamma\) de diamètre [AB], avec \(A(0\;;\, 1)\) et \(B(6\;;\, 9)\).</p>
+          <p><span class="etape-label">Étape 1 — </span>Centre&nbsp;: \(I\left(\dfrac{0 + 6}{2}\;;\, \dfrac{1 + 9}{2}\right) = I(3\;;\, 5)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(AB = \sqrt{6^2 + 8^2} = \sqrt{100} = 10\), donc \(r = 5\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\Gamma : (x - 3)^2 + (y - 5)^2 = 25\).</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Le point \(C(7\;;\, 2)\) est-il sur \(\Gamma\)&nbsp;? Qu'en déduire pour le triangle ABC&nbsp;?</p>
+          <p><span class="etape-label">Étape 1 — </span>\(\overrightarrow{CA}\,(-7\;;\, -1)\) et \(\overrightarrow{CB}\,(-1\;;\, 7)\)&nbsp;: \(\overrightarrow{CA} \cdot \overrightarrow{CB} = 7 - 7 = 0\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Produit nul&nbsp;: C voit [AB] sous un angle droit, donc C est sur le cercle de diamètre [AB]. Vérification par l'équation&nbsp;: \((7 - 3)^2 + (2 - 5)^2 = 16 + 9 = 25\)&nbsp;: cohérent.</p>
+          <p class="conclusion">Conclusion&nbsp;: C est sur \(\Gamma\), et le triangle ABC est rectangle en C. Deux points de vue, une seule géométrie.</p>
+        </div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Soit M distinct de A et de B. M est sur le cercle de diamètre [AB] si et seulement si…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(MA = MB\)</button>
+              <button type="button" class="quiz-reponse">\(\overrightarrow{MA} \cdot \overrightarrow{MB} = 0\)</button>
+              <button type="button" class="quiz-reponse">\(\overrightarrow{MA} \cdot \overrightarrow{MB} = r^2\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> voir [AB] sous un angle droit, c'est un produit scalaire nul. \(MA = MB\) décrit une autre figure&nbsp;: la médiatrice de [AB] — l'ensemble des points à égale distance de A et de B.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Avec \(A(1\;;\, 3)\) et \(B(7\;;\, 3)\), le cercle de diamètre [AB] a pour…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">centre \((4\;;\, 3)\) et rayon \(3\)</button>
+              <button type="button" class="quiz-reponse">centre \((4\;;\, 3)\) et rayon \(6\)</button>
+              <button type="button" class="quiz-reponse">centre \((3\;;\, 3)\) et rayon \(3\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le centre est le <em>milieu</em>&nbsp;: \(\left(\frac{1+7}{2}\;;\, 3\right) = (4\;;\, 3)\), et \(AB = 6\) est le <em>diamètre</em>&nbsp;: le rayon vaut la moitié, 3. Donner 6 comme rayon, c'est oublier de diviser — l'erreur la plus fréquente de la section.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Si \(\overrightarrow{MA} \cdot \overrightarrow{MB} &lt; 0\), alors M est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">sur le cercle de diamètre [AB]</button>
+              <button type="button" class="quiz-reponse">à l'extérieur de ce cercle</button>
+              <button type="button" class="quiz-reponse">à l'intérieur de ce cercle</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le produit vaut \(MI^2 - r^2\)&nbsp;: négatif quand \(MI &lt; r\), c'est-à-dire M à l'intérieur — de là, on voit [AB] sous un angle <em>obtus</em>. Tu l'as constaté en promenant M dans le graphique.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Confondre vecteur normal et vecteur directeur.</strong> Dans \(ax + by + c = 0\), le couple \((a\;;\, b)\) est <em>normal</em> — perpendiculaire à la droite. Le vecteur directeur, c'est \((-b\;;\, a)\). Prendre l'un pour l'autre transforme chaque droite en sa perpendiculaire&nbsp;: tout le calcul déraille sans prévenir.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Lire le centre avec les signes de l'équation.</strong> \((x - 2)^2 + (y + 1)^2 = 9\) a pour centre \((2\;;\, -1)\), pas \((-2\;;\, 1)\)&nbsp;: le centre est ce qui <em>annule</em> chaque parenthèse. Au moindre doute, remplace — le centre doit donner \(0 + 0\).</p>
+        </div>
+        <div class="piege">
+          <p><strong>Confondre \(r\) et \(r^2\).</strong> Le membre de droite de l'équation est le rayon <em>au carré</em>&nbsp;: \(= 9\) signifie un rayon de 3. Et si le membre de droite est négatif, ce n'est pas un cercle du tout — aucun point ne vérifie l'équation.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Mesurer la distance verticalement.</strong> La distance d'un point à une droite se mesure le long de la <em>perpendiculaire</em> — c'est MH, avec H le projeté orthogonal. La verticale est toujours plus longue, sauf si la droite est horizontale. Tu l'as vu chiffre contre chiffre à la section&nbsp;3.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Croire que \(x^2 + y^2 + \ldots = 0\) est toujours un cercle.</strong> Forme canonique d'abord&nbsp;: selon le membre de droite, c'est un cercle, un point unique… ou rien. Une équation qui ressemble à un cercle n'en est pas une preuve.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">VECTEUR NORMAL</span>
+          <p>\(d : ax + by + c = 0\) a pour vecteur normal \(\vec n\,(a\;;\, b)\) — et pour vecteur directeur \(\vec u\,(-b\;;\, a)\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">DROITE PAR A ET n</span>
+          <p>M est sur \(d\) \(\iff \vec n \cdot \overrightarrow{AM} = 0\)&nbsp;: recopie \(\vec n\) dans les coefficients, puis trouve \(c\) avec le point A.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">PROJETÉ</span>
+          <p>H, projeté orthogonal de M sur \(d\), est le point de \(d\) le plus proche de M&nbsp;; la distance de M à \(d\) est MH.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">CERCLE</span>
+          <p>Centre \(\Omega(a\;;\, b)\), rayon \(r\)&nbsp;: \((x - a)^2 + (y - b)^2 = r^2\) — et forme canonique pour reconnaître.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">DIAMÈTRE [AB]</span>
+          <p>M est sur le cercle de diamètre [AB] \(\iff \overrightarrow{MA} \cdot \overrightarrow{MB} = 0\)&nbsp;: l'angle droit voit le diamètre.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: vecteur normal et équations de droites, projeté orthogonal, équations de cercles, cercle de diamètre [AB] — et des synthèses pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· lire un vecteur normal</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Donne un vecteur normal de chaque droite&nbsp;: a. \(d_1 : 3x - 2y + 5 = 0\)&nbsp;; b. \(d_2 : y = 2x + 1\)&nbsp;; c. \(d_3 : x = 4\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Les coefficients de \(x\) et de \(y\)&nbsp;: \(\vec n\,(3\;;\, -2)\).</p>
+          <p><span class="etape-label">b. — </span>D'abord la forme cartésienne&nbsp;: \(y = 2x + 1\) s'écrit \(2x - y + 1 = 0\). Donc \(\vec n\,(2\;;\, -1)\).</p>
+          <p><span class="etape-label">c. — </span>\(x = 4\), c'est \(1x + 0y - 4 = 0\)&nbsp;: \(\vec n\,(1\;;\, 0)\) — un vecteur horizontal, normal à une droite verticale.</p>
+          <p class="conclusion">Conclusion&nbsp;: tout multiple non nul convient aussi — \((6\;;\, -4)\) est un autre vecteur normal de \(d_1\). Une droite a une infinité de vecteurs normaux, tous colinéaires.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· équation avec point et normale</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">a. Détermine une équation de la droite \(d\) passant par \(A(2\;;\, -1)\), de vecteur normal \(\vec n\,(3\;;\, 1)\). b. Le point \(B(1\;;\, 2)\) appartient-il à \(d\)&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(d : 3x + y + c = 0\), et A donne \(3 \times 2 + (-1) + c = 0\), soit \(c = -5\)&nbsp;: \(d : 3x + y - 5 = 0\).</p>
+          <p><span class="etape-label">b. — </span>Remplace par les coordonnées de B&nbsp;: \(3 \times 1 + 2 - 5 = 0\). L'équation est vérifiée&nbsp;: oui, \(B \in d\).</p>
+          <p class="conclusion">Conclusion&nbsp;: «&nbsp;appartient-il&nbsp;?&nbsp;» se règle toujours pareil — on remplace, on regarde si ça fait 0.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· droite perpendiculaire</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(d : 2x - y + 3 = 0\). Détermine une équation de la droite \(\Delta\) perpendiculaire à \(d\) passant par \(A(1\;;\, 4)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\Delta\) est perpendiculaire à \(d\)&nbsp;: un vecteur normal de \(\Delta\) est un vecteur <em>directeur</em> de \(d\), soit \(\vec u\,(-b\;;\, a) = (1\;;\, 2)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\Delta : x + 2y + c = 0\), et A donne \(1 + 2 \times 4 + c = 0\), soit \(c = -9\)&nbsp;: \(\Delta : x + 2y - 9 = 0\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Contrôle&nbsp;: \(\vec n_d \cdot \vec n_\Delta = 2 \times 1 + (-1) \times 2 = 0\)&nbsp;: normaux orthogonaux, droites perpendiculaires.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\Delta : x + 2y - 9 = 0\). Pour une perpendiculaire, les deux flèches échangent leurs rôles&nbsp;: le directeur de l'une est le normal de l'autre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· droite par deux points</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Détermine une équation cartésienne de la droite \((AB)\), avec \(A(1\;;\, 2)\) et \(B(3\;;\, 6)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\overrightarrow{AB}\,(2\;;\, 4)\) est un vecteur <em>directeur</em> de \((AB)\). Un vecteur normal doit lui être orthogonal&nbsp;: \(\vec n\,(4\;;\, -2)\) convient (produit scalaire \(2 \times 4 + 4 \times (-2) = 0\)), ou plus simple, \(\vec n\,(2\;;\, -1)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\((AB) : 2x - y + c = 0\), et A donne \(2 \times 1 - 2 + c = 0\), soit \(c = 0\)&nbsp;: \((AB) : 2x - y = 0\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Contrôle avec B&nbsp;: \(2 \times 3 - 6 = 0\)&nbsp;: B est bien dessus.</p>
+          <p class="conclusion">Conclusion&nbsp;: \((AB) : 2x - y = 0\) — elle passe par l'origine, d'où l'absence de constante. Le raccourci à retenir&nbsp;: pour passer d'un directeur \((p\;;\, q)\) à un normal, échange les coordonnées et change un signe&nbsp;: \((q\;;\, -p)\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· projeté orthogonal</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(d : x - 2y + 4 = 0\) et \(M(3\;;\, 1)\). a. Calcule les coordonnées du projeté orthogonal H de M sur \(d\). b. Déduis-en la distance de M à \(d\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Directeur de \(d\)&nbsp;: \(\vec u\,(2\;;\, 1)\), c'est le normal de la perpendiculaire \(\Delta\) passant par M&nbsp;: \(\Delta : 2x + y + c = 0\), avec \(2 \times 3 + 1 + c = 0\), donc \(c = -7\). Système&nbsp;: \(x - 2y = -4\) et \(2x + y = 7\). La première donne \(x = 2y - 4\)&nbsp;; dans la seconde&nbsp;: \(2(2y - 4) + y = 7\), soit \(5y = 15\)&nbsp;: \(y = 3\), \(x = 2\). Donc \(H(2\;;\, 3)\) — qui vérifie bien les deux équations.</p>
+          <p><span class="etape-label">b. — </span>\(MH = \sqrt{(3 - 2)^2 + (1 - 3)^2} = \sqrt{1 + 4} = \sqrt{5} \approx 2{,}24\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(H(2\;;\, 3)\), distance \(\sqrt{5}\). Remarque le contrôle gratuit&nbsp;: \(\overrightarrow{MH}\,(-1\;;\, 2)\) est bien colinéaire au vecteur normal \((1\;;\, -2)\) de \(d\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· distance à une droite</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Refais à la main ce que le graphique de la section&nbsp;3 affichait&nbsp;: pour \(d : 3x + 4y - 12 = 0\) et \(M(5\;;\, 4)\), calcule H puis la distance de M à \(d\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Directeur de \(d\)&nbsp;: \((-4\;;\, 3)\), donc \(\Delta : -4x + 3y + c = 0\), et M donne \(-20 + 12 + c = 0\), soit \(c = 8\)&nbsp;: \(\Delta : -4x + 3y + 8 = 0\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Système&nbsp;: \(3x + 4y = 12\) et \(-4x + 3y = -8\). De la seconde&nbsp;: \(y = \dfrac{4x - 8}{3}\)&nbsp;; dans la première&nbsp;: \(9x + 4(4x - 8) = 36\), soit \(25x = 68\)&nbsp;: \(x = \dfrac{68}{25} = 2{,}72\), puis \(y = \dfrac{24}{25} = 0{,}96\). Donc \(H(2{,}72\;;\, 0{,}96)\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(MH = \sqrt{(5 - 2{,}72)^2 + (4 - 0{,}96)^2} = \sqrt{2{,}28^2 + 3{,}04^2} = \sqrt{14{,}44} = 3{,}8\).</p>
+          <p class="conclusion">Conclusion&nbsp;: exactement les nombres du graphique — \(H(2{,}72\;;\, 0{,}96)\), distance 3,8. Et la «&nbsp;distance verticale&nbsp;» valait 4,75&nbsp;: la perpendiculaire gagne.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· équation de cercle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">a. Écris l'équation du cercle de centre \(\Omega(2\;;\, -1)\) et de rayon 3. b. Le point \(A(5\;;\, -1)\) est-il sur ce cercle&nbsp;? c. Et le point \(B(4\;;\, 1)\)&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\((x - 2)^2 + (y + 1)^2 = 9\). Attention au \(y + 1\)&nbsp;: on soustrait \(-1\).</p>
+          <p><span class="etape-label">b. — </span>\((5 - 2)^2 + (-1 + 1)^2 = 9 + 0 = 9\)&nbsp;: oui, A est sur le cercle.</p>
+          <p><span class="etape-label">c. — </span>\((4 - 2)^2 + (1 + 1)^2 = 4 + 4 = 8 \neq 9\)&nbsp;: non. Et comme \(8 &lt; 9\), B est même à l'<em>intérieur</em> du cercle.</p>
+          <p class="conclusion">Conclusion&nbsp;: l'équation répond à tout — dessus, dedans, dehors — en comparant \(\Omega M^2\) à \(r^2\). C'est le défi du graphique de la section&nbsp;4, version papier.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· centre et rayon</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Montre que l'équation \(x^2 + y^2 - 2x - 6y + 6 = 0\) décrit un cercle, et précise son centre et son rayon.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>Regroupe&nbsp;: \((x^2 - 2x) + (y^2 - 6y) = -6\).</p>
+          <p><span class="etape-label">Étape 2 — </span>Formes canoniques&nbsp;: \((x - 1)^2 - 1 + (y - 3)^2 - 9 = -6\), soit \((x - 1)^2 + (y - 3)^2 = 4\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(4 > 0\)&nbsp;: c'est bien un cercle, de centre \(\Omega(1\;;\, 3)\) et de rayon \(\sqrt{4} = 2\).</p>
+          <p class="conclusion">Conclusion&nbsp;: centre \((1\;;\, 3)\), rayon 2 — pas 4&nbsp;: le membre de droite est \(r^2\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· cercle ou pas&nbsp;?</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Chaque équation décrit-elle un cercle&nbsp;? a. \(x^2 + y^2 + 2x - 4y + 6 = 0\)&nbsp;; b. \(x^2 + y^2 - 2x + 2y + 2 = 0\)&nbsp;; c. \(2x^2 + 2y^2 - 4x - 8y - 8 = 0\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\((x + 1)^2 - 1 + (y - 2)^2 - 4 + 6 = 0\), soit \((x + 1)^2 + (y - 2)^2 = -1\)&nbsp;: une somme de carrés ne peut pas être négative. <strong>Aucun point</strong> — pas de cercle.</p>
+          <p><span class="etape-label">b. — </span>\((x - 1)^2 - 1 + (y + 1)^2 - 1 + 2 = 0\), soit \((x - 1)^2 + (y + 1)^2 = 0\)&nbsp;: les deux carrés doivent être nuls en même temps. <strong>Un seul point</strong>, \((1\;;\, -1)\).</p>
+          <p><span class="etape-label">c. — </span>Divise d'abord par 2&nbsp;: \(x^2 + y^2 - 2x - 4y - 4 = 0\), puis \((x - 1)^2 + (y - 2)^2 = 9\)&nbsp;: un <strong>cercle</strong>, de centre \((1\;;\, 2)\) et de rayon 3.</p>
+          <p class="conclusion">Conclusion&nbsp;: trois équations qui se ressemblent, trois figures différentes. Seule la forme canonique tranche — jamais l'allure de l'équation.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· cercle de diamètre [AB]</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(A(-1\;;\, 2)\) et \(B(5\;;\, 4)\). a. Détermine l'équation du cercle de diamètre [AB] par le centre et le rayon. b. Retrouve-la en développant \(\overrightarrow{MA} \cdot \overrightarrow{MB} = 0\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Centre&nbsp;: \(I(2\;;\, 3)\), le milieu. Rayon&nbsp;: \(r^2 = IA^2 = (-3)^2 + (-1)^2 = 10\). Équation&nbsp;: \((x - 2)^2 + (y - 3)^2 = 10\).</p>
+          <p><span class="etape-label">b. — </span>\(\overrightarrow{MA}\,(-1 - x\;;\, 2 - y)\) et \(\overrightarrow{MB}\,(5 - x\;;\, 4 - y)\)&nbsp;: le produit s'écrit \((x + 1)(x - 5) + (y - 2)(y - 4) = 0\), soit \(x^2 - 4x - 5 + y^2 - 6y + 8 = 0\), c'est-à-dire \(x^2 + y^2 - 4x - 6y + 3 = 0\). Forme canonique&nbsp;: \((x - 2)^2 + (y - 3)^2 = 10\)&nbsp;: la même.</p>
+          <p class="conclusion">Conclusion&nbsp;: deux routes, une équation. La route du milieu est plus courte&nbsp;; celle du produit scalaire montre <em>pourquoi</em> ça marche.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· angle droit détecté</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(A(-2\;;\, 1)\), \(B(4\;;\, 3)\) et \(C(0\;;\, 5)\). Montre que C est sur le cercle de diamètre [AB].</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\overrightarrow{CA}\,(-2\;;\, -4)\) et \(\overrightarrow{CB}\,(4\;;\, -2)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\overrightarrow{CA} \cdot \overrightarrow{CB} = (-2) \times 4 + (-4) \times (-2) = -8 + 8 = 0\).</p>
+          <p><span class="etape-label">Étape 3 — </span>Produit scalaire nul, C distinct de A et B&nbsp;: C voit [AB] sous un angle droit, donc C est sur le cercle de diamètre [AB] — et le triangle ABC est rectangle en C.</p>
+          <p class="conclusion">Conclusion&nbsp;: pas besoin d'équation de cercle ici — la caractérisation \(\overrightarrow{MA} \cdot \overrightarrow{MB} = 0\) suffit, en deux lignes.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· droite et cercle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit le cercle \(\mathcal{C} : (x - 1)^2 + (y - 2)^2 = 25\). a. Détermine les points d'intersection de \(\mathcal{C}\) avec la droite d'équation \(x = 4\). b. Même question avec la droite d'équation \(x = 6\). Que constates-tu&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Remplace \(x\) par 4&nbsp;: \((4 - 1)^2 + (y - 2)^2 = 25\), soit \((y - 2)^2 = 16\), donc \(y - 2 = 4\) ou \(y - 2 = -4\)&nbsp;: deux points, \((4\;;\, 6)\) et \((4\;;\, -2)\).</p>
+          <p><span class="etape-label">b. — </span>\((6 - 1)^2 + (y - 2)^2 = 25\), soit \((y - 2)^2 = 0\)&nbsp;: un seul point, \((6\;;\, 2)\). La droite touche le cercle sans le traverser — elle lui est <strong>tangente</strong>.</p>
+          <p class="conclusion">Conclusion&nbsp;: remplacer, puis résoudre une équation du second degré en \(y\)&nbsp;: deux solutions, une, ou aucune — la droite coupe, effleure, ou évite le cercle.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· tangente au cercle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Toujours avec \(\mathcal{C} : (x - 1)^2 + (y - 2)^2 = 25\), de centre \(\Omega\). a. Vérifie que \(T(4\;;\, 6)\) est sur \(\mathcal{C}\). b. La tangente à \(\mathcal{C}\) en T est la droite passant par T perpendiculaire au rayon \([\Omega T]\)&nbsp;: détermine son équation. c. Retrouve avec la même idée la tangente au point \((6\;;\, 2)\), et compare avec l'exercice 12.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\((4 - 1)^2 + (6 - 2)^2 = 9 + 16 = 25\)&nbsp;: T est sur \(\mathcal{C}\).</p>
+          <p><span class="etape-label">b. — </span>La tangente est perpendiculaire à \([\Omega T]\)&nbsp;: \(\overrightarrow{\Omega T}\,(3\;;\, 4)\) est son vecteur <em>normal</em>. Équation&nbsp;: \(3x + 4y + c = 0\), et T donne \(12 + 24 + c = 0\), soit \(c = -36\)&nbsp;: la tangente est \(3x + 4y - 36 = 0\).</p>
+          <p><span class="etape-label">c. — </span>En \((6\;;\, 2)\)&nbsp;: \(\overrightarrow{\Omega T}\,(5\;;\, 0)\), donc \(5x + c = 0\) avec \(30 + c = 0\)&nbsp;: la tangente est \(x = 6\) — exactement la droite de l'exercice 12.b, qui ne touchait le cercle qu'en ce point.</p>
+          <p class="conclusion">Conclusion&nbsp;: toute la section 2 au service du cercle — un point, un vecteur normal (le rayon), une équation. Les deux exercices racontent la même tangente, par deux chemins.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur une carte graduée en kilomètres, une antenne relais est plantée en \(\Omega(2\;;\, 3)\) et une route rectiligne a pour équation \(d : 3x + 4y - 38 = 0\). a. Calcule les coordonnées du point H de la route le plus proche de l'antenne, puis la distance de l'antenne à la route. b. L'antenne porte à 4&nbsp;km à la ronde&nbsp;: que peut-on dire de la couverture de la route&nbsp;? c. On pousse la portée à 5&nbsp;km&nbsp;: sur quelle longueur de route capte-t-on désormais&nbsp;? (Pythagore aidera.)</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>H est le projeté orthogonal de \(\Omega\) sur \(d\). Perpendiculaire par \(\Omega\)&nbsp;: normal \((-4\;;\, 3)\) (le directeur de \(d\)), donc \(-4x + 3y + c = 0\), et \(\Omega\) donne \(-8 + 9 + c = 0\), soit \(c = -1\). Système&nbsp;: \(3x + 4y = 38\) et \(-4x + 3y = 1\). De la seconde&nbsp;: \(y = \dfrac{1 + 4x}{3}\)&nbsp;; dans la première&nbsp;: \(9x + 4(1 + 4x) = 114\), soit \(25x = 110\)&nbsp;: \(x = 4{,}4\), puis \(y = 6{,}2\). Donc \(H(4{,}4\;;\, 6{,}2)\), et \(\Omega H = \sqrt{2{,}4^2 + 3{,}2^2} = \sqrt{16} = 4\)&nbsp;: la route passe à 4&nbsp;km de l'antenne.</p>
+          <p><span class="etape-label">b. — </span>La distance à la route est exactement égale à la portée&nbsp;: le cercle de couverture \((x - 2)^2 + (y - 3)^2 = 16\) touche la route au seul point H — elle lui est tangente. On capte en un point unique de la route&nbsp;: autant dire nulle part.</p>
+          <p><span class="etape-label">c. — </span>Portée 5&nbsp;km&nbsp;: le cercle de rayon 5 coupe la route en deux points E et F. Dans le triangle rectangle \(\Omega\)HE&nbsp;: \(HE = \sqrt{5^2 - 4^2} = 3\). La zone captée va de E à F&nbsp;: \(EF = 2 \times 3 = 6\)&nbsp;km.</p>
+          <p class="conclusion">Conclusion&nbsp;: on capte sur 6&nbsp;km de route. Tout le chapitre en un problème&nbsp;: projeté orthogonal pour la distance, équation de cercle pour la portée, et Pythagore pour finir.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · SANS CALCULATRICE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Dans un repère orthonormé, on considère les points \(A(-1\;;\, 1)\), \(B(7\;;\, 5)\) et \(C(3\;;\, 8)\).</p>
+          <div class="bac-partie">PARTIE A — LA HAUTEUR ISSUE DE C</div>
+          <ol>
+            <li>Montre que \(x - 2y + 3 = 0\) est une équation de la droite \((AB)\).</li>
+            <li>Détermine une équation de la hauteur du triangle ABC issue de C, c'est-à-dire de la droite passant par C perpendiculaire à \((AB)\).</li>
+            <li>Calcule les coordonnées de H, pied de cette hauteur, puis la longueur CH.</li>
+            <li>Déduis-en l'aire du triangle ABC.</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — LE CERCLE DE DIAMÈTRE [AB]</div>
+          <ol>
+            <li>Détermine l'équation du cercle \(\Gamma\) de diamètre [AB].</li>
+            <li>Le point C appartient-il à \(\Gamma\)&nbsp;? Que peux-tu en déduire pour le triangle ABC&nbsp;?</li>
+            <li>Montre que le point \(D(-1\;;\, 5)\) appartient à \(\Gamma\). Quelle est la nature du triangle ABD&nbsp;?</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>Deux vérifications suffisent&nbsp;: A donne \(-1 - 2 + 3 = 0\) et B donne \(7 - 10 + 3 = 0\). Les deux points sont dessus&nbsp;: c'est bien une équation de \((AB)\). (Autre voie&nbsp;: \(\overrightarrow{AB}\,(8\;;\, 4)\) est orthogonal au vecteur normal \((1\;;\, -2)\)&nbsp;: \(8 - 8 = 0\).)</p>
+            <p><span class="etape-label">A.2 — </span>La hauteur est perpendiculaire à \((AB)\)&nbsp;: son vecteur normal est le directeur de \((AB)\), soit \((2\;;\, 1)\). Avec C&nbsp;: \(2 \times 3 + 8 + c = 0\), donc \(c = -14\)&nbsp;: la hauteur a pour équation \(2x + y - 14 = 0\).</p>
+            <p><span class="etape-label">A.3 — </span>Système&nbsp;: \(x - 2y = -3\) et \(2x + y = 14\). La première donne \(x = 2y - 3\)&nbsp;; alors \(2(2y - 3) + y = 14\), soit \(5y = 20\)&nbsp;: \(y = 4\), \(x = 5\), donc \(H(5\;;\, 4)\). Et \(CH = \sqrt{(3 - 5)^2 + (8 - 4)^2} = \sqrt{20} = 2\sqrt{5}\).</p>
+            <p><span class="etape-label">A.4 — </span>\(AB = \sqrt{8^2 + 4^2} = \sqrt{80} = 4\sqrt{5}\), donc l'aire vaut \(\dfrac{AB \times CH}{2} = \dfrac{4\sqrt{5} \times 2\sqrt{5}}{2} = \dfrac{8 \times 5}{2} = 20\).</p>
+            <p><span class="etape-label">B.1 — </span>Centre&nbsp;: le milieu \(I(3\;;\, 3)\). Rayon&nbsp;: \(r^2 = IA^2 = (-4)^2 + (-2)^2 = 20\). Donc \(\Gamma : (x - 3)^2 + (y - 3)^2 = 20\).</p>
+            <p><span class="etape-label">B.2 — </span>Pour C&nbsp;: \((3 - 3)^2 + (8 - 3)^2 = 25 \neq 20\)&nbsp;: C n'est pas sur \(\Gamma\). Donc C ne voit pas [AB] sous un angle droit&nbsp;: le triangle ABC n'est <em>pas</em> rectangle en C.</p>
+            <p><span class="etape-label">B.3 — </span>Pour D&nbsp;: \((-1 - 3)^2 + (5 - 3)^2 = 16 + 4 = 20\)&nbsp;: D est sur \(\Gamma\), cercle de diamètre [AB]. Le triangle ABD est donc rectangle en D. (Contrôle direct&nbsp;: \(\overrightarrow{DA}\,(0\;;\, -4) \cdot \overrightarrow{DB}\,(8\;;\, 0) = 0\).)</p>
+            <p class="conclusion">Conclusion&nbsp;: équation de droite, perpendiculaire, projeté, cercle de diamètre — le sujet déroule tout le chapitre, et chaque réponse se contrôle en remplaçant des coordonnées. Prends ce réflexe&nbsp;: au bac, la vérification est gratuite.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">La trigonométrie <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
