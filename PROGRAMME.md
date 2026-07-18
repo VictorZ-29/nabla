@@ -63,7 +63,7 @@ depuis cet environnement, voir « À vérifier » en bas de fichier.
 
 ## Mathématiques — Première spécialité (programme 2026)
 
-**Bilan : 6 chapitres en ligne · 4 à faire · 2 compléments 2026 à apporter
+**Bilan : 7 chapitres en ligne · 3 à faire · 2 compléments 2026 à apporter
 aux chapitres existants.**
 
 ### Algèbre
@@ -86,7 +86,7 @@ aux chapitres existants.**
 | Chapitre Nabla | Contenus du programme | Statut |
 |---|---|---|
 | Le produit scalaire | Définitions (norme/angle, projeté orthogonal, bilinéarité, base orthonormée) ; orthogonalité ; identités de polarisation ; Al-Kashi ; travail d'une force. | ✅ `premiere/maths/produit-scalaire/` |
-| La géométrie repérée | Vecteur normal à une droite, équations de droites ; équation d'un cercle (centre, rayon) ; cercle de diamètre [AB] ; projeté orthogonal d'un point sur une droite. | ⬜ À faire — carte « BIENTÔT » déjà sur l'accueil |
+| La géométrie repérée | Vecteur normal à une droite, équations de droites ; équation d'un cercle (centre, rayon) ; cercle de diamètre [AB] ; projeté orthogonal d'un point sur une droite. | ✅ `premiere/maths/geometrie-reperee/` |
 
 ### Probabilités et statistiques
 
