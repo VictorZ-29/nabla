@@ -1270,3 +1270,18 @@
    même rôle que les niveaux non allumés des jauges. */
 
 .nrj-dissipe { fill: var(--tick); }
+
+/* --- Second degré : portions de courbe signées + tableau à un sommet ----------------------------------------
+   Le widget parabole-signe peint la parabole par le signe du trinôme :
+   même paire sémantique good/bad que les pentes de tangente (positif =
+   vert, négatif = rouge), épaisseur de courbe standard. Le tableau de
+   variations d'une parabole n'a qu'un point remarquable (le sommet) :
+   variante à 4 colonnes de la grille partagée .tab-grille. */
+
+.g-signe-pos { stroke: var(--good); stroke-width: var(--sw-curve); fill: none; stroke-linecap: round; }
+.g-signe-neg { stroke: var(--bad); stroke-width: var(--sw-curve); fill: none; stroke-linecap: round; }
+
+.tab-grille--sommet { grid-template-columns: minmax(58px, auto) 1fr 44px 1fr; }
+@media (max-width: 480px) {
+  .tab-grille--sommet { grid-template-columns: minmax(44px, auto) 1fr 34px 1fr; }
+}
