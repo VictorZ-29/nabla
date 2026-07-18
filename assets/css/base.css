@@ -208,14 +208,123 @@ button { font: inherit; }
 .hero-svg .pt-halo { fill: none; stroke: var(--accent); stroke-opacity: 0.4; stroke-width: 1.5; }
 .hero-svg .pt-point { fill: var(--accent); stroke: var(--bg); stroke-width: 2; }
 
+/* --- Accueil : recherche + filtres --------------------------------------------- */
+
+.outils-chapitres {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--pad-x) clamp(26px, 4vw, 40px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+}
+
+.recherche { position: relative; flex: 1 1 300px; max-width: 560px; }
+.recherche-input {
+  width: 100%;
+  font: inherit;
+  font-size: 15.5px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  padding: 10px 18px 10px 42px;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.recherche-input::placeholder { color: var(--faint); opacity: 1; }
+.recherche-input:hover { border-color: var(--dash); }
+.recherche-loupe {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  color: var(--faint);
+  pointer-events: none;
+}
+
+.recherche-resultats {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-block);
+  max-height: min(60vh, 420px);
+  overflow-y: auto;
+  padding: 6px;
+}
+.resultat-groupe {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 8px 10px 4px;
+}
+.resultat {
+  display: block;
+  padding: 8px 10px;
+  border-radius: var(--radius-chip);
+  text-decoration: none;
+  color: var(--text);
+}
+.resultat:hover, .resultat.actif { background: var(--accTint); color: var(--text); }
+.resultat-titre { font-size: 15.5px; font-weight: 500; }
+.resultat-sous {
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+.recherche-vide { padding: 10px 12px; font-size: 14.5px; color: var(--muted); }
+
+.filtres { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.filtre-groupe { display: flex; flex-wrap: wrap; gap: 8px; }
+.filtres .btn-pill[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accTint);
+}
+.filtres .filtre-bientot {
+  border-style: dashed;
+  border-color: var(--dash2);
+  color: var(--faint);
+  cursor: default;
+}
+.filtres .filtre-bientot:hover { border-color: var(--dash2); color: var(--faint); }
+
 /* --- Accueil : rangées de chapitres ------------------------------------------- */
+
+.catalogue { padding-bottom: clamp(48px, 7vw, 80px); }
 
 .rangee-chapitres {
   max-width: var(--page-max);
   margin: 0 auto;
   padding: 0 var(--pad-x) clamp(24px, 4vw, 40px);
 }
-.rangee-chapitres:last-of-type { padding-bottom: clamp(48px, 7vw, 80px); }
+
+/* Groupes par thème du programme officiel, dans chaque matière */
+.groupe-theme { display: grid; gap: 14px; }
+.groupe-theme + .groupe-theme { margin-top: 30px; }
+.theme-tete {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.theme-tete::after { content: ''; flex: 1; border-top: 1px solid var(--hairIn); }
 
 .rangee-tete {
   display: flex;
@@ -276,7 +385,6 @@ button { font: inherit; }
 .carte-motif .g-tangente { stroke: var(--accent); stroke-width: 1.4; fill: none; stroke-linecap: round; }
 .carte-motif .pt-point { fill: var(--accent); stroke: var(--surface); stroke-width: 1; }
 .carte-motif .pt-craie { fill: var(--chalk); }
-.carte-chapitre + .carte-chapitre { margin-top: 14px; }
 
 /* Cartes « bientôt » */
 .grille-bientot {
@@ -284,7 +392,6 @@ button { font: inherit; }
   grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
   gap: 14px;
 }
-.carte-chapitre + .grille-bientot { margin-top: 14px; }
 .carte-bientot {
   border: 1px dashed var(--dash2);
   border-radius: var(--radius-card);

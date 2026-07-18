@@ -38,7 +38,8 @@ Every chapter folder contains a `README.md` that you author when building the ch
 
 ```
 /
-├── index.html                                  # homepage
+├── index.html                                  # homepage — recherche, filtres niveau/matière,
+│                                               #   cartes groupées par thème officiel (cf. PROGRAMME.md)
 ├── premiere/maths/derivation/
 │   ├── index.html                              # chapter page
 │   └── README.md                               # chapter spec — authored by you
@@ -48,6 +49,8 @@ Every chapter folder contains a `README.md` that you author when building the ch
 │   ├── css/chapitre.css                        # chapter layout + reusable block components
 │   └── js/
 │       ├── theme.js                            # theme toggle
+│       ├── accueil.js                          # homepage: matière filter + search combobox
+│       ├── recherche-data.js                   # hand-maintained search index (chapters + sections)
 │       ├── sommaire.js                         # scroll-spy + smooth scroll + mobile collapse
 │       ├── corrige.js                          # exercise reveal toggles
 │       ├── analytics.js                        # throttled Plausible event helper (see Analytics)
@@ -95,7 +98,7 @@ Per page: unique `<title>` (pattern: `La dérivation — Première Spé Maths | 
 
 ## Analytics (Plausible)
 
-Custom events, throttled so one interaction session ≈ one event: `theme_toggle` (props: to), `widget_interact` (props: widget, chapitre), `corrige_open` (props: exercice, chapitre), `bac_open`. These answer the launch question: do students actually manipulate the widgets or only read? Nothing else — no cookies, no fingerprinting. Mention Plausible in the mentions-legales placeholder.
+Custom events, throttled so one interaction session ≈ one event: `theme_toggle` (props: to), `widget_interact` (props: widget, chapitre), `corrige_open` (props: exercice, chapitre), `bac_open`, `recherche` (props: resultats = avec|aucun — never the query text). These answer the launch question: do students actually manipulate the widgets or only read? Nothing else — no cookies, no fingerprinting. Mention Plausible in the mentions-legales placeholder.
 
 ## Accessibility & performance budget
 
@@ -111,4 +114,4 @@ WCAG AA contrast in both themes. Visible `:focus-visible` outlines everywhere; s
 
 ## Definition of done — chapter page
 
-Both themes checked against the designs · 375 px clean · every widget in the chapter README works by mouse, touch, and keyboard · KaTeX renders with no layout shift · sommaire scroll-spy works desktop + mobile · all corrigés toggle · internal links valid · meta/OG/sitemap updated · JS and Lighthouse budgets met · analytics events verified · chapter README written · session summary written.
+Both themes checked against the designs · 375 px clean · every widget in the chapter README works by mouse, touch, and keyboard · KaTeX renders with no layout shift · sommaire scroll-spy works desktop + mobile · all corrigés toggle · internal links valid · meta/OG/sitemap updated · search index (`recherche-data.js`) updated · JS and Lighthouse budgets met · analytics events verified · chapter README written · session summary written.
