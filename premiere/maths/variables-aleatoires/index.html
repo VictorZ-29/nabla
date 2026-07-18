@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Les variables aléatoires — Première Spé Maths | Nabla</title>
+<meta name="description" content="Comprends vraiment les variables aléatoires : loi de probabilité, espérance, variance et écart type, expliqués avec un jeu de kermesse que tu simules toi-même, la répétition d'épreuves de Bernoulli, et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/variables-aleatoires/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Les variables aléatoires — Première Spé Maths | Nabla">
+<meta property="og:description" content="Loi de probabilité, espérance, variance et écart type, répétition d'épreuves de Bernoulli : un cours interactif où tu simules le jeu toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/variables-aleatoires/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Les variables aléatoires — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Loi de probabilité, espérance, variance et écart type, épreuves de Bernoulli répétées : cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Les variables aléatoires — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur les variables aléatoires : loi de probabilité, espérance, variance et écart type, succession d'épreuves de Bernoulli indépendantes. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/variables-aleatoires/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Variable aléatoire réelle, loi de probabilité, espérance, variance, écart type, succession d'épreuves de Bernoulli indépendantes",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=16">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=16">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=16">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/va-loi.js"></script>
+<script type="module" src="../../../assets/js/widgets/va-simulation.js"></script>
+<script type="module" src="../../../assets/js/widgets/va-risque.js"></script>
+<script type="module" src="../../../assets/js/widgets/va-bernoulli.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="variables">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>Les variables aléatoires</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>établir la loi de probabilité d'une variable aléatoire, calculer une espérance, une variance et un écart type — et dire ce qu'ils racontent —, puis étudier deux ou trois répétitions d'une épreuve de Bernoulli avec un arbre.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. La roue de la kermesse</a>
+      <a href="#s2">2. La loi de probabilité</a>
+      <a href="#s3">3. L'espérance</a>
+      <a href="#s4">4. Variance et écart type</a>
+      <a href="#s5">5. Répéter une épreuve</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. La roue de la kermesse</a>
+        <a href="#s2">2. La loi de probabilité</a>
+        <a href="#s3">3. L'espérance</a>
+        <a href="#s4">4. Variance et écart type</a>
+        <a href="#s5">5. Répéter une épreuve</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <!-- §1 — L'ACCROCHE CONCRÈTE : la roue de la kermesse. Pas de widget,
+         pas de définition formelle. La figure statique est l'état initial
+         du widget « loi » du §2. -->
+    <section id="s1" class="chap-section">
+      <h2>1. La roue de la kermesse&nbsp;: bonne affaire&nbsp;?</h2>
+      <p class="prose">Kermesse du lycée. Le stand le plus bruyant, c'est la roue&nbsp;: 2&nbsp;€ la partie, tu la fais tourner, et le secteur qui s'arrête devant la flèche te dit ce que la caisse te rend. Cinq secteurs affichent 0&nbsp;€, trois affichent 2&nbsp;€, deux affichent 5&nbsp;€. Ton pote sort de là avec 5&nbsp;€ et un grand sourire&nbsp;: «&nbsp;franchement, ce jeu est rentable.&nbsp;» Toi, tu viens de perdre trois fois de suite. Qui a raison&nbsp;?</p>
+      <p class="prose">Personne, pour l'instant&nbsp;: une partie ne prouve rien, trois non plus. Pour juger le jeu, il faut le regarder <em>en entier</em> — toutes les issues possibles, avec leurs chances. La roue a dix secteurs identiques&nbsp;: dix issues équiprobables, comme les six faces d'un dé équilibré. Ça, tu sais le faire depuis la Seconde.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="La roue de la kermesse : dix secteurs égaux, cinq marqués 0 €, trois marqués 2 €, deux marqués 5 €, avec une flèche fixe en haut">
+          <path class="roue-sect roue-v0" d="M320 200L320 50A150 150 0 0 1 408.2 78.6Z"></path>
+          <path class="roue-sect roue-v2" d="M320 200L408.2 78.6A150 150 0 0 1 462.7 153.6Z"></path>
+          <path class="roue-sect roue-v0" d="M320 200L462.7 153.6A150 150 0 0 1 462.7 246.4Z"></path>
+          <path class="roue-sect roue-v5" d="M320 200L462.7 246.4A150 150 0 0 1 408.2 321.4Z"></path>
+          <path class="roue-sect roue-v0" d="M320 200L408.2 321.4A150 150 0 0 1 320 350Z"></path>
+          <path class="roue-sect roue-v2" d="M320 200L320 350A150 150 0 0 1 231.8 321.4Z"></path>
+          <path class="roue-sect roue-v0" d="M320 200L231.8 321.4A150 150 0 0 1 177.3 246.4Z"></path>
+          <path class="roue-sect roue-v2" d="M320 200L177.3 246.4A150 150 0 0 1 177.3 153.6Z"></path>
+          <path class="roue-sect roue-v5" d="M320 200L177.3 153.6A150 150 0 0 1 231.8 78.6Z"></path>
+          <path class="roue-sect roue-v0" d="M320 200L231.8 78.6A150 150 0 0 1 320 50Z"></path>
+          <text class="roue-val" x="352.8" y="104.2" text-anchor="middle">0&#8239;€</text>
+          <text class="roue-val" x="405.8" y="142.7" text-anchor="middle">2&#8239;€</text>
+          <text class="roue-val" x="426" y="205" text-anchor="middle">0&#8239;€</text>
+          <text class="roue-val" x="405.8" y="267.3" text-anchor="middle">5&#8239;€</text>
+          <text class="roue-val" x="352.8" y="305.8" text-anchor="middle">0&#8239;€</text>
+          <text class="roue-val" x="287.2" y="305.8" text-anchor="middle">2&#8239;€</text>
+          <text class="roue-val" x="234.2" y="267.3" text-anchor="middle">0&#8239;€</text>
+          <text class="roue-val" x="214" y="205" text-anchor="middle">2&#8239;€</text>
+          <text class="roue-val" x="234.2" y="142.7" text-anchor="middle">5&#8239;€</text>
+          <text class="roue-val" x="287.2" y="104.2" text-anchor="middle">0&#8239;€</text>
+          <path class="roue-pointe" d="M309 36L331 36L320 58Z"></path>
+          <circle class="roue-moyeu" cx="320" cy="200" r="7"></circle>
+        </svg>
+        <figcaption>La roue du stand&nbsp;: dix secteurs égaux, donc équiprobables. Le nombre affiché est ce que la caisse te rend — mais toi, tu as déjà payé 2&nbsp;€.</figcaption>
+      </figure>
+
+      <p class="prose">Attention au détail qui change tout&nbsp;: le nombre affiché n'est pas ce que tu <em>gagnes</em>. Tu as payé 2&nbsp;€ pour jouer. Si la roue s'arrête sur «&nbsp;2&nbsp;€&nbsp;», tu récupères exactement ta mise&nbsp;: opération blanche. Sur «&nbsp;5&nbsp;€&nbsp;», tu empoches 3&nbsp;€ de plus qu'en arrivant. Sur «&nbsp;0&nbsp;€&nbsp;», tu en as perdu 2. Ce qui t'intéresse vraiment, c'est le <strong>gain net</strong>&nbsp;— appelons-le X&nbsp;:</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>DU NOMBRE AFFICHÉ AU GAIN NET</span>
+          <span class="bande-note">MISE&nbsp;: 2&nbsp;€</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th></th><th>5 secteurs</th><th>3 secteurs</th><th>2 secteurs</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="note-cellule">la caisse te rend</td><td>0&nbsp;€</td><td>2&nbsp;€</td><td>5&nbsp;€</td></tr>
+              <tr><td class="note-cellule">ton gain net X</td><td>−2&nbsp;€</td><td>0&nbsp;€</td><td>+3&nbsp;€</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <p class="prose">Dix issues, mais seulement trois valeurs possibles pour X&nbsp;: −2, 0 ou +3. Et chaque secteur a la même chance de sortir, donc tout se compte comme en Seconde&nbsp;:</p>
+
+      <div class="math-vitrine">$$P = \frac{\text{nombre de secteurs favorables}}{\text{nombre total de secteurs}}$$</div>
+
+      <p class="prose">La question du chapitre tient en une phrase&nbsp;: peut-on résumer ce jeu par <em>un</em> nombre qui dise s'il est intéressant&nbsp;? Réponse en deux étapes&nbsp;: d'abord organiser les valeurs et leurs chances (section&nbsp;2), puis les moyenner intelligemment (section&nbsp;3).</p>
+    </section>
+
+    <!-- §2 — LE GESTE PHARE : regrouper les issues par valeur de X,
+         PUIS la définition formelle. -->
+    <section id="s2" class="chap-section">
+      <h2>2. La loi de probabilité&nbsp;: trois nombres qui disent tout</h2>
+      <p class="prose">Fais-le toi-même. Sur le graphique, choisis une valeur de X&nbsp;: la roue n'éclaire que les secteurs qui la produisent. Compte-les. Tu es en train de faire le geste central du chapitre&nbsp;: <em>regrouper les issues qui donnent le même nombre</em>.</p>
+
+      <figure class="widget" id="widget-loi" data-widget="va-loi">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Regroupe les issues</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Choisis une valeur de X">
+            <button type="button" data-mode="tout" aria-pressed="true">toute la roue</button>
+            <button type="button" data-mode="m2" aria-pressed="false">X&nbsp;=&nbsp;−2</button>
+            <button type="button" data-mode="z" aria-pressed="false">X&nbsp;=&nbsp;0</button>
+            <button type="button" data-mode="p3" aria-pressed="false">X&nbsp;=&nbsp;+3</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="La roue de la kermesse ; les secteurs correspondant à la valeur de X choisie restent éclairés, les autres s'estompent">
+          <path class="roue-sect roue-v0 js-sect" data-net="m2" d="M320 200L320 50A150 150 0 0 1 408.2 78.6Z"></path>
+          <path class="roue-sect roue-v2 js-sect" data-net="z" d="M320 200L408.2 78.6A150 150 0 0 1 462.7 153.6Z"></path>
+          <path class="roue-sect roue-v0 js-sect" data-net="m2" d="M320 200L462.7 153.6A150 150 0 0 1 462.7 246.4Z"></path>
+          <path class="roue-sect roue-v5 js-sect" data-net="p3" d="M320 200L462.7 246.4A150 150 0 0 1 408.2 321.4Z"></path>
+          <path class="roue-sect roue-v0 js-sect" data-net="m2" d="M320 200L408.2 321.4A150 150 0 0 1 320 350Z"></path>
+          <path class="roue-sect roue-v2 js-sect" data-net="z" d="M320 200L320 350A150 150 0 0 1 231.8 321.4Z"></path>
+          <path class="roue-sect roue-v0 js-sect" data-net="m2" d="M320 200L231.8 321.4A150 150 0 0 1 177.3 246.4Z"></path>
+          <path class="roue-sect roue-v2 js-sect" data-net="z" d="M320 200L177.3 246.4A150 150 0 0 1 177.3 153.6Z"></path>
+          <path class="roue-sect roue-v5 js-sect" data-net="p3" d="M320 200L177.3 153.6A150 150 0 0 1 231.8 78.6Z"></path>
+          <path class="roue-sect roue-v0 js-sect" data-net="m2" d="M320 200L231.8 78.6A150 150 0 0 1 320 50Z"></path>
+          <text class="roue-val js-sect-txt" data-net="m2" x="352.8" y="104.2" text-anchor="middle">0&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="z" x="405.8" y="142.7" text-anchor="middle">2&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="m2" x="426" y="205" text-anchor="middle">0&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="p3" x="405.8" y="267.3" text-anchor="middle">5&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="m2" x="352.8" y="305.8" text-anchor="middle">0&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="z" x="287.2" y="305.8" text-anchor="middle">2&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="m2" x="234.2" y="267.3" text-anchor="middle">0&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="z" x="214" y="205" text-anchor="middle">2&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="p3" x="234.2" y="142.7" text-anchor="middle">5&#8239;€</text>
+          <text class="roue-val js-sect-txt" data-net="m2" x="287.2" y="104.2" text-anchor="middle">0&#8239;€</text>
+          <path class="roue-pointe" d="M309 36L331 36L320 58Z"></path>
+          <circle class="roue-moyeu" cx="320" cy="200" r="7"></circle>
+        </svg>
+        <div class="widget-pied">
+          <div class="js-mode" data-mode="tout">
+            <p class="widget-question">Dix issues équiprobables, trois valeurs possibles pour X. Choisis une valeur ci-dessus&nbsp;: la roue te montre quelles issues la produisent.</p>
+          </div>
+          <div class="js-mode" data-mode="m2" hidden>
+            <p class="widget-question">X = −2, c'est «&nbsp;tu repars en ayant perdu ta mise&nbsp;»&nbsp;: les <strong>cinq</strong> secteurs marqués 0&nbsp;€. Donc \(P(X = -2) = \dfrac{5}{10} = 0{,}5\).</p>
+          </div>
+          <div class="js-mode" data-mode="z" hidden>
+            <p class="widget-question">X = 0, c'est «&nbsp;opération blanche&nbsp;»&nbsp;: les <strong>trois</strong> secteurs marqués 2&nbsp;€ — la caisse te rend exactement ta mise. Donc \(P(X = 0) = \dfrac{3}{10} = 0{,}3\).</p>
+          </div>
+          <div class="js-mode" data-mode="p3" hidden>
+            <p class="widget-question">X = +3, c'est «&nbsp;tu gagnes vraiment&nbsp;»&nbsp;: les <strong>deux</strong> secteurs marqués 5&nbsp;€, moins ta mise de 2&nbsp;€. Donc \(P(X = 3) = \dfrac{2}{10} = 0{,}2\).</p>
+          </div>
+        </div>
+        <div class="widget-note">Le bouton «&nbsp;toute la roue&nbsp;» réaffiche les dix secteurs. Remarque&nbsp;: 0,5 + 0,3 + 0,2 = 1 — aucune issue n'est oubliée, aucune n'est comptée deux fois.</div>
+      </figure>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une <strong>variable aléatoire</strong> X est une grandeur numérique dont la valeur dépend du résultat d'une expérience aléatoire&nbsp;: à chaque issue, elle associe un nombre. Donner la <strong>loi de probabilité</strong> de X, c'est donner toutes les valeurs possibles \(x_1, x_2, \dots, x_n\), et pour chacune la probabilité \(P(X = x_i)\).</p>
+      </div>
+
+      <p class="prose">«&nbsp;X = 3&nbsp;» est un raccourci de langage&nbsp;: c'est l'<em>événement</em> «&nbsp;la roue s'arrête sur une issue qui donne un gain net de 3&nbsp;€&nbsp;». La loi se présente toujours en tableau — le voici pour notre roue&nbsp;:</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>LA LOI DE PROBABILITÉ DE X</span>
+          <span class="bande-note">GAIN NET, EN €</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th>valeur \(x_i\)</th><th>−2</th><th>0</th><th>+3</th><th class="total sep-total">total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="note-cellule">\(P(X = x_i)\)</td><td>0,5</td><td>0,3</td><td>0,2</td><td class="total sep-total">1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE CONTRÔLE-RÉFLEXE</div>
+        <p>Les probabilités d'une loi somment toujours à 1&nbsp;:</p>
+        <div class="math-vitrine">$$P(X = x_1) + P(X = x_2) + \dots + P(X = x_n) = 1$$</div>
+        <p>Chaque issue donne exactement une valeur de X&nbsp;: rien ne manque, rien n'est compté deux fois. Une loi qui ne somme pas à 1 contient une erreur, cherche-la.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — ÉTABLIR LA LOI D'UNE VARIABLE ALÉATOIRE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Liste les valeurs possibles de X — les gains <em>nets</em> s'il y a une mise&nbsp;: pense à la soustraire.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Pour chaque valeur, regroupe les issues qui la produisent — le geste du graphique.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Calcule chaque \(P(X = x_i)\) et présente le tout en tableau.</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: la somme des probabilités doit faire 1.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MÉTHODE EN ACTION</div>
+        <p class="exemple-enonce">On lance un dé équilibré. Si le 6 sort, tu reçois 4&nbsp;€&nbsp;; si le résultat est 2 ou 4, tu reçois 1&nbsp;€&nbsp;; sinon, rien. La partie coûte 1&nbsp;€. Donne la loi de X, le gain net.</p>
+        <p><span class="etape-label">Étape 1 — </span>gains nets possibles&nbsp;: \(4 - 1 = 3\), \(1 - 1 = 0\), \(0 - 1 = -1\). Donc X prend les valeurs 3, 0 et −1.</p>
+        <p><span class="etape-label">Étape 2 — </span>regroupe les issues&nbsp;: X = 3 pour {6}&nbsp;; X = 0 pour {2&nbsp;; 4}&nbsp;; X = −1 pour {1&nbsp;; 3&nbsp;; 5}.</p>
+        <p><span class="etape-label">Étape 3 — </span>dé équilibré, donc \(P(X = 3) = \dfrac{1}{6}\), \(P(X = 0) = \dfrac{2}{6} = \dfrac{1}{3}\), \(P(X = -1) = \dfrac{3}{6} = \dfrac{1}{2}\).</p>
+        <p class="conclusion">Contrôle&nbsp;: \(\dfrac{1}{6} + \dfrac{2}{6} + \dfrac{3}{6} = 1\). La loi est bonne — garde ce dé en tête, il revient à la section suivante.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Une variable aléatoire, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">une issue de l'expérience aléatoire</button>
+              <button type="button" class="quiz-reponse">un nombre associé à chaque issue de l'expérience</button>
+              <button type="button" class="quiz-reponse">une probabilité</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> X transforme chaque issue en nombre&nbsp;: «&nbsp;secteur 5&nbsp;€&nbsp;» devient «&nbsp;+3&nbsp;». Ce n'est ni l'issue elle-même, ni une probabilité — les probabilités arrivent après, dans la loi.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Sur la roue du chapitre, \(P(X = 0)\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,5 — il y a cinq secteurs «&nbsp;0&nbsp;€&nbsp;»</button>
+              <button type="button" class="quiz-reponse">0,3 — les trois secteurs «&nbsp;2&nbsp;€&nbsp;»</button>
+              <button type="button" class="quiz-reponse">0,2</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> X = 0 signifie gain <em>net</em> nul&nbsp;: la caisse rend exactement la mise de 2&nbsp;€, donc les secteurs «&nbsp;2&nbsp;€&nbsp;». Les secteurs «&nbsp;0&nbsp;€&nbsp;» donnent X = −2 — le piège brut/net classique.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Dans toute loi de probabilité, la somme des \(P(X = x_i)\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">ça dépend du jeu</button>
+              <button type="button" class="quiz-reponse">100</button>
+              <button type="button" class="quiz-reponse">1</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> chaque issue donne exactement une valeur de X, donc tout l'univers est couvert une fois&nbsp;: total 1. Les «&nbsp;100&nbsp;», c'est en pourcentage — même idée, autre écriture.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §3 — L'ESPÉRANCE : simuler d'abord, formaliser ensuite. -->
+    <section id="s3" class="chap-section">
+      <h2>3. L'espérance&nbsp;: ce que le jeu te coûte vraiment</h2>
+      <p class="prose">Retour à la dispute de la kermesse. Ton pote a gagné une fois, tu as perdu trois fois — deux anecdotes. Pour juger le jeu, il faudrait jouer <em>beaucoup</em>. Cent fois&nbsp;? Mille fois&nbsp;? Personne n'a ce budget… sauf le graphique ci-dessous. Joue, rejoue, et surveille le <strong>gain moyen par partie</strong>&nbsp;: au début il gigote, puis il se calme quelque part. Où, exactement&nbsp;?</p>
+
+      <figure class="widget" id="widget-simulation" data-widget="va-simulation">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Joue, rejoue, et regarde la moyenne</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Courbe du gain moyen par partie en fonction du nombre de parties jouées ; une ligne pointillée marque l'espérance, moins 0,40 euro"></svg>
+        <div class="widget-pied">
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent" data-parties="1">jouer 1 partie</button>
+            <button type="button" class="btn-pill" data-parties="10">jouer ×&nbsp;10</button>
+            <button type="button" class="btn-pill" data-parties="100">jouer ×&nbsp;100</button>
+          </div>
+          <div class="lecture-formule js-comptes" aria-live="polite">Personne n'a encore joué. Lance une partie&nbsp;!</div>
+          <div class="chips">
+            <span class="chip">parties&nbsp;: <span class="js-n">0</span></span>
+            <span class="chip">gain total&nbsp;: <span class="js-total">0&nbsp;€</span></span>
+            <span class="chip">gain moyen&nbsp;: <span class="js-moyenne">—</span></span>
+            <span class="chip chip--accent">E(X) = −0,40&nbsp;€</span>
+          </div>
+          <p class="widget-legende js-legende" hidden>La courbe s'est collée sur la ligne en pointillé&nbsp;: en moyenne, chaque partie te coûte 0,40&nbsp;€. <strong>Une</strong> partie reste imprévisible&nbsp;; mille parties, non.</p>
+        </div>
+        <div class="widget-note">La roue est celle du chapitre&nbsp;: −2&nbsp;€ une fois sur deux, 0&nbsp;€ trois fois sur dix, +3&nbsp;€ une fois sur cinq. Plafond&nbsp;: 1&thinsp;000 parties — l'axe s'élargit tout seul au-delà de 100.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>D'où sort ce −0,40&nbsp;€&nbsp;? Imagine 1&thinsp;000 parties «&nbsp;idéales&nbsp;», où chaque valeur sort exactement à sa fréquence théorique&nbsp;: 500 fois −2&nbsp;€, 300 fois 0&nbsp;€, 200 fois +3&nbsp;€. Gain total&nbsp;: \(500 \times (-2) + 300 \times 0 + 200 \times 3 = -400\)&nbsp;€. Par partie&nbsp;: −0,40&nbsp;€. Divise chaque effectif par 1&thinsp;000 et regarde ce qui reste&nbsp;: \((-2) \times 0{,}5 + 0 \times 0{,}3 + 3 \times 0{,}2\). C'est une <em>moyenne des valeurs, pondérée par les probabilités</em>. Ce nombre porte un nom.</p>
+      </div>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>L'<strong>espérance</strong> de X est la moyenne de ses valeurs, pondérée par leurs probabilités&nbsp;:</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$E(X) = x_1\,P(X = x_1) + x_2\,P(X = x_2) + \dots + x_n\,P(X = x_n)$$</div>
+
+      <p class="prose">Et son <strong>interprétation</strong>, celle que le graphique vient de te montrer&nbsp;: quand on répète l'expérience un grand nombre de fois, la moyenne des valeurs observées se rapproche de E(X). C'est le nombre que cherchait la section 1&nbsp;: pour notre roue, \(E(X) = -0{,}40\)&nbsp;€ — chaque partie te coûte 40 centimes <em>en moyenne</em>. Ton pote a eu de la chance, c'est tout&nbsp;; le stand, lui, joue mille fois par après-midi, et encaisse.</p>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>E(X) se lit «&nbsp;en moyenne, par partie, sur un grand nombre de parties&nbsp;». E(X)&nbsp;&lt;&nbsp;0&nbsp;: le jeu te fait perdre&nbsp;; E(X)&nbsp;=&nbsp;0&nbsp;: jeu équitable&nbsp;; E(X)&nbsp;&gt;&nbsp;0&nbsp;: le jeu te rapporte.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER ET INTERPRÉTER UNE ESPÉRANCE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris la loi de X en tableau (méthode de la section 2).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Multiplie chaque valeur par sa probabilité — ligne du haut fois ligne du bas, colonne par colonne.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Additionne tout&nbsp;: c'est E(X). Garde les signes&nbsp;!</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">Conclus par une phrase avec «&nbsp;en moyenne&nbsp;» et l'unité — jamais un nombre sec.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE DÉ DE LA SECTION 2</div>
+        <p class="exemple-enonce">Le dé de tout à l'heure&nbsp;: X vaut −1, 0 ou 3 avec les probabilités \(\dfrac{1}{2}\), \(\dfrac{1}{3}\), \(\dfrac{1}{6}\). Ce jeu est-il favorable&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>\(E(X) = (-1) \times \dfrac{1}{2} + 0 \times \dfrac{1}{3} + 3 \times \dfrac{1}{6}\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(E(X) = -\dfrac{1}{2} + 0 + \dfrac{1}{2} = 0\).</p>
+        <p class="conclusion">Conclusion&nbsp;: E(X) = 0, le jeu est <strong>équitable</strong>&nbsp;: sur un grand nombre de parties, personne ne gagne ni ne perd en moyenne. Rare dans la vraie vie — la roue de la kermesse, elle, finance le voyage scolaire.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions sur la moyenne</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(E(X) = -0{,}40\)&nbsp;€ signifie…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">qu'en moyenne, sur un grand nombre de parties, on perd 0,40&nbsp;€ par partie</button>
+              <button type="button" class="quiz-reponse">qu'on perd 0,40&nbsp;€ à chaque partie</button>
+              <button type="button" class="quiz-reponse">qu'on ne peut jamais gagner</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> aucune partie ne fait perdre 0,40&nbsp;€ (ce n'est même pas une valeur possible&nbsp;!), et gagner +3&nbsp;€ arrive une fois sur cinq. L'espérance parle de la <em>moyenne à long terme</em>, pas d'une partie.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>X vaut −1, 1 ou 3 avec les probabilités 0,5&nbsp;; 0,25&nbsp;; 0,25. De tête, \(E(X) =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">1 — la moyenne de −1, 1 et 3</button>
+              <button type="button" class="quiz-reponse">3 — la valeur la plus grande</button>
+              <button type="button" class="quiz-reponse">0,5</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(-1 \times 0{,}5 + 1 \times 0{,}25 + 3 \times 0{,}25 = -0{,}5 + 0{,}25 + 0{,}75 = 0{,}5\). La moyenne <em>simple</em> des valeurs (1) oublie que −1 sort deux fois plus souvent que les autres&nbsp;: il faut pondérer.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>L'espérance de X est forcément l'une des valeurs possibles de X.</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">Vrai</button>
+              <button type="button" class="quiz-reponse">Faux</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> pour la roue, E(X) = −0,40&nbsp;€… et aucun secteur ne donne −0,40&nbsp;€. Une moyenne n'est pas un résultat possible, c'est un centre de gravité.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §4 — VARIANCE ET ÉCART TYPE : sentir le risque avant de le mesurer. -->
+    <section id="s4" class="chap-section">
+      <h2>4. Deux jeux, même moyenne&nbsp;: variance et écart type</h2>
+      <p class="prose">L'année suivante, la kermesse a deux stands de roue côte à côte. La <strong>roue sage</strong>&nbsp;: on perd 2&nbsp;€ trois fois sur dix, on est remboursé six fois sur dix, on gagne 2&nbsp;€ une fois sur dix. La <strong>roue folle</strong>&nbsp;: on perd sa mise neuf fois sur dix… mais une fois sur dix, jackpot, +14&nbsp;€. Calcule leurs espérances&nbsp;: −0,40&nbsp;€ toutes les deux. Les mêmes&nbsp;? Vraiment&nbsp;? Rejoue 100 parties de chaque et regarde les deux histoires.</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>DEUX ROUES, DEUX LOIS</span>
+          <span class="bande-note">GAIN NET, EN €</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th>valeur \(x_i\)</th><th>−2</th><th>0</th><th>+2</th><th>+14</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="note-cellule">roue sage</td><td>0,3</td><td>0,6</td><td>0,1</td><td>—</td></tr>
+              <tr><td class="note-cellule">roue folle</td><td>0,9</td><td>—</td><td>—</td><td>0,1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <figure class="widget" id="widget-risque" data-widget="va-risque">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Deux roues, même espérance</span>
+          </div>
+          <button type="button" class="btn-pill js-rejouer">↻ rejouer 100 parties</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Gain cumulé sur 100 parties pour les deux roues : les deux trajectoires suivent le même cap moyen, mais celle de la roue folle fait de grands bonds"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule js-bilan" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent">E = −0,40&nbsp;€ pour les deux</span>
+            <span class="chip">σ roue sage = 1,20&nbsp;€</span>
+            <span class="chip">σ roue folle = 4,80&nbsp;€</span>
+          </div>
+        </div>
+        <div class="widget-note">Chaque clic rejoue 100 parties toutes neuves à chaque roue. Les deux trajectoires descendent en moyenne de 0,40&nbsp;€ par partie — mais pas du tout avec le même calme. Ce «&nbsp;calme&nbsp;», c'est ce qu'on va mesurer.</div>
+      </figure>
+
+      <p class="prose">L'espérance ne voit pas la différence entre ces deux jeux&nbsp;: elle résume le <em>centre</em>, pas les <em>secousses</em>. Pour mesurer les secousses, on regarde les écarts à la moyenne, \(x_i - E(X)\)… mais leur moyenne pondérée vaut toujours zéro (les écarts positifs compensent exactement les négatifs). L'astuce&nbsp;: mettre les écarts <strong>au carré</strong> avant de les moyenner — plus de compensation possible.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>La <strong>variance</strong> de X est la moyenne pondérée des carrés des écarts à l'espérance&nbsp;; l'<strong>écart type</strong> \(\sigma(X)\) est sa racine carrée&nbsp;:</p>
+      </div>
+
+      <div class="math-vitrine">$$V(X) = P(X = x_1)\,\big(x_1 - E(X)\big)^2 + \dots + P(X = x_n)\,\big(x_n - E(X)\big)^2 \qquad \sigma(X) = \sqrt{V(X)}$$</div>
+
+      <p class="prose">Pourquoi deux mesures pour la même idée&nbsp;? Une question d'unité. Si X est en euros, V(X) est en… euros au carré — invendable dans une phrase. La racine carrée remet tout en euros&nbsp;: σ se compare directement aux valeurs du jeu. Grand σ = valeurs dispersées loin de la moyenne = jeu à sensations&nbsp;; petit σ = jeu régulier.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA FORMULE DE CALCUL RAPIDE</div>
+        <div class="math-vitrine">$$V(X) = E(X^2) - \big(E(X)\big)^2$$</div>
+        <p>«&nbsp;La moyenne des carrés, moins le carré de la moyenne.&nbsp;» \(E(X^2)\) se calcule comme une espérance ordinaire, en remplaçant chaque valeur par son carré — les probabilités, elles, ne changent pas. En développant \(\big(x_i - E(X)\big)^2\) dans la définition, tout se simplifie jusqu'à cette formule&nbsp;: même nombre, moitié moins de calculs.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER V(X) ET σ(X)</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule d'abord E(X) — tout le reste s'appuie dessus.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule \(E(X^2)\)&nbsp;: mets chaque valeur au carré, garde les probabilités, additionne.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">\(V(X) = E(X^2) - \big(E(X)\big)^2\). Attention&nbsp;: c'est le carré <em>de l'espérance</em> qu'on soustrait, pas l'espérance elle-même.</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">\(\sigma(X) = \sqrt{V(X)}\), avec l'unité de X. Contrôle&nbsp;: une variance est toujours positive ou nulle.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA ROUE DU CHAPITRE</div>
+        <p class="exemple-enonce">X vaut −2, 0 ou 3 avec les probabilités 0,5&nbsp;; 0,3&nbsp;; 0,2, et \(E(X) = -0{,}4\). Calcule V(X) et σ(X).</p>
+        <p><span class="etape-label">Étape 1 — </span>\(E(X^2) = 0{,}5 \times (-2)^2 + 0{,}3 \times 0^2 + 0{,}2 \times 3^2 = 2 + 0 + 1{,}8 = 3{,}8\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(V(X) = 3{,}8 - (-0{,}4)^2 = 3{,}8 - 0{,}16 = 3{,}64\).</p>
+        <p><span class="etape-label">Étape 3 — </span>\(\sigma(X) = \sqrt{3{,}64} \approx 1{,}91\)&nbsp;€.</p>
+        <p class="conclusion">Conclusion&nbsp;: en une partie, le gain s'écarte «&nbsp;typiquement&nbsp;» d'environ 1,91&nbsp;€ de la moyenne. Vérification au passage avec la définition&nbsp;: \(0{,}5 \times (-1{,}6)^2 + 0{,}3 \times 0{,}4^2 + 0{,}2 \times 3{,}4^2 = 1{,}28 + 0{,}048 + 2{,}312 = 3{,}64\) — même résultat, plus de calculs.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions sur la dispersion</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Deux jeux ont la même espérance. Ce qui peut encore les distinguer, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">rien&nbsp;: même espérance, mêmes jeux</button>
+              <button type="button" class="quiz-reponse">l'écart type — la dispersion autour de la moyenne</button>
+              <button type="button" class="quiz-reponse">la somme des probabilités</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la roue sage et la roue folle ont la même espérance et des écarts types de 1,20&nbsp;€ et 4,80&nbsp;€&nbsp;: mêmes moyennes, expériences très différentes. La somme des probabilités, elle, vaut 1 partout — elle ne distingue rien.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Si X est en euros, l'écart type σ(X) s'exprime…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">en euros, comme X</button>
+              <button type="button" class="quiz-reponse">en euros au carré</button>
+              <button type="button" class="quiz-reponse">sans unité</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est tout l'intérêt de la racine carrée&nbsp;: la <em>variance</em> est en €², l'écart type revient en €. C'est lui qu'on cite dans une phrase.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pour la roue du chapitre, \(E(X^2) = 3{,}8\) et \(E(X) = -0{,}4\). Alors \(V(X) =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(3{,}8 - 0{,}4 = 3{,}4\)</button>
+              <button type="button" class="quiz-reponse">\(3{,}8 + 0{,}16 = 3{,}96\)</button>
+              <button type="button" class="quiz-reponse">\(3{,}8 - 0{,}16 = 3{,}64\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> on soustrait le <em>carré</em> de l'espérance&nbsp;: \((-0{,}4)^2 = 0{,}16\). Oublier le carré (réponse 1) est l'erreur la plus fréquente du chapitre&nbsp;; et le carré d'un négatif est positif, donc on soustrait bien.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §5 — SUCCESSION D'ÉPREUVES DE BERNOULLI (nouveauté programme 2026,
+         n ≤ 4, sans loi binomiale) : manipuler l'arbre d'abord. -->
+    <section id="s5" class="chap-section">
+      <h2>5. Le chamboule-tout&nbsp;: répéter une épreuve</h2>
+      <p class="prose">Dernier stand de la kermesse&nbsp;: le chamboule-tout. Un lancer, deux issues possibles — la pyramide de boîtes tombe (succès), ou elle reste debout (échec). Disons que tu la fais tomber 3 fois sur 10&nbsp;: un lancer se résume à <em>un seul nombre</em>, \(p = 0{,}3\). Une expérience à deux issues comme celle-là porte un nom&nbsp;: une <strong>épreuve de Bernoulli</strong>.</p>
+      <p class="prose">Le forfait du stand, c'est <em>trois</em> lancers — et la pyramide est rebâtie à l'identique entre chaque. Même situation, mêmes chances, et ton deuxième lancer ne dépend pas du premier&nbsp;: on répète des épreuves <strong>identiques et indépendantes</strong>. Compte X, le nombre de pyramides tombées&nbsp;: voilà une variable aléatoire, et l'outil pour trouver sa loi, tu le connais depuis le chapitre des probabilités conditionnelles — l'arbre. Choisis une valeur de X sous le graphique et regarde quels chemins s'allument.</p>
+
+      <figure class="widget" id="widget-bernoulli" data-widget="va-bernoulli" data-p-init="0.3" data-n-init="3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le chamboule-tout</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Nombre de lancers">
+            <button type="button" data-n="2" aria-pressed="false">2 lancers</button>
+            <button type="button" data-n="3" aria-pressed="true">3 lancers</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 410" aria-label="Arbre des lancers répétés : à chaque étage, succès avec la probabilité p ou échec ; les chemins correspondant à la valeur de X choisie s'allument"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">p — la pyramide tombe à chaque lancer&nbsp;: <span class="js-lect-p">0,3</span></span>
+            <input type="range" class="js-p" min="0.1" max="0.9" step="0.1" value="0.3" aria-label="Probabilité de succès d'un lancer">
+          </div>
+          <div class="arbre-feuilles js-groupe" data-n="2" role="group" aria-label="Choisis une valeur de X (deux lancers)" hidden>
+            <button type="button" class="feuille-btn" data-k="0" aria-pressed="false">X = 0&nbsp;: <span class="js-val">49&nbsp;%</span></button>
+            <button type="button" class="feuille-btn" data-k="1" aria-pressed="false">X = 1&nbsp;: <span class="js-val">42&nbsp;%</span></button>
+            <button type="button" class="feuille-btn" data-k="2" aria-pressed="false">X = 2&nbsp;: <span class="js-val">9&nbsp;%</span></button>
+          </div>
+          <div class="arbre-feuilles js-groupe" data-n="3" role="group" aria-label="Choisis une valeur de X (trois lancers)">
+            <button type="button" class="feuille-btn" data-k="0" aria-pressed="false">X = 0&nbsp;: <span class="js-val">34,3&nbsp;%</span></button>
+            <button type="button" class="feuille-btn" data-k="1" aria-pressed="false">X = 1&nbsp;: <span class="js-val">44,1&nbsp;%</span></button>
+            <button type="button" class="feuille-btn" data-k="2" aria-pressed="true">X = 2&nbsp;: <span class="js-val">18,9&nbsp;%</span></button>
+            <button type="button" class="feuille-btn" data-k="3" aria-pressed="false">X = 3&nbsp;: <span class="js-val">2,7&nbsp;%</span></button>
+          </div>
+          <div class="lecture-formule js-calcul" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent js-esperance">E(X) = 0,9 boîte par série</span>
+            <span class="chip">les valeurs de X se partagent 100&nbsp;%</span>
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+        </div>
+        <div class="widget-note">S&nbsp;: la pyramide tombe (succès, probabilité p) · E&nbsp;: elle reste debout (échec). La probabilité d'un chemin se lit en multipliant le long de ses branches&nbsp;; celle d'une valeur de X, en additionnant ses chemins.</div>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une <strong>épreuve de Bernoulli</strong> est une expérience aléatoire à deux issues&nbsp;: <em>succès</em>, de probabilité p, et <em>échec</em>, de probabilité \(1 - p\). Répéter n fois cette épreuve dans les <strong>mêmes conditions</strong>, les répétitions étant <strong>indépendantes</strong> les unes des autres, s'appelle une succession de n épreuves de Bernoulli identiques et indépendantes.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi a-t-on le droit d'écrire <em>la même</em> probabilité p à tous les étages de l'arbre&nbsp;? C'est exactement l'indépendance&nbsp;: la pyramide rebâtie ne se souvient pas du lancer précédent, donc «&nbsp;sachant que le premier lancer a réussi&nbsp;» ne change rien au deuxième. Compare avec le tirage <em>sans remise</em> du chapitre précédent, où chaque étage devait être recalculé. Ici, l'arbre est paresseux&nbsp;: p et \(1-p\) partout.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER P(X = k) AVEC L'ARBRE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Vérifie le cadre&nbsp;: deux issues par essai, même p à chaque fois, essais indépendants. Dis-le sur ta copie — c'est ce qui autorise l'arbre paresseux.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Dessine l'arbre (n = 2, 3, voire 4 étages) avec p et \(1-p\) sur chaque branche.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Repère <em>tous</em> les chemins qui réalisent «&nbsp;X = k&nbsp;» — c'est-à-dire exactement k succès. Il y en a souvent plusieurs&nbsp;!</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">Multiplie le long de chaque chemin, puis additionne les chemins. Astuce&nbsp;: leurs produits sont tous égaux, donc «&nbsp;nombre de chemins × produit d'un chemin&nbsp;».</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UN JOUEUR MOINS ADROIT</div>
+        <p class="exemple-enonce">Ton petit frère fait tomber la pyramide avec la probabilité \(p = 0{,}2\) et tente trois lancers. a. Calcule \(P(X = 1)\). b. Calcule la probabilité qu'il fasse tomber au moins une pyramide.</p>
+        <p><span class="etape-label">a. — </span>trois chemins donnent exactement un succès (SEE, ESE, EES), chacun de probabilité \(0{,}2 \times 0{,}8 \times 0{,}8 = 0{,}128\). Donc \(P(X = 1) = 3 \times 0{,}128 = 0{,}384\).</p>
+        <p><span class="etape-label">b. — </span>«&nbsp;au moins une&nbsp;», passe par le contraire&nbsp;: l'événement opposé est «&nbsp;aucune pyramide&nbsp;», c'est-à-dire le chemin EEE. \(P(X = 0) = 0{,}8^3 = 0{,}512\), donc \(P(X \geqslant 1) = 1 - 0{,}512 = 0{,}488\).</p>
+        <p class="conclusion">Conclusion&nbsp;: même maladroit, il repart avec au moins une peluche presque une fois sur deux. Le «&nbsp;au moins un = 1 − aucun&nbsp;» est un réflexe à garder pour le bac.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Épreuves identiques et indépendantes&nbsp;: p partout sur l'arbre. \(P(X = k)\) = (nombre de chemins à k succès) × (produit le long d'un chemin). Et «&nbsp;au moins un succès&nbsp;» = \(1 - P(X = 0)\).</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>On répète 3 fois une épreuve de Bernoulli avec \(p = 0{,}5\). La probabilité de 3 succès vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(0{,}5 \times 3 = 1{,}5\)</button>
+              <button type="button" class="quiz-reponse">\(0{,}5^3 = 0{,}125\)</button>
+              <button type="button" class="quiz-reponse">0,5</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> un seul chemin (SSS), on <em>multiplie</em> le long des branches. La réponse 1,5 devait t'alerter toute seule&nbsp;: une probabilité ne dépasse jamais 1.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Pour 3 lancers, \(P(X = 2)\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(p^2\)</button>
+              <button type="button" class="quiz-reponse">\(p^2(1-p)\) — le chemin SSE</button>
+              <button type="button" class="quiz-reponse">\(3\,p^2(1-p)\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> deux pièges d'un coup&nbsp;: il faut le facteur \(1-p\) du lancer raté, <em>et</em> compter les trois chemins (SSE, SES, ESS). Retourne les voir s'allumer sur le graphique.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pourquoi a-t-on le droit de multiplier les probabilités le long d'un chemin&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">parce que les répétitions sont indépendantes</button>
+              <button type="button" class="quiz-reponse">parce que les probabilités somment à 1</button>
+              <button type="button" class="quiz-reponse">parce que l'arbre est symétrique</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> sur un arbre, on multiplie une branche par une probabilité <em>conditionnelle</em>&nbsp;; l'indépendance dit justement que celle-ci vaut p, sans rien recalculer. C'est elle qui rend l'arbre «&nbsp;paresseux&nbsp;».</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Quatre lancers, \(p = 0{,}1\). «&nbsp;Au moins un succès&nbsp;» se calcule par…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(4 \times 0{,}1 = 0{,}4\)</button>
+              <button type="button" class="quiz-reponse">\(0{,}1^4\)</button>
+              <button type="button" class="quiz-reponse">\(1 - 0{,}9^4\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le contraire de «&nbsp;au moins un&nbsp;» est «&nbsp;aucun&nbsp;», de probabilité \(0{,}9^4\). Quant à \(4 \times 0{,}1\), c'est l'espérance du nombre de succès (0,4 succès en moyenne) — un nombre utile, mais pas une probabilité d'événement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Confondre le nombre affiché et le gain net.</strong> «&nbsp;La roue affiche 5&nbsp;€, donc X = 5.&nbsp;» Non&nbsp;: tu as payé 2&nbsp;€, donc X = 3. Dès qu'un énoncé contient une mise, un billet ou un forfait, soustrais-le <em>avant</em> d'écrire la loi.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Prendre E(X) pour «&nbsp;la valeur la plus probable&nbsp;» — ou pour une valeur possible.</strong> E(X) = −0,40&nbsp;€ n'apparaît sur aucun secteur de la roue. L'espérance est une moyenne pondérée, un centre de gravité&nbsp;: elle peut très bien n'être aucune des valeurs de X.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Une loi qui ne somme pas à 1.</strong> Une valeur oubliée, une probabilité mal recopiée, et tout le reste s'écroule. Additionner les \(P(X = x_i)\) prend cinq secondes et rattrape la moitié des erreurs — fais-le systématiquement, même quand on ne le demande pas.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Dans \(V(X) = E(X^2) - \big(E(X)\big)^2\), mélanger \(E(X^2)\) et \(\big(E(X)\big)^2\).</strong> \(E(X^2)\)&nbsp;: on met les <em>valeurs</em> au carré, puis on moyenne. \(\big(E(X)\big)^2\)&nbsp;: on moyenne, puis on met <em>le résultat</em> au carré. Pour la roue&nbsp;: 3,8 d'un côté, 0,16 de l'autre — vraiment pas pareil.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Écrire \(P(X = 2) = p^2\) pour trois lancers.</strong> Deux oublis d'un coup&nbsp;: le facteur \(1 - p\) du lancer raté, et les <em>trois</em> chemins qui mènent à deux succès. La bonne écriture&nbsp;: \(3\,p^2(1-p)\). Compter les chemins d'abord, multiplier ensuite.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">LOI</span>
+          <p>Toutes les valeurs \(x_i\) de X avec leurs probabilités \(P(X = x_i)\) — et la somme fait 1, toujours.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ESPÉRANCE</span>
+          <p>\(E(X) = x_1 p_1 + \dots + x_n p_n\)&nbsp;: la moyenne par partie, sur un grand nombre de parties.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">VARIANCE</span>
+          <p>\(V(X) = E(X^2) - \big(E(X)\big)^2\)&nbsp;: la dispersion autour de la moyenne, en unité au carré.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ÉCART TYPE</span>
+          <p>\(\sigma(X) = \sqrt{V(X)}\), dans l'unité de X&nbsp;: petit σ, jeu régulier&nbsp;; grand σ, jeu à secousses.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">BERNOULLI</span>
+          <p>Épreuves identiques et indépendantes&nbsp;: arbre avec p partout&nbsp;; \(P(X = k)\) = nombre de chemins × produit d'un chemin.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: loi de probabilité, espérance, variance et écart type, épreuves de Bernoulli répétées, puis deux problèmes de synthèse. Beaucoup se font sans calculatrice — entraîne-toi comme ça, l'épreuve de fin de Première le demande.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· variable aléatoire</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On tire une carte au hasard dans un jeu de 32 cartes. X vaut 3 si la carte est un as, 1 si c'est une figure (roi, dame ou valet), 0 sinon. a. Quelles valeurs prend X&nbsp;? b. Établis la loi de probabilité de X. c. Vérifie ta loi.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>X prend les valeurs 3, 1 et 0.</p>
+          <p><span class="etape-label">b. — </span>il y a 4 as, 12 figures (3 par couleur × 4 couleurs) et \(32 - 4 - 12 = 16\) autres cartes. Tirage équiprobable&nbsp;: \(P(X = 3) = \dfrac{4}{32} = \dfrac{1}{8}\), \(P(X = 1) = \dfrac{12}{32} = \dfrac{3}{8}\), \(P(X = 0) = \dfrac{16}{32} = \dfrac{1}{2}\).</p>
+          <p><span class="etape-label">c. — </span>\(\dfrac{1}{8} + \dfrac{3}{8} + \dfrac{4}{8} = 1\)&nbsp;: aucune carte oubliée.</p>
+          <p class="conclusion">Conclusion&nbsp;: une loi, c'est valeurs + probabilités + contrôle de la somme. Prends l'habitude des trois d'un coup.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· compléter une loi</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">X prend les valeurs −5, 0, 5 et 10 avec \(P(X = -5) = 0{,}1\), \(P(X = 0) = 0{,}45\) et \(P(X = 10) = 0{,}2\). a. Calcule \(P(X = 5)\). b. Calcule \(P(X \geqslant 5)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>la somme des probabilités vaut 1, donc \(P(X = 5) = 1 - (0{,}1 + 0{,}45 + 0{,}2) = 1 - 0{,}75 = 0{,}25\).</p>
+          <p><span class="etape-label">b. — </span>«&nbsp;X ≥ 5&nbsp;» regroupe les valeurs 5 et 10&nbsp;: \(P(X \geqslant 5) = 0{,}25 + 0{,}2 = 0{,}45\).</p>
+          <p class="conclusion">Conclusion&nbsp;: la propriété «&nbsp;somme = 1&nbsp;» n'est pas qu'un contrôle — c'est aussi une équation qui donne la probabilité manquante.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· la tombola</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une tombola vend 100 tickets à 2&nbsp;€. Un ticket gagne 20&nbsp;€, quatre gagnent 5&nbsp;€, quinze gagnent 2&nbsp;€, les autres ne gagnent rien. Tu achètes un ticket&nbsp;; X est ton gain net. a. Établis la loi de X. b. Calcule la probabilité de ne pas perdre d'argent.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>gains nets&nbsp;: \(20 - 2 = 18\), \(5 - 2 = 3\), \(2 - 2 = 0\), \(0 - 2 = -2\). Sur 100 tickets équiprobables&nbsp;: \(P(X = 18) = 0{,}01\), \(P(X = 3) = 0{,}04\), \(P(X = 0) = 0{,}15\), \(P(X = -2) = 0{,}8\). Contrôle&nbsp;: \(0{,}01 + 0{,}04 + 0{,}15 + 0{,}8 = 1\).</p>
+          <p><span class="etape-label">b. — </span>ne pas perdre, c'est \(X \geqslant 0\)&nbsp;: \(P(X \geqslant 0) = 0{,}15 + 0{,}04 + 0{,}01 = 0{,}2\).</p>
+          <p class="conclusion">Conclusion&nbsp;: quatre fois sur cinq, un ticket de tombola est un don déguisé. C'est le but, remarque.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· gain brut, gain net</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">À la pêche aux canards, il y a 12 canards&nbsp;: 2 marqués «&nbsp;9&nbsp;€&nbsp;», 4 marqués «&nbsp;3&nbsp;€&nbsp;», 6 sans marque. La partie coûte 3&nbsp;€ et on attrape un canard au hasard. X est le gain net. a. Établis la loi de X. b. Quelle est la probabilité de perdre de l'argent&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>gains nets&nbsp;: \(9 - 3 = 6\), \(3 - 3 = 0\), \(0 - 3 = -3\). D'où \(P(X = 6) = \dfrac{2}{12} = \dfrac{1}{6}\), \(P(X = 0) = \dfrac{4}{12} = \dfrac{1}{3}\), \(P(X = -3) = \dfrac{6}{12} = \dfrac{1}{2}\). Contrôle&nbsp;: \(\dfrac{1}{6} + \dfrac{2}{6} + \dfrac{3}{6} = 1\).</p>
+          <p><span class="etape-label">b. — </span>perdre de l'argent, c'est \(X &lt; 0\), donc \(P(X = -3) = \dfrac{1}{2}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: le canard «&nbsp;3&nbsp;€&nbsp;» ne fait <em>pas</em> gagner 3&nbsp;€ — il rembourse la partie. Le piège brut/net, encore et toujours.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· espérance</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une appli de fidélité offre une récompense surprise à chaque passage en caisse&nbsp;: rien avec la probabilité 0,3, un bon de 5&nbsp;€ avec la probabilité 0,5, un bon de 10&nbsp;€ avec la probabilité 0,2. X est le montant reçu. a. Calcule E(X). b. Interprète ce nombre par une phrase.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(E(X) = 0 \times 0{,}3 + 5 \times 0{,}5 + 10 \times 0{,}2 = 0 + 2{,}5 + 2 = 4{,}5\)&nbsp;€.</p>
+          <p><span class="etape-label">b. — </span>sur un grand nombre de passages en caisse, l'appli offre en moyenne 4,50&nbsp;€ par passage.</p>
+          <p class="conclusion">Conclusion&nbsp;: la phrase d'interprétation contient toujours «&nbsp;en moyenne&nbsp;», «&nbsp;sur un grand nombre de répétitions&nbsp;» et l'unité. Les trois, sinon rien.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· jeu équitable</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On reprend la pêche aux canards de l'exercice 04 (loi de X&nbsp;: −3, 0, 6 avec \(\dfrac{1}{2}\), \(\dfrac{1}{3}\), \(\dfrac{1}{6}\)). a. Calcule E(X) et interprète. b. À quel prix faudrait-il vendre la partie pour que le jeu soit équitable&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(E(X) = (-3) \times \dfrac{1}{2} + 0 \times \dfrac{1}{3} + 6 \times \dfrac{1}{6} = -1{,}5 + 0 + 1 = -0{,}5\)&nbsp;€&nbsp;: en moyenne, chaque partie coûte 50 centimes au joueur.</p>
+          <p><span class="etape-label">b. — </span>appelle m le prix de la partie et raisonne sur les montants <em>rendus</em> (9, 3 ou 0&nbsp;€)&nbsp;: leur espérance vaut \(9 \times \dfrac{1}{6} + 3 \times \dfrac{1}{3} + 0 \times \dfrac{1}{2} = 1{,}5 + 1 = 2{,}5\)&nbsp;€. Le gain net moyen est \(2{,}5 - m\)&nbsp;: il est nul pour \(m = 2{,}50\)&nbsp;€.</p>
+          <p class="conclusion">Conclusion&nbsp;: équitable = espérance de gain net nulle. Le forain vend 3&nbsp;€ ce qui en «&nbsp;vaut&nbsp;» 2,50 — la différence, c'est sa marge.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· paramètre inconnu</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">X prend les valeurs −1, 2 et 4 avec \(P(X = -1) = p\), \(P(X = 2) = 0{,}3\) et \(P(X = 4) = 0{,}1\). a. Détermine p. b. Calcule E(X). c. Le jeu est-il favorable au joueur&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(p + 0{,}3 + 0{,}1 = 1\), donc \(p = 0{,}6\).</p>
+          <p><span class="etape-label">b. — </span>\(E(X) = (-1) \times 0{,}6 + 2 \times 0{,}3 + 4 \times 0{,}1 = -0{,}6 + 0{,}6 + 0{,}4 = 0{,}4\).</p>
+          <p><span class="etape-label">c. — </span>\(E(X) = 0{,}4 &gt; 0\)&nbsp;: favorable au joueur — en moyenne, il gagne 0,40 par partie.</p>
+          <p class="conclusion">Conclusion&nbsp;: la somme des probabilités sert d'équation, puis l'espérance sert de verdict. Deux réflexes, un exercice type.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· variance et écart type</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une borne d'arcade rend des tickets de manège&nbsp;: X vaut 2, 4 ou 6 tickets avec les probabilités 0,25&nbsp;; 0,5&nbsp;; 0,25. a. Calcule E(X). b. Calcule V(X) avec la formule \(V(X) = E(X^2) - \big(E(X)\big)^2\). c. Retrouve V(X) avec la définition, puis donne σ(X).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(E(X) = 2 \times 0{,}25 + 4 \times 0{,}5 + 6 \times 0{,}25 = 0{,}5 + 2 + 1{,}5 = 4\) tickets.</p>
+          <p><span class="etape-label">b. — </span>\(E(X^2) = 4 \times 0{,}25 + 16 \times 0{,}5 + 36 \times 0{,}25 = 1 + 8 + 9 = 18\), donc \(V(X) = 18 - 4^2 = 2\).</p>
+          <p><span class="etape-label">c. — </span>écarts à la moyenne&nbsp;: −2, 0, +2. \(V(X) = 0{,}25 \times 4 + 0{,}5 \times 0 + 0{,}25 \times 4 = 2\) — même résultat. \(\sigma(X) = \sqrt{2} \approx 1{,}41\) ticket.</p>
+          <p class="conclusion">Conclusion&nbsp;: les deux formules donnent toujours le même nombre&nbsp;; la «&nbsp;rapide&nbsp;» évite de calculer chaque écart. Et σ garde l'unité de X.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· comparer deux jeux</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Retrouve à la main ce que le graphique de la section 4 montrait. Roue sage&nbsp;: X vaut −2, 0, +2 avec 0,3&nbsp;; 0,6&nbsp;; 0,1. Roue folle&nbsp;: Y vaut −2, +14 avec 0,9&nbsp;; 0,1. a. Vérifie que E(X) = E(Y) = −0,4. b. Calcule V(X), V(Y), puis les deux écarts types. c. Un joueur déteste les mauvaises surprises&nbsp;: quelle roue lui conseilles-tu&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(E(X) = -0{,}6 + 0 + 0{,}2 = -0{,}4\)&nbsp;; \(E(Y) = -1{,}8 + 1{,}4 = -0{,}4\). Mêmes espérances.</p>
+          <p><span class="etape-label">b. — </span>\(E(X^2) = 4 \times 0{,}3 + 0 + 4 \times 0{,}1 = 1{,}6\), donc \(V(X) = 1{,}6 - 0{,}16 = 1{,}44\) et \(\sigma(X) = 1{,}20\)&nbsp;€. \(E(Y^2) = 4 \times 0{,}9 + 196 \times 0{,}1 = 3{,}6 + 19{,}6 = 23{,}2\), donc \(V(Y) = 23{,}2 - 0{,}16 = 23{,}04\) et \(\sigma(Y) = 4{,}80\)&nbsp;€.</p>
+          <p><span class="etape-label">c. — </span>même coût moyen, mais la roue folle disperse quatre fois plus&nbsp;: pour éviter les secousses, la roue sage.</p>
+          <p class="conclusion">Conclusion&nbsp;: comparer deux jeux, c'est comparer deux <em>couples</em> (E&nbsp;; σ). L'espérance dit le prix moyen, l'écart type dit l'ascenseur émotionnel.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· Bernoulli, n = 2</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une joueuse réussit ses tirs au but avec la probabilité 0,7, et ses tirs sont supposés indépendants. Elle tire deux fois&nbsp;; X est le nombre de buts. a. Dessine l'arbre. b. Établis la loi de X. c. Calcule E(X). Que remarques-tu&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>deux étages, S (but, 0,7) et E (raté, 0,3) à chacun&nbsp;: quatre chemins SS, SE, ES, EE.</p>
+          <p><span class="etape-label">b. — </span>\(P(X = 2) = 0{,}7^2 = 0{,}49\)&nbsp;; \(P(X = 1) = 2 \times 0{,}7 \times 0{,}3 = 0{,}42\) (deux chemins&nbsp;: SE et ES)&nbsp;; \(P(X = 0) = 0{,}3^2 = 0{,}09\). Contrôle&nbsp;: \(0{,}49 + 0{,}42 + 0{,}09 = 1\).</p>
+          <p><span class="etape-label">c. — </span>\(E(X) = 2 \times 0{,}49 + 1 \times 0{,}42 + 0 \times 0{,}09 = 1{,}4\) but. Tiens&nbsp;: \(1{,}4 = 2 \times 0{,}7\) — deux tirs à 70&nbsp;% de réussite donnent bien 1,4 but en moyenne. Joli, non&nbsp;?</p>
+          <p class="conclusion">Conclusion&nbsp;: X = 1 exige de compter <em>deux</em> chemins. Et l'espérance confirme l'intuition «&nbsp;n fois p&nbsp;» — tu le prouveras en Terminale.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· au moins un succès</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un jeu vidéo, chaque coffre contient un objet rare avec la probabilité 0,2, indépendamment des autres. Tu ouvres trois coffres&nbsp;; X est le nombre d'objets rares. a. Calcule la probabilité d'obtenir au moins un objet rare. b. Calcule \(P(X = 1)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>le contraire de «&nbsp;au moins un&nbsp;» est «&nbsp;aucun&nbsp;», un seul chemin&nbsp;: \(P(X = 0) = 0{,}8^3 = 0{,}512\). Donc \(P(X \geqslant 1) = 1 - 0{,}512 = 0{,}488\).</p>
+          <p><span class="etape-label">b. — </span>trois chemins à un succès, chacun de probabilité \(0{,}2 \times 0{,}8^2 = 0{,}128\)&nbsp;: \(P(X = 1) = 3 \times 0{,}128 = 0{,}384\).</p>
+          <p class="conclusion">Conclusion&nbsp;: presque une chance sur deux d'être servi, alors que chaque coffre n'offre que 20&nbsp;%. Répéter fait grimper les chances — mais par le détour du «&nbsp;1 − aucun&nbsp;», jamais en additionnant les p.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· quatre répétitions</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un QCM compte 4 questions à 4 réponses possibles chacune. Un élève répond entièrement au hasard&nbsp;; X est son nombre de bonnes réponses. a. Justifie qu'il s'agit d'une succession d'épreuves de Bernoulli identiques et indépendantes, et précise p. b. Calcule \(P(X = 0)\) et \(P(X = 4)\) sous forme de fractions. c. Montre que la probabilité d'avoir au moins une bonne réponse vaut \(\dfrac{175}{256}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>chaque question a deux issues (bonne réponse ou non), avec \(p = \dfrac{1}{4}\) à chaque fois, et répondre au hasard rend les questions indépendantes&nbsp;: le cadre de Bernoulli s'applique, avec n = 4.</p>
+          <p><span class="etape-label">b. — </span>\(P(X = 0) = \left(\dfrac{3}{4}\right)^4 = \dfrac{81}{256}\) (un seul chemin&nbsp;: quatre échecs)&nbsp;; \(P(X = 4) = \left(\dfrac{1}{4}\right)^4 = \dfrac{1}{256}\).</p>
+          <p><span class="etape-label">c. — </span>\(P(X \geqslant 1) = 1 - P(X = 0) = 1 - \dfrac{81}{256} = \dfrac{175}{256} \approx 0{,}68\).</p>
+          <p class="conclusion">Conclusion&nbsp;: deux chances sur trois de décrocher <em>au moins un</em> point au hasard… et une sur 256 de tout réussir. Le hasard dépanne, il ne remplace pas les révisions.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· lecture de code Python</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On a écrit ce programme Python (la fonction <code>random()</code> renvoie un nombre au hasard entre 0 et 1)&nbsp;:</p>
+        <div class="bloc-code"><pre>from random import random
+
+def partie():
+    r = random()
+    if r &lt; 0.5:
+        return -2
+    elif r &lt; 0.8:
+        return 0
+    else:
+        return 3
+
+def moyenne(N):
+    total = 0
+    for i in range(N):
+        total = total + partie()
+    return total / N</pre></div>
+        <p class="exercice-enonce">a. Justifie que <code>partie()</code> simule une partie de la roue du chapitre. b. Que calcule <code>moyenne(1000)</code>&nbsp;? c. Autour de quelle valeur se stabilise <code>moyenne(N)</code> quand N devient très grand&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span><code>r</code> tombe au hasard entre 0 et 1&nbsp;: il est dans \([0\;;\,0{,}5[\) avec la probabilité 0,5 (renvoie −2), dans \([0{,}5\;;\,0{,}8[\) avec la probabilité 0,3 (renvoie 0), au-delà avec la probabilité 0,2 (renvoie 3). C'est exactement la loi de X.</p>
+          <p><span class="etape-label">b. — </span>elle additionne les gains de 1&thinsp;000 parties simulées puis divise par 1&thinsp;000&nbsp;: c'est le gain moyen par partie sur 1&thinsp;000 parties — ce qu'affichait le graphique de la section 3.</p>
+          <p><span class="etape-label">c. — </span>d'après l'interprétation de l'espérance, la moyenne se stabilise autour de \(E(X) = -0{,}40\).</p>
+          <p class="conclusion">Conclusion&nbsp;: un simulateur ne «&nbsp;calcule&nbsp;» pas l'espérance, il la fait apparaître. Les seuils 0,5 et 0,8 encodent les probabilités cumulées — relis-les jusqu'à ce que ce soit évident.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème&nbsp;: l'assurance</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un assureur propose une assurance casse pour smartphone à 25&nbsp;€ par an. Il estime qu'un client casse son écran dans l'année avec la probabilité 0,2&nbsp;; la réparation, à sa charge, coûte alors 90&nbsp;€. X est le gain annuel de l'assureur pour un contrat. a. Établis la loi de X. b. Calcule E(X) et interprète pour 10&thinsp;000 contrats. c. Du point de vue du client, l'espérance est de −7&nbsp;€&nbsp;: pourquoi accepte-t-il un jeu défavorable&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>pas de casse (probabilité 0,8)&nbsp;: l'assureur encaisse 25&nbsp;€. Casse (0,2)&nbsp;: il encaisse 25 et paie 90, soit \(25 - 90 = -65\)&nbsp;€. Loi&nbsp;: \(P(X = 25) = 0{,}8\), \(P(X = -65) = 0{,}2\).</p>
+          <p><span class="etape-label">b. — </span>\(E(X) = 25 \times 0{,}8 + (-65) \times 0{,}2 = 20 - 13 = 7\)&nbsp;€&nbsp;: en moyenne, chaque contrat rapporte 7&nbsp;€ par an. Sur 10&thinsp;000 contrats, environ \(10\,000 \times 7 = 70\,000\)&nbsp;€ — et la moyenne réelle sera très proche de l'espérance, comme au graphique de la section 3.</p>
+          <p><span class="etape-label">c. — </span>le client, lui, ne joue qu'<em>une</em> fois&nbsp;: l'interprétation «&nbsp;en moyenne sur un grand nombre de répétitions&nbsp;» ne le concerne pas. Il paie 25&nbsp;€ certains pour effacer un risque rare mais lourd (−90&nbsp;€)&nbsp;: il achète une réduction d'écart type, pas une espérance.</p>
+          <p class="conclusion">Conclusion&nbsp;: l'assureur vit de l'espérance (il répète le jeu 10&thinsp;000 fois), le client paie pour la variance. Tout le chapitre tient dans cette phrase.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · SANS CALCULATRICE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Pour financer le voyage de fin d'année, le foyer du lycée vend des tickets de grattage à 2&nbsp;€, imprimés en très grand nombre&nbsp;: 5&nbsp;% des tickets rapportent 12&nbsp;€, 20&nbsp;% rapportent 4&nbsp;€, les autres ne rapportent rien. On note X le gain net (montant rapporté moins prix du ticket) d'un acheteur.</p>
+          <div class="bac-partie">PARTIE A — UN TICKET</div>
+          <ol>
+            <li>Justifie que X prend les valeurs 10, 2 et −2, puis établis la loi de probabilité de X.</li>
+            <li>Calcule E(X) et interprète ce résultat pour un acheteur.</li>
+            <li>Le foyer espère vendre 200 tickets. Quelle recette moyenne peut-il prévoir grâce à ce jeu&nbsp;?</li>
+            <li>Calcule V(X), puis montre, sans calculatrice, que \(2{,}9 &lt; \sigma(X) &lt; 3\).</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — TROIS TICKETS</div>
+          <ol>
+            <li>Un ticket est «&nbsp;gagnant&nbsp;» s'il rapporte un lot. Trois élèves achètent chacun un ticket. Justifie que le nombre Y de tickets gagnants suit le cadre d'une succession de trois épreuves de Bernoulli identiques et indépendantes, avec \(p = \dfrac{1}{4}\).</li>
+            <li>Calcule \(P(Y = 0)\), puis la probabilité qu'au moins un des trois tickets soit gagnant. On donnera les résultats sous forme de fractions.</li>
+            <li>Montre que \(P(Y = 1) = P(Y = 0)\). Étonnant, non&nbsp;?</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>gains nets&nbsp;: \(12 - 2 = 10\), \(4 - 2 = 2\), \(0 - 2 = -2\). Loi&nbsp;: \(P(X = 10) = 0{,}05\), \(P(X = 2) = 0{,}2\), \(P(X = -2) = 0{,}75\). Contrôle&nbsp;: \(0{,}05 + 0{,}2 + 0{,}75 = 1\).</p>
+            <p><span class="etape-label">A.2 — </span>\(E(X) = 10 \times 0{,}05 + 2 \times 0{,}2 + (-2) \times 0{,}75 = 0{,}5 + 0{,}4 - 1{,}5 = -0{,}6\)&nbsp;€&nbsp;: en moyenne, un acheteur perd 0,60&nbsp;€ par ticket.</p>
+            <p><span class="etape-label">A.3 — </span>ce que perd l'acheteur, le foyer le gagne&nbsp;: environ \(200 \times 0{,}60 = 120\)&nbsp;€ de recette moyenne.</p>
+            <p><span class="etape-label">A.4 — </span>\(E(X^2) = 100 \times 0{,}05 + 4 \times 0{,}2 + 4 \times 0{,}75 = 5 + 0{,}8 + 3 = 8{,}8\), donc \(V(X) = 8{,}8 - (-0{,}6)^2 = 8{,}8 - 0{,}36 = 8{,}44\). Comme \(2{,}9^2 = 8{,}41 &lt; 8{,}44 &lt; 9 = 3^2\) et que la fonction carré est croissante sur les positifs, \(2{,}9 &lt; \sigma(X) &lt; 3\).</p>
+            <p><span class="etape-label">B.1 — </span>chaque ticket est gagnant (probabilité \(0{,}05 + 0{,}2 = 0{,}25 = \dfrac{1}{4}\)) ou non&nbsp;: deux issues, même p pour les trois tickets, achats indépendants (tickets imprimés en très grand nombre). Cadre de Bernoulli, n = 3.</p>
+            <p><span class="etape-label">B.2 — </span>\(P(Y = 0) = \left(\dfrac{3}{4}\right)^3 = \dfrac{27}{64}\)&nbsp;; \(P(Y \geqslant 1) = 1 - \dfrac{27}{64} = \dfrac{37}{64}\) (un peu plus d'une chance sur deux).</p>
+            <p><span class="etape-label">B.3 — </span>trois chemins à un gagnant, chacun de probabilité \(\dfrac{1}{4} \times \left(\dfrac{3}{4}\right)^2 = \dfrac{9}{64}\)&nbsp;: \(P(Y = 1) = \dfrac{27}{64} = P(Y = 0)\). Le facteur 3 (les chemins) compense exactement le rapport des probabilités — c'est l'arbre qui rend ça visible.</p>
+            <p class="conclusion">Le bac adore ce découpage&nbsp;: une loi avec mise (attention au net), une espérance interprétée, une variance par la formule rapide, puis une répétition d'épreuves avec le réflexe «&nbsp;au moins un = 1 − aucun&nbsp;».</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">Les statistiques <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
