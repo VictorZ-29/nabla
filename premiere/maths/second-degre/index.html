@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Le second degré — Première Spé Maths | Nabla</title>
+<meta name="description" content="Comprends vraiment le second degré : la parabole et sa forme canonique, le sommet, le discriminant, les racines, la factorisation, le signe du trinôme et les inéquations, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/second-degre/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Le second degré — Première Spé Maths | Nabla">
+<meta property="og:description" content="La parabole et sa forme canonique, le discriminant, les racines, la factorisation et le signe du trinôme : un cours interactif où tu manipules les paraboles toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/second-degre/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Le second degré — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Forme canonique, discriminant, factorisation, signe du trinôme et inéquations : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Le second degré — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur le second degré : fonction polynôme du second degré, forme canonique et sommet, variations, discriminant, racines, factorisation, signe du trinôme et inéquations. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/second-degre/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Fonction polynôme du second degré, forme canonique, sommet et variations d'une parabole, discriminant, racines, factorisation du trinôme, signe du trinôme, inéquations du second degré",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=13">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=13">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=13">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/parabole-sommet.js"></script>
+<script type="module" src="../../../assets/js/widgets/parabole-discriminant.js"></script>
+<script type="module" src="../../../assets/js/widgets/parabole-signe.js"></script>
+<script type="module" src="../../../assets/js/widgets/parabole-formes.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="second-degre">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>Le second degré</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>mettre un trinôme sous forme canonique et lire son sommet, résoudre une équation du second degré avec (ou sans) le discriminant, factoriser, dresser un tableau de signes — et résoudre une inéquation.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. La courbe du ballon</a>
+      <a href="#s2">2. Attrape le sommet</a>
+      <a href="#s3">3. Le discriminant</a>
+      <a href="#s4">4. Factoriser, lire le signe</a>
+      <a href="#s5">5. Les inéquations</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. La courbe du ballon</a>
+        <a href="#s2">2. Attrape le sommet</a>
+        <a href="#s3">3. Le discriminant</a>
+        <a href="#s4">4. Factoriser, lire le signe</a>
+        <a href="#s5">5. Les inéquations</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. La courbe que dessine un ballon</h2>
+      <p class="prose">Match de foot, un défenseur te barre la route&nbsp;: tu fais une passe lobée. Le ballon décolle, monte, ralentit, culmine… puis retombe, exactement comme il est monté. Cette trajectoire, tout le monde la reconnaît à l'œil. Ce chapitre lui donne un nom, une équation — et surtout des outils pour répondre aux vraies questions&nbsp;: jusqu'où monte-t-il&nbsp;? où retombe-t-il&nbsp;? passe-t-il au-dessus du défenseur&nbsp;?</p>
+      <p class="prose">On mesure&nbsp;: à \(x\) mètres du point de départ, le ballon est à la hauteur \(h(x)\), en mètres&nbsp;:</p>
+
+      <div class="math-vitrine">$$h(x) = -0{,}5x^2 + 2x$$</div>
+
+      <p class="prose">Regarde bien cette écriture&nbsp;: elle ne répond <em>directement</em> à aucune des trois questions. La hauteur maximale&nbsp;? Invisible. Le point de chute&nbsp;? Caché. C'est le fil rouge du chapitre&nbsp;: un trinôme peut s'écrire de plusieurs façons, et chaque écriture révèle une information que les autres cachent. Apprendre le second degré, c'est apprendre à <em>réécrire</em>.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="Trajectoire du ballon : une parabole tournée vers le bas, de sommet S de coordonnées deux et deux, qui part de l'origine et retombe sur l'axe en x égale quatre ; la courbe de x au carré, en craie, est tracée à côté">
+          <path class="g-grid" d="M0 400L0 0M64 400L64 0M128 400L128 0M192 400L192 0M256 400L256 0M384 400L384 0M448 400L448 0M512 400L512 0M576 400L576 0M640 400L640 0M0 400L640 400M0 360L640 360M0 320L640 320M0 280L640 280M0 240L640 240M0 160L640 160M0 120L640 120M0 80L640 80M0 40L640 40M0 0L640 0"></path>
+          <path class="g-axis" d="M0 200L640 200M320 400L320 0"></path>
+          <path class="g-courbe" d="M176.9 0L178.9 5.7L181 11.3L183 16.8L185.1 22.2L187.1 27.6L189.2 32.8L191.2 38L193.2 43.1L195.3 48.1L197.3 53.1L199.4 57.9L201.4 62.7L203.5 67.4L205.5 72L207.6 76.5L209.6 81L211.6 85.3L213.7 89.6L215.7 93.8L217.8 98L219.8 102L221.9 106L223.9 109.8L226 113.6L228 117.3L230 121L232.1 124.5L234.1 128L236.2 131.4L238.2 134.7L240.3 137.9L242.3 141.1L244.4 144.1L246.4 147.1L248.4 150L250.5 152.8L252.5 155.6L254.6 158.2L256.6 160.8L258.7 163.3L260.7 165.7L262.8 168L264.8 170.2L266.8 172.4L268.9 174.5L270.9 176.5L273 178.4L275 180.2L277.1 182L279.1 183.7L281.2 185.3L283.2 186.8L285.2 188.2L287.3 189.6L289.3 190.8L291.4 192L293.4 193.1L295.5 194.1L297.5 195.1L299.6 195.9L301.6 196.7L303.6 197.4L305.7 198L307.7 198.5L309.8 199L311.8 199.3L313.9 199.6L315.9 199.8L318 200L322 200L324.1 199.8L326.1 199.6L328.2 199.3L330.2 199L332.3 198.5L334.3 198L336.4 197.4L338.4 196.7L340.4 195.9L342.5 195.1L344.5 194.1L346.6 193.1L348.6 192L350.7 190.8L352.7 189.6L354.8 188.2L356.8 186.8L358.8 185.3L360.9 183.7L362.9 182L365 180.2L367 178.4L369.1 176.5L371.1 174.5L373.2 172.4L375.2 170.2L377.2 168L379.3 165.7L381.3 163.3L383.4 160.8L385.4 158.2L387.5 155.6L389.5 152.8L391.6 150L393.6 147.1L395.6 144.1L397.7 141.1L399.7 137.9L401.8 134.7L403.8 131.4L405.9 128L407.9 124.5L410 121L412 117.3L414 113.6L416.1 109.8L418.1 106L420.2 102L422.2 98L424.3 93.8L426.3 89.6L428.4 85.3L430.4 81L432.4 76.5L434.5 72L436.5 67.4L438.6 62.7L440.6 57.9L442.7 53.1L444.7 48.1L446.8 43.1L448.8 38L450.8 32.8L452.9 27.6L454.9 22.2L457 16.8L459 11.3L461.1 5.7L463.1 0"></path>
+          <text class="etiquette-math etiquette-math--muted" font-size="15" x="470" y="16">x²</text>
+          <path class="g-guide" stroke-dasharray="4 4" d="M448 400L448 0"></path>
+          <text class="etiquette-mono etiquette-math--muted" font-size="12" x="454" y="392">x = 2</text>
+          <path class="g-courbe-derivee" d="M208.5 400L211.6 392.8L214.7 385.8L217.8 378.8L220.9 371.9L223.9 365.1L227 358.4L230.1 351.8L233.2 345.3L236.3 338.9L239.4 332.6L242.4 326.3L245.5 320.2L248.6 314.1L251.7 308.2L254.8 302.3L257.8 296.6L260.9 290.9L264 285.3L267.1 279.8L270.2 274.4L273.3 269.1L276.3 263.9L279.4 258.8L282.5 253.7L285.6 248.8L288.7 244L291.7 239.2L294.8 234.6L297.9 230L301 225.5L304.1 221.1L307.2 216.9L310.2 212.7L313.3 208.6L316.4 204.6L319.5 200.6L322.6 196.8L325.6 193.1L328.7 189.5L331.8 185.9L334.9 182.5L338 179.1L341.1 175.8L344.1 172.7L347.2 169.6L350.3 166.6L353.4 163.7L356.5 160.9L359.5 158.2L362.6 155.6L365.7 153.1L368.8 150.6L371.9 148.3L375 146.1L378 143.9L381.1 141.8L384.2 139.9L387.3 138L390.4 136.2L393.4 134.5L396.5 132.9L399.6 131.4L402.7 130L405.8 128.7L408.9 127.5L411.9 126.3L415 125.3L418.1 124.4L421.2 123.5L424.3 122.8L427.3 122.1L430.4 121.5L433.5 121L436.6 120.6L439.7 120.3L442.8 120.1L445.8 120L448.9 120L452 120.1L455.1 120.2L458.2 120.5L461.2 120.9L464.3 121.3L467.4 121.8L470.5 122.5L473.6 123.2L476.7 124L479.7 124.9L482.8 125.9L485.9 127L489 128.2L492.1 129.5L495.2 130.9L498.2 132.3L501.3 133.9L504.4 135.5L507.5 137.3L510.6 139.1L513.6 141L516.7 143.1L519.8 145.2L522.9 147.4L526 149.7L529.1 152.1L532.1 154.6L535.2 157.1L538.3 159.8L541.4 162.6L544.5 165.4L547.5 168.4L550.6 171.4L553.7 174.6L556.8 177.8L559.9 181.1L563 184.5L566 188L569.1 191.6L572.2 195.3L575.3 199.1L578.4 203L581.4 206.9L584.5 211L587.6 215.2L590.7 219.4L593.8 223.8L596.9 228.2L599.9 232.7L603 237.3L606.1 242L609.2 246.9L612.3 251.7L615.3 256.7L618.4 261.8L621.5 267L624.6 272.3L627.7 277.6L630.8 283.1L633.8 288.6L636.9 294.3L640 300"></path>
+          <circle class="pt-fixe" cx="320" cy="200" r="4"></circle>
+          <circle class="pt-fixe" cx="576" cy="200" r="4"></circle>
+          <text class="etiquette-math etiquette-math--muted" font-size="14" x="581" y="222">4</text>
+          <circle class="pt-point" cx="448" cy="120" r="5.5"></circle>
+          <text class="etiquette-math" font-size="18" x="424" y="108">S</text>
+        </svg>
+        <figcaption>La trajectoire du ballon est une <strong>parabole</strong>&nbsp;: la courbe de \(x^2\) retournée, aplatie et déplacée. Son point culminant, le <strong>sommet</strong> \(S(2\;;\,2)\), est posé sur un axe de symétrie vertical&nbsp;: le ballon retombe en \(x = 4\), symétrique de son départ.</figcaption>
+      </figure>
+
+      <p class="prose">Le vocabulaire de départ, tu l'as déjà croisé en Seconde&nbsp;:</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une <strong>fonction polynôme du second degré</strong> (on dit aussi un <strong>trinôme</strong>) est une fonction définie sur \(\mathbb{R}\) par \(f(x) = ax^2 + bx + c\), où \(a\), \(b\), \(c\) sont des réels et \(a \neq 0\).</p>
+        <p>Sa courbe est une <strong>parabole</strong>&nbsp;: tournée vers le haut si \(a > 0\), vers le bas si \(a < 0\).</p>
+      </div>
+
+      <p class="prose">Ici, \(h(x) = -0{,}5x^2 + 2x\)&nbsp;: \(a = -0{,}5\), \(b = 2\), \(c = 0\). Le \(a\) est négatif, la parabole regarde vers le bas — le ballon retombe. Reste à faire parler cette écriture. Direction le sommet.</p>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Attrape le sommet&nbsp;: la forme canonique</h2>
+      <p class="prose">Toute parabole, c'est la courbe de \(x^2\) étirée par \(a\), puis déplacée pour poser son sommet où il faut. Vérifie-le toi-même&nbsp;: attrape le sommet, déplace-le, écrase ou retourne la parabole avec le curseur \(a\) — et regarde les deux écritures de la fonction se réécrire en direct.</p>
+
+      <figure class="widget" id="widget-parabole-sommet"
+        data-widget="parabole-sommet"
+        data-a-init="-0.5" data-alpha-init="2" data-beta-init="2"
+        data-xmin="-5" data-xmax="5" data-ymin="-5" data-ymax="5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Attrape le sommet</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Parabole d'équation a facteur de x moins alpha, le tout au carré, plus beta, posée sur la courbe en craie de x au carré ; le sommet se déplace et les deux écritures de la fonction se réécrivent en direct"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">a</span>
+            <input type="range" class="js-curseur-a" min="-2" max="2" step="0.25" value="-0.5" aria-label="Coefficient a : l'ouverture et le sens de la parabole">
+          </div>
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">α</span>
+            <input type="range" class="js-curseur-alpha" min="-3" max="3" step="1" value="2" aria-label="Alpha : l'abscisse du sommet">
+          </div>
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">β</span>
+            <input type="range" class="js-curseur-beta" min="-3" max="3" step="0.5" value="2" aria-label="Beta : l'ordonnée du sommet">
+          </div>
+          <div class="lecture-formule"><span class="js-canonique">f(x) = −0,5 (x − 2)² + 2</span></div>
+          <div class="lecture-formule"><span class="js-developpee">= −0,5 x² + 2 x</span></div>
+          <div class="chips">
+            <span class="chip chip--accent js-sommet">S = (2 ; 2)</span>
+            <span class="chip chip--bad js-etat" aria-live="polite">a &lt; 0 — la parabole est tournée vers le bas</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">La courbe de x², retournée puis étirée par a (plus ouverte que x²), déplacée pour poser son sommet en (2 ; 2). Les deux écritures décrivent la même fonction.</p>
+        </div>
+        <div class="widget-note">Le sommet s'attrape aussi directement sur le graphique — il s'aimante à la grille. α et β sont exactement ses coordonnées&nbsp;: c'est tout l'intérêt de la première écriture.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi ces deux écritures décrivent-elles la même fonction&nbsp;? Développe la première&nbsp;: \(a(x - \alpha)^2 + \beta = ax^2 - 2a\alpha\,x + a\alpha^2 + \beta\). C'est bien un trinôme, avec \(b = -2a\alpha\). Retourne cette égalité&nbsp;: \(\alpha = -\dfrac{b}{2a}\). Autrement dit, <em>toute</em> forme développée cache une écriture avec le sommet — et on sait toujours retrouver où il est.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Tout trinôme \(f(x) = ax^2 + bx + c\) peut s'écrire sous la <strong>forme canonique</strong> \(f(x) = a(x - \alpha)^2 + \beta\), où \(S(\alpha\;;\,\beta)\) est le <strong>sommet</strong> de la parabole.</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$f(x) = a(x - \alpha)^2 + \beta \qquad \text{avec} \quad \alpha = -\dfrac{b}{2a} \ \text{ et } \ \beta = f(\alpha)$$</div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — SYMÉTRIE ET VARIATIONS</div>
+        <p>La parabole est symétrique par rapport à la droite verticale \(x = \alpha\), qui passe par le sommet.</p>
+        <p>Si \(a > 0\), \(f\) est décroissante sur \(\left]-\infty\;;\,\alpha\right]\) puis croissante sur \(\left[\alpha\;;\,+\infty\right[\)&nbsp;: le sommet est un creux, \(f\) admet un <strong>minimum</strong> égal à \(\beta\), atteint en \(\alpha\).</p>
+        <p>Si \(a < 0\), c'est l'inverse&nbsp;: le sommet est un toit, \(f\) admet un <strong>maximum</strong> égal à \(\beta\), atteint en \(\alpha\).</p>
+      </div>
+
+      <figure class="tableau tab-variations">
+        <figcaption>
+          <span>TABLEAU DE VARIATIONS — a &gt; 0</span>
+          <span class="bande-note">un creux&nbsp;: minimum β en α</span>
+        </figcaption>
+        <div class="defile">
+          <div class="tab-grille tab-grille--sommet" role="img" aria-label="Tableau de variations pour a positif : f décroît de moins l'infini à alpha, atteint son minimum beta en alpha, puis croît de alpha à plus l'infini.">
+            <div class="cel cel-entete bord-x">x</div>
+            <div class="cel cel-gauche bord-x">−∞</div>
+            <div class="cel-centre bord-x">α</div>
+            <div class="cel cel-droite bord-x">+∞</div>
+
+            <div class="cel cel-entete cel-fleche">f</div>
+            <div class="cel-fleche">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 6L73.8 45.2"></path><path class="fleche-pointe" d="M82 50L74.1 39.7L69.1 48.3Z"></path></svg>
+            </div>
+            <div class="val-bas">β</div>
+            <div class="cel-fleche">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 50L73.8 10.8"></path><path class="fleche-pointe" d="M82 6L74.1 16.3L69.1 7.7Z"></path></svg>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="tableau tab-variations">
+        <figcaption>
+          <span>TABLEAU DE VARIATIONS — a &lt; 0</span>
+          <span class="bande-note">un toit&nbsp;: maximum β en α</span>
+        </figcaption>
+        <div class="defile">
+          <div class="tab-grille tab-grille--sommet" role="img" aria-label="Tableau de variations pour a négatif : f croît de moins l'infini à alpha, atteint son maximum beta en alpha, puis décroît de alpha à plus l'infini.">
+            <div class="cel cel-entete bord-x">x</div>
+            <div class="cel cel-gauche bord-x">−∞</div>
+            <div class="cel-centre bord-x">α</div>
+            <div class="cel cel-droite bord-x">+∞</div>
+
+            <div class="cel cel-entete cel-fleche">f</div>
+            <div class="cel-fleche">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 50L73.8 10.8"></path><path class="fleche-pointe" d="M82 6L74.1 16.3L69.1 7.7Z"></path></svg>
+            </div>
+            <div class="val-haut">β</div>
+            <div class="cel-fleche">
+              <svg class="var-fleche" viewBox="0 0 88 56" aria-hidden="true" focusable="false"><path class="fleche-trait" d="M6 6L73.8 45.2"></path><path class="fleche-pointe" d="M82 50L74.1 39.7L69.1 48.3Z"></path></svg>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER LE SOMMET (ET LA FORME CANONIQUE)</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Calcule \(\alpha = -\dfrac{b}{2a}\) — attention aux signes de \(b\) et de \(a\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule \(\beta = f(\alpha)\)&nbsp;: la valeur de la fonction au sommet.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Écris \(f(x) = a(x - \alpha)^2 + \beta\) — et vérifie en développant de tête.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE TRINÔME QUI VA NOUS SUIVRE</div>
+        <p class="exemple-enonce">Mets \(f(x) = x^2 - 2x - 3\) sous forme canonique et donne son sommet.</p>
+        <p><span class="etape-label">Étape 1 — </span>\(a = 1\), \(b = -2\)&nbsp;: \(\alpha = -\dfrac{-2}{2 \times 1} = 1\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(\beta = f(1) = 1 - 2 - 3 = -4\).</p>
+        <p><span class="etape-label">Étape 3 — </span>\(f(x) = (x - 1)^2 - 4\). Vérification&nbsp;: \((x-1)^2 - 4 = x^2 - 2x + 1 - 4 = x^2 - 2x - 3\). ✓</p>
+        <p class="conclusion">Conclusion&nbsp;: sommet \(S(1\;;\,-4)\), et comme \(a = 1 > 0\), c'est un minimum. Retiens ce trinôme&nbsp;: il va nous accompagner tout le chapitre.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Le sommet&nbsp;: \(\alpha = -\dfrac{b}{2a}\), puis \(\beta = f(\alpha)\). La forme canonique est la carte d'identité de la parabole&nbsp;: \(a\) donne l'allure, \((\alpha\;;\,\beta)\) la position.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le sommet de la parabole de \(f(x) = 2(x - 3)^2 + 1\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(S(-3\;;\,1)\)</button>
+              <button type="button" class="quiz-reponse">\(S(3\;;\,1)\)</button>
+              <button type="button" class="quiz-reponse">\(S(3\;;\,-1)\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\alpha\) est la valeur qui <em>annule</em> la parenthèse&nbsp;: \((x - 3)^2\) s'annule en \(x = 3\). Lire \(-3\) parce qu'on voit un signe moins, c'est LE piège de la forme canonique.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(f(x) = -2(x + 1)^2 + 5\). La fonction \(f\) admet…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un maximum, égal à \(5\)</button>
+              <button type="button" class="quiz-reponse">un minimum, égal à \(5\)</button>
+              <button type="button" class="quiz-reponse">un maximum, égal à \(-1\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(a = -2 < 0\)&nbsp;: le sommet est un toit, donc un maximum. Sa valeur est \(\beta = 5\)&nbsp;; le \(-1\), c'est l'<em>endroit</em> où il est atteint, pas sa valeur.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pour mettre \(x^2 - 6x + 5\) sous forme canonique, on commence par calculer…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le discriminant</button>
+              <button type="button" class="quiz-reponse">les racines</button>
+              <button type="button" class="quiz-reponse">\(\alpha = -\dfrac{b}{2a}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le sommet d'abord&nbsp;: \(\alpha = \dfrac{6}{2} = 3\), puis \(\beta = f(3) = -4\). Le discriminant, lui, sert aux <em>racines</em> — c'est la section suivante.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Combien de racines&nbsp;? Le discriminant</h2>
+      <p class="prose">Deuxième vraie question&nbsp;: où la courbe traverse-t-elle l'axe des abscisses&nbsp;? Pour le ballon, c'est «&nbsp;où retombe-t-il&nbsp;?&nbsp;»&nbsp;— autrement dit, résoudre \(f(x) = 0\). Les solutions s'appellent les <strong>racines</strong> du trinôme. Et selon la position de la parabole, il peut y en avoir deux, une seule… ou aucune. Fais-le toi-même&nbsp;: monte et descends la parabole, et regarde les racines se rapprocher, fusionner, disparaître.</p>
+
+      <figure class="widget" id="widget-parabole-discriminant"
+        data-widget="parabole-discriminant" data-c-init="-3"
+        data-xmin="-3" data-xmax="5" data-ymin="-5" data-ymax="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Les trois destins d'une parabole</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages du coefficient c">
+            <button type="button" data-c="-3" aria-pressed="true">Δ &gt; 0</button>
+            <button type="button" data-c="1" aria-pressed="false">Δ = 0</button>
+            <button type="button" data-c="3" aria-pressed="false">Δ &lt; 0</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Parabole d'équation x au carré moins deux x plus c ; le curseur c la fait monter ou descendre, et les racines apparaissent, fusionnent ou disparaissent sur l'axe des abscisses"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">c</span>
+            <input type="range" class="js-curseur" min="-4" max="4" step="0.5" value="-3" aria-label="Coefficient c : monte ou descend la parabole">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="lecture-formule"><span class="js-ligne">Δ = b² − 4ac = 4 − 4 × (−3) = 16</span></div>
+          <div class="chips">
+            <span class="chip">c = <span class="js-c">−3</span></span>
+            <span class="chip chip--accent">Δ = <span class="js-delta">16</span></span>
+            <span class="chip chip--accent js-etat" aria-live="polite">Δ &gt; 0 — deux racines</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">La parabole traverse l'axe des abscisses en deux points : x₁ = −1,00 et x₂ = 3,00. L'équation f(x) = 0 a deux solutions.</p>
+        </div>
+        <div class="widget-note">Ici \(a = 1\) et \(b = -2\) sont figés, seul \(c\) bouge&nbsp;: monter la parabole, c'est augmenter \(c\) — et \(\Delta = 4 - 4c\) fond à mesure, jusqu'à devenir négatif.</div>
+      </figure>
+
+      <p class="prose">Le nombre qui décide du destin, tu viens de le voir vivre. Voici son nom.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Le <strong>discriminant</strong> du trinôme \(ax^2 + bx + c\) est le nombre \(\Delta = b^2 - 4ac\).</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LES RACINES DE \(ax^2 + bx + c = 0\)</div>
+        <p>Si \(\Delta > 0\), l'équation a <strong>deux solutions</strong>&nbsp;:</p>
+        <div class="math-vitrine">$$x_1 = \dfrac{-b - \sqrt{\Delta}}{2a} \qquad x_2 = \dfrac{-b + \sqrt{\Delta}}{2a}$$</div>
+        <p>Si \(\Delta = 0\), une seule solution, dite <strong>racine double</strong>&nbsp;: \(x_0 = -\dfrac{b}{2a}\).</p>
+        <p>Si \(\Delta < 0\), <strong>aucune solution</strong> réelle.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>D'où sort ce \(\Delta\)&nbsp;? De la forme canonique. Résoudre \(f(x) = 0\), c'est résoudre \(a(x - \alpha)^2 + \beta = 0\), c'est-à-dire \((x - \alpha)^2 = -\dfrac{\beta}{a}\) — et un calcul (que tu peux mener&nbsp;: développe et simplifie) montre que ce membre de droite vaut exactement \(\dfrac{\Delta}{4a^2}\). Or un carré n'est jamais négatif&nbsp;: si \(\Delta < 0\), impasse&nbsp;; si \(\Delta = 0\), l'unique solution est le sommet posé sur l'axe, \(x_0 = \alpha\)&nbsp;; si \(\Delta > 0\), deux solutions, symétriques de part et d'autre de \(\alpha\). Voilà pourquoi le \(-\dfrac{b}{2a}\) du sommet réapparaît au cœur des formules.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — RÉSOUDRE UNE ÉQUATION DU SECOND DEGRÉ</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Mets l'équation sous la forme \(ax^2 + bx + c = 0\), et identifie \(a\), \(b\), \(c\) <em>avec leurs signes</em>.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule \(\Delta = b^2 - 4ac\) et lis son signe&nbsp;: il donne le nombre de solutions.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Applique les formules — puis contrôle&nbsp;: les deux racines doivent être symétriques autour de \(-\dfrac{b}{2a}\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LES TROIS CAS</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Résous \(x^2 - 2x - 3 = 0\).</p>
+          <p><span class="etape-label">Étape 1 — </span>\(a = 1\), \(b = -2\), \(c = -3\)&nbsp;: \(\Delta = (-2)^2 - 4 \times 1 \times (-3) = 4 + 12 = 16 > 0\). Deux solutions.</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\sqrt{\Delta} = 4\)&nbsp;: \(x_1 = \dfrac{2 - 4}{2} = -1\) et \(x_2 = \dfrac{2 + 4}{2} = 3\).</p>
+          <p class="conclusion">Les racines \(-1\) et \(3\) sont bien symétriques autour de \(\alpha = 1\)&nbsp;: c'est notre trinôme de la section 2, dont le sommet \(S(1\;;\,-4)\) plonge sous l'axe — il <em>fallait</em> deux racines.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Résous \(9x^2 - 6x + 1 = 0\).</p>
+          <p><span class="etape-label">Calcul — </span>\(\Delta = 36 - 36 = 0\)&nbsp;: racine double \(x_0 = \dfrac{6}{18} = \dfrac{1}{3}\).</p>
+          <p class="conclusion">Le sommet est posé exactement sur l'axe. D'ailleurs \(9x^2 - 6x + 1 = (3x - 1)^2\)&nbsp;: un carré parfait.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">c. Résous \(x^2 + x + 3 = 0\).</p>
+          <p><span class="etape-label">Calcul — </span>\(\Delta = 1 - 12 = -11 < 0\)&nbsp;: aucune solution.</p>
+          <p class="conclusion">La parabole flotte entièrement au-dessus de l'axe. On n'écrit <em>pas</em> \(\sqrt{-11}\)&nbsp;: on s'arrête au signe de \(\Delta\).</p>
+        </div>
+      </div>
+
+      <p class="prose">Un mot d'honnêteté avant de dégainer \(\Delta\) partout&nbsp;: certaines équations se résolvent plus vite sans lui — \(x^2 = 9\), un produit déjà factorisé, une identité remarquable. L'exercice 07 t'entraîne à repérer ces raccourcis&nbsp;: à l'épreuve sans calculatrice, ils valent de l'or.</p>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur le discriminant</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le discriminant de \(ax^2 + bx + c\), c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(b^2 + 4ac\)</button>
+              <button type="button" class="quiz-reponse">\(4ac - b^2\)</button>
+              <button type="button" class="quiz-reponse">\(b^2 - 4ac\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(b^2 - 4ac\), en gardant les signes de \(a\), \(b\), \(c\). Inverser un signe dans \(\Delta\) est l'erreur de calcul la plus chère du chapitre&nbsp;: elle fausse tout ce qui suit.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>L'équation \(x^2 + 6x + 9 = 0\) a…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">deux solutions</button>
+              <button type="button" class="quiz-reponse">une seule solution</button>
+              <button type="button" class="quiz-reponse">aucune solution</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\Delta = 36 - 36 = 0\)&nbsp;: racine double \(x_0 = -3\). Tu pouvais aussi reconnaître \((x + 3)^2\)&nbsp;: un carré parfait s'annule en un seul point.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Si \(\Delta < 0\), alors la parabole…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">ne coupe jamais l'axe des abscisses</button>
+              <button type="button" class="quiz-reponse">est tournée vers le bas</button>
+              <button type="button" class="quiz-reponse">n'existe pas</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\Delta < 0\) dit seulement que \(f(x) = 0\) n'a pas de solution&nbsp;: la courbe flotte d'un seul côté de l'axe. Son orientation, elle, dépend du signe de \(a\) — pas de celui de \(\Delta\).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Factoriser et lire le signe</h2>
+      <p class="prose">Reprends notre trinôme fétiche&nbsp;: \(x^2 - 2x - 3\), racines \(-1\) et \(3\). Calcule \((x + 1)(x - 3)\)&nbsp;: tu retombes exactement dessus. Ce n'est pas un hasard — connaître les racines, c'est pouvoir <em>factoriser</em>. Et la forme factorisée est la troisième écriture du trinôme, celle qui montre les racines… et, tu vas le voir, le signe.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA FORME FACTORISÉE</div>
+        <p>Si \(\Delta > 0\), avec \(x_1\) et \(x_2\) les deux racines&nbsp;: \(f(x) = a(x - x_1)(x - x_2)\).</p>
+        <p>Si \(\Delta = 0\), avec \(x_0\) la racine double&nbsp;: \(f(x) = a(x - x_0)^2\).</p>
+        <p>Si \(\Delta < 0\)&nbsp;: pas de racine, pas de factorisation (en facteurs du premier degré).</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — FACTORISER UN TRINÔME</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Trouve les racines — par \(\Delta\), ou de tête quand l'équation est évidente.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Écris \(a(x - x_1)(x - x_2)\). Le \(a\) devant est <em>obligatoire</em>&nbsp;: sans lui, tu factorises un autre trinôme.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Vérifie&nbsp;: développe de tête, ou compare \(f(0)\) avec le \(c\) attendu.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — AVEC LE a DEVANT</div>
+        <p class="exemple-enonce">Factorise \(f(x) = 2x^2 - 5x + 2\).</p>
+        <p><span class="etape-label">Étape 1 — </span>\(\Delta = 25 - 16 = 9\), \(\sqrt{\Delta} = 3\)&nbsp;: \(x_1 = \dfrac{5 - 3}{4} = \dfrac{1}{2}\) et \(x_2 = \dfrac{5 + 3}{4} = 2\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(f(x) = 2\left(x - \dfrac{1}{2}\right)(x - 2)\).</p>
+        <p><span class="etape-label">Étape 3 — </span>en absorbant le 2 dans la première parenthèse&nbsp;: \(f(x) = (2x - 1)(x - 2)\). Contrôle&nbsp;: \(f(0) = (-1) \times (-2) = 2\). ✓</p>
+        <p class="conclusion">Conclusion&nbsp;: sans le facteur \(2\), on aurait factorisé \(x^2 - \dfrac{5}{2}x + 1\)… qui n'est pas \(f\).</p>
+      </div>
+
+      <p class="prose">La forme factorisée a un second super-pouvoir&nbsp;: le <strong>signe</strong> du trinôme — savoir où \(f(x)\) est positif, négatif, nul. C'est LA compétence qui servira toute l'année (signe de la dérivée, tableaux de variations…). Joue d'abord&nbsp;: déplace les racines, retourne la parabole avec le curseur \(a\), et regarde le tableau de signes se remplir tout seul.</p>
+
+      <figure class="widget" id="widget-parabole-signe"
+        data-widget="parabole-signe" data-a-init="1" data-x1-init="-1" data-x2-init="3"
+        data-racines="-3,4" data-xmin="-4.5" data-xmax="5.5" data-ymin="-5" data-ymax="5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le signe se lit sur la parabole</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Parabole d'équation a facteur de x moins x un, facteur de x moins x deux ; les deux racines se déplacent sur l'axe des abscisses, la courbe est colorée selon le signe du trinôme et un tableau de signes se met à jour en dessous"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">a</span>
+            <input type="range" class="js-curseur" min="-2" max="2" step="0.25" value="1" aria-label="Coefficient a : le sens et l'ouverture de la parabole">
+          </div>
+          <div class="lecture-formule"><span class="js-ligne">f(x) = (x + 1)(x − 3)</span></div>
+          <div class="chips">
+            <span class="chip">x₁ = <span class="js-x1">−1</span></span>
+            <span class="chip">x₂ = <span class="js-x2">3</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">a &gt; 0 — positif à l'extérieur des racines</span>
+          </div>
+          <div class="tab-grille tab-grille--mini" aria-hidden="true">
+            <div class="cel cel-entete bord-x">x</div>
+            <div class="cel cel-gauche bord-x">−∞</div>
+            <div class="cel-centre bord-x js-t-x1">−1</div>
+            <div class="bord-x"></div>
+            <div class="cel-centre bord-x js-t-x2">3</div>
+            <div class="cel cel-droite bord-x">+∞</div>
+
+            <div class="cel cel-entete cel-produit">f(x)</div>
+            <div class="cel-centre cel-produit js-t-ext-g">+</div>
+            <div class="cel-centre cel-produit js-t-zero-1">0</div>
+            <div class="cel-centre cel-produit js-t-int">−</div>
+            <div class="cel-centre cel-produit js-t-zero-2">0</div>
+            <div class="cel-centre cel-produit js-t-ext-d">+</div>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Au-dessus de l'axe avant −1 et après 3 (le signe de a), en dessous entre les deux (le signe opposé).</p>
+        </div>
+        <div class="widget-note">Déplace les racines&nbsp;: elles ne changent jamais les + et les − du tableau, seulement l'endroit où ça bascule. Le signe, c'est \(a\) qui le décide.</div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE SIGNE DU TRINÔME</div>
+        <p>Si \(\Delta > 0\)&nbsp;: le trinôme est <strong>du signe de \(a\) à l'extérieur des racines</strong>, du signe opposé entre elles, nul aux racines.</p>
+        <p>Si \(\Delta = 0\)&nbsp;: du signe de \(a\) partout, nul en \(x_0\).</p>
+        <p>Si \(\Delta < 0\)&nbsp;: du signe de \(a\) partout, jamais nul.</p>
+      </div>
+
+      <p class="prose">Et si tu préfères le raisonnement au par-cœur&nbsp;: avec la forme factorisée, c'est le tableau de signes d'un produit, exactement comme au chapitre sur la dérivation. Sur notre trinôme fétiche&nbsp;:</p>
+
+      <figure class="tableau tab-signes">
+        <figcaption>
+          <span>TABLEAU DE SIGNES</span>
+          <span class="bande-note">f(x) = (x + 1)(x − 3)</span>
+        </figcaption>
+        <div class="defile">
+          <div class="tab-grille" role="img" aria-label="Tableau de signes de f. Le facteur x plus 1 est négatif avant moins 1, nul en moins 1, positif après. Le facteur x moins 3 est négatif avant 3, nul en 3, positif après. Le produit f de x est donc positif avant moins 1, négatif entre moins 1 et 3, positif après 3.">
+            <div class="cel cel-entete bord-x">x</div>
+            <div class="cel cel-gauche bord-x">−∞</div>
+            <div class="cel-centre bord-x">−1</div>
+            <div class="bord-x"></div>
+            <div class="cel-centre bord-x">3</div>
+            <div class="cel cel-droite bord-x">+∞</div>
+
+            <div class="cel cel-entete bord-signe">x + 1</div>
+            <div class="cel-centre bord-signe">−</div>
+            <div class="cel-centre bord-signe">0</div>
+            <div class="cel-centre bord-signe">+</div>
+            <div class="cel-centre bord-signe"></div>
+            <div class="cel-centre bord-signe">+</div>
+
+            <div class="cel cel-entete bord-signe">x − 3</div>
+            <div class="cel-centre bord-signe">−</div>
+            <div class="cel-centre bord-signe"></div>
+            <div class="cel-centre bord-signe">−</div>
+            <div class="cel-centre bord-signe">0</div>
+            <div class="cel-centre bord-signe">+</div>
+
+            <div class="cel cel-entete cel-produit">f(x)</div>
+            <div class="cel-centre cel-produit">+</div>
+            <div class="cel-centre cel-produit">0</div>
+            <div class="cel-centre cel-produit">−</div>
+            <div class="cel-centre cel-produit">0</div>
+            <div class="cel-centre cel-produit">+</div>
+          </div>
+        </div>
+      </figure>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>À l'extérieur des racines, le trinôme a le signe de \(a\)&nbsp;; entre elles, le signe opposé. Pas de racine&nbsp;? Toujours le signe de \(a\).</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois réflexes sur le signe</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(2x^2 - 2x - 12\) a pour racines \(-2\) et \(3\). Sa forme factorisée est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(2(x + 2)(x - 3)\)</button>
+              <button type="button" class="quiz-reponse">\((x + 2)(x - 3)\)</button>
+              <button type="button" class="quiz-reponse">\(2(x - 2)(x + 3)\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> racine \(-2\) → facteur \((x + 2)\), et le \(a = 2\) devant est obligatoire&nbsp;: \((x+2)(x-3)\) tout seul se développe en \(x^2 - x - 6\), pas en \(2x^2 - 2x - 12\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(x^2 - 5x + 4\) a pour racines \(1\) et \(4\). Il est <em>négatif</em>…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">à l'extérieur de \(1\) et \(4\)</button>
+              <button type="button" class="quiz-reponse">jamais, puisque \(a > 0\)</button>
+              <button type="button" class="quiz-reponse">entre \(1\) et \(4\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> signe de \(a\) (positif) à l'extérieur, signe opposé entre les racines. «&nbsp;Jamais négatif puisque \(a > 0\)&nbsp;» oublie que la parabole plonge sous l'axe entre ses racines.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Un trinôme a \(\Delta < 0\) et \(a < 0\). Alors il est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">négatif seulement entre ses racines</button>
+              <button type="button" class="quiz-reponse">négatif pour tout \(x\)</button>
+              <button type="button" class="quiz-reponse">positif pour tout \(x\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> pas de racine, donc jamais de changement de signe&nbsp;: le trinôme garde partout le signe de \(a\), négatif. La première réponse parle de racines… qui n'existent pas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Résoudre une inéquation (avec la bonne écriture)</h2>
+      <p class="prose">Dernière compétence, celle qui rapporte le plus au bac&nbsp;: les <strong>inéquations</strong> du second degré — «&nbsp;pour quels \(x\) a-t-on \(f(x) \geq 0\)&nbsp;?&nbsp;». Avant la méthode, un test. Résous de tête&nbsp;: \(x^2 < 9\). Si tu as pensé «&nbsp;\(x < 3\)&nbsp;», ce paragraphe est écrit pour toi — et tu verras dans deux minutes ce qui cloche.</p>
+      <p class="prose">Pour bien résoudre, il faut d'abord savoir <em>lire</em> une parabole dans toutes ses écritures. Muscle ton œil&nbsp;: une seule des trois écritures correspond à la courbe tracée.</p>
+
+      <figure class="widget" id="widget-parabole-formes" data-widget="parabole-formes">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">À chaque parabole son écriture</span>
+          </div>
+          <span class="quiz-score js-progression">PARABOLE 1/4</span>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Une parabole est tracée ; à toi de trouver laquelle des trois écritures proposées lui correspond"></svg>
+        <div class="widget-pied">
+          <p class="quiz-enonce">Cette parabole, c'est celle de…</p>
+          <div class="quiz-reponses js-manche">
+            <button type="button" class="quiz-reponse">\((x - 1)(x + 3)\)</button>
+            <button type="button" class="quiz-reponse">\((x + 1)(x - 3)\)</button>
+            <button type="button" class="quiz-reponse">\(-(x + 1)(x - 3)\)</button>
+          </div>
+          <div class="quiz-reponses js-manche" hidden>
+            <button type="button" class="quiz-reponse">\(-(x - 1)^2 + 4\)</button>
+            <button type="button" class="quiz-reponse">\((x - 1)^2 + 4\)</button>
+            <button type="button" class="quiz-reponse">\(-(x + 1)^2 + 4\)</button>
+          </div>
+          <div class="quiz-reponses js-manche" hidden>
+            <button type="button" class="quiz-reponse">\(x^2 - 4\)</button>
+            <button type="button" class="quiz-reponse">\((x + 2)^2\)</button>
+            <button type="button" class="quiz-reponse">\((x - 2)^2\)</button>
+          </div>
+          <div class="quiz-reponses js-manche" hidden>
+            <button type="button" class="quiz-reponse">\((x - 1)^2 + 2\)</button>
+            <button type="button" class="quiz-reponse">\((x + 1)^2 + 2\)</button>
+            <button type="button" class="quiz-reponse">\((x + 1)^2 - 2\)</button>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> lis d'abord le signe de \(a\) (tournée vers le haut ou vers le bas&nbsp;?), puis les racines sur l'axe, ou le sommet.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> les racines se lisent sur l'axe&nbsp;: \(-1\) et \(3\). Racine \(-1\) → facteur \((x + 1)\)&nbsp;: le facteur s'annule à la racine. Et la parabole monte&nbsp;: \(a > 0\), ce qui élimine la version avec le moins devant.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> sommet \(S(1\;;\,4)\) et parabole tournée vers le bas. \((x-1)^2 + 4\) monterait (\(a > 0\))&nbsp;; \(-(x+1)^2 + 4\) poserait son sommet en \(-1\). Remarque&nbsp;: ses racines sont \(-1\) et \(3\) — la parabole précédente, retournée.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> la parabole <em>touche</em> l'axe en un seul point, \(x = 2\)&nbsp;: racine double, donc un carré \((x - 2)^2\). \(x^2 - 4\) aurait deux racines (\(-2\) et \(2\))&nbsp;; \((x + 2)^2\) poserait son sommet en \(-2\).</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> aucune racine (\(\Delta < 0\)&nbsp;: la courbe flotte au-dessus de l'axe) et sommet \(S(-1\;;\,2)\)&nbsp;: la parenthèse \((x + 1)^2\) s'annule en \(-1\). Les deux autres écritures se trompent d'un signe — sur \(\alpha\) ou sur \(\beta\).</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Parabole suivante ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <script type="application/json">
+        [
+          {"courbe":"fact-m1-3","ymin":-5,"ymax":6,"bonne":2},
+          {"courbe":"canon-neg-1-4","ymin":-4.5,"ymax":6,"bonne":1},
+          {"courbe":"double-2","ymin":-1.5,"ymax":6,"bonne":3},
+          {"courbe":"canon-m1-2","ymin":-1.5,"ymax":6,"bonne":2}
+        ]
+        </script>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — RÉSOUDRE UNE INÉQUATION DU SECOND DEGRÉ</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Ramène tout d'un seul côté&nbsp;: \(f(x) \geq 0\) (ou \(\leq\), \(<\), \(>\)), avec \(0\) de l'autre.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Cherche les racines de \(f\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Dresse le tableau de signes — ou dessine la parabole dans ta tête, c'est le même geste.</span></div>
+        <div class="methode-etape"><span class="etape-num">4.</span><span class="etape-corps">Lis l'ensemble des solutions&nbsp;: bornes <em>incluses</em> si l'inégalité est large, racines <em>exclues</em> si elle est stricte.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — LE TEST DU DÉBUT, ET UN a NÉGATIF</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Résous \(x^2 < 9\).</p>
+          <p><span class="etape-label">Étape 1 — </span>tout à gauche&nbsp;: \(x^2 - 9 < 0\). Racines de \(x^2 - 9 = (x-3)(x+3)\)&nbsp;: \(-3\) et \(3\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(a = 1 > 0\)&nbsp;: négatif <em>entre</em> les racines.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(S = \left]-3\;;\,3\right[\). La réponse «&nbsp;\(x < 3\)&nbsp;» oublie tout le côté gauche de la parabole&nbsp;: \(x = -10\) vérifie \(x < 3\), mais \((-10)^2 = 100\), pas vraiment inférieur à 9.</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Résous \(-x^2 + 2x + 3 \geq 0\).</p>
+          <p><span class="etape-label">Étape 1 — </span>racines&nbsp;: \(\Delta = 4 + 12 = 16\), \(x = \dfrac{-2 \pm 4}{-2}\), soit \(-1\) et \(3\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(a = -1 < 0\)&nbsp;: le trinôme est <em>positif entre</em> ses racines (signe opposé à \(a\) entre elles).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(S = \left[-1\;;\,3\right]\), bornes incluses car l'inégalité est large. Pas besoin de multiplier par \(-1\)&nbsp;: la règle du signe gère le \(a\) négatif toute seule.</p>
+        </div>
+      </div>
+
+      <p class="prose">Il te reste à choisir la bonne arme au bon moment. C'est le résumé le plus utile du chapitre&nbsp;:</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>LA BONNE ÉCRITURE POUR LA BONNE QUESTION</span>
+          <span class="bande-note">un seul trinôme, trois costumes</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th>écriture</th><th>ce qu'elle montre</th><th>la question qu'elle règle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>\(ax^2 + bx + c\) <span class="note-cellule">(développée)</span></td><td>\(c = f(0)\), et \(a\), \(b\), \(c\) pour \(\Delta\)</td><td>calculer, dériver, lancer le discriminant</td></tr>
+              <tr><td>\(a(x - \alpha)^2 + \beta\) <span class="note-cellule">(canonique)</span></td><td>le sommet \(S(\alpha\;;\,\beta)\)</td><td>extremum, variations, symétrie</td></tr>
+              <tr><td>\(a(x - x_1)(x - x_2)\) <span class="note-cellule">(factorisée)</span></td><td>les racines \(x_1\), \(x_2\)</td><td>équations \(f(x)=0\), signe, inéquations</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>L'ensemble des solutions de \(x^2 \leq 16\) est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\left]-\infty\;;\,4\right]\)</button>
+              <button type="button" class="quiz-reponse">\(\left[-4\;;\,4\right]\)</button>
+              <button type="button" class="quiz-reponse">\(\left[4\;;\,+\infty\right[\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(x^2 - 16 \leq 0\), racines \(-4\) et \(4\), négatif entre elles. Répondre «&nbsp;\(x \leq 4\)&nbsp;», c'est traiter du second degré comme du premier — le piège du chapitre.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>L'inéquation \(-2(x - 1)(x - 5) \geq 0\) a pour solutions…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\left]-\infty\;;\,1\right] \cup \left[5\;;\,+\infty\right[\)</button>
+              <button type="button" class="quiz-reponse">aucune&nbsp;: le trinôme est toujours négatif</button>
+              <button type="button" class="quiz-reponse">\(\left[1\;;\,5\right]\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(a = -2 < 0\)&nbsp;: positif <em>entre</em> les racines \(1\) et \(5\). La forme factorisée donne la réponse en une ligne, sans le moindre calcul de \(\Delta\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pour lire directement le sommet d'une parabole, la meilleure écriture est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la forme canonique</button>
+              <button type="button" class="quiz-reponse">la forme développée</button>
+              <button type="button" class="quiz-reponse">la forme factorisée</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(a(x - \alpha)^2 + \beta\) affiche \(S(\alpha\;;\,\beta)\). La développée montre \(c = f(0)\), la factorisée montre les racines&nbsp;: chaque écriture répond à sa question.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>\(x^2 + 3x + 7 > 0\), avec \(\Delta = 9 - 28 < 0\). Les solutions sont…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">aucune</button>
+              <button type="button" class="quiz-reponse">tous les réels</button>
+              <button type="button" class="quiz-reponse">impossibles à trouver sans les racines</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\Delta < 0\) et \(a > 0\)&nbsp;: le trinôme est strictement positif <em>partout</em>, l'inéquation est vraie pour tout réel. «&nbsp;Pas de racine&nbsp;» ne veut pas dire «&nbsp;pas de solution&nbsp;» — c'est le piège n°&thinsp;5 ci-dessous.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Oublier de regarder le signe de \(a\).</strong> L'allure de la parabole, le sens de l'extremum, le signe «&nbsp;à l'extérieur des racines&nbsp;»&nbsp;: tout dépend de \(a\). Un trinôme avec \(a < 0\) est <em>négatif</em> à l'extérieur de ses racines — pas positif.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Lire le sommet avec le mauvais signe.</strong> Le sommet de \((x + 3)^2 - 1\) est en \(x = -3\) — la valeur qui <em>annule</em> la parenthèse — pas en \(3\). Le \(\alpha\) de la forme canonique se lit «&nbsp;à l'envers&nbsp;» du signe affiché.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Diviser par \(x\).</strong> Passer de \(x^2 = 5x\) à \(x = 5\), c'est perdre la racine \(x = 0\). On ne divise jamais par une expression qui peut être nulle&nbsp;: on met tout d'un côté et on <em>factorise</em>&nbsp;: \(x(x - 5) = 0\).</p>
+        </div>
+        <div class="piege">
+          <p><strong>Résoudre \(x^2 < 9\) comme du premier degré.</strong> «&nbsp;\(x < 3\)&nbsp;» oublie toute la branche gauche de la parabole&nbsp;: les solutions sont \(\left]-3\;;\,3\right[\). Une inéquation du second degré passe par un tableau de signes, jamais par une racine carrée appliquée à la va-vite.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Confondre «&nbsp;pas de racine&nbsp;» et «&nbsp;pas de solution&nbsp;».</strong> \(\Delta < 0\) dit seulement que la parabole ne traverse pas l'axe. Le trinôme garde alors un signe constant (celui de \(a\))&nbsp;: une inéquation peut très bien être vraie pour <em>tous</em> les réels — ou aucun.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">TRINÔME</span>
+          <p>\(f(x) = ax^2 + bx + c\), avec \(a \neq 0\)&nbsp;; courbe&nbsp;: une parabole, vers le haut si \(a > 0\), vers le bas si \(a < 0\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">SOMMET</span>
+          <p>Forme canonique \(a(x - \alpha)^2 + \beta\) avec \(\alpha = -\dfrac{b}{2a}\), \(\beta = f(\alpha)\)&nbsp;; axe de symétrie \(x = \alpha\), extremum \(\beta\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">RACINES</span>
+          <p>\(\Delta = b^2 - 4ac\). Si \(\Delta > 0\)&nbsp;: \(x = \dfrac{-b \pm \sqrt{\Delta}}{2a}\)&nbsp;; si \(\Delta = 0\)&nbsp;: \(x_0 = -\dfrac{b}{2a}\)&nbsp;; si \(\Delta < 0\)&nbsp;: aucune.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">FACTORISER</span>
+          <p>\(a(x - x_1)(x - x_2)\) si \(\Delta > 0\)&nbsp;; \(a(x - x_0)^2\) si \(\Delta = 0\)&nbsp;; impossible si \(\Delta < 0\). Le \(a\) devant, toujours.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">SIGNE</span>
+          <p>Signe de \(a\) à l'extérieur des racines, opposé entre elles&nbsp;; si \(\Delta < 0\), toujours le signe de \(a\). C'est la clé des inéquations.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: lecture d'un trinôme, forme canonique et variations, équations et discriminant, factorisation, signe, inéquations — et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· lire un trinôme</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Pour chaque fonction, dis si c'est une fonction polynôme du second degré&nbsp;; si oui, donne \(a\), \(b\), \(c\) et le sens de la parabole&nbsp;: a. \(f(x) = 2x^2 - 3x + 1\)&nbsp;; b. \(g(x) = 5 - x^2\)&nbsp;; c. \(h(x) = 3x + 1\)&nbsp;; d. \(k(x) = (x - 1)(x + 4)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Oui&nbsp;: \(a = 2\), \(b = -3\), \(c = 1\). \(a > 0\)&nbsp;: parabole tournée vers le haut.</p>
+          <p><span class="etape-label">b. — </span>Oui — remets dans l'ordre&nbsp;: \(g(x) = -x^2 + 5\), donc \(a = -1\), \(b = 0\), \(c = 5\). Vers le bas.</p>
+          <p><span class="etape-label">c. — </span>Non&nbsp;: pas de terme en \(x^2\), c'est du premier degré (une droite).</p>
+          <p><span class="etape-label">d. — </span>Oui — développe&nbsp;: \(k(x) = x^2 + 3x - 4\), donc \(a = 1\), \(b = 3\), \(c = -4\). Vers le haut.</p>
+          <p class="conclusion">Conclusion&nbsp;: un trinôme peut se déguiser — développe ou réordonne avant de lire \(a\), \(b\), \(c\). Et le sens de la parabole ne dépend <em>que</em> du signe de \(a\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· lire la forme canonique</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Donne le sommet et le sens de chaque parabole&nbsp;: a. \(f(x) = (x - 3)^2 + 1\)&nbsp;; b. \(g(x) = 2(x + 1)^2 - 5\)&nbsp;; c. \(h(x) = -(x - 2)^2 + 4\). Puis&nbsp;: laquelle de ces fonctions admet un maximum, et lequel&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(S(3\;;\,1)\), \(a = 1 > 0\)&nbsp;: vers le haut.</p>
+          <p><span class="etape-label">b. — </span>\(S(-1\;;\,-5)\) — la parenthèse \((x+1)^2\) s'annule en \(-1\), pas en \(1\). Vers le haut.</p>
+          <p><span class="etape-label">c. — </span>\(S(2\;;\,4)\), \(a = -1 < 0\)&nbsp;: vers le bas.</p>
+          <p><span class="etape-label">Maximum — </span>seule \(h\) a \(a < 0\)&nbsp;: son sommet est un toit. Maximum \(4\), atteint en \(x = 2\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\alpha\) se lit avec le signe qui <em>annule</em> la parenthèse, et \(\beta\) est la valeur de l'extremum — «&nbsp;atteint en \(\alpha\)&nbsp;», mais «&nbsp;égal à \(\beta\)&nbsp;».</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· forme canonique</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Mets sous forme canonique&nbsp;: a. \(f(x) = x^2 - 6x + 5\)&nbsp;; b. \(g(x) = 2x^2 + 4x - 1\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\alpha = -\dfrac{-6}{2} = 3\)&nbsp;; \(\beta = f(3) = 9 - 18 + 5 = -4\). Donc \(f(x) = (x - 3)^2 - 4\). Vérification&nbsp;: \(x^2 - 6x + 9 - 4 = x^2 - 6x + 5\). ✓</p>
+          <p><span class="etape-label">b. — </span>\(\alpha = -\dfrac{4}{4} = -1\)&nbsp;; \(\beta = g(-1) = 2 - 4 - 1 = -3\). Donc \(g(x) = 2(x + 1)^2 - 3\). Vérification&nbsp;: \(2(x^2 + 2x + 1) - 3 = 2x^2 + 4x - 1\). ✓</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\alpha = -\dfrac{b}{2a}\), \(\beta = f(\alpha)\), et on <em>vérifie en développant</em> — dix secondes qui sauvent des points.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· variations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(f(x) = -2(x - 1)^2 + 8\). a. Donne le sommet et le sens de la parabole. b. Dresse le tableau de variations de \(f\). c. \(f\) admet-elle un maximum ou un minimum&nbsp;? Précise-le. d. Résous \(f(x) = 8\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Forme canonique directe&nbsp;: \(S(1\;;\,8)\), et \(a = -2 < 0\)&nbsp;: vers le bas.</p>
+          <p><span class="etape-label">b. — </span>\(f\) est croissante sur \(\left]-\infty\;;\,1\right]\), décroissante sur \(\left[1\;;\,+\infty\right[\)&nbsp;: flèche qui monte jusqu'à \(8\), puis flèche qui descend.</p>
+          <p><span class="etape-label">c. — </span>Un <em>maximum</em>, égal à \(8\), atteint en \(x = 1\).</p>
+          <p><span class="etape-label">d. — </span>\(-2(x-1)^2 + 8 = 8 \iff -2(x-1)^2 = 0 \iff x = 1\)&nbsp;: une seule solution — la valeur \(8\) n'est atteinte qu'au sommet, logique pour un maximum.</p>
+          <p class="conclusion">Conclusion&nbsp;: quand la forme canonique est donnée, tout se lit — ne développe surtout pas.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· discriminant</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Calcule \(\Delta\) et donne le <em>nombre</em> de solutions (sans les calculer)&nbsp;: a. \(x^2 - 3x + 2 = 0\)&nbsp;; b. \(4x^2 + 4x + 1 = 0\)&nbsp;; c. \(2x^2 + x + 3 = 0\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\Delta = 9 - 8 = 1 > 0\)&nbsp;: deux solutions.</p>
+          <p><span class="etape-label">b. — </span>\(\Delta = 16 - 16 = 0\)&nbsp;: une racine double.</p>
+          <p><span class="etape-label">c. — </span>\(\Delta = 1 - 24 = -23 < 0\)&nbsp;: aucune solution.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\Delta\) trie <em>avant</em> de calculer. À l'épreuve sans calculatrice, ce tri rapide est un réflexe qui rapporte.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· équations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Résous dans \(\mathbb{R}\)&nbsp;: a. \(x^2 - 2x - 3 = 0\)&nbsp;; b. \(2x^2 - 5x + 2 = 0\)&nbsp;; c. \(x^2 + 3x + 5 = 0\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\Delta = 4 + 12 = 16\), \(\sqrt{\Delta} = 4\)&nbsp;: \(x = \dfrac{2 \pm 4}{2}\), soit \(x_1 = -1\) et \(x_2 = 3\).</p>
+          <p><span class="etape-label">b. — </span>\(\Delta = 25 - 16 = 9\), \(\sqrt{\Delta} = 3\)&nbsp;: \(x = \dfrac{5 \pm 3}{4}\), soit \(x_1 = \dfrac{1}{2}\) et \(x_2 = 2\).</p>
+          <p><span class="etape-label">c. — </span>\(\Delta = 9 - 20 = -11 < 0\)&nbsp;: aucune solution.</p>
+          <p class="conclusion">Conclusion&nbsp;: contrôle systématique — en a., \(-1\) et \(3\) sont symétriques autour de \(-\dfrac{b}{2a} = 1\)&nbsp;: cohérent.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· équations sans Δ</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Résous <em>sans calculer de discriminant</em>&nbsp;: a. \(x^2 = 5x\)&nbsp;; b. \((3x - 2)(x + 5) = 0\)&nbsp;; c. \(x^2 - 49 = 0\)&nbsp;; d. \(x^2 + 1 = 0\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Surtout ne divise pas par \(x\)&nbsp;! Tout d'un côté et factorise&nbsp;: \(x^2 - 5x = x(x - 5) = 0\), donc \(x = 0\) <em>ou</em> \(x = 5\).</p>
+          <p><span class="etape-label">b. — </span>Déjà factorisé — un produit est nul si un facteur l'est&nbsp;: \(x = \dfrac{2}{3}\) ou \(x = -5\). Calculer \(\Delta\) ici serait du gâchis.</p>
+          <p><span class="etape-label">c. — </span>Identité remarquable&nbsp;: \((x - 7)(x + 7) = 0\), donc \(x = 7\) ou \(x = -7\).</p>
+          <p><span class="etape-label">d. — </span>\(x^2 = -1\)&nbsp;: un carré n'est jamais strictement négatif, aucune solution.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\Delta\) est un outil, pas un réflexe obligatoire. Produit nul, facteur commun, identités remarquables&nbsp;: plus rapides — et sans calculatrice, décisifs.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· factorisation</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Factorise quand c'est possible&nbsp;: a. \(x^2 - 2x - 3\)&nbsp;; b. \(-x^2 + 4x - 4\)&nbsp;; c. \(x^2 + x + 1\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Racines \(-1\) et \(3\) (exercice 06)&nbsp;: \(x^2 - 2x - 3 = (x + 1)(x - 3)\).</p>
+          <p><span class="etape-label">b. — </span>\(\Delta = 16 - 16 = 0\)&nbsp;: racine double \(x_0 = \dfrac{-4}{-2} = 2\), donc \(-x^2 + 4x - 4 = -(x - 2)^2\). Le \(a = -1\) devant, obligatoire.</p>
+          <p><span class="etape-label">c. — </span>\(\Delta = 1 - 4 = -3 < 0\)&nbsp;: pas de racine, pas de factorisation.</p>
+          <p class="conclusion">Conclusion&nbsp;: racines → facteurs \((x - \text{racine})\), et le \(a\) en tête. Contrôle rapide par \(f(0)\)&nbsp;: en b., \(-(0-2)^2 = -4\). ✓</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· tableau de signes</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dresse le tableau de signes&nbsp;: a. \(f(x) = x^2 - 5x + 4\)&nbsp;; b. \(g(x) = -x^2 + 6x - 9\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\Delta = 25 - 16 = 9\)&nbsp;: racines \(\dfrac{5 \pm 3}{2}\), soit \(1\) et \(4\). \(a = 1 > 0\)&nbsp;: positif avant \(1\), nul en \(1\), négatif entre \(1\) et \(4\), nul en \(4\), positif après.</p>
+          <p><span class="etape-label">b. — </span>\(\Delta = 36 - 36 = 0\)&nbsp;: racine double \(x_0 = 3\) (d'ailleurs \(g(x) = -(x - 3)^2\)). \(a = -1 < 0\)&nbsp;: négatif partout, nul en \(3\) seulement.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\Delta = 0\) ne crée pas de zone positive — le trinôme <em>touche</em> le zéro sans jamais changer de signe.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· inéquations</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Résous dans \(\mathbb{R}\)&nbsp;: a. \(x^2 - 5x + 4 \leq 0\)&nbsp;; b. \(x^2 + x + 2 > 0\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Le tableau de l'exercice 09&nbsp;: négatif (ou nul) entre les racines. \(S = \left[1\;;\,4\right]\), bornes incluses (inégalité large).</p>
+          <p><span class="etape-label">b. — </span>\(\Delta = 1 - 8 = -7 < 0\) et \(a = 1 > 0\)&nbsp;: le trinôme est strictement positif partout. \(S = \mathbb{R}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: une inéquation du second degré se <em>lit</em> dans un tableau de signes (ou sur la parabole imaginée) — jamais en bricolant l'inégalité.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· inéquations pièges</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Résous dans \(\mathbb{R}\)&nbsp;: a. \(x^2 \geq 25\)&nbsp;; b. \(3x^2 < 2x\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(x^2 - 25 \geq 0\), racines \(-5\) et \(5\), positif à l'extérieur&nbsp;: \(S = \left]-\infty\;;\,-5\right] \cup \left[5\;;\,+\infty\right[\). (Et non «&nbsp;\(x \geq 5\)&nbsp;» tout seul&nbsp;: \(x = -8\) convient aussi.)</p>
+          <p><span class="etape-label">b. — </span>Ne divise pas par \(x\)&nbsp;! \(3x^2 - 2x < 0 \iff x(3x - 2) < 0\)&nbsp;: racines \(0\) et \(\dfrac{2}{3}\), \(a = 3 > 0\), négatif entre elles&nbsp;: \(S = \left]0\;;\,\dfrac{2}{3}\right[\).</p>
+          <p class="conclusion">Conclusion&nbsp;: les deux pièges du chapitre dans un seul exercice — jamais «&nbsp;comme du premier degré&nbsp;», jamais de division par \(x\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· paramètre</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On considère l'équation \(x^2 + mx + 9 = 0\), où \(m\) est un réel. a. Pour quelles valeurs de \(m\) l'équation admet-elle une racine double&nbsp;? b. Résous l'équation pour \(m = 10\). c. Pour quelles valeurs de \(m\) n'a-t-elle aucune solution&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\Delta = m^2 - 36\). Racine double \(\iff \Delta = 0 \iff m^2 = 36 \iff m = 6\) ou \(m = -6\).</p>
+          <p><span class="etape-label">b. — </span>\(m = 10\)&nbsp;: \(\Delta = 100 - 36 = 64\), \(\sqrt{\Delta} = 8\)&nbsp;: \(x = \dfrac{-10 \pm 8}{2}\), soit \(x_1 = -9\) et \(x_2 = -1\).</p>
+          <p><span class="etape-label">c. — </span>Aucune solution \(\iff \Delta < 0 \iff m^2 - 36 < 0\). C'est… une inéquation du second degré en \(m\)&nbsp;: racines \(\pm 6\), négatif entre elles&nbsp;: \(m \in \left]-6\;;\,6\right[\).</p>
+          <p class="conclusion">Conclusion&nbsp;: le discriminant est devenu lui-même un trinôme à étudier — la boucle du chapitre est bouclée.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· position relative</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans un repère, on trace la parabole \(\mathcal{P} : y = x^2 - 2x + 3\) et la droite \(\mathcal{D} : y = x + 1\). a. Calcule la différence \(d(x) = (x^2 - 2x + 3) - (x + 1)\). b. Étudie le signe de \(d(x)\). c. Conclus sur les positions relatives de \(\mathcal{P}\) et \(\mathcal{D}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(d(x) = x^2 - 3x + 2\).</p>
+          <p><span class="etape-label">b. — </span>\(\Delta = 9 - 8 = 1\)&nbsp;: racines \(\dfrac{3 \pm 1}{2}\), soit \(1\) et \(2\). \(a > 0\)&nbsp;: positif à l'extérieur de \([1\;;\,2]\), négatif entre.</p>
+          <p><span class="etape-label">c. — </span>\(\mathcal{P}\) est au-dessus de \(\mathcal{D}\) sur \(\left]-\infty\;;\,1\right[\) et sur \(\left]2\;;\,+\infty\right[\), en dessous sur \(\left]1\;;\,2\right[\), et elles se coupent aux points d'abscisses \(1\) et \(2\) — c'est-à-dire \((1\;;\,2)\) et \((2\;;\,3)\).</p>
+          <p class="conclusion">Conclusion&nbsp;: «&nbsp;position relative&nbsp;» = signe d'une différence. Ce réflexe-là revient dans presque tous les sujets de bac.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Retour au terrain&nbsp;: ta passe lobée suit la trajectoire \(h(x) = -0{,}5x^2 + 2x\) (hauteur en mètres, à \(x\) mètres du départ). a. Montre que \(h(x) = -0{,}5(x - 2)^2 + 2\). b. Quelle hauteur maximale le ballon atteint-il, et à quelle distance de toi&nbsp;? c. À quelle distance retombe-t-il au sol&nbsp;? d. Le défenseur, à \(1\) m de toi, peut toucher le ballon jusqu'à \(1{,}40\) m du sol&nbsp;: ta passe passe-t-elle&nbsp;? e. Sur quelle distance le ballon vole-t-il à plus de \(1{,}50\) m&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Développe&nbsp;: \(-0{,}5(x^2 - 4x + 4) + 2 = -0{,}5x^2 + 2x - 2 + 2 = -0{,}5x^2 + 2x\). ✓</p>
+          <p><span class="etape-label">b. — </span>Forme canonique&nbsp;: sommet \(S(2\;;\,2)\), et \(a < 0\)&nbsp;: maximum. Le ballon culmine à \(2\) m de haut, \(2\) m devant toi.</p>
+          <p><span class="etape-label">c. — </span>\(h(x) = 0 \iff -0{,}5x(x - 4) = 0 \iff x = 0\) ou \(x = 4\)&nbsp;: parti de \(0\), il retombe \(4\) m plus loin — symétrique du départ autour de l'axe \(x = 2\).</p>
+          <p><span class="etape-label">d. — </span>\(h(1) = -0{,}5 + 2 = 1{,}5\) m&nbsp;: le ballon passe \(10\) cm au-dessus de sa main. Passe réussie — de justesse.</p>
+          <p><span class="etape-label">e. — </span>\(h(x) \geq 1{,}5 \iff -0{,}5x^2 + 2x - 1{,}5 \geq 0\). Multiplie par \(-2\) <em>en retournant l'inégalité</em>&nbsp;: \(x^2 - 4x + 3 \leq 0\), racines \(1\) et \(3\), négatif entre elles&nbsp;: \(x \in \left[1\;;\,3\right]\). Le ballon reste au-dessus de \(1{,}50\) m pendant \(2\) mètres.</p>
+          <p class="conclusion">Conclusion&nbsp;: sommet → forme canonique, point de chute → racines, «&nbsp;au-dessus de…&nbsp;» → inéquation. Les trois écritures du trinôme, chacune à son poste — c'est exactement à ça que sert ce chapitre.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · SANS CALCULATRICE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Partie A&nbsp;: étude complète d'un trinôme. Partie B&nbsp;: une entreprise fabrique et vend \(x\) objets par jour (\(0 \leq x \leq 60\))&nbsp;; son bénéfice quotidien, en euros, est modélisé par \(B(x) = -2x^2 + 120x - 1000\).</p>
+          <div class="bac-partie">PARTIE A</div>
+          <ol>
+            <li>Soit \(f(x) = 2x^2 - 8x + 6\). Montre que \(f(x) = 2(x - 2)^2 - 2\).</li>
+            <li>Déduis-en le tableau de variations de \(f\) et son extremum.</li>
+            <li>Résous \(f(x) = 0\) (la forme canonique peut t'éviter le discriminant).</li>
+            <li>Écris \(f(x)\) sous forme factorisée, puis résous \(f(x) \leq 0\).</li>
+          </ol>
+          <div class="bac-partie">PARTIE B</div>
+          <ol>
+            <li>Calcule \(B(0)\) et interprète ce résultat.</li>
+            <li>Montre que \(B(x) = -2(x - 30)^2 + 800\). Déduis-en le bénéfice maximal et la production correspondante.</li>
+            <li>Détermine pour quelles productions l'entreprise est rentable, c'est-à-dire \(B(x) \geq 0\).</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>Développe&nbsp;: \(2(x - 2)^2 - 2 = 2(x^2 - 4x + 4) - 2 = 2x^2 - 8x + 6\). ✓</p>
+            <p><span class="etape-label">A.2 — </span>Sommet \(S(2\;;\,-2)\), \(a = 2 > 0\)&nbsp;: \(f\) décroît sur \(\left]-\infty\;;\,2\right]\) puis croît&nbsp;; minimum \(-2\) atteint en \(x = 2\).</p>
+            <p><span class="etape-label">A.3 — </span>Par la forme canonique&nbsp;: \(2(x - 2)^2 = 2 \iff (x - 2)^2 = 1 \iff x - 2 = \pm 1\)&nbsp;: \(x = 1\) ou \(x = 3\). (Le discriminant \(\Delta = 64 - 48 = 16\) redonne bien \(\dfrac{8 \pm 4}{4}\), soit \(1\) et \(3\).)</p>
+            <p><span class="etape-label">A.4 — </span>\(f(x) = 2(x - 1)(x - 3)\)&nbsp;; \(a > 0\), négatif entre les racines&nbsp;: \(f(x) \leq 0 \iff x \in \left[1\;;\,3\right]\).</p>
+            <p><span class="etape-label">B.1 — </span>\(B(0) = -1000\)&nbsp;: sans production, l'entreprise perd \(1\,000\) € par jour — ses coûts fixes.</p>
+            <p><span class="etape-label">B.2 — </span>\(-2(x - 30)^2 + 800 = -2x^2 + 120x - 1800 + 800 = -2x^2 + 120x - 1000\). ✓ \(a < 0\)&nbsp;: maximum \(800\) € pour \(30\) objets par jour.</p>
+            <p><span class="etape-label">B.3 — </span>\(B(x) \geq 0 \iff -2(x - 30)^2 \geq -800 \iff (x - 30)^2 \leq 400 \iff -20 \leq x - 30 \leq 20\)&nbsp;: rentable pour \(x \in \left[10\;;\,50\right]\). En dessous de \(10\) objets, les coûts fixes l'emportent&nbsp;; au-delà de \(50\), produire trop coûte plus que ça ne rapporte.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">La géométrie repérée <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
