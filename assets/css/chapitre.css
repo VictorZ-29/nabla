@@ -1261,3 +1261,12 @@
    rôles que les barres du chapitre avancement). */
 
 .mvt-caisse { fill: var(--chip); stroke: var(--chalk); stroke-width: var(--sw-grid); }
+
+/* --- Énergie mécanique (physique-chimie) : la part dissipée du compte ---------------------------------------
+   La rampe, le compte à barres, la caisse tirée et le freinage réutilisent
+   l'existant (.g-courbe, .pt-halo/.pt-point, .jauge-*, .avc-barre-*,
+   .mvt-caisse, .arc-angle, .ond-mesure, étiquettes .avc-nom et .etl-valeur).
+   Nouveau ici : la part de la cagnotte partie en chaleur — barres éteintes,
+   même rôle que les niveaux non allumés des jauges. */
+
+.nrj-dissipe { fill: var(--tick); }

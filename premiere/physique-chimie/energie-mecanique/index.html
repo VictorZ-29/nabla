@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>L'énergie mécanique — Première Spé Physique-Chimie | Nabla</title>
+<meta name="description" content="Comprends vraiment l'énergie mécanique : l'énergie cinétique ½mv², l'énergie potentielle de pesanteur, le travail d'une force constante (moteur, résistant ou nul), le théorème de l'énergie cinétique, et la conservation ou non-conservation de Em = Ec + Epp — avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé physique-chimie, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/physique-chimie/energie-mecanique/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="L'énergie mécanique — Première Spé Physique-Chimie | Nabla">
+<meta property="og:description" content="Énergie cinétique, énergie potentielle, travail d'une force, théorème de l'énergie cinétique, conservation de Em : un cours interactif où tu suis l'énergie toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/physique-chimie/energie-mecanique/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="L'énergie mécanique — Première Spé Physique-Chimie | Nabla">
+<meta name="twitter:description" content="Énergie cinétique, énergie potentielle, travail d'une force, théorème de l'énergie cinétique, conservation de Em : cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "L'énergie mécanique — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé physique-chimie sur les aspects énergétiques des phénomènes mécaniques : énergie cinétique, énergie potentielle de pesanteur, travail d'une force constante, travail du poids, théorème de l'énergie cinétique, forces conservatives et non conservatives, conservation et non-conservation de l'énergie mécanique. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/physique-chimie/energie-mecanique/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité physique-chimie",
+  "teaches": "Énergie cinétique, énergie potentielle de pesanteur, énergie mécanique, travail d'une force constante, travail du poids, travail des frottements, théorème de l'énergie cinétique, forces conservatives et non conservatives, conservation et non-conservation de l'énergie mécanique",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=12">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=12">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=12">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/energie-rampe.js"></script>
+<script type="module" src="../../../assets/js/widgets/energie-travail.js"></script>
+<script type="module" src="../../../assets/js/widgets/energie-freinage.js"></script>
+<script type="module" src="../../../assets/js/widgets/stoechio-jeu.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="energie">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Physique-Chimie</span>
+  </div>
+  <h1>L'énergie mécanique</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>calculer une énergie cinétique E<sub>c</sub> = ½mv² et une énergie potentielle de pesanteur E<sub>pp</sub> = mgz, calculer le travail d'une force constante et dire s'il est moteur, résistant ou nul, exploiter le théorème de l'énergie cinétique, et suivre l'énergie mécanique E<sub>m</sub> = E<sub>c</sub> + E<sub>pp</sub>&nbsp;: dire quand elle se conserve — et chiffrer ce que les frottements emportent quand elle ne se conserve pas.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. La rampe du skatepark</a>
+      <a href="#s2">2. Cinétique et potentielle</a>
+      <a href="#s3">3. Le travail d'une force</a>
+      <a href="#s4">4. Le théorème de l'énergie cinétique</a>
+      <a href="#s5">5. Conservation… et fuite</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. La rampe du skatepark</a>
+        <a href="#s2">2. Cinétique et potentielle</a>
+        <a href="#s3">3. Le travail d'une force</a>
+        <a href="#s4">4. Le théorème de l'énergie cinétique</a>
+        <a href="#s5">5. Conservation… et fuite</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. La rampe du skatepark</h2>
+      <p class="prose">Samedi, skatepark. Ton pote pose sa planche au bord de la grande rampe — 3,20&nbsp;m au-dessus du creux —, se laisse tomber dedans… et ne donne plus un seul coup de pied. Il plonge, file dans le creux à toute allure, remonte en face, s'immobilise un instant, <em>presque</em> à la hauteur d'où il est parti. Puis il redescend, remonte de ton côté, un peu plus bas. À chaque passage, il perd un étage. Une minute plus tard, il se dandine au fond de la rampe, à plat.</p>
+      <p class="prose">Regarde bien ce qui vient de se passer, parce que tout le chapitre est dedans. D'abord un échange&nbsp;: plus il est haut, plus il est lent — et plus il est bas, plus il est rapide. La hauteur et la vitesse se troquent l'une contre l'autre, comme deux monnaies à taux de change fixe. Ensuite une limite&nbsp;: tant qu'il ne pompe pas avec les jambes, il ne remonte <em>jamais</em> plus haut que son point de départ. Et enfin une fuite&nbsp;: à chaque traversée, il perd un peu, jusqu'à l'arrêt complet.</p>
+      <p class="prose">La physique tient ce genre de comptes avec une précision de banquier. Ce chapitre, c'est exactement ça&nbsp;: deux réservoirs d'énergie qui échangent, une cagnotte totale qui n'a pas le droit de grossir — et une fuite qu'on saura chiffrer au joule près.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 340" role="img" aria-label="Une rampe de skatepark en demi-lune, haute de 3,20 mètres ; le skateur, un point accent, est posé tout en haut à gauche ; un encart montre trois barres d'énergie : cinétique vide, potentielle pleine, mécanique pleine">
+          <path class="g-grid" d="M25.7 0L25.7 340M99.3 0L99.3 340M172.9 0L172.9 340M246.4 0L246.4 340M320 0L320 340M393.6 0L393.6 340M467.1 0L467.1 340M540.7 0L540.7 340M614.3 0L614.3 340M0 226L640 226M0 152.4L640 152.4M0 78.9L640 78.9M0 5.3L640 5.3"></path>
+          <path class="g-axis" d="M0 299.5L640 299.5"></path>
+          <path class="g-courbe" d="M25.7 64.1L30.7 64.3L35.6 64.8L40.5 65.6L45.4 66.7L50.3 68.1L55.2 69.9L60.1 72L65 74.3L69.9 77L74.8 79.9L79.7 83.1L84.6 86.6L89.5 90.4L94.4 94.4L99.3 98.6L104.2 103.1L109.1 107.8L114 112.7L118.9 117.7L123.8 123L128.7 128.4L133.6 134L138.5 139.7L143.4 145.5L148.4 151.4L153.3 157.4L158.2 163.4L163.1 169.5L168 175.7L172.9 181.8L177.8 188L182.7 194.1L187.6 200.3L192.5 206.3L197.4 212.3L202.3 218.2L207.2 224L212.1 229.7L217 235.3L221.9 240.7L226.8 245.9L231.7 251L236.6 255.9L241.5 260.6L246.4 265.1L251.3 269.3L256.2 273.3L261.1 277.1L266.1 280.6L271 283.8L275.9 286.7L280.8 289.4L285.7 291.7L290.6 293.8L295.5 295.5L300.4 297L305.3 298.1L310.2 298.9L315.1 299.4L320 299.5L324.9 299.4L329.8 298.9L334.7 298.1L339.6 297L344.5 295.5L349.4 293.8L354.3 291.7L359.2 289.4L364.1 286.7L369 283.8L373.9 280.6L378.9 277.1L383.8 273.3L388.7 269.3L393.6 265.1L398.5 260.6L403.4 255.9L408.3 251L413.2 245.9L418.1 240.7L423 235.3L427.9 229.7L432.8 224L437.7 218.2L442.6 212.3L447.5 206.3L452.4 200.3L457.3 194.1L462.2 188L467.1 181.8L472 175.7L476.9 169.5L481.8 163.4L486.7 157.4L491.6 151.4L496.6 145.5L501.5 139.7L506.4 134L511.3 128.4L516.2 123L521.1 117.7L526 112.7L530.9 107.8L535.8 103.1L540.7 98.6L545.6 94.4L550.5 90.4L555.4 86.6L560.3 83.1L565.2 79.9L570.1 77L575 74.3L579.9 72L584.8 69.9L589.7 68.1L594.6 66.7L599.5 65.6L604.4 64.8L609.3 64.3L614.3 64.1"></path>
+          <path class="g-guide" d="M25.7 64.1L25.7 299.5"></path>
+          <text class="etl-valeur" x="34" y="186" text-anchor="start">z = 3,20 m</text>
+          <circle class="pt-halo" cx="25.7" cy="64.1" r="11"></circle>
+          <circle class="pt-point" cx="25.7" cy="64.1" r="5.5"></circle>
+          <text class="avc-nom" x="172" y="79" text-anchor="end">E<tspan dy="4" font-size="0.72em">c</tspan></text>
+          <rect class="jauge-fond" x="180" y="64" width="240" height="20" rx="3"></rect>
+          <text class="etl-valeur" x="426" y="79" text-anchor="start">0 J</text>
+          <text class="avc-nom" x="172" y="107" text-anchor="end">E<tspan dy="4" font-size="0.72em">pp</tspan></text>
+          <rect class="jauge-fond" x="180" y="92" width="240" height="20" rx="3"></rect>
+          <rect class="avc-barre-reactif" x="180" y="92" width="240" height="20"></rect>
+          <text class="etl-valeur" x="426" y="107" text-anchor="start">1 600 J</text>
+          <text class="avc-nom" x="172" y="135" text-anchor="end">E<tspan dy="4" font-size="0.72em">m</tspan></text>
+          <rect class="jauge-fond" x="180" y="120" width="240" height="20" rx="3"></rect>
+          <rect class="avc-barre-reactif" x="180" y="120" width="240" height="20"></rect>
+          <text class="etl-valeur" x="426" y="135" text-anchor="start">1 600 J</text>
+          <text class="avc-candidat" x="180" y="56">LE COMPTE ÉNERGIE, AU DÉPART</text>
+        </svg>
+        <figcaption>La rampe (chaque carreau vaut 1&nbsp;m), le skateur prêt à s'élancer à 3,20&nbsp;m — et le compte énergie au moment du départ&nbsp;: tout est dans la deuxième barre. Descends d'un écran pour le promener toi-même.</figcaption>
+      </figure>
+
+      <p class="prose">Une des deux monnaies, tu la connais déjà&nbsp;: au collège, tu as croisé l'<strong>énergie cinétique</strong>, l'énergie que possède un objet <em>parce qu'il bouge</em>&nbsp;:</p>
+
+      <div class="math-vitrine">$$E_c = \frac{1}{2} \, m \, v^2$$</div>
+
+      <p class="prose">Une masse en kilogrammes, une vitesse en mètres par seconde, un résultat en <strong>joules</strong> (J). Prends dix secondes pour interroger cette formule&nbsp;: pourquoi la vitesse y est-elle <em>au carré</em>&nbsp;? Ce détail-là — un simple exposant — décide des distances de sécurité sur la route, et la section&nbsp;4 te le fera toucher du doigt. Quant à la monnaie «&nbsp;hauteur&nbsp;», elle attend juste en dessous.</p>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Deux réservoirs&nbsp;: l'énergie cinétique et l'énergie potentielle</h2>
+      <p class="prose">Voici la rampe — et cette fois, le skateur t'obéit. Le curseur le promène le long de la demi-lune&nbsp;; sous le graphique, le compte énergie s'actualise en direct. Fais l'aller complet, du haut à gauche jusqu'au haut à droite, et surveille les trois barres&nbsp;: laquelle se vide, laquelle se remplit… et laquelle ne bronche pas&nbsp;?</p>
+
+      <figure class="widget" id="widget-rampe" data-widget="energie-rampe" data-nom="rampe" data-mode="libre" data-masse="50" data-g="10" data-hauteur="3.2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">L'échange, mètre par mètre</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 340" aria-label="La rampe de skatepark en demi-lune ; le skateur, un point accent, se déplace le long de la rampe avec le curseur, un pointillé rappelle son altitude"></svg>
+        <svg class="widget-graph graph-scinde" viewBox="0 0 640 210" aria-label="Le compte énergie : trois barres horizontales à l'échelle — énergie cinétique, énergie potentielle, et leur pile Em qui reste pleine quelle que soit la position"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">position du skateur sur la rampe</span>
+            <input type="range" class="js-curseur" min="0" max="48" step="1" value="0" aria-label="Position du skateur le long de la rampe">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">m = 50&nbsp;kg · g = 10&nbsp;N/kg</span>
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-rejouer">▸ fais l'aller complet</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Fais glisser le curseur, ou lance l'aller complet. Regarde les deux premières barres échanger — et garde un œil sur la troisième.</p>
+            <p class="widget-legende js-leg-cours" hidden>\(E_{pp}\) se vide exactement au rythme où \(E_c\) se remplit — et inversement à la remontée. Continue&nbsp;: promène-le encore un peu, et vérifie la barre du bas à chaque arrêt.</p>
+            <p class="widget-legende js-leg-fin" hidden>Tu peux le poser où tu veux&nbsp;: \(E_c + E_{pp} = 1\,600\)&nbsp;J, toujours. Cette somme qui refuse de bouger a un nom — l'énergie mécanique — et tant que rien ne frotte, elle est <strong>conservée</strong>.</p>
+          </div>
+        </div>
+        <div class="widget-note">Frottements négligés. Départ à 3,20&nbsp;m&nbsp;: Em = 1&thinsp;600&nbsp;J. Le compte du bas est à l'échelle, et la rangée Em est littéralement la pile Ec + Epp — regarde-la se recolorer sans changer de longueur.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi inventer des «&nbsp;énergies&nbsp;», alors qu'on a déjà les forces du chapitre précédent&nbsp;? Parce que suivre les forces sur la rampe, c'est refaire tout le film&nbsp;: à chaque instant, une direction qui change, un bilan à recommencer. La comptabilité de l'énergie, elle, saute directement du début à la fin&nbsp;— peu importe le chemin, peu importe la forme de la rampe. C'est la paresse la plus rentable de toute la physique&nbsp;: deux photos, et le bilan est fait.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de voir s'échanger, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>L'<strong>énergie cinétique</strong> d'un système de masse \(m\), modélisé par un point qui va à la vitesse \(v\)&nbsp;: \(E_c = \dfrac{1}{2} \, m \, v^2\), avec \(m\) en kg, \(v\) en m·s⁻¹ et \(E_c\) en <strong>joules</strong> (J). C'est l'énergie du mouvement&nbsp;: nulle à l'arrêt, et très sensible à la vitesse — à cause du carré.</p>
+      </div>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>L'<strong>énergie potentielle de pesanteur</strong> d'un système de masse \(m\) à l'altitude \(z\)&nbsp;: \(E_{pp} = m \, g \, z\), avec \(g\) l'intensité de la pesanteur (9,81&nbsp;N/kg, souvent arrondie à 10) et \(z\) mesurée depuis une <strong>référence que tu choisis</strong> — le niveau où \(E_{pp} = 0\). C'est l'énergie de la hauteur&nbsp;: une réserve que la pesanteur peut reconvertir en vitesse. Seules ses <em>variations</em> ont un sens physique&nbsp;; la valeur elle-même dépend de ta référence.</p>
+      </div>
+
+      <p class="prose">Et la troisième barre — celle qui ne bouge pas — porte le nom du chapitre.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>L'<strong>énergie mécanique</strong> d'un système est la somme de ses deux réservoirs&nbsp;:</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$E_m = E_c + E_{pp}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — FAIRE LES COMPTES D'UN SYSTÈME</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Choisis la référence des altitudes (\(z = 0\)) et écris-le — en général le point le plus bas du problème, pour que \(E_{pp}\) reste positive.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule \(E_c = \dfrac{1}{2} m v^2\) et \(E_{pp} = m g z\) au point qui t'intéresse — masse en kg, vitesse en m/s, altitude en m.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Additionne&nbsp;: \(E_m = E_c + E_{pp}\), en joules. Contrôle-réflexe&nbsp;: un ordre de grandeur (une personne qui marche, c'est ~100&nbsp;J&nbsp;; une voiture sur route, ~100&nbsp;000&nbsp;J).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE SKATE EN CHIFFRES</div>
+        <p class="exemple-enonce">Le skateur et sa planche pèsent \(m = 50\)&nbsp;kg. Il s'élance sans vitesse de \(z = 3{,}20\)&nbsp;m&nbsp;; on prend \(g = 10\)&nbsp;N/kg et la référence au creux de la rampe. a. Calcule \(E_c\), \(E_{pp}\) et \(E_m\) au départ. b. Au creux, \(v = 8{,}0\)&nbsp;m/s&nbsp;: refais les comptes.</p>
+        <p><span class="etape-label">a. — </span>départ sans vitesse&nbsp;: \(E_c = 0\). \(E_{pp} = 50 \times 10 \times 3{,}20 = 1\,600\)&nbsp;J. Donc \(E_m = 0 + 1\,600 = 1\,600\)&nbsp;J&nbsp;: toute la cagnotte est en hauteur.</p>
+        <p><span class="etape-label">b. — </span>au creux, \(z = 0\) donc \(E_{pp} = 0\), et \(E_c = \dfrac{1}{2} \times 50 \times 8{,}0^2 = 1\,600\)&nbsp;J. Donc \(E_m = 1\,600 + 0 = 1\,600\)&nbsp;J&nbsp;: même total, autre poche.</p>
+        <p class="conclusion">Conclusion&nbsp;: entre les deux photos, chaque joule de hauteur est devenu un joule de vitesse — la cagnotte n'a pas bougé. La section&nbsp;5 dira à quelle condition ce petit miracle tient.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Deux réservoirs, une somme&nbsp;: \(E_c = \dfrac{1}{2} m v^2\) (le mouvement), \(E_{pp} = m g z\) (la hauteur), et \(E_m = E_c + E_{pp}\) — la cagnotte du système, en joules.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Un scooter double sa vitesse. Son énergie cinétique…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">double aussi</button>
+              <button type="button" class="quiz-reponse">est multipliée par quatre</button>
+              <button type="button" class="quiz-reponse">est multipliée par ½</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la vitesse est <em>au carré</em>&nbsp;: \(E_c = \dfrac{1}{2} m (2v)^2 = 4 \times \dfrac{1}{2} m v^2\). «&nbsp;Double vitesse, double énergie&nbsp;» est le piège n°1 du chapitre — et la section&nbsp;4 montre ce qu'il coûte sur la route.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Dans \(E_{pp} = m g z\), l'altitude \(z\) se mesure…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">toujours depuis le sol</button>
+              <button type="button" class="quiz-reponse">depuis le centre de la Terre</button>
+              <button type="button" class="quiz-reponse">depuis une référence que tu choisis</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la référence \(z = 0\) est un choix, à écrire noir sur blanc au début du calcul. Deux choix différents donnent deux valeurs d'\(E_{pp}\) différentes — mais les mêmes <em>variations</em>, et c'est tout ce qui compte physiquement.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Sur la rampe sans frottements, à mi-hauteur (z = 1,60&nbsp;m)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(E_c = E_{pp}\)&nbsp;: moitié-moitié</button>
+              <button type="button" class="quiz-reponse">\(E_c > E_{pp}\), parce qu'il va vite</button>
+              <button type="button" class="quiz-reponse">\(E_{pp} > E_c\), parce qu'il est encore haut</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(E_{pp} = m g z\) est proportionnelle à \(z\)&nbsp;: à mi-hauteur, elle vaut la moitié de la cagnotte — et le reste est forcément en \(E_c\). Le graphique te l'a montré&nbsp;: 800&nbsp;J partout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Le travail d'une force&nbsp;: payer en énergie</h2>
+      <p class="prose">D'où viennent les joules d'un système, et par où s'en vont-ils&nbsp;? Réponse&nbsp;: par les forces. Quand une force pousse un objet <em>qui se déplace</em>, elle verse (ou prélève) de l'énergie — et ce versement porte un nom&nbsp;: le <strong>travail</strong>. Mais attention, une force ne compte pas toujours pour ce qu'elle pèse. Tire une caisse avec une corde&nbsp;: à plat, plein effet&nbsp;; en tirant trop vers le haut, presque rien&nbsp;; à la verticale, rien du tout. Fais tourner la corde toi-même.</p>
+
+      <figure class="widget" id="widget-travail" data-widget="energie-travail" data-nom="travail" data-force="40" data-deplacement="5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Une force, un angle, un travail</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages de l'angle">
+            <button type="button" data-angle="0" aria-pressed="false">0°</button>
+            <button type="button" data-angle="60" aria-pressed="true">60°</button>
+            <button type="button" data-angle="90" aria-pressed="false">90°</button>
+            <button type="button" data-angle="120" aria-pressed="false">120°</button>
+            <button type="button" data-angle="180" aria-pressed="false">180°</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 372" aria-label="Une caisse tirée du point A au point B sur un sol horizontal ; la flèche accent de la force tourne avec le curseur, un arc marque l'angle avec le déplacement, et une jauge signée en bas affiche le travail entre moins 200 et plus 200 joules"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">angle entre la force et le déplacement&nbsp;: <span class="js-angle">60°</span></span>
+            <input type="range" class="js-curseur" min="0" max="180" step="5" value="60" aria-label="Angle entre la force et le déplacement">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">F = 40&nbsp;N · AB = 5,0&nbsp;m</span>
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Balaie l'angle de 0° à 180° — ou saute d'un préréglage à l'autre. Surveille la jauge&nbsp;: où passe-t-elle par zéro&nbsp;? quand devient-elle négative&nbsp;?</p>
+            <p class="widget-legende js-leg-cours" hidden>La force garde la même intensité — 40&nbsp;N, pas un de plus — et pourtant son travail change du tout au tout. Ce n'est pas la force qui paie, c'est sa <em>composante le long du déplacement</em>.</p>
+            <p class="widget-legende js-leg-droit" hidden>À 90°, \(W = 0\)&nbsp;: la force n'aide pas, ne freine pas — elle ne <em>travaille</em> pas. C'est le cas du poids sur une route horizontale, et de la réaction du sol presque partout.</p>
+            <p class="widget-legende js-leg-fin" hidden>Tu as vu les deux signes&nbsp;: \(W > 0\), la force verse de l'énergie au système (travail <strong>moteur</strong>)&nbsp;; \(W < 0\), elle en prélève (travail <strong>résistant</strong>). Le signe du travail, c'est le sens du virement.</p>
+          </div>
+        </div>
+        <div class="widget-note">La flèche F garde la même longueur — seule son orientation change, et ça suffit à faire basculer W de +200&nbsp;J à −200&nbsp;J. La jauge est à l'échelle.</div>
+      </figure>
+
+      <p class="prose">Ce produit «&nbsp;force × déplacement × cosinus&nbsp;», tu l'as déjà rencontré en maths cette année&nbsp;: c'est un <a href="../../maths/produit-scalaire/">produit scalaire</a>. La physique s'en sert précisément pour ça.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Le <strong>travail</strong> d'une force constante \(\vec F\) sur un déplacement rectiligne de A à B&nbsp;: \(W_{AB}(\vec F) = \vec F \cdot \overrightarrow{AB} = F \times AB \times \cos\theta\), où \(\theta\) est l'angle entre la force et le déplacement. Il s'exprime en <strong>joules</strong>. Selon le signe&nbsp;: travail <strong>moteur</strong> (\(W > 0\), la force apporte de l'énergie), <strong>résistant</strong> (\(W < 0\), elle en retire), ou <strong>nul</strong> (\(\theta = 90°\), elle ne participe pas).</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE POIDS SE MOQUE DU CHEMIN, PAS LES FROTTEMENTS</div>
+        <p>Le travail du poids entre A et B ne dépend que des altitudes de départ et d'arrivée&nbsp;: \(W_{AB}(\vec P) = m g \, (z_A - z_B)\) — positif en descente, négatif en montée, quel que soit le chemin suivi. On dit que le poids est une force <strong>conservative</strong>.</p>
+        <p>Les frottements, eux, tirent toujours contre le mouvement&nbsp;: sur un trajet de longueur \(L\), avec une intensité constante \(f\), leur travail vaut \(W = -f \times L\). Plus le chemin est long, plus la facture est lourde&nbsp;: le travail des frottements <em>dépend du chemin</em> — force <strong>non conservative</strong>. Retiens ce contraste, la section&nbsp;5 est bâtie dessus.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER UN TRAVAIL SANS SE PIÉGER</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Fais un schéma&nbsp;: la force, le déplacement de A vers B, et l'angle \(\theta\) <em>entre les deux</em> — pas l'angle avec le sol.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Applique \(W = F \times AB \times \cos\theta\) (unités&nbsp;: N, m → J). Cas express&nbsp;: poids → \(m g (z_A - z_B)\)&nbsp;; frottements → \(-f L\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle le signe avec le bon sens&nbsp;: la force aide-t-elle le mouvement (moteur, +), le gêne-t-elle (résistant, −), ou lui est-elle perpendiculaire (nul)&nbsp;?</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA LUGE TIRÉE</div>
+        <p class="exemple-enonce">Tu tires une luge sur 5,0&nbsp;m de neige plate, corde tendue à 60° au-dessus de l'horizontale, avec une force de 40&nbsp;N. a. Calcule le travail de ta traction. b. Calcule le travail du poids de la luge sur ce trajet. c. Et si tu portais la luge à bout de bras, parfaitement horizontalement, sur les mêmes 5,0&nbsp;m — que vaudrait le travail de la force de tes bras&nbsp;?</p>
+        <p><span class="etape-label">a. — </span>\(W = F \times AB \times \cos\theta = 40 \times 5{,}0 \times \cos 60° = 40 \times 5{,}0 \times 0{,}5 = 100\)&nbsp;J. Travail moteur&nbsp;: tu verses 100&nbsp;J à la luge.</p>
+        <p><span class="etape-label">b. — </span>le trajet est horizontal&nbsp;: \(z_A = z_B\), donc \(W(\vec P) = m g (z_A - z_B) = 0\)&nbsp;J. Le poids, vertical, est perpendiculaire au déplacement — il ne travaille pas.</p>
+        <p><span class="etape-label">c. — </span>tes bras poussent vers le haut, le déplacement est horizontal&nbsp;: \(\theta = 90°\), travail nul aussi. Tu fatigues (tes muscles, eux, consomment), mais tu ne verses aucune énergie <em>mécanique</em> à la luge.</p>
+        <p class="conclusion">Conclusion&nbsp;: le travail ne mesure pas l'effort ressenti — il mesure l'énergie effectivement versée le long du déplacement. C'est le cosinus qui décide.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur le travail</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le travail d'une force s'exprime…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">en joules, comme une énergie</button>
+              <button type="button" class="quiz-reponse">en watts</button>
+              <button type="button" class="quiz-reponse">en newtons</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> un travail <em>est</em> un transfert d'énergie&nbsp;: des joules. Le newton mesure la force elle-même, et le watt mesure un débit d'énergie (des joules <em>par seconde</em>) — c'est de la puissance, pas du travail.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Une force perpendiculaire au déplacement…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">travaille en résistant</button>
+              <button type="button" class="quiz-reponse">ne travaille pas, même très intense</button>
+              <button type="button" class="quiz-reponse">travaille un peu, si elle est assez forte</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\cos 90° = 0\), et zéro fois n'importe quoi fait zéro&nbsp;: l'intensité ne sauve rien. C'est le sort du poids sur une route plate — 700&nbsp;N qui ne versent pas un joule.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Le travail du poids entre A et B dépend…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">du chemin suivi entre A et B</button>
+              <button type="button" class="quiz-reponse">seulement des altitudes de A et de B</button>
+              <button type="button" class="quiz-reponse">de la vitesse du système</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(W(\vec P) = m g (z_A - z_B)\)&nbsp;: seul le dénivelé compte — sentier direct ou lacets, même facture. C'est la définition d'une force conservative, et c'est ce qui rend l'énergie potentielle possible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Le théorème de l'énergie cinétique&nbsp;: le virement</h2>
+      <p class="prose">Un travail, c'est un virement — mais vers quel compte&nbsp;? Le voici, le lien&nbsp;: tout ce que les forces versent (ou prélèvent) atterrit sur le compte <em>cinétique</em>. C'est aussi là que le fameux «&nbsp;\(v^2\)&nbsp;» de la section&nbsp;1 montre les dents. Une voiture freine — force de freinage constante. Double sa vitesse, et mesure ce que ça coûte en mètres.</p>
+
+      <figure class="widget" id="widget-freinage" data-widget="energie-freinage" data-nom="freinage" data-masse="1000" data-frein="5000">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La distance de freinage, à l'échelle</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 250" aria-label="Une voiture sur une route horizontale ; un pointillé marque le début du freinage, la trace accent au sol montre la distance parcourue avant l'arrêt, mesurée par un crochet à l'échelle"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">vitesse au moment de freiner&nbsp;: <span class="js-v">36 km/h (10 m/s)</span></span>
+            <input type="range" class="js-curseur" min="10" max="30" step="5" value="10" aria-label="Vitesse de la voiture au début du freinage">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">m = 1&thinsp;000&nbsp;kg · f = 5&thinsp;000&nbsp;N</span>
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Monte la vitesse cran par cran et regarde la trace s'allonger. Compare surtout 36, 72 et 108&nbsp;km/h.</p>
+            <p class="widget-legende js-leg-cours" hidden>Le frein prélève toujours au même rythme — 5&thinsp;000&nbsp;J par mètre. Ce qui change, c'est la taille du compte \(E_c\) à vider… et lui grandit comme \(v^2\).</p>
+            <p class="widget-legende js-leg-fin" hidden>Deux fois plus vite&nbsp;: quatre fois plus loin. Trois fois plus vite&nbsp;: neuf fois plus loin. La distance de freinage suit \(v^2\), pas \(v\) — c'est LE chiffre que la sécurité routière veut que tu retiennes.</p>
+          </div>
+        </div>
+        <div class="widget-note">m = 1&thinsp;000&nbsp;kg, freinage constant f = 5&thinsp;000&nbsp;N, route horizontale. Le dessin est à l'échelle. Temps de réaction non compté — en vrai, ajoute ~15 m à 90 km/h avant même de toucher la pédale.</div>
+      </figure>
+
+      <p class="prose">Ce que le graphique applique en silence, voilà l'énoncé officiel.</p>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LE THÉORÈME DE L'ÉNERGIE CINÉTIQUE</div>
+        <p>Entre deux points A et B du trajet d'un système modélisé par un point, la variation d'énergie cinétique est égale à la <strong>somme des travaux</strong> de toutes les forces appliquées&nbsp;:</p>
+        <div class="math-vitrine">$$\Delta E_c = E_c(B) - E_c(A) = \sum W_{AB}(\vec F)$$</div>
+        <p>Travaux moteurs&nbsp;: le compte cinétique monte, le système accélère. Travaux résistants&nbsp;: il descend, le système ralentit. (La démonstration s'appuie sur la deuxième loi de Newton — elle t'attend en Terminale&nbsp;; en Première, on l'admet et on l'exploite.)</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi le carré, alors&nbsp;? Parce que le frein prélève des joules <em>par mètre parcouru</em> — un tarif fixe, \(f\) joules le mètre. Or à double vitesse, le compte à vider est quatre fois plus gros&nbsp;: \(E_c = \dfrac{1}{2}mv^2\). Quatre fois plus de joules au même tarif, c'est quatre fois plus de mètres. Le «&nbsp;carré&nbsp;» de la formule n'est pas un détail d'écriture — c'est lui qui allonge les distances d'arrêt plus vite que ton intuition.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — EXPLOITER LE THÉORÈME</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Choisis les deux points A et B du bilan, et fais l'inventaire des forces entre les deux (poids, réaction, traction, frottements…).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Calcule le travail de chaque force (méthode de la section&nbsp;3) — beaucoup valent zéro, c'est autant de gagné — puis leur somme.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Écris \(E_c(B) - E_c(A) = \sum W\) et isole l'inconnue&nbsp;: une vitesse (via \(E_c\)), une distance ou une force (via un travail).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE CHARIOT POUSSÉ</div>
+        <p class="exemple-enonce">Sur un rail horizontal, un chariot de \(m = 3{,}0\)&nbsp;kg part du repos, poussé par une force constante \(F = 30\)&nbsp;N alignée avec le rail, sur \(d = 5{,}0\)&nbsp;m (frottements négligés). a. Calcule le travail de chaque force. b. Déduis-en la vitesse du chariot au bout des 5,0&nbsp;m.</p>
+        <p><span class="etape-label">a. — </span>la poussée&nbsp;: \(W = 30 \times 5{,}0 \times \cos 0° = 150\)&nbsp;J (moteur). Le poids et la réaction du rail&nbsp;: perpendiculaires au déplacement, travail nul chacun. Somme&nbsp;: 150&nbsp;J.</p>
+        <p><span class="etape-label">b. — </span>théorème&nbsp;: \(E_c(B) - 0 = 150\)&nbsp;J, donc \(\dfrac{1}{2} \times 3{,}0 \times v^2 = 150\), d'où \(v^2 = 100\) et \(v = 10\)&nbsp;m·s⁻¹.</p>
+        <p class="conclusion">Conclusion&nbsp;: pas de chronomètre, pas de trajectoire détaillée — deux photos, un bilan de travaux, et la vitesse tombe. C'est toute l'élégance du théorème.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions de bilan</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Entre A et B, la variation d'énergie cinétique d'un système est égale…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">à la somme des travaux de toutes les forces</button>
+              <button type="button" class="quiz-reponse">au travail du poids seulement</button>
+              <button type="button" class="quiz-reponse">à la somme des forces appliquées</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> <em>toutes</em> les forces passent à la caisse, chacune avec son travail. Attention à la troisième réponse&nbsp;: une somme de forces est en newtons — on ne peut pas l'égaler à des joules. Les unités démasquent l'erreur.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Une voiture double sa vitesse. Sa distance de freinage (même force de freinage)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">double</button>
+              <button type="button" class="quiz-reponse">quadruple</button>
+              <button type="button" class="quiz-reponse">ne change pas — le frein est le même</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(f \times d = \dfrac{1}{2} m v^2\)&nbsp;: à force égale, \(d\) suit \(v^2\). Le graphique te l'a montré à l'échelle&nbsp;: 10&nbsp;m à 36&nbsp;km/h, 40&nbsp;m à 72&nbsp;km/h. Le frein est le même — le compte à vider ne l'est pas.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Sur un trajet où seule une force résistante travaille, l'énergie cinétique…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">augmente</button>
+              <button type="button" class="quiz-reponse">reste constante</button>
+              <button type="button" class="quiz-reponse">diminue</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\Delta E_c = \sum W < 0\)&nbsp;: le compte baisse, le système ralentit. Un travail résistant est un prélèvement — le théorème traduit le signe du travail en sort du mouvement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. L'énergie mécanique&nbsp;: la conservation… et la fuite</h2>
+      <p class="prose">Depuis la section&nbsp;2, un détail te chiffonne peut-être&nbsp;: sur le graphique, la cagnotte ne bouge pas — mais au vrai skatepark, ton pote <em>finit à l'arrêt</em>. Les deux sont vrais. La rampe idéale n'avait pas de frottements&nbsp;; la vraie en a. Remets-les, et regarde précisément ce qu'ils volent, traversée après traversée.</p>
+
+      <figure class="widget" id="widget-frottements" data-widget="energie-rampe" data-nom="frottements" data-mode="frottements" data-masse="50" data-g="10" data-hauteur="3.2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">La cagnotte qui fuit</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 340" aria-label="La même rampe de skatepark, avec frottements : à chaque traversée le skateur remonte moins haut, et de petites marques gardent la trace des demi-tours précédents"></svg>
+        <svg class="widget-graph graph-scinde" viewBox="0 0 640 210" aria-label="Le compte énergie avec frottements : la pile Em raccourcit à chaque traversée, la part manquante s'affiche en barres éteintes jusqu'au repère pointillé du départ"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">au départ&nbsp;: Em = 1&thinsp;600&nbsp;J</span>
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-traversee">▸ traversée suivante</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">Lance la première traversée, puis les suivantes. À chaque demi-tour, compare la hauteur atteinte à la précédente — et regarde la barre Em.</p>
+            <p class="widget-legende js-leg-cours" hidden>Il n'est pas remonté à 3,20&nbsp;m. La différence n'est pas «&nbsp;perdue quelque part&nbsp;»&nbsp;: elle est exactement égale au travail (résistant) des frottements sur la traversée.</p>
+            <p class="widget-legende js-leg-fin" hidden>\(E_m\) ne remonte jamais&nbsp;: les frottements travaillent en négatif à l'aller <em>et</em> au retour — la fuite est à sens unique, vers la chaleur. Voilà pourquoi une rampe réelle finit toujours par endormir le skate au fond.</p>
+          </div>
+        </div>
+        <div class="widget-note">Sur cette rampe, les frottements emportent la moitié de la cagnotte à chaque traversée. Le pointillé du compte marque le niveau de départ&nbsp;; les barres éteintes, ce qui est déjà parti en chaleur.</div>
+      </figure>
+
+      <p class="prose">Le contraste de la section&nbsp;3 — le poids qui se moque du chemin, les frottements qui le facturent au mètre — donne maintenant tout son sens au vocabulaire.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une force est <strong>conservative</strong> quand son travail ne dépend pas du chemin suivi — c'est le cas du poids. Une force est <strong>non conservative</strong> quand son travail dépend du chemin — c'est le cas des frottements. Les forces perpendiculaires au mouvement (réaction normale d'un support) ne travaillent pas&nbsp;: elles ne touchent pas aux comptes.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — CONSERVATION ET NON-CONSERVATION DE Em</div>
+        <p>Si les seules forces qui travaillent sont conservatives (le poids), l'énergie mécanique se <strong>conserve</strong>&nbsp;: \(E_m(B) = E_m(A)\) — les réservoirs échangent, la somme ne bouge pas.</p>
+        <p>Si des forces non conservatives travaillent, la variation de l'énergie mécanique est égale à leur travail&nbsp;:</p>
+        <div class="math-vitrine">$$\Delta E_m = E_m(B) - E_m(A) = W_{AB}(\vec f_{\text{nc}})$$</div>
+        <p>Des frottements (travail résistant) font <em>baisser</em> \(E_m\)&nbsp;: l'énergie part en chaleur. Une traction motrice (un câble, un moteur, tes jambes) peut aussi la faire <em>monter</em>. L'énergie ne disparaît jamais — elle quitte simplement le compte mécanique.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — LE BILAN D'ÉNERGIE MÉCANIQUE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Fixe la référence des altitudes, puis calcule \(E_m = E_c + E_{pp}\) au départ et à l'arrivée.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Demande-toi qui travaille&nbsp;: seulement le poids&nbsp;? Alors \(E_m\) se conserve — égale les deux comptes et isole l'inconnue (souvent une vitesse ou une hauteur).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Des frottements en jeu&nbsp;? Calcule \(\Delta E_m = E_m(\text{fin}) - E_m(\text{début})\)&nbsp;: c'est leur travail. Au besoin, remonte à leur intensité avec \(W = -f \times L\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE TOBOGGAN DE LA PISCINE</div>
+        <p class="exemple-enonce">Un enfant de \(m = 25\)&nbsp;kg s'élance sans vitesse en haut du toboggan, à \(4{,}0\)&nbsp;m au-dessus du bassin, et entre dans l'eau à \(6{,}0\)&nbsp;m/s. Donnée&nbsp;: \(g = 10\)&nbsp;N/kg, référence au niveau de l'eau. a. Calcule \(E_m\) au départ et à l'arrivée. b. L'énergie mécanique s'est-elle conservée&nbsp;? Conclus sur le travail des frottements. c. Sans frottements, à quelle vitesse serait-il arrivé&nbsp;?</p>
+        <p><span class="etape-label">a. — </span>départ&nbsp;: \(E_m = 0 + 25 \times 10 \times 4{,}0 = 1\,000\)&nbsp;J. Arrivée&nbsp;: \(E_m = \dfrac{1}{2} \times 25 \times 6{,}0^2 + 0 = 450\)&nbsp;J.</p>
+        <p><span class="etape-label">b. — </span>non&nbsp;: il manque \(\Delta E_m = 450 - 1\,000 = -550\)&nbsp;J. C'est le travail des frottements (toboggan + maillot)&nbsp;: 550&nbsp;J partis en chaleur — le toboggan chauffe, littéralement.</p>
+        <p><span class="etape-label">c. — </span>conservation&nbsp;: \(\dfrac{1}{2} \times 25 \times v^2 = 1\,000\), donc \(v^2 = 80\) et \(v = \sqrt{80} \approx 8{,}9\)&nbsp;m/s. Les frottements lui ont coûté presque 3&nbsp;m/s à l'arrivée.</p>
+        <p class="conclusion">Conclusion&nbsp;: le bilan d'énergie mécanique est un détecteur de frottements — l'écart entre les deux photos, c'est leur facture, au joule près.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Seul le poids travaille → \(E_m\) se conserve. Des frottements travaillent → \(\Delta E_m = W(\vec f)\) &lt; 0&nbsp;: la différence part en chaleur, et elle se calcule.</p>
+      </div>
+
+      <p class="prose">Avant les exercices, fais l'auditeur&nbsp;: quatre dossiers, quatre bilans. Le réflexe, toujours le même — que fait \(E_c\)&nbsp;? que fait \(E_{pp}\)&nbsp;? la somme suit.</p>
+
+      <figure class="widget" id="widget-jeu" data-widget="stoechio-jeu" data-nom="energie-jeu" data-progression="DOSSIER" data-suivant="Dossier suivant">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">L'auditeur de l'énergie</span>
+          </div>
+          <span class="quiz-score js-progression">DOSSIER 1/4</span>
+        </div>
+        <div class="widget-pied">
+          <div class="js-manche">
+            <svg class="widget-graph" viewBox="0 0 640 210" role="img" aria-label="Chronophotographie d'une pomme en chute libre : des positions de plus en plus espacées vers le bas">
+              <text class="avc-candidat" x="8" y="20">UNE POMME EN CHUTE LIBRE — air négligé · Δt identique entre deux images</text>
+              <circle class="pt-craie" cx="320" cy="46" r="4"></circle>
+              <circle class="pt-craie" cx="320" cy="62" r="4"></circle>
+              <circle class="pt-craie" cx="320" cy="86" r="4"></circle>
+              <circle class="pt-craie" cx="320" cy="118" r="4"></circle>
+              <circle class="pt-craie" cx="320" cy="158" r="4"></circle>
+              <path class="g-axis" d="M0 196L640 196"></path>
+            </svg>
+            <p class="quiz-enonce">Premier dossier. Pendant la chute, que fait son énergie mécanique&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">elle diminue — l'altitude baisse</button>
+              <button type="button" class="quiz-reponse">elle est constante — \(E_{pp}\) se déverse exactement dans \(E_c\)</button>
+              <button type="button" class="quiz-reponse">elle augmente — la vitesse augmente</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 210" role="img" aria-label="Un parachutiste qui descend à vitesse constante : positions régulièrement espacées sous un parachute">
+              <text class="avc-candidat" x="8" y="20">UN PARACHUTISTE — vitesse constante · Δt identique entre deux images</text>
+              <path class="g-courbe" d="M284 52Q320 24 356 52"></path>
+              <path class="g-guide" d="M284 52L320 66M356 52L320 66"></path>
+              <circle class="pt-craie" cx="320" cy="74" r="4"></circle>
+              <circle class="pt-craie" cx="320" cy="104" r="4"></circle>
+              <circle class="pt-craie" cx="320" cy="134" r="4"></circle>
+              <circle class="pt-craie" cx="320" cy="164" r="4"></circle>
+              <path class="g-axis" d="M0 196L640 196"></path>
+            </svg>
+            <p class="quiz-enonce">Deuxième dossier. \(E_c\) est constante, l'altitude diminue. Que fait \(E_m\), et où va l'énergie&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(E_m\) diminue — les frottements de l'air la dissipent en chaleur</button>
+              <button type="button" class="quiz-reponse">\(E_m\) est constante — la vitesse ne change pas</button>
+              <button type="button" class="quiz-reponse">\(E_m\) diminue — elle se transforme en énergie cinétique</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 210" role="img" aria-label="Une balle lâchée de deux mètres tombe puis rebondit en cloche jusqu'à un mètre vingt : deux niveaux pointillés marquent les hauteurs">
+              <text class="avc-candidat" x="8" y="20">LÂCHÉE DE 2,0 m, UN REBOND</text>
+              <path class="g-guide" d="M140 40L440 40M240 96L500 96"></path>
+              <text class="etl-valeur" x="132" y="44" text-anchor="end">2,0 m</text>
+              <text class="etl-valeur" x="508" y="100" text-anchor="start">1,2 m</text>
+              <circle class="pt-craie" cx="200" cy="40" r="4"></circle>
+              <path class="g-courbe" d="M200 40L200 180"></path>
+              <path class="g-courbe" d="M200 180Q290 12 380 180"></path>
+              <circle class="pt-point" cx="290" cy="96" r="4"></circle>
+              <path class="g-axis" d="M0 180L640 180"></path>
+            </svg>
+            <p class="quiz-enonce">Troisième dossier. Lâchée de 2,0&nbsp;m, elle remonte à 1,2&nbsp;m. Le verdict&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(E_m\) s'est conservée&nbsp;: l'énergie est simplement passée par \(E_c\)</button>
+              <button type="button" class="quiz-reponse">le poids a travaillé en négatif&nbsp;: voilà la perte</button>
+              <button type="button" class="quiz-reponse">40&nbsp;% de \(E_m\) sont partis en chaleur, dans le choc et dans l'air</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 210" role="img" aria-label="Une cabine de téléphérique qui monte à vitesse constante le long d'un câble : positions régulièrement espacées">
+              <text class="avc-candidat" x="8" y="20">LA CABINE MONTE — vitesse constante · Δt identique entre deux images</text>
+              <path class="g-guide" d="M180 190L560 30"></path>
+              <circle class="pt-craie" cx="228" cy="169.8" r="4"></circle>
+              <circle class="pt-craie" cx="285" cy="145.8" r="4"></circle>
+              <circle class="pt-craie" cx="342" cy="121.8" r="4"></circle>
+              <circle class="pt-craie" cx="399" cy="97.8" r="4"></circle>
+              <circle class="pt-craie" cx="456" cy="73.8" r="4"></circle>
+              <rect class="mvt-caisse" x="436" y="77.8" width="40" height="30" rx="3"></rect>
+              <path class="g-axis" d="M0 196L640 196"></path>
+            </svg>
+            <p class="quiz-enonce">Dernier dossier. La cabine monte à vitesse constante. Que fait son énergie mécanique&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(E_m\) est constante — la vitesse est constante</button>
+              <button type="button" class="quiz-reponse">\(E_m\) augmente — le câble fournit un travail moteur</button>
+              <button type="button" class="quiz-reponse">\(E_m\) diminue — le poids travaille en négatif</button>
+            </div>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> fais les comptes&nbsp;: que fait \(E_c\)&nbsp;? que fait \(E_{pp}\)&nbsp;? La somme suit.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> en chute libre, seul le poids travaille — force conservative&nbsp;: ce que \(E_{pp}\) perd, \(E_c\) le gagne joule pour joule. \(E_m\) ne bouge pas d'un iota.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> \(E_c\) constante + \(E_{pp}\) qui baisse&nbsp;: la somme baisse. Les frottements de l'air travaillent en résistant et dissipent la différence en chaleur — c'est d'ailleurs eux qui maintiennent la vitesse constante.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> il manque 0,8&nbsp;m sur 2,0&nbsp;m&nbsp;: 40&nbsp;% de la cagnotte, partis en chaleur au choc (et un peu dans l'air). Le poids, lui, est conservatif&nbsp;: sur un aller-retour, son travail total est nul — il ne peut rien «&nbsp;voler&nbsp;».</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> \(E_c\) constante, \(E_{pp}\) qui monte&nbsp;: \(E_m\) augmente. Quelqu'un paie — le câble, dont la traction travaille en moteur. \(E_m\) peut donc aussi <em>monter</em>&nbsp;: il suffit qu'une force non conservative travaille en positif.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Dossier suivant ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <div class="widget-note">Le réflexe de l'auditeur&nbsp;: d'abord Ec et Epp séparément, ensuite la somme — et si Em a bougé, chercher QUI a travaillé en non conservatif.</div>
+        <script type="application/json">[2, 1, 3, 2]</script>
+      </figure>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>L'énergie mécanique d'un système se conserve…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">toujours — c'est une loi de la physique</button>
+              <button type="button" class="quiz-reponse">quand sa vitesse est constante</button>
+              <button type="button" class="quiz-reponse">quand aucune force non conservative ne travaille</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la conservation de \(E_m\) est conditionnelle&nbsp;: seul le poids (et les forces qui ne travaillent pas) au tableau. Et «&nbsp;vitesse constante&nbsp;» ne suffit pas — le parachutiste descend à vitesse constante et son \(E_m\) fond.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Une balle rebondit moins haut qu'on ne l'a lâchée. L'énergie manquante…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">a disparu — c'est la perte du rebond</button>
+              <button type="button" class="quiz-reponse">a été prélevée par le poids</button>
+              <button type="button" class="quiz-reponse">est partie en chaleur, au choc et dans l'air</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'énergie ne disparaît jamais&nbsp;: elle quitte le compte <em>mécanique</em> pour le compte thermique. Et le poids ne peut rien prélever au total — force conservative, travail nul sur un aller-retour.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Un skieur descend une piste et arrive moins vite que ne le prédit la conservation de \(E_m\). L'écart mesure…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">l'erreur de mesure, forcément</button>
+              <button type="button" class="quiz-reponse">le travail des frottements sur la descente</button>
+              <button type="button" class="quiz-reponse">le travail du poids sur la descente</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\Delta E_m = W(\vec f)\)&nbsp;: le déficit d'énergie mécanique, c'est la facture des forces non conservatives. Le poids, lui, est déjà compté <em>dans</em> \(E_{pp}\) — le compter encore serait le compter deux fois.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Une cycliste monte une côte à vitesse constante. Son énergie mécanique…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">augmente — ses jambes fournissent un travail moteur</button>
+              <button type="button" class="quiz-reponse">est constante — la vitesse ne change pas</button>
+              <button type="button" class="quiz-reponse">diminue — monter fatigue</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(E_c\) constante, \(E_{pp}\) qui grimpe&nbsp;: \(E_m\) augmente — et ce sont ses muscles qui paient, en travaillant en moteur. \(E_m\) ne fait pas que baisser&nbsp;: elle suit les virements, dans les deux sens.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>«&nbsp;Double vitesse, double énergie.&nbsp;»</strong> Non — quadruple&nbsp;: la vitesse est <em>au carré</em> dans \(E_c = \dfrac{1}{2}mv^2\). Conséquence très concrète&nbsp;: passer de 36 à 72&nbsp;km/h multiplie la distance de freinage par 4, pas par 2. L'oubli du carré est l'erreur la plus chère du chapitre.</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;Une force intense travaille forcément beaucoup.&nbsp;»</strong> Le travail dépend de l'angle&nbsp;: à 90° du déplacement, \(W = 0\), quelle que soit l'intensité. Le poids d'une voiture — plus de 10&nbsp;000&nbsp;N — ne verse pas un joule sur une route horizontale. Toujours dessiner \(\theta\) avant de calculer.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Chercher «&nbsp;la vraie&nbsp;» valeur de \(E_{pp}\).</strong> Elle n'existe pas&nbsp;: \(E_{pp} = mgz\) dépend de la référence \(z = 0\), que <em>tu</em> choisis. Deux références donnent deux valeurs — et exactement les mêmes variations, seules physiquement significatives. Choisis la référence, écris-la, et n'en change plus en cours de calcul.</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;L'énergie mécanique se conserve toujours.&nbsp;»</strong> Elle ne se conserve que si aucune force non conservative ne travaille. Le moindre frottement la fait fondre — c'est pour ça que le skate s'arrête, que la balle rebondit moins haut, que le toboggan chauffe. Avant d'écrire \(E_m(A) = E_m(B)\), demande-toi toujours&nbsp;: qui travaille&nbsp;?</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;L'énergie perdue a disparu.&nbsp;»</strong> Rien ne disparaît&nbsp;: \(\Delta E_m = W(\vec f)\), et la différence part en chaleur — l'énergie quitte le compte mécanique, pas l'univers. Ne compte pas non plus le poids <em>en plus</em> dans ce bilan&nbsp;: il est déjà dans \(E_{pp}\) — l'y ajouter, c'est le compter deux fois.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">CINÉTIQUE</span>
+          <p>\(E_c = \dfrac{1}{2} m v^2\), en joules — \(m\) en kg, \(v\) en m/s. Le carré fait tout&nbsp;: double vitesse, quadruple énergie.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">POTENTIELLE</span>
+          <p>\(E_{pp} = m g z\), avec \(z\) mesurée depuis une référence choisie et annoncée. Seules ses variations comptent.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">TRAVAIL</span>
+          <p>\(W_{AB}(\vec F) = \vec F \cdot \overrightarrow{AB} = F \times AB \times \cos\theta\)&nbsp;: moteur (+), résistant (−), nul à 90°. Poids&nbsp;: \(mg(z_A - z_B)\), peu importe le chemin&nbsp;; frottements&nbsp;: \(-f L\), le chemin compte.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">LE THÉORÈME</span>
+          <p>\(\Delta E_c = \sum W_{AB}(\vec F)\)&nbsp;: la variation du compte cinétique, c'est la somme des virements de toutes les forces.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">MÉCANIQUE</span>
+          <p>\(E_m = E_c + E_{pp}\)&nbsp;: conservée si seules des forces conservatives travaillent&nbsp;; sinon \(\Delta E_m = W(\vec f_{\text{nc}})\) — la fuite se chiffre.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: l'énergie cinétique, l'énergie potentielle, le travail d'une force, le théorème de l'énergie cinétique, la conservation de \(E_m\) et sa fuite — et deux problèmes pour finir. Sauf mention contraire, prends \(g = 10\)&nbsp;N/kg.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· l'énergie cinétique</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une cycliste et son vélo pèsent ensemble \(m = 80\)&nbsp;kg et roulent à 18&nbsp;km/h. a. Convertis la vitesse en m/s. b. Calcule l'énergie cinétique de l'ensemble. c. Elle double sa vitesse&nbsp;: que devient \(E_c\)&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(v = \dfrac{18}{3{,}6} = 5{,}0\)&nbsp;m·s⁻¹. (Des km/h aux m/s, on divise par 3,6.)</p>
+          <p><span class="etape-label">b. — </span>\(E_c = \dfrac{1}{2} m v^2 = \dfrac{1}{2} \times 80 \times 5{,}0^2 = 1\,000\)&nbsp;J = 1,0&nbsp;kJ.</p>
+          <p><span class="etape-label">c. — </span>la vitesse est au carré&nbsp;: \(E_c\) est multipliée par \(2^2 = 4\), soit 4&thinsp;000&nbsp;J. Pas doublée — quadruplée.</p>
+          <p class="conclusion">Conclusion&nbsp;: toujours passer en m/s <em>avant</em> le calcul, et ne jamais oublier que le carré amplifie tout.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· E<sub>pp</sub> et la référence</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un livre de \(m = 1{,}2\)&nbsp;kg est posé sur une étagère, à 2,0&nbsp;m au-dessus du plancher de la chambre. La chambre est au 3ᵉ étage&nbsp;: son plancher domine la rue de 9,0&nbsp;m. a. Calcule \(E_{pp}\) du livre avec la référence au plancher de la chambre. b. Puis avec la référence au niveau de la rue. c. Laquelle est «&nbsp;la vraie&nbsp;»&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(E_{pp} = m g z = 1{,}2 \times 10 \times 2{,}0 = 24\)&nbsp;J.</p>
+          <p><span class="etape-label">b. — </span>l'altitude devient \(z = 9{,}0 + 2{,}0 = 11\)&nbsp;m&nbsp;: \(E_{pp} = 1{,}2 \times 10 \times 11 = 132\)&nbsp;J.</p>
+          <p><span class="etape-label">c. — </span>aucune&nbsp;: les deux sont correctes, chacune dans son repère. Si le livre tombe de l'étagère au plancher, les deux références donnent la même chute d'énergie — 24&nbsp;J. Seules les <em>variations</em> ont un sens physique.</p>
+          <p class="conclusion">Conclusion&nbsp;: la référence est un choix d'écriture, pas une propriété du livre. Choisis-la, annonce-la, et garde-la jusqu'au bout du calcul.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· calculer un travail</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une caisse est tirée sur \(AB = 25\)&nbsp;m par une force constante \(F = 40\)&nbsp;N. Calcule le travail de la force si&nbsp;: a. elle est alignée avec le déplacement&nbsp;; b. elle fait un angle de 60° avec lui&nbsp;; c. elle lui est perpendiculaire.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(W = F \times AB \times \cos 0° = 40 \times 25 \times 1 = 1\,000\)&nbsp;J.</p>
+          <p><span class="etape-label">b. — </span>\(W = 40 \times 25 \times \cos 60° = 40 \times 25 \times 0{,}5 = 500\)&nbsp;J&nbsp;: la moitié — seule la composante le long du déplacement paie.</p>
+          <p><span class="etape-label">c. — </span>\(\cos 90° = 0\)&nbsp;: \(W = 0\)&nbsp;J. Une force perpendiculaire au déplacement ne travaille pas.</p>
+          <p class="conclusion">Conclusion&nbsp;: même force, même distance, trois travaux différents — c'est l'angle qui décide de la part réellement versée.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· moteur, résistant ou nul</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un vélo descend une pente, en roue libre. Trois forces s'appliquent sur le système {vélo + cycliste}&nbsp;: le poids, la réaction normale de la route, les frottements (air + roulement). Pour chacune, dis si son travail est moteur, résistant ou nul — en justifiant par l'angle avec le déplacement.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Le poids — </span>vertical vers le bas, et le déplacement descend la pente&nbsp;: l'angle est aigu, \(\cos\theta > 0\)&nbsp;: travail <strong>moteur</strong>. C'est lui qui fait avancer la roue libre.</p>
+          <p><span class="etape-label">La réaction normale — </span>perpendiculaire à la route, donc au déplacement&nbsp;: \(\theta = 90°\), travail <strong>nul</strong>. Elle porte, elle ne paie pas.</p>
+          <p><span class="etape-label">Les frottements — </span>opposés au mouvement&nbsp;: \(\theta = 180°\), \(\cos\theta = -1\)&nbsp;: travail <strong>résistant</strong>. Ils prélèvent en continu.</p>
+          <p class="conclusion">Conclusion&nbsp;: le trio type de presque tous les bilans — un moteur, un spectateur, un préleveur. Prends l'habitude de trier les forces ainsi avant tout calcul.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· le travail du poids</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une randonneuse de \(m = 60\)&nbsp;kg monte de la cabane (altitude 1&thinsp;200&nbsp;m) au sommet (1&thinsp;450&nbsp;m). a. Calcule le travail de son poids à la montée. b. Elle redescend à la cabane par un sentier deux fois plus long&nbsp;: travail du poids à la descente&nbsp;? c. Que vaut le travail du poids sur l'aller-retour complet&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(W(\vec P) = m g (z_A - z_B) = 60 \times 10 \times (1\,200 - 1\,450) = -150\,000\)&nbsp;J = −150&nbsp;kJ. Négatif&nbsp;: en montée, le poids résiste.</p>
+          <p><span class="etape-label">b. — </span>seul le dénivelé compte, pas la longueur du sentier&nbsp;: \(W(\vec P) = 60 \times 10 \times (1\,450 - 1\,200) = +150\)&nbsp;kJ.</p>
+          <p><span class="etape-label">c. — </span>\(-150 + 150 = 0\)&nbsp;: sur un aller-retour, le travail du poids est nul. C'est la signature d'une force <strong>conservative</strong>.</p>
+          <p class="conclusion">Conclusion&nbsp;: le poids tient une comptabilité parfaite — tout ce qu'il prélève à la montée, il le rend à la descente, au joule près.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· les frottements et le chemin</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Pour aller du refuge au lac, deux chemins à plat&nbsp;: le direct (100&nbsp;m) et le panoramique (240&nbsp;m). On traîne un sac sur la neige&nbsp;; les frottements ont une intensité constante \(f = 20\)&nbsp;N. a. Calcule le travail des frottements sur chaque chemin. b. Pourquoi les frottements ne pourront-ils jamais être une force conservative&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>chemin direct&nbsp;: \(W = -f L = -20 \times 100 = -2\,000\)&nbsp;J. Chemin panoramique&nbsp;: \(W = -20 \times 240 = -4\,800\)&nbsp;J. Mêmes points de départ et d'arrivée, factures différentes.</p>
+          <p><span class="etape-label">b. — </span>une force conservative doit donner le même travail quel que soit le chemin. Les frottements facturent au mètre parcouru <em>et</em> toujours en négatif — leur travail dépend du chemin par construction. Ils sont non conservatifs, sans exception.</p>
+          <p class="conclusion">Conclusion&nbsp;: poids = forfait au dénivelé&nbsp;; frottements = compteur au mètre. Cette opposition est exactement ce qui sépare conservation et fuite de \(E_m\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· le théorème — trouver v</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur un rail horizontal, un chariot de \(m = 3{,}0\)&nbsp;kg part du repos. On le pousse avec une force constante \(F = 30\)&nbsp;N, alignée avec le rail, pendant \(d = 5{,}0\)&nbsp;m&nbsp;; les frottements sont négligés. a. Fais l'inventaire des forces et de leurs travaux. b. Calcule la vitesse finale du chariot. c. Sans nouveau calcul&nbsp;: quelle serait la vitesse si le chariot pesait 12&nbsp;kg&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>la poussée&nbsp;: \(W = 30 \times 5{,}0 = 150\)&nbsp;J (moteur)&nbsp;; le poids et la réaction du rail&nbsp;: perpendiculaires au déplacement, travaux nuls. Somme des travaux&nbsp;: 150&nbsp;J.</p>
+          <p><span class="etape-label">b. — </span>théorème de l'énergie cinétique, depuis le repos&nbsp;: \(\dfrac{1}{2} m v^2 - 0 = 150\)&nbsp;J, donc \(v^2 = \dfrac{2 \times 150}{3{,}0} = 100\), soit \(v = 10\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">c. — </span>même somme de travaux (150&nbsp;J), masse quadruplée&nbsp;: \(v^2\) est divisé par 4, donc \(v\) par 2 — soit 5,0&nbsp;m·s⁻¹.</p>
+          <p class="conclusion">Conclusion&nbsp;: le théorème convertit des joules en vitesse — et la masse, comme au chapitre précédent, joue les modératrices.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· le théorème — trouver d</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une voiture de \(m = 1\,000\)&nbsp;kg freine sur route horizontale&nbsp;; la force de freinage, constante, vaut \(f = 5\,000\)&nbsp;N. a. Calcule la distance de freinage à 20&nbsp;m/s (72&nbsp;km/h). b. Puis à 10&nbsp;m/s (36&nbsp;km/h). c. Généralise&nbsp;: comment la distance de freinage dépend-elle de la vitesse&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>théorème entre le début du freinage et l'arrêt&nbsp;: \(0 - \dfrac{1}{2} m v^2 = -f d\), donc \(d = \dfrac{m v^2}{2f} = \dfrac{1\,000 \times 400}{10\,000} = 40\)&nbsp;m.</p>
+          <p><span class="etape-label">b. — </span>\(d = \dfrac{1\,000 \times 100}{10\,000} = 10\)&nbsp;m&nbsp;: quatre fois moins pour une vitesse deux fois moindre.</p>
+          <p><span class="etape-label">c. — </span>\(d = \dfrac{m}{2f} \times v^2\)&nbsp;: à masse et freinage donnés, \(d\) est proportionnelle à \(v^2\). Doubler la vitesse quadruple la distance&nbsp;; la tripler la multiplie par neuf.</p>
+          <p class="conclusion">Conclusion&nbsp;: le carré de \(E_c\) se lit directement sur le bitume. C'est le calcul que fait la sécurité routière — et il ne compte même pas le temps de réaction.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· conservation — la chute</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une balle de \(m = 0{,}50\)&nbsp;kg est lâchée sans vitesse d'une hauteur de 5,0&nbsp;m (air négligé, référence au sol). a. Calcule son énergie mécanique au départ. b. Déduis-en sa vitesse au moment de toucher le sol. c. Montre que cette vitesse ne dépend pas de la masse.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(E_m = E_c + E_{pp} = 0 + 0{,}50 \times 10 \times 5{,}0 = 25\)&nbsp;J.</p>
+          <p><span class="etape-label">b. — </span>seul le poids travaille&nbsp;: \(E_m\) se conserve. Au sol, \(E_{pp} = 0\), donc \(\dfrac{1}{2} \times 0{,}50 \times v^2 = 25\)&nbsp;J, d'où \(v^2 = 100\) et \(v = 10\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">c. — </span>en littéral&nbsp;: \(\dfrac{1}{2} m v^2 = m g h\)&nbsp;: la masse se simplifie, \(v = \sqrt{2 g h}\). Plume ou enclume, même vitesse — tant que l'air ne s'en mêle pas.</p>
+          <p class="conclusion">Conclusion&nbsp;: la conservation transforme une hauteur en vitesse sans chronomètre ni trajectoire — et l'écriture littérale révèle ce que les nombres cachaient&nbsp;: \(m\) ne comptait pas.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· conservation — la forme ne compte pas</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un toboggan aquatique part de \(h = 3{,}20\)&nbsp;m au-dessus du bassin&nbsp;; l'eau qui ruisselle rend les frottements négligeables. Sa forme est une succession de virages et de bosses inconnue. a. Explique pourquoi on peut quand même calculer la vitesse d'arrivée. b. Calcule-la. c. Compare-la à celle d'une chute verticale de la même hauteur — et commente.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>les seules forces sont le poids (conservatif) et la réaction du toboggan (perpendiculaire, travail nul)&nbsp;: \(E_m\) se conserve. Or \(E_m\) ne dépend que de \(z\) et \(v\) — pas du chemin. La forme du toboggan est hors sujet.</p>
+          <p><span class="etape-label">b. — </span>\(m g h = \dfrac{1}{2} m v^2\), donc \(v = \sqrt{2 g h} = \sqrt{2 \times 10 \times 3{,}20} = \sqrt{64} = 8{,}0\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">c. — </span>une chute verticale de 3,20&nbsp;m donne exactement la même vitesse&nbsp;: 8,0&nbsp;m/s. Le toboggan change la direction d'arrivée et la durée du trajet — pas la vitesse finale.</p>
+          <p class="conclusion">Conclusion&nbsp;: c'est la superpuissance de l'énergie — répondre sans connaître la trajectoire. Le chapitre précédent aurait exigé le film complet&nbsp;; deux photos suffisent.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· non-conservation — le skieur</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un skieur de \(m = 60\)&nbsp;kg s'élance sans vitesse d'un sommet situé 45&nbsp;m plus haut que le bas de la piste, et y arrive à 20&nbsp;m/s. Référence au bas de la piste. a. Calcule \(E_m\) au départ et à l'arrivée. b. L'énergie mécanique s'est-elle conservée&nbsp;? Chiffre le travail des frottements. c. Où est passée cette énergie&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>départ&nbsp;: \(E_m = 0 + 60 \times 10 \times 45 = 27\,000\)&nbsp;J. Arrivée&nbsp;: \(E_m = \dfrac{1}{2} \times 60 \times 20^2 + 0 = 12\,000\)&nbsp;J.</p>
+          <p><span class="etape-label">b. — </span>non&nbsp;: \(\Delta E_m = 12\,000 - 27\,000 = -15\,000\)&nbsp;J. C'est le travail des forces non conservatives — frottements des skis sur la neige et de l'air&nbsp;: \(W(\vec f) = -15\)&nbsp;kJ.</p>
+          <p><span class="etape-label">c. — </span>en chaleur&nbsp;: la neige fond légèrement sous les skis, l'air est brassé. L'énergie a quitté le compte mécanique, pas l'univers.</p>
+          <p class="conclusion">Conclusion&nbsp;: plus de la moitié de la cagnotte est partie en route. Le bilan \(\Delta E_m\) mesure la facture des frottements sans jamais les voir.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· le rebond</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une balle de \(m = 60\)&nbsp;g est lâchée de 2,0&nbsp;m&nbsp;; après un rebond, elle remonte à 1,2&nbsp;m. Référence au sol. a. Calcule \(E_m\) juste avant le lâcher et au sommet du rebond. b. Quelle fraction de l'énergie mécanique a été perdue&nbsp;? c. Où est-elle passée&nbsp;? d. À quelle hauteur remontera-t-elle après le deuxième rebond, si chaque rebond coûte la même fraction&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>attention à la masse&nbsp;: 60&nbsp;g = 0,060&nbsp;kg. Départ&nbsp;: \(E_m = 0{,}060 \times 10 \times 2{,}0 = 1{,}2\)&nbsp;J. Sommet du rebond&nbsp;: \(E_m = 0{,}060 \times 10 \times 1{,}2 = 0{,}72\)&nbsp;J.</p>
+          <p><span class="etape-label">b. — </span>perte&nbsp;: \(1{,}2 - 0{,}72 = 0{,}48\)&nbsp;J, soit \(\dfrac{0{,}48}{1{,}2} = 40\)&nbsp;%. (On pouvait aller plus vite&nbsp;: \(E_m \propto h\), et \(h\) passe de 2,0 à 1,2&nbsp;m — moins 40&nbsp;%.)</p>
+          <p><span class="etape-label">c. — </span>en chaleur au moment du choc (la balle et le sol se déforment), et un peu dans l'air. Le poids n'y est pour rien&nbsp;: conservatif.</p>
+          <p><span class="etape-label">d. — </span>même fraction conservée (60&nbsp;%)&nbsp;: \(h = 1{,}2 \times 0{,}60 = 0{,}72\)&nbsp;m.</p>
+          <p class="conclusion">Conclusion&nbsp;: les hauteurs de rebond forment une suite géométrique de raison 0,6 — tes deux spécialités viennent de se serrer la main.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· le pendule</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une bille de \(m = 200\)&nbsp;g pend au bout d'un fil de \(L = 2{,}0\)&nbsp;m. On l'écarte de 60° et on la lâche sans vitesse&nbsp;; les frottements sont négligés. Donnée&nbsp;: écartée de 60°, la bille est montée de \(z = L(1 - \cos 60°) = 1{,}0\)&nbsp;m au-dessus de son point le plus bas. a. Calcule \(E_m\) (référence au point le plus bas). b. Calcule la vitesse de la bille au point le plus bas. c. De l'autre côté, peut-elle monter jusqu'à 70°&nbsp;? d. Où sa vitesse est-elle maximale, et pourquoi&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>lâchée sans vitesse à \(z = 1{,}0\)&nbsp;m&nbsp;: \(E_m = 0{,}200 \times 10 \times 1{,}0 = 2{,}0\)&nbsp;J.</p>
+          <p><span class="etape-label">b. — </span>seul le poids travaille (le fil, tendu, reste perpendiculaire au mouvement — travail nul)&nbsp;: \(E_m\) se conserve. En bas&nbsp;: \(\dfrac{1}{2} \times 0{,}200 \times v^2 = 2{,}0\)&nbsp;J, donc \(v^2 = 20\) et \(v = \sqrt{20} \approx 4{,}5\)&nbsp;m·s⁻¹.</p>
+          <p><span class="etape-label">c. — </span>non&nbsp;: monter à 70° exigerait \(z = L(1 - \cos 70°) > 1{,}0\)&nbsp;m, donc plus d'énergie potentielle que toute la cagnotte. Sans apport extérieur, la bille remonte au mieux à 60° — la conservation est aussi une <em>interdiction</em>.</p>
+          <p><span class="etape-label">d. — </span>au point le plus bas&nbsp;: \(E_{pp}\) y est minimale, donc \(E_c\) maximale — toute la cagnotte est en vitesse à cet instant.</p>
+          <p class="conclusion">Conclusion&nbsp;: un pendule est une rampe de skate déguisée — mêmes échanges, même plafond infranchissable, même point bas où tout va vite.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Le grand huit. Dans un parc d'attractions, un chariot de \(m = 500\)&nbsp;kg (passagers compris) est hissé au sommet de la première descente, à \(h_1 = 40\)&nbsp;m, puis lâché quasiment sans vitesse. La bosse suivante culmine à \(h_2 = 38\)&nbsp;m. Référence au point bas du circuit. a. Calcule \(E_m\) au lâcher, puis la vitesse au point bas si les frottements sont négligés. b. Toujours sans frottements, le chariot passe-t-il la bosse de 38&nbsp;m&nbsp;? c. En réalité, les frottements dissipent 15&nbsp;% de l'énergie mécanique avant la bosse. Passe-t-il encore&nbsp;? d. Propose deux solutions d'ingénieur pour que l'attraction fonctionne.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(E_m = 500 \times 10 \times 40 = 200\,000\)&nbsp;J = 200&nbsp;kJ. Au point bas, tout est cinétique&nbsp;: \(\dfrac{1}{2} \times 500 \times v^2 = 200\,000\), donc \(v^2 = 800\) et \(v = \sqrt{800} \approx 28\)&nbsp;m·s⁻¹ — un peu plus de 100&nbsp;km/h.</p>
+          <p><span class="etape-label">b. — </span>franchir 38&nbsp;m coûte \(E_{pp} = 500 \times 10 \times 38 = 190\)&nbsp;kJ &lt; 200&nbsp;kJ&nbsp;: oui, il passe — avec 10&nbsp;kJ de cinétique, soit \(v^2 = 40\), \(v \approx 6{,}3\)&nbsp;m/s au sommet de la bosse.</p>
+          <p><span class="etape-label">c. — </span>il ne reste que \(0{,}85 \times 200 = 170\)&nbsp;kJ. La hauteur maximale atteignable est \(z = \dfrac{170\,000}{500 \times 10} = 34\)&nbsp;m &lt; 38&nbsp;m&nbsp;: le chariot n'atteint plus le sommet — il redescend en arrière.</p>
+          <p><span class="etape-label">d. — </span>abaisser la deuxième bosse nettement sous 34&nbsp;m (marge de sécurité), ou donner de la vitesse au lâcher (un lancement motorisé — un travail moteur qui regonfle \(E_m\)). C'est pour ça que, sur un vrai grand huit, chaque bosse est plus basse que la précédente.</p>
+          <p class="conclusion">Conclusion&nbsp;: la silhouette décroissante des montagnes russes n'est pas un choix esthétique — c'est un bilan d'énergie mécanique dessiné dans le ciel.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Deux volets indépendants&nbsp;: la rampe du cours passée aux rayons X, puis une descente en luge où l'énergie fuit — et où l'on remonte jusqu'à l'intensité des frottements. Donnée commune&nbsp;: \(g = 10\)&nbsp;N/kg.</p>
+          <div class="bac-partie">PARTIE A — LE SKATEPARK, FROTTEMENTS NÉGLIGÉS</div>
+          <p class="prose">Le skateur et sa planche (\(m = 50\)&nbsp;kg) s'élancent sans vitesse du haut de la rampe, à \(h = 3{,}20\)&nbsp;m au-dessus du creux. Référence des altitudes au creux de la rampe.</p>
+          <ol>
+            <li>Rappelle les expressions de \(E_c\), \(E_{pp}\) et \(E_m\), puis calcule les trois au point de départ.</li>
+            <li>Justifie que l'énergie mécanique se conserve ici, puis calcule la vitesse au creux de la rampe.</li>
+            <li>Détermine l'altitude du point où la vitesse vaut 4,0&nbsp;m/s.</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — LA LUGE, FROTTEMENTS COMPRIS</div>
+          <p class="prose">Une luge et son passager (\(m = 80\)&nbsp;kg) partent sans vitesse du haut d'une piste rectiligne de longueur \(L = 200\)&nbsp;m, dont le départ domine l'arrivée de 30&nbsp;m. La vitesse mesurée à l'arrivée est de 10&nbsp;m/s. On modélise les frottements par une force d'intensité constante \(f\), opposée au mouvement.</p>
+          <ol>
+            <li>Calcule l'énergie mécanique au départ et à l'arrivée (référence à l'arrivée).</li>
+            <li>Montre que le travail des frottements sur la descente vaut −20&nbsp;kJ.</li>
+            <li>Déduis-en l'intensité \(f\) des frottements.</li>
+            <li>Sans calcul&nbsp;: si la neige était plus glissante (frottements plus faibles), la vitesse d'arrivée serait-elle plus grande, plus petite ou identique&nbsp;? Justifie en une phrase.</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>\(E_c = \dfrac{1}{2}mv^2 = 0\) (départ sans vitesse)&nbsp;; \(E_{pp} = mgz = 50 \times 10 \times 3{,}20 = 1\,600\)&nbsp;J&nbsp;; \(E_m = E_c + E_{pp} = 1\,600\)&nbsp;J.</p>
+            <p><span class="etape-label">A.2 — </span>seules forces&nbsp;: le poids (conservatif) et la réaction de la rampe (perpendiculaire au mouvement, travail nul)&nbsp;: \(E_m\) se conserve. Au creux, \(E_{pp} = 0\)&nbsp;: \(\dfrac{1}{2} \times 50 \times v^2 = 1\,600\), donc \(v^2 = 64\) et \(v = 8{,}0\)&nbsp;m·s⁻¹.</p>
+            <p><span class="etape-label">A.3 — </span>à 4,0&nbsp;m/s&nbsp;: \(E_c = \dfrac{1}{2} \times 50 \times 16 = 400\)&nbsp;J, donc \(E_{pp} = 1\,600 - 400 = 1\,200\)&nbsp;J et \(z = \dfrac{1\,200}{50 \times 10} = 2{,}40\)&nbsp;m. (Remarque&nbsp;: à la moitié de la vitesse maximale, il reste les trois quarts de la hauteur — le carré, encore.)</p>
+            <p><span class="etape-label">B.1 — </span>départ&nbsp;: \(E_m = 0 + 80 \times 10 \times 30 = 24\,000\)&nbsp;J. Arrivée&nbsp;: \(E_m = \dfrac{1}{2} \times 80 \times 10^2 + 0 = 4\,000\)&nbsp;J.</p>
+            <p><span class="etape-label">B.2 — </span>\(\Delta E_m = 4\,000 - 24\,000 = -20\,000\)&nbsp;J. Cette variation est le travail des forces non conservatives — les frottements&nbsp;: \(W(\vec f) = -20\)&nbsp;kJ.</p>
+            <p><span class="etape-label">B.3 — </span>\(W(\vec f) = -f L\), donc \(f = \dfrac{20\,000}{200} = 100\)&nbsp;N.</p>
+            <p><span class="etape-label">B.4 — </span>plus grande&nbsp;: la fuite serait plus faible, il resterait davantage d'énergie mécanique à l'arrivée — donc plus de cinétique, donc plus de vitesse.</p>
+            <p class="conclusion">Conclusion&nbsp;: la partie A teste la conservation (calculer, justifier, inverser)&nbsp;; la partie B, la non-conservation — le bilan \(\Delta E_m\) qui se transforme en mesure de force. Les deux moitiés du chapitre, exactement dans l'esprit de l'épreuve.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">L'énergie électrique <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
