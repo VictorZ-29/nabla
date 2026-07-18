@@ -69,6 +69,20 @@ export const CHAPITRES = [
     ],
   },
   {
+    titre: 'La trigonométrie',
+    url: 'premiere/maths/trigonometrie/',
+    niveau: 'Première',
+    matiere: 'Spé Maths',
+    mots: 'trigonométrie cercle trigonométrique radian degré cosinus sinus cos sin valeurs remarquables angles associés mesure principale exercices corrigés',
+    sections: [
+      { id: 's1', titre: 'Un tour de grande roue', mots: 'grande roue cercle de rayon 1 distance parcourue arc périmètre 2π' },
+      { id: 's2', titre: 'Enrouler la droite sur le cercle', mots: 'enroulement droite des réels cercle trigonométrique sens direct radian conversion degrés 180° = π rad' },
+      { id: 's3', titre: 'Cosinus et sinus', mots: 'cosinus sinus coordonnées abscisse ordonnée cos²t + sin²t = 1 identité signes quadrants périodicité mesure principale' },
+      { id: 's4', titre: 'Les valeurs remarquables', mots: 'valeurs exactes remarquables π/6 π/4 π/3 racine de 2 sur 2 racine de 3 sur 2 tableau' },
+      { id: 's5', titre: 'Les angles associés', mots: 'angles associés opposé −t π−t π+t π/2−t symétries signes complémentaires' },
+    ],
+  },
+  {
     titre: 'Le produit scalaire',
     url: 'premiere/maths/produit-scalaire/',
     niveau: 'Première',

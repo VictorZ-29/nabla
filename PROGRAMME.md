@@ -63,7 +63,7 @@ depuis cet environnement, voir « À vérifier » en bas de fichier.
 
 ## Mathématiques — Première spécialité (programme 2026)
 
-**Bilan : 7 chapitres en ligne · 3 à faire · 2 compléments 2026 à apporter
+**Bilan : 8 chapitres en ligne · 2 à faire · 2 compléments 2026 à apporter
 aux chapitres existants.**
 
 ### Algèbre
@@ -79,7 +79,7 @@ aux chapitres existants.**
 |---|---|---|
 | La dérivation | Taux de variation, nombre dérivé, tangente ; fonctions dérivées des fonctions usuelles ; opérations (somme, produit, quotient…) ; signe de f′ → variations et extremums ; tableaux de signes et de variations. | ✅ `premiere/maths/derivation/` — **complément 2026 à ajouter : approximation affine locale** |
 | La fonction exponentielle | Définition (f′ = f, f(0) = 1) ; propriétés algébriques ; variations, courbe ; suites géométriques exp(na) ; équations et inéquations. | ✅ `premiere/maths/exponentielle/` |
-| La trigonométrie | Cercle trigonométrique, enroulement de la droite des réels, radian ; cosinus et sinus d'un réel ; valeurs remarquables ; angles associés ; cos²+sin² = 1. **Hors programme Première depuis 2026 : les fonctions x ↦ sin x, x ↦ cos x (parité, périodicité, courbes, dérivées, variations) — parties en Terminale.** | ⬜ À faire |
+| La trigonométrie | Cercle trigonométrique, enroulement de la droite des réels, radian ; cosinus et sinus d'un réel ; valeurs remarquables ; angles associés ; cos²+sin² = 1. **Hors programme Première depuis 2026 : les fonctions x ↦ sin x, x ↦ cos x (parité, périodicité, courbes, dérivées, variations) — parties en Terminale.** | ✅ `premiere/maths/trigonometrie/` — mesure principale et π/2 − t inclus, à confirmer sur l'annexe 2026 (cf. « À vérifier ») |
 
 ### Géométrie
 
