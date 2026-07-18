@@ -1285,3 +1285,12 @@
 @media (max-width: 480px) {
   .tab-grille--sommet { grid-template-columns: minmax(44px, auto) 1fr 34px 1fr; }
 }
+
+/* --- Trigonométrie : compatibilité KaTeX dans les widgets ----------------- */
+/* `.widget svg` et `.figure-graph svg` (height: auto) écrasent le
+   `.katex svg { height: inherit }` de KaTeX — même spécificité, mais
+   chapitre.css est chargé après lui. Or les éléments étirables de KaTeX
+   (radicaux \sqrt, barres \overline) sont des SVG : ils s'aplatissaient dans
+   les boutons et explications de quiz. On rend la main à KaTeX ici, en
+   dernier dans le fichier. */
+.widget .katex svg, .figure-graph .katex svg { width: 100%; height: inherit; }
