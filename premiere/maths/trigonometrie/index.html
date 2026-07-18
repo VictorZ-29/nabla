@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>La trigonométrie — Première Spé Maths | Nabla</title>
+<meta name="description" content="Comprends vraiment le cercle trigonométrique : le radian, cosinus et sinus lus comme des coordonnées, les valeurs remarquables et les angles associés, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé maths, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/maths/trigonometrie/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="La trigonométrie — Première Spé Maths | Nabla">
+<meta property="og:description" content="Le cercle trigonométrique, le radian, cosinus et sinus, les valeurs remarquables et les angles associés : un cours interactif où tu manipules le cercle toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/maths/trigonometrie/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="La trigonométrie — Première Spé Maths | Nabla">
+<meta name="twitter:description" content="Cercle trigonométrique, radian, cosinus et sinus, valeurs remarquables, angles associés : cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "La trigonométrie — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé maths sur la trigonométrie : cercle trigonométrique, enroulement de la droite des réels, radian, cosinus et sinus d'un réel, valeurs remarquables, angles associés. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/maths/trigonometrie/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité mathématiques",
+  "teaches": "Cercle trigonométrique, enroulement de la droite des réels, radian, cosinus et sinus d'un réel, valeurs remarquables, angles associés",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=15">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=15">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=15">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/trigo-enroulement.js"></script>
+<script type="module" src="../../../assets/js/widgets/trigo-cossin.js"></script>
+<script type="module" src="../../../assets/js/widgets/trigo-valeurs.js"></script>
+<script type="module" src="../../../assets/js/widgets/trigo-associes.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="trigonometrie">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Maths</span>
+  </div>
+  <h1>La trigonométrie</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>convertir des degrés en radians, placer un réel sur le cercle trigonométrique, lire cosinus et sinus comme des coordonnées, retrouver les valeurs exactes remarquables — et utiliser les angles associés sans apprendre les signes par cœur.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. Un tour de grande roue</a>
+      <a href="#s2">2. Enrouler la droite sur le cercle</a>
+      <a href="#s3">3. Cosinus et sinus</a>
+      <a href="#s4">4. Les valeurs remarquables</a>
+      <a href="#s5">5. Les angles associés</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. Un tour de grande roue</a>
+        <a href="#s2">2. Enrouler la droite sur le cercle</a>
+        <a href="#s3">3. Cosinus et sinus</a>
+        <a href="#s4">4. Les valeurs remarquables</a>
+        <a href="#s5">5. Les angles associés</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. Un tour de grande roue</h2>
+      <p class="prose">Tu montes dans une grande roue. La cabine s'élève, passe au sommet, redescend de l'autre côté. Comment dire <em>où</em> tu en es à un instant donné&nbsp;? Un angle, dirais-tu — «&nbsp;j'ai tourné de tant de degrés depuis le départ&nbsp;». Mais il existe une deuxième façon, plus directe&nbsp;: donner la <strong>distance parcourue le long du cercle</strong>. «&nbsp;J'ai roulé 30 mètres de rail.&nbsp;» Aucun degré là-dedans — juste une longueur.</p>
+      <p class="prose">Les mathématiciens ont adopté cette deuxième langue. Prends un cercle de rayon 1 — une roue dont le rayon sert d'unité. Son périmètre, tu le connais depuis le collège&nbsp;:</p>
+
+      <div class="math-vitrine">$$\text{tour complet} = 2\pi R = 2\pi \times 1 = 2\pi \approx 6{,}28$$</div>
+
+      <p class="prose">Un quart de tour, c'est donc un quart de \(2\pi\), soit \(\dfrac{\pi}{2} \approx 1{,}57\). Regarde la figure&nbsp;: le point est parti de I, a tourné d'un quart de tour — 90° dans l'ancienne langue, un arc de longueur \(\dfrac{\pi}{2}\) dans la nouvelle. Ce chapitre t'apprend la nouvelle&nbsp;: c'est elle que tout le lycée utilisera.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 400" role="img" aria-label="Cercle de rayon 1 centré à l'origine : un point M a parcouru un quart de tour depuis le point I, l'arc parcouru est surligné et mesure pi sur 2, soit 90 degrés">
+          <path class="g-grid" d="M0 400L0 0M160 400L160 0M480 400L480 0M640 400L640 0M0 360L640 360M0 40L640 40"></path>
+          <path class="g-axis" d="M0 200L640 200M320 400L320 0"></path>
+          <circle class="g-courbe" cx="320" cy="200" r="160"></circle>
+          <path class="g-guide" stroke-dasharray="4 4" d="M367.5 192.8L366.9 189.9L366.2 187.0L365.3 184.1L364.2 181.3L363.0 178.6L361.5 175.9L360.0 173.4L358.2 171.0L356.3 168.6L354.3 166.4L352.1 164.3L349.8 162.4L347.4 160.6L344.9 159.0L342.3 157.5L339.6 156.2"></path>
+          <path class="vec-pointe" d="M339.6 156.2L349.3 156.7L346.4 163.1Z"></path>
+          <text class="etiquette-math etiquette-math--muted" font-size="15" x="380.7" y="163.4">+</text>
+          <path class="g-tangente" d="M480.0 200.0L479.7 189.5L478.6 179.1L476.9 168.8L474.5 158.6L471.5 148.6L467.8 138.8L463.5 129.2L458.6 120.0L453.0 111.1L446.9 102.6L440.3 94.5L433.1 86.9L425.5 79.7L417.4 73.1L408.9 67.0L400.0 61.4L390.8 56.5L381.2 52.2L371.4 48.5L361.4 45.5L351.2 43.1L340.9 41.4L330.5 40.3L320.0 40.0"></path>
+          <path class="vec-pointe--accent" d="M320 40L332 35.5L332 44.5Z"></path>
+          <text class="etiquette-math etiquette-math--accent" font-size="16" x="446.7" y="73.3">π/2</text>
+          <text class="etiquette-math etiquette-math--muted" font-size="14" x="382.2" y="137.8">90°</text>
+          <circle class="pt-fixe" cx="480" cy="200" r="4.5"></circle>
+          <text class="etiquette-math" font-size="16" x="490" y="222">I</text>
+          <circle class="pt-point" cx="320" cy="40" r="5.5"></circle>
+          <text class="etiquette-math" font-size="17" x="298" y="30">M</text>
+        </svg>
+        <figcaption>Un quart de tour sur le cercle de rayon 1&nbsp;: 90° d'un côté, un arc de longueur \(\dfrac{\pi}{2} \approx 1{,}57\) de l'autre. Même position, deux langues.</figcaption>
+      </figure>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Enrouler la droite des réels sur le cercle</h2>
+      <p class="prose">Voici le geste fondateur du chapitre. En bas, la droite des réels, graduée comme d'habitude. Fais glisser \(t\)&nbsp;: le morceau de droite entre 0 et \(t\) vient <strong>s'enrouler</strong> sur le cercle en partant de I — vers le haut si \(t\) est positif, vers le bas sinon. Fais un demi-tour, un tour complet, puis passe en négatif.</p>
+
+      <figure class="widget" id="widget-trigo-enroulement"
+        data-widget="trigo-enroulement" data-k-init="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Enrouler la droite sur le cercle</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Préréglages du réel t">
+            <button type="button" data-k="6" aria-pressed="true">t = π/2</button>
+            <button type="button" data-k="12" aria-pressed="false">t = π</button>
+            <button type="button" data-k="24" aria-pressed="false">t = 2π</button>
+          </div>
+        </div>
+        <svg class="widget-graph js-cercle" viewBox="0 0 640 400" aria-label="Cercle trigonométrique : le réel t choisi sur la droite graduée s'enroule sur le cercle depuis le point I, dans le sens direct pour t positif"></svg>
+        <svg class="widget-graph graph-scinde js-ruban" viewBox="0 0 640 96" aria-label="La droite des réels graduée de moins deux pi à deux pi ; le morceau entre zéro et t est surligné"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne">
+            <span class="curseur-label" aria-hidden="true">t</span>
+            <input type="range" class="js-curseur" min="-24" max="24" step="1" value="6" aria-label="Réel t à enrouler sur le cercle, par pas de un douzième de pi">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="lecture-formule"><span class="js-ligne">t = π/2 ≈ 1,57 rad = 90°</span></div>
+          <div class="chips">
+            <span class="chip">en degrés&nbsp;: <span class="js-deg">90°</span></span>
+            <span class="chip chip--accent">longueur d'arc&nbsp;: <span class="js-arc">1,57</span></span>
+            <span class="chip chip--good js-etat" aria-live="polite">t &gt; 0 — sens direct</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Un quart de tour : 90° = π/2 rad ≈ 1,57. L'arc parcouru mesure le quart du périmètre 2π.</p>
+        </div>
+        <div class="widget-note">Le curseur avance par pas de π/12, soit 15°&nbsp;: chaque position se lit exactement, en π comme en degrés.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi enrouler&nbsp;? Parce que ça fabrique une correspondance parfaite&nbsp;: chaque réel \(t\) atterrit sur un point du cercle, sans exception. Les angles deviennent des <em>nombres</em>, et la mesure ne doit rien à une unité inventée&nbsp;: c'est une longueur d'arc, point. Seule subtilité&nbsp;: après un tour complet, la droite continue de s'enrouler par-dessus — \(t\) et \(t + 2\pi\) tombent sur le même point.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on l'écrit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Le <strong>cercle trigonométrique</strong> est le cercle de centre O et de rayon 1, orienté dans le <strong>sens direct</strong> (le sens inverse des aiguilles d'une montre). En enroulant la droite des réels sur ce cercle à partir du point I, chaque réel \(t\) est associé à un unique point \(M(t)\).</p>
+        <p>La <strong>mesure en radians</strong> de l'angle \(\widehat{IOM}\) est le réel \(t\)&nbsp;: la longueur de l'arc parcouru, comptée positivement dans le sens direct.</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$180^\circ = \pi \ \text{rad} \qquad\qquad 360^\circ = 2\pi \ \text{rad}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CONVERTIR DEGRÉS ⇆ RADIANS</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Retiens une seule correspondance&nbsp;: \(180^\circ = \pi\) rad. Tout le reste est une proportionnalité.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Degrés → radians&nbsp;: multiplie par \(\dfrac{\pi}{180}\). Radians → degrés&nbsp;: multiplie par \(\dfrac{180}{\pi}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle l'ordre de grandeur&nbsp;: moins d'un quart de tour doit donner moins de \(\dfrac{\pi}{2} \approx 1{,}57\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — DEUX CONVERSIONS</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Convertis \(60^\circ\) en radians.</p>
+          <p><span class="etape-label">Calcul — </span>\(60 \times \dfrac{\pi}{180} = \dfrac{60\pi}{180} = \dfrac{\pi}{3}\).</p>
+          <p class="conclusion">\(60^\circ = \dfrac{\pi}{3}\) rad — un sixième de tour, cohérent&nbsp;: c'est moins que \(\dfrac{\pi}{2}\).</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Convertis \(\dfrac{3\pi}{4}\) rad en degrés.</p>
+          <p><span class="etape-label">Calcul — </span>\(\dfrac{3\pi}{4} \times \dfrac{180}{\pi} = \dfrac{3 \times 180}{4} = 135\).</p>
+          <p class="conclusion">\(\dfrac{3\pi}{4}\) rad \(= 135^\circ\) — entre le quart de tour (90°) et le demi-tour (180°), comme sur le cercle.</p>
+        </div>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>\(180^\circ = \pi\) radians. Une seule correspondance à savoir&nbsp;: toutes les conversions en découlent par proportionnalité.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Un angle de \(60^\circ\), en radians, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{\pi}{3}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\pi}{6}\)</button>
+              <button type="button" class="quiz-reponse">\(60\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(60 \times \dfrac{\pi}{180} = \dfrac{\pi}{3}\). Et le réel \(60\) tout court n'a rien à voir&nbsp;: sur le cercle, il correspond à presque dix tours. \(\dfrac{\pi}{6}\), c'est \(30^\circ\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(\pi\) radians, c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">un tour complet</button>
+              <button type="button" class="quiz-reponse">un demi-tour</button>
+              <button type="button" class="quiz-reponse">un quart de tour</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\pi\) rad \(= 180^\circ\), le demi-périmètre du cercle de rayon 1. Le tour complet, c'est \(2\pi\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Sur le cercle trigonométrique, le sens direct est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le sens des aiguilles d'une montre</button>
+              <button type="button" class="quiz-reponse">le sens inverse des aiguilles d'une montre</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> c'est une convention, la même pour tout le monde&nbsp;: les réels positifs s'enroulent dans le sens inverse des aiguilles. Un \(t\) négatif tourne dans le sens des aiguilles.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Cosinus et sinus&nbsp;: les coordonnées de M</h2>
+      <p class="prose">Le point \(M(t)\) vit dans un repère&nbsp;: il a donc une abscisse et une ordonnée. Ces deux nombres sont si utiles qu'ils portent un nom — et tu vas les lire toi-même avant qu'on les définisse. Déplace M sur le cercle et suis des yeux les deux projections sur les axes. Garde aussi un œil sur la dernière puce&nbsp;: elle ne bougera pas d'un millimètre.</p>
+
+      <figure class="widget" id="widget-trigo-cossin"
+        data-widget="trigo-cossin" data-k-init="4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Les deux coordonnées de M</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Cercle trigonométrique avec un point M déplaçable ; ses projections sur les axes donnent cosinus t en abscisse et sinus t en ordonnée"></svg>
+        <div class="widget-pied">
+          <div class="chips">
+            <span class="chip">t = <span class="js-t">π/3</span></span>
+            <span class="chip chip--accent">cos t = <span class="js-cos">0,50</span></span>
+            <span class="chip chip--accent">sin t = <span class="js-sin">0,87</span></span>
+            <span class="chip">cos²t + sin²t = <span class="js-un">1,00</span></span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">Angle remarquable — valeurs exactes : cos(π/3) = 1/2 et sin(π/3) = √3/2. Les puces affichent leurs arrondis.</p>
+        </div>
+        <div class="widget-note">Près d'une graduation de π/12, le point s'y cale tout seul&nbsp;: relâche-le sur π/6, π/4 ou π/3 pour voir les valeurs exactes.</div>
+      </figure>
+
+      <p class="prose">Ces deux coordonnées que tu viens de promener, voilà leurs noms.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Pour tout réel \(t\), le <strong>cosinus</strong> de \(t\), noté \(\cos t\), est l'<strong>abscisse</strong> du point \(M(t)\)&nbsp;; le <strong>sinus</strong> de \(t\), noté \(\sin t\), est son <strong>ordonnée</strong>.</p>
+      </div>
+
+      <div class="math-vitrine">$$M(t) = (\cos t\;;\, \sin t)$$</div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ</div>
+        <p>Pour tout réel \(t\)&nbsp;:</p>
+        <p>\(-1 \leq \cos t \leq 1\) et \(-1 \leq \sin t \leq 1\)&nbsp;;</p>
+        <p>\(\cos^2 t + \sin^2 t = 1\)&nbsp;;</p>
+        <p>\(\cos(t + 2\pi) = \cos t\) et \(\sin(t + 2\pi) = \sin t\) — après un tour complet, le point est le même.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>L'encadrement d'abord&nbsp;: M reste sur le cercle de rayon 1, ses coordonnées ne peuvent pas s'échapper de \([-1\;;\, 1]\). L'identité ensuite&nbsp;: le rayon \([OM]\), de longueur 1, est l'hypoténuse d'un triangle rectangle dont les deux autres côtés mesurent \(|\cos t|\) et \(|\sin t|\). Pythagore donne \(\cos^2 t + \sin^2 t = 1^2\). Tu l'as vue rester figée à \(1{,}00\) dans le graphique&nbsp;: ce n'était pas un hasard, c'est un théorème.</p>
+      </div>
+
+      <p class="prose">Attention à la notation&nbsp;: \(\cos^2 t\) veut dire \((\cos t)^2\), le carré du cosinus — pas le cosinus de \(t^2\). Cette identité est l'outil n°&thinsp;1 du chapitre&nbsp;: si tu connais l'une des deux coordonnées, elle te donne l'autre… au signe près. Et le signe, c'est le cercle qui le donne.</p>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — RETROUVER sin t À PARTIR DE cos t (OU L'INVERSE)</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris l'identité&nbsp;: \(\sin^2 t = 1 - \cos^2 t\).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Prends la racine&nbsp;: \(\sin t = \pm\sqrt{1 - \cos^2 t}\) — deux candidats.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Tranche avec le cercle&nbsp;: l'énoncé localise \(t\) dans un intervalle&nbsp;; place M et lis si l'ordonnée (ou l'abscisse) y est positive ou négative.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA MOITIÉ MANQUANTE</div>
+        <p class="exemple-enonce">On sait que \(\cos t = \dfrac{3}{5}\) et que \(t \in \left[-\dfrac{\pi}{2}\;;\, 0\right]\). Calcule \(\sin t\).</p>
+        <p><span class="etape-label">Étape 1 — </span>\(\sin^2 t = 1 - \left(\dfrac{3}{5}\right)^2 = 1 - \dfrac{9}{25} = \dfrac{16}{25}\).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(\sin t = \dfrac{4}{5}\) ou \(\sin t = -\dfrac{4}{5}\).</p>
+        <p><span class="etape-label">Étape 3 — </span>\(t \in \left[-\dfrac{\pi}{2}\;;\, 0\right]\)&nbsp;: M est dans le quart en bas à droite, son ordonnée est négative.</p>
+        <p class="conclusion">Conclusion&nbsp;: \(\sin t = -\dfrac{4}{5}\). L'identité donne la valeur, le cercle donne le signe.</p>
+      </div>
+
+      <p class="prose">Dernier outil de la section. Un même point du cercle est repéré par une infinité de réels&nbsp;: \(t\), \(t + 2\pi\), \(t - 2\pi\)… Parmi toutes ces mesures, une seule tombe dans \(\left]-\pi\;;\, \pi\right]\)&nbsp;: on l'appelle la <strong>mesure principale</strong>. C'est la carte d'identité du point.</p>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER LA MESURE PRINCIPALE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris \(2\pi\) avec le dénominateur de ton angle&nbsp;: \(2\pi = \dfrac{12\pi}{6} = \dfrac{8\pi}{4} = \dfrac{6\pi}{3}\)…</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Ajoute ou retranche ce \(2\pi\) autant de fois que nécessaire — chaque fois, c'est un tour complet, le point ne bouge pas.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Arrête-toi dès que le résultat est dans \(\left]-\pi\;;\, \pi\right]\).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UNE MESURE PRINCIPALE</div>
+        <p class="exemple-enonce">Détermine la mesure principale de \(\dfrac{17\pi}{6}\).</p>
+        <p><span class="etape-label">Calcul — </span>\(\dfrac{17\pi}{6} - 2\pi = \dfrac{17\pi}{6} - \dfrac{12\pi}{6} = \dfrac{5\pi}{6}\), et \(\dfrac{5\pi}{6} \in \left]-\pi\;;\, \pi\right]\).</p>
+        <p class="conclusion">Conclusion&nbsp;: la mesure principale est \(\dfrac{5\pi}{6}\)&nbsp;: \(\dfrac{17\pi}{6}\), c'est le même point, un tour plus loin.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur le cercle</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(\cos t\), c'est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">l'abscisse de \(M(t)\)</button>
+              <button type="button" class="quiz-reponse">l'ordonnée de \(M(t)\)</button>
+              <button type="button" class="quiz-reponse">la longueur de l'arc parcouru</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le couple est rangé comme \((x\;;\, y)\)&nbsp;: \((\cos t\;;\, \sin t)\). L'ordonnée, c'est le sinus. Et la longueur d'arc, c'est \(t\) lui-même.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Existe-t-il un réel \(t\) tel que \(\cos t = 1{,}4\)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">oui, si \(t\) est assez grand</button>
+              <button type="button" class="quiz-reponse">non, jamais</button>
+              <button type="button" class="quiz-reponse">oui, pour \(t = 1{,}4\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> M reste sur le cercle de rayon 1&nbsp;: ses coordonnées vivent dans \([-1\;;\, 1]\). Aucun \(t\), si grand soit-il, n'y changera rien — la courbe s'enroule, elle ne s'échappe pas.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Si \(\sin t = 0{,}6\), alors \(\cos^2 t\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(0{,}4\)</button>
+              <button type="button" class="quiz-reponse">\(0{,}8\)</button>
+              <button type="button" class="quiz-reponse">\(0{,}64\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\cos^2 t = 1 - \sin^2 t = 1 - 0{,}36 = 0{,}64\). Répondre \(0{,}4\), c'est oublier les carrés&nbsp;; \(0{,}8\), c'est \(\cos t\) (au signe près), pas son carré.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Les valeurs remarquables</h2>
+      <p class="prose">L'épreuve de Première se passe <em>sans calculatrice</em>&nbsp;: quelques cosinus et sinus doivent devenir des réflexes. La bonne nouvelle&nbsp;: sur \(\left[0\;;\, \dfrac{\pi}{2}\right]\), il n'y a que cinq angles à connaître — et leurs valeurs s'organisent toutes seules.</p>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>VALEURS REMARQUABLES</span>
+          <span class="bande-note">À SAVOIR RETROUVER SANS LA TABLE</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th>\(t\)</th><th>\(0\)</th><th>\(\dfrac{\pi}{6}\)</th><th>\(\dfrac{\pi}{4}\)</th><th>\(\dfrac{\pi}{3}\)</th><th>\(\dfrac{\pi}{2}\)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>\(\cos t\)</td><td>\(1\)</td><td>\(\dfrac{\sqrt{3}}{2}\)</td><td>\(\dfrac{\sqrt{2}}{2}\)</td><td>\(\dfrac{1}{2}\)</td><td>\(0\)</td></tr>
+              <tr><td>\(\sin t\)</td><td>\(0\)</td><td>\(\dfrac{1}{2}\)</td><td>\(\dfrac{\sqrt{2}}{2}\)</td><td>\(\dfrac{\sqrt{3}}{2}\)</td><td>\(1\)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>La ligne du sinus, c'est \(\dfrac{\sqrt{0}}{2},\ \dfrac{\sqrt{1}}{2},\ \dfrac{\sqrt{2}}{2},\ \dfrac{\sqrt{3}}{2},\ \dfrac{\sqrt{4}}{2}\) — et le cosinus lit la même liste à l'envers.</p>
+      </div>
+
+      <p class="prose">Maintenant, vérifie que ça tient sans la table sous les yeux. Le dessin t'aide plus que ta mémoire&nbsp;: plus M est haut, plus le sinus est grand&nbsp;; plus M est à droite, plus le cosinus est grand.</p>
+
+      <figure class="widget" id="widget-trigo-valeurs" data-widget="trigo-valeurs">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le cadran des valeurs exactes</span>
+          </div>
+          <span class="quiz-score js-progression">ANGLE 1/6</span>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Un angle remarquable est dessiné sur le cercle trigonométrique ; à toi de trouver la valeur exacte demandée"></svg>
+        <div class="widget-pied">
+          <div class="js-manche">
+            <p class="quiz-enonce">\(\cos\dfrac{\pi}{6}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{1}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{3}}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{2}}{2}\)</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">\(\sin\dfrac{\pi}{6}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{3}}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{2}}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{1}{2}\)</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">\(\cos\dfrac{\pi}{4}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{2}}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{1}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{3}}{2}\)</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">\(\sin\dfrac{\pi}{3}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{1}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{2}}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{3}}{2}\)</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">\(\cos\dfrac{\pi}{2}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(1\)</button>
+              <button type="button" class="quiz-reponse">\(0\)</button>
+              <button type="button" class="quiz-reponse">\(-1\)</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">\(\cos \pi\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(1\)</button>
+              <button type="button" class="quiz-reponse">\(0\)</button>
+              <button type="button" class="quiz-reponse">\(-1\)</button>
+            </div>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> regarde le dessin&nbsp;: M est-il plutôt haut ou bas&nbsp;? à droite ou à gauche&nbsp;? La valeur cherchée est une coordonnée de M.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> à \(\dfrac{\pi}{6}\), M est encore près de l'axe horizontal&nbsp;: grande abscisse, \(\dfrac{\sqrt{3}}{2} \approx 0{,}87\). La valeur \(\dfrac{1}{2}\), c'est son ordonnée.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> M est bas&nbsp;: petite ordonnée, \(\dfrac{1}{2}\). Remarque l'échange avec \(\dfrac{\pi}{3}\)&nbsp;: les deux angles sont complémentaires — tu comprendras pourquoi à la section 5.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> à 45°, abscisse et ordonnée sont égales&nbsp;: \(\dfrac{\sqrt{2}}{2}\) pour les deux. Le seul angle de la table où cosinus et sinus coïncident.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> à \(\dfrac{\pi}{3}\), M est haut&nbsp;: grande ordonnée, \(\dfrac{\sqrt{3}}{2}\) — la même valeur que \(\cos\dfrac{\pi}{6}\), ce n'est pas un hasard.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> M est au sommet, en \((0\;;\, 1)\)&nbsp;: abscisse nulle. Et \(\sin\dfrac{\pi}{2} = 1\), la plus grande valeur possible d'un sinus.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> \(M(\pi)\) est à gauche, en \((-1\;;\, 0)\)&nbsp;: \(\cos \pi = -1\) et \(\sin \pi = 0\). Le cercle donne aussi les valeurs négatives — aucune table à rallonger.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Angle suivant ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <script type="application/json">
+        [
+          {"k":2,"bonne":2},
+          {"k":2,"bonne":3},
+          {"k":3,"bonne":1},
+          {"k":4,"bonne":3},
+          {"k":6,"bonne":2},
+          {"k":12,"bonne":3}
+        ]
+        </script>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — RETROUVER UNE VALEUR REMARQUABLE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Place l'angle sur le cercle, même grossièrement&nbsp;: \(\dfrac{\pi}{6}\) est bas, \(\dfrac{\pi}{3}\) est haut, \(\dfrac{\pi}{4}\) est au milieu.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Demande-toi si la coordonnée cherchée est grande ou petite — proche de 1 ou proche de 0.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Choisis dans la liste \(0,\ \dfrac{1}{2},\ \dfrac{\sqrt{2}}{2} \approx 0{,}71,\ \dfrac{\sqrt{3}}{2} \approx 0{,}87,\ 1\)&nbsp;: c'est forcément l'une des cinq.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — UN CALCUL EXACT</div>
+        <p class="exemple-enonce">Calcule la valeur exacte de \(A = \cos\dfrac{\pi}{3} + \sin\dfrac{\pi}{6}\).</p>
+        <p><span class="etape-label">Étape 1 — </span>\(\cos\dfrac{\pi}{3} = \dfrac{1}{2}\) (M est haut, abscisse petite) et \(\sin\dfrac{\pi}{6} = \dfrac{1}{2}\) (M est bas, ordonnée petite).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(A = \dfrac{1}{2} + \dfrac{1}{2} = 1\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(A = 1\), valeur exacte — aucun arrondi, aucune calculatrice.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois valeurs de tête</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(\cos\dfrac{\pi}{3}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{1}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{3}}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{2}}{2}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> à \(\dfrac{\pi}{3}\), M est haut sur le cercle&nbsp;: abscisse petite, \(\dfrac{1}{2}\). \(\dfrac{\sqrt{3}}{2}\), c'est \(\cos\dfrac{\pi}{6}\) — ou \(\sin\dfrac{\pi}{3}\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(\sin\dfrac{\pi}{4}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{1}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{2}}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{3}}{2}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> à 45°, cosinus et sinus sont égaux&nbsp;: \(\dfrac{\sqrt{2}}{2} \approx 0{,}71\) pour les deux. C'est le seul angle de la table où ils coïncident.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>\(\sin\dfrac{\pi}{2}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(0\)</button>
+              <button type="button" class="quiz-reponse">\(-1\)</button>
+              <button type="button" class="quiz-reponse">\(1\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(M\!\left(\dfrac{\pi}{2}\right)\) est au sommet du cercle, en \((0\;;\, 1)\)&nbsp;: ordonnée 1. Son abscisse, elle, est nulle&nbsp;: \(\cos\dfrac{\pi}{2} = 0\).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Les angles associés&nbsp;: le dessin plutôt que le par-cœur</h2>
+      <p class="prose">Que vaut \(\cos\dfrac{5\pi}{6}\)&nbsp;? Ta table s'arrête à \(\dfrac{\pi}{2}\)… mais \(\dfrac{5\pi}{6} = \pi - \dfrac{\pi}{6}\), et le point \(M\!\left(\pi - \dfrac{\pi}{6}\right)\) est le <em>reflet</em> de \(M\!\left(\dfrac{\pi}{6}\right)\) dans l'axe vertical&nbsp;: même hauteur, abscisse retournée. Tous les angles hors de \(\left[0\;;\, \dfrac{\pi}{2}\right]\) se ramènent ainsi à un angle de référence par une symétrie. Choisis une symétrie, déplace M, et regarde ce qui se conserve et ce qui change de signe.</p>
+
+      <figure class="widget" id="widget-trigo-associes"
+        data-widget="trigo-associes" data-k-init="2" data-mode-init="oppose">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Quatre symétries, huit formules</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Choix de l'angle associé">
+            <button type="button" data-mode="oppose" aria-pressed="true">−t</button>
+            <button type="button" data-mode="piMoins" aria-pressed="false">π − t</button>
+            <button type="button" data-mode="piPlus" aria-pressed="false">π + t</button>
+            <button type="button" data-mode="complementaire" aria-pressed="false">π/2 − t</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 400" aria-label="Cercle trigonométrique avec un point M déplaçable dans le premier quart et son symétrique M prime selon la symétrie choisie"></svg>
+        <div class="widget-pied">
+          <div class="lecture-formule"><span class="js-ligne-cos">cos(−π/6) = cos(π/6) = √3/2</span></div>
+          <div class="lecture-formule"><span class="js-ligne-sin">sin(−π/6) = −sin(π/6) = −1/2</span></div>
+          <div class="chips">
+            <span class="chip">t = <span class="js-t">π/6</span></span>
+            <span class="chip chip--accent">angle associé&nbsp;: <span class="js-tp">−π/6</span></span>
+            <span class="chip chip--accent js-etat" aria-live="polite">symétrie d'axe (Ox) — l'axe des abscisses</span>
+          </div>
+          <p class="widget-legende js-legende" aria-live="polite">M′ est le reflet de M dans l'axe horizontal : même abscisse (cos conservé), hauteur retournée (sin change de signe). Ici t est remarquable : les deux lignes sont exactes.</p>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+        </div>
+      </figure>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LES ANGLES ASSOCIÉS</div>
+        <p>Pour tout réel \(t\)&nbsp;:</p>
+        <p>\(\cos(-t) = \cos t\) et \(\sin(-t) = -\sin t\)&nbsp;;</p>
+        <p>\(\cos(\pi - t) = -\cos t\) et \(\sin(\pi - t) = \sin t\)&nbsp;;</p>
+        <p>\(\cos(\pi + t) = -\cos t\) et \(\sin(\pi + t) = -\sin t\)&nbsp;;</p>
+        <p>\(\cos\left(\dfrac{\pi}{2} - t\right) = \sin t\) et \(\sin\left(\dfrac{\pi}{2} - t\right) = \cos t\).</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Aucune de ces huit formules n'est une liste à réciter&nbsp;: chacune est la photo d'une symétrie. L'axe horizontal conserve l'abscisse et retourne l'ordonnée&nbsp;; l'axe vertical fait l'inverse&nbsp;; le centre O retourne les deux&nbsp;; la diagonale les échange — voilà pourquoi \(\cos\dfrac{\pi}{6} = \sin\dfrac{\pi}{3}\), le mystère de la section 4. Au contrôle, dessine un petit cercle et lis les signes dessus&nbsp;: dix secondes, zéro erreur.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CALCULER HORS DE [0 ; π/2]</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris l'angle à partir d'un angle de référence de \(\left[0\;;\, \dfrac{\pi}{2}\right]\)&nbsp;: \(\dfrac{5\pi}{6} = \pi - \dfrac{\pi}{6}\), \(\dfrac{4\pi}{3} = \pi + \dfrac{\pi}{3}\), \(-\dfrac{\pi}{4} = -\left(\dfrac{\pi}{4}\right)\)…</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Fais le croquis&nbsp;: place les deux points, lis quelle coordonnée se conserve et laquelle change de signe.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Remplace par la valeur remarquable de l'angle de référence.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLES RÉSOLUS — TROIS ANGLES HORS TABLE</div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">a. Calcule \(\cos\dfrac{2\pi}{3}\).</p>
+          <p><span class="etape-label">Calcul — </span>\(\dfrac{2\pi}{3} = \pi - \dfrac{\pi}{3}\)&nbsp;: symétrie d'axe vertical, le cosinus change de signe&nbsp;: \(-\cos\dfrac{\pi}{3}\).</p>
+          <p class="conclusion">\(\cos\dfrac{2\pi}{3} = -\dfrac{1}{2}\)</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">b. Calcule \(\sin\left(-\dfrac{\pi}{4}\right)\).</p>
+          <p><span class="etape-label">Calcul — </span>reflet dans l'axe horizontal&nbsp;: le sinus change de signe&nbsp;: \(-\sin\dfrac{\pi}{4}\).</p>
+          <p class="conclusion">\(\sin\left(-\dfrac{\pi}{4}\right) = -\dfrac{\sqrt{2}}{2}\)</p>
+        </div>
+        <div class="exemple-item">
+          <p class="exemple-enonce">c. Calcule \(\sin\dfrac{7\pi}{6}\).</p>
+          <p><span class="etape-label">Calcul — </span>\(\dfrac{7\pi}{6} = \pi + \dfrac{\pi}{6}\)&nbsp;: symétrie de centre O, tout change de signe&nbsp;: \(-\sin\dfrac{\pi}{6}\).</p>
+          <p class="conclusion">\(\sin\dfrac{7\pi}{6} = -\dfrac{1}{2}\)</p>
+        </div>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>\(\cos(\pi - t)\) est égal à…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(-\cos t\)</button>
+              <button type="button" class="quiz-reponse">\(\cos t\)</button>
+              <button type="button" class="quiz-reponse">\(\sin t\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> la symétrie d'axe vertical retourne l'abscisse. Recopier \(\cos t\) sans le signe est LE piège des angles associés&nbsp;: fais le croquis.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>\(\sin(-t)\) est égal à…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\sin t\)</button>
+              <button type="button" class="quiz-reponse">\(-\sin t\)</button>
+              <button type="button" class="quiz-reponse">\(\cos t\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> le reflet dans l'axe horizontal retourne la hauteur&nbsp;: \(\sin(-t) = -\sin t\). Le cosinus, lui, ne bouge pas&nbsp;: \(\cos(-t) = \cos t\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>\(\cos\dfrac{5\pi}{6}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\dfrac{\sqrt{3}}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(-\dfrac{1}{2}\)</button>
+              <button type="button" class="quiz-reponse">\(-\dfrac{\sqrt{3}}{2}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\dfrac{5\pi}{6} = \pi - \dfrac{\pi}{6}\)&nbsp;: valeur de référence \(\dfrac{\sqrt{3}}{2}\), et M est en haut à <em>gauche</em>, donc cosinus négatif. \(-\dfrac{1}{2}\) se trompe de valeur&nbsp;: \(\dfrac{1}{2}\) va avec \(\dfrac{\pi}{3}\).</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>\(t\) est entre \(-\pi\) et \(-\dfrac{\pi}{2}\)&nbsp;: M est en bas à gauche. Alors…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\cos t > 0\) et \(\sin t < 0\)</button>
+              <button type="button" class="quiz-reponse">\(\cos t < 0\) et \(\sin t < 0\)</button>
+              <button type="button" class="quiz-reponse">\(\cos t < 0\) et \(\sin t > 0\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> en bas à gauche, abscisse et ordonnée sont toutes les deux négatives. Place le point, lis les signes&nbsp;: c'est tout le secret de ce chapitre.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Confondre \(60\) et \(60^\circ\).</strong> Le réel 60 n'est pas «&nbsp;60 degrés&nbsp;»&nbsp;: sur le cercle, 60 correspond à un arc de 60 rayons — presque dix tours. En radians, \(60^\circ\) s'écrit \(\dfrac{\pi}{3}\). Écris toujours le symbole ° quand il y en a un.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Échanger cosinus et sinus.</strong> Le cosinus est l'<em>abscisse</em>, le sinus l'<em>ordonnée</em>. Retiens que le couple est rangé comme les coordonnées&nbsp;: \((\cos t\;;\, \sin t) = (x\;;\, y)\) — cosinus d'abord, sur l'axe horizontal.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Recopier \(\cos(\pi - t) = \cos t\).</strong> La symétrie d'axe vertical retourne l'abscisse&nbsp;: \(\cos(\pi - t) = -\cos t\). En cas de doute, dix secondes de croquis donnent le signe — c'est tout l'intérêt des symétries de la section 5.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Mélanger \(\dfrac{1}{2}\), \(\dfrac{\sqrt{2}}{2}\) et \(\dfrac{\sqrt{3}}{2}\).</strong> \(\cos\dfrac{\pi}{3} = \dfrac{1}{2}\), pas \(\dfrac{\sqrt{3}}{2}\). Lis le dessin&nbsp;: à \(\dfrac{\pi}{3}\), M est haut, donc son abscisse est petite. Et garde la liste croissante du sinus&nbsp;: \(\dfrac{\sqrt{0}}{2}, \dfrac{\sqrt{1}}{2}, \dfrac{\sqrt{2}}{2}, \dfrac{\sqrt{3}}{2}, \dfrac{\sqrt{4}}{2}\).</p>
+        </div>
+        <div class="piege">
+          <p><strong>Distribuer cos sur une somme.</strong> \(\cos(a + b) \neq \cos a + \cos b\). Teste avec \(a = b = \dfrac{\pi}{2}\)&nbsp;: à gauche \(\cos \pi = -1\), à droite \(0 + 0 = 0\). De même, \(\cos^2 t\) veut dire \((\cos t)^2\), pas \(\cos(t^2)\).</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">CERCLE</span>
+          <p>Rayon 1, sens direct&nbsp;: chaque réel \(t\) s'enroule sur un unique point \(M(t)\), et \(t + 2\pi\) donne le même point.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">RADIAN</span>
+          <p>\(180^\circ = \pi\) rad. Conversions par proportionnalité&nbsp;: \(\times \dfrac{\pi}{180}\) dans un sens, \(\times \dfrac{180}{\pi}\) dans l'autre.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">COS &amp; SIN</span>
+          <p>\(M(t) = (\cos t\;;\, \sin t)\)&nbsp;: deux nombres de \([-1\;;\, 1]\), liés par \(\cos^2 t + \sin^2 t = 1\).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">VALEURS</span>
+          <p>Pour \(t = 0, \dfrac{\pi}{6}, \dfrac{\pi}{4}, \dfrac{\pi}{3}, \dfrac{\pi}{2}\)&nbsp;: \(\sin t = \dfrac{\sqrt{0}}{2}, \dfrac{\sqrt{1}}{2}, \dfrac{\sqrt{2}}{2}, \dfrac{\sqrt{3}}{2}, \dfrac{\sqrt{4}}{2}\) — et cos lit la liste à l'envers.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ASSOCIÉS</span>
+          <p>\(-t\), \(\pi - t\), \(\pi + t\), \(\dfrac{\pi}{2} - t\)&nbsp;: quatre symétries du cercle. Le croquis donne les signes, l'angle de référence donne la valeur.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: le radian et le cercle, cosinus et sinus, les valeurs remarquables, les angles associés — puis deux synthèses et un problème.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· degrés ⇆ radians</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">a. Convertis en radians&nbsp;: \(30^\circ\), \(90^\circ\), \(120^\circ\), \(225^\circ\). b. Convertis en degrés&nbsp;: \(\dfrac{\pi}{12}\), \(\dfrac{5\pi}{6}\), \(\dfrac{5\pi}{2}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>on multiplie par \(\dfrac{\pi}{180}\)&nbsp;: \(30^\circ = \dfrac{\pi}{6}\)&nbsp;; \(90^\circ = \dfrac{\pi}{2}\)&nbsp;; \(120^\circ = \dfrac{120\pi}{180} = \dfrac{2\pi}{3}\)&nbsp;; \(225^\circ = \dfrac{225\pi}{180} = \dfrac{5\pi}{4}\).</p>
+          <p><span class="etape-label">b. — </span>on multiplie par \(\dfrac{180}{\pi}\)&nbsp;: \(\dfrac{\pi}{12} = 15^\circ\)&nbsp;; \(\dfrac{5\pi}{6} = 150^\circ\)&nbsp;; \(\dfrac{5\pi}{2} = 450^\circ\) — plus d'un tour&nbsp;: un tour complet (360°) puis encore 90°.</p>
+          <p class="conclusion">Conclusion&nbsp;: une seule correspondance à savoir, \(180^\circ = \pi\)&nbsp;; tout le reste est une proportionnalité.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· placer sur le cercle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Place sur le cercle trigonométrique les points \(M\!\left(\dfrac{\pi}{2}\right)\), \(M\!\left(-\dfrac{\pi}{4}\right)\), \(M\!\left(\dfrac{2\pi}{3}\right)\) et \(M(\pi)\). Un croquis à main levée suffit.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(M\!\left(\dfrac{\pi}{2}\right)\)&nbsp;: un quart de tour dans le sens direct, tout en haut, en \((0\;;\, 1)\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(M\!\left(-\dfrac{\pi}{4}\right)\)&nbsp;: \(t\) négatif, on tourne dans le sens des aiguilles&nbsp;: un huitième de tour vers le bas, en bas à droite.</p>
+          <p><span class="etape-label">Étape 3 — </span>\(M\!\left(\dfrac{2\pi}{3}\right)\)&nbsp;: \(\dfrac{2\pi}{3} = \dfrac{\pi}{2} + \dfrac{\pi}{6}\)&nbsp;: un peu au-delà du sommet, en haut à gauche.</p>
+          <p><span class="etape-label">Étape 4 — </span>\(M(\pi)\)&nbsp;: un demi-tour, à gauche, en \((-1\;;\, 0)\).</p>
+          <p class="conclusion">Conclusion&nbsp;: positif → sens inverse des aiguilles, négatif → sens des aiguilles&nbsp;; et repère-toi aux quatre points cardinaux \(0\), \(\dfrac{\pi}{2}\), \(\pi\), \(-\dfrac{\pi}{2}\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· mesure principale</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">a. Montre que \(\dfrac{13\pi}{6}\) et \(\dfrac{\pi}{6}\) repèrent le même point du cercle. b. Détermine la mesure principale de \(\dfrac{17\pi}{4}\), puis celle de \(-\dfrac{7\pi}{6}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\dfrac{13\pi}{6} - 2\pi = \dfrac{13\pi}{6} - \dfrac{12\pi}{6} = \dfrac{\pi}{6}\)&nbsp;: les deux réels diffèrent d'un tour complet, le point est le même.</p>
+          <p><span class="etape-label">b. — </span>\(\dfrac{17\pi}{4} - 2\pi = \dfrac{9\pi}{4}\), puis \(\dfrac{9\pi}{4} - 2\pi = \dfrac{\pi}{4} \in \left]-\pi\;;\, \pi\right]\)&nbsp;: mesure principale \(\dfrac{\pi}{4}\) (deux tours retranchés). Pour \(-\dfrac{7\pi}{6}\)&nbsp;: \(-\dfrac{7\pi}{6} + 2\pi = \dfrac{5\pi}{6} \in \left]-\pi\;;\, \pi\right]\)&nbsp;: mesure principale \(\dfrac{5\pi}{6}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: ajouter ou retrancher \(2\pi\) (écrit au bon dénominateur) jusqu'à tomber dans \(\left]-\pi\;;\, \pi\right]\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· signes de cos et sin</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sans rien calculer, donne le signe de \(\cos t\) et de \(\sin t\) pour&nbsp;: a. \(t = \dfrac{2\pi}{3}\)&nbsp;; b. \(t = -\dfrac{\pi}{6}\)&nbsp;; c. \(t = \dfrac{4\pi}{3}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\dfrac{2\pi}{3}\) est entre \(\dfrac{\pi}{2}\) et \(\pi\)&nbsp;: M en haut à gauche, donc \(\cos t < 0\) et \(\sin t > 0\).</p>
+          <p><span class="etape-label">b. — </span>\(-\dfrac{\pi}{6}\)&nbsp;: M en bas à droite, donc \(\cos t > 0\) et \(\sin t < 0\).</p>
+          <p><span class="etape-label">c. — </span>\(\dfrac{4\pi}{3}\) est entre \(\pi\) et \(\dfrac{3\pi}{2}\)&nbsp;: M en bas à gauche, donc \(\cos t < 0\) et \(\sin t < 0\).</p>
+          <p class="conclusion">Conclusion&nbsp;: place le point, lis les signes. Il n'existe aucune formule plus rapide que ce croquis.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· vrai ou faux</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Vrai ou faux, en justifiant&nbsp;: a. il existe un réel \(t\) tel que \(\cos t = 1{,}2\)&nbsp;; b. il existe un réel \(t\) tel que \(\sin t = -1\)&nbsp;; c. si \(\cos t = 0\), alors \(\sin t = 1\)&nbsp;; d. pour tout réel \(t\), \(\cos(t + 2\pi) = \cos t\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>Faux&nbsp;: un cosinus vit dans \([-1\;;\, 1]\), et \(1{,}2\) est dehors.</p>
+          <p><span class="etape-label">b. — </span>Vrai&nbsp;: \(t = -\dfrac{\pi}{2}\) convient — M est tout en bas, en \((0\;;\, -1)\).</p>
+          <p><span class="etape-label">c. — </span>Faux&nbsp;: \(\cos t = 0\) place M tout en haut <em>ou</em> tout en bas&nbsp;: \(\sin t = 1\) ou \(\sin t = -1\). Contre-exemple&nbsp;: \(t = -\dfrac{\pi}{2}\).</p>
+          <p><span class="etape-label">d. — </span>Vrai&nbsp;: \(t + 2\pi\) repère le même point (un tour de plus), donc même abscisse.</p>
+          <p class="conclusion">Conclusion&nbsp;: toutes les réponses se lisent sur le cercle — coordonnées bornées, tour complet invisible.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· cos²t + sin²t = 1</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On sait que \(\cos t = 0{,}6\) et que \(t \in \left[-\dfrac{\pi}{2}\;;\, 0\right]\). Calcule \(\sin t\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\sin^2 t = 1 - \cos^2 t = 1 - 0{,}36 = 0{,}64\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\sin t = 0{,}8\) ou \(\sin t = -0{,}8\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(t \in \left[-\dfrac{\pi}{2}\;;\, 0\right]\)&nbsp;: M en bas à droite, ordonnée négative.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\sin t = -0{,}8\). L'identité donne la valeur, le cercle donne le signe — toujours dans cet ordre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· cos²t + sin²t = 1</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On sait que \(\sin t = \dfrac{1}{3}\) et que \(t \in \left[\dfrac{\pi}{2}\;;\, \pi\right]\). Calcule la valeur exacte de \(\cos t\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\cos^2 t = 1 - \dfrac{1}{9} = \dfrac{8}{9}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\cos t = \pm\sqrt{\dfrac{8}{9}} = \pm\dfrac{2\sqrt{2}}{3}\), car \(\sqrt{8} = 2\sqrt{2}\).</p>
+          <p><span class="etape-label">Étape 3 — </span>\(t \in \left[\dfrac{\pi}{2}\;;\, \pi\right]\)&nbsp;: M en haut à gauche, abscisse négative.</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\cos t = -\dfrac{2\sqrt{2}}{3}\). Valeur exacte demandée, valeur exacte rendue — pas de \(0{,}94\) approximatif.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· valeurs remarquables</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Donne les valeurs exactes de&nbsp;: \(\cos\dfrac{\pi}{6}\), \(\sin\dfrac{\pi}{3}\), \(\cos\dfrac{\pi}{4}\), \(\sin\dfrac{\pi}{2}\) et \(\cos 0\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Calcul — </span>\(\cos\dfrac{\pi}{6} = \dfrac{\sqrt{3}}{2}\)&nbsp;; \(\sin\dfrac{\pi}{3} = \dfrac{\sqrt{3}}{2}\)&nbsp;; \(\cos\dfrac{\pi}{4} = \dfrac{\sqrt{2}}{2}\)&nbsp;; \(\sin\dfrac{\pi}{2} = 1\)&nbsp;; \(\cos 0 = 1\).</p>
+          <p class="conclusion">Conclusion&nbsp;: \(\cos\dfrac{\pi}{6} = \sin\dfrac{\pi}{3}\), et ce n'est pas un hasard&nbsp;: \(\dfrac{\pi}{6}\) et \(\dfrac{\pi}{3}\) sont complémentaires (section 5).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· calcul exact</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Calcule la valeur exacte de&nbsp;: a. \(A = \cos\dfrac{\pi}{3} + \sin\dfrac{\pi}{6}\)&nbsp;; b. \(B = \cos^2\dfrac{\pi}{4} + \sin^2\dfrac{\pi}{6}\)&nbsp;; c. \(C = \sin\dfrac{\pi}{3} \times \cos\dfrac{\pi}{6}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(A = \dfrac{1}{2} + \dfrac{1}{2} = 1\).</p>
+          <p><span class="etape-label">b. — </span>\(B = \left(\dfrac{\sqrt{2}}{2}\right)^2 + \left(\dfrac{1}{2}\right)^2 = \dfrac{2}{4} + \dfrac{1}{4} = \dfrac{3}{4}\). Attention&nbsp;: les deux angles sont <em>différents</em>, donc pas de \(\cos^2 + \sin^2 = 1\) ici&nbsp;!</p>
+          <p><span class="etape-label">c. — </span>\(C = \dfrac{\sqrt{3}}{2} \times \dfrac{\sqrt{3}}{2} = \dfrac{3}{4}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: l'identité \(\cos^2 t + \sin^2 t = 1\) ne vaut que pour un <em>même</em> angle \(t\) — la question b. est là pour te le rappeler.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· angles associés</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Exprime en fonction de \(\cos t\) ou \(\sin t\)&nbsp;: a. \(\cos(-t)\)&nbsp;; b. \(\sin(\pi - t)\)&nbsp;; c. \(\cos(\pi + t)\)&nbsp;; d. \(\sin\left(\dfrac{\pi}{2} - t\right)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\cos(-t) = \cos t\)&nbsp;: symétrie d'axe horizontal, l'abscisse ne bouge pas.</p>
+          <p><span class="etape-label">b. — </span>\(\sin(\pi - t) = \sin t\)&nbsp;: symétrie d'axe vertical, la hauteur ne bouge pas.</p>
+          <p><span class="etape-label">c. — </span>\(\cos(\pi + t) = -\cos t\)&nbsp;: symétrie de centre O, tout change de signe.</p>
+          <p><span class="etape-label">d. — </span>\(\sin\left(\dfrac{\pi}{2} - t\right) = \cos t\)&nbsp;: symétrie par rapport à la diagonale, les coordonnées s'échangent.</p>
+          <p class="conclusion">Conclusion&nbsp;: quatre réponses, quatre croquis. Aucune formule apprise par cœur ne vaut le dessin.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· angles associés</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Calcule la valeur exacte de&nbsp;: a. \(\cos\dfrac{2\pi}{3}\)&nbsp;; b. \(\sin\dfrac{5\pi}{6}\)&nbsp;; c. \(\cos\left(-\dfrac{\pi}{3}\right)\)&nbsp;; d. \(\sin\dfrac{4\pi}{3}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\dfrac{2\pi}{3} = \pi - \dfrac{\pi}{3}\)&nbsp;: \(\cos\dfrac{2\pi}{3} = -\cos\dfrac{\pi}{3} = -\dfrac{1}{2}\).</p>
+          <p><span class="etape-label">b. — </span>\(\dfrac{5\pi}{6} = \pi - \dfrac{\pi}{6}\)&nbsp;: \(\sin\dfrac{5\pi}{6} = \sin\dfrac{\pi}{6} = \dfrac{1}{2}\).</p>
+          <p><span class="etape-label">c. — </span>\(\cos\left(-\dfrac{\pi}{3}\right) = \cos\dfrac{\pi}{3} = \dfrac{1}{2}\).</p>
+          <p><span class="etape-label">d. — </span>\(\dfrac{4\pi}{3} = \pi + \dfrac{\pi}{3}\)&nbsp;: \(\sin\dfrac{4\pi}{3} = -\sin\dfrac{\pi}{3} = -\dfrac{\sqrt{3}}{2}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: angle de référence pour la valeur, croquis pour le signe — la méthode de la section 5, quatre fois de suite.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· lire le cercle</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">À l'aide du cercle trigonométrique, détermine tous les réels \(t\) de \(\left]-\pi\;;\, \pi\right]\) tels que&nbsp;: a. \(\cos t = \dfrac{1}{2}\)&nbsp;; b. \(\sin t = -\dfrac{\sqrt{2}}{2}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>chercher \(\cos t = \dfrac{1}{2}\), c'est chercher les points du cercle d'abscisse \(\dfrac{1}{2}\)&nbsp;: la verticale \(x = \dfrac{1}{2}\) coupe le cercle en deux points, symétriques par rapport à l'axe horizontal. Celui du haut est \(M\!\left(\dfrac{\pi}{3}\right)\), celui du bas \(M\!\left(-\dfrac{\pi}{3}\right)\). Solutions&nbsp;: \(t = \dfrac{\pi}{3}\) ou \(t = -\dfrac{\pi}{3}\).</p>
+          <p><span class="etape-label">b. — </span>l'horizontale \(y = -\dfrac{\sqrt{2}}{2}\) coupe le cercle en deux points du bas, symétriques par rapport à l'axe vertical&nbsp;: \(t = -\dfrac{\pi}{4}\) et \(t = -\pi + \dfrac{\pi}{4} = -\dfrac{3\pi}{4}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: une valeur de cosinus (ou de sinus) correspond en général à <em>deux</em> points sur un tour — un seul aux extrêmes \(\pm 1\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· synthèse</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Soit \(t \in \left[\dfrac{\pi}{2}\;;\, \pi\right]\) tel que \(\cos t = -\dfrac{\sqrt{3}}{2}\). a. Détermine \(t\). b. Donne \(\sin t\). c. Calcule \(\sin(-t)\) et \(\cos(\pi + t)\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>la valeur de référence \(\dfrac{\sqrt{3}}{2}\) va avec \(\dfrac{\pi}{6}\)&nbsp;; un cosinus négatif en haut à gauche désigne \(t = \pi - \dfrac{\pi}{6} = \dfrac{5\pi}{6}\), qui est bien dans \(\left[\dfrac{\pi}{2}\;;\, \pi\right]\).</p>
+          <p><span class="etape-label">b. — </span>\(\sin\dfrac{5\pi}{6} = \sin\dfrac{\pi}{6} = \dfrac{1}{2}\) (symétrie d'axe vertical — ou l'identité, avec le signe lu sur le cercle).</p>
+          <p><span class="etape-label">c. — </span>\(\sin(-t) = -\sin t = -\dfrac{1}{2}\)&nbsp;; \(\cos(\pi + t) = -\cos t = \dfrac{\sqrt{3}}{2}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: valeurs remarquables, quadrants et angles associés dans un même exercice — le trio gagnant du chapitre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">La grande roue d'une fête foraine a un rayon de 20&nbsp;m&nbsp;; son axe est à 22&nbsp;m du sol. Ta cabine part du point le plus bas, et la roue tourne dans le sens direct à vitesse constante&nbsp;: un tour complet dure 12 minutes. a. Quelle distance ta cabine parcourt-elle pendant un tour complet&nbsp;? b. De quel angle, en radians, la roue a-t-elle tourné après 2 minutes&nbsp;? après 3 minutes&nbsp;? c. Montre qu'après une rotation d'angle \(t\), la hauteur de la cabine au-dessus du sol vaut \(h(t) = 22 - 20\cos t\). d. Calcule la hauteur de la cabine après 2 minutes, puis après 6 minutes.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>le périmètre&nbsp;: \(2\pi \times 20 = 40\pi \approx 125{,}7\)&nbsp;m.</p>
+          <p><span class="etape-label">b. — </span>2 minutes = \(\dfrac{2}{12} = \dfrac{1}{6}\) de tour, donc \(t = \dfrac{2\pi}{6} = \dfrac{\pi}{3}\)&nbsp;; 3 minutes = un quart de tour, \(t = \dfrac{\pi}{2}\).</p>
+          <p><span class="etape-label">c. — </span>place un cercle de rayon 20 centré sur l'axe. Quand la roue a tourné de \(t\), l'angle entre la verticale descendante et la cabine vaut \(t\)&nbsp;: dans le triangle rectangle, la cabine est à \(20\cos t\) <em>sous</em> l'axe. Sa hauteur vaut donc \(22 - 20\cos t\).</p>
+          <p><span class="etape-label">d. — </span>\(h\!\left(\dfrac{\pi}{3}\right) = 22 - 20 \times \dfrac{1}{2} = 12\)&nbsp;m&nbsp;; après 6 minutes, \(t = \pi\) (demi-tour)&nbsp;: \(h(\pi) = 22 - 20 \times (-1) = 42\)&nbsp;m — le sommet de la roue.</p>
+          <p class="conclusion">Conclusion&nbsp;: le radian mesure le chemin parcouru (a., b.), le cosinus place la cabine (c., d.)&nbsp;: tout le chapitre tient dans une roue.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · SANS CALCULATRICE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Les deux parties sont indépendantes. Toutes les valeurs demandées sont exactes — aucune calculatrice n'est nécessaire, comme à l'épreuve.</p>
+          <div class="bac-partie">PARTIE A</div>
+          <ol>
+            <li>Place sur le cercle trigonométrique les points repérés par \(\dfrac{3\pi}{4}\) et \(-\dfrac{5\pi}{6}\).</li>
+            <li>Donne les valeurs exactes de \(\cos\dfrac{3\pi}{4}\) et \(\sin\dfrac{3\pi}{4}\).</li>
+            <li>Détermine la mesure principale de \(\dfrac{29\pi}{6}\).</li>
+          </ol>
+          <div class="bac-partie">PARTIE B</div>
+          <p class="prose">Soit \(t \in \left[0\;;\, \dfrac{\pi}{2}\right]\) tel que \(\sin t = \dfrac{3}{5}\).</p>
+          <ol>
+            <li>Calcule \(\cos t\).</li>
+            <li>Déduis-en \(\cos(\pi - t)\) et \(\sin(\pi + t)\).</li>
+            <li>Montre que \((\cos t + \sin t)^2 = 1 + 2\sin t \cos t\), puis calcule la valeur exacte de \((\cos t + \sin t)^2\).</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>\(\dfrac{3\pi}{4} = \pi - \dfrac{\pi}{4}\)&nbsp;: en haut à gauche, à 45° de chaque axe. \(-\dfrac{5\pi}{6} = -\left(\pi - \dfrac{\pi}{6}\right)\)&nbsp;: en bas à gauche, proche du point \((-1\;;\, 0)\).</p>
+            <p><span class="etape-label">A.2 — </span>référence \(\dfrac{\pi}{4}\), point en haut à gauche&nbsp;: \(\cos\dfrac{3\pi}{4} = -\dfrac{\sqrt{2}}{2}\) et \(\sin\dfrac{3\pi}{4} = \dfrac{\sqrt{2}}{2}\).</p>
+            <p><span class="etape-label">A.3 — </span>\(\dfrac{29\pi}{6} - 2\pi = \dfrac{17\pi}{6}\), puis \(\dfrac{17\pi}{6} - 2\pi = \dfrac{5\pi}{6} \in \left]-\pi\;;\, \pi\right]\)&nbsp;: mesure principale \(\dfrac{5\pi}{6}\).</p>
+            <p><span class="etape-label">B.1 — </span>\(\cos^2 t = 1 - \dfrac{9}{25} = \dfrac{16}{25}\), et \(t \in \left[0\;;\, \dfrac{\pi}{2}\right]\) donne un cosinus positif&nbsp;: \(\cos t = \dfrac{4}{5}\).</p>
+            <p><span class="etape-label">B.2 — </span>\(\cos(\pi - t) = -\cos t = -\dfrac{4}{5}\)&nbsp;; \(\sin(\pi + t) = -\sin t = -\dfrac{3}{5}\).</p>
+            <p><span class="etape-label">B.3 — </span>développe&nbsp;: \((\cos t + \sin t)^2 = \cos^2 t + 2\sin t \cos t + \sin^2 t = 1 + 2\sin t \cos t\) grâce à l'identité. Puis \(1 + 2 \times \dfrac{3}{5} \times \dfrac{4}{5} = 1 + \dfrac{24}{25} = \dfrac{49}{25}\). Vérification directe&nbsp;: \(\left(\dfrac{4}{5} + \dfrac{3}{5}\right)^2 = \left(\dfrac{7}{5}\right)^2 = \dfrac{49}{25}\).</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">Les variables aléatoires <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
