@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>L'oxydoréduction et les titrages — Première Spé Physique-Chimie | Nabla</title>
+<meta name="description" content="Comprends vraiment l'oxydoréduction : oxydants, réducteurs, couples, demi-équations électroniques, équations d'oxydoréduction, et le titrage colorimétrique avec l'équivalence, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé physique-chimie, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/physique-chimie/oxydoreduction-titrages/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="L'oxydoréduction et les titrages — Première Spé Physique-Chimie | Nabla">
+<meta property="og:description" content="Oxydants, réducteurs, demi-équations électroniques, équations d'oxydoréduction, titrage colorimétrique et équivalence : un cours interactif où tu fais circuler les électrons toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/physique-chimie/oxydoreduction-titrages/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="L'oxydoréduction et les titrages — Première Spé Physique-Chimie | Nabla">
+<meta name="twitter:description" content="Oxydants, réducteurs, demi-équations, titrage colorimétrique et équivalence : un cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "L'oxydoréduction et les titrages — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé physique-chimie sur l'oxydoréduction : couples oxydant/réducteur, oxydation et réduction, demi-équations électroniques, équations d'oxydoréduction, titrage avec suivi colorimétrique, équivalence, relation à l'équivalence. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/physique-chimie/oxydoreduction-titrages/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité physique-chimie",
+  "teaches": "Couples oxydant/réducteur, oxydation et réduction, demi-équations électroniques, équations d'oxydoréduction, titrage colorimétrique, équivalence, relation à l'équivalence",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=17">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=17">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=17">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/redox-transfert.js"></script>
+<script type="module" src="../../../assets/js/widgets/stoechio-jeu.js"></script>
+<script type="module" src="../../../assets/js/widgets/redox-equation.js"></script>
+<script type="module" src="../../../assets/js/widgets/titrage.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="redox">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Physique-Chimie</span>
+  </div>
+  <h1>L'oxydoréduction et les titrages</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>reconnaître l'oxydant et le réducteur d'un couple, écrire et ajuster une demi-équation électronique, combiner deux demi-équations en une équation d'oxydoréduction — et exploiter un titrage colorimétrique&nbsp;: repérer l'équivalence, écrire la relation à l'équivalence, en déduire une concentration inconnue.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. Un clou dans le bleu</a>
+      <a href="#s2">2. Le transfert d'électrons</a>
+      <a href="#s3">3. Les demi-équations</a>
+      <a href="#s4">4. L'équation d'oxydoréduction</a>
+      <a href="#s5">5. Le titrage colorimétrique</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. Un clou dans le bleu</a>
+        <a href="#s2">2. Le transfert d'électrons</a>
+        <a href="#s3">3. Les demi-équations</a>
+        <a href="#s4">4. L'équation d'oxydoréduction</a>
+        <a href="#s5">5. Le titrage colorimétrique</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. Un clou dans le bleu</h2>
+      <p class="prose">Lundi, en TP&nbsp;: un clou de fer bien gris, et un bécher d'un bleu profond — une solution de sulfate de cuivre. Tu plonges le clou, tu attends. Vingt minutes plus tard, le clou est couvert d'un dépôt rouge-brun, et le bleu de la solution a pâli. Personne n'a rien versé, rien chauffé, rien mélangé. Alors&nbsp;: qui a fait quoi&nbsp;?</p>
+      <p class="prose">Ce petit tour de passe-passe est partout&nbsp;: la rouille qui ronge un vélo laissé dehors, la pomme coupée qui brunit, la pile qui alimente ton téléphone, l'éthylotest qui change de couleur. À chaque fois, la même histoire invisible&nbsp;: des <strong>électrons</strong> quittent une espèce chimique pour en rejoindre une autre. On ne les voit jamais — mais leurs traces, si&nbsp;: un dépôt qui pousse, une couleur qui s'efface. Ce chapitre t'apprend à lire ces traces, puis à t'en servir pour <em>mesurer</em>&nbsp;: c'est le titrage, l'un des gestes les plus classiques du Bac.</p>
+      <p class="prose">Voici la photo de départ, prise avant que quoi que ce soit ne bouge&nbsp;: 0,10&nbsp;mol d'ions cuivre \(\mathrm{Cu^{2+}}\) — c'est eux, le bleu — et un clou de fer encore net. Tu l'as vu au chapitre sur <a href="../composition-systeme/">la composition d'un système</a>&nbsp;: la couleur d'une solution suit sa concentration. Garde l'œil sur le bleu, il va te raconter toute l'histoire.</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 330" role="img" aria-label="Un bécher rempli d'une solution bleue de sulfate de cuivre, dans laquelle plonge un clou de fer encore propre">
+          <path class="dil-verre" d="M200 50L200 286Q200 290 204 290L496 290Q500 290 500 286L500 50"></path>
+          <rect class="dil-liquide" x="204" y="120" width="292" height="168" fill-opacity="0.72"></rect>
+          <text class="avc-nom" x="252" y="172" text-anchor="middle">Cu<tspan dy="-5" font-size="0.72em">2+</tspan></text>
+          <text class="avc-nom" x="330" y="238" text-anchor="middle">Cu<tspan dy="-5" font-size="0.72em">2+</tspan></text>
+          <text class="avc-nom" x="268" y="130" text-anchor="middle">Cu<tspan dy="-5" font-size="0.72em">2+</tspan></text>
+          <rect class="avc-barre-reactif" x="399" y="63" width="32" height="9" rx="2"></rect>
+          <rect class="avc-barre-reactif" x="407" y="72" width="16" height="198" rx="3"></rect>
+          <text class="avc-candidat" x="393" y="70" text-anchor="end">le clou de fer</text>
+          <text class="avc-candidat" x="350" y="316" text-anchor="middle">la solution de sulfate de cuivre</text>
+        </svg>
+        <figcaption>La photo de départ&nbsp;: la solution doit son bleu aux ions \(\mathrm{Cu^{2+}}\) (0,10&nbsp;mol), le clou est encore gris. À la section suivante, ce dessin prend vie — et c'est toi qui pousses les électrons.</figcaption>
+      </figure>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Le transfert d'électrons&nbsp;: oxydant et réducteur</h2>
+      <p class="prose">Reprends la photo de la section 1 — et anime-la. Le curseur pousse la réaction&nbsp;: chaque cran transfère un paquet d'électrons du clou vers les ions. Avant de toucher quoi que ce soit, un pronostic&nbsp;: d'où viendra le cuivre rouge qui va couvrir le clou&nbsp;? Du clou lui-même, ou de la solution&nbsp;? Manipule, et surveille les deux compteurs d'électrons sous le graphique.</p>
+
+      <figure class="widget" id="widget-transfert" data-widget="redox-transfert"
+        data-n0="0.1" data-x-max="0.1" data-x-init="0">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Fais circuler les électrons</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 330" aria-label="Le bécher du clou de fer : quand l'avancement augmente, le bleu de la solution pâlit, un dépôt de cuivre pousse sur le clou et une flèche montre les électrons qui passent du clou vers les ions"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">avancement x&nbsp;: <span class="js-x">0,00</span>&nbsp;mol</span>
+            <input type="range" class="js-curseur" min="0" max="0.1" step="0.01" value="0" aria-label="Avancement de la réaction, en moles">
+          </div>
+          <div class="lecture-formule">Fe → Fe<sup>2+</sup> + 2 e<sup>−</sup>&nbsp;&nbsp;·&nbsp;&nbsp;le clou a cédé <span class="js-e-ox">0,00</span> mol d'électrons</div>
+          <div class="lecture-formule">Cu<sup>2+</sup> + 2 e<sup>−</sup> → Cu&nbsp;&nbsp;·&nbsp;&nbsp;les ions ont capté <span class="js-e-red">0,00</span> mol d'électrons</div>
+          <div class="chips">
+            <span class="chip">il reste <span class="js-ncu">0,10</span> mol de Cu<sup>2+</sup></span>
+            <span class="chip">il s'est formé <span class="js-nfe">0,00</span> mol de Fe<sup>2+</sup></span>
+            <span class="chip chip--accent js-etat" aria-live="polite">x = 0 — la solution est bleue</span>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">x = 0&nbsp;: la photo de la section 1. Les électrons du fer n'attendent qu'une chose — un preneur. Et les ions Cu<sup>2+</sup> d'en face sont preneurs.</p>
+            <p class="widget-legende js-leg-cours" hidden>Regarde les deux compteurs&nbsp;: électrons cédés = électrons captés, à chaque instant. Un électron ne s'évapore jamais, il change de propriétaire. Et le bleu pâlit&nbsp;: chaque Cu<sup>2+</sup> qui capte deux électrons cesse d'être un ion — il devient le cuivre rouge du dépôt.</p>
+            <p class="widget-legende js-leg-fin" hidden>Plus un ion Cu<sup>2+</sup>&nbsp;: plus personne pour capter les électrons, la réaction s'arrête. Le bleu a disparu, le clou est cuivré, et la solution contient désormais des ions Fe<sup>2+</sup>. (En vrai, ils la teintent d'un vert très pâle.)</p>
+          </div>
+        </div>
+        <div class="widget-note">Le curseur s'arrête quand le dernier ion Cu<sup>2+</sup> est consommé&nbsp;: le clou, lui, est en large excès. Avancement, réactif limitant&nbsp;: tout le chapitre sur l'avancement s'applique ici tel quel.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi la solution se décolore-t-elle&nbsp;? Parce que le bleu, c'était les ions \(\mathrm{Cu^{2+}}\) eux-mêmes. Chaque fois que l'un d'eux capte deux électrons, il cesse d'être un ion&nbsp;: il devient un atome de cuivre métallique, qui se colle au clou. Le transfert d'électrons est invisible — mais il déteint.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire avec la main, voilà comment on le dit.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Un <strong>réducteur</strong> est une espèce chimique capable de <strong>céder</strong> un ou plusieurs électrons (ici, le fer du clou). Un <strong>oxydant</strong> est une espèce capable de <strong>capter</strong> un ou plusieurs électrons (ici, l'ion \(\mathrm{Cu^{2+}}\)). Une <strong>oxydation</strong> est une perte d'électrons&nbsp;; une <strong>réduction</strong>, un gain d'électrons. Une <strong>réaction d'oxydoréduction</strong> est un transfert d'électrons d'un réducteur vers un oxydant.</p>
+      </div>
+
+      <p class="prose">Le fer a cédé ses électrons et il est devenu \(\mathrm{Fe^{2+}}\). Mais rien n'est définitif&nbsp;: face à un bon donneur, un ion \(\mathrm{Fe^{2+}}\) pourrait très bien reprendre deux électrons et redevenir du fer. \(\mathrm{Fe^{2+}}\) et \(\mathrm{Fe}\) sont les deux visages d'un même personnage — on les range en <em>couple</em>.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Un <strong>couple oxydant/réducteur</strong>, noté Ox/Red (l'oxydant toujours en premier&nbsp;: \(\mathrm{Cu^{2+}/Cu}\), \(\mathrm{Fe^{2+}/Fe}\), \(\mathrm{I_2/I^-}\)), réunit deux espèces qui s'échangent par transfert d'électrons. Ce lien s'écrit par une <strong>demi-équation électronique</strong>&nbsp;:</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$\mathrm{Ox} \;+\; n\,e^- \;=\; \mathrm{Red}$$</div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — QUI EST OXYDÉ, QUI EST RÉDUIT&nbsp;?</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Suis les charges pour voir qui perd et qui gagne des électrons&nbsp;: \(\mathrm{Fe}\) devient \(\mathrm{Fe^{2+}}\), il a perdu 2 électrons&nbsp;; \(\mathrm{Cu^{2+}}\) devient \(\mathrm{Cu}\), il en a gagné 2.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Celui qui cède est le <em>réducteur</em>&nbsp;: il subit une oxydation. Celui qui capte est l'<em>oxydant</em>&nbsp;: il subit une réduction.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Contrôle-réflexe&nbsp;: le vocabulaire est croisé — c'est l'<em>oxydant</em> qui est réduit, le <em>réducteur</em> qui est oxydé. Si ta phrase dit «&nbsp;l'oxydant s'oxyde&nbsp;», recommence.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA LAME DE ZINC</div>
+        <p class="exemple-enonce">On plonge une lame de zinc dans une solution de sulfate de cuivre&nbsp;: la lame se cuivre, le bleu pâlit, et on détecte des ions \(\mathrm{Zn^{2+}}\). Identifie les couples en jeu, l'oxydant, le réducteur, et l'espèce oxydée.</p>
+        <p><span class="etape-label">Étape 1 — </span>les charges&nbsp;: \(\mathrm{Zn}\) devient \(\mathrm{Zn^{2+}}\) (il perd 2 électrons)&nbsp;; \(\mathrm{Cu^{2+}}\) devient \(\mathrm{Cu}\) (il en gagne 2).</p>
+        <p><span class="etape-label">Étape 2 — </span>le zinc cède&nbsp;: c'est le réducteur, il est oxydé. L'ion \(\mathrm{Cu^{2+}}\) capte&nbsp;: c'est l'oxydant, il est réduit. Couples&nbsp;: \(\mathrm{Zn^{2+}/Zn}\) et \(\mathrm{Cu^{2+}/Cu}\).</p>
+        <p class="conclusion">Conclusion&nbsp;: \(\mathrm{Cu^{2+}}\) refait exactement le même geste qu'avec le clou de fer. Un bon oxydant prend ses électrons à qui veut bien les donner — zinc, fer, peu importe le donneur.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>Le réducteur <strong>cède</strong>, l'oxydant <strong>capte</strong>. Et le vocabulaire se croise&nbsp;: le réducteur est <em>oxydé</em>, l'oxydant est <em>réduit</em>.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Un oxydant, c'est une espèce qui…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">cède des électrons</button>
+              <button type="button" class="quiz-reponse">capte des électrons</button>
+              <button type="button" class="quiz-reponse">perd sa couleur en solution</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'oxydant capte, le réducteur cède. Quant à la couleur, c'était un bonus du \(\mathrm{Cu^{2+}}\)&nbsp;: beaucoup d'oxydants sont incolores.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Dans le bécher du clou, le fer \(\mathrm{Fe}\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">est réduit</button>
+              <button type="button" class="quiz-reponse">est l'oxydant</button>
+              <button type="button" class="quiz-reponse">est oxydé</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> il cède 2 électrons&nbsp;: c'est le réducteur, donc il est <em>oxydé</em>. Répondre «&nbsp;réduit&nbsp;», c'est tomber dans le vocabulaire croisé — le piège n°1 du chapitre.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Quand l'avancement atteint \(x = 0{,}10\)&nbsp;mol, la quantité d'électrons échangés vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">0,20 mol</button>
+              <button type="button" class="quiz-reponse">0,10 mol</button>
+              <button type="button" class="quiz-reponse">impossible à savoir</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> chaque «&nbsp;fournée&nbsp;» échange 2 électrons (lis-le sur les demi-équations)&nbsp;: \(2x = 0{,}20\)&nbsp;mol. Répondre 0,10, c'est oublier le 2 — le coefficient suit son espèce, comme au chapitre sur l'avancement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Les demi-équations électroniques</h2>
+      <p class="prose">\(\mathrm{Fe} = \mathrm{Fe^{2+}} + 2\,e^-\)&nbsp;: tu viens de passer une section entière avec deux demi-équations sous les yeux. <em>Demi</em>, parce que chacune ne raconte que la moitié de l'histoire — un seul couple, avec ses électrons apparents. Encore faut-il savoir les écrire, même quand le couple est plus coriace que \(\mathrm{Cu^{2+}/Cu}\). Entraîne l'œil d'abord&nbsp;: quatre couples, trois propositions à chaque fois, une seule demi-équation juste.</p>
+
+      <figure class="widget" id="widget-demi" data-widget="stoechio-jeu" data-nom="demi-jeu"
+        data-progression="COUPLE" data-suivant="Couple suivant">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Trouve la bonne demi-équation</span>
+          </div>
+          <span class="quiz-score js-progression">COUPLE 1/4</span>
+        </div>
+        <div class="widget-pied">
+          <div class="js-manche">
+            <p class="quiz-enonce">Le couple \(\mathrm{Cu^{2+}/Cu}\) — laquelle de ces demi-équations est juste&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\mathrm{Cu^{2+}} = \mathrm{Cu} + 2\,e^-\)</button>
+              <button type="button" class="quiz-reponse">\(\mathrm{Cu^{2+}} + 2\,e^- = \mathrm{Cu}\)</button>
+              <button type="button" class="quiz-reponse">\(\mathrm{Cu^{2+}} + e^- = \mathrm{Cu}\)</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">Le couple \(\mathrm{Al^{3+}/Al}\) — laquelle est juste&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\mathrm{Al^{3+}} + 3\,e^- = \mathrm{Al}\)</button>
+              <button type="button" class="quiz-reponse">\(\mathrm{Al^{3+}} + 2\,e^- = \mathrm{Al}\)</button>
+              <button type="button" class="quiz-reponse">\(\mathrm{Al} + 3\,e^- = \mathrm{Al^{3+}}\)</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">Le couple \(\mathrm{I_2/I^-}\) (le diiode de la Bétadine) — laquelle est juste&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\mathrm{I_2} + e^- = \mathrm{I^-}\)</button>
+              <button type="button" class="quiz-reponse">\(\mathrm{I_2} + 2\,e^- = \mathrm{I^-}\)</button>
+              <button type="button" class="quiz-reponse">\(\mathrm{I_2} + 2\,e^- = 2\,\mathrm{I^-}\)</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <p class="quiz-enonce">Le couple \(\mathrm{MnO_4^-/Mn^{2+}}\), en milieu acide — laquelle est juste&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(\mathrm{MnO_4^-} + 5\,e^- = \mathrm{Mn^{2+}} + 2\,\mathrm{O_2}\)</button>
+              <button type="button" class="quiz-reponse">\(\mathrm{MnO_4^-} + 8\,\mathrm{H^+} + 5\,e^- = \mathrm{Mn^{2+}} + 4\,\mathrm{H_2O}\)</button>
+              <button type="button" class="quiz-reponse">\(\mathrm{MnO_4^-} + 4\,\mathrm{H^+} + 3\,e^- = \mathrm{Mn^{2+}} + 2\,\mathrm{H_2O}\)</button>
+            </div>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> compte les atomes de chaque élément, puis les charges&nbsp;: tout doit se conserver des deux côtés.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> les charges s'équilibrent&nbsp;: \(+2 - 2 = 0\) à gauche, 0 à droite. Le nombre d'électrons se lit sur la charge de l'ion — et c'est bien l'oxydant qui les capte.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> une charge \(3+\) demande 3 électrons. La troisième proposition faisait capter des électrons au métal&nbsp;: un réducteur n'en capte pas, il en donne.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> les éléments d'abord&nbsp;: deux atomes d'iode à gauche exigent \(2\,\mathrm{I^-}\) à droite. Ensuite les charges&nbsp;: \(-2 = -2\). Les deux autres propositions perdaient un atome d'iode en route.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> les 4 oxygènes partent dans \(4\,\mathrm{H_2O}\), qui réclament \(8\,\mathrm{H^+}\)&nbsp;; les charges finissent le travail&nbsp;: \(-1 + 8 - 5 = +2\) des deux côtés. (Et non, l'oxygène ne s'échappe pas en \(\mathrm{O_2}\)&nbsp;: on l'équilibre avec de l'eau.) La méthode complète arrive juste en dessous.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Couple suivant ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <script type="application/json">[2, 1, 3, 2]</script>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — ÉCRIRE UNE DEMI-ÉQUATION (EN MILIEU ACIDE)</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris l'oxydant et le réducteur du couple de part et d'autre du signe =, puis équilibre l'élément autre que O et H (Mn, I, Cr…).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Équilibre les oxygènes en ajoutant des molécules d'eau \(\mathrm{H_2O}\), puis les hydrogènes en ajoutant des ions \(\mathrm{H^+}\) (on travaille en milieu acide).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Équilibre les charges en ajoutant des électrons \(e^-\) — toujours du côté de l'oxydant. Contrôle-réflexe&nbsp;: recompte atomes <em>et</em> charges des deux côtés&nbsp;; un seul déséquilibre et tout est faux.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — L'ION PERMANGANATE</div>
+        <p class="exemple-enonce">Écris la demi-équation du couple \(\mathrm{MnO_4^-/Mn^{2+}}\) en milieu acide — le violet le plus célèbre de la chimie.</p>
+        <p><span class="etape-label">Étape 1 — </span>\(\mathrm{MnO_4^-} = \mathrm{Mn^{2+}}\)&nbsp;: un manganèse de chaque côté, rien à faire.</p>
+        <p><span class="etape-label">Étape 2 — </span>4 oxygènes à gauche&nbsp;: on ajoute \(4\,\mathrm{H_2O}\) à droite. Ces 4 eaux apportent 8 hydrogènes&nbsp;: on ajoute \(8\,\mathrm{H^+}\) à gauche.</p>
+        <p><span class="etape-label">Étape 3 — </span>charges&nbsp;: à gauche \(-1 + 8 = +7\), à droite \(+2\). Il faut 5 électrons à gauche&nbsp;: \(\mathrm{MnO_4^-} + 8\,\mathrm{H^+} + 5\,e^- = \mathrm{Mn^{2+}} + 4\,\mathrm{H_2O}\).</p>
+        <p class="conclusion">Conclusion&nbsp;: retiens la routine — l'élément, puis O avec \(\mathrm{H_2O}\), puis H avec \(\mathrm{H^+}\), puis les charges avec \(e^-\). Dans cet ordre. Et garde cette demi-équation au chaud&nbsp;: elle resservira aux sections 4 et 5.</p>
+      </div>
+
+      <figure class="tableau">
+        <figcaption>
+          <span>LES COUPLES À CONNAÎTRE</span>
+          <span class="bande-note">OX / RED</span>
+        </figcaption>
+        <div class="defile">
+          <table>
+            <thead>
+              <tr><th>Couple</th><th>Demi-équation</th><th>Où tu le croises</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>\(\mathrm{Cu^{2+}/Cu}\)</td><td>\(\mathrm{Cu^{2+}} + 2\,e^- = \mathrm{Cu}\)</td><td>le clou de ce chapitre</td></tr>
+              <tr><td>\(\mathrm{Zn^{2+}/Zn}\)</td><td>\(\mathrm{Zn^{2+}} + 2\,e^- = \mathrm{Zn}\)</td><td>les piles, les gouttières</td></tr>
+              <tr><td>\(\mathrm{Al^{3+}/Al}\)</td><td>\(\mathrm{Al^{3+}} + 3\,e^- = \mathrm{Al}\)</td><td>la section 4</td></tr>
+              <tr><td>\(\mathrm{I_2/I^-}\)</td><td>\(\mathrm{I_2} + 2\,e^- = 2\,\mathrm{I^-}\)</td><td>la Bétadine, les titrages</td></tr>
+              <tr><td>\(\mathrm{Fe^{3+}/Fe^{2+}}\)</td><td>\(\mathrm{Fe^{3+}} + e^- = \mathrm{Fe^{2+}}\)</td><td>la gravure des circuits</td></tr>
+              <tr><td>\(\mathrm{MnO_4^-/Mn^{2+}}\)</td><td>\(\mathrm{MnO_4^-} + 8\,\mathrm{H^+} + 5\,e^- = \mathrm{Mn^{2+}} + 4\,\mathrm{H_2O}\)</td><td>LE titrage coloré du Bac</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <p class="prose">Remarque le fer, qui joue dans deux couples&nbsp;: \(\mathrm{Fe^{2+}/Fe}\) et \(\mathrm{Fe^{3+}/Fe^{2+}}\). Le même ion \(\mathrm{Fe^{2+}}\) est <em>oxydant</em> dans le premier et <em>réducteur</em> dans le second. Oxydant ou réducteur, ce n'est pas une étiquette à vie&nbsp;: c'est un rôle dans un couple.</p>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Encore trois sur les demi-équations</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Dans une demi-équation, les électrons s'écrivent…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">du côté de l'oxydant</button>
+              <button type="button" class="quiz-reponse">du côté du réducteur</button>
+              <button type="button" class="quiz-reponse">du côté qu'on veut, ça ne change rien</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\mathrm{Ox} + n\,e^- = \mathrm{Red}\)&nbsp;: c'est l'oxydant qui capte. Les mettre côté réducteur inverse le sens du transfert — et fausse toutes les charges.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Pour équilibrer les oxygènes d'une demi-équation en milieu acide, on ajoute…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">du dioxygène \(\mathrm{O_2}\)</button>
+              <button type="button" class="quiz-reponse">des électrons supplémentaires</button>
+              <button type="button" class="quiz-reponse">des molécules d'eau \(\mathrm{H_2O}\)</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'eau pour les O, puis \(\mathrm{H^+}\) pour les H. Faire apparaître du \(\mathrm{O_2}\) est le réflexe faux du jeu&nbsp;; les électrons, eux, n'équilibrent que les <em>charges</em>, jamais les atomes.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Combien d'électrons dans la demi-équation du couple \(\mathrm{Fe^{3+}/Fe^{2+}}\)&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">2</button>
+              <button type="button" class="quiz-reponse">1</button>
+              <button type="button" class="quiz-reponse">3</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\mathrm{Fe^{3+}} + e^- = \mathrm{Fe^{2+}}\)&nbsp;: la charge ne descend que de 1. Lire «&nbsp;3&nbsp;» ou «&nbsp;2&nbsp;» sur les exposants sans faire la différence, c'est le piège du recopiage.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. L'équation d'oxydoréduction</h2>
+      <p class="prose">Une demi-équation ne se produit jamais seule. Les électrons cédés par le réducteur doivent être captés par l'oxydant — immédiatement, intégralement&nbsp;: il n'existe pas de stock d'électrons libres dans un bécher. D'où le problème du jour&nbsp;: le couple \(\mathrm{Al^{3+}/Al}\) échange 3 électrons, le couple \(\mathrm{Cu^{2+}/Cu}\) en échange 2. Comment marier un donneur de 3 avec un preneur de 2&nbsp;? Fais les comptes toi-même.</p>
+
+      <figure class="widget" id="widget-equation" data-widget="redox-equation"
+        data-e-ox="3" data-e-red="2" data-m-max="6">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Fais les comptes d'électrons</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <div class="widget-pied">
+          <div class="rdx-demi">
+            <div class="rdx-stepper" role="group" aria-label="Multiplicateur de la demi-équation d'oxydation de l'aluminium">
+              <button type="button" class="btn-pill js-ox-moins" aria-label="Diminuer le multiplicateur">−</button>
+              <span class="rdx-mult js-m-ox" aria-live="polite">1</span>
+              <button type="button" class="btn-pill js-ox-plus" aria-label="Augmenter le multiplicateur">+</button>
+            </div>
+            <div class="lecture-formule">× ( Al = Al<sup>3+</sup> + 3 e<sup>−</sup> )&nbsp;&nbsp;— l'oxydation</div>
+          </div>
+          <div class="rdx-demi">
+            <div class="rdx-stepper" role="group" aria-label="Multiplicateur de la demi-équation de réduction de l'ion cuivre">
+              <button type="button" class="btn-pill js-red-moins" aria-label="Diminuer le multiplicateur">−</button>
+              <span class="rdx-mult js-m-red" aria-live="polite">1</span>
+              <button type="button" class="btn-pill js-red-plus" aria-label="Augmenter le multiplicateur">+</button>
+            </div>
+            <div class="lecture-formule">× ( Cu<sup>2+</sup> + 2 e<sup>−</sup> = Cu )&nbsp;&nbsp;— la réduction</div>
+          </div>
+          <div class="chips">
+            <span class="chip">e<sup>−</sup> cédés&nbsp;: <span class="js-calc-ox">1 × 3 = 3</span></span>
+            <span class="chip">e<sup>−</sup> captés&nbsp;: <span class="js-calc-red">1 × 2 = 2</span></span>
+            <span class="chip chip--bad js-etat" aria-live="polite">3 e⁻ cédés ≠ 2 e⁻ captés</span>
+          </div>
+          <div class="js-resultats" aria-live="polite">
+            <p class="widget-legende js-eq-attente">Tant que cédés ≠ captés, des électrons resteraient orphelins — et un électron libre dans l'eau, ça n'existe pas. Ajuste les deux multiplicateurs jusqu'à l'accord parfait.</p>
+            <div class="js-eq-simple" hidden>
+              <div class="math-vitrine">$$2\,\mathrm{Al} \;+\; 3\,\mathrm{Cu^{2+}} \;\longrightarrow\; 2\,\mathrm{Al^{3+}} \;+\; 3\,\mathrm{Cu}$$</div>
+              <p class="widget-legende">6 électrons cédés, 6 captés&nbsp;: ils s'annulent et disparaissent de l'écriture. Voilà l'équation d'oxydoréduction — remarque&nbsp;: plus un seul électron visible.</p>
+            </div>
+            <div class="js-eq-double" hidden>
+              <div class="math-vitrine">$$4\,\mathrm{Al} \;+\; 6\,\mathrm{Cu^{2+}} \;\longrightarrow\; 4\,\mathrm{Al^{3+}} \;+\; 6\,\mathrm{Cu}$$</div>
+              <p class="widget-legende">12 = 12&nbsp;: l'équation est juste… mais tout est doublé pour rien. La convention garde les plus petits nombres entiers&nbsp;: reviens à (2&nbsp;; 3).</p>
+            </div>
+          </div>
+        </div>
+        <div class="widget-note">Multiplier une demi-équation ne change pas sa chimie&nbsp;: c'est répéter la même transformation plusieurs fois — exactement comme doubler une recette.</div>
+      </figure>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — ÉTABLIR UNE ÉQUATION D'OXYDORÉDUCTION</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris les deux demi-équations dans le sens réel de la réaction&nbsp;: le réducteur d'un couple cède (\(\mathrm{Red_1} = \mathrm{Ox_1} + n_1\,e^-\)), l'oxydant de l'autre capte (\(\mathrm{Ox_2} + n_2\,e^- = \mathrm{Red_2}\)).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Multiplie chaque demi-équation par le nombre qui égalise les électrons cédés et captés (le plus petit multiple commun de \(n_1\) et \(n_2\)).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Additionne membre à membre et simplifie&nbsp;: les électrons disparaissent. S'il en reste un dans l'équation finale, c'est faux. Contrôle-réflexe&nbsp;: atomes <em>et</em> charges conservés.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE PERMANGANATE ET LE FER</div>
+        <p class="exemple-enonce">Établis l'équation de la réaction entre l'ion permanganate \(\mathrm{MnO_4^-}\) (couple \(\mathrm{MnO_4^-/Mn^{2+}}\), en milieu acide) et l'ion fer(II) \(\mathrm{Fe^{2+}}\) (couple \(\mathrm{Fe^{3+}/Fe^{2+}}\)).</p>
+        <p><span class="etape-label">Étape 1 — </span>le \(\mathrm{Fe^{2+}}\) cède&nbsp;: \(\mathrm{Fe^{2+}} = \mathrm{Fe^{3+}} + e^-\). Le \(\mathrm{MnO_4^-}\) capte&nbsp;: \(\mathrm{MnO_4^-} + 8\,\mathrm{H^+} + 5\,e^- = \mathrm{Mn^{2+}} + 4\,\mathrm{H_2O}\) (section 3).</p>
+        <p><span class="etape-label">Étape 2 — </span>5 électrons contre 1&nbsp;: on multiplie la demi-équation du fer par 5.</p>
+        <p><span class="etape-label">Étape 3 — </span>on additionne, les \(5\,e^-\) s'annulent&nbsp;:</p>
+        <div class="math-vitrine">$$\mathrm{MnO_4^-} + 8\,\mathrm{H^+} + 5\,\mathrm{Fe^{2+}} \;\longrightarrow\; \mathrm{Mn^{2+}} + 4\,\mathrm{H_2O} + 5\,\mathrm{Fe^{3+}}$$</div>
+        <p>Contrôle des charges&nbsp;: à gauche \(-1 + 8 + 10 = +17\), à droite \(+2 + 15 = +17\). Rien ne dépasse.</p>
+        <p class="conclusion">Conclusion&nbsp;: un \(\mathrm{MnO_4^-}\) consomme <em>cinq</em> \(\mathrm{Fe^{2+}}\). Garde ce 5 en tête — c'est lui qui fera tout le sel (et tous les pièges) du titrage de la section 5.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions sur l'équation</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Dans une équation d'oxydoréduction finale, les électrons…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">apparaissent à gauche</button>
+              <button type="button" class="quiz-reponse">apparaissent du côté de l'oxydant</button>
+              <button type="button" class="quiz-reponse">n'apparaissent jamais</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> ils sont transférés, pas stockés&nbsp;: cédés = captés, donc ils s'annulent à l'addition. S'il en reste un, les comptes n'étaient pas égalisés.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Pour combiner \(\mathrm{Ag^+} + e^- = \mathrm{Ag}\) avec \(\mathrm{Cu} = \mathrm{Cu^{2+}} + 2\,e^-\), on multiplie…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">la demi-équation de l'argent par 2</button>
+              <button type="button" class="quiz-reponse">celle du cuivre par 2</button>
+              <button type="button" class="quiz-reponse">aucune&nbsp;: on additionne directement</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> 1 électron contre 2&nbsp;: c'est le petit compte qu'on double. Bilan&nbsp;: \(\mathrm{Cu} + 2\,\mathrm{Ag^+} \longrightarrow \mathrm{Cu^{2+}} + 2\,\mathrm{Ag}\). Additionner directement laisserait un électron orphelin.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>L'équation \(2\,\mathrm{Al} + 3\,\mathrm{Cu^{2+}} \longrightarrow 2\,\mathrm{Al^{3+}} + 3\,\mathrm{Cu}\) est-elle bien équilibrée&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">non&nbsp;: il manque les électrons</button>
+              <button type="button" class="quiz-reponse">oui&nbsp;: atomes et charges se conservent</button>
+              <button type="button" class="quiz-reponse">non&nbsp;: les charges ne sont pas égales</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(+6\) de chaque côté, et les atomes suivent. Les électrons, eux, n'ont rien à faire dans une équation finale — leur absence n'est pas un oubli, c'est la règle.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. Le titrage colorimétrique&nbsp;: mesurer avec une couleur</h2>
+      <p class="prose">Passe côté paillasse, avec une mission de chimiste&nbsp;: un anti-mousse pour gazon annonce sa teneur en sulfate de fer — donc en ions \(\mathrm{Fe^{2+}}\). Vérifions. Le problème&nbsp;: les ions \(\mathrm{Fe^{2+}}\) sont quasi invisibles dans la fiole, impossible de les compter directement. Mais tu peux les faire <em>réagir</em> — entièrement, jusqu'au dernier — avec un réactif dont tu contrôles exactement le versement. C'est le titrage.</p>
+      <p class="prose">Et l'outil parfait existe&nbsp;: l'ion permanganate \(\mathrm{MnO_4^-}\), d'un violet intense, qui consomme les \(\mathrm{Fe^{2+}}\) selon l'équation de la section 4. Verse-le depuis la burette, un demi-millilitre à la fois, et guette la fiole&nbsp;: trouve le volume exact où la teinte bascule.</p>
+
+      <figure class="widget" id="widget-titrage" data-widget="titrage"
+        data-ca="0.05" data-va="20" data-cb="0.02" data-coef="5" data-v-max="16" data-v-init="0">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Verse et guette la couleur</span>
+          </div>
+          <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 360" aria-label="À gauche, une burette verse une solution violette de permanganate dans une fiole d'ions fer deux plus ; à droite, le graphique des quantités de matière en fonction du volume versé se trace au fur et à mesure et montre un point anguleux à l'équivalence"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">volume versé V&nbsp;: <span class="js-v">0,0</span>&nbsp;mL</span>
+            <input type="range" class="js-curseur" min="0" max="16" step="0.5" value="0" aria-label="Volume de solution titrante versé, en millilitres">
+          </div>
+          <div class="lecture-formule js-ligne" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip">versé&nbsp;: <span class="js-nb">0,00</span> mmol de MnO<sub>4</sub><sup>−</sup></span>
+            <span class="chip">il reste <span class="js-nfe">1,00</span> mmol de Fe<sup>2+</sup></span>
+            <span class="chip chip--accent js-etat" aria-live="polite">V = 0 — tout le fer(II) est là</span>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-debut">La fiole contient 20,0&nbsp;mL de solution à doser&nbsp;: 1,00&nbsp;mmol d'ions Fe<sup>2+</sup> (et de l'acide, exigé par la demi-équation du permanganate). La burette est pleine. Verse.</p>
+            <p class="widget-legende js-leg-avant" hidden>Chaque goutte violette qui tombe est aussitôt décolorée&nbsp;: ses MnO<sub>4</sub><sup>−</sup> trouvent des Fe<sup>2+</sup> à oxyder et deviennent des ions Mn<sup>2+</sup> incolores. Le réactif versé est limitant — tout ce que tu verses est consommé.</p>
+            <p class="widget-legende js-leg-equiv" hidden>V = 10,0&nbsp;mL&nbsp;: exactement assez de MnO<sub>4</sub><sup>−</sup> pour consommer la dernière trace de Fe<sup>2+</sup>. Les deux réactifs s'épuisent ensemble — c'est l'équivalence. Note ce volume&nbsp;: c'est LA mesure du titrage.</p>
+            <p class="widget-legende js-leg-apres" hidden>Plus un Fe<sup>2+</sup> à oxyder&nbsp;: le permanganate versé ne réagit plus, il s'accumule — et son violet s'installe. En pratique, c'est cette teinte qui persiste qui signale l'équivalence dépassée&nbsp;: on arrête de verser à la première goutte qui tient.</p>
+          </div>
+        </div>
+        <div class="widget-note">Réaction support&nbsp;: MnO<sub>4</sub><sup>−</sup> + 8 H<sup>+</sup> + 5 Fe<sup>2+</sup> → Mn<sup>2+</sup> + 4 H<sub>2</sub>O + 5 Fe<sup>3+</sup> (section 4). Burette&nbsp;: c = 0,020 mol/L. Fiole&nbsp;: 20,0 mL de solution de concentration inconnue.</div>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p><strong>Titrer</strong> une espèce, c'est déterminer sa quantité de matière (ou sa concentration) en la faisant réagir <em>totalement</em> avec un réactif versé progressivement — le réactif <strong>titrant</strong> — au moyen d'une réaction support unique, totale et rapide. L'<strong>équivalence</strong> est l'instant du titrage où les réactifs ont été mélangés dans les proportions stœchiométriques de la réaction support&nbsp;: le réactif titré, jusque-là en excès, s'épuise — <strong>le réactif limitant change à l'équivalence</strong>.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi la couleur bascule-t-elle pile à l'équivalence&nbsp;? Avant, le \(\mathrm{MnO_4^-}\) versé est limitant&nbsp;: chaque goutte est intégralement consommée, le violet meurt à l'arrivée. Après, plus un \(\mathrm{Fe^{2+}}\)&nbsp;: la première goutte «&nbsp;en trop&nbsp;» ne trouve plus personne, et son violet teinte toute la fiole. Le changement de couleur, c'est le <em>changement de réactif limitant</em> rendu visible à l'œil nu.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — LA RELATION À L'ÉQUIVALENCE</div>
+        <p>À l'équivalence, le mélange est stœchiométrique — exactement comme au chapitre sur <a href="../reaction-avancement/">l'avancement</a>. Pour une réaction support \(a\,\mathrm{A} + b\,\mathrm{B} \longrightarrow \dots\) où A est l'espèce titrée et B le réactif titrant&nbsp;:</p>
+        <div class="math-vitrine">$$\frac{n_{\mathrm{A}}}{a} = \frac{n_{\mathrm{B},E}}{b}$$</div>
+        <p>où \(n_{\mathrm{B},E} = c_{\mathrm{B}} \times V_E\) est la quantité de réactif titrant versée à l'équivalence.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — EXPLOITER UN TITRAGE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris la réaction support et repère les nombres stœchiométriques de l'espèce titrée (\(a\)) et du titrant (\(b\)).</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">À l'équivalence&nbsp;: \(\dfrac{n_{\mathrm{A}}}{a} = \dfrac{c_{\mathrm{B}} \times V_E}{b}\). Isole \(n_{\mathrm{A}}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Termine en concentration&nbsp;: \(c_{\mathrm{A}} = \dfrac{n_{\mathrm{A}}}{V_{\mathrm{A}}}\), avec \(V_{\mathrm{A}}\) le volume <em>prélevé</em> (la prise d'essai). Contrôle-réflexe&nbsp;: les coefficients — ici, un \(\mathrm{MnO_4^-}\) consomme <em>cinq</em> \(\mathrm{Fe^{2+}}\), pas un.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — L'ANTI-MOUSSE AU BANC D'ESSAI</div>
+        <p class="exemple-enonce">Dans le graphique&nbsp;: \(V_{\mathrm{A}} = 20{,}0\)&nbsp;mL de solution d'ions \(\mathrm{Fe^{2+}}\), titrés par du permanganate à \(c_{\mathrm{B}} = 0{,}020\)&nbsp;mol·L⁻¹. La teinte violette persiste à partir de \(V_E = 10{,}0\)&nbsp;mL. Quelle est la concentration en \(\mathrm{Fe^{2+}}\)&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>réaction support (section 4)&nbsp;: \(\mathrm{MnO_4^-} + 8\,\mathrm{H^+} + 5\,\mathrm{Fe^{2+}} \longrightarrow \mathrm{Mn^{2+}} + 4\,\mathrm{H_2O} + 5\,\mathrm{Fe^{3+}}\), donc \(a = 5\) (le fer titré) et \(b = 1\) (le permanganate titrant).</p>
+        <p><span class="etape-label">Étape 2 — </span>\(n_{\mathrm{B},E} = c_{\mathrm{B}} \times V_E = 0{,}020 \times 0{,}0100 = 2{,}0 \times 10^{-4}\)&nbsp;mol, et \(\dfrac{n_{\mathrm{A}}}{5} = \dfrac{n_{\mathrm{B},E}}{1}\), donc \(n_{\mathrm{A}} = 5 \times 2{,}0 \times 10^{-4} = 1{,}0 \times 10^{-3}\)&nbsp;mol.</p>
+        <p><span class="etape-label">Étape 3 — </span>\(c_{\mathrm{A}} = \dfrac{n_{\mathrm{A}}}{V_{\mathrm{A}}} = \dfrac{1{,}0 \times 10^{-3}}{0{,}0200} = 0{,}050\)&nbsp;mol·L⁻¹.</p>
+        <p class="conclusion">Conclusion&nbsp;: exactement la 1,00&nbsp;mmol que le graphique affichait au départ — la boucle est bouclée. Le facteur 5 a fait tout le travail&nbsp;: l'oublier divise le résultat par cinq.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>À l'équivalence, le mélange est stœchiométrique&nbsp;: \(\dfrac{n_{\text{titré}}}{a} = \dfrac{c_{\mathrm{B}} \times V_E}{b}\). La couleur qui bascule n'est que le réactif limitant qui change de camp.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>À l'équivalence d'un titrage…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le réactif titrant est en excès depuis le début</button>
+              <button type="button" class="quiz-reponse">les réactifs ont été mélangés dans les proportions stœchiométriques</button>
+              <button type="button" class="quiz-reponse">il reste la moitié du réactif titré</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> proportions exactes, rien de plus, rien de moins&nbsp;: le titré s'épuise pile quand le titrant cesse d'être limitant. C'est ce basculement que la couleur trahit.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Avant l'équivalence, dans la fiole, le réactif limitant est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">le titrant versé — d'où le violet qui disparaît</button>
+              <button type="button" class="quiz-reponse">l'espèce titrée, présente dans la fiole</button>
+              <button type="button" class="quiz-reponse">aucun&nbsp;: la réaction n'a pas commencé</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> tout ce qui tombe est aussitôt consommé&nbsp;: le versé est limitant, le titré en excès. La réaction, elle, se produit dès la première goutte — totale et rapide, c'est le cahier des charges d'une réaction support.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>On titre 10,0&nbsp;mL de \(\mathrm{Fe^{2+}}\)&nbsp;; l'équivalence arrive pour 8,0&nbsp;mL de \(\mathrm{MnO_4^-}\) à 0,010&nbsp;mol·L⁻¹. Alors \(n(\mathrm{Fe^{2+}}) =\)…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">\(8{,}0 \times 10^{-5}\) mol</button>
+              <button type="button" class="quiz-reponse">\(1{,}6 \times 10^{-5}\) mol</button>
+              <button type="button" class="quiz-reponse">\(4{,}0 \times 10^{-4}\) mol</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(n_{\mathrm{B},E} = 0{,}010 \times 0{,}0080 = 8{,}0 \times 10^{-5}\)&nbsp;mol, puis \(\times 5\)&nbsp;: \(4{,}0 \times 10^{-4}\)&nbsp;mol. Répondre \(8{,}0 \times 10^{-5}\), c'est le réflexe «&nbsp;1 pour 1&nbsp;»&nbsp;; \(1{,}6 \times 10^{-5}\), c'est diviser par 5 au lieu de multiplier.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>La teinte violette persiste dans la fiole. Cela signifie que…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">l'équivalence est dépassée&nbsp;: le titrant ne réagit plus</button>
+              <button type="button" class="quiz-reponse">la réaction support s'est accélérée</button>
+              <button type="button" class="quiz-reponse">les ions \(\mathrm{Fe^{2+}}\) colorent enfin la solution</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> plus de \(\mathrm{Fe^{2+}}\) à oxyder&nbsp;: le \(\mathrm{MnO_4^-}\) s'accumule et impose sa couleur. C'est le signal d'arrêt du versement — et la lecture de \(V_E\).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Dire «&nbsp;l'oxydant s'oxyde&nbsp;».</strong> Non&nbsp;: le vocabulaire est croisé. L'oxydant <em>capte</em> des électrons, donc il subit la <em>réduction</em>&nbsp;; le réducteur cède, donc il subit l'<em>oxydation</em>. Redis-le jusqu'à ce que ça tienne&nbsp;: le réducteur est oxydé, l'oxydant est réduit.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Laisser des électrons dans l'équation finale.</strong> Une équation d'oxydoréduction ne montre jamais de \(e^-\)&nbsp;: ils passent directement du réducteur à l'oxydant, sans jamais flotter dans la solution. S'il en reste un dans ton bilan, c'est que les comptes cédés/captés n'étaient pas égalisés — reprends les multiplicateurs.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Additionner les demi-équations sans égaliser.</strong> Combiner \(\mathrm{Ag^+} + e^- = \mathrm{Ag}\) et \(\mathrm{Cu} = \mathrm{Cu^{2+}} + 2\,e^-\) telles quelles laisse un électron orphelin. Le contrôle qui ne pardonne pas&nbsp;: la charge totale doit être la même des deux côtés de l'équation finale.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Le réflexe «&nbsp;1 pour 1&nbsp;» à l'équivalence.</strong> \(n(\text{titré}) = n(\text{versé})\) n'est vrai que si les deux coefficients sont égaux. Avec \(\mathrm{MnO_4^-} + 5\,\mathrm{Fe^{2+}}\), chaque goutte de permanganate consomme <em>cinq</em> fers&nbsp;: écris toujours la relation \(\dfrac{n_{\mathrm{A}}}{a} = \dfrac{n_{\mathrm{B},E}}{b}\) avant de calculer.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Confondre titrage et dosage par étalonnage.</strong> L'étalonnage (chapitre sur <a href="../composition-systeme/">la composition d'un système</a>) <em>compare</em> sans toucher&nbsp;: la lumière traverse, l'échantillon ressort intact. Le titrage <em>détruit</em> ce qu'il mesure&nbsp;: la réaction support consomme l'espèce titrée. Les deux «&nbsp;dosent&nbsp;», mais un seul consomme l'échantillon — et le Bac adore te demander lequel choisir.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">COUPLE</span>
+          <p>\(\mathrm{Ox} + n\,e^- = \mathrm{Red}\). L'oxydant capte, le réducteur cède — et le vocabulaire se croise&nbsp;: l'oxydant est réduit, le réducteur est oxydé.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">DEMI-ÉQUATION</span>
+          <p>L'élément d'abord, les O avec \(\mathrm{H_2O}\), les H avec \(\mathrm{H^+}\), les charges avec \(e^-\) — dans cet ordre (milieu acide).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ÉQUATION</span>
+          <p>Réducteur d'un couple + oxydant d'un autre&nbsp;; électrons égalisés (multiplicateurs) puis annulés — jamais visibles dans le bilan.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">ÉQUIVALENCE</span>
+          <p>Réactifs mélangés dans les proportions stœchiométriques&nbsp;: le réactif limitant change — et la couleur bascule.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">RELATION</span>
+          <p>\(\dfrac{n_{\text{titré}}}{a} = \dfrac{c_{\mathrm{B}} \times V_E}{b}\), puis \(c = \dfrac{n}{V}\) sur la prise d'essai.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: couples et vocabulaire, demi-équations, équations d'oxydoréduction, titrages, et un problème pour finir.</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· le vocabulaire des couples</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On considère les couples \(\mathrm{Zn^{2+}/Zn}\), \(\mathrm{I_2/I^-}\) et \(\mathrm{Fe^{3+}/Fe^{2+}}\). a. Donne l'oxydant et le réducteur de chaque couple. b. Que signifie, en termes d'électrons, la phrase «&nbsp;le zinc est oxydé&nbsp;»&nbsp;? c. Au cours d'une réaction d'oxydoréduction, qui est réduit&nbsp;: l'oxydant ou le réducteur&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>l'oxydant s'écrit toujours en premier&nbsp;: oxydants \(\mathrm{Zn^{2+}}\), \(\mathrm{I_2}\), \(\mathrm{Fe^{3+}}\)&nbsp;; réducteurs \(\mathrm{Zn}\), \(\mathrm{I^-}\), \(\mathrm{Fe^{2+}}\).</p>
+          <p><span class="etape-label">b. — </span>le zinc <em>cède</em> des électrons&nbsp;: \(\mathrm{Zn} = \mathrm{Zn^{2+}} + 2\,e^-\). Être oxydé = perdre des électrons.</p>
+          <p><span class="etape-label">c. — </span>l'<em>oxydant</em>&nbsp;: c'est lui qui capte les électrons, donc lui qui est réduit. Le vocabulaire croisé, piège n°1 du chapitre.</p>
+          <p class="conclusion">Conclusion&nbsp;: Ox/Red, l'oxydant d'abord — et les rôles se lisent sur les électrons, jamais sur les noms.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· oxydé ou réduit&nbsp;?</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Quand on verse de l'acide chlorhydrique sur du zinc, ça mousse&nbsp;: \(\mathrm{Zn} + 2\,\mathrm{H^+} \longrightarrow \mathrm{Zn^{2+}} + \mathrm{H_2}\). a. Qui cède des électrons, et combien&nbsp;? Qui les capte&nbsp;? b. Identifie les deux couples en jeu. c. Quelle espèce est oxydée&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\mathrm{Zn}\) devient \(\mathrm{Zn^{2+}}\)&nbsp;: il cède 2 électrons. Chaque \(\mathrm{H^+}\) en capte un (il en faut deux pour faire un \(\mathrm{H_2}\))&nbsp;: \(2\,\mathrm{H^+} + 2\,e^- = \mathrm{H_2}\).</p>
+          <p><span class="etape-label">b. — </span>couples \(\mathrm{Zn^{2+}/Zn}\) et \(\mathrm{H^+/H_2}\).</p>
+          <p><span class="etape-label">c. — </span>le zinc&nbsp;: il cède, c'est le réducteur, il est oxydé. Les bulles, c'est l'oxydant \(\mathrm{H^+}\) réduit en dihydrogène.</p>
+          <p class="conclusion">Conclusion&nbsp;: «&nbsp;l'acide attaque le métal&nbsp;» est une réaction d'oxydoréduction qui s'ignore — les électrons passent du métal aux ions \(\mathrm{H^+}\).</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· demi-équations simples</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Écris la demi-équation électronique de chaque couple&nbsp;: a. \(\mathrm{Ag^+/Ag}\). b. \(\mathrm{Zn^{2+}/Zn}\). c. \(\mathrm{Fe^{3+}/Fe^{2+}}\). d. \(\mathrm{Cl_2/Cl^-}\).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\mathrm{Ag^+} + e^- = \mathrm{Ag}\)&nbsp;: une charge \(+\), un électron.</p>
+          <p><span class="etape-label">b. — </span>\(\mathrm{Zn^{2+}} + 2\,e^- = \mathrm{Zn}\).</p>
+          <p><span class="etape-label">c. — </span>\(\mathrm{Fe^{3+}} + e^- = \mathrm{Fe^{2+}}\)&nbsp;: la charge ne descend que de 1, donc <em>un seul</em> électron — pas 3.</p>
+          <p><span class="etape-label">d. — </span>\(\mathrm{Cl_2} + 2\,e^- = 2\,\mathrm{Cl^-}\)&nbsp;: l'élément d'abord (2 chlores), les charges ensuite.</p>
+          <p class="conclusion">Conclusion&nbsp;: le nombre d'électrons se lit sur l'écart de charges, pas sur l'exposant tout seul.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· demi-équation en milieu acide</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Le couple \(\mathrm{Cr_2O_7^{2-}/Cr^{3+}}\) est celui des anciens éthylotests (l'ion dichromate est orange, l'ion \(\mathrm{Cr^{3+}}\) est vert). Écris sa demi-équation en milieu acide, en suivant la méthode&nbsp;: a. équilibre le chrome. b. les oxygènes. c. les hydrogènes. d. les charges.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>2 chromes à gauche&nbsp;: \(\mathrm{Cr_2O_7^{2-}} = 2\,\mathrm{Cr^{3+}}\).</p>
+          <p><span class="etape-label">b. — </span>7 oxygènes à gauche&nbsp;: \(+\,7\,\mathrm{H_2O}\) à droite.</p>
+          <p><span class="etape-label">c. — </span>ces 7 eaux apportent 14 hydrogènes&nbsp;: \(+\,14\,\mathrm{H^+}\) à gauche.</p>
+          <p><span class="etape-label">d. — </span>charges&nbsp;: gauche \(-2 + 14 = +12\), droite \(2 \times (+3) = +6\)&nbsp;: il faut 6 électrons à gauche. \(\mathrm{Cr_2O_7^{2-}} + 14\,\mathrm{H^+} + 6\,e^- = 2\,\mathrm{Cr^{3+}} + 7\,\mathrm{H_2O}\).</p>
+          <p class="conclusion">Conclusion&nbsp;: la routine élément → O → H → charges digère même les gros morceaux. Et le virage orange → vert de l'éthylotest, c'est cette réduction-là.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· lire une équation</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Pour graver les circuits imprimés, on ronge le cuivre avec une solution d'ions fer(III)&nbsp;: \(2\,\mathrm{Fe^{3+}} + \mathrm{Cu} \longrightarrow 2\,\mathrm{Fe^{2+}} + \mathrm{Cu^{2+}}\). a. Retrouve les deux couples en jeu. b. Écris les deux demi-équations dans le sens où elles se produisent. c. Qui est oxydé, qui est réduit&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>le fer passe de \(\mathrm{Fe^{3+}}\) à \(\mathrm{Fe^{2+}}\)&nbsp;: couple \(\mathrm{Fe^{3+}/Fe^{2+}}\). Le cuivre passe de \(\mathrm{Cu}\) à \(\mathrm{Cu^{2+}}\)&nbsp;: couple \(\mathrm{Cu^{2+}/Cu}\).</p>
+          <p><span class="etape-label">b. — </span>\(\mathrm{Fe^{3+}} + e^- = \mathrm{Fe^{2+}}\) (deux fois)&nbsp;; \(\mathrm{Cu} = \mathrm{Cu^{2+}} + 2\,e^-\).</p>
+          <p><span class="etape-label">c. — </span>le cuivre cède&nbsp;: il est oxydé — c'est bien pour ça qu'il est «&nbsp;rongé&nbsp;». \(\mathrm{Fe^{3+}}\) capte&nbsp;: il est réduit.</p>
+          <p class="conclusion">Conclusion&nbsp;: surprise du jour — \(\mathrm{Cu^{2+}}\) était l'oxydant vedette du cours, et voilà le cuivre métal en réducteur. Le rôle dépend du couple d'en face.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· établir une équation</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Le «&nbsp;sapin d'argent&nbsp;» du labo&nbsp;: un fil de cuivre plongé dans du nitrate d'argent se couvre d'aiguilles brillantes, et la solution bleuit. Établis l'équation de la réaction entre le cuivre \(\mathrm{Cu}\) et les ions \(\mathrm{Ag^+}\) (couples \(\mathrm{Ag^+/Ag}\) et \(\mathrm{Cu^{2+}/Cu}\)).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>le cuivre cède&nbsp;: \(\mathrm{Cu} = \mathrm{Cu^{2+}} + 2\,e^-\). L'ion argent capte&nbsp;: \(\mathrm{Ag^+} + e^- = \mathrm{Ag}\).</p>
+          <p><span class="etape-label">Étape 2 — </span>2 électrons contre 1&nbsp;: on double la demi-équation de l'argent.</p>
+          <p><span class="etape-label">Étape 3 — </span>\(\mathrm{Cu} + 2\,\mathrm{Ag^+} \longrightarrow \mathrm{Cu^{2+}} + 2\,\mathrm{Ag}\). Charges&nbsp;: \(+2\) de chaque côté, aucun électron visible.</p>
+          <p class="conclusion">Conclusion&nbsp;: les aiguilles, c'est l'argent réduit&nbsp;; le bleu, c'est \(\mathrm{Cu^{2+}}\) qui apparaît — l'équation raconte exactement ce qu'on voit.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· le graphique rejoué</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Refais à la main ce que le graphique de la section 4 t'a fait faire aux boutons&nbsp;: a. établis l'équation de la réaction entre l'aluminium \(\mathrm{Al}\) et les ions \(\mathrm{Cu^{2+}}\) (couples \(\mathrm{Al^{3+}/Al}\) et \(\mathrm{Cu^{2+}/Cu}\)). b. Combien de moles d'électrons sont échangées quand 2&nbsp;mol d'aluminium réagissent&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\mathrm{Al} = \mathrm{Al^{3+}} + 3\,e^-\) (×2) et \(\mathrm{Cu^{2+}} + 2\,e^- = \mathrm{Cu}\) (×3)&nbsp;: 6 électrons de chaque côté, d'où \(2\,\mathrm{Al} + 3\,\mathrm{Cu^{2+}} \longrightarrow 2\,\mathrm{Al^{3+}} + 3\,\mathrm{Cu}\).</p>
+          <p><span class="etape-label">b. — </span>chaque aluminium cède 3 électrons&nbsp;: \(2 \times 3 = 6\)&nbsp;mol d'électrons. (C'est le «&nbsp;6 = 6&nbsp;» que le graphique affichait à l'accord.)</p>
+          <p class="conclusion">Conclusion&nbsp;: le plus petit multiple commun de 3 et 2 est 6 — les multiplicateurs (2&nbsp;; 3) ne sortent pas du chapeau.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· équation avec H⁺ et H₂O</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">En t'appuyant sur l'exercice 4, établis l'équation de la réaction entre l'ion dichromate \(\mathrm{Cr_2O_7^{2-}}\) (couple \(\mathrm{Cr_2O_7^{2-}/Cr^{3+}}\), en milieu acide) et les ions fer(II) \(\mathrm{Fe^{2+}}\) (couple \(\mathrm{Fe^{3+}/Fe^{2+}}\)).</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\mathrm{Cr_2O_7^{2-}} + 14\,\mathrm{H^+} + 6\,e^- = 2\,\mathrm{Cr^{3+}} + 7\,\mathrm{H_2O}\) (exercice 4) et \(\mathrm{Fe^{2+}} = \mathrm{Fe^{3+}} + e^-\).</p>
+          <p><span class="etape-label">Étape 2 — </span>6 électrons contre 1&nbsp;: on multiplie la demi-équation du fer par 6.</p>
+          <p><span class="etape-label">Étape 3 — </span>\(\mathrm{Cr_2O_7^{2-}} + 14\,\mathrm{H^+} + 6\,\mathrm{Fe^{2+}} \longrightarrow 2\,\mathrm{Cr^{3+}} + 7\,\mathrm{H_2O} + 6\,\mathrm{Fe^{3+}}\). Contrôle des charges&nbsp;: \(-2 + 14 + 12 = +24\) à gauche, \(+6 + 18 = +24\) à droite.</p>
+          <p class="conclusion">Conclusion&nbsp;: les \(\mathrm{H^+}\) et \(\mathrm{H_2O}\) de la demi-équation suivent tels quels dans l'équation finale — seuls les électrons disparaissent.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· le clou, version tableau d'avancement</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Retour au bécher de la section 2&nbsp;: 0,10&nbsp;mol d'ions \(\mathrm{Cu^{2+}}\) et un clou de 11,2&nbsp;g de fer (\(M(\mathrm{Fe}) = 56\)&nbsp;g·mol⁻¹, \(M(\mathrm{Cu}) = 63{,}5\)&nbsp;g·mol⁻¹). Réaction&nbsp;: \(\mathrm{Fe} + \mathrm{Cu^{2+}} \longrightarrow \mathrm{Fe^{2+}} + \mathrm{Cu}\), totale. a. Vérifie que le clou est en excès. b. Quelle masse de cuivre se dépose au maximum&nbsp;? c. Quelle masse de fer le clou a-t-il perdue&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n(\mathrm{Fe}) = \dfrac{11{,}2}{56} = 0{,}20\)&nbsp;mol. Coefficients égaux&nbsp;: les candidats sont les stocks, \(0{,}20 &gt; 0{,}10\)&nbsp;: le \(\mathrm{Cu^{2+}}\) est limitant, \(x_{\max} = 0{,}10\)&nbsp;mol — c'est bien là que le curseur de la section 2 s'arrêtait.</p>
+          <p><span class="etape-label">b. — </span>\(n(\mathrm{Cu}) = x_{\max} = 0{,}10\)&nbsp;mol, soit \(m = 0{,}10 \times 63{,}5 = 6{,}35\)&nbsp;g de cuivre déposé.</p>
+          <p><span class="etape-label">c. — </span>le clou perd \(0{,}10\)&nbsp;mol de fer&nbsp;: \(m = 0{,}10 \times 56 = 5{,}6\)&nbsp;g. Il en reste \(11{,}2 - 5{,}6 = 5{,}6\)&nbsp;g — la moitié du clou est partie en ions.</p>
+          <p class="conclusion">Conclusion&nbsp;: une réaction d'oxydoréduction se traite au tableau d'avancement comme n'importe quelle autre — le chapitre précédent n'a pas pris sa retraite.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· le principe du titrage</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Vrai ou faux&nbsp;? Corrige les affirmations fausses. a. «&nbsp;Le réactif titrant se trouve dans la burette.&nbsp;» b. «&nbsp;Avant l'équivalence, le réactif titré est limitant.&nbsp;» c. «&nbsp;À l'équivalence, il reste la moitié du réactif titré.&nbsp;» d. «&nbsp;Dans un titrage au permanganate, la teinte violette persistante signale que l'équivalence est dépassée.&nbsp;»</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>vrai&nbsp;: on verse le titrant (concentration connue) sur le titré (la fiole, concentration cherchée).</p>
+          <p><span class="etape-label">b. — </span>faux&nbsp;: avant l'équivalence, c'est le <em>titrant versé</em> qui est limitant — tout ce qui tombe est consommé. Le titré n'est limitant qu'après… et il n'y en a plus.</p>
+          <p><span class="etape-label">c. — </span>faux&nbsp;: à l'équivalence, le titré est <em>entièrement</em> consommé — c'est la définition (proportions stœchiométriques).</p>
+          <p><span class="etape-label">d. — </span>vrai&nbsp;: plus rien à oxyder, le permanganate s'accumule et sa couleur tient. On lit \(V_E\) à la première goutte qui persiste.</p>
+          <p class="conclusion">Conclusion&nbsp;: le titrage tient en une phrase — le limitant change de camp à l'équivalence, et la couleur le crie.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· la Bétadine au banc d'essai</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">On titre le diiode \(\mathrm{I_2}\) (brun) d'un antiseptique par les ions thiosulfate \(\mathrm{S_2O_3^{2-}}\), selon la réaction support (donnée)&nbsp;: \(\mathrm{I_2} + 2\,\mathrm{S_2O_3^{2-}} \longrightarrow 2\,\mathrm{I^-} + \mathrm{S_4O_6^{2-}}\). Prise d'essai&nbsp;: 10,0&nbsp;mL&nbsp;; titrant à 0,10&nbsp;mol·L⁻¹&nbsp;; la teinte brune disparaît pour \(V_E = 13{,}0\)&nbsp;mL. a. Écris la relation à l'équivalence. b. Calcule \(n(\mathrm{I_2})\) dans la prise. c. Déduis-en la concentration en diiode.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(a = 1\) (le diiode titré), \(b = 2\) (le thiosulfate)&nbsp;: \(\dfrac{n(\mathrm{I_2})}{1} = \dfrac{n(\mathrm{S_2O_3^{2-}})_E}{2}\).</p>
+          <p><span class="etape-label">b. — </span>\(n(\mathrm{S_2O_3^{2-}})_E = 0{,}10 \times 0{,}0130 = 1{,}3 \times 10^{-3}\)&nbsp;mol, donc \(n(\mathrm{I_2}) = \dfrac{1{,}3 \times 10^{-3}}{2} = 6{,}5 \times 10^{-4}\)&nbsp;mol.</p>
+          <p><span class="etape-label">c. — </span>\(c = \dfrac{6{,}5 \times 10^{-4}}{0{,}0100} = 6{,}5 \times 10^{-2}\)&nbsp;mol·L⁻¹.</p>
+          <p class="conclusion">Conclusion&nbsp;: cette fois on <em>divise</em> par le coefficient (2 thiosulfates par diiode) — la relation à l'équivalence décide du sens, pas un réflexe.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· prévoir le volume équivalent</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Avant de lancer un titrage, on estime toujours \(V_E\) pour vérifier qu'il tombera dans la burette (25&nbsp;mL). On veut titrer 20,0&nbsp;mL d'une solution de \(\mathrm{Fe^{2+}}\) de concentration estimée à 0,080&nbsp;mol·L⁻¹ par du permanganate à 0,040&nbsp;mol·L⁻¹ (réaction support de la section 4). a. Estime \(n(\mathrm{Fe^{2+}})\) dans la prise. b. Déduis-en la quantité de \(\mathrm{MnO_4^-}\) nécessaire, puis le \(V_E\) attendu. c. La burette convient-elle&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(n(\mathrm{Fe^{2+}}) = 0{,}080 \times 0{,}0200 = 1{,}6 \times 10^{-3}\)&nbsp;mol.</p>
+          <p><span class="etape-label">b. — </span>relation à l'équivalence&nbsp;: \(n(\mathrm{MnO_4^-})_E = \dfrac{n(\mathrm{Fe^{2+}})}{5} = 3{,}2 \times 10^{-4}\)&nbsp;mol, d'où \(V_E = \dfrac{3{,}2 \times 10^{-4}}{0{,}040} = 8{,}0 \times 10^{-3}\)&nbsp;L \(= 8{,}0\)&nbsp;mL.</p>
+          <p><span class="etape-label">c. — </span>oui&nbsp;: 8,0&nbsp;mL &lt; 25&nbsp;mL, avec de la marge si la concentration réelle est un peu plus grande.</p>
+          <p class="conclusion">Conclusion&nbsp;: la relation à l'équivalence marche dans les deux sens — retrouver une concentration, ou prévoir un volume. Même formule, autre inconnue.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· l'éthylotest</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Dans les anciens éthylotests chimiques, l'éthanol \(\mathrm{C_2H_6O}\) de l'haleine est oxydé en acide éthanoïque \(\mathrm{C_2H_4O_2}\) par l'ion dichromate. Demi-équation de l'éthanol (donnée)&nbsp;: \(\mathrm{C_2H_6O} + \mathrm{H_2O} = \mathrm{C_2H_4O_2} + 4\,\mathrm{H^+} + 4\,e^-\). a. Justifie que l'éthanol joue le rôle de réducteur. b. En combinant avec la demi-équation de l'exercice 4, établis l'équation de la réaction. c. Pourquoi le virage de l'orange au vert révèle-t-il la présence d'alcool&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>dans sa demi-équation, l'éthanol <em>cède</em> 4 électrons (ils apparaissent à droite)&nbsp;: c'est un réducteur, il est oxydé en acide éthanoïque.</p>
+          <p><span class="etape-label">b. — </span>6 électrons captés contre 4 cédés&nbsp;: plus petit multiple commun 12, donc dichromate ×2 et éthanol ×3. En additionnant puis en simplifiant les \(\mathrm{H^+}\) (28 − 12 = 16) et les \(\mathrm{H_2O}\) (14 − 3 = 11)&nbsp;: \(2\,\mathrm{Cr_2O_7^{2-}} + 16\,\mathrm{H^+} + 3\,\mathrm{C_2H_6O} \longrightarrow 4\,\mathrm{Cr^{3+}} + 11\,\mathrm{H_2O} + 3\,\mathrm{C_2H_4O_2}\). Contrôle des charges&nbsp;: \(-4 + 16 = +12\) à gauche, \(+12\) à droite.</p>
+          <p><span class="etape-label">c. — </span>s'il y a de l'alcool, la réaction consomme du dichromate orange et fabrique du \(\mathrm{Cr^{3+}}\) vert&nbsp;: le tube change de couleur. Pas d'alcool, pas de transfert d'électrons — le tube reste orange.</p>
+          <p class="conclusion">Conclusion&nbsp;: quand \(\mathrm{H^+}\) et \(\mathrm{H_2O}\) figurent des deux côtés, on simplifie à la fin — et le contrôle des charges rattrape toutes les étourderies.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème · la vitamine C du jus d'orange</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">L'étiquette d'un jus d'orange annonce «&nbsp;vitamine C&nbsp;: 18&nbsp;mg pour 100&nbsp;mL&nbsp;». La vitamine C (acide ascorbique \(\mathrm{C_6H_8O_6}\), \(M = 176\)&nbsp;g·mol⁻¹) est un réducteur&nbsp;: on la titre par le diiode selon \(\mathrm{C_6H_8O_6} + \mathrm{I_2} \longrightarrow \mathrm{C_6H_6O_6} + 2\,\mathrm{H^+} + 2\,\mathrm{I^-}\) (donnée). Quelques gouttes d'empois d'amidon colorent la solution en bleu dès que le diiode est en excès. On titre 20,0&nbsp;mL de jus par du diiode à \(2{,}5 \times 10^{-3}\)&nbsp;mol·L⁻¹&nbsp;; le bleu persiste à partir de \(V_E = 8{,}0\)&nbsp;mL. a. Pourquoi le bleu n'apparaît-il qu'après l'équivalence&nbsp;? b. Calcule la quantité de vitamine C dans la prise. c. L'étiquette dit-elle vrai&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>avant l'équivalence, chaque goutte de \(\mathrm{I_2}\) est consommée par la vitamine C&nbsp;: pas de diiode libre, pas de bleu. Après, le \(\mathrm{I_2}\) en excès s'accumule et l'empois d'amidon le révèle — même logique que le violet du permanganate.</p>
+          <p><span class="etape-label">b. — </span>l'équation est en 1 pour 1&nbsp;: \(n(\mathrm{C_6H_8O_6}) = n(\mathrm{I_2})_E = 2{,}5 \times 10^{-3} \times 0{,}0080 = 2{,}0 \times 10^{-5}\)&nbsp;mol dans les 20,0&nbsp;mL.</p>
+          <p><span class="etape-label">c. — </span>pour 100&nbsp;mL&nbsp;: \(n = 5 \times 2{,}0 \times 10^{-5} = 1{,}0 \times 10^{-4}\)&nbsp;mol, soit \(m = 1{,}0 \times 10^{-4} \times 176 = 1{,}76 \times 10^{-2}\)&nbsp;g \(\approx 18\)&nbsp;mg. L'étiquette dit vrai.</p>
+          <p class="conclusion">Conclusion&nbsp;: avec une burette et un peu d'oxydoréduction, tu viens de contrôler une étiquette alimentaire — c'est littéralement le travail des laboratoires de la répression des fraudes.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">L'eau oxygénée des pharmacies est une solution de peroxyde d'hydrogène \(\mathrm{H_2O_2}\), un antiseptique qui se décompose lentement avec le temps. On contrôle un flacon entamé. Couples en jeu&nbsp;: \(\mathrm{O_2/H_2O_2}\) et \(\mathrm{MnO_4^-/Mn^{2+}}\). Demi-équation donnée&nbsp;: \(\mathrm{H_2O_2} = \mathrm{O_2} + 2\,\mathrm{H^+} + 2\,e^-\).</p>
+          <div class="bac-partie">PARTIE A — LA RÉACTION SUPPORT</div>
+          <ol>
+            <li>Justifie que l'eau oxygénée joue ici le rôle de réducteur.</li>
+            <li>En combinant avec la demi-équation du permanganate (section 3), établis l'équation support du titrage.</li>
+            <li>Écris la relation à l'équivalence entre \(n(\mathrm{H_2O_2})\) et \(n(\mathrm{MnO_4^-})_E\).</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — LE CONTRÔLE DU FLACON</div>
+          <p class="prose">L'étiquette annonce une concentration \(c_0 = 0{,}89\)&nbsp;mol·L⁻¹ («&nbsp;10 volumes&nbsp;»). On dilue la solution du flacon 10 fois, puis on titre \(V_{\mathrm{A}} = 10{,}0\)&nbsp;mL de solution diluée par du permanganate à \(c_{\mathrm{B}} = 0{,}020\)&nbsp;mol·L⁻¹. La teinte violette persiste à partir de \(V_E = 8{,}0\)&nbsp;mL.</p>
+          <ol>
+            <li>Montre par un calcul rapide que, sans dilution, le volume équivalent attendu n'aurait pas tenu dans une burette de 25&nbsp;mL.</li>
+            <li>Calcule la quantité de permanganate versée à l'équivalence.</li>
+            <li>Déduis-en la quantité, puis la concentration de \(\mathrm{H_2O_2}\) dans la solution diluée.</li>
+            <li>Remonte à la concentration du flacon et compare à l'étiquette. Qu'en conclus-tu&nbsp;?</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>dans sa demi-équation, \(\mathrm{H_2O_2}\) cède 2 électrons (à droite du =)&nbsp;: c'est un réducteur, oxydé en \(\mathrm{O_2}\) — d'où les petites bulles pendant le titrage.</p>
+            <p><span class="etape-label">A.2 — </span>10 électrons de chaque côté (permanganate ×2, eau oxygénée ×5), puis simplification des \(\mathrm{H^+}\) (16 − 10 = 6)&nbsp;: \(2\,\mathrm{MnO_4^-} + 6\,\mathrm{H^+} + 5\,\mathrm{H_2O_2} \longrightarrow 2\,\mathrm{Mn^{2+}} + 8\,\mathrm{H_2O} + 5\,\mathrm{O_2}\). Charges&nbsp;: \(+4\) des deux côtés.</p>
+            <p><span class="etape-label">A.3 — </span>\(\dfrac{n(\mathrm{H_2O_2})}{5} = \dfrac{n(\mathrm{MnO_4^-})_E}{2}\), donc \(n(\mathrm{H_2O_2}) = \dfrac{5}{2}\,n(\mathrm{MnO_4^-})_E\).</p>
+            <p><span class="etape-label">B.1 — </span>à 0,89&nbsp;mol·L⁻¹, la prise contiendrait \(8{,}9 \times 10^{-3}\)&nbsp;mol de \(\mathrm{H_2O_2}\), exigeant \(n(\mathrm{MnO_4^-}) = \dfrac{2}{5} \times 8{,}9 \times 10^{-3} \approx 3{,}6 \times 10^{-3}\)&nbsp;mol, soit \(V_E \approx \dfrac{3{,}6 \times 10^{-3}}{0{,}020} = 0{,}18\)&nbsp;L = 180&nbsp;mL&nbsp;: sept burettes. On dilue.</p>
+            <p><span class="etape-label">B.2 — </span>\(n(\mathrm{MnO_4^-})_E = c_{\mathrm{B}} \times V_E = 0{,}020 \times 0{,}0080 = 1{,}6 \times 10^{-4}\)&nbsp;mol.</p>
+            <p><span class="etape-label">B.3 — </span>\(n(\mathrm{H_2O_2}) = \dfrac{5}{2} \times 1{,}6 \times 10^{-4} = 4{,}0 \times 10^{-4}\)&nbsp;mol, d'où \(c_{\text{diluée}} = \dfrac{4{,}0 \times 10^{-4}}{0{,}0100} = 0{,}040\)&nbsp;mol·L⁻¹.</p>
+            <p><span class="etape-label">B.4 — </span>dilution par 10&nbsp;: \(c_{\text{flacon}} = 0{,}40\)&nbsp;mol·L⁻¹, contre 0,89 annoncés. L'écart (plus de la moitié perdue) dépasse largement les petites incertitudes de la manipulation&nbsp;: le flacon entamé s'est réellement décomposé. C'est exactement pour ça qu'on titre au lieu de croire l'étiquette.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre"><a href="../ondes-mecaniques/">Les ondes mécaniques <span aria-hidden="true">→</span></a></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
