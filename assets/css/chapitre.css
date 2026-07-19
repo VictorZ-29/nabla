@@ -1333,3 +1333,30 @@
   margin: 16px 0;
 }
 .bloc-code pre { margin: 0; }
+
+/* --- Oxydoréduction (physique-chimie) : transfert d'électrons, équilibrage, titrage ------------------------
+   Le bécher, la burette, la fiole et leurs liquides réutilisent l'existant
+   (.dil-verre, .dil-liquide — seule l'opacité varie), le clou craie
+   .avc-barre-reactif et son dépôt accent .avc-barre-produit (même partage
+   des rôles que réactif/produit), les étiquettes .avc-nom/.avc-candidat/
+   .etl-valeur, la pointe .vec-pointe--accent, les droites .g-courbe (craie)
+   et .g-courbe-derivee (accent). Nouveaux ici : le trait du flux
+   d'électrons, la rangée demi-équation + multiplicateur du widget
+   d'équilibrage, et des gardes d'interligne pour les exposants d'ions
+   dans les lectures. Couleurs et épaisseurs : tokens uniquement. */
+
+.rdx-electrons { stroke: var(--accent); stroke-width: var(--sw-tan-mini); fill: none; }
+
+.rdx-demi { display: flex; align-items: center; gap: 8px 14px; flex-wrap: wrap; }
+.rdx-stepper { display: inline-flex; align-items: center; gap: 8px; flex: none; }
+.rdx-mult {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent);
+  min-width: 2ch;
+  text-align: center;
+}
+
+.lecture-formule sup, .avc-tableau sup, .feuille-btn sup, .quiz-reponse sup,
+.widget-note sub, .widget-note sup, .widget-legende sub, .widget-legende sup { line-height: 0; }
