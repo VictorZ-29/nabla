@@ -170,6 +170,20 @@ export const CHAPITRES = [
     ],
   },
   {
+    titre: 'L’oxydoréduction et les titrages',
+    url: 'premiere/physique-chimie/oxydoreduction-titrages/',
+    niveau: 'Première',
+    matiere: 'Spé Physique-Chimie',
+    mots: 'oxydoréduction redox oxydant réducteur couple demi-équation électronique transfert d’électrons titrage colorimétrique équivalence burette exercices corrigés',
+    sections: [
+      { id: 's1', titre: 'Un clou dans le bleu', mots: 'clou de fer sulfate de cuivre dépôt rouge couleur qui pâlit' },
+      { id: 's2', titre: 'Le transfert d’électrons', mots: 'oxydant réducteur couple oxydation réduction gain perte d’électrons Ox/Red' },
+      { id: 's3', titre: 'Les demi-équations', mots: 'demi-équation électronique ajuster H+ H2O électrons milieu acide permanganate' },
+      { id: 's4', titre: 'L’équation d’oxydoréduction', mots: 'équation d’oxydoréduction combiner demi-équations égaliser les électrons multiplicateurs' },
+      { id: 's5', titre: 'Le titrage colorimétrique', mots: 'titrage équivalence burette changement de couleur réactif limitant relation à l’équivalence volume équivalent concentration' },
+    ],
+  },
+  {
     titre: 'Le mouvement d’un système',
     url: 'premiere/physique-chimie/mouvement-systeme/',
     niveau: 'Première',

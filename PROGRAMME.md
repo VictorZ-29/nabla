@@ -111,7 +111,7 @@ aux chapitres existants (dérivation : approximation affine).**
 
 ## Physique-chimie — Première spécialité (programme 2019, toujours en vigueur)
 
-**Bilan : 5 chapitres en ligne · 11 à faire.** Découpage proposé : un
+**Bilan : 6 chapitres en ligne · 10 à faire.** Découpage proposé : un
 chapitre Nabla par sous-partie officielle (des regroupements restent
 possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 
@@ -121,7 +121,7 @@ possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 |---|---|---|
 | La composition d'un système chimique | « Détermination de la composition du système initial à l'aide de grandeurs physiques » : masse molaire, quantité de matière n = m/M ; concentration en quantité de matière c = n/V ; volume molaire des gaz ; absorbance, loi de Beer-Lambert, dosage par étalonnage. | ✅ `premiere/physique-chimie/composition-systeme/` |
 | La réaction chimique et l'avancement | « Suivi et modélisation de l'évolution d'un système siège d'une transformation chimique » : avancement x, tableau d'avancement, réactif limitant, x_max/x_f, transformations totale et non totale, mélange stœchiométrique. | ✅ `premiere/physique-chimie/reaction-avancement/` |
-| L'oxydoréduction et les titrages | « Détermination d'une quantité de matière grâce à une transformation chimique » : couples oxydant/réducteur, demi-équations électroniques, réactions d'oxydoréduction ; titrage colorimétrique, équivalence. | ⬜ À faire |
+| L'oxydoréduction et les titrages | « Détermination d'une quantité de matière grâce à une transformation chimique » : couples oxydant/réducteur, demi-équations électroniques, réactions d'oxydoréduction ; titrage colorimétrique, équivalence. | ✅ `premiere/physique-chimie/oxydoreduction-titrages/` |
 | La polarité des entités | « De la structure à la polarité d'une entité » : schéma de Lewis, géométrie des entités, électronégativité, polarisation des liaisons, polarité d'une molécule. | ⬜ À faire |
 | Cohésion et solubilité | « De la structure des entités à la cohésion et à la solubilité/miscibilité d'espèces chimiques » : interactions de Van der Waals, liaison hydrogène ; dissolution des solides ioniques ; solubilité, miscibilité ; extraction par solvant ; hydrophile/lipophile, savons. | ⬜ À faire — regroupable avec la polarité en un seul gros chapitre si besoin |
 | Les molécules organiques | « Structure des entités organiques » : squelette carboné, formules brutes et semi-développées ; groupes caractéristiques et familles fonctionnelles (alcool, aldéhyde, cétone, acide carboxylique) ; nomenclature limitée ; spectroscopie infrarouge. | ⬜ À faire |

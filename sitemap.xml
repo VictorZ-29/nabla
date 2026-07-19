@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://NABLA_DOMAIN/</loc>
-    <lastmod>2026-07-18</lastmod>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://NABLA_DOMAIN/premiere/maths/derivation/</loc>
@@ -46,7 +46,11 @@
   </url>
   <url>
     <loc>https://NABLA_DOMAIN/premiere/physique-chimie/reaction-avancement/</loc>
-    <lastmod>2026-07-17</lastmod>
+    <lastmod>2026-07-19</lastmod>
+  </url>
+  <url>
+    <loc>https://NABLA_DOMAIN/premiere/physique-chimie/oxydoreduction-titrages/</loc>
+    <lastmod>2026-07-19</lastmod>
   </url>
   <url>
     <loc>https://NABLA_DOMAIN/premiere/physique-chimie/ondes-mecaniques/</loc>
