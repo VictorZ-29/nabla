@@ -138,7 +138,7 @@ straight lines from module-local data).
 |---|---|---|
 | `s1` | 1. Un clou dans le bleu | hook prose (le TP du clou ; rouille, pomme, pile, éthylotest) · lien arrière composition · static figure (bécher + clou, état initial du widget phare) — no widget, no definition |
 | `s2` | 2. Le transfert d'électrons | **widget redox-transfert** · POURQUOI ? (le bleu, c'était les ions) · DÉFINITION (oxydant/réducteur/oxydation/réduction) · DÉFINITION (couple, demi-équation) · vitrine --grande (Ox + n e⁻ = Red) · MÉTHODE (qui est oxydé, qui est réduit) · EXEMPLE RÉSOLU (la lame de zinc) · À RETENIR · **quiz s2** (3 q.) |
-| `s3` | 3. Les demi-équations | hook · **widget demi-jeu** (4 manches) · MÉTHODE (élément → O → H → charges) · EXEMPLE RÉSOLU (MnO₄⁻/Mn²⁺) · tableau (les couples à connaître) · prose (Fe dans deux couples : un rôle, pas une étiquette) · **quiz s3** (3 q.) |
+| `s3` | 3. Les demi-équations | hook · **widget demi-jeu** (4 manches) · MÉTHODE (4 étapes : élément principal → O avec H₂O → H avec H⁺ → charges avec e⁻) · tableau (la méthode en action : MnO₄⁻/Mn²⁺ construit ligne à ligne) · prose (le contrôle du correcteur) · EXEMPLE RÉSOLU (SO₄²⁻/SO₂) · tableau (les couples à connaître) · prose (Fe dans deux couples : un rôle, pas une étiquette) · **quiz s3** (3 q.) |
 | `s4` | 4. L'équation d'oxydoréduction | hook (pas de stock d'électrons libres) · **widget redox-equation** · MÉTHODE (établir l'équation) · EXEMPLE RÉSOLU (MnO₄⁻ + 5 Fe²⁺ — l'équation du §5) · **quiz s4** (3 q.) |
 | `s5` | 5. Le titrage colorimétrique | hook (l'anti-mousse, la mission de chimiste) · **widget titrage** · DÉFINITION (titrage, équivalence) · POURQUOI ? (couleur = changement de limitant) · PROPRIÉTÉ (relation à l'équivalence, lien avancement) · MÉTHODE (exploiter un titrage) · EXEMPLE RÉSOLU (les nombres du widget) · À RETENIR · **quiz s5** (4 q.) |
 | `pieges` | Les pièges classiques | 5 pièges (vocabulaire croisé · e⁻ dans l'équation finale · additionner sans égaliser · le réflexe 1 pour 1 · titrage vs étalonnage) |
@@ -382,3 +382,22 @@ session ran autonomously). Please read as author. Specific decisions:
     mouvement → énergie). Sitemap lastmod 2026-07-19 (accueil,
     avancement, this page) ; search index entry added ; PROGRAMME.md row
     ✅ and bilan 6/10. « mis à jour juillet 2026 » hand-maintained.
+16. **§3 expanded at your request** (session 2) : la MÉTHODE passe de 3
+    à 4 étapes explicites — élément principal → oxygènes avec H₂O →
+    hydrogènes avec H⁺ → charges avec e⁻ (ton ordre était le bon) —
+    avec la logique du « pourquoi » à chaque étape (l'eau est disponible
+    en solution aqueuse ; les H⁺ du milieu acide remboursent les
+    hydrogènes apportés par l'eau). Ajout d'un tableau `.tableau` qui
+    construit la demi-équation MnO₄⁻/Mn²⁺ ligne à ligne (une ligne par
+    étape), suivi d'une phrase de contrôle « comme un correcteur ».
+    L'EXEMPLE RÉSOLU (qui refaisait MnO₄⁻) est déplacé sur un couple
+    neuf, **SO₄²⁻/SO₂** (contexte E220/conservateur des vins — mon
+    choix), pour une deuxième exécution complète des 4 gestes. Deux
+    décisions à vérifier : (a) j'écris « l'élément principal » plutôt
+    que ton « espèce chimique principale » — Mn est un élément, MnO₄⁻
+    une espèce, et la distinction est justement un point de vocabulaire
+    à protéger ; (b) SO₄²⁻/SO₂ déborde légèrement de la liste usuelle de
+    Première — remplaçable par O₂/H₂O, mais ce couple-là saute l'étape
+    des H₂O (élément principal = O), donc démontre moins bien la
+    méthode. Aucun changement CSS (composants existants), pas de bump
+    de version.
