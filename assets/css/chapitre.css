@@ -1294,3 +1294,42 @@
    les boutons et explications de quiz. On rend la main à KaTeX ici, en
    dernier dans le fichier. */
 .widget .katex svg, .figure-graph .katex svg { width: 100%; height: inherit; }
+
+/* --- Variables aléatoires : la roue de la kermesse --------------------------------------------------------
+   10 secteurs équiprobables ; la teinte code la valeur du gain net X
+   (neutre = −2 €, accent léger = 0 €, accent fort = +3 €). Choisir une
+   valeur de X estompe les secteurs des autres issues (.roue-hors) —
+   regrouper les issues, c'est construire la loi. */
+
+.roue-sect { stroke: var(--bg); stroke-width: 2; }
+.roue-v0 { fill: var(--chip); }
+.roue-v2 { fill: var(--accTint); }
+.roue-v5 { fill: var(--accTint2); }
+.roue-val { font-family: var(--font-mono); font-size: 14.5px; fill: var(--text); }
+.roue-pointe { fill: var(--accent); }
+.roue-moyeu { fill: var(--bg); stroke: var(--hair); }
+.roue-hors { opacity: 0.15; }
+@media (prefers-reduced-motion: no-preference) {
+  .roue-sect, .roue-val { transition: opacity 0.25s ease; }
+}
+
+/* Boutons de jeu désactivés (plafond de 1 000 parties atteint) */
+.btn-pill:disabled { opacity: 0.45; cursor: default; }
+
+/* Le groupe de valeurs de X non utilisé (2 ou 3 lancers) est masqué :
+   display:flex l'emporterait sur l'attribut hidden (cf. .chips[hidden]) */
+.arbre-feuilles[hidden] { display: none; }
+
+/* Script Python à lire (exercice 13 — le programme demande de la lecture
+   de code, pas d'exécution : site statique) */
+.bloc-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.65;
+  background: var(--chip);
+  border-radius: var(--radius-block);
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+.bloc-code pre { margin: 0; }
