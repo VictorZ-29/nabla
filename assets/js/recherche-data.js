@@ -225,4 +225,18 @@ export const CHAPITRES = [
       { id: 's5', titre: 'La relation λ = v × T', mots: 'λ = vT longueur d’onde célérité période lambda' },
     ],
   },
+  {
+    titre: 'Lentilles, images et couleurs',
+    url: 'premiere/physique-chimie/lentilles-couleurs/',
+    niveau: 'Première',
+    matiere: 'Spé Physique-Chimie',
+    mots: 'lentille mince convergente image relation de conjugaison grandissement gamma foyer distance focale loupe synthèse additive soustractive couleur des objets lumière exercices corrigés',
+    sections: [
+      { id: 's1', titre: 'L’image sur le mur', mots: 'lentille convergente loupe image foyer F F’ distance focale axe optique' },
+      { id: 's2', titre: 'Construis l’image', mots: 'construction rayons centre optique image réelle virtuelle droite renversée' },
+      { id: 's3', titre: 'Conjugaison et grandissement', mots: 'relation de conjugaison 1/OA’ − 1/OA = 1/f’ grandissement gamma mesures algébriques' },
+      { id: 's4', titre: 'Les deux synthèses', mots: 'synthèse additive soustractive rouge vert bleu cyan magenta jaune filtres couleurs complémentaires blanc' },
+      { id: 's5', titre: 'La couleur des objets', mots: 'couleur perçue absorption diffusion transmission objet éclairé lumière colorée' },
+    ],
+  },
 ];

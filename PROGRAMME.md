@@ -111,7 +111,7 @@ aux chapitres existants (dérivation : approximation affine).**
 
 ## Physique-chimie — Première spécialité (programme 2019, toujours en vigueur)
 
-**Bilan : 6 chapitres en ligne · 10 à faire.** Découpage proposé : un
+**Bilan : 7 chapitres en ligne · 9 à faire.** Découpage proposé : un
 chapitre Nabla par sous-partie officielle (des regroupements restent
 possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 
@@ -148,7 +148,7 @@ possibles, notés ci-dessous — à arbitrer par Victor chapitre par chapitre).
 | Chapitre Nabla | Sous-partie officielle & contenus | Statut |
 |---|---|---|
 | Les ondes mécaniques | « Ondes mécaniques » : onde progressive, célérité, retard ; ondes périodiques, période, longueur d'onde, relation λ = v·T. | ✅ `premiere/physique-chimie/ondes-mecaniques/` |
-| Lentilles, images et couleurs | « La lumière : images et couleurs » : lentille mince convergente, relation de conjugaison, grandissement, image réelle/virtuelle ; couleur des objets, synthèses additive et soustractive, couleurs complémentaires. | ⬜ À faire |
+| Lentilles, images et couleurs | « La lumière : images et couleurs » : lentille mince convergente, relation de conjugaison, grandissement, image réelle/virtuelle ; couleur des objets, synthèses additive et soustractive, couleurs complémentaires. | ✅ `premiere/physique-chimie/lentilles-couleurs/` |
 | Le photon et les spectres | « Modèles ondulatoire et particulaire de la lumière » : domaines du spectre électromagnétique ; le photon, E = h·ν ; interaction lumière-matière (absorption, émission), quantification des niveaux d'énergie, spectres. | ⬜ À faire |
 
 ### Transversal
