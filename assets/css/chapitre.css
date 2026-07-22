@@ -1360,3 +1360,60 @@
 
 .lecture-formule sup, .avc-tableau sup, .feuille-btn sup, .quiz-reponse sup,
 .widget-note sub, .widget-note sup, .widget-legende sub, .widget-legende sup { line-height: 0; }
+
+/* --- Lentilles, images et couleurs (physique-chimie) : banc optique + synthèses --------------------------
+   Le banc optique partage les rôles habituels : la lentille, l'axe et
+   l'objet sont craie (le donné), les trois rayons de construction et
+   l'image sont accent (ce que la lentille fabrique) ; les prolongements
+   virtuels sont le même accent en pointillés. Les scènes de couleurs
+   utilisent le nuancier « physique » --lum-* de tokens.css (couleurs de
+   contenu, identiques dans les deux thèmes) ; toutes les étiquettes
+   texte vivent HORS des scènes noire/blanche, dans les classes mono
+   habituelles, pour garder le contraste AA dans les deux thèmes. */
+
+.opt-lentille { stroke: var(--chalk); stroke-width: var(--sw-curve); fill: none; stroke-linecap: round; }
+.opt-pointe { fill: var(--chalk); }
+.opt-tick { stroke: var(--axis); stroke-width: var(--sw-tan-mini); fill: none; }
+.opt-rayon { stroke: var(--accent); stroke-width: var(--sw-tan-mini); fill: none; }
+.opt-rayon--virtuel { stroke-dasharray: 4 5; }
+.opt-objet { stroke: var(--chalk); stroke-width: var(--sw-tan); fill: none; }
+.opt-objet-pointe { fill: var(--chalk); }
+
+.lum-fond-noir { fill: var(--lum-noir); }
+.lum-fond-blanc { fill: var(--lum-blanc); }
+.lum-contour { fill: none; stroke: var(--lum-trace); stroke-width: var(--sw-grid); stroke-dasharray: 4 5; }
+.lum-rouge { fill: var(--lum-rouge); }
+.lum-vert { fill: var(--lum-vert); }
+.lum-bleu { fill: var(--lum-bleu); }
+.lum-cyan { fill: var(--lum-cyan); }
+.lum-magenta { fill: var(--lum-magenta); }
+.lum-jaune { fill: var(--lum-jaune); }
+.lum-blanc { fill: var(--lum-blanc); }
+.lum-noir { fill: var(--lum-noir); }
+
+/* le « ? » sur le maillot mystère (toujours sur la scène noire) et la
+   pastille-témoin dessinée en SVG hors de la scène */
+.lum-question {
+  fill: var(--lum-blanc);
+  font-family: var(--font-mono);
+  font-size: 24px;
+}
+.lum-puce-svg { stroke: var(--hair); stroke-width: 1; }
+
+/* pastille de couleur dans les boutons, chips et corrigés */
+.lum-puce {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  border: 1px solid var(--hair);
+  vertical-align: -1px;
+}
+.lum-puce--rouge { background: var(--lum-rouge); }
+.lum-puce--vert { background: var(--lum-vert); }
+.lum-puce--bleu { background: var(--lum-bleu); }
+.lum-puce--cyan { background: var(--lum-cyan); }
+.lum-puce--magenta { background: var(--lum-magenta); }
+.lum-puce--jaune { background: var(--lum-jaune); }
+.lum-puce--blanc { background: var(--lum-blanc); }
+.lum-puce--noir { background: var(--lum-noir); }

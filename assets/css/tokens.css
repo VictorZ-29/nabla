@@ -30,6 +30,22 @@
   --radius-card: 12px;
   --radius-block: 10px;
   --radius-chip: 6px;
+
+  /* --- Couleurs « physiques » (chapitre lentilles & couleurs) ----------
+     Lumières et filtres de la synthèse des couleurs : ce sont des
+     couleurs de CONTENU (le rouge d'une lampe rouge), pas des couleurs
+     de thème — identiques en sombre et en clair, jamais utilisées pour
+     du texte. Hors de ce nuancier, la règle reste : aucune couleur codée
+     en dur hors tokens. */
+  --lum-rouge: #E23B3B;
+  --lum-vert: #35A853;
+  --lum-bleu: #3563E9;
+  --lum-cyan: #2BB8C9;
+  --lum-magenta: #C93BC0;
+  --lum-jaune: #E9C53B;
+  --lum-blanc: #F5F2E9;
+  --lum-noir: #101010;
+  --lum-trace: #8A8677;   /* contours pointillés des lampes/filtres éteints */
 }
 
 /* --------------------------------------------------------------------------
