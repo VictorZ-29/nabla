@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Thème avant le premier rendu (pas de flash) : sombre pour tout le monde,
+   sauf choix explicite « clair » enregistré via le toggle (localStorage). */
+(function () {
+  try {
+    if (localStorage.getItem('nabla-theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch (e) {}
+})();
+</script>
+
+<title>Lentilles, images et couleurs — Première Spé Physique-Chimie | Nabla</title>
+<meta name="description" content="Comprends vraiment les lentilles et la couleur : construis l'image d'un objet avec les trois rayons, exploite la relation de conjugaison et le grandissement (signes compris), mélange les lumières et prévois la couleur d'un objet selon son éclairage, avec des graphiques que tu manipules toi-même et 15 exercices corrigés pas à pas. Cours de Première spé physique-chimie, gratuit.">
+<link rel="canonical" href="https://NABLA_DOMAIN/premiere/physique-chimie/lentilles-couleurs/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lentilles, images et couleurs — Première Spé Physique-Chimie | Nabla">
+<meta property="og:description" content="Construction de l'image, relation de conjugaison, grandissement, synthèses additive et soustractive, couleur des objets : un cours interactif où tu déplaces l'objet et mélanges les lumières toi-même, et 15 exercices corrigés.">
+<meta property="og:url" content="https://NABLA_DOMAIN/premiere/physique-chimie/lentilles-couleurs/">
+<meta property="og:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Lentilles, images et couleurs — Première Spé Physique-Chimie | Nabla">
+<meta name="twitter:description" content="Lentille convergente, conjugaison, grandissement, synthèses des couleurs, couleur des objets : cours interactif et 15 exercices corrigés.">
+<meta name="twitter:image" content="https://NABLA_DOMAIN/assets/og/nabla-og.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Lentilles, images et couleurs — cours interactif et exercices corrigés",
+  "description": "Chapitre interactif de Première spé physique-chimie sur la lumière : lentille mince convergente, construction de l'image par les trois rayons, relation de conjugaison, grandissement, images réelles et virtuelles, synthèse additive, synthèse soustractive, couleurs complémentaires, couleur des objets. 15 exercices corrigés.",
+  "url": "https://NABLA_DOMAIN/premiere/physique-chimie/lentilles-couleurs/",
+  "inLanguage": "fr",
+  "isAccessibleForFree": true,
+  "learningResourceType": "fiche de révision interactive",
+  "educationalLevel": "Première générale — spécialité physique-chimie",
+  "teaches": "Lentille mince convergente, construction de l'image, relation de conjugaison, grandissement, image réelle et image virtuelle, synthèse additive, synthèse soustractive, couleurs complémentaires, couleur des objets (absorption, diffusion, transmission)",
+  "audience": { "@type": "EducationalAudience", "educationalRole": "student" },
+  "provider": { "@type": "Organization", "name": "Nabla", "url": "https://NABLA_DOMAIN/" }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=STIX+Two+Text:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<!-- Rendu découpé bloc par bloc (une frame chacun) : toutes les formules
+     rendues d'un coup figeaient la page ~1 s sur les machines modestes ;
+     découpé, la pire tâche est divisée par 4. Le passage final sur <body>
+     attrape ce qui vivrait hors des sections. -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="(function(){var o={delimiters:[{left:'$$',right:'$$',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false};var q=Array.prototype.slice.call(document.querySelectorAll('.chap-section')).reduce(function(a,s){return a.concat(Array.prototype.slice.call(s.children))},[]);q.push(document.body);(function pas(){var s=q.shift();if(!s)return;renderMathInElement(s,o);requestAnimationFrame(pas)})()})();"></script>
+
+<link rel="icon" type="image/svg+xml" href="../../../assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicon-32.png">
+<link rel="stylesheet" href="../../../assets/css/tokens.css?v=18">
+<link rel="stylesheet" href="../../../assets/css/base.css?v=18">
+<link rel="stylesheet" href="../../../assets/css/chapitre.css?v=18">
+
+<script type="module" src="../../../assets/js/theme.js"></script>
+<script type="module" src="../../../assets/js/sommaire.js"></script>
+<script type="module" src="../../../assets/js/corrige.js"></script>
+<script type="module" src="../../../assets/js/quiz.js"></script>
+<script type="module" src="../../../assets/js/widgets/banc-optique.js"></script>
+<script type="module" src="../../../assets/js/widgets/couleur-synthese.js"></script>
+<script type="module" src="../../../assets/js/widgets/stoechio-jeu.js"></script>
+<script defer data-domain="NABLA_DOMAIN" src="https://plausible.io/js/script.js"></script>
+</head>
+<body data-chapitre="lentilles">
+
+<header class="site-header">
+  <a class="marque" href="../../../">
+    <svg class="logo-nabla" viewBox="0 0 32 32" width="22" height="22" aria-hidden="true">
+      <path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"></path>
+    </svg>
+    <span class="marque-nom">Nabla</span>
+  </a>
+  <nav class="nav-site" aria-label="Navigation principale">
+    <a href="../../../#chapitres">Chapitres</a>
+    <a href="../../../#apropos">À&nbsp;propos</a>
+    <button type="button" class="btn-pill js-toggle-theme">☀︎ clair</button>
+  </nav>
+</header>
+
+<section class="chap-entete">
+  <div class="fil-ariane">
+    <a href="../../../">Accueil</a>
+    <span aria-hidden="true">/</span>
+    <span>Première · Spé Physique-Chimie</span>
+  </div>
+  <h1>Lentilles, images et couleurs</h1>
+  <p class="chap-savoir"><span class="savoir-tag">CE QUE TU DOIS SAVOIR FAIRE — </span>construire l'image d'un objet par une lentille convergente avec les trois rayons, exploiter la relation de conjugaison et le grandissement (signes compris), distinguer image réelle et image virtuelle, prévoir le résultat d'une synthèse additive ou soustractive, et la couleur perçue d'un objet selon la lumière qui l'éclaire.</p>
+  <div class="chap-meta">≈ 60 min de travail · 15 exercices corrigés · mis à jour juillet 2026</div>
+</section>
+
+<div class="chap-layout">
+
+  <aside class="sommaire">
+    <div class="sommaire-titre" id="sommaire-titre">SOMMAIRE</div>
+    <nav class="sommaire-liens js-sommaire-liens" aria-labelledby="sommaire-titre">
+      <a href="#s1">1. L'image sur le mur</a>
+      <a href="#s2">2. Construis l'image</a>
+      <a href="#s3">3. Conjugaison et grandissement</a>
+      <a href="#s4">4. Les deux synthèses</a>
+      <a href="#s5">5. La couleur des objets</a>
+      <a href="#pieges">Les pièges classiques</a>
+      <a href="#essentiel">L'essentiel en 5 lignes</a>
+      <a href="#ex">Exercices — 15 corrigés</a>
+      <a href="#bac">Vers le Bac</a>
+    </nav>
+  </aside>
+
+  <main class="chap-contenu">
+
+    <details class="sommaire-mobile js-sommaire-mobile">
+      <summary>SOMMAIRE <span aria-hidden="true">▾</span></summary>
+      <nav class="sommaire-liens js-sommaire-liens" aria-label="Sommaire">
+        <a href="#s1">1. L'image sur le mur</a>
+        <a href="#s2">2. Construis l'image</a>
+        <a href="#s3">3. Conjugaison et grandissement</a>
+        <a href="#s4">4. Les deux synthèses</a>
+        <a href="#s5">5. La couleur des objets</a>
+        <a href="#pieges">Les pièges classiques</a>
+        <a href="#essentiel">L'essentiel en 5 lignes</a>
+        <a href="#ex">Exercices — 15 corrigés</a>
+        <a href="#bac">Vers le Bac</a>
+      </nav>
+    </details>
+
+    <section id="s1" class="chap-section">
+      <h2>1. L'image sur le mur</h2>
+      <p class="prose">Prends une loupe — n'importe laquelle, celle du tiroir de la cuisine — et place-toi dos à la fenêtre, face à un mur clair. Approche, recule… et à une certaine distance, il apparaît sur le mur&nbsp;: un petit rectangle net, en couleurs, avec les arbres, les immeubles, les nuages qui bougent. La fenêtre entière, projetée sur ton mur. Un détail cloche&nbsp;: <strong>tout est à l'envers</strong>. Le ciel en bas, la rue en haut.</p>
+      <p class="prose">Ce petit miracle a un nom&nbsp;: une <strong>image</strong>. La loupe a attrapé la lumière qui venait de la fenêtre et l'a réorganisée, rayon par rayon, pour reformer la scène ailleurs. C'est exactement ce que fait l'objectif d'un téléphone sur son capteur, et le vidéoprojecteur de ta salle de classe sur l'écran — à l'envers aussi, d'ailleurs, on verra pourquoi. Deux questions vont nous occuper&nbsp;: <em>où</em> se forme l'image, et <em>quelle taille</em> elle a.</p>
+      <p class="prose">Le vocabulaire, tu l'as déjà croisé en Seconde. Une loupe est une <strong>lentille mince convergente</strong>&nbsp;; sur les schémas, on la dessine comme un trait vertical à double flèche, traversé par l'<strong>axe optique</strong>. La scène qu'on photographie, on la résume en une flèche AB posée sur l'axe. Voici la situation de départ, réglée comme la loupe devant la fenêtre&nbsp;:</p>
+
+      <figure class="figure-graph">
+        <svg viewBox="0 0 640 300" role="img" aria-label="Un banc optique : une flèche objet AB à gauche, une lentille convergente au centre, et l'image A′B′ renversée et plus petite à droite ; trois rayons partis de B se croisent exactement en B′">
+          <path class="g-grid" d="M16.8 0L16.8 300M50.5 0L50.5 300M84.2 0L84.2 300M117.9 0L117.9 300M151.6 0L151.6 300M185.3 0L185.3 300M218.9 0L218.9 300M286.3 0L286.3 300M320.0 0L320.0 300M353.7 0L353.7 300M387.4 0L387.4 300M421.1 0L421.1 300M454.7 0L454.7 300M488.4 0L488.4 300M522.1 0L522.1 300M555.8 0L555.8 300M589.5 0L589.5 300M623.2 0L623.2 300"></path>
+          <path class="g-axis" d="M0 150.0L640 150.0"></path>
+          <path class="opt-rayon" d="M50.5 112.5L640.0 221.9"></path>
+          <path class="opt-rayon" d="M50.5 112.5L252.6 112.5L640.0 328.1"></path>
+          <path class="opt-rayon" d="M50.5 112.5L252.6 168.8L640.0 168.8"></path>
+          <path class="opt-lentille" d="M252.6 18.8L252.6 281.3"></path>
+          <path class="opt-pointe" d="M252.6 9.8L245.6 23.8L259.6 23.8Z"></path>
+          <path class="opt-pointe" d="M252.6 290.3L245.6 276.3L259.6 276.3Z"></path>
+          <path class="opt-tick" d="M185.3 140.0L185.3 160.0"></path>
+          <path class="opt-tick" d="M320.0 140.0L320.0 160.0"></path>
+          <text class="etiquette-math" font-size="16" x="185.3" y="178.8" text-anchor="middle">F</text>
+          <text class="etiquette-math" font-size="16" x="320.0" y="178.8" text-anchor="middle">F′</text>
+          <text class="etiquette-math etiquette-math--muted" font-size="16" x="261.6" y="178.8">O</text>
+          <path class="opt-objet" d="M50.5 150L50.5 123.5"></path>
+          <path class="opt-objet-pointe" d="M50.5 112.5L46.0 123.5L55.0 123.5Z"></path>
+          <text class="etiquette-math" font-size="15" x="50.5" y="98.8" text-anchor="middle">B</text>
+          <text class="etiquette-math" font-size="15" x="50.5" y="171.3" text-anchor="middle">A</text>
+          <path class="g-courbe-derivee" d="M353.7 150L353.7 157.8"></path>
+          <path class="vec-pointe--accent" d="M353.7 168.8L349.2 157.8L358.2 157.8Z"></path>
+          <text class="etiquette-math etiquette-math--accent" font-size="15" x="353.7" y="130.0" text-anchor="middle">A′</text>
+          <text class="etiquette-math etiquette-math--accent" font-size="15" x="353.7" y="193.8" text-anchor="middle">B′</text>
+        </svg>
+        <figcaption>L'objet AB (la fenêtre), la lentille (la loupe), et de l'autre côté&nbsp;: l'image A′B′ — renversée, plus petite, exactement là où les rayons se recroisent. Chaque carreau vaut 10&nbsp;cm. À toi de jouer juste en dessous.</figcaption>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">RAPPEL DE SECONDE</span>
+        <p>Une <strong>lentille mince convergente</strong> dévie les rayons lumineux qui la traversent pour les faire converger. Elle a un <strong>centre optique</strong> O, un <strong>foyer objet</strong> F et un <strong>foyer image</strong> F′, symétriques par rapport à O. La distance <strong>\(f' = OF'\)</strong> est sa <strong>distance focale</strong>&nbsp;: ici, \(f' = 20\)&nbsp;cm.</p>
+      </div>
+    </section>
+
+    <section id="s2" class="chap-section">
+      <h2>2. Trois rayons suffisent&nbsp;: construis l'image</h2>
+      <p class="prose">Des rayons, il en part une infinité de chaque point de l'objet. La bonne nouvelle, c'est qu'il suffit d'en suivre <em>deux ou trois</em>, bien choisis, pour savoir où tous les autres se retrouvent. Fais-le toi-même&nbsp;: déplace l'objet le long de l'axe et regarde ce que deviennent l'image et les trois rayons. Une consigne&nbsp;: approche l'objet de la lentille, doucement, jusqu'à passer le foyer F — et surveille ce qui se passe autour.</p>
+
+      <figure class="widget" id="widget-banc" data-widget="banc-optique" data-nom="banc" data-f="20" data-hauteur="6" data-oa-init="-60" data-domaine="-70,-5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Le banc optique</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Positions préréglées de l'objet">
+            <button type="button" data-oa="-60" aria-pressed="false">loin</button>
+            <button type="button" data-oa="-40" aria-pressed="false">à 2F</button>
+            <button type="button" data-oa="-30" aria-pressed="false">entre 2F et F</button>
+            <button type="button" data-oa="-10" aria-pressed="false">tout près</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 300" aria-label="Un banc optique interactif : l'objet AB glisse le long de l'axe optique, les trois rayons de construction et l'image A′B′ suivent en direct ; l'image se renverse ou se redresse selon la position de l'objet"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">position de l'objet&nbsp;: OA = <span class="js-oa">−60</span>&nbsp;cm</span>
+            <input type="range" class="js-curseur" min="-70" max="-5" step="1" value="-60" aria-label="Position algébrique de l'objet sur l'axe optique, en centimètres">
+          </div>
+          <div class="chips">
+            <span class="chip chip--accent js-oap"></span>
+            <span class="chip js-gamma"></span>
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-reelle">Les trois rayons partis de B se recroisent en un point unique&nbsp;: B′. L'image est <em>réelle</em>&nbsp;: place un écran à cet endroit, elle s'y affiche. Approche l'objet de F et regarde-la reculer.</p>
+            <p class="widget-legende js-leg-explosion" hidden>Si près du foyer, l'image devient immense et part très loin — le cadre ne suffit plus, mais les nombres continuent de la suivre. Un tout petit pas de plus…</p>
+            <p class="widget-legende js-leg-focale" hidden>Objet exactement au foyer&nbsp;: les rayons ressortent parallèles, ils ne se recroisent jamais. Pas d'image du tout — c'est la frontière entre les deux mondes.</p>
+            <p class="widget-legende js-leg-loupe" hidden>Passé le foyer, plus aucun rayon ne se croise à droite&nbsp;: ce sont leurs <em>prolongements</em> (pointillés) qui se croisent à gauche. L'image est <em>virtuelle</em>, droite et agrandie — impossible à projeter sur un écran, mais ton œil la voit à travers la lentille. C'est la loupe.</p>
+          </div>
+        </div>
+        <div class="widget-note">Échelle&nbsp;: un carreau = 10&nbsp;cm&nbsp;; f′ = 20&nbsp;cm&nbsp;; l'objet AB mesure 6,0&nbsp;cm. Les positions OA et OA′ sont des mesures algébriques&nbsp;: négatives à gauche de O, positives à droite.</div>
+      </figure>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>Pourquoi trois rayons suffisent-ils&nbsp;? Parce que <em>tous</em> les rayons issus de B — les milliers qui traversent la lentille — se recroisent au même point B′. Les trois qu'on trace ne sont pas spéciaux pour la lumière&nbsp;; ils sont spéciaux pour <em>nous</em>, parce qu'on sait les dessiner sans calcul. Deux d'entre eux donnent déjà B′&nbsp;: le troisième sert de vérification.</p>
+      </div>
+
+      <p class="prose">Ce que tu viens de faire à la main, voilà comment on le trace sur une copie.</p>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CONSTRUIRE L'IMAGE D'UN OBJET AB</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Depuis B (le sommet de l'objet), trace les rayons que tu sais dessiner&nbsp;: celui qui passe par <strong>O</strong> traverse <em>sans être dévié</em>&nbsp;; celui qui arrive <strong>parallèle à l'axe</strong> ressort en passant par <strong>F′</strong>&nbsp;; celui qui passe par <strong>F</strong> ressort <em>parallèle à l'axe</em>.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Leur point d'intersection après la lentille est <strong>B′</strong>, l'image de B. S'ils ne se croisent pas à droite, prolonge-les en pointillés vers la gauche&nbsp;: l'image est virtuelle.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">A′ est au pied de B′ sur l'axe optique. Lis la nature de l'image&nbsp;: réelle ou virtuelle, droite ou renversée, agrandie ou réduite.</span></div>
+      </div>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Une image est <strong>réelle</strong> quand les rayons se croisent vraiment&nbsp;: on peut la recueillir sur un écran (capteur, mur, rétine). Elle est <strong>virtuelle</strong> quand seuls leurs <em>prolongements</em> se croisent&nbsp;: aucun écran ne peut l'attraper, mais un œil qui regarde à travers la lentille la voit — c'est l'image que fabrique une loupe.</p>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LA CONSTRUCTION SUR PAPIER</div>
+        <p class="exemple-enonce">Une lentille a une distance focale f′ = 2,0&nbsp;cm (échelle du schéma&nbsp;: 1 carreau = 1&nbsp;cm). Un objet AB de 1,0&nbsp;cm est placé à 3,0&nbsp;cm devant la lentille. Construis l'image et donne sa nature.</p>
+        <p><span class="etape-label">Étape 1 — </span>place O, puis F à 2 carreaux à gauche et F′ à 2 carreaux à droite&nbsp;; dessine AB debout sur l'axe, 3 carreaux à gauche de O. Depuis B, trace&nbsp;: le rayon par O, tout droit&nbsp;; le rayon parallèle à l'axe, qui replonge par F′&nbsp;; le rayon par F, qui ressort parallèle.</p>
+        <p><span class="etape-label">Étape 2 — </span>les trois se croisent en un même point sous l'axe, 6 carreaux à droite de la lentille&nbsp;: c'est B′, donc A′ juste au-dessus, sur l'axe.</p>
+        <p class="conclusion">Conclusion&nbsp;: image réelle (les rayons se croisent vraiment), renversée (B′ sous l'axe), agrandie (2,0&nbsp;cm au lieu de 1,0&nbsp;cm). Vérifie sur le graphique&nbsp;: c'est le préréglage «&nbsp;entre 2F et F&nbsp;», à l'échelle 10 près.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s2">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions, trente secondes</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Le rayon qui passe par le centre optique O…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">traverse la lentille sans être dévié</button>
+              <button type="button" class="quiz-reponse">ressort en passant par F′</button>
+              <button type="button" class="quiz-reponse">ressort parallèle à l'axe optique</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> par O, tout droit. «&nbsp;Ressort par F′&nbsp;», c'est le rayon arrivé <em>parallèle à l'axe</em>&nbsp;; «&nbsp;ressort parallèle&nbsp;», c'est celui passé <em>par F</em>. Trois rayons, trois règles — ne les mélange pas.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>On cache la moitié inférieure de la lentille avec un carton. L'image sur l'écran…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">perd sa moitié inférieure</button>
+              <button type="button" class="quiz-reponse">devient floue</button>
+              <button type="button" class="quiz-reponse">reste entière, mais moins lumineuse</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> chaque point de l'image reçoit des rayons de <em>toute</em> la surface de la lentille. En cacher la moitié supprime la moitié des rayons — pour chaque point&nbsp;: l'image entière reste, deux fois moins lumineuse. Les trois rayons du schéma ne sont qu'un échantillon.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Un objet est placé entre le foyer F et la lentille. Son image est…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">réelle et renversée</button>
+              <button type="button" class="quiz-reponse">virtuelle, droite et agrandie</button>
+              <button type="button" class="quiz-reponse">inexistante</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> passé le foyer, les rayons ressortent en divergeant&nbsp;: seuls leurs prolongements se croisent, à gauche — image virtuelle, droite, agrandie. C'est le réglage «&nbsp;tout près&nbsp;» du graphique, et c'est comme ça que ta loupe grossit. «&nbsp;Inexistante&nbsp;», c'est uniquement l'objet <em>pile au foyer</em>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s3" class="chap-section">
+      <h2>3. Conjugaison et grandissement&nbsp;: l'image par le calcul</h2>
+      <p class="prose">La construction donne l'image… sur un schéma à l'échelle, avec une règle. Un opticien, lui, calcule. Il existe une formule qui relie la position de l'objet, celle de l'image et la distance focale — et tu vas la <em>voir tenir</em> avant de l'écrire. Sous le banc, trois nombres&nbsp;: déplace l'objet où tu veux, et regarde la différence \(\dfrac{1}{\overline{OA'}} - \dfrac{1}{\overline{OA}}\) retomber, à chaque position, exactement sur le même nombre.</p>
+
+      <figure class="widget" id="widget-formule" data-widget="banc-optique" data-nom="formule" data-f="20" data-hauteur="6" data-oa-init="-60" data-domaine="-70,-5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Une différence qui ne bouge jamais</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Positions préréglées de l'objet">
+            <button type="button" data-oa="-60" aria-pressed="false">−60</button>
+            <button type="button" data-oa="-40" aria-pressed="false">−40</button>
+            <button type="button" data-oa="-30" aria-pressed="false">−30</button>
+            <button type="button" data-oa="-10" aria-pressed="false">−10</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 300" aria-label="Le même banc optique interactif ; sous le graphique, la relation de conjugaison est recalculée en direct à chaque position de l'objet et retombe toujours sur un vingtième"></svg>
+        <div class="widget-pied">
+          <div class="curseur-ligne curseur-ligne--libelle">
+            <span class="curseur-legende">position de l'objet&nbsp;: OA = <span class="js-oa">−60</span>&nbsp;cm</span>
+            <input type="range" class="js-curseur" min="-70" max="-5" step="1" value="-60" aria-label="Position algébrique de l'objet sur l'axe optique, en centimètres">
+          </div>
+          <div class="lecture-formule js-ligne1" aria-live="polite"></div>
+          <div class="lecture-formule js-ligne2"></div>
+          <div class="chips">
+            <span class="chip chip--accent">1/f′ = 0,050 cm⁻¹</span>
+            <span class="chip js-oap"></span>
+            <span class="chip js-gamma"></span>
+            <span class="chip js-etat" aria-live="polite"></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-reelle">Bouge l'objet&nbsp;: OA change, OA′ change… mais la première ligne retombe toujours sur 0,050 = 1/f′. C'est la signature de la lentille — elle ne dépend pas de l'objet.</p>
+            <p class="widget-legende js-leg-explosion" hidden>Près du foyer, 1/OA se rapproche de −1/f′… et 1/OA′ se rapproche de zéro&nbsp;: OA′ file vers l'infini. La formule raconte exactement ce que le banc t'a montré.</p>
+            <p class="widget-legende js-leg-focale" hidden>Au foyer, 1/OA vaut exactement −1/f′&nbsp;: la somme est nulle, et un inverse nul, c'est une image… nulle part. La formule dit «&nbsp;pas d'image&nbsp;» toute seule.</p>
+            <p class="widget-legende js-leg-loupe" hidden>Côté loupe, OA′ devient négatif — l'image passe à gauche — et γ devient positif&nbsp;: droite. Les signes de la formule racontent la nature de l'image sans schéma.</p>
+          </div>
+        </div>
+        <div class="widget-note">Mêmes réglages qu'à la section 2&nbsp;: f′ = 20&nbsp;cm, AB = 6,0&nbsp;cm. Les inverses sont arrondis à trois décimales — et leur différence retombe exactement sur 0,050 à chaque position entière.</div>
+      </figure>
+
+      <p class="prose">Avant d'écrire la formule proprement, un mot sur les signes — ce n'est pas un caprice, c'est ce qui lui permet de tout raconter d'un coup.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Sur l'axe optique, orienté dans le sens de la lumière et d'origine O, on repère chaque point par une <strong>mesure algébrique</strong>&nbsp;: \(\overline{OA}\) est <em>négative</em> si A est à gauche de O (objet réel), <em>positive</em> à droite. De même pour \(\overline{OA'}\), et verticalement pour les tailles \(\overline{AB}\) et \(\overline{A'B'}\) (négatives vers le bas). Un objet placé 60&nbsp;cm devant la lentille, c'est \(\overline{OA} = -60\)&nbsp;cm.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — RELATION DE CONJUGAISON</div>
+        <p>Pour une lentille mince convergente de distance focale \(f'\), les positions de l'objet et de l'image sont liées par&nbsp;:</p>
+      </div>
+
+      <div class="math-vitrine math-vitrine--grande">$$\frac{1}{\overline{OA'}} - \frac{1}{\overline{OA}} = \frac{1}{f'}$$</div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — GRANDISSEMENT</div>
+        <p>Le <strong>grandissement</strong> \(\gamma\) (gamma) compare l'image à l'objet&nbsp;:</p>
+        <div class="math-vitrine">$$\gamma = \frac{\overline{A'B'}}{\overline{AB}} = \frac{\overline{OA'}}{\overline{OA}}$$</div>
+        <p>Sans unité. Son <strong>signe</strong> dit le sens&nbsp;: \(\gamma < 0\), image renversée&nbsp;; \(\gamma > 0\), image droite. Sa <strong>valeur absolue</strong> dit la taille&nbsp;: \(|\gamma| > 1\), agrandie&nbsp;; \(|\gamma| < 1\), réduite.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — TROUVER L'IMAGE PAR LE CALCUL</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Écris les données <em>en mesures algébriques</em>&nbsp;: un objet réel est à gauche, donc \(\overline{OA} < 0\). C'est l'étape où tout se joue.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Isole l'inconnue&nbsp;: \(\dfrac{1}{\overline{OA'}} = \dfrac{1}{f'} + \dfrac{1}{\overline{OA}}\), calcule, puis <em>inverse</em> le résultat pour obtenir \(\overline{OA'}\).</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Calcule \(\gamma = \dfrac{\overline{OA'}}{\overline{OA}}\) et conclus&nbsp;: signe de \(\overline{OA'}\) → réelle (+) ou virtuelle (−)&nbsp;; signe de \(\gamma\) → droite ou renversée&nbsp;; \(|\gamma|\) → taille (et \(\overline{A'B'} = \gamma \times \overline{AB}\)).</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE RÉGLAGE DE DÉPART DU BANC</div>
+        <p class="exemple-enonce">La lentille du chapitre&nbsp;: f′ = 20&nbsp;cm. L'objet AB, de taille 6,0&nbsp;cm, est placé 60&nbsp;cm devant la lentille. Position, taille et nature de l'image&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>mesures algébriques&nbsp;: \(\overline{OA} = -60\)&nbsp;cm (objet à gauche), \(f' = +20\)&nbsp;cm.</p>
+        <p><span class="etape-label">Étape 2 — </span>\(\dfrac{1}{\overline{OA'}} = \dfrac{1}{20} + \dfrac{1}{-60} = \dfrac{3}{60} - \dfrac{1}{60} = \dfrac{2}{60} = \dfrac{1}{30}\), donc \(\overline{OA'} = +30\)&nbsp;cm&nbsp;: image réelle, 30&nbsp;cm derrière la lentille.</p>
+        <p><span class="etape-label">Étape 3 — </span>\(\gamma = \dfrac{30}{-60} = -0{,}5\)&nbsp;: image renversée, deux fois plus petite&nbsp;; \(\overline{A'B'} = -0{,}5 \times 6{,}0 = -3{,}0\)&nbsp;cm.</p>
+        <p class="conclusion">Conclusion&nbsp;: image réelle à 30&nbsp;cm, renversée, de 3,0&nbsp;cm — exactement ce que le banc affiche au réglage «&nbsp;−60&nbsp;». Le calcul et le dessin doivent toujours tomber d'accord&nbsp;: c'est ton contrôle-réflexe.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>\(\dfrac{1}{\overline{OA'}} - \dfrac{1}{\overline{OA}} = \dfrac{1}{f'}\) et \(\gamma = \dfrac{\overline{OA'}}{\overline{OA}}\), avec \(\overline{OA} < 0\) pour un objet réel. Les <em>signes</em> racontent la nature de l'image&nbsp;; oublie-les et tout s'écroule.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s3">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Quatre questions sur les deux formules</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Un objet est posé 40&nbsp;cm devant une lentille. Dans la relation de conjugaison, \(\overline{OA}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">+40 cm</button>
+              <button type="button" class="quiz-reponse">−40 cm</button>
+              <button type="button" class="quiz-reponse">40 cm, le signe n'a pas d'importance</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> l'objet est à gauche de O, donc \(\overline{OA} = -40\)&nbsp;cm. Le signe a toute l'importance du monde&nbsp;: avec +40, la formule te fabrique une image au mauvais endroit — c'est LE piège du chapitre.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>f′ = 10&nbsp;cm et \(\overline{OA} = -30\)&nbsp;cm. Alors \(\overline{OA'}\) vaut…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">+15 cm</button>
+              <button type="button" class="quiz-reponse">−15 cm</button>
+              <button type="button" class="quiz-reponse">+7,5 cm</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> \(\dfrac{1}{\overline{OA'}} = \dfrac{1}{10} + \dfrac{1}{-30} = \dfrac{2}{30}\), donc \(\overline{OA'} = +15\)&nbsp;cm. Trouver 7,5, c'est avoir <em>ajouté</em> \(\dfrac{1}{30}\) (signe oublié)&nbsp;; −15 sort d'une soustraction dans le mauvais sens.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pour une image, γ = −0,5 signifie…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">renversée et deux fois plus grande</button>
+              <button type="button" class="quiz-reponse">droite et deux fois plus petite</button>
+              <button type="button" class="quiz-reponse">renversée et deux fois plus petite</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> deux informations indépendantes&nbsp;: le signe − dit «&nbsp;renversée&nbsp;», la valeur 0,5 dit «&nbsp;moitié de la taille&nbsp;». Le signe ne parle jamais de taille, et la taille ne parle jamais de sens.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q4</span>Une image virtuelle…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">se voit à travers la lentille, mais ne se projette pas sur un écran</button>
+              <button type="button" class="quiz-reponse">peut se recueillir sur un écran, comme les autres</button>
+              <button type="button" class="quiz-reponse">n'existe pas vraiment — c'est une erreur de calcul</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> aucun rayon ne se croise vraiment là où elle est&nbsp;: un écran n'y attrape rien. Mais ton œil, lui, la voit très bien à travers la lentille — tu l'as fait à chaque fois que tu as utilisé une loupe. \(\overline{OA'} < 0\) n'est pas une erreur&nbsp;: c'est une information.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s4" class="chap-section">
+      <h2>4. Mélanger les lumières&nbsp;: les deux synthèses</h2>
+      <p class="prose">Deuxième moitié du chapitre&nbsp;: la couleur. Regarde ton écran de très près — à la loupe, justement. Chaque pixel blanc est en réalité un trio de minuscules lampes&nbsp;: une rouge, une verte, une bleue. Ton écran ne sait fabriquer <em>que</em> ces trois lumières-là, et pourtant il t'affiche des couchers de soleil. Au concert, même principe&nbsp;: trois projecteurs suffisent à peindre la scène de toutes les couleurs.</p>
+      <p class="prose">Comment trois lumières en font-elles des millions&nbsp;? En s'additionnant. Fais l'expérience&nbsp;: allume les lampes une à une, superpose-les — puis passe côté filtres, où c'est tout l'inverse.</p>
+
+      <figure class="widget" id="widget-syntheses" data-widget="couleur-synthese" data-nom="syntheses">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">Lampes ou filtres</span>
+          </div>
+          <div class="segmente" role="group" aria-label="Choix de la synthèse">
+            <button type="button" class="js-mode" data-mode="add" aria-pressed="true">LAMPES</button>
+            <button type="button" class="js-mode" data-mode="sous" aria-pressed="false">FILTRES</button>
+          </div>
+        </div>
+        <svg class="widget-graph" viewBox="0 0 640 280" aria-label="Trois disques de lumière colorée qui se recouvrent : sur la scène noire, les lampes rouge, verte et bleue s'additionnent ; sur l'écran blanc, les filtres cyan, magenta et jaune se retranchent"></svg>
+        <div class="widget-pied">
+          <div class="lecture-controles js-controles-add">
+            <button type="button" class="feuille-btn js-lampe" data-c="r" data-couleur="rouge" aria-pressed="true"><span class="lum-puce lum-puce--rouge" aria-hidden="true"></span> lampe rouge</button>
+            <button type="button" class="feuille-btn js-lampe" data-c="v" data-couleur="verte" aria-pressed="false"><span class="lum-puce lum-puce--vert" aria-hidden="true"></span> lampe verte</button>
+            <button type="button" class="feuille-btn js-lampe" data-c="b" data-couleur="bleue" aria-pressed="false"><span class="lum-puce lum-puce--bleu" aria-hidden="true"></span> lampe bleue</button>
+          </div>
+          <div class="lecture-controles js-controles-sous" hidden>
+            <button type="button" class="feuille-btn js-filtre" data-c="c" data-couleur="cyan" aria-pressed="true"><span class="lum-puce lum-puce--cyan" aria-hidden="true"></span> filtre cyan</button>
+            <button type="button" class="feuille-btn js-filtre" data-c="m" data-couleur="magenta" aria-pressed="false"><span class="lum-puce lum-puce--magenta" aria-hidden="true"></span> filtre magenta</button>
+            <button type="button" class="feuille-btn js-filtre" data-c="j" data-couleur="jaune" aria-pressed="false"><span class="lum-puce lum-puce--jaune" aria-hidden="true"></span> filtre jaune</button>
+          </div>
+          <div class="lecture-formule js-resultat" aria-live="polite"></div>
+          <div class="chips">
+            <span class="chip chip--accent js-chip-groupe"><span class="lum-puce js-puce" aria-hidden="true"></span> <span class="js-chip"></span></span>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill js-reset">↺ réinitialiser</button>
+          </div>
+          <div class="js-legendes" aria-live="polite">
+            <p class="widget-legende js-leg-blanc" hidden>Rouge + vert + bleu = blanc. Le blanc n'est pas une couleur «&nbsp;pure&nbsp;»&nbsp;: c'est la somme des trois. Ton écran fait ça sur chaque pixel, en ce moment même.</p>
+            <p class="widget-legende js-leg-noir" hidden>Les trois filtres ensemble&nbsp;: chacun retire sa part, il ne reste rien. Le noir des encres d'imprimante, c'est exactement ça — cyan + magenta + jaune.</p>
+          </div>
+        </div>
+        <div class="widget-note">Côté LAMPES, la scène est noire et chaque lampe <em>ajoute</em> sa lumière. Côté FILTRES, l'écran reçoit de la lumière blanche et chaque filtre <em>retire</em> une couleur&nbsp;: le cyan absorbe le rouge, le magenta absorbe le vert, le jaune absorbe le bleu.</div>
+      </figure>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>La <strong>synthèse additive</strong> superpose des <em>lumières</em>&nbsp;: partant du noir, chaque lumière s'ajoute — rouge + vert + bleu redonne du blanc. La <strong>synthèse soustractive</strong> superpose des <em>matières</em> qui absorbent (filtres, encres, peintures)&nbsp;: partant de la lumière blanche, chacune retire sa part — cyan + magenta + jaune ne laisse rien passer&nbsp;: noir.</p>
+      </div>
+
+      <div class="bloc-propriete">
+        <div class="bloc-label">PROPRIÉTÉ — COULEURS COMPLÉMENTAIRES</div>
+        <p>Deux couleurs sont <strong>complémentaires</strong> quand leurs lumières s'ajoutent en blanc&nbsp;: <span class="lum-puce lum-puce--rouge" aria-hidden="true"></span>&nbsp;rouge ↔ <span class="lum-puce lum-puce--cyan" aria-hidden="true"></span>&nbsp;cyan, <span class="lum-puce lum-puce--vert" aria-hidden="true"></span>&nbsp;vert ↔ <span class="lum-puce lum-puce--magenta" aria-hidden="true"></span>&nbsp;magenta, <span class="lum-puce lum-puce--bleu" aria-hidden="true"></span>&nbsp;bleu ↔ <span class="lum-puce lum-puce--jaune" aria-hidden="true"></span>&nbsp;jaune. Chaque filtre absorbe exactement la couleur complémentaire de la sienne — c'est le pont entre les deux synthèses.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — CHOISIR LA BONNE SYNTHÈSE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Identifie ce qui se superpose. Des <strong>lumières</strong> qui s'ajoutent sur une même zone (projecteurs, sous-pixels d'écran)&nbsp;: synthèse <em>additive</em>.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">De la <strong>matière</strong> traversée ou recouverte (filtres, encres, couches de peinture)&nbsp;: synthèse <em>soustractive</em> — chaque couche <em>absorbe</em>, il reste ce que personne n'a pris.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Raisonne en composantes R/V/B&nbsp;: écris ce qui arrive, barre ce qui est absorbé, recompose ce qui reste.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — L'IMPRIMANTE SANS ENCRE ROUGE</div>
+        <p class="exemple-enonce">Une imprimante n'a que trois encres&nbsp;: cyan, magenta, jaune. Comment imprime-t-elle un cœur rouge vif&nbsp;?</p>
+        <p><span class="etape-label">Structure — </span>des encres sur du papier&nbsp;: la lumière blanche de la pièce traverse les couches et rebondit sur le papier — synthèse <em>soustractive</em>.</p>
+        <p><span class="etape-label">Composantes — </span>on veut garder le rouge seul. Il faut donc absorber le vert (c'est le travail du magenta) et le bleu (c'est le travail du jaune)&nbsp;: l'imprimante superpose <strong>magenta + jaune</strong>.</p>
+        <p class="conclusion">Conclusion&nbsp;: le rouge s'imprime sans encre rouge — magenta + jaune. Vérifie-le sur le graphique, côté FILTRES&nbsp;; et la prochaine fois qu'une cartouche magenta est vide, tu sauras pourquoi tes rouges ont viré à l'orange sale.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s4">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions sur les mélanges</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Sur une scène noire, on superpose un projecteur rouge et un projecteur vert. On voit…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">du marron, comme en peinture</button>
+              <button type="button" class="quiz-reponse">du jaune</button>
+              <button type="button" class="quiz-reponse">du blanc</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> des <em>lumières</em> qui s'ajoutent&nbsp;: rouge + vert = jaune. Le marron, c'est ton réflexe de peinture (soustractif) — il ne s'applique pas aux lumières. Et pour le blanc, il manque le bleu.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Pour afficher du blanc, un pixel d'écran…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">allume ses trois sous-pixels rouge, vert et bleu</button>
+              <button type="button" class="quiz-reponse">allume un sous-pixel blanc dédié</button>
+              <button type="button" class="quiz-reponse">éteint tout — le blanc est l'absence de couleur</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> R + V + B = blanc&nbsp;: pas besoin de lampe blanche. Tout éteint, c'est le noir — sur un écran, le noir est l'absence de lumière, et le blanc en est la somme.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Un filtre cyan traversé par de la lumière blanche…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">ajoute du cyan à la lumière</button>
+              <button type="button" class="quiz-reponse">absorbe le vert et le bleu</button>
+              <button type="button" class="quiz-reponse">absorbe le rouge et laisse passer le vert et le bleu</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> un filtre ne <em>fabrique</em> jamais de lumière, il en retire&nbsp;: le cyan absorbe sa complémentaire, le rouge. Ce qui passe — vert + bleu — se recompose en cyan pour ton œil.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="s5" class="chap-section">
+      <h2>5. La couleur des objets&nbsp;: on voit ce qu'ils diffusent</h2>
+      <p class="prose">Retour au concert. Le guitariste porte son maillot rouge fétiche. Les projecteurs passent au bleu pour la ballade… et son maillot devient <em>noir</em>. Personne ne l'a repeint&nbsp;: c'est la lumière qui a changé. La couleur d'un objet n'est pas une étiquette collée dessus — c'est une conversation entre l'objet et la lumière qui l'éclaire.</p>
+      <p class="prose">Le mécanisme tient en une phrase&nbsp;: un objet <em>absorbe</em> certaines lumières et <em>diffuse</em> les autres — et tu ne vois que ce qu'il diffuse. Vérifie que tu l'as en main&nbsp;: quatre scènes, quatre prédictions. Décompose la lumière du projecteur en rouge/vert/bleu, garde ce que le maillot sait diffuser.</p>
+
+      <figure class="widget" id="widget-couleur-jeu" data-widget="stoechio-jeu" data-nom="couleur-jeu" data-progression="SCÈNE" data-suivant="Scène suivante">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">INTERACTIF</span>
+            <span class="widget-titre">De quelle couleur est le maillot&nbsp;?</span>
+          </div>
+          <span class="quiz-score js-progression">SCÈNE 1/4</span>
+        </div>
+        <div class="widget-pied">
+          <div class="js-manche">
+            <svg class="widget-graph" viewBox="0 0 640 200" role="img" aria-label="Une scène noire : un projecteur de lumière blanche éclaire un maillot dont la couleur est cachée ; une pastille indique qu'en lumière blanche ce maillot est rouge">
+              <rect class="lum-fond-noir" x="30" y="6" width="580" height="150" rx="10"></rect>
+              <path class="lum-blanc" d="M140 16L254 152L470 152L188 12Z"></path>
+              <path class="lum-contour" d="M286 106L306 88L334 88L354 106L344 118L336 110L336 146L304 146L304 110L296 118Z"></path>
+              <text class="lum-question" x="320" y="136" text-anchor="middle">?</text>
+              <text class="avc-candidat" x="140" y="178">lumière blanche</text>
+              <rect class="lum-puce-svg lum-rouge" x="425" y="168" width="12" height="12" rx="3"></rect>
+              <text class="avc-candidat" x="444" y="178">ce maillot, en lumière blanche</text>
+            </svg>
+            <p class="quiz-enonce">Le maillot rouge du guitariste, sous la lumière blanche des projecteurs. Tu le vois…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">blanc — il renvoie la lumière qu'il reçoit</button>
+              <button type="button" class="quiz-reponse">rouge</button>
+              <button type="button" class="quiz-reponse">noir — il absorbe la lumière</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 200" role="img" aria-label="La même scène noire, mais le projecteur est bleu ; en lumière blanche ce maillot est rouge">
+              <rect class="lum-fond-noir" x="30" y="6" width="580" height="150" rx="10"></rect>
+              <path class="lum-bleu" d="M140 16L254 152L470 152L188 12Z"></path>
+              <path class="lum-contour" d="M286 106L306 88L334 88L354 106L344 118L336 110L336 146L304 146L304 110L296 118Z"></path>
+              <text class="lum-question" x="320" y="136" text-anchor="middle">?</text>
+              <text class="avc-candidat" x="140" y="178">lumière bleue</text>
+              <rect class="lum-puce-svg lum-rouge" x="425" y="168" width="12" height="12" rx="3"></rect>
+              <text class="avc-candidat" x="444" y="178">ce maillot, en lumière blanche</text>
+            </svg>
+            <p class="quiz-enonce">Ballade&nbsp;: les projecteurs passent au bleu. Le même maillot rouge, tu le vois…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">rouge — un maillot rouge reste rouge</button>
+              <button type="button" class="quiz-reponse">violet — rouge + bleu</button>
+              <button type="button" class="quiz-reponse">noir</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 200" role="img" aria-label="La même scène noire, projecteur cyan ; en lumière blanche ce maillot est blanc">
+              <rect class="lum-fond-noir" x="30" y="6" width="580" height="150" rx="10"></rect>
+              <path class="lum-cyan" d="M140 16L254 152L470 152L188 12Z"></path>
+              <path class="lum-contour" d="M286 106L306 88L334 88L354 106L344 118L336 110L336 146L304 146L304 110L296 118Z"></path>
+              <text class="lum-question" x="320" y="136" text-anchor="middle">?</text>
+              <text class="avc-candidat" x="140" y="178">lumière cyan</text>
+              <rect class="lum-puce-svg lum-blanc" x="425" y="168" width="12" height="12" rx="3"></rect>
+              <text class="avc-candidat" x="444" y="178">ce maillot, en lumière blanche</text>
+            </svg>
+            <p class="quiz-enonce">Le bassiste, lui, est en maillot blanc. Sous la lumière cyan, tu le vois…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">cyan</button>
+              <button type="button" class="quiz-reponse">blanc — le blanc reste blanc</button>
+              <button type="button" class="quiz-reponse">bleu</button>
+            </div>
+          </div>
+          <div class="js-manche" hidden>
+            <svg class="widget-graph" viewBox="0 0 640 200" role="img" aria-label="La même scène noire, projecteur magenta ; en lumière blanche ce maillot est jaune">
+              <rect class="lum-fond-noir" x="30" y="6" width="580" height="150" rx="10"></rect>
+              <path class="lum-magenta" d="M140 16L254 152L470 152L188 12Z"></path>
+              <path class="lum-contour" d="M286 106L306 88L334 88L354 106L344 118L336 110L336 146L304 146L304 110L296 118Z"></path>
+              <text class="lum-question" x="320" y="136" text-anchor="middle">?</text>
+              <text class="avc-candidat" x="140" y="178">lumière magenta</text>
+              <rect class="lum-puce-svg lum-jaune" x="425" y="168" width="12" height="12" rx="3"></rect>
+              <text class="avc-candidat" x="444" y="178">ce maillot, en lumière blanche</text>
+            </svg>
+            <p class="quiz-enonce">Rappel&nbsp;: magenta = rouge + bleu. Le batteur, en maillot jaune, sous la lumière magenta. Tu le vois…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">noir — jaune et magenta n'ont rien en commun</button>
+              <button type="button" class="quiz-reponse">jaune — il garde sa couleur</button>
+              <button type="button" class="quiz-reponse">rouge</button>
+            </div>
+          </div>
+          <div class="quiz-retours" aria-live="polite">
+            <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> décompose la lumière du projecteur en rouge/vert/bleu, garde ce que le maillot diffuse, et réessaie.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> <span class="lum-puce lum-puce--rouge" aria-hidden="true"></span> un maillot rouge <em>diffuse</em> le rouge et <em>absorbe</em> le vert et le bleu. La lumière blanche apporte les trois&nbsp;: il renvoie sa part de rouge. «&nbsp;Blanc&nbsp;» oublie qu'il absorbe&nbsp;; «&nbsp;noir&nbsp;» oublie qu'il diffuse.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> <span class="lum-puce lum-puce--noir" aria-hidden="true"></span> la lumière bleue ne contient aucun rouge. Le maillot absorbe le bleu… et n'a rien à diffuser&nbsp;: noir. Un objet ne <em>mélange</em> pas sa couleur avec celle de la lampe — il filtre ce qu'il reçoit.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> <span class="lum-puce lum-puce--cyan" aria-hidden="true"></span> un objet blanc diffuse <em>tout</em> ce qu'il reçoit. Il reçoit du cyan (vert + bleu), il renvoie du cyan&nbsp;: un objet blanc prend la couleur de son éclairage. C'est pour ça que les murs blancs d'une salle de concert changent de couleur toute la soirée.</p>
+            <p class="quiz-retour js-expl" hidden><span class="verdict verdict--bonne">EXACT —</span> <span class="lum-puce lum-puce--rouge" aria-hidden="true"></span> le jaune diffuse rouge + vert&nbsp;; le magenta apporte rouge + bleu. Le seul point commun&nbsp;: le rouge. Ni jaune (il faudrait du vert), ni noir (le rouge passe)&nbsp;: le batteur vire au rouge.</p>
+            <p class="quiz-retour js-final" hidden><strong class="js-final-txt"></strong></p>
+          </div>
+          <div class="lecture-controles">
+            <button type="button" class="btn-pill btn-pill--accent js-suivant" hidden>Scène suivante ▸</button>
+            <button type="button" class="btn-pill js-recommencer" hidden>↺ recommencer</button>
+          </div>
+        </div>
+        <div class="widget-note">La pastille sous chaque scène rappelle la couleur du maillot <em>en lumière blanche</em> — sa «&nbsp;couleur d'étiquette&nbsp;». La question est&nbsp;: que devient-elle sous ce projecteur-là&nbsp;?</div>
+        <script type="application/json">[2, 3, 1, 3]</script>
+      </figure>
+
+      <p class="prose">Ce que tu viens d'appliquer quatre fois, voilà comment ça s'énonce.</p>
+
+      <div class="bloc-definition">
+        <span class="bloc-tag">DÉFINITION</span>
+        <p>Quand la lumière rencontre un objet, chaque composante colorée est soit <strong>absorbée</strong> (elle disparaît, transformée en chaleur), soit <strong>diffusée</strong> (renvoyée dans toutes les directions), soit <strong>transmise</strong> (elle traverse, si l'objet est transparent — c'est le cas des filtres de la section 4). La <strong>couleur perçue</strong> d'un objet opaque, c'est l'ensemble des lumières qu'il <em>diffuse</em> parmi celles qu'il <em>reçoit</em>.</p>
+      </div>
+
+      <div class="bloc-pourquoi">
+        <div class="bloc-label">POURQUOI&nbsp;?</div>
+        <p>«&nbsp;La couleur n'est pas dans l'objet&nbsp;»&nbsp;: le maillot n'a pas changé entre deux morceaux — sa matière absorbe toujours les mêmes composantes. Ce qui a changé, c'est l'offre. Un maillot «&nbsp;rouge&nbsp;», c'est un maillot qui <em>saurait</em> diffuser du rouge… encore faut-il qu'on lui en donne. La couleur d'étiquette suppose la lumière blanche&nbsp;; change la lumière, et l'étiquette ment.</p>
+      </div>
+
+      <div class="bloc-methode">
+        <div class="bloc-label">MÉTHODE — PRÉVOIR LA COULEUR PERÇUE</div>
+        <div class="methode-etape"><span class="etape-num">1.</span><span class="etape-corps">Décompose la lumière incidente en composantes&nbsp;: blanche = R + V + B, cyan = V + B, magenta = R + B, jaune = R + V.</span></div>
+        <div class="methode-etape"><span class="etape-num">2.</span><span class="etape-corps">Décompose ce que l'objet sait diffuser (sa couleur en lumière blanche)&nbsp;: un objet jaune diffuse R + V, un blanc diffuse tout, un noir rien.</span></div>
+        <div class="methode-etape"><span class="etape-num">3.</span><span class="etape-corps">Garde l'intersection — les composantes à la fois <em>reçues</em> et <em>diffusables</em> — et recompose. Rien en commun&nbsp;? L'objet paraît noir.</span></div>
+      </div>
+
+      <div class="bloc-exemple">
+        <div class="exemple-tag">EXEMPLE RÉSOLU — LE SHORT VERT SOUS LA LUMIÈRE MAGENTA</div>
+        <p class="exemple-enonce">Le chanteur porte un short vert (en lumière blanche). Les projecteurs passent au magenta. De quelle couleur le public voit-il le short&nbsp;?</p>
+        <p><span class="etape-label">Étape 1 — </span>lumière incidente&nbsp;: magenta = rouge + bleu. Pas de vert dans l'offre.</p>
+        <p><span class="etape-label">Étape 2 — </span>le short vert ne sait diffuser que le vert&nbsp;: il absorbe le rouge et le bleu.</p>
+        <p><span class="etape-label">Étape 3 — </span>intersection&nbsp;: {rouge, bleu} ∩ {vert} = rien. Aucune composante ne repart vers le public.</p>
+        <p class="conclusion">Conclusion&nbsp;: le short paraît noir. Vert et magenta sont complémentaires — c'est le duo le plus cruel de la scène, et un grand classique du Bac.</p>
+      </div>
+
+      <div class="bloc-retenir">
+        <span class="bloc-tag">À RETENIR</span>
+        <p>On ne voit jamais «&nbsp;la couleur d'un objet&nbsp;»&nbsp;: on voit ce qu'il <strong>diffuse</strong> parmi ce qu'il <strong>reçoit</strong>. Sa couleur d'étiquette n'est valable qu'en lumière blanche.</p>
+      </div>
+
+      <div class="widget quiz" data-quiz="s5">
+        <div class="widget-tete">
+          <div class="widget-titre-groupe">
+            <span class="pill-interactif">TESTE-TOI</span>
+            <span class="widget-titre">Trois questions pour finir</span>
+          </div>
+          <span class="quiz-score js-quiz-score" hidden></span>
+        </div>
+        <div class="quiz-corps">
+          <div class="quiz-question" data-bonne="2">
+            <p class="quiz-enonce"><span class="quiz-num">Q1</span>Un maillot rouge éclairé en lumière verte paraît…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">rouge</button>
+              <button type="button" class="quiz-reponse">noir</button>
+              <button type="button" class="quiz-reponse">jaune — rouge + vert</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> il ne reçoit que du vert, qu'il absorbe&nbsp;: rien à diffuser, noir. Il ne «&nbsp;reste&nbsp;» pas rouge (avec quoi&nbsp;?), et il ne mélange pas sa couleur à celle de la lampe — le jaune, c'est deux <em>lumières</em> superposées, pas un objet plus une lampe.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="1">
+            <p class="quiz-enonce"><span class="quiz-num">Q2</span>Un objet blanc, c'est un objet qui…</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">diffuse toutes les lumières qu'il reçoit</button>
+              <button type="button" class="quiz-reponse">paraît blanc sous n'importe quelle lumière</button>
+              <button type="button" class="quiz-reponse">absorbe toutes les lumières</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> il renvoie tout ce qu'on lui donne — c'est pour ça qu'il paraît blanc <em>en lumière blanche</em>, et cyan sous une lumière cyan. Tout absorber, c'est la définition d'un objet noir.</p>
+            </div>
+          </div>
+          <div class="quiz-question" data-bonne="3">
+            <p class="quiz-enonce"><span class="quiz-num">Q3</span>Pourquoi un citron paraît-il jaune en lumière blanche&nbsp;?</p>
+            <div class="quiz-reponses">
+              <button type="button" class="quiz-reponse">il fabrique sa propre lumière jaune</button>
+              <button type="button" class="quiz-reponse">il absorbe le jaune et diffuse le reste</button>
+              <button type="button" class="quiz-reponse">il absorbe le bleu et diffuse rouge + vert</button>
+            </div>
+            <div class="quiz-retours" aria-live="polite">
+              <p class="quiz-retour js-relance" hidden><span class="verdict verdict--fausse">PAS ENCORE —</span> élimine cette réponse et réessaie.</p>
+              <p class="quiz-retour js-explication" hidden><span class="verdict verdict--bonne">EXACT —</span> rouge + vert diffusés ensemble, c'est le jaune de la synthèse additive — le citron n'émet rien, il trie. Absorber le jaune, ce serait diffuser rouge + vert + bleu <em>moins</em> le… non&nbsp;: le jaune n'est pas une composante, c'est déjà un mélange. Raisonne toujours en R/V/B.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pieges" class="chap-section">
+      <div class="bloc-pieges">
+        <span class="bloc-tag">LES PIÈGES CLASSIQUES</span>
+        <div class="piege">
+          <p><strong>Oublier que \(\overline{OA}\) est négatif.</strong> «&nbsp;L'objet est à 40&nbsp;cm&nbsp;» se traduit par \(\overline{OA} = -40\)&nbsp;cm — l'objet réel est à <em>gauche</em> de O. Injecte +40 dans la relation de conjugaison et tout ce qui suit est faux, avec une calculatrice parfaitement d'accord. Premier réflexe de chaque exercice&nbsp;: écrire les mesures algébriques avec leur signe.</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;γ = −2, donc l'image est plus petite.&nbsp;»</strong> Non&nbsp;: le signe et la taille sont deux informations indépendantes. Le − dit «&nbsp;renversée&nbsp;», le 2 dit «&nbsp;deux fois plus <em>grande</em>&nbsp;». Une image réduite et droite, c'est γ = +0,5&nbsp;; renversée et réduite, γ = −0,5. Lis le signe, puis la valeur absolue — dans cet ordre.</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;On cache la moitié de la lentille, on perd la moitié de l'image.&nbsp;»</strong> Chaque point de l'image est construit par des rayons issus de <em>toute</em> la surface de la lentille — les trois rayons du schéma ne sont qu'un échantillon commode. Moitié de lentille cachée&nbsp;: image entière, moitié moins lumineuse. Si tu doutes, repense au POURQUOI de la section 2.</p>
+        </div>
+        <div class="piege">
+          <p><strong>Mélanger lumières et peintures.</strong> Rouge + vert = jaune… en <em>lumières</em> (synthèse additive). En peinture, le même mélange donne un brun douteux, parce que les pigments <em>absorbent</em> (synthèse soustractive). Avant de répondre, demande-toi ce qui se superpose&nbsp;: des lumières qui s'ajoutent, ou des matières qui retirent&nbsp;?</p>
+        </div>
+        <div class="piege">
+          <p><strong>«&nbsp;Un objet a une couleur, point.&nbsp;»</strong> Le maillot «&nbsp;rouge&nbsp;» n'est rouge qu'en lumière blanche&nbsp;: sous une lumière bleue, il est noir&nbsp;; un objet blanc prend la couleur de son éclairage. La couleur perçue dépend toujours de deux choses — ce que l'objet sait diffuser, et ce que la lumière lui apporte.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentiel" class="chap-section">
+      <div class="bloc-essentiel">
+        <span class="bloc-tag">L'ESSENTIEL EN 5 LIGNES</span>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">RAYONS</span>
+          <p>Par O&nbsp;: tout droit. Parallèle à l'axe&nbsp;: ressort par F′. Par F&nbsp;: ressort parallèle. Deux suffisent à placer B′&nbsp;; le troisième vérifie.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">CONJUGAISON</span>
+          <p>\(\dfrac{1}{\overline{OA'}} - \dfrac{1}{\overline{OA}} = \dfrac{1}{f'}\), en mesures algébriques&nbsp;: \(\overline{OA} < 0\) pour un objet réel&nbsp;; \(\overline{OA'} > 0\) image réelle, \(\overline{OA'} < 0\) image virtuelle.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">GRANDISSEMENT</span>
+          <p>\(\gamma = \dfrac{\overline{A'B'}}{\overline{AB}} = \dfrac{\overline{OA'}}{\overline{OA}}\)&nbsp;: signe = sens (− renversée, + droite), valeur absolue = taille (&gt;&thinsp;1 agrandie).</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">SYNTHÈSES</span>
+          <p>Lumières qui s'ajoutent (additive)&nbsp;: R + V + B = blanc. Filtres et encres qui retirent (soustractive)&nbsp;: C + M + J = noir. Complémentaires&nbsp;: R↔C, V↔M, B↔J.</p>
+        </div>
+        <div class="essentiel-ligne">
+          <span class="essentiel-label">COULEUR PERÇUE</span>
+          <p>Un objet diffuse certaines composantes et absorbe les autres&nbsp;: on voit ce qu'il <em>diffuse</em> parmi ce qu'il <em>reçoit</em>. Sa «&nbsp;couleur&nbsp;» suppose la lumière blanche.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ex" class="chap-section">
+      <div class="ex-tete">
+        <h2>Exercices</h2>
+        <span class="ex-compte">15 corrigés</span>
+      </div>
+      <p class="ex-intro">Commence par le niveau 1. Cherche vraiment avant d'ouvrir le corrigé — c'est là que ça rentre. Les exercices suivent l'ordre du cours&nbsp;: la construction de l'image (01–03), la conjugaison et le grandissement (04–09), les synthèses des couleurs (10–11), la couleur des objets (12–13), puis un problème pour finir (14).</p>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 01 <span class="exercice-theme">· les trois rayons</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Complète les trois règles de construction. a. Le rayon qui passe par le centre optique O… b. Le rayon qui arrive parallèle à l'axe optique… c. Le rayon qui passe par le foyer objet F…</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-01" data-exercice="01" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-01" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>…traverse la lentille <strong>sans être dévié</strong>&nbsp;: O est le seul point de la lentille qui laisse la lumière tranquille.</p>
+          <p><span class="etape-label">b. — </span>…ressort en passant par le <strong>foyer image F′</strong>. C'est la définition même de F′&nbsp;: le point où convergent les rayons venus de l'infini.</p>
+          <p><span class="etape-label">c. — </span>…ressort <strong>parallèle à l'axe optique</strong> — c'est la règle b lue dans l'autre sens (la lumière peut parcourir chaque trajet dans les deux sens).</p>
+          <p class="conclusion">Conclusion&nbsp;: trois règles, deux suffisent, la troisième vérifie. Récite-les avant chaque construction — elles portent tout le chapitre.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 02 <span class="exercice-theme">· construction</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une lentille convergente a pour distance focale f′ = 20&nbsp;cm. Un objet AB de 2,0&nbsp;cm est placé 30&nbsp;cm devant la lentille. a. Construis l'image A′B′ à l'échelle 1/10. b. Lis sur ta construction la position et la taille de l'image, puis sa nature.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-02" data-exercice="02" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-02" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>à l'échelle 1/10&nbsp;: F à 2&nbsp;cm à gauche de O, F′ à 2&nbsp;cm à droite, AB à 3&nbsp;cm à gauche. Depuis B&nbsp;: rayon par O tout droit&nbsp;; rayon parallèle à l'axe qui replonge par F′&nbsp;; rayon par F qui ressort parallèle. Les trois se croisent sous l'axe, à 6&nbsp;cm à droite de la lentille.</p>
+          <p><span class="etape-label">b. — </span>en revenant à l'échelle réelle&nbsp;: \(\overline{OA'} = +60\)&nbsp;cm, image de 4,0&nbsp;cm, tête en bas. Image <strong>réelle</strong> (les rayons se croisent vraiment), <strong>renversée</strong>, <strong>agrandie</strong> (γ = −2).</p>
+          <p class="conclusion">Conclusion&nbsp;: c'est le préréglage «&nbsp;entre 2F et F&nbsp;» du graphique de la section 2 — l'objet entre F et 2F donne toujours une image réelle, renversée et agrandie. C'est le réglage du vidéoprojecteur.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 03 <span class="exercice-theme">· nature de l'image</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Une lentille a pour distance focale f′ = 10&nbsp;cm. Sans calcul complet, donne la nature de l'image (réelle ou virtuelle, droite ou renversée) pour un objet placé&nbsp;: a. à 30&nbsp;cm devant la lentille&nbsp;; b. à 15&nbsp;cm&nbsp;; c. à 6&nbsp;cm.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-03" data-exercice="03" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-03" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Structure — </span>tout se joue par rapport à F (à 10&nbsp;cm) et à 2F (à 20&nbsp;cm)&nbsp;: avant F, image réelle et renversée&nbsp;; après F, image virtuelle et droite.</p>
+          <p><span class="etape-label">a. — </span>30&nbsp;cm &gt; 2f′&nbsp;: image <strong>réelle, renversée, réduite</strong> (le réglage «&nbsp;loin&nbsp;» du banc).</p>
+          <p><span class="etape-label">b. — </span>15&nbsp;cm est entre F et 2F&nbsp;: image <strong>réelle, renversée, agrandie</strong>.</p>
+          <p><span class="etape-label">c. — </span>6&nbsp;cm &lt; f′&nbsp;: l'objet a passé le foyer — image <strong>virtuelle, droite, agrandie</strong>&nbsp;: la lentille fonctionne en loupe.</p>
+          <p class="conclusion">Conclusion&nbsp;: la position de l'objet par rapport à F décide de tout. Si tu hésites, rejoue le graphique de la section 2 dans ta tête — ou pour de vrai.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 04 <span class="exercice-theme">· conjugaison</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un objet AB de 3,0&nbsp;cm est placé 36&nbsp;cm devant une lentille de distance focale f′ = 12&nbsp;cm. a. Calcule \(\overline{OA'}\). b. Calcule γ, puis la taille de l'image. c. Donne la nature complète de l'image.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-04" data-exercice="04" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-04" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>mesures algébriques d'abord&nbsp;: \(\overline{OA} = -36\)&nbsp;cm. Alors \(\dfrac{1}{\overline{OA'}} = \dfrac{1}{12} + \dfrac{1}{-36} = \dfrac{3}{36} - \dfrac{1}{36} = \dfrac{2}{36} = \dfrac{1}{18}\), donc \(\overline{OA'} = +18\)&nbsp;cm.</p>
+          <p><span class="etape-label">b. — </span>\(\gamma = \dfrac{\overline{OA'}}{\overline{OA}} = \dfrac{18}{-36} = -0{,}5\)&nbsp;; \(\overline{A'B'} = \gamma \times \overline{AB} = -0{,}5 \times 3{,}0 = -1{,}5\)&nbsp;cm.</p>
+          <p><span class="etape-label">c. — </span>\(\overline{OA'} &gt; 0\)&nbsp;: image <strong>réelle</strong>, 18&nbsp;cm derrière la lentille&nbsp;; γ &lt; 0&nbsp;: <strong>renversée</strong>&nbsp;; |γ| = 0,5&nbsp;: <strong>réduite</strong>, 1,5&nbsp;cm.</p>
+          <p class="conclusion">Conclusion&nbsp;: signe d'abord, calcul ensuite, lecture des signes pour finir. Contrôle-réflexe&nbsp;: objet au-delà de 2F (36 &gt; 24), donc réelle-renversée-réduite — cohérent.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 05 <span class="exercice-theme">· position de l'objet</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Avec une lentille de distance focale f′ = 12&nbsp;cm, on veut former une image nette sur un écran placé 36&nbsp;cm derrière la lentille. a. Où faut-il placer l'objet&nbsp;? b. Que vaut le grandissement&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-05" data-exercice="05" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-05" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>cette fois l'inconnue est \(\overline{OA}\), avec \(\overline{OA'} = +36\)&nbsp;cm (image sur écran = réelle, à droite). \(\dfrac{1}{\overline{OA}} = \dfrac{1}{\overline{OA'}} - \dfrac{1}{f'} = \dfrac{1}{36} - \dfrac{3}{36} = -\dfrac{2}{36} = -\dfrac{1}{18}\), donc \(\overline{OA} = -18\)&nbsp;cm&nbsp;: l'objet à 18&nbsp;cm devant la lentille.</p>
+          <p><span class="etape-label">b. — </span>\(\gamma = \dfrac{36}{-18} = -2\)&nbsp;: image renversée, deux fois plus grande que l'objet.</p>
+          <p class="conclusion">Conclusion&nbsp;: la relation de conjugaison se lit dans tous les sens — on isole l'inverse qu'on cherche. Et le signe trouvé (−18) confirme tout seul que l'objet est bien à gauche&nbsp;: si tu trouves +18, c'est le piège n°&thinsp;1.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 06 <span class="exercice-theme">· la loupe</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un philatéliste examine un timbre avec une loupe de distance focale f′ = 5,0&nbsp;cm, tenue à 3,0&nbsp;cm du timbre. a. Calcule \(\overline{OA'}\) et γ. b. Explique pourquoi cette image ne peut pas être projetée sur un écran, mais se voit très bien à travers la loupe.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-06" data-exercice="06" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-06" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\overline{OA} = -3{,}0\)&nbsp;cm (le timbre est entre F et O&nbsp;: 3,0 &lt; 5,0). \(\dfrac{1}{\overline{OA'}} = \dfrac{1}{5{,}0} + \dfrac{1}{-3{,}0} = \dfrac{3}{15} - \dfrac{5}{15} = -\dfrac{2}{15}\), donc \(\overline{OA'} = -7{,}5\)&nbsp;cm&nbsp;; \(\gamma = \dfrac{-7{,}5}{-3{,}0} = +2{,}5\).</p>
+          <p><span class="etape-label">b. — </span>\(\overline{OA'} &lt; 0\)&nbsp;: l'image est <strong>virtuelle</strong>, du même côté que le timbre. Aucun rayon ne s'y croise vraiment — un écran n'y attraperait rien. Mais l'œil, placé derrière la loupe, reçoit les rayons <em>comme s'ils</em> venaient de cette image&nbsp;: il voit un timbre droit (γ &gt; 0) et 2,5 fois plus grand.</p>
+          <p class="conclusion">Conclusion&nbsp;: objet entre F et O → image virtuelle, droite, agrandie. C'est le mode «&nbsp;loupe&nbsp;», et le calcul le raconte entièrement par ses signes.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 07 <span class="exercice-theme">· taille de l'image</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Sur le banc du chapitre (f′ = 20&nbsp;cm), une figurine de 1,5&nbsp;cm est placée 25&nbsp;cm devant la lentille. Calcule la position, la taille et le sens de son image.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-07" data-exercice="07" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-07" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>\(\overline{OA} = -25\)&nbsp;cm&nbsp;; \(\dfrac{1}{\overline{OA'}} = \dfrac{1}{20} + \dfrac{1}{-25} = \dfrac{5}{100} - \dfrac{4}{100} = \dfrac{1}{100}\)&nbsp;: \(\overline{OA'} = +100\)&nbsp;cm. L'objet est à peine au-delà du foyer, l'image part très loin — un mètre derrière la lentille.</p>
+          <p><span class="etape-label">Étape 2 — </span>\(\gamma = \dfrac{100}{-25} = -4\)&nbsp;; \(\overline{A'B'} = -4 \times 1{,}5 = -6{,}0\)&nbsp;cm.</p>
+          <p class="conclusion">Conclusion&nbsp;: image réelle à 1,00&nbsp;m, renversée, 6,0&nbsp;cm — quatre fois plus grande. Plus l'objet frôle le foyer, plus l'image s'éloigne et grandit&nbsp;: tu l'as vu «&nbsp;exploser&nbsp;» sur le graphique, le calcul le confirme.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 08 <span class="exercice-theme">· objet à l'infini</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 1</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Par une belle journée, on concentre la lumière du Soleil avec une loupe&nbsp;: le point brûlant se forme à 8,0&nbsp;cm de la lentille. a. Que vaut la distance focale de la loupe&nbsp;? b. Justifie avec la relation de conjugaison.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-08" data-exercice="08" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-08" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>f′ = 8,0&nbsp;cm&nbsp;: le Soleil est si loin que son image se forme <em>dans le plan focal image</em>. Le point brûlant, c'est l'image du Soleil, posée sur F′.</p>
+          <p><span class="etape-label">b. — </span>quand \(\overline{OA}\) devient immense, \(\dfrac{1}{\overline{OA}}\) fond vers 0&nbsp;: la relation devient \(\dfrac{1}{\overline{OA'}} \approx \dfrac{1}{f'}\), donc \(\overline{OA'} \approx f'\). Objet à l'infini → image au foyer&nbsp;; les rayons du Soleil arrivent parallèles, et tous les rayons parallèles à l'axe ressortent par F′.</p>
+          <p class="conclusion">Conclusion&nbsp;: mesurer où brûle une loupe, c'est mesurer sa distance focale. C'est aussi pour ça qu'un appareil photo qui vise loin place son capteur au voisinage du plan focal — retiens ce cas limite, il ouvre le sujet Vers le Bac.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 09 <span class="exercice-theme">· le vidéoprojecteur</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Le vidéoprojecteur de ta salle projette l'image d'une petite puce lumineuse à travers un objectif assimilé à une lentille de distance focale f′ = 20&nbsp;cm. L'écran est à 2,20&nbsp;m de l'objectif. a. À quelle distance de la lentille la puce doit-elle se trouver&nbsp;? b. Calcule γ. c. La puce mesure 2,0&nbsp;cm de large&nbsp;: quelle est la largeur de l'image&nbsp;? d. Pourquoi l'électronique du projecteur affiche-t-elle l'image source à l'envers&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-09" data-exercice="09" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-09" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\overline{OA'} = +220\)&nbsp;cm (l'écran, à droite). \(\dfrac{1}{\overline{OA}} = \dfrac{1}{220} - \dfrac{1}{20} = \dfrac{1}{220} - \dfrac{11}{220} = -\dfrac{10}{220} = -\dfrac{1}{22}\)&nbsp;: \(\overline{OA} = -22\)&nbsp;cm. La puce est 22&nbsp;cm devant l'objectif — juste au-delà du foyer, comme l'exercice 07 l'annonçait.</p>
+          <p><span class="etape-label">b. — </span>\(\gamma = \dfrac{220}{-22} = -10\).</p>
+          <p><span class="etape-label">c. — </span>largeur de l'image&nbsp;: \(|\gamma| \times 2{,}0 = 10 \times 2{,}0 = 20\)&nbsp;cm. Pour remplir un écran plus grand, on recule le projecteur (|γ| augmente avec \(\overline{OA'}\)) ou on change d'objectif.</p>
+          <p><span class="etape-label">d. — </span>γ &lt; 0&nbsp;: l'optique renverse l'image. Pour que le public la voie à l'endroit, la puce affiche donc tout <em>à l'envers</em> — le renversement optique remet le monde debout.</p>
+          <p class="conclusion">Conclusion&nbsp;: un vidéoprojecteur, c'est le banc optique réglé entre F et 2F, γ négatif assumé et compensé. La loupe du chapitre et l'objectif du cinéma sont le même objet, réglé différemment.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 10 <span class="exercice-theme">· synthèse additive</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Chaque pixel de ton téléphone contient trois sous-pixels&nbsp;: rouge, vert, bleu. Quels sous-pixels sont allumés pour afficher&nbsp;: a. du jaune&nbsp;; b. du magenta&nbsp;; c. du blanc&nbsp;; d. du noir&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-10" data-exercice="10" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-10" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>jaune = <strong>rouge + vert</strong> (synthèse additive&nbsp;: des lumières qui s'ajoutent).</p>
+          <p><span class="etape-label">b. — </span>magenta = <strong>rouge + bleu</strong>.</p>
+          <p><span class="etape-label">c. — </span>blanc = <strong>les trois</strong>&nbsp;: R + V + B.</p>
+          <p><span class="etape-label">d. — </span>noir = <strong>aucun</strong>&nbsp;: sur un écran, le noir est une absence de lumière.</p>
+          <p class="conclusion">Conclusion&nbsp;: ton écran ne possède ni lampe jaune ni lampe blanche — il n'a que trois couleurs et ton œil fait la somme. Zoome sur un pixel avec une goutte d'eau posée sur l'écran&nbsp;: les trois bandes apparaissent.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 11 <span class="exercice-theme">· filtres</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">De la lumière blanche traverse un filtre jaune, puis un filtre cyan. a. Quelles composantes passent le filtre jaune&nbsp;? b. Lesquelles survivent au filtre cyan&nbsp;? Quelle couleur voit-on à la sortie&nbsp;? c. On remplace le filtre cyan par un filtre magenta&nbsp;: que devient la couleur de sortie&nbsp;?</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-11" data-exercice="11" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-11" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>le filtre jaune absorbe sa complémentaire, le bleu&nbsp;: il laisse passer <strong>rouge + vert</strong>.</p>
+          <p><span class="etape-label">b. — </span>le filtre cyan absorbe le rouge&nbsp;: du duo {rouge, vert}, seul le <strong>vert</strong> survit. Sortie&nbsp;: verte.</p>
+          <p><span class="etape-label">c. — </span>le magenta absorbe le vert&nbsp;: du duo {rouge, vert}, seul le <strong>rouge</strong> survit. Sortie&nbsp;: rouge.</p>
+          <p class="conclusion">Conclusion&nbsp;: chaque filtre retire sa composante complémentaire, et l'ordre des filtres ne change rien — c'est une intersection. Vérifie les deux cas sur le graphique de la section 4, côté FILTRES.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 12 <span class="exercice-theme">· couleur sous une lumière</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 2</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un drapeau français (bleu, blanc, rouge) est éclairé uniquement par une lumière rouge. Décris l'apparence de chacune des trois bandes.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-12" data-exercice="12" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-12" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">Étape 1 — </span>l'offre&nbsp;: du rouge, rien d'autre.</p>
+          <p><span class="etape-label">Étape 2 — </span>bande bleue&nbsp;: elle ne diffuse que le bleu, absorbe le rouge → <strong>noire</strong>. Bande blanche&nbsp;: elle diffuse tout, donc renvoie le rouge reçu → <strong>rouge</strong>. Bande rouge&nbsp;: elle diffuse le rouge → <strong>rouge</strong>.</p>
+          <p class="conclusion">Conclusion&nbsp;: le drapeau paraît noir-rouge-rouge — les deux dernières bandes deviennent indiscernables. C'est le test classique du programme&nbsp;: une seule composante offerte, et chaque matière révèle ce qu'elle sait en faire.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 13 <span class="exercice-theme">· composantes</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Un tee-shirt est magenta en lumière blanche. a. Quelles composantes diffuse-t-il, et laquelle absorbe-t-il&nbsp;? b. De quelle couleur paraît-il sous une lumière verte&nbsp;? c. Sous une lumière cyan&nbsp;? d. Propose un éclairage coloré (autre que blanc) sous lequel il paraît exactement magenta.</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-13" data-exercice="13" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-13" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>magenta = rouge + bleu&nbsp;: il <strong>diffuse le rouge et le bleu</strong>, et <strong>absorbe le vert</strong> (sa complémentaire).</p>
+          <p><span class="etape-label">b. — </span>lumière verte&nbsp;: il n'y a que du vert, il l'absorbe → <strong>noir</strong>. Vert et magenta, complémentaires&nbsp;: le duo qui éteint.</p>
+          <p><span class="etape-label">c. — </span>lumière cyan = vert + bleu&nbsp;: le vert est absorbé, le bleu est diffusé → <strong>bleu</strong>.</p>
+          <p><span class="etape-label">d. — </span>il faut lui offrir du rouge <em>et</em> du bleu sans rien attendre du vert&nbsp;: une lumière <strong>magenta</strong> convient — il diffuse tout ce qu'elle apporte.</p>
+          <p class="conclusion">Conclusion&nbsp;: décompose, croise, recompose — la méthode de la section 5 traite n'importe quelle combinaison, même celles que tu n'as jamais vues.</p>
+        </div>
+      </article>
+
+      <article class="exercice">
+        <div class="exercice-tete">
+          <span class="exercice-label">EXERCICE 14 <span class="exercice-theme">· problème</span></span>
+          <span class="exercice-niveau">
+            <span class="niveau-nom">niveau 3</span>
+            <span class="niveau-barres" aria-hidden="true"><span class="plein"></span><span class="plein"></span><span class="plein"></span></span>
+          </span>
+        </div>
+        <p class="exercice-enonce">Projet du samedi soir&nbsp;: transformer ton téléphone en mini-projecteur de cinéma avec une grande loupe de distance focale f′ = 25&nbsp;cm, fixée dans une boîte à chaussures. Tu veux projeter le film sur le mur, à 1,50&nbsp;m de la loupe. a. À quelle distance de la loupe faut-il caler le téléphone&nbsp;? b. L'écran du téléphone mesure 12&nbsp;cm de large&nbsp;: quelle sera la largeur de l'image&nbsp;? c. Avant de lancer le film, il y a deux réglages indispensables&nbsp;: lesquels&nbsp;? (Pense au signe de γ… et à la luminosité de la pièce.)</p>
+        <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-14" data-exercice="14" data-voir="Voir le corrigé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé ▾</button>
+        <div class="corrige" id="corrige-14" hidden>
+          <div class="corrige-tag">CORRIGÉ</div>
+          <p><span class="etape-label">a. — </span>\(\overline{OA'} = +150\)&nbsp;cm&nbsp;; \(\dfrac{1}{\overline{OA}} = \dfrac{1}{150} - \dfrac{1}{25} = \dfrac{1}{150} - \dfrac{6}{150} = -\dfrac{5}{150} = -\dfrac{1}{30}\)&nbsp;: \(\overline{OA} = -30\)&nbsp;cm. Le téléphone se cale 30&nbsp;cm derrière la loupe, écran vers elle.</p>
+          <p><span class="etape-label">b. — </span>\(\gamma = \dfrac{150}{-30} = -5\)&nbsp;: l'image mesure \(5 \times 12 = 60\)&nbsp;cm de large. Un petit écran de cinéma.</p>
+          <p><span class="etape-label">c. — </span>γ &lt; 0&nbsp;: l'image est <strong>renversée</strong> — il faut retourner le téléphone (et verrouiller la rotation automatique, sinon il se remet à l'endroit et ton film repasse tête en bas). Et éteindre la pièce&nbsp;: la lumière du petit écran s'étale sur une image 5 × 5 = 25 fois plus grande en surface, donc bien plus pâle — dans le noir, elle redevient éclatante.</p>
+          <p class="conclusion">Conclusion&nbsp;: une loupe, une boîte, la relation de conjugaison — et tu as construit un vrai projecteur. C'est exactement l'optique du modèle du chapitre, jusqu'au γ négatif qu'il faut ruser.</p>
+        </div>
+      </article>
+
+      <article id="bac" class="bac">
+        <div class="bande-inversee">
+          <span>VERS LE BAC — EXERCICE 15</span>
+          <span class="bande-note">≈ 45 MIN · CALCULATRICE UTILE</span>
+        </div>
+        <div class="bac-corps">
+          <p class="prose">Soir de concert. Au fond de la salle, tu photographies la scène avec ton téléphone&nbsp;; sur scène, l'éclairagiste peint les musiciens avec ses projecteurs. Les deux moitiés du chapitre travaillent ensemble.</p>
+          <div class="bac-partie">PARTIE A — L'APPAREIL PHOTO DU TÉLÉPHONE</div>
+          <ol>
+            <li>L'objectif du téléphone est assimilé à une lentille mince convergente de distance focale f′ = 4,0&nbsp;mm&nbsp;; le capteur joue le rôle d'écran. Le chanteur, debout à 3,0&nbsp;m, mesure 1,80&nbsp;m. Justifie sans calcul que son image se forme très près du plan focal image.</li>
+            <li>Calcule \(\overline{OA'}\) (en millimètres, à 0,01&nbsp;mm près) et vérifie l'affirmation de la question 1.</li>
+            <li>Calcule le grandissement γ, puis la taille de l'image du chanteur sur le capteur. Est-elle compatible avec un capteur de 6,0&nbsp;mm de haut&nbsp;?</li>
+            <li>Que signifie le signe de γ, et pourquoi les photos sortent-elles pourtant à l'endroit&nbsp;?</li>
+          </ol>
+          <div class="bac-partie">PARTIE B — LES PROJECTEURS DE LA SCÈNE</div>
+          <ol>
+            <li>L'éclairagiste superpose ses trois projecteurs rouge, vert et bleu sur le chanteur. De quelle couleur est la lumière qui l'éclaire&nbsp;? Quelle synthèse est en jeu&nbsp;?</li>
+            <li>La bassiste porte une écharpe cyan (en lumière blanche). L'éclairagiste passe toute la scène en lumière jaune&nbsp;: de quelle couleur l'écharpe paraît-elle&nbsp;?</li>
+            <li>Le guitariste est en jean bleu. Sous cette même lumière jaune, comment le public voit-il le jean&nbsp;? Conclus d'une phrase sur ce que le mot «&nbsp;couleur d'un objet&nbsp;» veut vraiment dire.</li>
+          </ol>
+          <button type="button" class="corrige-toggle" aria-expanded="false" aria-controls="corrige-bac" data-exercice="15" data-event="bac_open" data-voir="Voir le corrigé détaillé ▾" data-masquer="Masquer le corrigé ▴">Voir le corrigé détaillé ▾</button>
+          <div class="corrige" id="corrige-bac" hidden>
+            <div class="corrige-tag">CORRIGÉ — LES GRANDES ÉTAPES</div>
+            <p><span class="etape-label">A.1 — </span>le chanteur est à 3,0&nbsp;m pour une focale de 4,0&nbsp;mm&nbsp;: il est «&nbsp;à l'infini&nbsp;» à l'échelle de la lentille. Ses rayons arrivent quasi parallèles, et des rayons parallèles convergent dans le plan focal image (cf. exercice 08)&nbsp;: l'image se forme au voisinage de F′.</p>
+            <p><span class="etape-label">A.2 — </span>\(\overline{OA} = -3\,000\)&nbsp;mm&nbsp;; \(\dfrac{1}{\overline{OA'}} = \dfrac{1}{4{,}0} + \dfrac{1}{-3\,000} = 0{,}25 - 0{,}000\,33 = 0{,}249\,67\)&nbsp;mm⁻¹, donc \(\overline{OA'} \approx 4{,}01\)&nbsp;mm&nbsp;: à un centième de millimètre du plan focal — l'affirmation tient.</p>
+            <p><span class="etape-label">A.3 — </span>\(\gamma = \dfrac{4{,}01}{-3\,000} \approx -1{,}3 \times 10^{-3}\)&nbsp;; taille de l'image&nbsp;: \(|\gamma| \times 1{,}80\)&nbsp;m \(\approx 2{,}4\)&nbsp;mm. Largement compatible avec un capteur de 6,0&nbsp;mm — le chanteur entier tient dessus.</p>
+            <p><span class="etape-label">A.4 — </span>γ &lt; 0&nbsp;: l'image sur le capteur est renversée. Le logiciel du téléphone retourne simplement l'image avant de l'afficher — même ruse que le vidéoprojecteur de l'exercice 09.</p>
+            <p><span class="etape-label">B.1 — </span>trois <em>lumières</em> superposées&nbsp;: synthèse <strong>additive</strong>&nbsp;; R + V + B = <strong>blanc</strong>.</p>
+            <p><span class="etape-label">B.2 — </span>l'écharpe cyan diffuse vert + bleu&nbsp;; la lumière jaune apporte rouge + vert&nbsp;; intersection&nbsp;: le vert → l'écharpe paraît <strong>verte</strong>.</p>
+            <p><span class="etape-label">B.3 — </span>le jean bleu ne diffuse que le bleu&nbsp;; le jaune n'en apporte pas → <strong>noir</strong> (bleu et jaune sont complémentaires). Conclusion en une phrase&nbsp;: la «&nbsp;couleur d'un objet&nbsp;» n'est que sa réponse à la lumière blanche — change la lumière, la couleur perçue change avec elle.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <div class="pied-chapitre">
+      <div>
+        <div class="suivant-tag">CHAPITRE SUIVANT</div>
+        <div class="suivant-titre">L'énergie électrique <span class="pastille-bientot">BIENTÔT</span></div>
+      </div>
+      <a class="pied-contact" href="mailto:bonjour@nabla.example">Un point pas clair&nbsp;? Écris-moi.</a>
+    </div>
+
+  </main>
+</div>
+
+<footer class="site-footer site-footer--chapitre">
+  <div class="footer-inner">
+    <span class="footer-marque"><svg class="logo-nabla" viewBox="0 0 32 32" width="13" height="13" aria-hidden="true"><path d="M6.8 7.2 L25.2 7.2 L16 26 L9 11.7" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Nabla — fiches de révision interactives</span></span>
+    <span class="footer-liens">
+      <a href="mailto:bonjour@nabla.example">Écris-moi</a>
+      <a href="../../../mentions-legales/">Mentions légales</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
